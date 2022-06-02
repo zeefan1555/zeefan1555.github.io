@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="4.27, Hexo">
+    <meta name="keywords" content="4.26 select API介绍, Hexo">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>4.27 | Hexo</title>
+    <title>4.26 select API介绍 | Hexo</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -312,12 +312,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/23.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/18.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">4.27</h1>
+                    <h1 class="description center-align post-title">4.26 select API介绍</h1>
                 </div>
             </div>
         </div>
@@ -431,9 +431,13 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/webserver/">
+                                <span class="chip bg-color">webserver</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
@@ -459,7 +463,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    0
+                    282
                 </div>
                 
 
@@ -486,7 +490,49 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <ul>
+<li>select <a href="marginnote3app://note/CD9C37C7-8EEA-4921-AF39-7988041FEDE5"></a><ul>
+<li>select主旨思想 <a href="marginnote3app://note/33F57C46-F5EF-4A17-BFAF-6A03A421B9D2"></a></li>
+<li>select函数api; <a href="marginnote3app://note/4F075E84-2389-414F-A15E-9F0BB9233B3C"></a></li>
+<li>select()工作过程分析 <a href="marginnote3app://note/47F7AC84-680E-48B4-8BF8-76E253C3B96F"></a></li>
+<li>FD_SET; FD_CLR; FD_ISSET FD_ZERO <a href="marginnote3app://note/95850377-9FF1-4E4C-AE9E-2D66F39FFD27"></a></li>
+</ul>
+</li>
+</ul>
+<h2 id="0-1-select主旨思想"><a href="#0-1-select主旨思想" class="headerlink" title="0.1 select主旨思想"></a>0.1 select主旨思想</h2><p><a href="marginnote3app://note/33F57C46-F5EF-4A17-BFAF-6A03A421B9D2"></a><br>![[8fe3d70dbc83fb8ddb4ae30dad6893b8.png]]</p>
+<ol>
+<li>创造一个文件描述表，将想要监听的函数(accept，read，rec)文件描述符添加进表</li>
+<li>调用系统内核函数，监听该表，如果有函数进行了读写操作就对文件描述符表进行设置</li>
+<li>返回文件描述表，并且告诉你哪些函数进行了I/0操作<blockquote>
+<ul>
+<li>![[97e5cae867768c9dd0c5e1d2a938da97.png]]</li>
+<li>假设上面是读文件描述表，谁有变化了，把他的位置置为1(操作的是二进制位)</li>
+</ul>
+</blockquote>
+</li>
+</ol>
+<blockquote>
+<ul>
+<li>#面经webserver</li>
+</ul>
+</blockquote>
+<h2 id="0-2-select函数api"><a href="#0-2-select函数api" class="headerlink" title="0.2 select函数api"></a>0.2 select函数api</h2><p><a href="marginnote3app://note/4F075E84-2389-414F-A15E-9F0BB9233B3C"></a><br>![[f2ae4530eeda3ea6ca01d0b71ca6505f.png]]</p>
+<blockquote>
+<ul>
+<li>![[c81ef0baa80bcb94dd95c5de3fcb1626.png]]<a href="marginnote3app://note/027E3726-EE0D-4262-A219-6AED24E70949"></a></li>
+<li>#面经webserver</li>
+</ul>
+</blockquote>
+<h2 id="0-3-select-工作过程分析"><a href="#0-3-select-工作过程分析" class="headerlink" title="0.3 select()工作过程分析"></a>0.3 select()工作过程分析</h2><p><a href="marginnote3app://note/47F7AC84-680E-48B4-8BF8-76E253C3B96F"></a></p>
+<blockquote>
+<ul>
+<li>![[eea064ddbabb2555af7c152c9bba24c5.png]]<a href="marginnote3app://note/E6736E3A-32D6-43F8-A255-B4D4EAF53378"></a></li>
+<li>#面经webserver</li>
+<li>首先监听ABCD，将用户态中3,4,100,101的标志为置为1，从用户态拷贝到内核态一份一模一样的<br>然后内核监听到了，AB发送了数据，CD没有发送数据，将内核态的的对应标志位3,4置为1，100,101 置为0<br>最后在从内核态拷贝回用户态使其保持一致</li>
+</ul>
+</blockquote>
+<h2 id="0-4-FD-SET"><a href="#0-4-FD-SET" class="headerlink" title="0.4 FD_SET"></a>0.4 FD_SET</h2><p><a href="marginnote3app://note/95850377-9FF1-4E4C-AE9E-2D66F39FFD27"></a><br>![[e5173057a693286c7a1af4c4385dbd56.png]]</p>
+
                 
             </div>
             <hr/>
@@ -512,7 +558,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://zeefan1555.github.io/2022/05/31/4-27/">https://zeefan1555.github.io/2022/05/31/4-27/</a>
+                    <a href="https://zeefan1555.github.io/2022/05/31/4.26-select-api-jie-shao/">https://zeefan1555.github.io/2022/05/31/4.26-select-api-jie-shao/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -549,7 +595,11 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/webserver/">
+                                    <span class="chip bg-color">webserver</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -721,13 +771,13 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2022/06/01/tse/">
+                <a href="/2022/05/31/4-27/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="tse">
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="4.27">
                         
-                        <span class="card-title">tse</span>
+                        <span class="card-title">4.27</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -738,7 +788,7 @@
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-06-01
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-05-31
                         </span>
                         <span class="publish-author">
                             
@@ -758,13 +808,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/05/31/4.26-select-api-jie-shao/">
+                <a href="/2022/05/28/hello-world/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="4.26 select API介绍">
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
                         
-                        <span class="card-title">4.26 select API介绍</span>
+                        <span class="card-title">Hello World</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -775,7 +825,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-31
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-28
                             </span>
                         <span class="publish-author">
                             
@@ -784,14 +834,6 @@
                             
                         </span>
                     </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/webserver/">
-                        <span class="chip bg-color">webserver</span>
-                    </a>
-                    
                 </div>
                 
             </div>
