@@ -24,9 +24,8 @@
 <meta property="og:description" content="1 860.柠檬水找零力扣题目链接 在柠檬水摊上，每一杯柠檬水的售价为&amp;nbsp;5&amp;nbsp;美元。 顾客排队购买你的产品，（按账单 bills 支付的顺序）一次购买一杯。 每位顾客只买一杯柠檬水，然后向你付 5 美元、10 美元或 20 美元。你必须给每个顾客正确找零，也就是说净交易是每位顾客向你支付 5 美元。 注意，一开始你手头没有任何零钱。 如果你能给每位顾客正确找零，返回&amp;nbsp;t">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-06-06T07:32:08.000Z">
-<meta property="article:modified_time" content="2022-06-06T07:35:37.227Z">
+<meta property="article:modified_time" content="2022-06-08T13:53:35.524Z">
 <meta property="article:author" content="zeefan">
-<meta property="article:tag" content="代码随想录">
 <meta property="article:tag" content="贪心算法">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -70,7 +69,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"zeefan1555.github.io","root":"/","version":"1.9.1","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"zeefan1555.github.io","root":"/","version":"1.9.1","typing":{"enable":true,"typeSpeed":100,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":10},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -96,7 +95,7 @@
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <strong>Fluid</strong>
+      <strong>一杯空气</strong>
     </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
@@ -220,7 +219,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          undefined 字
+          1.4k 字
         
       </span>
     
@@ -231,7 +230,7 @@
         
         
         
-          NaN 分钟
+          12 分钟
         
       </span>
     
@@ -327,39 +326,7 @@
 <p>账单是20的情况，为什么要优先消耗一个10和一个5呢？<br><strong>因为美元10只能给账单20找零，而美元5可以给账单10和账单20找零，美元5更万能！</strong></p>
 <p>局部最优：逐一对元素进行判断<br>全局最优：完成全部账单的找零</p>
 <h1 id="3-代码"><a href="#3-代码" class="headerlink" title="3 代码"></a>3 代码</h1><p>自写，已编译成功</p>
-<pre class=" language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
-<span class="token keyword">public</span><span class="token operator">:</span>
-    <span class="token keyword">bool</span> <span class="token function">lemonadeChange</span><span class="token punctuation">(</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token operator">&amp;</span> bills<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">int</span> five <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> ten <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> twenty <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> bill <span class="token operator">:</span> bills<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment" spellcheck="true">// 顺序遍历数组,先从第一个元素开始</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>bill <span class="token operator">==</span> <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-                five <span class="token operator">++</span><span class="token punctuation">;</span>
-            <span class="token punctuation">}</span>
-            <span class="token comment" spellcheck="true">// else return false; 不需要这行代码因为5肯定能收</span>
-
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>bill <span class="token operator">==</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-                <span class="token keyword">if</span> <span class="token punctuation">(</span>five <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                    five<span class="token operator">--</span><span class="token punctuation">;</span>
-                    ten<span class="token operator">++</span><span class="token punctuation">;</span>
-                <span class="token punctuation">}</span>
-            <span class="token keyword">else</span> <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>    
-            <span class="token punctuation">}</span>
-
-            <span class="token keyword">if</span><span class="token punctuation">(</span>bill <span class="token operator">==</span> <span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-                <span class="token keyword">if</span> <span class="token punctuation">(</span>ten <span class="token operator">></span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> five <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-                    ten<span class="token operator">--</span><span class="token punctuation">;</span>
-                    five<span class="token operator">--</span><span class="token punctuation">;</span>
-                <span class="token punctuation">}</span>
-                <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span> five <span class="token operator">>=</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">{</span> <span class="token comment" spellcheck="true">// 一定要用else if 下边也用else，这样这三个函数才能成为整体</span>
-                    five <span class="token operator">-</span><span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span>
-                <span class="token punctuation">}</span>
-                <span class="token keyword">else</span>  <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-            <span class="token punctuation">}</span>
-        <span class="token punctuation">}</span>
-             <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 放在整体for循环外</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-</code></pre>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre class=" language-hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">lemonadeChange</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; bills)</span> </span>{<br>        <span class="hljs-type">int</span> five = <span class="hljs-number">0</span>, ten = <span class="hljs-number">0</span>, twenty = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> bill : bills) { <span class="hljs-comment">// 顺序遍历数组,先从第一个元素开始</span><br>            <span class="hljs-keyword">if</span> (bill == <span class="hljs-number">5</span>){<br>                five ++;<br>            }<br>            <span class="hljs-comment">// else return false; 不需要这行代码因为5肯定能收</span><br><br>            <span class="hljs-keyword">if</span> (bill == <span class="hljs-number">10</span>){<br>                <span class="hljs-keyword">if</span> (five &gt; <span class="hljs-number">0</span>) {<br>                    five--;<br>                    ten++;<br>                }<br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;    <br>            }<br><br>            <span class="hljs-keyword">if</span>(bill == <span class="hljs-number">20</span>){<br>                <span class="hljs-keyword">if</span> (ten &gt; <span class="hljs-number">0</span> &amp;&amp; five &gt; <span class="hljs-number">0</span>){<br>                    ten--;<br>                    five--;<br>                }<br>                <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> ( five &gt;= <span class="hljs-number">3</span>){ <span class="hljs-comment">// 一定要用else if 下边也用else，这样这三个函数才能成为整体</span><br>                    five -= <span class="hljs-number">3</span>;<br>                }<br>                <span class="hljs-keyword">else</span>  <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>            }<br>        }<br>             <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; <span class="hljs-comment"><code class="language-hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">lemonadeChange</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; bills)</span> </span>{<br>        <span class="hljs-type">int</span> five = <span class="hljs-number">0</span>, ten = <span class="hljs-number">0</span>, twenty = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> bill : bills) { <span class="hljs-comment">// 顺序遍历数组,先从第一个元素开始</span><br>            <span class="hljs-keyword">if</span> (bill == <span class="hljs-number">5</span>){<br>                five ++;<br>            }<br>            <span class="hljs-comment">// else return false; 不需要这行代码因为5肯定能收</span><br><br>            <span class="hljs-keyword">if</span> (bill == <span class="hljs-number">10</span>){<br>                <span class="hljs-keyword">if</span> (five &gt; <span class="hljs-number">0</span>) {<br>                    five--;<br>                    ten++;<br>                }<br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;    <br>            }<br><br>            <span class="hljs-keyword">if</span>(bill == <span class="hljs-number">20</span>){<br>                <span class="hljs-keyword">if</span> (ten &gt; <span class="hljs-number">0</span> &amp;&amp; five &gt; <span class="hljs-number">0</span>){<br>                    ten--;<br>                    five--;<br>                }<br>                <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> ( five &gt;= <span class="hljs-number">3</span>){ <span class="hljs-comment">// 一定要用else if 下边也用else，这样这三个函数才能成为整体</span><br>                    five -= <span class="hljs-number">3</span>;<br>                }<br>                <span class="hljs-keyword">else</span>  <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>            }<br>        }<br>             <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; <span class="hljs-comment">// 放在整体for循环外</span><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
 
               
             </div>
@@ -380,6 +347,13 @@
   <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" class="category-chain-item">数据结构与算法</a>
   
   
+    <span>></span>
+    
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95/" class="category-chain-item">代码随想录</a>
+  
+  
+
+  
 
       </span>
     
@@ -391,8 +365,6 @@
   
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95/">#代码随想录</a>
       
         <a href="/tags/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/">#贪心算法</a>
       
@@ -422,6 +394,11 @@
           <div>2022年6月6日</div>
         </div>
       
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2022年6月8日</div>
+        </div>
       
       <div class="license-meta-item">
         <div>许可协议</div>
@@ -605,6 +582,21 @@
   </script>
 
 
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
 
 
 
