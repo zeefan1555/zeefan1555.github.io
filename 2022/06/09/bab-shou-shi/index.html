@@ -16,26 +16,26 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1 406.根据身高重建队列力扣题目链接 假设有打乱顺序的一群人站成一个队列，数组 people 表示队列中一些人的属性（不一定按顺序）。每个 people[i] &#x3D; [hi, ki] 表示第 i 个人的身高为 hi ，前面 正好 有 ki 个身高大于或等于 hi 的人。 请你重新构造并返回输入数组&amp;nbsp;people 所表示的队列。返回的队列应该格式化为数组 queue ，其中 queue[">
+    <meta name="description" content="BetterAndBetter手势操作助记右键按压手势![[BAB手势 2022-06-09 17.21.49.excalidraw]]">
 <meta property="og:type" content="article">
-<meta property="og:title" content="14.根据身高重建队列">
-<meta property="og:url" content="https://zeefan1555.github.io/2022/06/07/14.gen-ju-shen-gao-chong-jian-dui-lie/index.html">
+<meta property="og:title" content="BAB手势">
+<meta property="og:url" content="https://zeefan1555.github.io/2022/06/09/bab-shou-shi/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="1 406.根据身高重建队列力扣题目链接 假设有打乱顺序的一群人站成一个队列，数组 people 表示队列中一些人的属性（不一定按顺序）。每个 people[i] &#x3D; [hi, ki] 表示第 i 个人的身高为 hi ，前面 正好 有 ki 个身高大于或等于 hi 的人。 请你重新构造并返回输入数组&amp;nbsp;people 所表示的队列。返回的队列应该格式化为数组 queue ，其中 queue[">
+<meta property="og:description" content="BetterAndBetter手势操作助记右键按压手势![[BAB手势 2022-06-09 17.21.49.excalidraw]]">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201216201851982.png">
-<meta property="article:published_time" content="2022-06-07T03:22:25.000Z">
-<meta property="article:modified_time" content="2022-06-08T13:53:26.613Z">
+<meta property="og:image" content="https://zeefan1555.github.io/img/Pasted%20image%2020220609175744.png">
+<meta property="article:published_time" content="2022-06-09T09:21:00.000Z">
+<meta property="article:modified_time" content="2022-06-09T10:08:21.529Z">
 <meta property="article:author" content="zeefan">
-<meta property="article:tag" content="贪心算法">
+<meta property="article:tag" content="软件操作技巧">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20201216201851982.png">
+<meta name="twitter:image" content="https://zeefan1555.github.io/img/Pasted%20image%2020220609175744.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>14.根据身高重建队列 - 一杯空气</title>
+  <title>BAB手势 - 一杯空气</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -200,7 +200,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="14.根据身高重建队列"></span>
+            <span id="subtitle" data-typed-text="BAB手势"></span>
           
         </div>
 
@@ -211,8 +211,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-06-07 11:22" pubdate>
-          2022年6月7日 上午
+        <time datetime="2022-06-09 17:21" pubdate>
+          2022年6月9日 下午
         </time>
       </span>
     
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.1k 字
+          66 字
         
       </span>
     
@@ -234,7 +234,7 @@
         
         
         
-          11 分钟
+          1 分钟
         
       </span>
     
@@ -280,68 +280,19 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">14.根据身高重建队列</h1>
+            <h1 style="display: none">BAB手势</h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年6月8日 晚上
+                    本文最后更新于：2022年6月9日 晚上
                   
                 
               </p>
             
             <div class="markdown-body">
               
-              <h1 id="1-406-根据身高重建队列"><a href="#1-406-根据身高重建队列" class="headerlink" title="1 406.根据身高重建队列"></a>1 406.根据身高重建队列</h1><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/queue-reconstruction-by-height/">力扣题目链接</a></p>
-<p>假设有打乱顺序的一群人站成一个队列，数组 people 表示队列中一些人的属性（不一定按顺序）。每个 people[i] = [hi, ki] 表示第 i 个人的身高为 hi ，前面 正好 有 ki 个身高大于或等于 hi 的人。</p>
-<p>请你重新构造并返回输入数组&nbsp;people 所表示的队列。返回的队列应该格式化为数组 queue ，其中 queue[j] = [hj, kj] 是队列中第 j 个人的属性（queue[0] 是排在队列前面的人）。</p>
-<p>示例 1：</p>
-<ul>
-<li>  输入：people = [ [7,0],[4,4],[7,1],[5,0],[6,1],[5,2] ]</li>
-<li>  输出：[ [5,0],[7,0],[5,2],[6,1],[4,4],[7,1] ]</li>
-<li>解释：<ul>
-<li>  编号为 0 的人身高为 5 ，没有身高更高或者相同的人排在他前面。</li>
-<li>  编号为 1 的人身高为 7 ，没有身高更高或者相同的人排在他前面。</li>
-<li>  编号为 2 的人身高为 5 ，有 2 个身高更高或者相同的人排在他前面，即编号为 0 和 1 的人。</li>
-<li>  编号为 3 的人身高为 6 ，有 1 个身高更高或者相同的人排在他前面，即编号为 1 的人。</li>
-<li>  编号为 4 的人身高为 4 ，有 4 个身高更高或者相同的人排在他前面，即编号为 0、1、2、3 的人。</li>
-<li>  编号为 5 的人身高为 7 ，有 1 个身高更高或者相同的人排在他前面，即编号为 1 的人。</li>
-<li>  因此 [ [5,0],[7,0],[5,2],[6,1],[4,4],[7,1] ] 是重新构造后的队列。</li>
-</ul>
-</li>
-</ul>
-<p>示例 2：</p>
-<ul>
-<li>  输入：people = [ [6,0],[5,0],[4,0],[3,2],[2,2],[1,4] ]</li>
-<li>  输出：[ [4,0],[5,0],[2,2],[3,2],[1,4],[6,0] ]</li>
-</ul>
-<p>提示：</p>
-<ul>
-<li>  1 &lt;= people.length &lt;= 2000</li>
-<li>  0 &lt;= hi &lt;= 10^6</li>
-<li>  0 &lt;= ki &lt; people.length</li>
-</ul>
-<p>题目数据确保队列可以被重建</p>
-<h1 id="2-思路"><a href="#2-思路" class="headerlink" title="2 思路"></a>2 思路</h1><p>本题有两个维度，h和k，看到这种题目一定要想如何确定一个维度，然后在按照另一个维度重新排列。<br><strong>如果两个维度一起考虑一定会顾此失彼</strong></p>
-<p>先按身高h来排序(从大到小)，身高相同的k小的站前面<br>在按k的大小进行<strong>插入</strong>操作，后序插入节点也不会影响前面已经插入的节点，最终按照k的规则完成了队列。<br><img src="https://img-blog.csdnimg.cn/20201216201851982.png" srcset="/img/loading.gif" lazyload alt="406.根据身高重建队列|800"><br>插入的过程：</p>
-<ul>
-<li>  插入[7,0]：[ [7,0] ]// 插入0下标</li>
-<li>  插入[7,1]：[ [7,0],[7,1] ]// 插入1下标</li>
-<li>  插入[6,1]：[ [7,0],[6,1],[7,1] ]// 插入1下标</li>
-<li>  插入[5,0]：[ [5,0],[7,0],[6,1],[7,1] ]// 插入0下标</li>
-<li>  插入[5,2]：[ [5,0],[7,0],[5,2],[6,1],[7,1] ]// 插入2下标</li>
-<li>  插入[4,4]：[ [5,0],[7,0],[5,2],[6,1],[4,4],[7,1] ]// 插入4下标</li>
-</ul>
-<p>如果先按k来排序，会发现k的排列不符合条件，身高也不符合条件，两个维度一个也没确定下来</p>
-<p>在按照身高从大到小排序后：<br><strong>局部最优：优先按身高高的people的k来插入。插入操作过后的people满足队列属性</strong><br><strong>全局最优：最后都做完插入操作，整个队列满足题目队列属性</strong></p>
-<h3 id="2-1-1-关联知识点"><a href="#2-1-1-关联知识点" class="headerlink" title="2.1.1 关联知识点"></a>2.1.1 关联知识点</h3><p>[[vector]]，[[sort函数]]，[[insert函数]]</p>
-<h1 id="3-代码"><a href="#3-代码" class="headerlink" title="3 代码"></a>3 代码</h1><p>[[14.根据身高重建队列(carl链表).mp4]]<br>[[14.根据身高重建队列(carl vector).mp4]]<br>[[14.根据身高重建队列(carl 排序).mp4]]</p>
-<p>vector的代码看懂了</p>
-<p>排序完的people： [ [7,0], [7,1], [6,1], [5,0], [5,2]，[4,4] ]<br><code>people[i][1]</code>：eg <code>people[2][1]</code>=1：第二元素的第一个位置的值即{7, 1}中的1</p>
-<p>自写,编译已通过</p>
-<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre class=" language-hljs cpp"><span class="hljs-comment">// 版本一</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">static</span> <span class="hljs-type">bool</span> <span class="hljs-title">cmp</span><span class="hljs-params">(<span class="hljs-type">const</span> vector&lt;<span class="hljs-type">int</span>&gt;&amp; a, <span class="hljs-type">const</span> vector&lt;<span class="hljs-type">int</span>&gt;&amp; b)</span> </span>{<br>        <span class="hljs-keyword">if</span> (a[<span class="hljs-number">0</span>] == b[<span class="hljs-number">0</span>]) <span class="hljs-keyword">return</span> a[<span class="hljs-number">1</span>] &lt; b[<span class="hljs-number">1</span>]; <span class="hljs-comment">// 没看懂，看视频：传进来的是数组eg[7,0]</span><br>        <span class="hljs-keyword">return</span> a[<span class="hljs-number">0</span>] &gt; b[<span class="hljs-number">0</span>];<br>    }<br>    vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">reconstructQueue</span>(vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt;&amp; people){<br>        <span class="hljs-built_in">sort</span>(people.<span class="hljs-built_in">begin</span>(), people.<span class="hljs-built_in">end</span>(), cmp);<br>        vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; que;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; people.<span class="hljs-built_in">size</span>(); i++){<br>            <span class="hljs-type">int</span> position = people[i][<span class="hljs-number">1</span>]; <span class="hljs-comment">// 要放到for循环里边</span><br>            que.<span class="hljs-built_in">insert</span>(que.<span class="hljs-built_in">begin</span>() + position, people[i]);<span class="hljs-comment">// 要插入的是que里，不要成people.begin()</span><br>        }<br>        <span class="hljs-keyword"><code class="language-hljs cpp"><span class="hljs-comment">// 版本一</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">static</span> <span class="hljs-type">bool</span> <span class="hljs-title">cmp</span><span class="hljs-params">(<span class="hljs-type">const</span> vector&lt;<span class="hljs-type">int</span>&gt;&amp; a, <span class="hljs-type">const</span> vector&lt;<span class="hljs-type">int</span>&gt;&amp; b)</span> </span>{<br>        <span class="hljs-keyword">if</span> (a[<span class="hljs-number">0</span>] == b[<span class="hljs-number">0</span>]) <span class="hljs-keyword">return</span> a[<span class="hljs-number">1</span>] &lt; b[<span class="hljs-number">1</span>]; <span class="hljs-comment">// 没看懂，看视频：传进来的是数组eg[7,0]</span><br>        <span class="hljs-keyword">return</span> a[<span class="hljs-number">0</span>] &gt; b[<span class="hljs-number">0</span>];<br>    }<br>    vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">reconstructQueue</span>(vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt;&amp; people){<br>        <span class="hljs-built_in">sort</span>(people.<span class="hljs-built_in">begin</span>(), people.<span class="hljs-built_in">end</span>(), cmp);<br>        vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; que;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; people.<span class="hljs-built_in">size</span>(); i++){<br>            <span class="hljs-type">int</span> position = people[i][<span class="hljs-number">1</span>]; <span class="hljs-comment">// 要放到for循环里边</span><br>            que.<span class="hljs-built_in">insert</span>(que.<span class="hljs-built_in">begin</span>() + position, people[i]);<span class="hljs-comment">// 要插入的是que里，不要成people.begin()</span><br>        }<br>        <span class="hljs-keyword">return</span> que;<br>      }   <br>};<br></code></pre></td></tr></tbody></table></figure>
-
-<p>链表的代码没看懂  #疑问</p>
+              <p>BetterAndBetter手势操作助记<br>右键按压手势<br>![[BAB手势 2022-06-09 17.21.49.excalidraw]]</p>
 
               
             </div>
@@ -359,15 +310,8 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" class="category-chain-item">数据结构与算法</a>
+  <a href="/categories/%E5%B7%A5%E4%BD%9C/" class="category-chain-item">工作</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95/" class="category-chain-item">代码随想录</a>
-  
-  
-
   
 
       </span>
@@ -381,7 +325,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/">#贪心算法</a>
+        <a href="/tags/%E8%BD%AF%E4%BB%B6%E6%93%8D%E4%BD%9C%E6%8A%80%E5%B7%A7/">#软件操作技巧</a>
       
     </div>
   
@@ -393,8 +337,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>14.根据身高重建队列</div>
-      <div>https://zeefan1555.github.io/2022/06/07/14.gen-ju-shen-gao-chong-jian-dui-lie/</div>
+      <div>BAB手势</div>
+      <div>https://zeefan1555.github.io/2022/06/09/bab-shou-shi/</div>
     </div>
     <div class="license-meta">
       
@@ -406,13 +350,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年6月7日</div>
+          <div>2022年6月9日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2022年6月8日</div>
+          <div>2022年6月9日</div>
         </div>
       
       <div class="license-meta-item">
@@ -441,9 +385,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/06/09/bab-shou-shi/" title="BAB手势">
+                      <a href="/2022/06/10/17.yong-zui-shao-shu-liang-de-jian-yin-bao-qi-qiu-2-ban/" title="17.用最少数量的箭引爆气球(2版)">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">BAB手势</span>
+                        <span class="hidden-mobile">17.用最少数量的箭引爆气球(2版)</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -451,8 +395,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/06/07/begin-end/" title="begin,end">
-                        <span class="hidden-mobile">begin,end</span>
+                      <a href="/2022/06/07/14.gen-ju-shen-gao-chong-jian-dui-lie/" title="14.根据身高重建队列">
+                        <span class="hidden-mobile">14.根据身高重建队列</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

@@ -16,22 +16,24 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="ob 1 遍历函数操作到最后一个元素时不会取到最后一个下标的后一位(也就是长度)    for (int i &#x3D; 0; i &lt; prices.size(); i++){             result +&#x3D; max(prices[i+1] - prices[i],0);&#x2F;&#x2F; 用!&#x3D;更好         }  2 数组求和for (循环变量类型 循环变量名称 : 要被遍历的对象) 循环体">
+    <meta name="description" content="ob 1 遍历函数操作到最后一个元素时不会取到最后一个下标的后一位(也就是长度) for (int i &#x3D; 0; i &lt; prices.for (int i &#x3D; 0; i &lt; prices.size(); i++){          result +&#x3D; max(prices[i+1] - prices[i],0);&#x2F;&#x2F; 用!&#x3D;更好      }     2 数组求和for (循环变量">
 <meta property="og:type" content="article">
 <meta property="og:title" content="for 循环">
 <meta property="og:url" content="https://zeefan1555.github.io/2022/06/06/for-xun-huan/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="ob 1 遍历函数操作到最后一个元素时不会取到最后一个下标的后一位(也就是长度)    for (int i &#x3D; 0; i &lt; prices.size(); i++){             result +&#x3D; max(prices[i+1] - prices[i],0);&#x2F;&#x2F; 用!&#x3D;更好         }  2 数组求和for (循环变量类型 循环变量名称 : 要被遍历的对象) 循环体">
+<meta property="og:site_name" content="一杯空气">
+<meta property="og:description" content="ob 1 遍历函数操作到最后一个元素时不会取到最后一个下标的后一位(也就是长度) for (int i &#x3D; 0; i &lt; prices.for (int i &#x3D; 0; i &lt; prices.size(); i++){          result +&#x3D; max(prices[i+1] - prices[i],0);&#x2F;&#x2F; 用!&#x3D;更好      }     2 数组求和for (循环变量">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-06-06T06:08:12.000Z">
-<meta property="article:modified_time" content="2022-06-07T12:04:19.798Z">
+<meta property="article:modified_time" content="2022-06-09T10:41:36.920Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="函数">
 <meta name="twitter:card" content="summary_large_image">
   
   
+    <meta name="referrer" content="no-referrer-when-downgrade">
   
-  <title>for 循环 - Hexo</title>
+  
+  <title>for 循环 - 一杯空气</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -69,7 +71,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"zeefan1555.github.io","root":"/","version":"1.9.1","typing":{"enable":true,"typeSpeed":100,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":10},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"zeefan1555.github.io","root":"/","version":"1.9.1","typing":{"enable":true,"typeSpeed":100,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"Text"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":10},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -82,7 +84,7 @@
   
 <meta name="generator" content="Hexo 5.4.2">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+</head>
 
 
 <body>
@@ -219,7 +221,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          undefined 字
+          334 字
         
       </span>
     
@@ -230,12 +232,20 @@
         
         
         
-          NaN 分钟
+          2 分钟
         
       </span>
     
 
     
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
     
   </div>
 
@@ -270,19 +280,31 @@
             <!-- SEO header -->
             <h1 style="display: none">for 循环</h1>
             
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2022年6月9日 晚上
+                  
+                
+              </p>
+            
             <div class="markdown-body">
               
               <p><a href="obsidian://advanced-uri?vault=Documents&amp;uid=e21b2a82-20a3-4f7e-981e-d83e6df620a5">ob</a></p>
 <h1 id="1-遍历函数"><a href="#1-遍历函数" class="headerlink" title="1 遍历函数"></a>1 遍历函数</h1><p>操作到最后一个元素时不会取到最后一个下标的后一位(也就是长度)</p>
-<pre class=" language-cpp"><code class="language-cpp">   <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> prices<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-            result <span class="token operator">+</span><span class="token operator">=</span> <span class="token function">max</span><span class="token punctuation">(</span>prices<span class="token punctuation">[</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">-</span> prices<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">// 用!=更好</span>
-        <span class="token punctuation">}</span>
-</code></pre>
+<div class="code-wrapper"><pre class="line-numbers language-hljs cpp"><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; prices.<span class="hljs-built_in"><code class="language-hljs cpp"><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; prices.<span class="hljs-built_in">size</span>(); i++){
+         result += <span class="hljs-built_in">max</span>(prices[i+<span class="hljs-number">1</span>] - prices[i],<span class="hljs-number">0</span>);<span class="hljs-comment">// 用!=更好</span>
+     }<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div>
+
+
+
+
 <h1 id="2-数组求和"><a href="#2-数组求和" class="headerlink" title="2 数组求和"></a>2 数组求和</h1><p>for (循环变量类型 循环变量名称 : 要被遍历的对象) 循环体<br>应用：对数组求和<br>    从第一个元素开始操作</p>
-<pre class=" language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">//A是数组，for循环对数组求和</span>
-<span class="token keyword">int</span> result <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> a <span class="token operator">:</span> A<span class="token punctuation">)</span>  result <span class="token operator">+</span><span class="token operator">=</span> a<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// a没有特殊的意义，只是指明循环变量的类型，“:”后只需数组名即可</span>
-</code></pre>
+<div class="code-wrapper"><pre class="line-numbers language-hljs cpp"><span class="hljs-comment"><code class="language-hljs cpp"><span class="hljs-comment">//A是数组，for循环对数组求和</span>
+<span class="hljs-type">int</span> result = <span class="hljs-number">0</span>;
+<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> a : A)  result += a; <span class="hljs-comment">// a没有特殊的意义，只是指明循环变量的类型，“:”后只需数组名即可</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div>
+
+
 <p>#flashcards/代码随想录<br>n%2 == 1什么意思<br>?<br>n%2就是对n求：n除以2后的余数，这里余数只有两种情况就是0或者是1<br>eg：5%2=1</p>
 
               
@@ -347,7 +369,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2022年6月7日</div>
+          <div>2022年6月9日</div>
         </div>
       
       <div class="license-meta-item">
@@ -439,8 +461,6 @@
   
 
 
-
-  
 
 
 
@@ -687,9 +707,9 @@
 </script>
 
 
-  <script>Fluid.plugins.imageCaption();</script>
-
   <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
 
