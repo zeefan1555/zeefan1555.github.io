@@ -1,0 +1,590 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+  
+  
+  <entry>
+    <title>退火</title>
+    <link href="/2022/06/16/tui-huo/"/>
+    <url>/2022/06/16/tui-huo/</url>
+    
+    <content type="html"><![CDATA[<h1 id="1-摘要"><a href="#1-摘要" class="headerlink" title="1 摘要"></a>1 摘要</h1><p><strong>是否退火</strong>：能够直接挤出就没必要退火，硬度低，比如纯铝，就没必要退火<br><strong>目的：</strong><br>    提高成形后表面质量，<strong>提高它的塑性</strong>，便于改善成形效果，减少表面缺陷<br>    退火主要是去应力，使材料组织回到初始状态，这样能保证挤压前每个工件的组织都一样<br>    让晶粒均匀，能够好观察以后的梯度样貌<br><strong>成形要求</strong>：表面无缺陷，形状规整，就和松青挤出的纯铜差不多就行</p><h1 id="2-AZ13B镁合金-退火"><a href="#2-AZ13B镁合金-退火" class="headerlink" title="2 AZ13B镁合金 退火"></a>2 AZ13B镁合金 退火</h1><p><img src="https://s1.vika.cn/space/2022/06/15/07272ec877d24b698c8944d6a1296f0b" alt="|600"><br>150 ℃-240 min 退火后只有部分区域发生了再结晶(这不行)<br>在 300℃退火处理后,晶粒尺寸比较稳定,由平均晶粒尺寸为9.1μm 的再结晶组织组成</p><p>较高的温度(300℃)能够改善镁合金的塑性[^1]。<br>AZ31B 镁合金轧制态板材经 300 ℃退火 60 min 后伸长率最高,为 27.3%。<br><img src="https://s1.vika.cn/space/2022/06/15/b41108bd01ba4924a6f8e98e64d285c6" alt="|600"></p><p><img src="https://s1.vika.cn/space/2022/06/15/d56b14c8de0348a292f42e2572ea922e" alt="|600"></p><h2 id="2-1-镁合金退火总结"><a href="#2-1-镁合金退火总结" class="headerlink" title="2.1 镁合金退火总结"></a>2.1 镁合金退火总结</h2><p>退火温度升至 300℃, 保温 60min，退火后炉内冷却取出</p><h1 id="3-19号楼马弗炉加热说明"><a href="#3-19号楼马弗炉加热说明" class="headerlink" title="3 19号楼马弗炉加热说明"></a>3 19号楼马弗炉加热说明</h1><h2 id="3-1-热处理01-mp4"><a href="#3-1-热处理01-mp4" class="headerlink" title="3.1 [[热处理01.mp4]]"></a>3.1 [[热处理01.mp4]]</h2><p>[[热处理01.mp4#t=01:00.963]]<br>    最左边的按钮用来查看上次的设置的参数</p><p>[[热处理01.mp4#t=02:59.825]]：正式开始<br>    按三下最右边的按钮，在按左上角进入初始页面(set页面)</p><p>[[热处理01.mp4#t=04:23.253]]：结束</p><p>[[热处理01.mp4#t=05:16.599]]<br>    红色的是实际温度，绿色的设置的温度</p><p>[[热处理01.mp4#t=05:53.805]]<br>降到室温25度才能开炉，600度都要到隔天了，不要在100度开炉</p><p>[[热处理01.mp4#t=07:25.853]]：流程<br><img src="https://s1.vika.cn/space/2022/06/16/ca3ff8ad7b6247b4a7df51eabee02d88" alt="|900"></p><p>炉子下边挺脏的，直接放样品下去不太合适，用陶瓷来放样品，承受的温度高<br>    [[热处理01.mp4#t=09:10.640]]<br>    [[热处理01.mp4#t=08:17.611]]</p><h2 id="3-2-操作文档"><a href="#3-2-操作文档" class="headerlink" title="3.2 操作文档"></a>3.2 操作文档</h2><p><img src="https://s1.vika.cn/space/2022/06/16/f87b10afa6c642c2b6c0615ca8c45337" alt="|600"></p><p><img src="https://s1.vika.cn/space/2022/06/16/8cf7a8e3745a4762aa990a902c36a5a6" alt="|600"></p><p><img src="https://s1.vika.cn/space/2022/06/16/0cd20d0656be427bb69a0daaa909eae3" alt="|600"></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>科研</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>热处理</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>20.合并区间</title>
+    <link href="/2022/06/16/20.he-bing-qu-jian/"/>
+    <url>/2022/06/16/20.he-bing-qu-jian/</url>
+    
+    <content type="html"><![CDATA[<p>文章简介<br>    力扣题解： 56. 合并区间</p><span id="more"></span><h1 id="1-56-合并区间"><a href="#1-56-合并区间" class="headerlink" title="1 # 56. 合并区间"></a>1 <a href="https://www.programmercarl.com/0056.%E5%90%88%E5%B9%B6%E5%8C%BA%E9%97%B4.html#_56-%E5%90%88%E5%B9%B6%E5%8C%BA%E9%97%B4">#</a> 56. 合并区间</h1><p><a href="https://leetcode-cn.com/problems/merge-intervals/">力扣题目链接</a></p><p>给出一个区间的集合，请合并所有重叠的区间。</p><p>示例 1:</p><ul><li>  输入: intervals = [ [1,3],[2,6],[8,10],[15,18] ]</li><li>  输出: [ [1,6],[8,10],[15,18] ]</li><li>  解释: 区间 [1,3] 和 [2,6] 重叠, 将它们合并为 [1,6].</li></ul><p>示例&nbsp;2:</p><ul><li>  输入: intervals = [ [1,4],[4,5] ]</li><li>  输出: [ [1,5] ]</li><li>  解释: 区间 [1,4] 和 [4,5] 可被视为重叠区间。</li><li>  注意：输入类型已于2019年4月15日更改。 请重置默认代码定义以获取新方法签名。</li></ul><p>提示：</p><ul><li>  intervals[ i ][0] &lt;= intervals[ i ][ 1 ]</li></ul><h1 id="2-思路"><a href="#2-思路" class="headerlink" title="2 思路"></a>2 思路</h1><p>左边界排序后<br>局部最优：每次合并都取最大的右边界，这样就可以合并更多的区间了<br>整体最优：合并所有重叠的区间。<br>排序后：intervals[i]的左边界在intervals[i - 1]左边界和右边界的范围内，一定有重复！.</p><blockquote><p>第二个数组的头如果小与第一个数组的尾，那么一定有重复<br><img src="https://img-blog.csdnimg.cn/20201223200632791.png" alt="56.合并区间"></p></blockquote><h2 id="2-1-排序"><a href="#2-1-排序" class="headerlink" title="2.1 排序"></a>2.1 排序</h2><p>按左边界排序</p><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">static</span> <span class="hljs-type">bool</span> <span class="hljs-title">cmp</span> <span class="hljs-params">(<span class="hljs-type">const</span> vector&lt;<span class="hljs-type">int</span>&gt;&amp; a, <span class="hljs-type">const</span> vector&lt;<span class="hljs-type">int</span>&gt;&amp; b)</span> </span>{<br>        <span class="hljs-keyword">return</span> a[<span class="hljs-number">0</span>] &lt; b[<span class="hljs-number">0</span>];<br>    }<br></code></pre></td></tr></tbody></table></figure><h2 id="2-2-判断是否重叠"><a href="#2-2-判断是否重叠" class="headerlink" title="2.2 判断是否重叠"></a>2.2 判断是否重叠</h2><p>for循环中判断重叠<br>第二个数组的头小于第一个数组的尾即为重叠<br> </p><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp">intervals[i][<span class="hljs-number">0</span>] &lt;= intervals[i - <span class="hljs-number">1</span>][<span class="hljs-number">1</span>]<br></code></pre></td></tr></tbody></table></figure><br>定义出来两个数组的头和尾，下边写的更简洁<p></p><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// 下标从1开始，因为要比较：intervals[i][0] &lt;= intervals[i - 1][1]</span><br><span class="hljs-type">int</span> start = intervals[i - <span class="hljs-number">1</span>][<span class="hljs-number">0</span>]; <span class="hljs-comment">// 初始区间的左边界</span><br><span class="hljs-type">int</span> end = intervals[i - <span class="hljs-number">1</span>][<span class="hljs-number">1</span>];   <span class="hljs-comment">// 初始区间的右边界</span><br><br></code></pre></td></tr></tbody></table></figure><h2 id="2-3-合并区间"><a href="#2-3-合并区间" class="headerlink" title="2.3 合并区间"></a>2.3 合并区间</h2><p>用[[while 循环]]合并区间：while循环是if 和 for 循环的结合体<br>比较第一个数组和第二数组的尾部谁更大，更新数组的尾部就行<br>同时要控制i的增加，如果合并了，那么进行一次i++, 出去while 循环后，for又进行一次i++，这样就控制了跳过了合并区间[[20.合并区间#^hcnuf7|段引用]]</p><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-type">int</span> end = intervals[i - <span class="hljs-number">1</span>][<span class="hljs-number">1</span>];<br>end = <span class="hljs-built_in">max</span>(end, intervals[i][<span class="hljs-number">1</span>]); <span class="hljs-comment">// 比较第一个数组和第二数组的尾部</span><br></code></pre></td></tr></tbody></table></figure><h2 id="2-4-放入result结果集"><a href="#2-4-放入result结果集" class="headerlink" title="2.4 放入result结果集"></a>2.4 放入result结果集</h2><p>取合并区间的头和尾作为一个新的数组加入到result数组中，<code>result.push_back({start, end});</code><br>如果没有合并就把原数组加入result</p><p><strong>注意</strong>：<br>还要单独判断最后一个数组是否合并了，如果合并了，正常加入就如result就行<br>如果没合并要单独的把最后一个数组加入result</p><h1 id="3-代码"><a href="#3-代码" class="headerlink" title="3 代码"></a>3 代码</h1><h2 id="3-1-代码随想录断点调试-lt-span-class-”hint–top-hint–rounded”-aria-label-”代码随想录"><a href="#3-1-代码随想录断点调试-lt-span-class-”hint–top-hint–rounded”-aria-label-”代码随想录" class="headerlink" title="3.1 代码随想录断点调试<span class=”hint–top hint–rounded” aria-label=”代码随想录"></a>3.1 代码随想录断点调试<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote">&lt;span class=”hint–top hint–rounded” aria-label=”代码随想录</a></sup></h2><p><a href="#fn:1" rel="footnote">“&gt;[1]</a><br><a href="file:///Users/yibeikongqiu/Desktop/ishot视频/贪心算法/20.合并区间(carl).mp4">20.合并区间(carl).mp4</a><br>    <a href="file:///Users/yibeikongqiu/Desktop/ishot%E8%A7%86%E9%A2%91/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/20.%E5%90%88%E5%B9%B6%E5%8C%BA%E9%97%B4(carl).mp4#t=19.133532">00:19</a> ：i++<br>        如果合并了第二区间，那么自然i不能从第二个区间在开始，要从第三个位置开始，while循环中有个i++，到了for循环中还有个i++, i到时候等于3，就跳过了合并的区间在开始<br>    <a href="file:///Users/yibeikongqiu/Desktop/ishot%E8%A7%86%E9%A2%91/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/20.%E5%90%88%E5%B9%B6%E5%8C%BA%E9%97%B4(carl).mp4#t=29.228653">00:29</a>：此时i 等于3，从合并区间的下个区间在开始进行 ^hcnuf7</p><h2 id="3-2-carl-自写"><a href="#3-2-carl-自写" class="headerlink" title="3.2 carl 自写"></a>3.2 carl 自写</h2><p>编译还未通过</p><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">static</span> <span class="hljs-type">bool</span> <span class="hljs-title">cmp</span> <span class="hljs-params">(<span class="hljs-type">const</span> &lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt;&amp; a, <span class="hljs-type">const</span> &lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt;&amp; b)</span></span>{<br>        <span class="hljs-keyword">return</span> a[<span class="hljs-number">0</span>] &lt; b[<span class="hljs-number">0</span>];<span class="hljs-comment">// 只比较左位置，所以不用二维数组</span><br>    }<br>    vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; result;<br><br>        vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">merge</span>(vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt;&amp; intervals) {<br>        <span class="hljs-keyword">if</span>(intervals.<span class="hljs-built_in">size</span>() == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> result;<span class="hljs-comment">// 此时result为空</span><br>        <span class="hljs-type">int</span> length = intervals.<span class="hljs-built_in">size</span>();<br><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; length; i++){<br>            <span class="hljs-type">int</span> start = intervals[i - <span class="hljs-number">1</span>][<span class="hljs-number">0</span>];<br>            <span class="hljs-type">int</span> end = intervals[i - <span class="hljs-number">1</span>][<span class="hljs-number">1</span>];<br>            <span class="hljs-type">bool</span> flag = <span class="hljs-literal">false</span>;<br>            <span class="hljs-keyword">while</span> (i &lt; length &amp;&amp; intervals[i][<span class="hljs-number">0</span>] &lt; end){<br>                end = <span class="hljs-built_in">max</span>(end, intervals[i][<span class="hljs-number">1</span>])<br>                <span class="hljs-keyword">if</span> (i == length - <span class="hljs-number">1</span>) flag = <span class="hljs-literal">true</span>;<br>                i++;<br>            }<br>            result.<span class="hljs-built_in">push_back</span> ({start,end}); <span class="hljs-comment">// 如果没合并就是单独的，如果合并了也更新了。</span><br>                                            <span class="hljs-comment">// 每一次的循环都在加入result数组所以在for循环中</span><br>        }<br>        <span class="hljs-keyword">if</span>(flag == <span class="hljs-literal">false</span>) {<br>            result.<span class="hljs-built_in">push_back</span>({intervals[length<span class="hljs-number">-1</span>][<span class="hljs-number">0</span>],intervals[length<span class="hljs-number">-1</span>][<span class="hljs-number">1</span>]});<br>        }<br>        <span class="hljs-keyword">return</span> result;<br>    }<br>};<br></code></pre></td></tr></tbody></table></figure><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a href="https://www.programmercarl.com/0056.%E5%90%88%E5%B9%B6%E5%8C%BA%E9%97%B4.html#%E6%80%9D%E8%B7%AF">代码随想录</a><a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>]]></content>
+    
+    
+    <categories>
+      
+      <category>数据结构与算法</category>
+      
+      <category>代码随想录</category>
+      
+      <category>贪心算法</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>贪心算法</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>notion函数公式</title>
+    <link href="/2022/06/15/notion-han-shu-gong-shi/"/>
+    <url>/2022/06/15/notion-han-shu-gong-shi/</url>
+    
+    <content type="html"><![CDATA[<p>notion函数公式</p><h1 id="1-时间公式"><a href="#1-时间公式" class="headerlink" title="1 时间公式"></a>1 时间公式</h1><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs cpp">开始的后两位：<span class="hljs-built_in">toNumber</span>(<span class="hljs-built_in">slice</span>(<span class="hljs-built_in">prop</span>(<span class="hljs-string">"开始"</span>),<span class="hljs-number">3</span>))<br>结束的后两位：<span class="hljs-built_in">toNumber</span>(<span class="hljs-built_in">slice</span>(<span class="hljs-built_in">prop</span>(<span class="hljs-string">"结束"</span>),<span class="hljs-number">3</span>))<br><br>开始的前两位：<span class="hljs-built_in">toNumber</span>(<span class="hljs-built_in">slice</span>(<span class="hljs-built_in">prop</span>(<span class="hljs-string">"开始"</span>),<span class="hljs-number">0</span>,<span class="hljs-number">2</span>))<br>结束的前两位：<span class="hljs-built_in">toNumber</span>(<span class="hljs-built_in">slice</span>(<span class="hljs-built_in">prop</span>(<span class="hljs-string">"结束"</span>),<span class="hljs-number">0</span>,<span class="hljs-number">2</span>))<br><br><br>相减的分钟数：(<span class="hljs-built_in">toNumber</span>(<span class="hljs-built_in">slice</span>(<span class="hljs-built_in">prop</span>(<span class="hljs-string">"结束"</span>),<span class="hljs-number">3</span>))-<span class="hljs-built_in">toNumber</span>(<span class="hljs-built_in">slice</span>(<span class="hljs-built_in">prop</span>(<span class="hljs-string">"开始"</span>),<span class="hljs-number">3</span>)))<br>相减的小时数：(<span class="hljs-built_in">toNumber</span>(<span class="hljs-built_in">slice</span>(<span class="hljs-built_in">prop</span>(<span class="hljs-string">"结束"</span>),<span class="hljs-number">0</span>,<span class="hljs-number">2</span>))-<span class="hljs-built_in">toNumber</span>(<span class="hljs-built_in">slice</span>(<span class="hljs-built_in">prop</span>(<span class="hljs-string">"开始"</span>),<span class="hljs-number">0</span>,<span class="hljs-number">2</span>)))<br><br>小时+分钟：<br><span class="hljs-built_in">floor</span>((<span class="hljs-built_in">toNumber</span>(<span class="hljs-built_in">slice</span>(<span class="hljs-built_in">prop</span>(<span class="hljs-string">"结束"</span>), <span class="hljs-number">0</span>, <span class="hljs-number">2</span>)) - <span class="hljs-built_in">toNumber</span>(<span class="hljs-built_in">slice</span>(<span class="hljs-built_in">prop</span>(<span class="hljs-string">"开始"</span>), <span class="hljs-number">0</span>, <span class="hljs-number">2</span>)) + (<span class="hljs-built_in">toNumber</span>(<span class="hljs-built_in">slice</span>(<span class="hljs-built_in">prop</span>(<span class="hljs-string">"结束"</span>), <span class="hljs-number">3</span>)) - <span class="hljs-built_in">toNumber</span>(<span class="hljs-built_in">slice</span>(<span class="hljs-built_in">prop</span>(<span class="hljs-string">"开始"</span>), <span class="hljs-number">3</span>))) / <span class="hljs-number">60</span>) * <span class="hljs-number">100</span>) /<span class="hljs-number">100</span> <br><br><br><span class="hljs-comment">//不借位</span><br><span class="hljs-keyword">if</span>(<span class="hljs-built_in">toNumber</span>(<span class="hljs-built_in">slice</span>(<span class="hljs-built_in">prop</span>(<span class="hljs-string">"结束"</span>), <span class="hljs-number">3</span>)) &gt;= <span class="hljs-built_in">toNumber</span>(<span class="hljs-built_in">slice</span>(<span class="hljs-built_in">prop</span>(<span class="hljs-string">"开始"</span>), <span class="hljs-number">3</span>)), <span class="hljs-built_in">floor</span>((<span class="hljs-built_in">toNumber</span>(<span class="hljs-built_in">slice</span>(<span class="hljs-built_in">prop</span>(<span class="hljs-string">"结束"</span>), <span class="hljs-number">0</span>, <span class="hljs-number">2</span>)) - <span class="hljs-built_in">toNumber</span>(<span class="hljs-built_in">slice</span>(<span class="hljs-built_in">prop</span>(<span class="hljs-string">"开始"</span>), <span class="hljs-number">0</span>, <span class="hljs-number">2</span>)) + (<span class="hljs-built_in">toNumber</span>(<span class="hljs-built_in">slice</span>(<span class="hljs-built_in">prop</span>(<span class="hljs-string">"结束"</span>), <span class="hljs-number">3</span>)) - <span class="hljs-built_in">toNumber</span>(<span class="hljs-built_in">slice</span>(<span class="hljs-built_in">prop</span>(<span class="hljs-string">"开始"</span>), <span class="hljs-number">3</span>))) / <span class="hljs-number">60</span>) * <span class="hljs-number">100</span>) / <span class="hljs-number">100</span>, <span class="hljs-number">0</span>)<br><br><span class="hljs-comment">//借位</span><br><span class="hljs-built_in">floor</span>((<span class="hljs-built_in">toNumber</span>(<span class="hljs-built_in">slice</span>(<span class="hljs-built_in">prop</span>(<span class="hljs-string">"结束"</span>), <span class="hljs-number">0</span>, <span class="hljs-number">2</span>))<span class="hljs-number">-1</span> - <span class="hljs-built_in">toNumber</span>(<span class="hljs-built_in">slice</span>(<span class="hljs-built_in">prop</span>(<span class="hljs-string">"开始"</span>), <span class="hljs-number">0</span>, <span class="hljs-number">2</span>)) + (<span class="hljs-built_in">toNumber</span>(<span class="hljs-built_in">slice</span>(<span class="hljs-built_in">prop</span>(<span class="hljs-string">"结束"</span>), <span class="hljs-number">3</span>))+<span class="hljs-number">60</span> - <span class="hljs-built_in">toNumber</span>(<span class="hljs-built_in">slice</span>(<span class="hljs-built_in">prop</span>(<span class="hljs-string">"开始"</span>), <span class="hljs-number">3</span>))) / <span class="hljs-number">60</span>) * <span class="hljs-number">100</span>) /<span class="hljs-number">100</span><br><br><br><span class="hljs-comment">//时间计算总函数：已通过</span><br><span class="hljs-keyword">if</span>(<span class="hljs-built_in">toNumber</span>(<span class="hljs-built_in">slice</span>(<span class="hljs-built_in">prop</span>(<span class="hljs-string">"结束"</span>), <span class="hljs-number">3</span>)) &gt;= <span class="hljs-built_in">toNumber</span>(<span class="hljs-built_in">slice</span>(<span class="hljs-built_in">prop</span>(<span class="hljs-string">"开始"</span>), <span class="hljs-number">3</span>)), <span class="hljs-built_in">floor</span>((<span class="hljs-built_in">toNumber</span>(<span class="hljs-built_in">slice</span>(<span class="hljs-built_in">prop</span>(<span class="hljs-string">"结束"</span>), <span class="hljs-number">0</span>, <span class="hljs-number">2</span>)) - <span class="hljs-built_in">toNumber</span>(<span class="hljs-built_in">slice</span>(<span class="hljs-built_in">prop</span>(<span class="hljs-string">"开始"</span>), <span class="hljs-number">0</span>, <span class="hljs-number">2</span>)) + (<span class="hljs-built_in">toNumber</span>(<span class="hljs-built_in">slice</span>(<span class="hljs-built_in">prop</span>(<span class="hljs-string">"结束"</span>), <span class="hljs-number">3</span>)) - <span class="hljs-built_in">toNumber</span>(<span class="hljs-built_in">slice</span>(<span class="hljs-built_in">prop</span>(<span class="hljs-string">"开始"</span>), <span class="hljs-number">3</span>))) / <span class="hljs-number">60</span>) * <span class="hljs-number">100</span>) / <span class="hljs-number">100</span>, <span class="hljs-built_in">floor</span>((<span class="hljs-built_in">toNumber</span>(<span class="hljs-built_in">slice</span>(<span class="hljs-built_in">prop</span>(<span class="hljs-string">"结束"</span>), <span class="hljs-number">0</span>, <span class="hljs-number">2</span>)) - <span class="hljs-number">1</span> - <span class="hljs-built_in">toNumber</span>(<span class="hljs-built_in">slice</span>(<span class="hljs-built_in">prop</span>(<span class="hljs-string">"开始"</span>), <span class="hljs-number">0</span>, <span class="hljs-number">2</span>)) + (<span class="hljs-built_in">toNumber</span>(<span class="hljs-built_in">slice</span>(<span class="hljs-built_in">prop</span>(<span class="hljs-string">"结束"</span>), <span class="hljs-number">3</span>)) + <span class="hljs-number">60</span> - <span class="hljs-built_in">toNumber</span>(<span class="hljs-built_in">slice</span>(<span class="hljs-built_in">prop</span>(<span class="hljs-string">"开始"</span>), <span class="hljs-number">3</span>))) / <span class="hljs-number">60</span>) * <span class="hljs-number">100</span>) / <span class="hljs-number">100</span>)<br><br><span class="hljs-comment">//时间范围改造函数</span><br><span class="hljs-keyword">if</span>(<span class="hljs-built_in">toNumber</span>(<span class="hljs-built_in">slice</span>(<span class="hljs-built_in">prop</span>(<span class="hljs-string">"结束"</span>), <span class="hljs-number">3</span>)) &gt;= <span class="hljs-built_in">toNumber</span>(<span class="hljs-built_in">slice</span>(<span class="hljs-built_in">prop</span>(<span class="hljs-string">"开始"</span>), <span class="hljs-number">3</span>)), format((<span class="hljs-built_in">toNumber</span>(<span class="hljs-built_in">slice</span>(<span class="hljs-built_in">prop</span>(<span class="hljs-string">"结束"</span>), <span class="hljs-number">0</span>, <span class="hljs-number">2</span>)) - <span class="hljs-built_in">toNumber</span>(<span class="hljs-built_in">slice</span>(<span class="hljs-built_in">prop</span>(<span class="hljs-string">"开始"</span>), <span class="hljs-number">0</span>, <span class="hljs-number">2</span>)))+ <span class="hljs-string">"h"</span> + format((<span class="hljs-built_in">toNumber</span>(<span class="hljs-built_in">slice</span>(<span class="hljs-built_in">prop</span>(<span class="hljs-string">"结束"</span>),<span class="hljs-number">3</span>))-<span class="hljs-built_in">toNumber</span>(<span class="hljs-built_in">slice</span>(<span class="hljs-built_in">prop</span>(<span class="hljs-string">"开始"</span>),<span class="hljs-number">3</span>)))) +<span class="hljs-string">"m"</span> , <span class="hljs-string">"0"</span>)<br></code></pre></td></tr></tbody></table></figure><p>时间范围</p><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs cpp">format(<span class="hljs-built_in">toNumber</span>(<span class="hljs-built_in">slice</span>(<span class="hljs-built_in">prop</span>(<span class="hljs-string">"结束"</span>), <span class="hljs-number">3</span>)) - <span class="hljs-built_in">toNumber</span>(<span class="hljs-built_in">slice</span>(<span class="hljs-built_in">prop</span>(<span class="hljs-string">"开始"</span>), <span class="hljs-number">3</span>))) + <span class="hljs-string">"m"</span><br><span class="hljs-comment">//不借位</span><br>format(<span class="hljs-built_in">toNumber</span>(<span class="hljs-built_in">slice</span>(<span class="hljs-built_in">prop</span>(<span class="hljs-string">"结束"</span>), <span class="hljs-number">0</span>, <span class="hljs-number">2</span>)) - <span class="hljs-built_in">toNumber</span>(<span class="hljs-built_in">slice</span>(<span class="hljs-built_in">prop</span>(<span class="hljs-string">"开始"</span>), <span class="hljs-number">0</span>, <span class="hljs-number">2</span>))) + <span class="hljs-string">"h"</span> + format(<span class="hljs-built_in">toNumber</span>(<span class="hljs-built_in">slice</span>(<span class="hljs-built_in">prop</span>(<span class="hljs-string">"结束"</span>), <span class="hljs-number">3</span>)) - <span class="hljs-built_in">toNumber</span>(<span class="hljs-built_in">slice</span>(<span class="hljs-built_in">prop</span>(<span class="hljs-string">"开始"</span>), <span class="hljs-number">3</span>))) + <span class="hljs-string">"m"</span><br><br><span class="hljs-comment">//借位</span><br>format(<span class="hljs-built_in">toNumber</span>(<span class="hljs-built_in">slice</span>(<span class="hljs-built_in">prop</span>(<span class="hljs-string">"结束"</span>), <span class="hljs-number">0</span>, <span class="hljs-number">2</span>))<span class="hljs-number">-1</span> - <span class="hljs-built_in">toNumber</span>(<span class="hljs-built_in">slice</span>(<span class="hljs-built_in">prop</span>(<span class="hljs-string">"开始"</span>), <span class="hljs-number">0</span>, <span class="hljs-number">2</span>))) + <span class="hljs-string">"h"</span> + format(<span class="hljs-built_in">toNumber</span>(<span class="hljs-built_in">slice</span>(<span class="hljs-built_in">prop</span>(<span class="hljs-string">"结束"</span>), <span class="hljs-number">3</span>))+<span class="hljs-number">60</span> - <span class="hljs-built_in">toNumber</span>(<span class="hljs-built_in">slice</span>(<span class="hljs-built_in">prop</span>(<span class="hljs-string">"开始"</span>), <span class="hljs-number">3</span>))) + <span class="hljs-string">"m"</span><br></code></pre></td></tr></tbody></table></figure><p>写notion公式的心得：把零件找出来，在组装</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>软件</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>notion</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>c++中 - ‘0’ 以及 -&#39;a&#39; 的相减操作解释</title>
+    <link href="/2022/06/15/c-zhong-0-yi-ji-a-de-xiang-jian-cao-zuo-jie-shi/"/>
+    <url>/2022/06/15/c-zhong-0-yi-ji-a-de-xiang-jian-cao-zuo-jie-shi/</url>
+    
+    <content type="html"><![CDATA[<p>#flashcards/代码随想录/知识点<br>c++中 - ‘0’ 以及 -‘a’ 的相减操作解释<br>?</p><h1 id="1-将数字字符转为整形变量"><a href="#1-将数字字符转为整形变量" class="headerlink" title="1 将数字字符转为整形变量"></a>1 将数字字符转为整形变量</h1><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// 将str 字符串"1234"里的各个数字字符转成整型，存入整型数组x：</span><br><span class="hljs-type">char</span> str[]=<span class="hljs-string">"1234"</span>;<br><span class="hljs-type">int</span> x[<span class="hljs-number">4</span>] = <span class="hljs-number">0</span>;<br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>; i&lt;<span class="hljs-number">4</span>; i++) x[i] = str[i] - <span class="hljs-string">'0'</span>; <br></code></pre></td></tr></tbody></table></figure><blockquote><p>数字字符减去‘0’就得到了该数字。减去字符0，也就是减去0的ASCII码值48。</p></blockquote><h1 id="2-将字母由小写转为大写"><a href="#2-将字母由小写转为大写" class="headerlink" title="2 将字母由小写转为大写"></a>2 将字母由小写转为大写</h1><p>字母字符- ‘a’得到 该字母下的下标</p><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// 把字符串中字母，小写变大写</span><br><span class="hljs-type">char</span> str[]=<span class="hljs-string">"aBcxYz"</span>;<br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>; i&lt;<span class="hljs-built_in">strlen</span>(str); i++)<br><span class="hljs-keyword">if</span> (str[i] &gt;=<span class="hljs-string">'a'</span> &amp;&amp; str[i] &lt;=<span class="hljs-string">'z'</span>) str[i] = str[i] -<span class="hljs-string">'a'</span> + <span class="hljs-string">'A'</span>;<br></code></pre></td></tr></tbody></table></figure><h2 id="2-1-取到字母字符对应的数字：a→0，b→1…"><a href="#2-1-取到字母字符对应的数字：a→0，b→1…" class="headerlink" title="2.1 取到字母字符对应的数字：a→0，b→1…."></a>2.1 取到字母字符对应的数字：a→0，b→1….</h2><p>原理：a - ‘a’ = 0, b - ‘a’ = 1 …..</p><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-type">int</span> hash[<span class="hljs-number">27</span>] = {<span class="hljs-number">0</span>};<br>S = <span class="hljs-string">"ababcbacadefegdehijhklij"</span><span class="hljs-comment">// S[0] - 'a'= 0</span><br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; S.<span class="hljs-built_in">size</span>(); i++) { <br>            hash[S[i] - <span class="hljs-string">'a'</span>] = i; <span class="hljs-comment">//</span><br>        }<br></code></pre></td></tr></tbody></table></figure><p>[[19.划分字母区间#^dhg2oc]]<br><a href="file:///Users/yibeikongqiu/Desktop/ishot%E8%A7%86%E9%A2%91/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/19.%E5%88%92%E5%88%86%E5%AD%97%E6%AF%8D%E5%8C%BA%E9%97%B4(carl).mp4#t=63.222835">01:03</a><br>    S = “<strong>a</strong>babcbac<strong>a</strong>defegdehijhklij”<br>    将每一个字母的所对应的下标值放到了hash数组里了，相同字母的是更新的，因为 S[1] - ‘a’=&nbsp;S[6] - ‘a’ = 0 </p>]]></content>
+    
+    
+    <categories>
+      
+      <category>C++</category>
+      
+      <category>-C++ primer plus</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>c++中 - ‘0’ 以及 -&#39;a&#39; 的相减操作解释</title>
+    <link href="/2022/06/15/while-xun-huan/"/>
+    <url>/2022/06/15/while-xun-huan/</url>
+    
+    <content type="html"><![CDATA[<p>while循环是if 和 for 循环的结合体，<br>只要在while循环中增加跳出语句就行</p><p>while(i){i++}</p><p>if(){<br>for()<br>}</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>C++</category>
+      
+      <category>C++ primer plus</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>函数</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>19.划分字母区间</title>
+    <link href="/2022/06/15/19.hua-fen-zi-mu-qu-jian/"/>
+    <url>/2022/06/15/19.hua-fen-zi-mu-qu-jian/</url>
+    
+    <content type="html"><![CDATA[<p>文章简介<br>    力扣题解：763.划分字母区间</p><span id="more"></span><h1 id="1-763-划分字母区间"><a href="#1-763-划分字母区间" class="headerlink" title="1 763.划分字母区间"></a>1 763.划分字母区间</h1><p><a href="https://leetcode-cn.com/problems/partition-labels/">力扣题目链接</a></p><p>字符串 S 由小写字母组成。我们要把这个字符串划分为尽可能多的片段，同一字母最多出现在一个片段中。返回一个表示每个字符串片段的长度的列表。</p><p>示例：</p><ul><li>  输入：S = “ababcbacadefegdehijhklij”</li><li>  输出：[9,7,8] 解释： 划分结果为 “ababcbaca”, “defegde”, “hijhklij”。 每个字母最多出现在一个片段中。 像 “ababcbacadefegde”, “hijhklij” 的划分是错误的，因为划分的片段数较少。</li></ul><p>提示：</p><ul><li>  S的长度在[1, 500]之间。</li><li>  S只包含小写字母 ‘a’ 到 ‘z’ 。</li></ul><h1 id="2-思路"><a href="#2-思路" class="headerlink" title="2 思路"></a>2 思路</h1><p>总共分为两步<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="代码随想录">[1]</span></a></sup>：</p><ul><li>  统计每一个字符最后出现的位置</li><li>从头遍历字符，并更新字符的最远出现下标，如果找到字符最远出现位置下标和当前下标相等了，则找到了分割点<br><img src="https://img-blog.csdnimg.cn/20201222191924417.png" alt="763.划分字母区间|900"><h1 id="3-代码"><a href="#3-代码" class="headerlink" title="3 代码"></a>3 代码</h1><h2 id="3-1-carl断点调试"><a href="#3-1-carl断点调试" class="headerlink" title="3.1 carl断点调试"></a>3.1 carl断点调试</h2><a href="file:///Users/yibeikongqiu/Desktop/ishot视频/贪心算法/19.划分字母区间(carl).mp4">19.划分字母区间(carl).MP4</a><br>  以后可以监听几个变量：S[i]，right - left +1<br>  [[c++中 - ‘0’ 以及 -‘a’ 的相减操作解释]]<br>  S = “<strong>a</strong>babcbac<strong>a</strong>defegdehijhklij”<br>  <a href="file:///Users/yibeikongqiu/Desktop/ishot%E8%A7%86%E9%A2%91/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/19.%E5%88%92%E5%88%86%E5%AD%97%E6%AF%8D%E5%8C%BA%E9%97%B4(carl).mp4#t=12.709769">00:12</a> <pre><code class="hljs">  S = "a==b==abcbacadefegdehijhklij"，相当于将b对应1，这个数存在了hash里  hash[S[1] - 'a'] =&nbsp;1，即hash[2] = 1</code></pre>  <a href="file:///Users/yibeikongqiu/Desktop/ishot%E8%A7%86%E9%A2%91/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/19.%E5%88%92%E5%88%86%E5%AD%97%E6%AF%8D%E5%8C%BA%E9%97%B4(carl).mp4#t=63.222835">01:03</a> <pre><code class="hljs">  S = "==**a**==babcbac==**a**==defegdehijhklij"  将每一个字母的所对应的下标值放到了hash数组里了，相同字母的是更新的，因为 S[1] - 'a'=&nbsp;S[9] - 'a' = 0 (第一个区间)</code></pre>  <a href="file:///Users/yibeikongqiu/Desktop/ishot%E8%A7%86%E9%A2%91/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/19.%E5%88%92%E5%88%86%E5%AD%97%E6%AF%8D%E5%8C%BA%E9%97%B4(carl).mp4#t=70.392045">01:10</a> <pre><code class="hljs">  此使 right = max(0, 8)，之道i 到下标8才会进入if 循环语句，它在下标8之前一直在比较有没有比8更大值，有的话说明第一个分割点更远</code></pre>  <a href="file:///Users/yibeikongqiu/Desktop/ishot%E8%A7%86%E9%A2%91/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/19.%E5%88%92%E5%88%86%E5%AD%97%E6%AF%8D%E5%8C%BA%E9%97%B4(carl).mp4#t=113.069755">01:53</a><pre><code class="hljs">  到达第一分割点下标8(i =&nbsp;8)处，开始push_back结果，并且更新下一个区间  right  - left + 1  = 8-0+1= 9 第一个区间相当于：尾 - 头 + 1  下个区间要在更新一下头即left = i+1 =&nbsp;9  </code></pre></li></ul><h3 id="3-1-1-代码"><a href="#3-1-1-代码" class="headerlink" title="3.1.1 代码"></a>3.1.1 代码</h3><p>自写 编译已通过</p><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">partitionLabels</span><span class="hljs-params">(string S)</span> </span>{<br>       <span class="hljs-type">int</span> hash[<span class="hljs-number">27</span>] = {<span class="hljs-number">0</span>};<span class="hljs-comment">// 数组初始化必须是列表，不能是单纯的0</span><br>       <span class="hljs-comment">//int hash[S.size()] = {0}; // S.size 可变动的，错误：可变大小的对象可能未初始化</span><br><br>       <span class="hljs-comment">//hash数组中写入每个字母的最远下标值</span><br>       <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; S.<span class="hljs-built_in">size</span>(); i++){<br>           hash[S[i] - <span class="hljs-string">'a'</span>] = i;<br>       }<br>       <span class="hljs-type">int</span> right = <span class="hljs-number">0</span>;<br>       <span class="hljs-type">int</span> left = <span class="hljs-number">0</span>;<br>       vector&lt;<span class="hljs-type">int</span>&gt; result; <span class="hljs-comment">// vector 能够不断往里加数据</span><br>       <span class="hljs-comment">// 不断的找分割区间</span><br>       <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; S.<span class="hljs-built_in">size</span>(); i++){<br>           right = <span class="hljs-built_in">max</span> (right, hash[S[i] - <span class="hljs-string">'a'</span>]); <span class="hljs-comment">// 确定区间的尾部 不是hash[i], 是每个字母对应的最远下标</span><br>           <span class="hljs-keyword">if</span>(i == right){<br>               result.<span class="hljs-built_in">push_back</span>(right - left +<span class="hljs-number">1</span>); <span class="hljs-comment">// 返回是字符串的长度所以+1</span><br>               left = i + <span class="hljs-number">1</span>; <span class="hljs-comment">// 更新下一个区间头部，现在i是上一区间的尾，所以下个头部为 i+1</span><br>           }<br>       }<br>       <span class="hljs-keyword">return</span> result;<br>    }<br>};<br></code></pre></td></tr></tbody></table></figure><hr><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a href="https://www.programmercarl.com/0763.%E5%88%92%E5%88%86%E5%AD%97%E6%AF%8D%E5%8C%BA%E9%97%B4.html#%E6%80%9D%E8%B7%AF">代码随想录</a><a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>]]></content>
+    
+    
+    <categories>
+      
+      <category>数据结构与算法</category>
+      
+      <category>代码随想录</category>
+      
+      <category>贪心算法</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>贪心算法</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>切割材料+制样</title>
+    <link href="/2022/06/14/qie-ge-cai-liao-zhi-yang/"/>
+    <url>/2022/06/14/qie-ge-cai-liao-zhi-yang/</url>
+    
+    <content type="html"><![CDATA[<h1 id="1-切割"><a href="#1-切割" class="headerlink" title="1 切割"></a>1 切割</h1><p>切割圆棒和圆盘分离处12mm范围内，<br><img src="https://s1.vika.cn/space/2022/06/14/2d7ff49ea0c8442ab6e80f41c0f30a32" width="500" height="500"></p><h1 id="2-制样"><a href="#2-制样" class="headerlink" title="2 制样"></a>2 制样</h1><p>第一次溶液做点稀点：一次性杯子，倒4分之一的水(配套粉的)，4勺粉。搅拌至拉丝<br>倒到模具当中，先倒一点(3分之一)，然后用镊子在把材料拿起在压下去</p><blockquote><p>主要让切割材料底下溶液渗透均匀<br><img src="https://s1.vika.cn/space/2022/06/14/7139d0510c9e43e2a3bcc0b7816cfbe8" alt="|400"></p></blockquote><p>第二次溶液做点稠点：一次性杯子，倒3分之一的水(配套粉的)，7勺粉。搅拌至拉丝<br>这次把模具倒满</p><hr><p>跳转回ob：<a href="obsidian://advanced-uri?vault=Documents&amp;uid=0a90dfa0-acef-4bf3-bb8b-0b72eb035933">ob</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>科研</category>
+      
+      <category>实验流程</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>PPT技巧-文字高亮</title>
+    <link href="/2022/06/14/ppt-ji-qiao-wen-zi-gao-liang/"/>
+    <url>/2022/06/14/ppt-ji-qiao-wen-zi-gao-liang/</url>
+    
+    <content type="html"><![CDATA[<p>注意事项：</p><p>按住Shift 用来垂直或水平移动<br>如果上下两个文字没有在同一位置，无法实现文字滚动效果</p><hr><p>参考资料：<br><a href="https://www.bilibili.com/video/BV1pv4y1G7Qp/?spm_id_from=333.788&amp;vd_source=f2340d96e99780a96b50d8096ffaaf1a">keynote 教程 有手就行系列 024 苹果发布会分解教学_哔哩哔哩_bilibili</a></p><hr><p>下一篇：[[切割材料+制样]]</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>PPT</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>自然辩证法考试重点</title>
+    <link href="/2022/06/13/zi-ran-bian-zheng-fa-kao-shi-chong-dian/"/>
+    <url>/2022/06/13/zi-ran-bian-zheng-fa-kao-shi-chong-dian/</url>
+    
+    <content type="html"><![CDATA[<p><a href="https://skinny-girl-067.notion.site/832c73b10a1849e49262e0d8eb1b505b">整理自然辩证法考试内容–notion</a></p><hr><p>下一篇：[[PPT技巧-文字高亮]]</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>考试</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>六级考试时间安排</title>
+    <link href="/2022/06/11/liu-ji-kao-shi-shi-jian-an-pai/"/>
+    <url>/2022/06/11/liu-ji-kao-shi-shi-jian-an-pai/</url>
+    
+    <content type="html"><![CDATA[<p>正式时间：15.00-17.25<br>报道时间：14.20</p><p>15.00前：发答题卡</p><p>15.00-15.10：开始发卷子</p><p>15.10-15.40：开始让动笔写作文👉 30分钟</p><p>15.40-16.10：听力👉 30分钟</p><p>16.10-16.15：暂停5分钟收答题卡1(作文和听力)</p><p>16.15-17.25：余下时间写卷至结束</p><p>下一篇：[[自然辩证法考试重点]]</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>考试</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>六级</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>由hexo clean 问题引发的一些学习感想</title>
+    <link href="/2022/06/11/you-hexo-clean-wen-ti-yin-fa-de-yi-xie-xue-xi-gan-xiang/"/>
+    <url>/2022/06/11/you-hexo-clean-wen-ti-yin-fa-de-yi-xie-xue-xi-gan-xiang/</url>
+    
+    <content type="html"><![CDATA[<p>hexo 上传文章的固定流程：</p><p><code>hexo clean</code> → <code>hexo  g</code> → <code>hexo  s</code> → <code>hexo  d</code></p><p>其实网上看了很多人这样写，但我一直把<code>hexo clean</code> 写成 <code>hexo c</code>。其实系统也一直都有在报错，但我从来都没有关注。因为终端窗口小，没能显示出来上边的错误信息，下面一堆英文的也不想看。每次都当成了顺利执行了。自己还沾沾自喜的觉得<code>hexo c</code> 写也可以，网上没人说自己发现了新大陆了。<br><img src="https://s1.vika.cn/space/2022/06/11/9106c9ae345a4543a36819fd0351132c" alt="|600"><br>后来在用hexo写文章的时候，换主主题总是有些问题(见下图)，自己困扰了很多天，每天拿出来很多时间来尝试解决问题，但都无果。其实就是因为没有用hexo clean 清除缓存导致的<br><img src="https://s1.vika.cn/space/2022/06/11/d2d6e3f8df354e7cad5a8cfa1b5d2983" alt="|800"></p><p>我为什么一直固执写 <code>hexo c</code> 呢，<br>我认为有以下方面原因：</p><ol><li><strong>自以为是</strong>。觉得很多都可以简写，那这个命令应该也可以。自己试了试看到终端输出信息了。就觉得可以了，但其实根本没认真看出来的信息</li><li><strong>嫌麻烦</strong>。觉得是英文的，根本静不下来心去看。</li></ol><p>希望以后在这两方面加强自己</p><p>下一篇：[[六级考试时间安排]]</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>学习感悟</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>hexo 问题</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>科研材料总结</title>
+    <link href="/2022/06/10/ke-yan-cai-liao-zong-jie/"/>
+    <url>/2022/06/10/ke-yan-cai-liao-zong-jie/</url>
+    
+    <content type="html"><![CDATA[<p>硬度单位<br>洛氏硬度：HR；布氏硬度：HB；维氏硬度：HV</p><p>自用<sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span class="hint--top hint--rounded" aria-label="ob">[2]</span></a></sup></p><h1 id="1-镁合金"><a href="#1-镁合金" class="headerlink" title="1 镁合金"></a>1 镁合金</h1><h2 id="1-1-硬度"><a href="#1-1-硬度" class="headerlink" title="1.1 硬度"></a>1.1 硬度</h2><p>镁合金型号：<strong>AZ31B(HR70)</strong> AZ61 AZ91  ZK60 WE40<br>镁合金的hv：45~75不等</p><p>纯铜：HB85，50~65HV<br>纯铝：HB28<br>7075铝合金：退火后的HV140</p><p><strong>硬度低于纯铜的材料：</strong><br><strong>纯铜</strong>：HB：85，HV：50~65<br>    退火(软)铜硬度为：50HV</p><p>304不锈钢：<br>淘宝：硬度在HBW85左右(淘宝)<br>网上：HB187，HRB90，HV200</p><h1 id="2-退火"><a href="#2-退火" class="headerlink" title="2 [[退火]]"></a>2 [[退火]]</h1><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a href="marginnote3app://note/78EE4419-7316-4B0F-9104-116415CFBD95">margin</a><a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:2" class="footnote-text"><span><a href="obsidian://advanced-uri?vault=Documents&amp;uid=c94962a5-c07b-4fe5-b5c1-4d72c4fb033a">ob</a><a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>]]></content>
+    
+    
+    <categories>
+      
+      <category>科研</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>材料</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>18.无重叠区间</title>
+    <link href="/2022/06/10/18.wu-chong-die-qu-jian/"/>
+    <url>/2022/06/10/18.wu-chong-die-qu-jian/</url>
+    
+    <content type="html"><![CDATA[<p>文章简介：<br>力扣题解：435. 无重叠区间</p><span id="more"></span><h1 id="1-无重叠区间"><a href="#1-无重叠区间" class="headerlink" title="1 无重叠区间"></a>1 无重叠区间</h1><p><a href="https://leetcode-cn.com/problems/non-overlapping-intervals/">力扣题目链接</a></p><p>给定一个区间的集合，找到需要移除区间的最小数量，使剩余区间互不重叠。</p><p>注意: 可以认为区间的终点总是大于它的起点。 区间 [1,2] 和 [2,3] 的边界相互“接触”，但没有相互重叠。</p><p>示例 1:</p><ul><li>  输入: [ [1,2], [2,3], [3,4], [1,3] ]</li><li>  输出: 1</li><li>  解释: 移除 [1,3] 后，剩下的区间没有重叠。</li></ul><p>示例 2:</p><ul><li>  输入: [ [1,2], [1,2], [1,2] ]</li><li>  输出: 2</li><li>  解释: 你需要移除两个 [1,2] 来使剩下的区间没有重叠。</li></ul><p>示例 3:</p><ul><li>  输入: [ [1,2], [2,3] ]</li><li>  输出: 0</li><li>  解释: 你不需要移除任何区间，因为它们已经是无重叠的了。</li></ul><h1 id="2-思路"><a href="#2-思路" class="headerlink" title="2 思路"></a>2 思路</h1><p><strong>按照右边界排序，从左向右记录非交叉区间的个数。最后用区间总数减去非交叉区间的个数就是需要移除的区间个数了</strong>。</p><p>从左向右遍历，优先选择右边界小的数组(因为右边界越小，留给下一个区间的空间就越大)</p><blockquote><p><img src="https://s1.vika.cn/space/2022/06/10/6830dccb02804260a38ac29d8641f9f8" alt="|600"></p></blockquote><p><strong>局部最优</strong>：优先选右边界小的区间，所以从左向右遍历，留给下一个区间的空间大一些，从而尽量避免交叉。<br>全局最优：选取最多的非交叉区间。<br><img src="https://img-blog.csdnimg.cn/20201221201553618.png" alt="435.无重叠区间|600"></p><blockquote><p>选择1就把2，3pass了，选择4就把5pass了</p></blockquote><h1 id="3-代码"><a href="#3-代码" class="headerlink" title="3 代码"></a>3 代码</h1><h2 id="3-1-carl"><a href="#3-1-carl" class="headerlink" title="3.1 carl"></a>3.1 carl</h2><p>自写代码已通过</p><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">private</span>:<br><span class="hljs-function"><span class="hljs-type">static</span> <span class="hljs-type">bool</span> <span class="hljs-title">cmp</span> <span class="hljs-params">(<span class="hljs-type">const</span> vector&lt;<span class="hljs-type">int</span>&gt;&amp; a,<span class="hljs-type">const</span> vector&lt;<span class="hljs-type">int</span>&gt;&amp; b)</span></span>{<br>    <span class="hljs-keyword">return</span> a[<span class="hljs-number">1</span>] &lt; b[<span class="hljs-number">1</span>];<span class="hljs-comment">// 按右边界排序</span><br>}<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">eraseOverlapIntervals</span><span class="hljs-params">(vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt;&amp; intervals)</span> </span>{<br>        <span class="hljs-keyword">if</span> (intervals.<span class="hljs-built_in">size</span>() == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-built_in">sort</span>(intervals.<span class="hljs-built_in">begin</span>(), intervals.<span class="hljs-built_in">end</span>(),cmp);<br>        <span class="hljs-type">int</span> count = <span class="hljs-number">1</span>; <span class="hljs-comment">//记录非交叉区间的个数</span><br>        <span class="hljs-type">int</span> end = intervals[<span class="hljs-number">0</span>][<span class="hljs-number">1</span>]; <span class="hljs-comment">// 记录第一个区间的尾部</span><br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; intervals.<span class="hljs-built_in">size</span>(); i++){<br>            <span class="hljs-keyword">if</span>(end &lt;= intervals[i][<span class="hljs-number">0</span>]){<span class="hljs-comment">// 如果头尾没有重合，即不重叠</span><br>                end = intervals[i][<span class="hljs-number">1</span>]; <span class="hljs-comment">// 更新end为下一个没有重合的尾部，不断for循环在</span><br>                count++;<br>            }<br>        } <br>        <span class="hljs-keyword">return</span> intervals.<span class="hljs-built_in">size</span>() - count; <br><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure><h1 id="4-参考资料"><a href="#4-参考资料" class="headerlink" title="4 参考资料"></a>4 参考资料</h1><p><a href="https://www.programmercarl.com/0435.%E6%97%A0%E9%87%8D%E5%8F%A0%E5%8C%BA%E9%97%B4.html">代码随想录</a><br><a href="https://www.bilibili.com/video/BV1Uh41117SZ?spm_id_from=333.337.search-card.all.click&amp;vd_source=f2340d96e99780a96b50d8096ffaaf1a">【Leetcode】Python版每日一题（20201231）：435. 无重叠区间（想想罗志祥会怎么做）_哔哩哔哩_bilibili</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>数据结构与算法</category>
+      
+      <category>代码随想录</category>
+      
+      <category>贪心算法</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>贪心算法</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>17.用最少数量的箭引爆气球(2版)</title>
+    <link href="/2022/06/10/17.yong-zui-shao-shu-liang-de-jian-yin-bao-qi-qiu-2-ban/"/>
+    <url>/2022/06/10/17.yong-zui-shao-shu-liang-de-jian-yin-bao-qi-qiu-2-ban/</url>
+    
+    <content type="html"><![CDATA[<p><strong>文章简介</strong>：<br>    力扣题解：452用最少数量的箭引爆气球(第二版)</p><span id="more"></span><h1 id="1-452用最少数量的箭引爆气球"><a href="#1-452用最少数量的箭引爆气球" class="headerlink" title="1 452用最少数量的箭引爆气球"></a>1 452用最少数量的箭引爆气球</h1><p><a href="https://leetcode-cn.com/problems/minimum-number-of-arrows-to-burst-balloons/">力扣题目链接</a></p><p>在二维空间中有许多球形的气球。对于每个气球，提供的输入是水平方向上，气球直径的开始和结束坐标。由于它是水平的，所以纵坐标并不重要，因此只要知道开始和结束的横坐标就足够了。开始坐标总是小于结束坐标。</p><p>一支弓箭可以沿着 x 轴从不同点完全垂直地射出。在坐标 x 处射出一支箭，若有一个气球的直径的开始和结束坐标为 xstart，xend， 且满足 &nbsp;xstart&nbsp;≤ x ≤ xend，则该气球会被引爆。可以射出的弓箭的数量没有限制。 弓箭一旦被射出之后，可以无限地前进。我们想找到使得所有气球全部被引爆，所需的弓箭的最小数量。</p><p>给你一个数组 points ，其中 points [i] = [xstart,xend] ，返回引爆所有气球所必须射出的最小弓箭数。</p><p>示例 1：</p><ul><li>  输入：points = [ [10,16],[2,8],[1,6],[7,12] ]</li><li>  输出：2</li><li>  解释：对于该样例，x = 6 可以射爆 [2,8],[1,6] 两个气球，以及 x = 11 射爆另外两个气球</li></ul><p>示例 2：</p><ul><li>  输入：points = [ [1,2],[3,4],[5,6],[7,8] ]</li><li>  输出：4</li></ul><p>示例 3：</p><ul><li>  输入：points = [ [1,2],[2,3],[3,4],[4,5] ]</li><li>  输出：2</li></ul><p>示例 4：</p><ul><li>  输入：points = [ [1,2] ]</li><li>  输出：1</li></ul><p>示例 5：</p><ul><li>  输入：points = [ [2,3],[2,3] ]</li><li>  输出：1</li></ul><p>提示：</p><ul><li>  0 &lt;= points.length &lt;= 10^4</li><li>  points[i].length == 2</li><li>  -2^31 &lt;= xstart &lt;&nbsp;xend &lt;= 2^31 - 1</li></ul><h1 id="2-思路"><a href="#2-思路" class="headerlink" title="2 思路"></a>2 思路</h1><h2 id="2-1-b站参考视频及笔记"><a href="#2-1-b站参考视频及笔记" class="headerlink" title="2.1 b站参考视频及笔记"></a>2.1 b站参考视频及笔记</h2><p><a href="https://www.bilibili.com/video/BV12y4y1k7B5/?spm_id_from=333.788.recommend_more_video.1&amp;vd_source=f2340d96e99780a96b50d8096ffaaf1a">看了三天动画，我拿到阿里研发offer，贪心算法，射击气球 LeetCode 452_哔哩哔哩_bilibili</a><br><img src="https://s1.vika.cn/space/2022/06/10/3141cfabb0c94275b7edf999b4b5197f"></p><p>从这里开始看即可</p><p><a href="https://www.bilibili.com/video/BV12y4y1k7B5/?spm_id_from=333.788.recommend_more_video.1&amp;vd_source=f2340d96e99780a96b50d8096ffaaf1a#t=544.080526">09:04</a></p><p>先按左端点先排好序<br>不用管左端点，<strong>只关心右端点就行</strong>，因为只在右端点射击就行了<br>记录射击区间为第一个数组区间：[一左，一右]，<strong>其实只关心右端点就行了</strong></p><p>如果第二个数组的<strong>左端点</strong>==小于==第一个数组的<strong>右端点</strong>(两个数组有重叠部分)<br>说明第二个数组在射击区间内，同时将射击区间更新为：[二左，一右] (重叠部分)，右端点无变化</p><p><a href="https://www.bilibili.com/video/BV12y4y1k7B5/?spm_id_from=333.788.recommend_more_video.1&amp;vd_source=f2340d96e99780a96b50d8096ffaaf1a#t=617.733348">10:17</a><br>如果第二数组的右端点==小于==第一个数组的右端点 (说明要缩小射击区间)<br>射击区间为：[一左，二右]</p><p>如果第二数组的左端点大于第一个数组的<strong>右端点</strong>(两个数组<strong>没有</strong>重叠部分)，箭数+1(需要另一支箭才可以射完)<br>更新射击区间为：[二左，二右] (第二个数组区间)</p><p><a href="https://www.bilibili.com/video/BV12y4y1k7B5/?spm_id_from=333.788.recommend_more_video.1&amp;vd_source=f2340d96e99780a96b50d8096ffaaf1a#t=765.508572">12:45代码结果</a></p><h2 id="2-2-代码随想录"><a href="#2-2-代码随想录" class="headerlink" title="2.2 代码随想录"></a>2.2 代码随想录</h2><p><strong>局部最优</strong>：当气球出现重叠，一起射，所用弓箭最少。</p><p><strong>全局最优</strong>：把所有气球射爆所用弓箭最少。 按照气球的起始位置排序，从前向后遍历气球数组，靠左尽可能让气球重复</p><p><strong>如果气球重叠了，重叠气球中最小右边界， 之前的区间一定需要一个弓箭</strong></p><p>可以看出首先第一组重叠气球，一定是需要一个箭， 气球3，的左边界</p><p><strong>大于了</strong></p><p>第一组重叠气球的</p><p><strong>最小右边界</strong></p><p>所以再需要一支箭来射气球3了。</p><p><img src="https://img-blog.csdnimg.cn/20201123101929791.png" alt="https://img-blog.csdnimg.cn/20201123101929791.png"></p><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span>&nbsp;<span class="hljs-title class_">Solution</span>&nbsp;{<br><br><span class="hljs-keyword">private</span>:<br><br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-function"><span class="hljs-type">static</span>&nbsp;<span class="hljs-type">bool</span>&nbsp;<span class="hljs-title">cmp</span><span class="hljs-params">(<span class="hljs-type">const</span>&nbsp;vector&lt;<span class="hljs-type">int</span>&gt;&amp;&nbsp;a,&nbsp;<span class="hljs-type">const</span>&nbsp;vector&lt;<span class="hljs-type">int</span>&gt;&amp;&nbsp;b)</span>&nbsp;</span>{<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-keyword">return</span>&nbsp;a[<span class="hljs-number">0</span>]&nbsp;&lt;&nbsp;b[<span class="hljs-number">0</span>];<br><br>&nbsp;&nbsp;&nbsp;&nbsp;}<br><br><span class="hljs-keyword">public</span>:<br><br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-function"><span class="hljs-type">int</span>&nbsp;<span class="hljs-title">findMinArrowShots</span><span class="hljs-params">(vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt;&amp;&nbsp;points)</span>&nbsp;</span>{<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-keyword">if</span>&nbsp;(points.<span class="hljs-built_in">size</span>()&nbsp;==&nbsp;<span class="hljs-number">0</span>)&nbsp;<span class="hljs-keyword">return</span>&nbsp;<span class="hljs-number">0</span>;<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-built_in">sort</span>(points.<span class="hljs-built_in">begin</span>(),&nbsp;points.<span class="hljs-built_in">end</span>(),&nbsp;cmp);<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-type">int</span>&nbsp;result&nbsp;=&nbsp;<span class="hljs-number">1</span>;&nbsp;<span class="hljs-comment">//&nbsp;points&nbsp;不为空至少需要一支箭</span><br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-keyword">for</span>&nbsp;(<span class="hljs-type">int</span>&nbsp;i&nbsp;=&nbsp;<span class="hljs-number">1</span>;&nbsp;i&nbsp;&lt;&nbsp;points.<span class="hljs-built_in">size</span>();&nbsp;i++)&nbsp;{<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-keyword">if</span>&nbsp;(points[i][<span class="hljs-number">0</span>]&nbsp;&gt;&nbsp;points[i&nbsp;-&nbsp;<span class="hljs-number">1</span>][<span class="hljs-number">1</span>])&nbsp;{&nbsp;&nbsp;<span class="hljs-comment">//&nbsp;气球i和气球i-1不挨着，注意这里不是&gt;=</span><br><span class="hljs-comment">//points: {{1, 6}, {2, 8}, {7, 12}, {10, 16}} if (points[i][0] &gt; points[i - 1][1])</span><br><span class="hljs-comment">//eg：points[1][0] &gt; points[0][1]：第二个元素的第0号位置 &gt;第一个元素的第1号位置 2&gt;6 (if 语句跳过)看图更容易懂</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result++;&nbsp;<span class="hljs-comment">//&nbsp;需要一支箭</span><br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-keyword">else</span>&nbsp;{&nbsp;&nbsp;<span class="hljs-comment">//&nbsp;气球i和气球i-1挨着</span><br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;points[i][<span class="hljs-number">1</span>]&nbsp;=&nbsp;<span class="hljs-built_in">min</span>(points[i&nbsp;-&nbsp;<span class="hljs-number">1</span>][<span class="hljs-number">1</span>],&nbsp;points[i][<span class="hljs-number">1</span>]);&nbsp;<span class="hljs-comment">//&nbsp;更新重叠气球最小右边界</span><br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-keyword">return</span>&nbsp;result;<br><br>&nbsp;&nbsp;&nbsp;&nbsp;}<br><br>};<br><br></code></pre></td></tr></tbody></table></figure><h1 id="3-代码"><a href="#3-代码" class="headerlink" title="3 代码"></a>3 代码</h1><p>图解<br><img src="https://s1.vika.cn/space/2022/06/10/a494349688e74c7ebe4ce80e4b26d1bc" alt="|700"></p><p>自写编译已通过(b站三天动画版)</p><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">private</span>:<br><span class="hljs-function"><span class="hljs-type">static</span> <span class="hljs-type">bool</span> <span class="hljs-title">cmp</span> <span class="hljs-params">(<span class="hljs-type">const</span> vector&lt;<span class="hljs-type">int</span>&gt;&amp; a, <span class="hljs-type">const</span> vector&lt;<span class="hljs-type">int</span>&gt;&amp; b)</span></span>{<br>    <span class="hljs-keyword">return</span> a[<span class="hljs-number">0</span>] &lt; b[<span class="hljs-number">0</span>];<span class="hljs-comment">// 从小到大排序</span><br>}<br><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">findMinArrowShots</span><span class="hljs-params">(vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt;&amp; points)</span> </span>{<br>        <span class="hljs-keyword">if</span>(points.<span class="hljs-built_in">size</span>() == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-built_in">sort</span>(points.<span class="hljs-built_in">begin</span>(), points.<span class="hljs-built_in">end</span>(), cmp);<br>        <span class="hljs-type">int</span> arrow = <span class="hljs-number">1</span>;<br>        <span class="hljs-type">int</span> rarrow = points[<span class="hljs-number">0</span>][<span class="hljs-number">1</span>]; <span class="hljs-comment">// 射击区间的右端点</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; points.<span class="hljs-built_in">size</span>(); i++){<br>            <span class="hljs-keyword">if</span> (points[i][<span class="hljs-number">0</span>] &lt;= rarrow){ <span class="hljs-comment">// 有重叠部分，这里必须小于等于因为也要找到挨着但不重叠的，最后是用射击右端点来判别的</span><br>                <span class="hljs-keyword">if</span>(points[i][<span class="hljs-number">1</span>] &lt; rarrow){ <span class="hljs-comment">// 如果第二数组的右端点比第一个数组的右端点小，就缩小射击区间</span><br>                rarrow = points[i][<span class="hljs-number">1</span>]; <span class="hljs-comment">// 更新右端点</span><br>                }<br>            }<br>            <span class="hljs-keyword">else</span> {<br>                rarrow = points[i][<span class="hljs-number">1</span>];<br>                arrow ++;<br>            }<br>        }<br>        <span class="hljs-keyword">return</span> arrow;<br><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure><p>自写编译已通过(carl) 推荐</p><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">private</span>:<br><span class="hljs-function"><span class="hljs-type">static</span> <span class="hljs-type">bool</span> <span class="hljs-title">cmp</span> <span class="hljs-params">(<span class="hljs-type">const</span> vector&lt;<span class="hljs-type">int</span>&gt;&amp; a, <span class="hljs-type">const</span> vector&lt;<span class="hljs-type">int</span>&gt;&amp; b)</span></span>{<br>    <span class="hljs-keyword">return</span> a[<span class="hljs-number">0</span>] &lt; b[<span class="hljs-number">0</span>];<span class="hljs-comment">// 从小到大排序</span><br>}<br><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">findMinArrowShots</span><span class="hljs-params">(vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt;&amp; points)</span> </span>{<br>        <span class="hljs-keyword">if</span>(points.<span class="hljs-built_in">size</span>() == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-built_in">sort</span>(points.<span class="hljs-built_in">begin</span>(), points.<span class="hljs-built_in">end</span>(), cmp);<br>        <span class="hljs-type">int</span> arrow = <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; points.<span class="hljs-built_in">size</span>(); i++){<br>            <span class="hljs-keyword">if</span> (points[i][<span class="hljs-number">0</span>] &lt;= points[i<span class="hljs-number">-1</span>][<span class="hljs-number">1</span>]){<span class="hljs-comment">// 如果有重叠或者挨着就可以用一支箭射爆(因为射爆的区间是大区间，重叠的是子区间),右边界就是射爆的位置</span><br>                    points[i][<span class="hljs-number">1</span>] = <span class="hljs-built_in">min</span> (points[i<span class="hljs-number">-1</span>][<span class="hljs-number">1</span>],points[i][<span class="hljs-number">1</span>]); <span class="hljs-comment">// 更新右边界与下一个比,看射爆的位置下一个能不能满足</span><br>                }<br><br>            <span class="hljs-keyword">else</span> arrow++;<br>            } <br><br><br>            <span class="hljs-keyword">return</span> arrow;<br>            <br>        }<br>   <br>};<br></code></pre></td></tr></tbody></table></figure><h1 id="4-参考资料"><a href="#4-参考资料" class="headerlink" title="4 参考资料"></a>4 参考资料</h1><p><a href="https://www.programmercarl.com/0452.%E7%94%A8%E6%9C%80%E5%B0%91%E6%95%B0%E9%87%8F%E7%9A%84%E7%AE%AD%E5%BC%95%E7%88%86%E6%B0%94%E7%90%83.html">代码随想录</a></p><p><a href="https://www.bilibili.com/video/BV12y4y1k7B5/?spm_id_from=333.788.recommend_more_video.1&amp;vd_source=f2340d96e99780a96b50d8096ffaaf1a">看了三天动画，我拿到阿里研发offer，贪心算法，射击气球 LeetCode 452_哔哩哔哩_bilibili</a></p><p>下一篇：[[18.无重叠区间]]</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>数据结构与算法</category>
+      
+      <category>代码随想录</category>
+      
+      <category>贪心算法</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>贪心算法</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>BAB手势</title>
+    <link href="/2022/06/09/bab-shou-shi/"/>
+    <url>/2022/06/09/bab-shou-shi/</url>
+    
+    <content type="html"><![CDATA[<p>BetterAndBetter手势操作助记<br>右键按压手势<br>![[BAB手势 2022-06-09 17.21.49.excalidraw]]</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>工作</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>软件操作技巧</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>14.根据身高重建队列</title>
+    <link href="/2022/06/07/14.gen-ju-shen-gao-chong-jian-dui-lie/"/>
+    <url>/2022/06/07/14.gen-ju-shen-gao-chong-jian-dui-lie/</url>
+    
+    <content type="html"><![CDATA[<h1 id="1-406-根据身高重建队列"><a href="#1-406-根据身高重建队列" class="headerlink" title="1 406.根据身高重建队列"></a>1 406.根据身高重建队列</h1><p><a href="https://leetcode-cn.com/problems/queue-reconstruction-by-height/">力扣题目链接</a></p><p>假设有打乱顺序的一群人站成一个队列，数组 people 表示队列中一些人的属性（不一定按顺序）。每个 people[i] = [hi, ki] 表示第 i 个人的身高为 hi ，前面 正好 有 ki 个身高大于或等于 hi 的人。</p><p>请你重新构造并返回输入数组&nbsp;people 所表示的队列。返回的队列应该格式化为数组 queue ，其中 queue[j] = [hj, kj] 是队列中第 j 个人的属性（queue[0] 是排在队列前面的人）。</p><p>示例 1：</p><ul><li>  输入：people = [ [7,0],[4,4],[7,1],[5,0],[6,1],[5,2] ]</li><li>  输出：[ [5,0],[7,0],[5,2],[6,1],[4,4],[7,1] ]</li><li>解释：<ul><li>  编号为 0 的人身高为 5 ，没有身高更高或者相同的人排在他前面。</li><li>  编号为 1 的人身高为 7 ，没有身高更高或者相同的人排在他前面。</li><li>  编号为 2 的人身高为 5 ，有 2 个身高更高或者相同的人排在他前面，即编号为 0 和 1 的人。</li><li>  编号为 3 的人身高为 6 ，有 1 个身高更高或者相同的人排在他前面，即编号为 1 的人。</li><li>  编号为 4 的人身高为 4 ，有 4 个身高更高或者相同的人排在他前面，即编号为 0、1、2、3 的人。</li><li>  编号为 5 的人身高为 7 ，有 1 个身高更高或者相同的人排在他前面，即编号为 1 的人。</li><li>  因此 [ [5,0],[7,0],[5,2],[6,1],[4,4],[7,1] ] 是重新构造后的队列。</li></ul></li></ul><p>示例 2：</p><ul><li>  输入：people = [ [6,0],[5,0],[4,0],[3,2],[2,2],[1,4] ]</li><li>  输出：[ [4,0],[5,0],[2,2],[3,2],[1,4],[6,0] ]</li></ul><p>提示：</p><ul><li>  1 &lt;= people.length &lt;= 2000</li><li>  0 &lt;= hi &lt;= 10^6</li><li>  0 &lt;= ki &lt; people.length</li></ul><p>题目数据确保队列可以被重建</p><h1 id="2-思路"><a href="#2-思路" class="headerlink" title="2 思路"></a>2 思路</h1><p>本题有两个维度，h和k，看到这种题目一定要想如何确定一个维度，然后在按照另一个维度重新排列。<br><strong>如果两个维度一起考虑一定会顾此失彼</strong></p><p>先按身高h来排序(从大到小)，身高相同的k小的站前面<br>在按k的大小进行<strong>插入</strong>操作，后序插入节点也不会影响前面已经插入的节点，最终按照k的规则完成了队列。<br><img src="https://img-blog.csdnimg.cn/20201216201851982.png" alt="406.根据身高重建队列|800"><br>插入的过程：</p><ul><li>  插入[7,0]：[ [7,0] ]// 插入0下标</li><li>  插入[7,1]：[ [7,0],[7,1] ]// 插入1下标</li><li>  插入[6,1]：[ [7,0],[6,1],[7,1] ]// 插入1下标</li><li>  插入[5,0]：[ [5,0],[7,0],[6,1],[7,1] ]// 插入0下标</li><li>  插入[5,2]：[ [5,0],[7,0],[5,2],[6,1],[7,1] ]// 插入2下标</li><li>  插入[4,4]：[ [5,0],[7,0],[5,2],[6,1],[4,4],[7,1] ]// 插入4下标</li></ul><p>如果先按k来排序，会发现k的排列不符合条件，身高也不符合条件，两个维度一个也没确定下来</p><p>在按照身高从大到小排序后：<br><strong>局部最优：优先按身高高的people的k来插入。插入操作过后的people满足队列属性</strong><br><strong>全局最优：最后都做完插入操作，整个队列满足题目队列属性</strong></p><h3 id="2-1-1-关联知识点"><a href="#2-1-1-关联知识点" class="headerlink" title="2.1.1 关联知识点"></a>2.1.1 关联知识点</h3><p>[[vector]]，[[sort函数]]，[[insert函数]]</p><h1 id="3-代码"><a href="#3-代码" class="headerlink" title="3 代码"></a>3 代码</h1><p>[[14.根据身高重建队列(carl链表).mp4]]<br>[[14.根据身高重建队列(carl vector).mp4]]<br>[[14.根据身高重建队列(carl 排序).mp4]]</p><p>vector的代码看懂了</p><p>排序完的people： [ [7,0], [7,1], [6,1], [5,0], [5,2]，[4,4] ]<br><code>people[i][1]</code>：eg <code>people[2][1]</code>=1：第二元素的第一个位置的值即{7, 1}中的1</p><p>自写,编译已通过</p><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><br><span class="hljs-comment">// 版本一</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">static</span> <span class="hljs-type">bool</span> <span class="hljs-title">cmp</span><span class="hljs-params">(<span class="hljs-type">const</span> vector&lt;<span class="hljs-type">int</span>&gt;&amp; a, <span class="hljs-type">const</span> vector&lt;<span class="hljs-type">int</span>&gt;&amp; b)</span> </span>{<br>        <span class="hljs-keyword">if</span> (a[<span class="hljs-number">0</span>] == b[<span class="hljs-number">0</span>]) <span class="hljs-keyword">return</span> a[<span class="hljs-number">1</span>] &lt; b[<span class="hljs-number">1</span>]; <span class="hljs-comment">// 没看懂，看视频：传进来的是数组eg[7,0]</span><br>        <span class="hljs-keyword">return</span> a[<span class="hljs-number">0</span>] &gt; b[<span class="hljs-number">0</span>];<br>    }<br>    vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">reconstructQueue</span>(vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt;&amp; people){<br>        <span class="hljs-built_in">sort</span>(people.<span class="hljs-built_in">begin</span>(), people.<span class="hljs-built_in">end</span>(), cmp);<br>        vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; que;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; people.<span class="hljs-built_in">size</span>(); i++){<br>            <span class="hljs-type">int</span> position = people[i][<span class="hljs-number">1</span>]; <span class="hljs-comment">// 要放到for循环里边</span><br>            que.<span class="hljs-built_in">insert</span>(que.<span class="hljs-built_in">begin</span>() + position, people[i]);<span class="hljs-comment">// 要插入的是que里，不要成people.begin()</span><br>        }<br>        <span class="hljs-keyword">return</span> que;<br>      }   <br>};<br><br></code></pre></td></tr></tbody></table></figure><p>链表的代码没看懂  #疑问</p><p>[[科研材料总结]]</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>数据结构与算法</category>
+      
+      <category>代码随想录</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>贪心算法</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>begin,end</title>
+    <link href="/2022/06/07/begin-end/"/>
+    <url>/2022/06/07/begin-end/</url>
+    
+    <content type="html"><![CDATA[<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-type">int</span> ia[] = {<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>,<span class="hljs-number">7</span>,<span class="hljs-number">8</span>,<span class="hljs-number">9</span>};<br><span class="hljs-type">int</span> *beg = <span class="hljs-built_in">begin</span>(ia);<br><span class="hljs-type">int</span> *last = <span class="hljs-built_in">end</span>(ia);<br></code></pre></td></tr></tbody></table></figure><p>begin函数返回指向数组的<strong>首元素的指针</strong>，end函数返回指向数组<strong>尾元素的下一个位置的指针</strong>，<br>这两个函数都被定义在iterator的头文件中。使用begin和end函数就可以很好地处理数组中的元素</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>C++</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>函数</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>insert函数</title>
+    <link href="/2022/06/07/insert-han-shu/"/>
+    <url>/2022/06/07/insert-han-shu/</url>
+    
+    <content type="html"><![CDATA[<h1 id="1-在字符串中插入"><a href="#1-在字符串中插入" class="headerlink" title="1 在字符串中插入"></a>1 在字符串中插入</h1><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br> <br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>{<br>    <span class="hljs-function">string <span class="hljs-title">str</span><span class="hljs-params">(<span class="hljs-string">"All that exists is what's ahead."</span>)</span></span>;<br>    string a, b;<br>    a = str.<span class="hljs-built_in">insert</span>(<span class="hljs-number">4</span>,<span class="hljs-string">"sky"</span>);<br>    <span class="hljs-comment">//在下标为4的位置，插入字符串sky</span><br>    cout &lt;&lt; a &lt;&lt; endl; <span class="hljs-comment">//输出All skythat exists is what's ahead.</span><br> <br>    str = <span class="hljs-string">"All that exists is what's ahead."</span>;<br>    b = str.<span class="hljs-built_in">insert</span>(<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-string">'x'</span>);<br>    <span class="hljs-comment">//在下标为4的位置，插入字符串5个字符x</span><br>    cout &lt;&lt; b &lt;&lt; endl; <span class="hljs-comment">//输出 All xxxxxthat exists is what's ahead.</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>}<br></code></pre></td></tr></tbody></table></figure><h1 id="2-在数组下标处插入"><a href="#2-在数组下标处插入" class="headerlink" title="2 在数组下标处插入"></a>2 在数组下标处插入</h1><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cpp">vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; que;<br>que.<span class="hljs-built_in">insert</span>(que.<span class="hljs-built_in">begin</span>() + position, people[i]);<span class="hljs-comment">// 在下标position处插入people[i]</span><br></code></pre></td></tr></tbody></table></figure><p>[[begin,end]]</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>C++</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>函数</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>vector</title>
+    <link href="/2022/06/07/vector/"/>
+    <url>/2022/06/07/vector/</url>
+    
+    <content type="html"><![CDATA[<p>普通数组 int a [10]，一旦定义了就不能改变了，这个数组最多只能放10个元素了<br>动态数组vector，不用关心初始的大小，可以随意的添加数据</p><p><strong>vector的底层实现也是普通数组</strong>。</p><p>vector的大小有两个维度一个是size一个是capicity，<br>size就是我们平时用来遍历vector时候用的，例如：<code>for (int i = 0; i &lt; vec.size(); i++)</code><br>而capicity是vector底层数组（就是普通数组）的大小，capicity可不一定就是size<br>当insert数据的时候，如果已经大于capicity，capicity会成倍扩容，但对外暴露的size其实仅仅是+1而已，剩下的位置还是空闲的</p><p>C++中vector（可以理解是一个动态数组，底层是普通数组实现的）如果插入元素大于预先普通数组大小，vector底部会有一个扩容的操作，即申请两倍于原先普通数组的大小，然后把数据拷贝到另一个更大的数组上，然后在释放原数组内存。<br>eg：<br>原vector中的size和capicity相同都是3，初始化为1 2 3，此时要push_back一个元素4。<br>那么底层其实就要申请一个大小为6的普通数组，并且把原元素拷贝过去，释放原数组内存，<br><strong>注意图中底层数组的内存起始地址已经变了</strong>。<br><img src="https://img-blog.csdnimg.cn/20201218185902217.png" alt="vector原理|800"></p><p>所以使用vector（动态数组）来insert，是费时的，插入再拷贝的话，单纯一个插入的操作就是O(n^2)了，甚至可能拷贝好几次，就不止O(n^2)了。</p><p>解决办法：可以采用链表来进行插入操作<br>    eg：<code>vector&lt;vector&lt;int&gt;&gt; que：[[7,0],[7,1]]</code> →<code>list&lt;vector&lt;int&gt;&gt; que：[7,0]→[7,1]</code></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>C++</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>函数</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>12.分发糖果</title>
+    <link href="/2022/06/06/12.fen-fa-tang-guo/"/>
+    <url>/2022/06/06/12.fen-fa-tang-guo/</url>
+    
+    <content type="html"><![CDATA[<h1 id="1-分发糖果"><a href="#1-分发糖果" class="headerlink" title="1 分发糖果"></a>1 分发糖果</h1><p><a href="https://leetcode-cn.com/problems/candy/">力扣题目链接</a></p><p>老师想给孩子们分发糖果，有 N&nbsp;个孩子站成了一条直线，老师会根据每个孩子的表现，预先给他们评分。</p><p>你需要按照以下要求，帮助老师给这些孩子分发糖果：</p><ul><li>  每个孩子至少分配到 1 个糖果。</li><li>  相邻的孩子中，评分高的孩子必须获得更多的糖果。</li></ul><p>那么这样下来，老师至少需要准备多少颗糖果呢？</p><p>示例&nbsp;1:</p><ul><li>  输入: [1,0,2]</li><li>  输出: 5</li><li>  解释: 你可以分别给这三个孩子分发 2、1、2 颗糖果。</li></ul><p>示例&nbsp;2:</p><ul><li>  输入: [1,2,2]</li><li>  输出: 4</li><li>  解释: 你可以分别给这三个孩子分发 1、2、1 颗糖果。第三个孩子只得到 1 颗糖果，这已满足上述两个条件。</li></ul><h1 id="2-思路"><a href="#2-思路" class="headerlink" title="2 思路"></a>2 思路</h1><p>先比较每一个孩子的右边或者左边，<strong>如果两边一起考虑一定会顾此失彼</strong>。</p><p>rate：评分；candyVec：糖果个数</p><p><strong>右边</strong>：从前往后遍历<br>局部最优：如果右比左大，右边孩子就多一个糖果。<br>全局最优：总体中评分高的右孩子比左孩子多一个糖果<br><img src="https://img-blog.csdnimg.cn/20201117114916878.png" alt="135.分发糖果|700"><br><strong>左边</strong>：从后往前遍历<br>局部最优：如果左比右大，左边孩子就多一个糖果。<br>全局最优：总体中评分高的左孩子比右孩子多一个糖果<br>#flashcards/代码随想录<br>为什么不能从前往后遍历<br>?<br>因为如果继续从前向后遍历，就无法利用上一次得出的candyVec的数组了</p><!--SR:!2022-06-18,3,250--><p>eg：<br><img src="https://img-blog.csdnimg.cn/20201117115658791.png" alt="135.分发糖果1|700"><br>如果是图中这样的话，就没必要用max函数了啊 #疑问 </p><h1 id="3-代码"><a href="#3-代码" class="headerlink" title="3 代码"></a>3 代码</h1><p>自写代码已通过，没有用max函数</p><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">candy</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; ratings)</span></span>{<br>        <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">candyVec</span><span class="hljs-params">(ratings.size(), <span class="hljs-number">1</span>)</span></span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; ratings.<span class="hljs-built_in">size</span>(); i++){<br>            <span class="hljs-keyword">if</span>(ratings[i+<span class="hljs-number">1</span>] &gt; ratings[i]) {<br>            candyVec[i+<span class="hljs-number">1</span>] = candyVec[i]+<span class="hljs-number">1</span>;<br>            }<br>       }<br><br>       <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = ratings.<span class="hljs-built_in">size</span>() - <span class="hljs-number">2</span>; i &gt;= <span class="hljs-number">0</span>; i-- ) { <span class="hljs-comment">// 从倒数第二位置开始比</span><br>        <span class="hljs-keyword">if</span> (ratings[i] &gt; ratings[i+<span class="hljs-number">1</span>]){<br>            candyVec[i] = candyVec[i+<span class="hljs-number">1</span>]+<span class="hljs-number">1</span>;<br>            }<br>       }<br>       <span class="hljs-type">int</span> result = <span class="hljs-number">0</span>;<br>       <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> a : candyVec) result += a; <span class="hljs-comment">// 分号后边只需要变量名就行</span><br>       <span class="hljs-keyword">return</span> result;<br>    }<br>};<br><br></code></pre></td></tr></tbody></table></figure><p>参考资料<br>[[for 循环]]</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>数据结构与算法</category>
+      
+      <category>代码随想录</category>
+      
+      <category>贪心算法</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>贪心算法</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>13.柠檬水找零</title>
+    <link href="/2022/06/06/13.ning-meng-shui-zhao-ling/"/>
+    <url>/2022/06/06/13.ning-meng-shui-zhao-ling/</url>
+    
+    <content type="html"><![CDATA[<h1 id="1-860-柠檬水找零"><a href="#1-860-柠檬水找零" class="headerlink" title="1 860.柠檬水找零"></a>1 860.柠檬水找零</h1><p><a href="https://leetcode-cn.com/problems/lemonade-change/">力扣题目链接</a></p><p>在柠檬水摊上，每一杯柠檬水的售价为&nbsp;5&nbsp;美元。</p><p>顾客排队购买你的产品，（按账单 bills 支付的顺序）一次购买一杯。</p><p>每位顾客只买一杯柠檬水，然后向你付 5 美元、10 美元或 20 美元。你必须给每个顾客正确找零，也就是说净交易是每位顾客向你支付 5 美元。</p><p>注意，一开始你手头没有任何零钱。</p><p>如果你能给每位顾客正确找零，返回&nbsp;true&nbsp;，否则返回 false&nbsp;。</p><p>示例 1：</p><ul><li>  输入：[5,5,5,10,20]</li><li>  输出：true</li><li>解释：<ul><li>  前 3 位顾客那里，我们按顺序收取 3 张 5 美元的钞票。</li><li>  第 4 位顾客那里，我们收取一张 10 美元的钞票，并返还 5 美元。</li><li>  第 5 位顾客那里，我们找还一张 10 美元的钞票和一张 5 美元的钞票。</li><li>  由于所有客户都得到了正确的找零，所以我们输出 true。</li></ul></li></ul><p>示例 2：</p><ul><li>  输入：[5,5,10]</li><li>  输出：true</li></ul><p>示例 3：</p><ul><li>  输入：[10,10]</li><li>  输出：false</li></ul><p>示例 4：</p><ul><li>  输入：[5,5,10,10,20]</li><li>  输出：false</li><li>解释：<ul><li>  前 2 位顾客那里，我们按顺序收取 2 张 5 美元的钞票。</li><li>  对于接下来的 2 位顾客，我们收取一张 10 美元的钞票，然后返还 5 美元。</li><li>  对于最后一位顾客，我们无法退回 15 美元，因为我们现在只有两张 10 美元的钞票。</li><li>  由于不是每位顾客都得到了正确的找零，所以答案是 false。</li></ul></li></ul><p>提示：</p><ul><li>  0 &lt;= bills.length &lt;= 10000</li><li>  bills[i]&nbsp;不是&nbsp;5&nbsp;就是&nbsp;10&nbsp;或是&nbsp;20</li></ul><h1 id="2-思路"><a href="#2-思路" class="headerlink" title="2 思路"></a>2 思路</h1><p>有如下三种情况：</p><ul><li>  情况一：账单是5，直接收下。</li><li>  情况二：账单是10，消耗一个5，增加一个10</li><li>  情况三：账单是20，优先消耗一个10和一个5，如果不够，再消耗三个5<br>用新型for循环 for (int bill : bills)，逐一对元素进行判断就行[[for 循环]]</li></ul><p>账单是20的情况，为什么要优先消耗一个10和一个5呢？<br><strong>因为美元10只能给账单20找零，而美元5可以给账单10和账单20找零，美元5更万能！</strong></p><p>局部最优：逐一对元素进行判断<br>全局最优：完成全部账单的找零</p><h1 id="3-代码"><a href="#3-代码" class="headerlink" title="3 代码"></a>3 代码</h1><p>自写，已编译成功</p><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">lemonadeChange</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; bills)</span> </span>{<br>        <span class="hljs-type">int</span> five = <span class="hljs-number">0</span>, ten = <span class="hljs-number">0</span>, twenty = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> bill : bills) { <span class="hljs-comment">// 顺序遍历数组,先从第一个元素开始</span><br>            <span class="hljs-keyword">if</span> (bill == <span class="hljs-number">5</span>){<br>                five ++;<br>            }<br>            <span class="hljs-comment">// else return false; 不需要这行代码因为5肯定能收</span><br><br>            <span class="hljs-keyword">if</span> (bill == <span class="hljs-number">10</span>){<br>                <span class="hljs-keyword">if</span> (five &gt; <span class="hljs-number">0</span>) {<br>                    five--;<br>                    ten++;<br>                }<br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;    <br>            }<br><br>            <span class="hljs-keyword">if</span>(bill == <span class="hljs-number">20</span>){<br>                <span class="hljs-keyword">if</span> (ten &gt; <span class="hljs-number">0</span> &amp;&amp; five &gt; <span class="hljs-number">0</span>){<br>                    ten--;<br>                    five--;<br>                }<br>                <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> ( five &gt;= <span class="hljs-number">3</span>){ <span class="hljs-comment">// 一定要用else if 下边也用else，这样这三个函数才能成为整体</span><br>                    five -= <span class="hljs-number">3</span>;<br>                }<br>                <span class="hljs-keyword">else</span>  <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>            }<br>        }<br>             <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; <span class="hljs-comment">// 放在整体for循环外</span><br>    }<br>};<br><br></code></pre></td></tr></tbody></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>数据结构与算法</category>
+      
+      <category>代码随想录</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>贪心算法</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>for 循环</title>
+    <link href="/2022/06/06/for-xun-huan/"/>
+    <url>/2022/06/06/for-xun-huan/</url>
+    
+    <content type="html"><![CDATA[<p><a href="obsidian://advanced-uri?vault=Documents&amp;uid=e21b2a82-20a3-4f7e-981e-d83e6df620a5">ob</a></p><h1 id="1-遍历函数"><a href="#1-遍历函数" class="headerlink" title="1 遍历函数"></a>1 遍历函数</h1><p>操作到最后一个元素时不会取到最后一个下标的后一位(也就是长度)</p><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; prices.<span class="hljs-built_in">size</span>(); i++){<br>         result += <span class="hljs-built_in">max</span>(prices[i+<span class="hljs-number">1</span>] - prices[i],<span class="hljs-number">0</span>);<span class="hljs-comment">// 用!=更好</span><br>     }<br></code></pre></td></tr></tbody></table></figure><h1 id="2-数组求和"><a href="#2-数组求和" class="headerlink" title="2 数组求和"></a>2 数组求和</h1><p>for (循环变量类型 循环变量名称 : 要被遍历的对象) 循环体<br>应用：对数组求和<br>    从第一个元素开始操作</p><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">//A是数组，for循环对数组求和</span><br><span class="hljs-type">int</span> result = <span class="hljs-number">0</span>;<br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> a : A)  result += a; <span class="hljs-comment">// a没有特殊的意义，只是指明循环变量的类型，“:”后只需数组名即可</span><br></code></pre></td></tr></tbody></table></figure><p>#flashcards/代码随想录<br>n%2 == 1什么意思<br>?<br>n%2就是对n求：n除以2后的余数，这里余数只有两种情况就是0或者是1<br>eg：5%2=1</p><!--SR:!2022-06-18,3,250-->]]></content>
+    
+    
+    <categories>
+      
+      <category>C++</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>函数</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>纯铝的性能指标</title>
+    <link href="/2022/06/02/chun-lu-de-xing-neng-zhi-biao/"/>
+    <url>/2022/06/02/chun-lu-de-xing-neng-zhi-biao/</url>
+    
+    <content type="html"><![CDATA[<p><a href="marginnote3app://note/3AE993AE-E623-4E05-BDD8-A7A400FEE1A2">margin</a><br><a href="obsidian://advanced-uri?vault=Documents&amp;uid=1eb5db61-b344-4a33-a07a-7a34f51a00d0">ob</a></p><h1 id="1-梯度结构纯铝的形貌"><a href="#1-梯度结构纯铝的形貌" class="headerlink" title="1 梯度结构纯铝的形貌"></a>1 梯度结构纯铝的形貌</h1><h2 id="1-1-成形效果"><a href="#1-1-成形效果" class="headerlink" title="1.1 成形效果"></a>1.1 成形效果</h2><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs col">![](https://s1.vika.cn/space/2022/06/02/bca77150b3084c549a77bf090cb2ce2e)<br>挤出长度跟出口厚度成反比<br><br>![](https://s1.vika.cn/space/2022/06/02/6b18b35cc90944fcb6872a47dc51dec5)<br><br></code></pre></td></tr></tbody></table></figure><h2 id="1-2-原始纯铝与梯度纯铝的微观组织"><a href="#1-2-原始纯铝与梯度纯铝的微观组织" class="headerlink" title="1.2 原始纯铝与梯度纯铝的微观组织"></a>1.2 原始纯铝与梯度纯铝的微观组织</h2><p><img src="https://s1.vika.cn/space/2022/06/02/e1b9812b60f64c419b2299c54afa3da3" alt="|600"><br><img src="https://s1.vika.cn/space/2022/06/02/a666e2c8fa314ef4b4be704418324067" alt="|600"><br>B侧细化 A侧基本没变，成梯度材料</p><h2 id="1-3-微观组织演变机制"><a href="#1-3-微观组织演变机制" class="headerlink" title="1.3 微观组织演变机制"></a>1.3 微观组织演变机制</h2><p><img src="https://s1.vika.cn/space/2022/06/02/bdf90acd645c4bd490a1c54d6111f285" alt="|600"></p><h1 id="2-梯度结构纯铝的力学性能"><a href="#2-梯度结构纯铝的力学性能" class="headerlink" title="2 梯度结构纯铝的力学性能"></a>2 梯度结构纯铝的力学性能</h1><h2 id="2-1-梯度结构纯铝的硬度梯度"><a href="#2-1-梯度结构纯铝的硬度梯度" class="headerlink" title="2.1 梯度结构纯铝的硬度梯度"></a>2.1 梯度结构纯铝的硬度梯度</h2><p>原材料32HV，梯度材料44HV<br>B测最高，到A测减少，因为晶粒细化，但靠近A侧硬度平稳且有所提升，是产生了材料硬化<br>金属材料的硬度与其晶粒大小成反比,即<strong>晶粒越细,材料的硬度越高</strong><br><img src="https://s1.vika.cn/space/2022/06/02/d74d109525504da5b0b60ac6c71974c2" alt="|600"></p><h2 id="2-2-梯度结构纯铝的拉伸性能"><a href="#2-2-梯度结构纯铝的拉伸性能" class="headerlink" title="2.2 梯度结构纯铝的拉伸性能"></a>2.2 梯度结构纯铝的拉伸性能</h2><p>梯度材料拉伸强度达到了160MPa，是原件的一倍多<br><img src="https://s1.vika.cn/space/2022/06/02/6591bb51508e4f82bf050a2253d22844" alt="|600"><br>随着厚度的增加, 梯度样品的抗拉强度逐渐下降,而延展性逐渐增强</p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs col"><br></code></pre></td></tr></tbody></table></figure><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs col"><br></code></pre></td></tr></tbody></table></figure><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs col">![|600](https://s1.vika.cn/space/2022/06/02/9d767470c48f4318941bd9b40ca940a4)<br><br>![](https://s1.vika.cn/space/2022/06/02/f98676a6b6414cb4bb655c06d5ecbcb3)<br><br></code></pre></td></tr></tbody></table></figure><h2 id="2-3-拉伸断口分析"><a href="#2-3-拉伸断口分析" class="headerlink" title="2.3 拉伸断口分析"></a>2.3 拉伸断口分析</h2><p>人们希望韧性断裂，而不是脆性断裂。通过观察端口来进行分析</p><p>怎么分析端口是韧性断裂还是塑性断裂<br>?<br>韧窝的尺寸越大,材料的塑性越好，韧窝的尺寸大小也不均匀,既有 10 μm 左右的大韧窝,也有 2 μm 左右的小韧窝,这是由于在拉伸变形过程中,小韧窝不断拉长、聚合成大韧窝,同时也有小韧窝不断萌生</p><p>纯铝原材料的拉伸断口呈现出典型的韧性断裂特征是<strong>韧性断裂</strong></p><p><img src="https://s1.vika.cn/space/2022/06/02/9434e67a2f554ef2a718b05c74d585b1" alt="|600"><br>梯度材料纯铝也是<strong>韧性断裂</strong>，韧窝也主要分布在纤维区和剪切唇的部分区域<br><img src="https://s1.vika.cn/space/2022/06/02/a99078324c754506acf4df4755369ad6" alt="|600"></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>科研</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>材料性能</tag>
+      
+      <tag>塑性流动挤出</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  
+</search>
