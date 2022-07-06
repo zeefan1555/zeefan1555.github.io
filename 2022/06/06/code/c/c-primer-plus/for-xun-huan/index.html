@@ -16,15 +16,15 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="ob 1 遍历函数操作到最后一个元素时不会取到最后一个下标的后一位(也就是长度) 123for (int i &#x3D; 0; i &lt; prices.size(); i++){         result +&#x3D; max(prices[i+1] - prices[i],0);&#x2F;&#x2F; 用!&#x3D;更好     }     2 数组求和for (循环变量类型 循环变量名称 : 要被遍历的对象) 循环体应用：对数">
+    <meta name="description" content="ob 1 遍历函数操作到最后一个元素时不会取到最后一个下标的后一位(也就是长度) 123for (int i &#x3D; 0; i &lt; prices.size(); i++){         result +&#x3D; max(prices[i+1] - prices[i],0);&#x2F;&#x2F; 用!&#x3D;更好     }   从后往前遍历：for (int i &#x3D; num.size () - 1; i &gt; 0;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="for 循环">
 <meta property="og:url" content="https://zeefan1555.github.io/2022/06/06/code/c/c-primer-plus/for-xun-huan/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="ob 1 遍历函数操作到最后一个元素时不会取到最后一个下标的后一位(也就是长度) 123for (int i &#x3D; 0; i &lt; prices.size(); i++){         result +&#x3D; max(prices[i+1] - prices[i],0);&#x2F;&#x2F; 用!&#x3D;更好     }     2 数组求和for (循环变量类型 循环变量名称 : 要被遍历的对象) 循环体应用：对数">
+<meta property="og:description" content="ob 1 遍历函数操作到最后一个元素时不会取到最后一个下标的后一位(也就是长度) 123for (int i &#x3D; 0; i &lt; prices.size(); i++){         result +&#x3D; max(prices[i+1] - prices[i],0);&#x2F;&#x2F; 用!&#x3D;更好     }   从后往前遍历：for (int i &#x3D; num.size () - 1; i &gt; 0;">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-06-06T06:08:12.000Z">
-<meta property="article:modified_time" content="2022-06-24T02:59:06.731Z">
+<meta property="article:modified_time" content="2022-07-04T09:02:57.617Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="函数">
 <meta name="twitter:card" content="summary_large_image">
@@ -221,7 +221,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          340 字
+          435 字
         
       </span>
     
@@ -232,7 +232,7 @@
         
         
         
-          2 分钟
+          3 分钟
         
       </span>
     
@@ -283,7 +283,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年6月24日 上午
+                    本文最后更新于：2022年7月4日 下午
                   
                 
               </p>
@@ -295,14 +295,14 @@
 <figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; prices.<span class="hljs-built_in">size</span>(); i++){<br>         result += <span class="hljs-built_in">max</span>(prices[i+<span class="hljs-number">1</span>] - prices[i],<span class="hljs-number">0</span>);<span class="hljs-comment">// 用!=更好</span><br>     }<br></code></pre></td></tr></tbody></table></figure>
 
 
-
-
+<p>从后往前遍历：<code>for (int i = num.size () - 1; i &gt; 0; i--)</code> 这个操作不了第一个元素(下标0)</p>
+<p>从前往后遍历：<code>for(int i = 0 ; i &lt; num.size(); i++)</code>，</p>
 <h1 id="2-数组求和"><a href="#2-数组求和" class="headerlink" title="2 数组求和"></a>2 数组求和</h1><p>for (循环变量类型 循环变量名称 : 要被遍历的对象) 循环体<br>应用：对数组求和<br>    从第一个元素开始操作</p>
 <figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">//A是数组，for循环对数组求和</span><br><span class="hljs-type">int</span> result = <span class="hljs-number">0</span>;<br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> a : A)  result += a; <span class="hljs-comment">// a没有特殊的意义，只是指明循环变量的类型，“:”后只需数组名即可</span><br></code></pre></td></tr></tbody></table></figure>
 
 
 <p>#flashcards/代码随想录<br>n%2 == 1什么意思<br>?<br>n%2就是对n求：n除以2后的余数，这里余数只有两种情况就是0或者是1<br>eg：5%2=1</p>
-<!--SR:!2022-06-18,3,250-->
+<!--SR:!2022-08-01,28,250-->
 
 
 
@@ -383,7 +383,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2022年6月24日</div>
+          <div>2022年7月4日</div>
         </div>
       
       <div class="license-meta-item">

@@ -4,6 +4,304 @@
   
   
   <entry>
+    <title>7.不同路径 II</title>
+    <link href="/2022/07/06/code/shu-ju-jie-gou-yu-suan-fa/dai-ma-sui-xiang-lu/dong-tai-gui-hua/7.bu-tong-lu-jing-ii/"/>
+    <url>/2022/07/06/code/shu-ju-jie-gou-yu-suan-fa/dai-ma-sui-xiang-lu/dong-tai-gui-hua/7.bu-tong-lu-jing-ii/</url>
+    
+    <content type="html"><![CDATA[<p>文章简介：LeetCode  题解——63. 不同路径 II</p><span id="more"></span><h1 id="1-63-不同路径-II"><a href="#1-63-不同路径-II" class="headerlink" title="1 63.不同路径 II"></a>1 63.不同路径 II</h1><p><a href="https://leetcode.cn/problems/unique-paths-ii/">力扣题目链接</a></p><p>一个机器人位于一个 m x n 网格的左上角 （起始点在下图中标记为“Start” ）。</p><p>机器人每次<strong>只能向下或者向右移动一步</strong>。机器人试图达到网格的右下角（在下图中标记为“Finish”）。</p><p>现在考虑<strong>网格中有障碍物</strong>。那么从左上角到右下角将会有多少条不同的路径？</p><p><img src="https://img-blog.csdnimg.cn/20210111204901338.png"></p><p><strong>网格中的障碍物和空位置分别用 1 和 0 来表示。</strong></p><p>示例 1：</p><p><img src="https://img-blog.csdnimg.cn/20210111204939971.png"></p><ul><li>  输入：obstacleGrid = [[0,0,0],[0,1,0],[0,0,0]]</li><li>  输出：2 解释：</li><li>  3x3 网格的正中间有一个障碍物。</li><li>从左上角到右下角一共有 2 条不同的路径：<ol><li> 向右 -&gt; 向右 -&gt; 向下 -&gt; 向下</li><li> 向下 -&gt; 向下 -&gt; 向右 -&gt; 向右</li></ol></li></ul><p>示例 2：</p><p><img src="https://img-blog.csdnimg.cn/20210111205857918.png"></p><ul><li>  输入：obstacleGrid = [[0,1],[0,0]]</li><li>  输出：1</li></ul><p>提示：</p><ul><li>  m ==&nbsp;obstacleGrid.length</li><li>  n ==&nbsp;obstacleGrid[i].length</li><li>  1 &lt;= m, n &lt;= 100</li><li>  obstacleGrid[i][j] 为 0 或 1</li></ul><h1 id="2-思路"><a href="#2-思路" class="headerlink" title="2 思路"></a>2 思路</h1><p>相比[[6.不同路径]]不同的是多了障碍，遇到障碍<code>dp[i][j]</code>保持0就可以了：表示过不去</p><p>两个地方需要跳过赋值</p><ol><li>初始值(第一行第一列)，跳过有障碍的地方在赋值</li><li>递推公式中(除了第一行第一列的)，跳过有障碍的地方在赋值</li></ol><h1 id="3-代码"><a href="#3-代码" class="headerlink" title="3 代码"></a>3 代码</h1><p>编译已通过</p><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">uniquePathsWithObstacles</span><span class="hljs-params">(vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt;&amp; obstacleGrid)</span> </span>{<br>        <span class="hljs-type">int</span> m = obstacleGrid.<span class="hljs-built_in">size</span>();<br>        <span class="hljs-type">int</span> n = obstacleGrid[<span class="hljs-number">0</span>].<span class="hljs-built_in">size</span>();<br>        vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">dp</span>(m,<span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;(n,<span class="hljs-number">0</span>));<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; m &amp;&amp; obstacleGrid[i][<span class="hljs-number">0</span>] == <span class="hljs-number">0</span>; i++) dp[<span class="hljs-number">0</span>][i] = <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; j &lt; n &amp;&amp; obstacleGrid[<span class="hljs-number">0</span>][j] == <span class="hljs-number">0</span>; j++) dp[j][<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; m; i++){<br>            <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt; n; j++){<br>                <span class="hljs-keyword">if</span>(obstacleGrid[i][j] == <span class="hljs-number">0</span>){ <span class="hljs-comment">// if (obstacleGrid[i][j] == 1) continue;</span><br>                    dp[i][j] = dp[i<span class="hljs-number">-1</span>][j] + dp[i][j<span class="hljs-number">-1</span>];<br>                }<br>            }<br>        }<br>        <span class="hljs-keyword">return</span> dp[m<span class="hljs-number">-1</span>][n<span class="hljs-number">-1</span>];<br><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure><h1 id="4-参考资料"><a href="#4-参考资料" class="headerlink" title="4 参考资料"></a>4 参考资料</h1><p>自用跳转链接：🈚</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>👨🏻‍💻code</category>
+      
+      <category>数据结构与算法</category>
+      
+      <category>代码随想录</category>
+      
+      <category>动态规划</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>动态规划</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>6.不同路径</title>
+    <link href="/2022/07/06/code/shu-ju-jie-gou-yu-suan-fa/dai-ma-sui-xiang-lu/dong-tai-gui-hua/6.bu-tong-lu-jing/"/>
+    <url>/2022/07/06/code/shu-ju-jie-gou-yu-suan-fa/dai-ma-sui-xiang-lu/dong-tai-gui-hua/6.bu-tong-lu-jing/</url>
+    
+    <content type="html"><![CDATA[<p>文章简介：LeetCode  题解——62.不同路径</p><span id="more"></span><h1 id="1-62-不同路径"><a href="#1-62-不同路径" class="headerlink" title="1 62.不同路径"></a>1 62.不同路径</h1><p><a href="https://leetcode.cn/problems/unique-paths/">力扣题目链接</a></p><p>一个机器人位于一个 m x n&nbsp;网格的左上角 （起始点在下图中标记为 “Start” ）。</p><p>机器人每次只能<strong>向下或者向右</strong>移动一步。机器人试图达到网格的右下角（在下图中标记为 “Finish” ）。</p><p>问总共有多少条不同的路径？</p><p>示例 1：</p><p><img src="https://img-blog.csdnimg.cn/20210110174033215.png"></p><ul><li>  输入：m = 3, n = 7</li><li>  输出：28</li></ul><p>示例 2：</p><ul><li>  输入：m = 2, n = 3</li><li>  输出：3</li></ul><p>解释： 从左上角开始，总共有 3 条路径可以到达右下角。</p><ol><li> 向右 -&gt; 向右 -&gt; 向下</li><li> 向右 -&gt; 向下 -&gt; 向右</li><li> 向下 -&gt; 向右 -&gt; 向右</li></ol><p>示例 3：</p><ul><li>  输入：m = 7, n = 3</li><li>  输出：28</li></ul><p>示例 4：</p><ul><li>  输入：m = 3, n = 3</li><li>  输出：6</li></ul><p>提示：</p><ul><li>  1 &lt;= m, n &lt;= 100</li><li>  题目数据保证答案小于等于 2 * 10^9</li></ul><h1 id="2-思路"><a href="#2-思路" class="headerlink" title="2 思路"></a>2 思路</h1><h2 id="2-1-图论"><a href="#2-1-图论" class="headerlink" title="2.1 图论"></a>2.1 图论</h2><p>暂定</p><h2 id="2-2-数论"><a href="#2-2-数论" class="headerlink" title="2.2 数论"></a>2.2 数论</h2><p>暂定</p><h2 id="2-3-动态规划"><a href="#2-3-动态规划" class="headerlink" title="2.3 动态规划"></a>2.3 动态规划</h2><p>m✖️n：行✖️列<br>按照动规五部曲来分析：</p><ol><li>确定dp数组（dp table）以及下标的含义<br><code>dp[i][j]</code> ：表示从（0 ，0）出发，到(i, j) 有<code>dp[i][j]</code>条不同的路径。</li><li>确定递推公式<br>机器人只能向下或向右移动<br>所以<code>dp[i][j]</code>，只能有两个方向来推导出来，即<code>dp[i - 1][j]</code> 和 <code>dp[i][j - 1]</code>。(上面，左面)<br><code>dp[i][j] = dp[i - 1][j] + dp[i][j - 1]</code>，因为只能从上面或者左面过来</li><li> dp数组的初始化<br>如何初始化呢，首先<code>dp[i][0]</code>一定都是1，因为从(0, 0)的位置到(i, 0)的路径只有一条，那么<code>dp[0][j]</code>也同理。<br>所以初始化代码为：<figure class="highlight apache"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">for</span> (int i = <span class="hljs-number">0</span>; i &lt; m; i++) dp[i][<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;<br><span class="hljs-attribute">for</span> (int j = <span class="hljs-number">0</span>; j &lt; n; j++) dp[<span class="hljs-number">0</span>][j] = <span class="hljs-number">1</span>;<br></code></pre></td></tr></tbody></table></figure></li><li> 确定遍历顺序<br>这里要看一下递归公式<code>dp[i][j] = dp[i - 1][j] + dp[i][j - 1]</code>，<code>dp[i][j]</code>都是从其上方和左方推导而来，那么从左到右一层一层遍历就可以了。两个for循环嵌套</li></ol><p>这样就可以保证推导<code>dp[i][j]</code>的时候，<code>dp[i - 1][j]</code> 和 <code>dp[i][j - 1]</code>一定是有数值的。</p><ol start="5"><li> 举例推导dp数组</li></ol><p>如图所示：<br><code>dp[i][j] = dp[i - 1][j] + dp[i][j - 1]</code>，<code>dp[2][2] = dp[1][2] + dp[2][1]</code>，<code>dp[3][7] = dp[2][7] + dp[3][6]</code> 上面/左面<br><img src="https://img-blog.csdnimg.cn/20201209113631392.png" alt="62.不同路径1"></p><h1 id="3-代码"><a href="#3-代码" class="headerlink" title="3 代码"></a>3 代码</h1><h2 id="3-1-二维数组解法，编译已通过"><a href="#3-1-二维数组解法，编译已通过" class="headerlink" title="3.1 二维数组解法，编译已通过"></a>3.1 二维数组解法，编译已通过</h2><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">uniquePaths</span><span class="hljs-params">(<span class="hljs-type">int</span> m, <span class="hljs-type">int</span> n)</span> </span>{<br>      vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">dp</span>(m, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;(n,<span class="hljs-number">0</span>));<br>      <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; m; i++) dp[i][<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;<br>      <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; j &lt; n; j++) dp[<span class="hljs-number">0</span>][j] = <span class="hljs-number">1</span>;<br>      <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; m; i++){ <span class="hljs-comment">// 从(1,1)开始的</span><br>          <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt; n; j++){<br>              dp[i][j] = dp[i<span class="hljs-number">-1</span>][j] + dp[i][j<span class="hljs-number">-1</span>];<br>          }<br>      }<br>      <span class="hljs-keyword">return</span> dp[m<span class="hljs-number">-1</span>][n<span class="hljs-number">-1</span>];<span class="hljs-comment">// 因为下标从0开始，所以-1</span><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure><h2 id="3-2-一维数组暂定"><a href="#3-2-一维数组暂定" class="headerlink" title="3.2 一维数组暂定"></a>3.2 一维数组暂定</h2><h1 id="4-参考资料"><a href="#4-参考资料" class="headerlink" title="4 参考资料"></a>4 参考资料</h1><p>自用跳转链接：🈚</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>👨🏻‍💻code</category>
+      
+      <category>数据结构与算法</category>
+      
+      <category>代码随想录</category>
+      
+      <category>动态规划</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>动态规划</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>4.使用最小花费爬楼梯</title>
+    <link href="/2022/07/05/code/shu-ju-jie-gou-yu-suan-fa/dai-ma-sui-xiang-lu/dong-tai-gui-hua/4.shi-yong-zui-xiao-hua-fei-pa-lou-ti/"/>
+    <url>/2022/07/05/code/shu-ju-jie-gou-yu-suan-fa/dai-ma-sui-xiang-lu/dong-tai-gui-hua/4.shi-yong-zui-xiao-hua-fei-pa-lou-ti/</url>
+    
+    <content type="html"><![CDATA[<p>文章简介：LeetCode  题解—— 746. 使用最小花费爬楼梯</p><span id="more"></span><h1 id="1-使用最小花费爬楼梯"><a href="#1-使用最小花费爬楼梯" class="headerlink" title="1 使用最小花费爬楼梯"></a>1 使用最小花费爬楼梯</h1><p><a href="https://leetcode.cn/problems/min-cost-climbing-stairs/">力扣题目链接</a></p><p>数组的每个下标作为一个阶梯，第 i 个阶梯对应着一个非负数的体力花费值&nbsp;cost[i]（下标从 0 开始）。</p><p><strong>每当你爬上一个阶梯你都要花费对应的体力值，一旦支付了相应的体力值，你就可以选择向上爬一个阶梯或者爬两个阶梯。</strong></p><p>请你找出达到楼层顶部的最低花费。在开始时，你可以选择从下标为 0 或 1 的元素作为初始阶梯。</p><p>示例&nbsp;1：</p><p>输入：cost = [10, 15, 20] 输出：15 解释：最低花费是从 cost[1] 开始，然后走两步即可到阶梯顶，一共花费 15 。 &nbsp;示例 2：</p><blockquote><p>第一次不要钱，爬上了15，支付15后可以爬一层到楼顶，那我从10开始支付10爬两层不是更好吗</p></blockquote><p>输入：cost = [1, 100, 1, 1, 1, 100, 1, 1, 100, 1] 输出：6 解释：最低花费方式是从 cost[0] 开始，逐个经过那些 1 ，跳过 cost[3] ，一共花费 6 。</p><p>提示：</p><ul><li>  cost 的长度范围是 [2, 1000]。</li><li>  cost[i] 将会是一个整型数据，范围为 [0, 999] 。</li></ul><h1 id="2-思路"><a href="#2-思路" class="headerlink" title="2 思路"></a>2 思路</h1><p><strong>注意题目描述：每当你爬上一个阶梯你都要花费对应的体力值，一旦支付了相应的体力值，你就可以选择向上爬一个阶梯或者爬两个阶梯</strong></p><p>动归五部曲</p><p><font color="#F36208">1.  确定dp数组以及下标的含义</font><br>**dp[i]的定义：到达第i个台阶所花费的最<br>少体力为dp[i]**。<br>注意这里认为是第一步一定是要花费：<br>    dp[0] = cost[0];<br>    dp[1] = cost[1];<br>    <strong>dp[2] = min(dp[0], dp[1]) + cost[2];</strong><br><font color="#F36208">2.  确定递推公式</font><br>**可以有两个途径得到dp[i]，一个是dp[i-1] 一个是dp[i-2]**。</p><blockquote><p>一旦支付当前下边相应的体力值，就可向上爬一个或者两个楼梯</p></blockquote><p><strong>dp[i] = min(dp[i - 1], dp[i - 2]) + cost[i];</strong><br>爬上台阶i，可能是从 i - 1 层，i-2层爬上来的，然后在离开台阶i 又在需要花费cost[i]<br><font color="#F36208">3. dp数组初始化</font><br>题目说：可以选择从下标为 0 或 1 的元素作为初始阶梯。<br>从下标0处离开需要cost[0]，下标1同理</p><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">dp</span><span class="hljs-params">(cost.size())</span></span>;<br>dp[<span class="hljs-number">0</span>] = cost[<span class="hljs-number">0</span>];<br>dp[<span class="hljs-number">1</span>] = cost[<span class="hljs-number">1</span>];<br></code></pre></td></tr></tbody></table></figure><p><font color="#F36208">4. 遍历顺序</font><br>因为是模拟台阶，而且dp[i]又dp[i-1]dp[i-2]推出，所以是从前到后遍历cost数组就可以了。<br><strong>但是稍稍有点难度的动态规划，其遍历顺序并不容易确定下来</strong>。<br><font color="#F36208">5. 举例推导dp数组</font><br>| cost  | 10  | 15  | 20  |<br>| —– | — | — | — |<br>| dp[i] | 10  | 15  | 30  |<br>|       |     |     |     |<br><img src="https://img-blog.csdnimg.cn/2021010621363669.png" alt="746.使用最小花费爬楼梯"><br>为什么选择最后两位的最小值呢<br>?<br>最后两位支付该值都可以到下一层，假设所求是第N层的最小开销，只需要计算min(谁能到N层)，到了N层后又不到下一层，所以相当于最后一步不用花费，就停止到那了，不用+cost[i]</p><h1 id="3-代码"><a href="#3-代码" class="headerlink" title="3 代码"></a>3 代码</h1><p>编译已通过</p><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">minCostClimbingStairs</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; cost)</span> </span>{<br>        <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">dp</span><span class="hljs-params">(cost.size())</span></span>;<br>        dp[<span class="hljs-number">0</span>] = cost[<span class="hljs-number">0</span>];<br>        dp[<span class="hljs-number">1</span>] = cost[<span class="hljs-number">1</span>];<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">2</span>; i &lt; cost.<span class="hljs-built_in">size</span>(); i++){<span class="hljs-comment">// 这里不用&lt;=，因为下标从0开始，取不到cost.size()||从第三个元素开始，下标是2</span><br>            dp[i] = <span class="hljs-built_in">min</span>(dp[i - <span class="hljs-number">1</span>], dp[i - <span class="hljs-number">2</span>]) + cost[i];<br>        }<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">min</span>(dp[cost.<span class="hljs-built_in">size</span>()<span class="hljs-number">-1</span>], dp[cost.<span class="hljs-built_in">size</span>() - <span class="hljs-number">2</span>]);<br><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure><h1 id="4-参考资料"><a href="#4-参考资料" class="headerlink" title="4 参考资料"></a>4 参考资料</h1><p><a href="https://www.programmercarl.com/0746.%E4%BD%BF%E7%94%A8%E6%9C%80%E5%B0%8F%E8%8A%B1%E8%B4%B9%E7%88%AC%E6%A5%BC%E6%A2%AF.html#%E6%80%9D%E8%B7%AF">代码随想录</a><br><a href="https://www.bilibili.com/video/BV1fq4y1T7Uo?spm_id_from=333.337.search-card.all.click&amp;vd_source=f2340d96e99780a96b50d8096ffaaf1a">Leetcode-746.使用最小花费爬楼梯_哔哩哔哩_bilibili</a><br>自用跳转链接：🈚</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>👨🏻‍💻code</category>
+      
+      <category>数据结构与算法</category>
+      
+      <category>代码随想录</category>
+      
+      <category>动态规划</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>动态规划</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>3.爬楼梯</title>
+    <link href="/2022/07/05/code/shu-ju-jie-gou-yu-suan-fa/dai-ma-sui-xiang-lu/dong-tai-gui-hua/3.pa-lou-ti/"/>
+    <url>/2022/07/05/code/shu-ju-jie-gou-yu-suan-fa/dai-ma-sui-xiang-lu/dong-tai-gui-hua/3.pa-lou-ti/</url>
+    
+    <content type="html"><![CDATA[<p>文章简介：LeetCode  题解——70. 爬楼梯</p><span id="more"></span><h1 id="1-爬楼梯"><a href="#1-爬楼梯" class="headerlink" title="1 爬楼梯"></a>1 爬楼梯</h1><p><a href="https://leetcode.cn/problems/climbing-stairs/">力扣题目链接</a></p><p>假设你正在爬楼梯。需要 n 阶你才能到达楼顶。</p><p>每次你可以爬 1 或 2 个台阶。<strong>你有多少种不同的方法</strong>可以爬到楼顶呢？</p><p>注意：给定 n 是一个正整数。</p><p>示例 1：</p><ul><li>  输入： 2</li><li>  输出： 2</li><li>解释： 有两种方法可以爬到楼顶。<ul><li>  1 阶 + 1 阶</li><li>  2 阶</li></ul></li></ul><p>示例 2：</p><ul><li>  输入： 3</li><li>  输出： 3</li><li>解释： 有三种方法可以爬到楼顶。<ul><li>  1 阶 + 1 阶 + 1 阶</li><li>  1 阶 + 2 阶</li><li>  2 阶 + 1 阶</li></ul></li></ul><h1 id="2-思路"><a href="#2-思路" class="headerlink" title="2 思路"></a>2 思路</h1><p>第三层楼梯的状态可以由第二层楼梯 和 到第一层楼梯状态推导出来，那么就可以想到动态规划了。<br>    爬到第一层楼梯有一种方法，爬到二层楼梯有两种方法。<br>    第一层楼梯再跨两步就到第三层 ，第二层楼梯再跨一步就到第三层。<br>    dp[3] = dp[2] + dp[1] = 2+1 =3</p><p>动归五部曲：</p><ol><li> 确定dp数组以及下标的含义<br>dp[i]： 爬到第i层楼梯，有dp[i]种方法</li><li> 确定递推公式<br>首先是dp[i - 1]，上i-1层楼梯，有dp[i - 1]种方法，那么再一步跳一个台阶不就是dp[i]了么。<br>还有就是dp[i - 2]，上i-2层楼梯，有dp[i - 2]种方法，那么再一步跳两个台阶不就是dp[i]了么<br>dp[i] = dp[i - 1] + dp[i - 2] 。</li><li>dp数组如何初始化<br>不考虑dp[0]，dp[1] = 1， dp[2] = 2<blockquote><p>dp[0]没有意义，i从3 开始递推</p></blockquote></li><li> 确定遍历顺序<br>从递推公式dp[i] = dp[i - 1] + dp[i - 2];中可以看出，遍历顺序一定是从前向后遍历的</li><li> 举推导dp数组<br>举例当n为5的时候，dp table（dp数组）应该是这样的<br><img src="https://img-blog.csdnimg.cn/20210105202546299.png" alt="70.爬楼梯"><blockquote><p>本质就是斐波那契数列，就是没有讨论dp[0] 的情况</p></blockquote></li></ol><p>#面试<br>有的题解是把dp[0]初始化为1，然后遍历的时候i从2开始遍历，这样是可以解题的，然后强行解释一波dp[0]应该等于1的含义。<br>一个严谨的思考过程，应该是初始化dp[1] = 1，dp[2] = 2，然后i从3开始遍历，<br>这个可以是面试的一个小问题，考察候选人对dp[i]定义的理解程度。</p><h1 id="3-代码"><a href="#3-代码" class="headerlink" title="3 代码"></a>3 代码</h1><p>优化一下空间复杂度</p><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">climbStairs</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> </span>{<br>        <span class="hljs-keyword">if</span> (n &lt;= <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> n;<br>        <span class="hljs-type">int</span> dp[<span class="hljs-number">3</span>];<br>        dp[<span class="hljs-number">1</span>] = <span class="hljs-number">1</span>;<br>        dp[<span class="hljs-number">2</span>] = <span class="hljs-number">2</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">3</span>; i &lt;= n; i++){<br>            <span class="hljs-type">int</span> sum = dp[<span class="hljs-number">2</span>] + dp [<span class="hljs-number">1</span>];<br>            dp[<span class="hljs-number">2</span>] = sum;<br>            dp[<span class="hljs-number">1</span>] = dp[<span class="hljs-number">2</span>]; <br>        }<br>        <span class="hljs-keyword">return</span> dp[<span class="hljs-number">2</span>];<br><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure><h1 id="4-加强版爬楼梯"><a href="#4-加强版爬楼梯" class="headerlink" title="4 加强版爬楼梯"></a>4 加强版爬楼梯</h1><p>这道题目还可以继续深化，就是一步一个台阶，两个台阶，三个台阶，直到 m个台阶，有多少种方法爬到n阶楼顶。</p><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">climbStairs</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> </span>{<br>        <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">dp</span><span class="hljs-params">(n + <span class="hljs-number">1</span>, <span class="hljs-number">0</span>)</span></span>;<br>        dp[<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++) {<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt;= m; j++) { <span class="hljs-comment">// 把m换成2，就可以AC爬楼梯这道题</span><br>                <span class="hljs-keyword">if</span> (i - j &gt;= <span class="hljs-number">0</span>) dp[i] += dp[i - j];<br>            }<br>        }<br>        <span class="hljs-keyword">return</span> dp[n];<br>    }<br>};<br></code></pre></td></tr></tbody></table></figure><p>代码中m表示最多可以爬m个台阶。</p><p><strong>以上代码不能运行哈，我主要是为了体现只要把m换成2，粘过去，就可以AC爬楼梯这道题，不信你就粘一下试试，哈哈</strong>。</p><p><strong>此时我就发现一个绝佳的大厂面试题</strong>，第一道题就是单纯的爬楼梯，然后看候选人的代码实现，如果把dp[0]的定义成1了，就可以发难了，为什么dp[0]一定要初始化为1，此时可能候选人就要强行给dp[0]应该是1找各种理由。那这就是一个考察点了，对dp[i]的定义理解的不深入。</p><p>我在<a href="https://programmercarl.com/%E5%89%8D%E5%BA%8F/%E9%80%9A%E8%BF%87%E4%B8%80%E9%81%93%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE%EF%BC%8C%E8%AE%B2%E4%B8%80%E8%AE%B2%E9%80%92%E5%BD%92%E7%AE%97%E6%B3%95%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%EF%BC%81.html">通过一道面试题目，讲一讲递归算法的时间复杂度！</a><a href="https://programmercarl.com/%E5%89%8D%E5%BA%8F/%E9%80%9A%E8%BF%87%E4%B8%80%E9%81%93%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE%EF%BC%8C%E8%AE%B2%E4%B8%80%E8%AE%B2%E9%80%92%E5%BD%92%E7%AE%97%E6%B3%95%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%EF%BC%81.html"></a><br>中，以我自己面试别人的真实经历，通过求x的n次方 这么简单的题目，就可以考察候选人对算法性能以及递归的理解深度，录友们可以看看，绝对有收获！</p><h1 id="5-参考资料"><a href="#5-参考资料" class="headerlink" title="5 参考资料"></a>5 参考资料</h1><p><a href="https://www.programmercarl.com/0070.%E7%88%AC%E6%A5%BC%E6%A2%AF.html#%E6%80%9D%E8%B7%AF">代码随想录</a><br>自用跳转链接：🈚</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>👨🏻‍💻code</category>
+      
+      <category>数据结构与算法</category>
+      
+      <category>代码随想录</category>
+      
+      <category>动态规划</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>动态规划</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>2.斐波那契数</title>
+    <link href="/2022/07/05/code/shu-ju-jie-gou-yu-suan-fa/dai-ma-sui-xiang-lu/dong-tai-gui-hua/2.fei-bo-na-qi-shu/"/>
+    <url>/2022/07/05/code/shu-ju-jie-gou-yu-suan-fa/dai-ma-sui-xiang-lu/dong-tai-gui-hua/2.fei-bo-na-qi-shu/</url>
+    
+    <content type="html"><![CDATA[<p>文章简介：LeetCode 题解 ——509. 斐波那契数</p><span id="more"></span><h1 id="1-509-斐波那契数"><a href="#1-509-斐波那契数" class="headerlink" title="1 509. 斐波那契数"></a>1 509. 斐波那契数</h1><p><a href="https://leetcode.cn/problems/fibonacci-number/">力扣题目链接</a></p><p>斐波那契数，通常用&nbsp;F(n) 表示，形成的序列称为 斐波那契数列 。该数列由&nbsp;0 和 1 开始，<strong>后面的每一项数字都是前面两项数字的和</strong>。也就是： F(0) = 0，F(1)&nbsp;= 1 F(n) = F(n - 1) + F(n - 2)，其中 n &gt; 1 给你n ，请计算 F(n) 。</p><p>示例 1：</p><ul><li>  输入：2</li><li>  输出：1</li><li>  解释：F(2) = F(1) + F(0) = 1 + 0 = 1</li></ul><p>示例 2：</p><ul><li>  输入：3</li><li>  输出：2</li><li>  解释：F(3) = F(2) + F(1) = 1 + 1 = 2</li></ul><p>示例 3：</p><ul><li>  输入：4</li><li>  输出：3</li><li>  解释：F(4) = F(3) + F(2) = 2 + 1 = 3</li></ul><p>提示：</p><ul><li>  0 &lt;= n &lt;= 30</li></ul><h1 id="2-思路"><a href="#2-思路" class="headerlink" title="2 思路"></a>2 思路</h1><p>动规五部曲：</p><p>这里我们要用一个一维dp数组来保存递归的结果</p><ol><li> 确定dp数组以及下标的含义</li></ol><p>dp[i]的定义为：第i个数的斐波那契数值是dp[i]</p><ol start="2"><li> 确定递推公式</li></ol><p>为什么这是一道非常简单的入门题目呢？</p><p><strong>因为题目已经把递推公式直接给我们了：状态转移方程 dp[i] = dp[i - 1] + dp[i - 2];</strong></p><ol start="3"><li> dp数组如何初始化</li></ol><p><strong>题目中把如何初始化也直接给我们了，如下：</strong></p><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cpp">dp[<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;<br>dp[<span class="hljs-number">1</span>] = <span class="hljs-number">1</span>;<br></code></pre></td></tr></tbody></table></figure><ol start="4"><li> 确定遍历顺序</li></ol><p>从递归公式dp[i] = dp[i - 1] + dp[i - 2];中可以看出，dp[i]是依赖 dp[i - 1] 和 dp[i - 2]，那么遍历的顺序一定是从前到后遍历的</p><ol start="5"><li> 举例推导dp数组</li></ol><p>按照这个递推公式dp[i] = dp[i - 1] + dp[i - 2]，我们来推导一下，当N为10的时候，dp数组应该是如下的数列：</p><p>0 1 1 2 3 5 8 13 21 34 55</p><p>如果代码写出来，发现结果不对，就把dp数组打印出来看看和我们推导的数列是不是一致的。</p><h1 id="3-代码"><a href="#3-代码" class="headerlink" title="3 代码"></a>3 代码</h1><p>编译已通过</p><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">fib</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> </span>{<br>        <span class="hljs-keyword">if</span> (n &lt; <span class="hljs-number">2</span>) <span class="hljs-keyword">return</span> n;<br>        <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">dp</span><span class="hljs-params">(n + <span class="hljs-number">1</span>)</span></span>;<span class="hljs-comment">// 因为下标从0开始，要总长度所以+1</span><br>        dp[<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;<br>        dp[<span class="hljs-number">1</span>] = <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">2</span>; i &lt;= n; i++){ <span class="hljs-comment">// 是≤，要把n也算上，因为最后输出的是n</span><br>            dp[i] = dp[i - <span class="hljs-number">1</span>] + dp[i - <span class="hljs-number">2</span>];<br>        }<br>        <span class="hljs-keyword">return</span> dp[n];<span class="hljs-comment">// vector的返回和使用都要用[]</span><br><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure><h1 id="4-参考资料"><a href="#4-参考资料" class="headerlink" title="4 参考资料"></a>4 参考资料</h1><p>自用跳转链接：<a href="obsidian://advanced-uri?vault=Documents&amp;uid=9fc19dba-4edb-4f3d-8d7e-22b7c2462fc7">obsidian</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>👨🏻‍💻code</category>
+      
+      <category>数据结构与算法</category>
+      
+      <category>代码随想录</category>
+      
+      <category>动态规划</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>动态规划</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>1.动态规划理论基础</title>
+    <link href="/2022/07/05/code/shu-ju-jie-gou-yu-suan-fa/dai-ma-sui-xiang-lu/dong-tai-gui-hua/1.dong-tai-gui-hua-li-lun-ji-chu/"/>
+    <url>/2022/07/05/code/shu-ju-jie-gou-yu-suan-fa/dai-ma-sui-xiang-lu/dong-tai-gui-hua/1.dong-tai-gui-hua-li-lun-ji-chu/</url>
+    
+    <content type="html"><![CDATA[<p>文章简介：如题</p><span id="more"></span><p>动态规划，英文：Dynamic Programming，简称DP<br><strong>动态规划中每一个状态一定是由上一个状态推导出来的</strong>，贪心是局部最优推导全局最优</p><p>例如：有N件物品和一个最多能背重量为W 的背包。第i件物品的重量是weight[i]，得到的价值是value[i] 。<strong>每件物品只能用一次</strong>，求解将哪些物品装入背包里物品价值总和最大。</p><p>动态规划中dp[j]是由dp[j-weight[i]]推导出来的，然后取max(dp[j], dp[j - weight[i]] + value[i])。</p><h1 id="1-动态规划解题步骤"><a href="#1-动态规划解题步骤" class="headerlink" title="1 动态规划解题步骤"></a>1 动态规划解题步骤</h1><ol><li> 确定dp数组（dp table）以及下标的含义</li><li> 确定递推公式</li><li> dp数组如何初始化</li><li> 确定遍历顺序</li><li> 举例推导dp数组</li></ol><p><strong>一些情况是递推公式决定了dp数组要如何初始化！</strong></p><p><strong>做动规的题目，写代码之前一定要把状态转移在dp数组的上具体情况模拟一遍，心中有数，确定最后推出的是想要的结果</strong>。<br>然后再写代码，如果代码没通过就打印dp数组，看看是不是和自己预先推导的哪里不一样。</p><p>如果打印出来和自己预先模拟推导是一样的，那么就是自己的递归公式、初始化或者遍历顺序有问题了。</p><p>如果和自己预先模拟推导的不一样，那么就是代码实现细节有问题。<br><strong>找问题的最好方式就是把dp数组打印出来，看看究竟是不是按照自己思路推导的！</strong></p><h2 id="1-1-debug"><a href="#1-1-debug" class="headerlink" title="1.1 debug"></a>1.1 debug</h2><p><strong>如果代码写出来了，一直AC不了，灵魂三问：</strong></p><ol><li> 这道题目我举例推导状态转移公式了么？</li><li> 我打印dp数组的日志了么？</li><li> 打印出来了dp数组和我想的一样么？</li></ol><p>哈哈，专治各种代码写出来了但AC不了的疑难杂症。</p><h1 id="2-参考资料"><a href="#2-参考资料" class="headerlink" title="2 参考资料"></a>2 参考资料</h1><p><a href="https://www.programmercarl.com/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80.html#%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%9A%84%E8%A7%A3%E9%A2%98%E6%AD%A5%E9%AA%A4">代码随想录</a><br>自用跳转连接：🈚️</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>👨🏻‍💻code</category>
+      
+      <category>数据结构与算法</category>
+      
+      <category>代码随想录</category>
+      
+      <category>动态规划</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>动态规划</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>24.监控二叉树</title>
+    <link href="/2022/07/05/code/shu-ju-jie-gou-yu-suan-fa/dai-ma-sui-xiang-lu/tan-xin-suan-fa/24.jian-kong-er-cha-shu/"/>
+    <url>/2022/07/05/code/shu-ju-jie-gou-yu-suan-fa/dai-ma-sui-xiang-lu/tan-xin-suan-fa/24.jian-kong-er-cha-shu/</url>
+    
+    <content type="html"><![CDATA[<p>文章简介：968.监控二叉树</p><span id="more"></span><h1 id="1-968-监控二叉树"><a href="#1-968-监控二叉树" class="headerlink" title="1 968.监控二叉树"></a>1 968.监控二叉树</h1><p><a href="https://leetcode.cn/problems/binary-tree-cameras/">力扣题目链接</a></p><p>给定一个二叉树，我们在树的节点上安装摄像头。</p><p>节点上的每个摄影头都可以监视其父对象、自身及其直接子对象。</p><p>计算监控树的所有节点所需的最小摄像头数量。</p><p>示例 1：</p><p><img src="https://img-blog.csdnimg.cn/20201229175736596.png"></p><ul><li>  输入：[0,0,null,0,0]</li><li>  输出：1</li><li>  解释：如图所示，一台摄像头足以监控所有节点。</li></ul><p>示例 2：</p><p><img src="https://img-blog.csdnimg.cn/2020122917584449.png"></p><ul><li>  输入：[0,0,null,0,null,0,null,null,0]</li><li>  输出：2</li><li>  解释：需要至少两个摄像头来监视树的所有节点。 上图显示了摄像头放置的有效位置之一。</li></ul><p>提示：</p><ul><li>  给定树的节点数的范围是 [1, 1000]。</li><li>  <strong>每个节点的值都是 0</strong>。</li></ul><h1 id="2-思路"><a href="#2-思路" class="headerlink" title="2 思路"></a>2 思路</h1><p>摄像头放在叶子节点的父节点位置，才能充分利用摄像头的覆盖面积。</p><p>为什么不从头结点开始看起呢，为啥要从叶子节点看呢<br>?<br>因为头结点放不放摄像头也就省下一个摄像头， 叶子节点放不放摄像头省下了的摄像头数量是指数阶别的。<br><strong>局部最优：让叶子节点的父节点安摄像头，所用摄像头最少，<br>整体最优：全部摄像头数量所用最少！</strong></p><p>大体思路就是：从低到上，先给叶子节点父节点放个摄像头，然后隔两个节点放一个摄像头，直至到二叉树头结点</p><p>每个节点可能有几种状态：<br>有如下三种：</p><ul><li>  该节点无覆盖</li><li>  本节点有摄像头</li><li>  本节点有覆盖</li></ul><p>我们分别有三个数字来表示：</p><ul><li>  0：该节点无覆盖</li><li>  1：本节点有摄像头</li><li>  2：本节点有覆盖</li></ul><p><img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202207051425661.png"></p><h1 id="3-参考资料"><a href="#3-参考资料" class="headerlink" title="3 参考资料"></a>3 参考资料</h1><p><a href="https://www.programmercarl.com/0968.%E7%9B%91%E6%8E%A7%E4%BA%8C%E5%8F%89%E6%A0%91.html#%E6%80%9D%E8%B7%AF">代码随想录</a><br>自用跳转连接：🈚️</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>👨🏻‍💻code</category>
+      
+      <category>数据结构与算法</category>
+      
+      <category>代码随想录</category>
+      
+      <category>贪心算法</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>贪心算法</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>实验设计</title>
+    <link href="/2022/07/04/ke-yan/shi-yan-she-ji/"/>
+    <url>/2022/07/04/ke-yan/shi-yan-she-ji/</url>
+    
+    <content type="html"><![CDATA[<p>镁合金设置温度分布<br>挤压角度：100°，110，120，130，140</p><blockquote><p>110， 120 的圆盘成形效果最好，140的圆棒成形效果最好</p></blockquote><p>温度分布：</p><table><thead><tr><th>100</th><th>150</th><th>200</th><th>250</th><th>300</th><th>350</th><th>400</th></tr></thead><tbody><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr></tbody></table><p>试验温度为室温和100, 150, 200, 250, 300, 350, 400 ℃<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="AZ31B镁合金板热成形温…理温度下成形件的组织与性能_呼啸">[1]</span></a></sup></p><h1 id="1-参考资料"><a href="#1-参考资料" class="headerlink" title="1 参考资料"></a>1 参考资料</h1><p>自用跳转连接：<a href="">ob</a>， <a href="">blog</a></p><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a href="marginnote3app://note/F62253DC-5296-4BB8-A7BF-97F9BD2553CF">AZ31B镁合金板热成形温…理温度下成形件的组织与性能_呼啸</a><a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>]]></content>
+    
+    
+    <categories>
+      
+      <category>👨🏻‍🎓科研</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>23.买卖股票的最佳时机含手续费</title>
+    <link href="/2022/07/04/code/shu-ju-jie-gou-yu-suan-fa/dai-ma-sui-xiang-lu/tan-xin-suan-fa/23.mai-mai-gu-piao-de-zui-jia-shi-ji-han-shou-xu-fei/"/>
+    <url>/2022/07/04/code/shu-ju-jie-gou-yu-suan-fa/dai-ma-sui-xiang-lu/tan-xin-suan-fa/23.mai-mai-gu-piao-de-zui-jia-shi-ji-han-shou-xu-fei/</url>
+    
+    <content type="html"><![CDATA[<p>文章简介<br>    力扣题解：714. 买卖股票的最佳时机含手续费</p><span id="more"></span><h1 id="1-买卖股票的最佳时机含手续费"><a href="#1-买卖股票的最佳时机含手续费" class="headerlink" title="1 买卖股票的最佳时机含手续费"></a>1 买卖股票的最佳时机含手续费</h1><p><a href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/">力扣题目链接</a></p><p>给定一个整数数组&nbsp;prices，其中第&nbsp;i&nbsp;个元素代表了第&nbsp;i&nbsp;天的股票价格 ；非负整数&nbsp;fee 代表了交易股票的手续费用。</p><p>你可以无限次地完成交易，但是你每笔交易都需要付手续费。<strong>如果你已经购买了一个股票，在卖出它之前你就不能再继续购买股票了。</strong></p><p><strong>返回获得利润的最大值。</strong></p><p>注意：这里的一笔交易指买入持有并卖出股票的整个过程，每笔交易你只需要为支付一次手续费。</p><blockquote><p>相当于买入和卖出</p></blockquote><p>示例 1: 输入: prices = [1, 3, 2, 8, 4, 9], fee = 2 输出: 8</p><p>解释: 能够达到的最大利润: 在此处买入&nbsp;prices[0] = 1 在此处卖出 prices[3] = 8 在此处买入 prices[4] = 4 在此处卖出 prices[5] = 9 总利润:&nbsp;((8 - 1) - 2) + ((9 - 4) - 2) = 8.</p><p>注意:</p><ul><li>  0 &lt; prices.length &lt;= 50000.</li><li>  0 &lt; prices[i] &lt; 50000.</li><li>  0 &lt;= fee &lt; 50000.</li></ul><h1 id="2-思路"><a href="#2-思路" class="headerlink" title="2 思路"></a>2 思路</h1><h2 id="2-1-6-买卖股票的最佳时机II"><a href="#2-1-6-买卖股票的最佳时机II" class="headerlink" title="2.1 [[6. 买卖股票的最佳时机II]]"></a>2.1 [[6. 买卖股票的最佳时机II]]</h2><p>![[6. 买卖股票的最佳时机II#2 思路]]<br>与 6的区别是多了个手续费<br>有了手续费，就要关系什么时候买卖了，因为计算所获得利润，需要考虑买卖利润可能不足以手续费的情况。<br>用贪心策略，就是最低值买，最高值（减去手续费还盈利）就卖。</p><p>找到两个点</p><ul><li>  买入日期：其实很好想，遇到更低点就记录一下。</li><li>  卖出日期：这个就不好算了，但也没有必要算出准确的卖出日期，只要当前价格大于（最低价格+手续费），就可以收获利润，至于准确的卖出日期，就是连续收获利润区间里的最后一天（并不需要计算是具体哪一天）。</li></ul><p>做收获利润操作的时候其实有三种情况：</p><ul><li>  情况一：收获利润的这一天并不是收获利润区间里的最后一天（<strong>不是真正的卖出，相当于持有股票</strong>），所以后面要继续收获利润。</li><li>  情况二：前一天是收获利润区间里的最后一天（相当于真正的卖出了），今天要重新记录最小价格了。</li><li>  情况三：不作操作，保持原有状态（买入，卖出，不买不卖）<h3 id="2-1-1-思路总结"><a href="#2-1-1-思路总结" class="headerlink" title="2.1.1 思路总结"></a>2.1.1 思路总结</h3></li></ul><ol><li>不断的寻找最低点，在最低点时买入</li><li>寻找有利润的时候买入，更新下一次的买入位置在循环卖出</li><li>对所有利润加和</li></ol><h2 id="2-2-断点调试"><a href="#2-2-断点调试" class="headerlink" title="2.2 断点调试"></a>2.2 断点调试</h2><p><a href="file:///Users/yibeikongqiu/Desktop/ishot视频/贪心算法/23.买卖股票的最佳时机含手续费.mp4">23.买卖股票的最佳时机含手续费</a></p><p><a href="file:///Users/yibeikongqiu/Desktop/ishot%E8%A7%86%E9%A2%91/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/23.%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA%E5%90%AB%E6%89%8B%E7%BB%AD%E8%B4%B9.mp4#t=10.471542">00:10</a> 情况三：现在的价格不是最低的，并且卖出的话亏本</p><p><a href="file:///Users/yibeikongqiu/Desktop/ishot%E8%A7%86%E9%A2%91/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/23.%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA%E5%90%AB%E6%89%8B%E7%BB%AD%E8%B4%B9.mp4#t=28.795416">00:28</a><br>#疑问 #已解决<br>为什么要minPrice = prices[i]- fee呢，如果去掉了- fee 则结果不对<br><del>因为在该下标处已经交过了一次手续费，不需要在交了？？？</del></p><p>输入：prices = [1,3,7,5,10,3], fee = 3<br>输出：6<br>相当于：1时买入，10时卖出(10-1-3 = 6)<br>并不是：1时买入，7时卖出，5时买入，10时卖出(7-1-3  +  10 - 5 -3 = 5)<br>minprice = price[i] - fee  有正利润就假装卖了，先收集利润，- fee 的作用是如果后边的还有利润更高的，则这次其实是不卖的<br>eg：7时有正利润的先收集起来(7-1-3=3)<br>但此时的minPrice = 7-3  =&nbsp;4， 4是后边的最小的，接下来的利润是10-4-3= 3<br>总利润就是3+3 = 6，而不是像上边计算的5，这个作用就是，看似在7处卖了，实际没卖，最后是在10的位置卖的</p><h1 id="3-代码"><a href="#3-代码" class="headerlink" title="3 代码"></a>3 代码</h1><p>编译已通过</p><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">maxProfit</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; prices, <span class="hljs-type">int</span> fee)</span> </span>{<br>        <span class="hljs-type">int</span> result = <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> minPrice = prices[<span class="hljs-number">0</span>];<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i =&nbsp;<span class="hljs-number">1</span>; i &lt; prices.<span class="hljs-built_in">size</span>(); i++){<br>            <span class="hljs-keyword">if</span> (prices[i] &lt; minPrice) minPrice = prices[i];<br>            <span class="hljs-keyword">if</span> (prices[i] &gt; minPrice &amp;&amp; prices[i] - minPrice - fee &lt; <span class="hljs-number">0</span>) <span class="hljs-keyword">continue</span>;<br>            <span class="hljs-keyword">if</span> (prices[i] - minPrice - fee &gt; <span class="hljs-number">0</span>){<br>                result += prices[i] -minPrice - fee;<br>                minPrice = prices[i] - fee; <br>            }<br>        }<br>        <span class="hljs-keyword">return</span> result;<br>    }<br>};<br></code></pre></td></tr></tbody></table></figure><h1 id="4-知识点"><a href="#4-知识点" class="headerlink" title="4 知识点"></a>4 知识点</h1><p>[[continue]]</p><h1 id="5-参考资料"><a href="#5-参考资料" class="headerlink" title="5 参考资料"></a>5 参考资料</h1><p>自用跳转连接：<a href="">ob</a>， <a href="">blog</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>👨🏻‍💻code</category>
+      
+      <category>数据结构与算法</category>
+      
+      <category>代码随想录</category>
+      
+      <category>贪心算法</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>贪心算法</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>22.单调递增的数字</title>
+    <link href="/2022/07/03/code/shu-ju-jie-gou-yu-suan-fa/dai-ma-sui-xiang-lu/tan-xin-suan-fa/22.dan-diao-di-zeng-de-shu-zi/"/>
+    <url>/2022/07/03/code/shu-ju-jie-gou-yu-suan-fa/dai-ma-sui-xiang-lu/tan-xin-suan-fa/22.dan-diao-di-zeng-de-shu-zi/</url>
+    
+    <content type="html"><![CDATA[<p>文章简介<br>    力扣题解： 738.单调递增的数字</p><span id="more"></span><h1 id="1-738-单调递增的数字"><a href="#1-738-单调递增的数字" class="headerlink" title="1 738.单调递增的数字"></a>1 738.单调递增的数字</h1><p><a href="https://leetcode.cn/problems/monotone-increasing-digits/">力扣题目链接</a></p><p>给定一个非负整数&nbsp;N，找出小于或等于&nbsp;N&nbsp;的最大的<strong>整数</strong>，同时这个整数需要满足其<strong>各个位数上</strong>的数字是单调递增。</p><p>（当且仅当每<strong>个相邻位数上的数字&nbsp;x&nbsp;和&nbsp;y&nbsp;满足&nbsp;x &lt;= y</strong>&nbsp;时，我们称这个整数是单调递增的。）</p><p>示例 1:</p><ul><li>  输入: N = 10</li><li>  输出: 9</li></ul><p>示例 2:</p><ul><li>  输入: N = 1234</li><li>  输出: 1234</li></ul><p>示例 3:</p><ul><li>  输入: N = 332</li><li>  输出: 299</li></ul><p>说明: N&nbsp;是在&nbsp;[0, 10^9]&nbsp;范围内的一个整数。</p><h1 id="2-思路"><a href="#2-思路" class="headerlink" title="2 思路"></a>2 思路</h1><p>找≤ N，的最大单增的整数<br>如果不递增，就把除最后一位每一位都减1，这样保证了减过数比原数小。然后在把除了第一个位(因为第一个位最大不能变，变了会使得比原来的数大)，后边的位数全部令为9，这样就得到了最大的整数。<br>代码：一旦出现strNum[i - 1] &gt; strNum[i]的情况（非单调递增），首先想让strNum[i - 1]–，然后strNum[i]给为9</p><p>例如<br>332 → 222→299<br>753 → 643 → 699</p><h2 id="2-1-断点调试"><a href="#2-1-断点调试" class="headerlink" title="2.1 断点调试"></a>2.1 断点调试</h2><p><a href="file:///Users/yibeikongqiu/Desktop/ishot视频/贪心算法/22.单调递增的数字(carl).mp4">22.单调递增的数字(carl:332).mp4</a><br><a href="file:///Users/yibeikongqiu/Desktop/ishot%E8%A7%86%E9%A2%91/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/22.%E5%8D%95%E8%B0%83%E9%80%92%E5%A2%9E%E7%9A%84%E6%95%B0%E5%AD%97(carl).mp4#t=7.519521">00:07</a> 前一个数大于后一个数则让前一个数减1</p><blockquote><p>从后往前遍历，for (i = num.size () - 1; i &gt; 0; i–) [[for 循环]]</p></blockquote><p>flag至少是1，因为i 不会取到0。这样就报证了至少从第二个2数开始赋9，直到到最后一个数</p><p><a href="file:///Users/yibeikongqiu/Desktop/ishot%E8%A7%86%E9%A2%91/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/22.%E5%8D%95%E8%B0%83%E9%80%92%E5%A2%9E%E7%9A%84%E6%95%B0%E5%AD%97(carl).mp4#t=10.337641">00:10</a> 只需要减1的原因是：让他的每一个位都比原来的数小，在把除了第一个位(因为第一个位最大)，后边的位数全部令为9，这样就得到了最大的整数</p><p><a href="file:///Users/yibeikongqiu/Desktop/ishot视频/贪心算法/22.单调递增的数字(carl:1234).mp4">22.单调递增的数字(carl/1234)</a><br>    1234 本身都是递增的，所以第一个for循环会跳过，第二for循环也不会执行</p><h1 id="3-代码"><a href="#3-代码" class="headerlink" title="3 代码"></a>3 代码</h1><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">monotoneIncreasingDigits</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> </span>{<br>        string strNum = <span class="hljs-built_in">to_string</span>(n);<br>        <span class="hljs-type">int</span> flag = strNum.<span class="hljs-built_in">size</span>() ;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = strNum.<span class="hljs-built_in">size</span>() - <span class="hljs-number">1</span>; i &gt; <span class="hljs-number">0</span>; i--){<br>            <span class="hljs-keyword">if</span> (strNum[i - <span class="hljs-number">1</span>]&gt; strNum[i]){<br>                flag = i;<br>                strNum[i<span class="hljs-number">-1</span>]--;<br>            }<br>        }<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = flag; i &lt; strNum.<span class="hljs-built_in">size</span>(); i++){<br>            strNum[i] = <span class="hljs-string">'9'</span>;<br>        }<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">stoi</span> (strNum);<br>    }<br>};<br></code></pre></td></tr></tbody></table></figure><p>stoi函数 #flashcards/代码随想录<br>?<br>将数字字符串转为数字：”2147482” → 2147482</p><!--SR:!2022-07-07,3,250--><h1 id="4-参考资料"><a href="#4-参考资料" class="headerlink" title="4 参考资料"></a>4 参考资料</h1><p><a href="https://www.programmercarl.com/0738.%E5%8D%95%E8%B0%83%E9%80%92%E5%A2%9E%E7%9A%84%E6%95%B0%E5%AD%97.html#%E6%9A%B4%E5%8A%9B%E8%A7%A3%E6%B3%95">代码随想录</a><br>自用跳转连接：<a href="obsidian://advanced-uri?vault=Documents&amp;uid=49dde99d-8015-4224-9c0b-96d9d0dae41a">ob</a>， <a href="">blog</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>👨🏻‍💻code</category>
+      
+      <category>数据结构与算法</category>
+      
+      <category>代码随想录</category>
+      
+      <category>贪心算法</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>贪心算法</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>材料内部结构</title>
     <link href="/2022/06/28/ke-yan/cai-liao-nei-bu-jie-gou/"/>
     <url>/2022/06/28/ke-yan/cai-liao-nei-bu-jie-gou/</url>
@@ -179,7 +477,7 @@
     <link href="/2022/06/16/ke-yan/tui-huo/"/>
     <url>/2022/06/16/ke-yan/tui-huo/</url>
     
-    <content type="html"><![CDATA[<h1 id="1-摘要"><a href="#1-摘要" class="headerlink" title="1 摘要"></a>1 摘要</h1><p><strong>是否退火</strong>：能够直接挤出就没必要退火，硬度低，比如纯铝，就没必要退火<br><strong>目的：</strong><br>    提高成形后表面质量，<strong>提高它的塑性</strong>，便于改善成形效果，减少表面缺陷<br>    退火主要是去应力，使材料组织回到初始状态，这样能保证挤压前每个工件的组织都一样<br>    让晶粒均匀，能够好观察以后的梯度样貌<br><strong>成形要求</strong>：表面无缺陷，形状规整，就和松青挤出的纯铜差不多就行</p><h1 id="2-AZ13B镁合金-退火"><a href="#2-AZ13B镁合金-退火" class="headerlink" title="2 AZ13B镁合金 退火"></a>2 AZ13B镁合金 退火</h1><p><img src="https://s1.vika.cn/space/2022/06/15/07272ec877d24b698c8944d6a1296f0b" alt="|600"><br>150 ℃-240 min 退火后只有部分区域发生了再结晶(这不行)<br>在 300℃退火处理后,晶粒尺寸比较稳定,由平均晶粒尺寸为9.1μm 的再结晶组织组成</p><p>较高的温度(300℃)能够改善镁合金的塑性<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="margin">[1]</span></a></sup>。<br>AZ31B 镁合金轧制态板材经 300 ℃退火 60 min 后伸长率最高,为 27.3%。<br><img src="https://s1.vika.cn/space/2022/06/15/b41108bd01ba4924a6f8e98e64d285c6" alt="|600"></p><p><img src="https://s1.vika.cn/space/2022/06/15/d56b14c8de0348a292f42e2572ea922e" alt="|600"></p><h2 id="2-1-镁合金退火总结"><a href="#2-1-镁合金退火总结" class="headerlink" title="2.1 镁合金退火总结"></a>2.1 镁合金退火总结</h2><p>退火温度升至 300℃, 保温 60min，退火后炉内冷却取出<br>2.1：将锻态镁合金在350°C、2h的条件下进行再结晶退火<sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span class="hint--top hint--rounded" aria-label="AZ31B镁合金筒形件多道次强旋织构演化及强化机理研究 - 中国知网">[2]</span></a></sup><br>2.1：退火处理工艺及参数为：加热温度为260°C，保温15min， 升温速率取 5°C/min，随炉冷却后取出工件<sup id="fnref:3" class="footnote-ref"><a href="#fn:3" rel="footnote"><span class="hint--top hint--rounded" aria-label="AZ31B镁合金表面滚压强化研究 - 中国知网">[3]</span></a></sup>。</p><h1 id="3-19号楼马弗炉加热操作"><a href="#3-19号楼马弗炉加热操作" class="headerlink" title="3 19号楼马弗炉加热操作"></a>3 19号楼马弗炉加热操作</h1><h2 id="3-1-操作视频"><a href="#3-1-操作视频" class="headerlink" title="3.1 操作视频"></a>3.1 操作视频</h2><p>[[热处理01.mp4]]</p><p>[[热处理01.mp4#t=01:00.963]]<br>    最左边的按钮用来查看上次的设置的参数</p><p>[[热处理01.mp4#t=02:59.825]]：正式开始<br>    按三下最右边的按钮，在按左上角进入初始页面(set页面)</p><p>[[热处理01.mp4#t=04:23.253]]：结束</p><p>[[热处理01.mp4#t=05:16.599]]<br>    红色的是实际温度，绿色的设置的温度</p><p>[[热处理01.mp4#t=05:53.805]]<br>降到室温25度才能开炉，600度都要到隔天了，不要在100度开炉</p><p>[[热处理01.mp4#t=07:25.853]]：流程<br><img src="https://s1.vika.cn/space/2022/06/16/ca3ff8ad7b6247b4a7df51eabee02d88" alt="|900"></p><p>炉子下边挺脏的，直接放样品下去不太合适，用陶瓷来放样品，承受的温度高<br>    [[热处理01.mp4#t=09:10.640]]<br>    [[热处理01.mp4#t=08:17.611]]</p><h2 id="3-2-操作文档"><a href="#3-2-操作文档" class="headerlink" title="3.2 操作文档"></a>3.2 操作文档</h2><div class="group-image-container"><div class="group-image-row"><div class="group-image-wrap"><img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202206162017876.png" alt="|600"></div><div class="group-image-wrap"><img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202206162017391.png" alt="|600"></div><div class="group-image-wrap"><img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202206162018849.png" alt="|600"></div></div></div><h1 id="4-参考资料"><a href="#4-参考资料" class="headerlink" title="4 参考资料"></a>4 参考资料</h1><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a href="marginnote3app://note/78EE4419-7316-4B0F-9104-116415CFBD95">margin</a><a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:2" class="footnote-text"><span><a href="https://kns.cnki.net/kcms/detail/detail.aspx?dbcode=CMFD&amp;dbname=CMFD202201&amp;filename=1021900755.nh&amp;uniplatform=NZKPT&amp;v=5Rx9z0dEkJU4WzR6pCnp0XWyhQb8xRZ5iMRPNdPJBPVDo9CF-RagrxkNh-MQaLMa">AZ31B镁合金筒形件多道次强旋织构演化及强化机理研究 - 中国知网</a><a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:3" class="footnote-text"><span><a href="https://kns.cnki.net/kcms/detail/detail.aspx?dbcode=CMFD&amp;dbname=CMFD202201&amp;filename=1021155229.nh&amp;uniplatform=NZKPT&amp;v=us7-K1qgCpj5f5QN9eOdchJ9P2om_2zkT5iLqRdK25tWa_Bp7kcv2OYETpRo6scL">AZ31B镁合金表面滚压强化研究 - 中国知网</a><a href="#fnref:3" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>]]></content>
+    <content type="html"><![CDATA[<h1 id="1-摘要"><a href="#1-摘要" class="headerlink" title="1 摘要"></a>1 摘要</h1><p><strong>是否退火</strong>：能够直接挤出就没必要退火，硬度低，比如纯铝，就没必要退火<br><strong>目的：</strong><br>    提高成形后表面质量，<strong>提高它的塑性</strong>，便于改善成形效果，减少表面缺陷<br>    退火主要是去应力，使材料组织回到初始状态，这样能保证挤压前每个工件的组织都一样<br>    让晶粒均匀，能够好观察以后的梯度样貌<br><strong>成形要求</strong>：表面无缺陷，形状规整，就和松青挤出的纯铜差不多就行</p><h1 id="2-AZ13B镁合金-退火"><a href="#2-AZ13B镁合金-退火" class="headerlink" title="2 AZ13B镁合金 退火"></a>2 AZ13B镁合金 退火</h1><p><img src="https://s1.vika.cn/space/2022/06/15/07272ec877d24b698c8944d6a1296f0b" alt="|600"><br>150 ℃-240 min 退火后只有部分区域发生了再结晶(这不行)<br>在 300℃退火处理后,晶粒尺寸比较稳定,由平均晶粒尺寸为9.1μm 的再结晶组织组成</p><p>较高的温度(300℃)能够改善镁合金的塑性<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="margin">[1]</span></a></sup>。<br>AZ31B 镁合金轧制态板材经 300 ℃退火 60 min 后伸长率最高,为 27.3%。<br><img src="https://s1.vika.cn/space/2022/06/15/b41108bd01ba4924a6f8e98e64d285c6" alt="|600"></p><p><img src="https://s1.vika.cn/space/2022/06/15/d56b14c8de0348a292f42e2572ea922e" alt="|600"></p><h2 id="2-1-镁合金退火总结"><a href="#2-1-镁合金退火总结" class="headerlink" title="2.1 镁合金退火总结"></a>2.1 镁合金退火总结</h2><p>退火温度升至 300℃, 保温 60min，退火后炉内冷却取出</p><p>将锻态镁合金在350°C、2h的条件下进行再结晶退火<sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span class="hint--top hint--rounded" aria-label="AZ31B镁合金筒形件多道次强旋织构演化及强化机理研究 - 中国知网">[2]</span></a></sup></p><p>退火处理工艺及参数为：加热温度为260°C，保温15min， 升温速率取 5°C/min，随炉冷却后取出工件<sup id="fnref:3" class="footnote-ref"><a href="#fn:3" rel="footnote"><span class="hint--top hint--rounded" aria-label="AZ31B镁合金表面滚压强化研究 - 中国知网">[3]</span></a></sup></p><p>镁合金板材<sup id="fnref:4" class="footnote-ref"><a href="#fn:4" rel="footnote"><span class="hint--top hint--rounded" aria-label="AZ31B镁合金板热成形温…理温度下成形件的组织与性能_呼啸">[4]</span></a></sup>：将A Z 3 1 B镁合金板分别在2 0 0, 3 0 0, 4 0 0 ℃下保温1 0m i n,<br>未 热 处 理 A Z 3 1 B镁 合 金 板的显微组 织 主 要 由 大 小 不 均 匀 的 等 轴 晶 粒 组 成, 晶粒 尺 寸 为1 0<del>4 0μm, 形 成 的β析 出 相 (M g 1 7 A l 1 2相) 较少[ 1 4]; 2 0 0 ℃热 处 理 后 的 显 微 组 织 变 化不大, 等轴晶粒尺寸仍为1 0</del>4 0μm, 析出相的 分布也 没 有 明 显 变 化; 当 热 处 理 温 度 达 到 3 0 0, 4 0 0 ℃时, 镁 合 金 板 的 显 微 组 织 发 生 了 明 显 的 变化, 主要表现为大尺寸晶粒的数量明显增 多, 晶 粒的最大尺寸达到了5 0μm, 且析出相的分布更加弥散。对比可知, 2 0 0 ℃为 A Z 3 1 B镁 合 金 板 较 为 理想的加热 温 度, 该 温 度 下 能 够 较 好 地 保 持 细 小 的显微组织。</p><blockquote><p>这个好像是先退火200,300,400后，在挤压后的晶相<br><img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202207042001235.png"></p></blockquote><h1 id="3-19号楼马弗炉加热操作"><a href="#3-19号楼马弗炉加热操作" class="headerlink" title="3 19号楼马弗炉加热操作"></a>3 19号楼马弗炉加热操作</h1><h2 id="3-1-操作文档"><a href="#3-1-操作文档" class="headerlink" title="3.1 操作文档"></a>3.1 操作文档</h2><div class="group-image-container"><div class="group-image-row"><div class="group-image-wrap"><img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202206162017876.png" alt="|600"></div><div class="group-image-wrap"><img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202206162017391.png" alt="|600"></div><div class="group-image-wrap"><img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202206162018849.png" alt="|600"></div></div></div><h1 id="4-参考资料"><a href="#4-参考资料" class="headerlink" title="4 参考资料"></a>4 参考资料</h1><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a href="marginnote3app://note/78EE4419-7316-4B0F-9104-116415CFBD95">margin</a><a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:2" class="footnote-text"><span><a href="https://kns.cnki.net/kcms/detail/detail.aspx?dbcode=CMFD&amp;dbname=CMFD202201&amp;filename=1021900755.nh&amp;uniplatform=NZKPT&amp;v=5Rx9z0dEkJU4WzR6pCnp0XWyhQb8xRZ5iMRPNdPJBPVDo9CF-RagrxkNh-MQaLMa">AZ31B镁合金筒形件多道次强旋织构演化及强化机理研究 - 中国知网</a><a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:3" class="footnote-text"><span><a href="https://kns.cnki.net/kcms/detail/detail.aspx?dbcode=CMFD&amp;dbname=CMFD202201&amp;filename=1021155229.nh&amp;uniplatform=NZKPT&amp;v=us7-K1qgCpj5f5QN9eOdchJ9P2om_2zkT5iLqRdK25tWa_Bp7kcv2OYETpRo6scL">AZ31B镁合金表面滚压强化研究 - 中国知网</a><a href="#fnref:3" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:4" class="footnote-text"><span><a href="marginnote3app://note/5D3F197F-7FDC-42A0-8C97-2618192A9CC2">AZ31B镁合金板热成形温…理温度下成形件的组织与性能_呼啸</a><a href="#fnref:4" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>]]></content>
     
     
     <categories>
@@ -250,6 +548,35 @@
     <tags>
       
       <tag>notion</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>c++中 - ‘0’ 以及 -&#39;a&#39; 的相减操作解释</title>
+    <link href="/2022/06/15/code/c/c-primer-plus/continue/"/>
+    <url>/2022/06/15/code/c/c-primer-plus/continue/</url>
+    
+    <content type="html"><![CDATA[<p>执行continue 函数相当于又调到了函数的开头<a href="file:///Users/yibeikongqiu/Desktop/ishot%E8%A7%86%E9%A2%91/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/23.%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA%E5%90%AB%E6%89%8B%E7%BB%AD%E8%B4%B9.mp4#t=4.619299">00:04</a><br>作用：能够控制for循环中，跳过一些代码段，然后又使i不断前进<br><a href="file:///Users/yibeikongqiu/Desktop/ishot视频/贪心算法/23.买卖股票的最佳时机含手续费.mp4">23.买卖股票的最佳时机含手续费</a></p><h1 id="1-参考资料"><a href="#1-参考资料" class="headerlink" title="1 参考资料"></a>1 参考资料</h1><p>自用跳转连接：<a href="">ob</a>， <a href="">blog</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>👨🏻‍💻code</category>
+      
+      <category>C++</category>
+      
+      <category>C++ primer plus</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>函数</tag>
       
     </tags>
     
@@ -458,7 +785,7 @@
     <link href="/2022/06/10/ke-yan/ke-yan-cai-liao-zong-jie/"/>
     <url>/2022/06/10/ke-yan/ke-yan-cai-liao-zong-jie/</url>
     
-    <content type="html"><![CDATA[<p>硬度单位<br>洛氏硬度：HR；布氏硬度：HB；维氏硬度：HV</p><p>自用<sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span class="hint--top hint--rounded" aria-label="ob">[2]</span></a></sup></p><h1 id="1-镁合金"><a href="#1-镁合金" class="headerlink" title="1 镁合金"></a>1 镁合金</h1><h2 id="1-1-硬度"><a href="#1-1-硬度" class="headerlink" title="1.1 硬度"></a>1.1 硬度</h2><p>镁合金型号：<strong>AZ31B(HR70)</strong> AZ61 AZ91  ZK60 WE40<br>镁合金的hv：45~75不等</p><p>纯铜：HB85，50~65HV<br>纯铝：HB28<br>7075铝合金：退火后的HV140</p><p><strong>硬度低于纯铜的材料：</strong><br><strong>纯铜</strong>：HB：85，HV：50~65<br>    退火(软)铜硬度为：50HV</p><p>304不锈钢：<br>淘宝：硬度在HBW85左右(淘宝)<br>网上：HB187，HRB90，HV200</p><h1 id="2-退火"><a href="#2-退火" class="headerlink" title="2 [[退火]]"></a>2 [[退火]]</h1><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:2" class="footnote-text"><span><a href="obsidian://advanced-uri?vault=Documents&amp;uid=c94962a5-c07b-4fe5-b5c1-4d72c4fb033a">ob</a><a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>]]></content>
+    <content type="html"><![CDATA[<p>硬度单位<br>洛氏硬度：HR；布氏硬度：HB；维氏硬度：HV</p><p>自用<sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span class="hint--top hint--rounded" aria-label="ob">[2]</span></a></sup></p><h1 id="1-镁合金"><a href="#1-镁合金" class="headerlink" title="1 镁合金"></a>1 镁合金</h1><h2 id="1-1-硬度"><a href="#1-1-硬度" class="headerlink" title="1.1 硬度"></a>1.1 硬度</h2><p>镁合金型号：<strong>AZ31B(HR70)</strong> AZ61 AZ91  ZK60 WE40<br>镁合金的hv：45~75不等</p><p>纯铜：HB85，50~65HV<br>纯铝：HB28<br>7075铝合金：退火后的HV140</p><p><strong>硬度低于纯铜的材料：</strong><br><strong>纯铜</strong>：HB：85，HV：50~65<br>    退火(软)铜硬度为：50HV</p><p>304不锈钢：<br>淘宝：硬度在HBW85左右(淘宝)<br>网上：HB187，HRB90，HV200</p><p><img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202207041914021.png"></p><h1 id="2-模具材料硬度"><a href="#2-模具材料硬度" class="headerlink" title="2 模具材料硬度"></a>2 模具材料硬度</h1><p>skh51 热处理淬火后硬度可以达到64HRC</p><p>skd11 热处理后硬度58~60HRC</p><h1 id="3-退火"><a href="#3-退火" class="headerlink" title="3 [[退火]]"></a>3 [[退火]]</h1><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:2" class="footnote-text"><span><a href="obsidian://advanced-uri?vault=Documents&amp;uid=c94962a5-c07b-4fe5-b5c1-4d72c4fb033a">ob</a><a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>]]></content>
     
     
     <categories>
@@ -653,7 +980,7 @@
     <link href="/2022/06/07/code/c/c-primer-plus/vector/"/>
     <url>/2022/06/07/code/c/c-primer-plus/vector/</url>
     
-    <content type="html"><![CDATA[<p>普通数组 int a [10]，一旦定义了就不能改变了，这个数组最多只能放10个元素了<br>动态数组vector，不用关心初始的大小，可以随意的添加数据</p><p><strong>vector的底层实现也是普通数组</strong>。</p><p>vector的大小有两个维度一个是size一个是capicity，<br>size就是我们平时用来遍历vector时候用的，例如：<code>for (int i = 0; i &lt; vec.size(); i++)</code><br>而capicity是vector底层数组（就是普通数组）的大小，capicity可不一定就是size<br>当insert数据的时候，如果已经大于capicity，capicity会成倍扩容，但对外暴露的size其实仅仅是+1而已，剩下的位置还是空闲的</p><p>C++中vector（可以理解是一个动态数组，底层是普通数组实现的）如果插入元素大于预先普通数组大小，vector底部会有一个扩容的操作，即申请两倍于原先普通数组的大小，然后把数据拷贝到另一个更大的数组上，然后在释放原数组内存。<br>eg：<br>原vector中的size和capicity相同都是3，初始化为1 2 3，此时要push_back一个元素4。<br>那么底层其实就要申请一个大小为6的普通数组，并且把原元素拷贝过去，释放原数组内存，<br><strong>注意图中底层数组的内存起始地址已经变了</strong>。<br><img src="https://img-blog.csdnimg.cn/20201218185902217.png" alt="vector原理|800"></p><p>所以使用vector（动态数组）来insert，是费时的，插入再拷贝的话，单纯一个插入的操作就是O(n^2)了，甚至可能拷贝好几次，就不止O(n^2)了。</p><p>解决办法：可以采用链表来进行插入操作<br>    eg：<code>vector&lt;vector&lt;int&gt;&gt; que：[[7,0],[7,1]]</code> →<code>list&lt;vector&lt;int&gt;&gt; que：[7,0]→[7,1]</code></p>]]></content>
+    <content type="html"><![CDATA[<h1 id="1-用法"><a href="#1-用法" class="headerlink" title="1 用法"></a>1 用法</h1><h2 id="1-1-初始化"><a href="#1-1-初始化" class="headerlink" title="1.1 初始化"></a>1.1 初始化</h2><p><strong>一维数组的初始化</strong> </p><ol><li><code>vector&lt;int&gt; a(10)</code>; <code>vector&lt;int&gt; a(10,1)</code>;(10个变量每个为1)</li><li><code>vector&lt;int&gt; a(b)</code>; //用b向量来创建a向量，整体复制性赋值</li><li><code>vector&lt;int&gt; a(b.begin(),b.begin+3)</code>; //定义了a值为b中第0个到第2个（共3个）元素</li><li>int b[7]={1,2,3,4,5,9,8}; <code>vector&lt;int&gt; a(b,b+7);</code> //从数组中获得初值</li></ol><p><strong>二维数组的初始化</strong><br>初始化为0</p><figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;&gt; vec(row, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt; (col,<span class="hljs-number">0</span>));<br></code></pre></td></tr></tbody></table></figure><p>返回值和使用时：必须用 dp[ i ]，不能用dp(i)</p><h1 id="2-原理"><a href="#2-原理" class="headerlink" title="2 原理"></a>2 原理</h1><p>普通数组 int a [10]，一旦定义了就不能改变了，这个数组最多只能放10个元素了<br>动态数组vector，不用关心初始的大小，可以随意的添加数据</p><p><strong>vector的底层实现也是普通数组</strong>。</p><p>vector的大小有两个维度一个是size一个是capicity，<br>size就是我们平时用来遍历vector时候用的，例如：<code>for (int i = 0; i &lt; vec.size(); i++)</code><br>而capicity是vector底层数组（就是普通数组）的大小，capicity可不一定就是size<br>当insert数据的时候，如果已经大于capicity，capicity会成倍扩容，但对外暴露的size其实仅仅是+1而已，剩下的位置还是空闲的</p><p>C++中vector（可以理解是一个动态数组，底层是普通数组实现的）如果插入元素大于预先普通数组大小，vector底部会有一个扩容的操作，即申请两倍于原先普通数组的大小，然后把数据拷贝到另一个更大的数组上，然后在释放原数组内存。<br>eg：<br>原vector中的size和capicity相同都是3，初始化为1 2 3，此时要push_back一个元素4。<br>那么底层其实就要申请一个大小为6的普通数组，并且把原元素拷贝过去，释放原数组内存，<br><strong>注意图中底层数组的内存起始地址已经变了</strong>。<br><img src="https://img-blog.csdnimg.cn/20201218185902217.png" alt="vector原理|800"></p><p>所以使用vector（动态数组）来insert，是费时的，插入再拷贝的话，单纯一个插入的操作就是O(n^2)了，甚至可能拷贝好几次，就不止O(n^2)了。</p><p>解决办法：可以采用链表来进行插入操作<br>    eg：<code>vector&lt;vector&lt;int&gt;&gt; que：[[7,0],[7,1]]</code> →<code>list&lt;vector&lt;int&gt;&gt; que：[7,0]→[7,1]</code></p><h1 id="3-参考"><a href="#3-参考" class="headerlink" title="3 参考"></a>3 参考</h1><p><a href="https://blog.csdn.net/wkq0825/article/details/82255984?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522165701148116781683956725%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=165701148116781683956725&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-82255984-null-null.142%5Ev30%5Econtrol,185%5Ev2%5Econtrol&amp;utm_term=vector+c+++%E7%94%A8%E6%B3%95&amp;spm=1018.2226.3001.4187">C++ vector的用法（整理）_一个幽默且帅气的程序员的博客-CSDN博客_c++ vector</a></p>]]></content>
     
     
     <categories>
@@ -682,7 +1009,7 @@
     <link href="/2022/06/06/code/shu-ju-jie-gou-yu-suan-fa/dai-ma-sui-xiang-lu/tan-xin-suan-fa/12.fen-fa-tang-guo/"/>
     <url>/2022/06/06/code/shu-ju-jie-gou-yu-suan-fa/dai-ma-sui-xiang-lu/tan-xin-suan-fa/12.fen-fa-tang-guo/</url>
     
-    <content type="html"><![CDATA[<h1 id="1-分发糖果"><a href="#1-分发糖果" class="headerlink" title="1 分发糖果"></a>1 分发糖果</h1><p><a href="https://leetcode-cn.com/problems/candy/">力扣题目链接</a></p><p>老师想给孩子们分发糖果，有 N&nbsp;个孩子站成了一条直线，老师会根据每个孩子的表现，预先给他们评分。</p><p>你需要按照以下要求，帮助老师给这些孩子分发糖果：</p><ul><li>  每个孩子至少分配到 1 个糖果。</li><li>  相邻的孩子中，评分高的孩子必须获得更多的糖果。</li></ul><p>那么这样下来，老师至少需要准备多少颗糖果呢？</p><p>示例&nbsp;1:</p><ul><li>  输入: [1,0,2]</li><li>  输出: 5</li><li>  解释: 你可以分别给这三个孩子分发 2、1、2 颗糖果。</li></ul><p>示例&nbsp;2:</p><ul><li>  输入: [1,2,2]</li><li>  输出: 4</li><li>  解释: 你可以分别给这三个孩子分发 1、2、1 颗糖果。第三个孩子只得到 1 颗糖果，这已满足上述两个条件。</li></ul><h1 id="2-思路"><a href="#2-思路" class="headerlink" title="2 思路"></a>2 思路</h1><p>先比较每一个孩子的右边或者左边，<strong>如果两边一起考虑一定会顾此失彼</strong>。</p><p>rate：评分；candyVec：糖果个数</p><p><strong>右边</strong>：从前往后遍历<br>局部最优：如果右比左大，右边孩子就多一个糖果。<br>全局最优：总体中评分高的右孩子比左孩子多一个糖果<br><img src="https://img-blog.csdnimg.cn/20201117114916878.png" alt="135.分发糖果|700"><br><strong>左边</strong>：从后往前遍历<br>局部最优：如果左比右大，左边孩子就多一个糖果。<br>全局最优：总体中评分高的左孩子比右孩子多一个糖果<br>#flashcards/代码随想录<br>为什么不能从前往后遍历<br>?<br>因为如果继续从前向后遍历，就无法利用上一次得出的candyVec的数组了</p><!--SR:!2022-06-18,3,250--><p>eg：<br><img src="https://img-blog.csdnimg.cn/20201117115658791.png" alt="135.分发糖果1|700"><br>如果是图中这样的话，就没必要用max函数了啊 #疑问 </p><h1 id="3-代码"><a href="#3-代码" class="headerlink" title="3 代码"></a>3 代码</h1><p>自写代码已通过，没有用max函数</p><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">candy</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; ratings)</span></span>{<br>        <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">candyVec</span><span class="hljs-params">(ratings.size(), <span class="hljs-number">1</span>)</span></span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; ratings.<span class="hljs-built_in">size</span>(); i++){<br>            <span class="hljs-keyword">if</span>(ratings[i+<span class="hljs-number">1</span>] &gt; ratings[i]) {<br>            candyVec[i+<span class="hljs-number">1</span>] = candyVec[i]+<span class="hljs-number">1</span>;<br>            }<br>       }<br><br>       <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = ratings.<span class="hljs-built_in">size</span>() - <span class="hljs-number">2</span>; i &gt;= <span class="hljs-number">0</span>; i-- ) { <span class="hljs-comment">// 从倒数第二位置开始比</span><br>        <span class="hljs-keyword">if</span> (ratings[i] &gt; ratings[i+<span class="hljs-number">1</span>]){<br>            candyVec[i] = candyVec[i+<span class="hljs-number">1</span>]+<span class="hljs-number">1</span>;<br>            }<br>       }<br>       <span class="hljs-type">int</span> result = <span class="hljs-number">0</span>;<br>       <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> a : candyVec) result += a; <span class="hljs-comment">// 分号后边只需要变量名就行</span><br>       <span class="hljs-keyword">return</span> result;<br>    }<br>};<br><br></code></pre></td></tr></tbody></table></figure><p>参考资料<br>[[for 循环]]</p>]]></content>
+    <content type="html"><![CDATA[<h1 id="1-分发糖果"><a href="#1-分发糖果" class="headerlink" title="1 分发糖果"></a>1 分发糖果</h1><p><a href="https://leetcode-cn.com/problems/candy/">力扣题目链接</a></p><p>老师想给孩子们分发糖果，有 N&nbsp;个孩子站成了一条直线，老师会根据每个孩子的表现，预先给他们评分。</p><p>你需要按照以下要求，帮助老师给这些孩子分发糖果：</p><ul><li>  每个孩子至少分配到 1 个糖果。</li><li>  相邻的孩子中，评分高的孩子必须获得更多的糖果。</li></ul><p>那么这样下来，老师至少需要准备多少颗糖果呢？</p><p>示例&nbsp;1:</p><ul><li>  输入: [1,0,2]</li><li>  输出: 5</li><li>  解释: 你可以分别给这三个孩子分发 2、1、2 颗糖果。</li></ul><p>示例&nbsp;2:</p><ul><li>  输入: [1,2,2]</li><li>  输出: 4</li><li>  解释: 你可以分别给这三个孩子分发 1、2、1 颗糖果。第三个孩子只得到 1 颗糖果，这已满足上述两个条件。</li></ul><h1 id="2-思路"><a href="#2-思路" class="headerlink" title="2 思路"></a>2 思路</h1><p>先比较每一个孩子的右边或者左边，<strong>如果两边一起考虑一定会顾此失彼</strong>。</p><p>rate：评分；candyVec：糖果个数</p><p><strong>右边</strong>：从前往后遍历<br>局部最优：如果右比左大，右边孩子就多一个糖果。<br>全局最优：总体中评分高的右孩子比左孩子多一个糖果<br><img src="https://img-blog.csdnimg.cn/20201117114916878.png" alt="135.分发糖果|700"><br><strong>左边</strong>：从后往前遍历<br>局部最优：如果左比右大，左边孩子就多一个糖果。<br>全局最优：总体中评分高的左孩子比右孩子多一个糖果<br>#flashcards/代码随想录<br>为什么不能从前往后遍历<br>?<br>因为如果继续从前向后遍历，就无法利用上一次得出的candyVec的数组了</p><!--SR:!2022-07-31,27,250--><p>eg：<br><img src="https://img-blog.csdnimg.cn/20201117115658791.png" alt="135.分发糖果1|700"><br>如果是图中这样的话，就没必要用max函数了啊 #疑问 </p><h1 id="3-代码"><a href="#3-代码" class="headerlink" title="3 代码"></a>3 代码</h1><p>自写代码已通过，没有用max函数</p><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">candy</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; ratings)</span></span>{<br>        <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">candyVec</span><span class="hljs-params">(ratings.size(), <span class="hljs-number">1</span>)</span></span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; ratings.<span class="hljs-built_in">size</span>(); i++){<br>            <span class="hljs-keyword">if</span>(ratings[i+<span class="hljs-number">1</span>] &gt; ratings[i]) {<br>            candyVec[i+<span class="hljs-number">1</span>] = candyVec[i]+<span class="hljs-number">1</span>;<br>            }<br>       }<br><br>       <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = ratings.<span class="hljs-built_in">size</span>() - <span class="hljs-number">2</span>; i &gt;= <span class="hljs-number">0</span>; i-- ) { <span class="hljs-comment">// 从倒数第二位置开始比</span><br>        <span class="hljs-keyword">if</span> (ratings[i] &gt; ratings[i+<span class="hljs-number">1</span>]){<br>            candyVec[i] = candyVec[i+<span class="hljs-number">1</span>]+<span class="hljs-number">1</span>;<br>            }<br>       }<br>       <span class="hljs-type">int</span> result = <span class="hljs-number">0</span>;<br>       <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> a : candyVec) result += a; <span class="hljs-comment">// 分号后边只需要变量名就行</span><br>       <span class="hljs-keyword">return</span> result;<br>    }<br>};<br><br></code></pre></td></tr></tbody></table></figure><p>参考资料<br>[[for 循环]]</p>]]></content>
     
     
     <categories>
@@ -744,7 +1071,7 @@
     <link href="/2022/06/06/code/c/c-primer-plus/for-xun-huan/"/>
     <url>/2022/06/06/code/c/c-primer-plus/for-xun-huan/</url>
     
-    <content type="html"><![CDATA[<p><a href="obsidian://advanced-uri?vault=Documents&amp;uid=e21b2a82-20a3-4f7e-981e-d83e6df620a5">ob</a></p><h1 id="1-遍历函数"><a href="#1-遍历函数" class="headerlink" title="1 遍历函数"></a>1 遍历函数</h1><p>操作到最后一个元素时不会取到最后一个下标的后一位(也就是长度)</p><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; prices.<span class="hljs-built_in">size</span>(); i++){<br>         result += <span class="hljs-built_in">max</span>(prices[i+<span class="hljs-number">1</span>] - prices[i],<span class="hljs-number">0</span>);<span class="hljs-comment">// 用!=更好</span><br>     }<br></code></pre></td></tr></tbody></table></figure><h1 id="2-数组求和"><a href="#2-数组求和" class="headerlink" title="2 数组求和"></a>2 数组求和</h1><p>for (循环变量类型 循环变量名称 : 要被遍历的对象) 循环体<br>应用：对数组求和<br>    从第一个元素开始操作</p><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">//A是数组，for循环对数组求和</span><br><span class="hljs-type">int</span> result = <span class="hljs-number">0</span>;<br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> a : A)  result += a; <span class="hljs-comment">// a没有特殊的意义，只是指明循环变量的类型，“:”后只需数组名即可</span><br></code></pre></td></tr></tbody></table></figure><p>#flashcards/代码随想录<br>n%2 == 1什么意思<br>?<br>n%2就是对n求：n除以2后的余数，这里余数只有两种情况就是0或者是1<br>eg：5%2=1</p><!--SR:!2022-06-18,3,250-->]]></content>
+    <content type="html"><![CDATA[<p><a href="obsidian://advanced-uri?vault=Documents&amp;uid=e21b2a82-20a3-4f7e-981e-d83e6df620a5">ob</a></p><h1 id="1-遍历函数"><a href="#1-遍历函数" class="headerlink" title="1 遍历函数"></a>1 遍历函数</h1><p>操作到最后一个元素时不会取到最后一个下标的后一位(也就是长度)</p><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; prices.<span class="hljs-built_in">size</span>(); i++){<br>         result += <span class="hljs-built_in">max</span>(prices[i+<span class="hljs-number">1</span>] - prices[i],<span class="hljs-number">0</span>);<span class="hljs-comment">// 用!=更好</span><br>     }<br></code></pre></td></tr></tbody></table></figure><p>从后往前遍历：<code>for (int i = num.size () - 1; i &gt; 0; i--)</code> 这个操作不了第一个元素(下标0)</p><p>从前往后遍历：<code>for(int i = 0 ; i &lt; num.size(); i++)</code>，</p><h1 id="2-数组求和"><a href="#2-数组求和" class="headerlink" title="2 数组求和"></a>2 数组求和</h1><p>for (循环变量类型 循环变量名称 : 要被遍历的对象) 循环体<br>应用：对数组求和<br>    从第一个元素开始操作</p><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">//A是数组，for循环对数组求和</span><br><span class="hljs-type">int</span> result = <span class="hljs-number">0</span>;<br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> a : A)  result += a; <span class="hljs-comment">// a没有特殊的意义，只是指明循环变量的类型，“:”后只需数组名即可</span><br></code></pre></td></tr></tbody></table></figure><p>#flashcards/代码随想录<br>n%2 == 1什么意思<br>?<br>n%2就是对n求：n除以2后的余数，这里余数只有两种情况就是0或者是1<br>eg：5%2=1</p><!--SR:!2022-08-01,28,250-->]]></content>
     
     
     <categories>
@@ -838,6 +1165,37 @@
       
     </categories>
     
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>6. 买卖股票的最佳时机II</title>
+    <link href="/2022/05/30/code/shu-ju-jie-gou-yu-suan-fa/dai-ma-sui-xiang-lu/tan-xin-suan-fa/6.mai-mai-gu-piao-de-zui-jia-shi-ji-ii/"/>
+    <url>/2022/05/30/code/shu-ju-jie-gou-yu-suan-fa/dai-ma-sui-xiang-lu/tan-xin-suan-fa/6.mai-mai-gu-piao-de-zui-jia-shi-ji-ii/</url>
+    
+    <content type="html"><![CDATA[<p>文章简介<br>    力扣题解：</p><span id="more"></span><h1 id="1-122-买卖股票的最佳时机II"><a href="#1-122-买卖股票的最佳时机II" class="headerlink" title="1 122.买卖股票的最佳时机II"></a>1 122.买卖股票的最佳时机II</h1><p><a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/">力扣题目链接</a></p><p>给定一个数组，它的第&nbsp;i 个元素是一支<strong>给定股票</strong>第 i 天的价格。</p><p>设计一个算法来计算你所能获取的最大利润。你可以尽可能地完成更多的交易（多次买卖一支股票）。</p><p>注意：你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。</p><p>示例 1:</p><ul><li>  输入: [7,1,5,3,6,4]</li><li>  输出: 7</li><li>  解释: 在第 2 天（股票价格 = 1）的时候买入，在第 3 天（股票价格 = 5）的时候卖出, 这笔交易所能获得利润 = 5-1 = 4。随后，在第 4 天（股票价格 = 3）的时候买入，在第 5 天（股票价格 = 6）的时候卖出, 这笔交易所能获得利润 = 6-3 = 3 。</li></ul><p>示例 2:</p><ul><li>  输入: [1,2,3,4,5]</li><li>  输出: 4</li><li>  解释: 在第 1 天（股票价格 = 1）的时候买入，在第 5 天 （股票价格 = 5）的时候卖出, 这笔交易所能获得利润 = 5-1 = 4 。注意你不能在第 1 天和第 2 天接连购买股票，之后再将它们卖出。因为这样属于同时参与了多笔交易，你必须在再次购买前出售掉之前的股票。</li></ul><p>示例&nbsp;3:</p><ul><li>  输入: [7,6,4,3,1]</li><li>  输出: 0</li><li>  解释: 在这种情况下, 没有交易完成, 所以最大利润为 0。</li></ul><p>提示：</p><ul><li>  1 &lt;= prices.length &lt;= 3 * 10 ^ 4</li><li>  0 &lt;= prices[i] &lt;= 10 ^ 4</li></ul><h1 id="2-思路"><a href="#2-思路" class="headerlink" title="2 思路"></a>2 思路</h1><p><strong>最终利润是可以分解的</strong>，<strong>把利润分解为每天为单位的维度</strong><br>假如第0天买入，第3天卖出，那么利润为：prices[3] - prices[0]。<br>相当于(prices[3] - prices[2]) + (prices[2] - prices[1]) + (prices[1] - prices[0])。 </p><p><strong>把整体利润拆为每天的利润</strong><br>每天的利润序列：(prices[i] - prices[i - 1])+…..+(prices[1] - prices[0])<br><img src="https://img-blog.csdnimg.cn/2020112917480858.png" alt="122.买卖股票的最佳时机II|650"><br>第一天没利润，利润表比股票价格表少一位 </p><p>局部最优：求得每天的正利润， </p><p>全局最优：求和每天的正利润 </p><h1 id="3-代码"><a href="#3-代码" class="headerlink" title="3 代码"></a>3 代码</h1><p>[[for 循环]]</p><p>编译已通过 </p><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">maxProfit</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; prices)</span> </span>{<br>        <span class="hljs-type">int</span> result = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i != prices.<span class="hljs-built_in">size</span>(); i++){<br>            result += <span class="hljs-built_in">max</span>(prices[i+<span class="hljs-number">1</span>] - prices[i],<span class="hljs-number">0</span>);<br>        }<br>        <span class="hljs-keyword">return</span> result;<br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>👨🏻‍💻code</category>
+      
+      <category>数据结构与算法</category>
+      
+      <category>代码随想录</category>
+      
+      <category>贪心算法</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>贪心算法</tag>
+      
+    </tags>
     
   </entry>
   
@@ -1024,7 +1382,7 @@
     <link href="/2022/05/27/code/shu-ju-jie-gou-yu-suan-fa/dai-ma-sui-xiang-lu/hui-su-suan-fa/21.jie-shu-du/"/>
     <url>/2022/05/27/code/shu-ju-jie-gou-yu-suan-fa/dai-ma-sui-xiang-lu/hui-su-suan-fa/21.jie-shu-du/</url>
     
-    <content type="html"><![CDATA[<p>N皇后是每一行找一个位置放皇后<br>数独是<strong>棋盘的每一个位置都要放一个数字，并检查数字是否合法</strong></p><p>void backtracking(参数) {<br>        startIndex：控制下一层的起始位置<br>            去重(从下一层的第一个位置开始：backtracking(…., i+1))<br>            排列问题不用startIndex<br>        used[]：去重(从下一层的起始位置开始：backtracking(…., 0))<br>    if (终止条件) {<br>        存放结果;<br>    return;<br>        要取树上所有节点时不要加return<br>    }<br>    for (选择：本层集合中元素（树中节点孩子的数量就是集合的大小）) {<br>        处理节点;<br>        backtracking(路径，选择列表); // 递归<br>        回溯，撤销处理结果<br>    }<br> }</p><h1 id="1-回溯三部曲"><a href="#1-回溯三部曲" class="headerlink" title="1 回溯三部曲"></a>1 回溯三部曲</h1><p>定义一些变量</p><h2 id="1-1-确定回溯函数参数返回值"><a href="#1-1-确定回溯函数参数返回值" class="headerlink" title="1.1 确定回溯函数参数返回值"></a>1.1 确定回溯函数参数返回值</h2><p>数独和N皇后的返回值用bool值</p><h2 id="1-2-终止条件-存放结果-return"><a href="#1-2-终止条件-存放结果-return" class="headerlink" title="1.2 终止条件, 存放结果, return"></a>1.2 终止条件, 存放结果, return</h2><p>不需要终止条件，等数填满了，棋盘自然终止</p><h2 id="1-3-单层搜索过程"><a href="#1-3-单层搜索过程" class="headerlink" title="1.3 单层搜索过程"></a>1.3 单层搜索过程</h2><p><strong>一个for循环遍历棋盘的行，一个for循环遍历棋盘的列，一行一列确定下来之后，递归遍历这个位置放9个数字的可能性！</strong></p><h3 id="1-3-1-判断棋盘是否合法"><a href="#1-3-1-判断棋盘是否合法" class="headerlink" title="1.3.1 判断棋盘是否合法"></a>1.3.1 判断棋盘是否合法</h3><p>判断棋盘是否合法有如下三个维度：</p><ul><li>  同行是否重复</li><li>  同列是否重复</li><li>  9宫格里是否重复</li></ul><p>#flashcards/代码随想录 #疑问<br>二维数组的行数与列数<br>?<br>int array[2]  [3]；二行三列<br>    int row = array.size();&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;行数&nbsp;&nbsp;&nbsp;<br>    int col = array[0].size();  列数</p><!--SR:!2022-06-18,3,250-->]]></content>
+    <content type="html"><![CDATA[<p>N皇后是每一行找一个位置放皇后<br>数独是<strong>棋盘的每一个位置都要放一个数字，并检查数字是否合法</strong></p><p>void backtracking(参数) {<br>        startIndex：控制下一层的起始位置<br>            去重(从下一层的第一个位置开始：backtracking(…., i+1))<br>            排列问题不用startIndex<br>        used[]：去重(从下一层的起始位置开始：backtracking(…., 0))<br>    if (终止条件) {<br>        存放结果;<br>    return;<br>        要取树上所有节点时不要加return<br>    }<br>    for (选择：本层集合中元素（树中节点孩子的数量就是集合的大小）) {<br>        处理节点;<br>        backtracking(路径，选择列表); // 递归<br>        回溯，撤销处理结果<br>    }<br> }</p><h1 id="1-回溯三部曲"><a href="#1-回溯三部曲" class="headerlink" title="1 回溯三部曲"></a>1 回溯三部曲</h1><p>定义一些变量</p><h2 id="1-1-确定回溯函数参数返回值"><a href="#1-1-确定回溯函数参数返回值" class="headerlink" title="1.1 确定回溯函数参数返回值"></a>1.1 确定回溯函数参数返回值</h2><p>数独和N皇后的返回值用bool值</p><h2 id="1-2-终止条件-存放结果-return"><a href="#1-2-终止条件-存放结果-return" class="headerlink" title="1.2 终止条件, 存放结果, return"></a>1.2 终止条件, 存放结果, return</h2><p>不需要终止条件，等数填满了，棋盘自然终止</p><h2 id="1-3-单层搜索过程"><a href="#1-3-单层搜索过程" class="headerlink" title="1.3 单层搜索过程"></a>1.3 单层搜索过程</h2><p><strong>一个for循环遍历棋盘的行，一个for循环遍历棋盘的列，一行一列确定下来之后，递归遍历这个位置放9个数字的可能性！</strong></p><h3 id="1-3-1-判断棋盘是否合法"><a href="#1-3-1-判断棋盘是否合法" class="headerlink" title="1.3.1 判断棋盘是否合法"></a>1.3.1 判断棋盘是否合法</h3><p>判断棋盘是否合法有如下三个维度：</p><ul><li>  同行是否重复</li><li>  同列是否重复</li><li>  9宫格里是否重复</li></ul><p>#flashcards/代码随想录 #疑问<br>二维数组的行数与列数<br>?<br>int array[2]  [3]；二行三列<br>    int row = array.size();&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;行数&nbsp;&nbsp;&nbsp;<br>    int col = array[0].size();  列数</p><!--SR:!2022-08-02,29,250-->]]></content>
     
     
     <categories>
