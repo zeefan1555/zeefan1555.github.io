@@ -4,11 +4,98 @@
   
     
     <entry>
+      <title>域名失效问题</title>
+      <link href="/posts/62729/"/>
+      <url>/posts/62729/</url>
+      
+        <content type="html"><![CDATA[<p>本地source文件添加一个文件：CNAME文件(不要任何的后缀)</p><p>下一次hexo d 就会传上去</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 👨🏻‍💻code </category>
+          
+          <category> 项目 </category>
+          
+          <category> hexo blog </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> hexo </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>GitHub如何取消域名绑定</title>
+      <link href="/posts/14830/"/>
+      <url>/posts/14830/</url>
+      
+        <content type="html"><![CDATA[<p>删除本地source下的CNAME和GitHub上的CNAME文件<br><img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202207121716990.png"></p><p>清楚浏览器缓冲<br><img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202207121715979.png"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 👨🏻‍💻code </category>
+          
+          <category> 项目 </category>
+          
+          <category> hexo blog </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> hexo </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>hexo如何创建短的url</title>
+      <link href="/posts/15258/"/>
+      <url>/posts/15258/</url>
+      
+        <content type="html"><![CDATA[<p><a href="https://github.com/rozbo/hexo-abbrlink2">GitHub - rozbo/hexo-abbrlink2</a></p><p>安装插件→添加config信息</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 👨🏻‍💻code </category>
+          
+          <category> 项目 </category>
+          
+          <category> hexo blog </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> blog </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>12. 0-1背包理论基础(二滚动数组)</title>
       <link href="/posts/39517/"/>
       <url>/posts/39517/</url>
       
-        <content type="html"><![CDATA[<p>文章简介：如题</p><span id="more"></span><h1 id="1-参考资料"><a href="#1-参考资料" class="headerlink" title="1 参考资料"></a>1 参考资料</h1><p>自用跳转链接：🈚</p>]]></content>
+        <content type="html"><![CDATA[<h1 id="1-参考资料"><a href="#1-参考资料" class="headerlink" title="1 参考资料"></a>1 参考资料</h1><p>自用跳转链接：🈚</p>]]></content>
       
       
       <categories>
@@ -161,7 +248,7 @@
       <link href="/posts/5255/"/>
       <url>/posts/5255/</url>
       
-        <content type="html"><![CDATA[<p>文章简介：LeetCode  题解—— 343. 整数拆分</p><span id="more"></span><h1 id="1-整数拆分"><a href="#1-整数拆分" class="headerlink" title="1 整数拆分"></a>1 整数拆分</h1><p><a href="https://leetcode.cn/problems/integer-break/">力扣题目链接</a></p><p>给定一个正整数&nbsp;n，将其拆分为至少两个正整数的和，并使这些整数的乘积最大化。 返回你可以获得的最大乘积。</p><p>示例 1:</p><ul><li>  输入: 2</li><li>  输出: 1</li><li>  解释: 2 = 1 + 1, 1 × 1 = 1。</li></ul><p>示例&nbsp;2:</p><ul><li>  输入: 10</li><li>  输出: 36</li><li>  解释: 10 = 3 + 3 + 4, 3 ×&nbsp;3 ×&nbsp;4 = 36。</li><li>  说明: 你可以假设&nbsp;n&nbsp;不小于 2 且不大于 58。</li></ul><h1 id="2-思路"><a href="#2-思路" class="headerlink" title="2 思路"></a>2 思路</h1><h2 id="2-1-动态规划"><a href="#2-1-动态规划" class="headerlink" title="2.1 动态规划"></a>2.1 动态规划</h2><p>将数的拆分想象成块的切分<br>2,3不切分，因为切分来会变小<br>如果不用去写dp初始值，可以在转移方程里面再加上一个和j * i-j的最大值比较<br>两个for循环是标准的动归写法</p><ol><li>确定dp数组（dp table）以及下标的含义<br>dp[i]：分拆数字i，可以得到的最大乘积为dp[i]。</li><li>确定递推公式<br>下面这样写需要提前定义2,3不可拆定义出来他们的dp值，因为他俩不用拆是最大<br>dp[i] = max({dp[i],dp[j] * dp[i-j] );<br>dp[i]是随着i的值在一直变化的，max 中有dp[i]就是保证，不断变化中的值取最高的那一个<br>j是切的位置，把一个数切成两部分，而这左右两部分又可以在切。也就是dp[j]，dp[i-j]，也是默认将一个数强制拆成4份以及4份以上了。</li></ol><p>或者这样，不用提前定义dp[2]，dp[3]<br>dp[i] = max(dp[i], max((i - j) * j, dp[i - j] * j));<br>3. dp的初始化<br>dp[0] dp[1]无意义，没法拆，所以不赋值。从dp[2] = 1开始，把dp[3] = 2。<br>2，3不用拆是最大的</p><h2 id="2-2-贪心算法"><a href="#2-2-贪心算法" class="headerlink" title="2.2 贪心算法"></a>2.2 贪心算法</h2><p>数学已证明过：<strong>每次拆成n个3，如果剩下是4，则保留4，然后相乘</strong><br>尽量切3，最后切2，2和3是最稳定最稳定不可拆分质数</p><blockquote><p>1，2，3不划分最大，一划分反而变小了</p></blockquote><h1 id="3-代码"><a href="#3-代码" class="headerlink" title="3 代码"></a>3 代码</h1><h2 id="3-1-动态规划"><a href="#3-1-动态规划" class="headerlink" title="3.1 动态规划"></a>3.1 动态规划</h2><p>编译已通过</p><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">integerBreak</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> </span>{<br>        <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">dp</span><span class="hljs-params">(n+<span class="hljs-number">1</span>,<span class="hljs-number">0</span>)</span></span>;<br>        <span class="hljs-keyword">if</span> (n == <span class="hljs-number">2</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">if</span> (n == <span class="hljs-number">3</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">2</span>;<br>        dp[<span class="hljs-number">2</span>] = <span class="hljs-number">1</span>;<br>        dp[<span class="hljs-number">3</span>] = <span class="hljs-number">2</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">4</span>; i &lt;= n; i++){ <span class="hljs-comment">// 应该从数字4开始，对应的下标是5 </span><br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt;= i/<span class="hljs-number">2</span>; j++){ <span class="hljs-comment">// 切一半就行，另一半是对称的</span><br>                dp[i] = <span class="hljs-built_in">max</span>(dp[i], <span class="hljs-built_in">max</span>(j*(i-j), j*dp[i-j])); <span class="hljs-comment">// 后一个max中是数的相乘 和 数和上一次的最优结果相乘</span><br>            }<br>        }<br>        <span class="hljs-keyword">return</span> dp[n];<br>    }<br>};<br></code></pre></td></tr></tbody></table></figure><p>编译已通过</p><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">integerBreak</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> </span>{<br>        <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">dp</span><span class="hljs-params">(n+<span class="hljs-number">1</span>)</span></span>;<br>        <span class="hljs-keyword">if</span> (n == <span class="hljs-number">2</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">if</span> (n == <span class="hljs-number">3</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">2</span>;<br>        <span class="hljs-comment">// 2，3不切分，要这样赋值下面才能通过</span><br>        dp[<span class="hljs-number">2</span>] = <span class="hljs-number">2</span>;<br>        dp[<span class="hljs-number">3</span>] = <span class="hljs-number">3</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">4</span>; i &lt;= n; i++){<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt;= i/<span class="hljs-number">2</span>; j++){<br>                dp[i] = <span class="hljs-built_in">max</span>(dp[i], dp[j]*dp[i-j]);<br>            }<br>        }<br>        <span class="hljs-keyword">return</span> dp[n];<br>    }<br>};<br></code></pre></td></tr></tbody></table></figure><p>如果递归公式是 dp[i] = max(dp[i], dp[i - j] * dp[j]);，就一定要这么初始化。递推公式没毛病，但初始化解释不通！</p><p>虽然代码在初始位置有一个判断if (n &lt;= 3) return 1 * (n - 1);，保证n&lt;=3 结果是正确的，但代码后面又要给dp[1]赋值1 和 dp[2] 赋值 2，<strong>这其实就是自相矛盾的代码，违背了dp[i]的定义！</strong></p><p>我举这个例子，其实就说做题的严谨性，上面这个代码也可以AC，大体上一看好像也没有毛病，递推公式也说得过去，但是仅仅是恰巧过了而已<br><img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202207112130227.png"><br>// 错了的原因是dp[1]是0，必须定义dp[1] = 1,另外还有其他的原因</p><h2 id="3-2-贪心"><a href="#3-2-贪心" class="headerlink" title="3.2 贪心"></a>3.2 贪心</h2><p>编译已通过</p><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">integerBreak</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> </span>{<br>        <span class="hljs-keyword">if</span> (n == <span class="hljs-number">2</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">if</span> (n == <span class="hljs-number">3</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">2</span>;<br>        <span class="hljs-keyword">if</span> (n == <span class="hljs-number">4</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">4</span>; <span class="hljs-comment">// 要有 = 4的判断，不然4的没法输出</span><br>                <span class="hljs-type">int</span> result = <span class="hljs-number">1</span>;，<br>        <span class="hljs-keyword">while</span>(n &gt; <span class="hljs-number">4</span>){<br>            result *= <span class="hljs-number">3</span>;<br>            n -= <span class="hljs-number">3</span>;<br>        }<br>        <span class="hljs-keyword">return</span> result * n;<br>    }<br>};<br></code></pre></td></tr></tbody></table></figure><p><img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202207112032423.png"></p><h1 id="4-参考资料"><a href="#4-参考资料" class="headerlink" title="4 参考资料"></a>4 参考资料</h1><p><a href="https://www.bilibili.com/video/BV1Nt4y1D7gh?spm_id_from=333.337.search-card.all.click&amp;vd_source=f2340d96e99780a96b50d8096ffaaf1a">LeetCode每日打卡.343.整数拆分_哔哩哔哩_bilibili</a><br>自用跳转链接：🈚</p>]]></content>
+        <content type="html"><![CDATA[<h1 id="1-343-整数拆分"><a href="#1-343-整数拆分" class="headerlink" title="1 343.整数拆分"></a>1 343.整数拆分</h1><p><a href="https://leetcode.cn/problems/integer-break/">力扣题目链接</a></p><p>给定一个正整数&nbsp;n，将其拆分为至少两个正整数的和，并使这些整数的乘积最大化。 返回你可以获得的最大乘积。</p><p>示例 1:</p><ul><li>  输入: 2</li><li>  输出: 1</li><li>  解释: 2 = 1 + 1, 1 × 1 = 1。</li></ul><p>示例&nbsp;2:</p><ul><li>  输入: 10</li><li>  输出: 36</li><li>  解释: 10 = 3 + 3 + 4, 3 ×&nbsp;3 ×&nbsp;4 = 36。</li><li>  说明: 你可以假设&nbsp;n&nbsp;不小于 2 且不大于 58。</li></ul><h1 id="2-思路"><a href="#2-思路" class="headerlink" title="2 思路"></a>2 思路</h1><h2 id="2-1-动态规划"><a href="#2-1-动态规划" class="headerlink" title="2.1 动态规划"></a>2.1 动态规划</h2><p>将数的拆分想象成块的切分<br>2,3不切分，因为切分来会变小<br>如果不用去写dp初始值，可以在转移方程里面再加上一个和j * i-j的最大值比较<br>两个for循环是标准的动归写法</p><ol><li>确定dp数组（dp table）以及下标的含义<br>dp[i]：分拆数字i，可以得到的最大乘积为dp[i]。</li><li>确定递推公式<br>下面这样写需要提前定义2,3不可拆定义出来他们的dp值，因为他俩不用拆是最大<br>dp[i] = max({dp[i],dp[j] * dp[i-j] );<br>dp[i]是随着i的值在一直变化的，max 中有dp[i]就是保证，不断变化中的值取最高的那一个<br>j是切的位置，把一个数切成两部分，而这左右两部分又可以在切。也就是dp[j]，dp[i-j]，也是默认将一个数强制拆成4份以及4份以上了。</li></ol><p>或者这样，不用提前定义dp[2]，dp[3]<br>dp[i] = max(dp[i], max((i - j) * j, dp[i - j] * j));<br>3. dp的初始化<br>dp[0] dp[1]无意义，没法拆，所以不赋值。从dp[2] = 1开始，把dp[3] = 2。<br>2，3不用拆是最大的</p><h2 id="2-2-贪心算法"><a href="#2-2-贪心算法" class="headerlink" title="2.2 贪心算法"></a>2.2 贪心算法</h2><p>数学已证明过：<strong>每次拆成n个3，如果剩下是4，则保留4，然后相乘</strong><br>尽量切3，最后切2，2和3是最稳定最稳定不可拆分质数</p><blockquote><p>1，2，3不划分最大，一划分反而变小了</p></blockquote><h1 id="3-代码"><a href="#3-代码" class="headerlink" title="3 代码"></a>3 代码</h1><h2 id="3-1-动态规划"><a href="#3-1-动态规划" class="headerlink" title="3.1 动态规划"></a>3.1 动态规划</h2><p>编译已通过</p><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">integerBreak</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> </span>{<br>        <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">dp</span><span class="hljs-params">(n+<span class="hljs-number">1</span>,<span class="hljs-number">0</span>)</span></span>;<br>        <span class="hljs-keyword">if</span> (n == <span class="hljs-number">2</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">if</span> (n == <span class="hljs-number">3</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">2</span>;<br>        dp[<span class="hljs-number">2</span>] = <span class="hljs-number">1</span>;<br>        dp[<span class="hljs-number">3</span>] = <span class="hljs-number">2</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">4</span>; i &lt;= n; i++){ <span class="hljs-comment">// 应该从数字4开始，对应的下标是5 </span><br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt;= i/<span class="hljs-number">2</span>; j++){ <span class="hljs-comment">// 切一半就行，另一半是对称的</span><br>                dp[i] = <span class="hljs-built_in">max</span>(dp[i], <span class="hljs-built_in">max</span>(j*(i-j), j*dp[i-j])); <span class="hljs-comment">// 后一个max中是数的相乘 和 数和上一次的最优结果相乘</span><br>            }<br>        }<br>        <span class="hljs-keyword">return</span> dp[n];<br>    }<br>};<br></code></pre></td></tr></tbody></table></figure><p>编译已通过</p><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">integerBreak</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> </span>{<br>        <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">dp</span><span class="hljs-params">(n+<span class="hljs-number">1</span>)</span></span>;<br>        <span class="hljs-keyword">if</span> (n == <span class="hljs-number">2</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">if</span> (n == <span class="hljs-number">3</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">2</span>;<br>        <span class="hljs-comment">// 2，3不切分，要这样赋值下面才能通过</span><br>        dp[<span class="hljs-number">2</span>] = <span class="hljs-number">2</span>;<br>        dp[<span class="hljs-number">3</span>] = <span class="hljs-number">3</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">4</span>; i &lt;= n; i++){<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt;= i/<span class="hljs-number">2</span>; j++){<br>                dp[i] = <span class="hljs-built_in">max</span>(dp[i], dp[j]*dp[i-j]);<br>            }<br>        }<br>        <span class="hljs-keyword">return</span> dp[n];<br>    }<br>};<br></code></pre></td></tr></tbody></table></figure><p>如果递归公式是 dp[i] = max(dp[i], dp[i - j] * dp[j]);，就一定要这么初始化。递推公式没毛病，但初始化解释不通！</p><p>虽然代码在初始位置有一个判断if (n &lt;= 3) return 1 * (n - 1);，保证n&lt;=3 结果是正确的，但代码后面又要给dp[1]赋值1 和 dp[2] 赋值 2，<strong>这其实就是自相矛盾的代码，违背了dp[i]的定义！</strong></p><p>我举这个例子，其实就说做题的严谨性，上面这个代码也可以AC，大体上一看好像也没有毛病，递推公式也说得过去，但是仅仅是恰巧过了而已<br><img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202207112130227.png"><br>// 错了的原因是dp[1]是0，必须定义dp[1] = 1,另外还有其他的原因</p><h2 id="3-2-贪心"><a href="#3-2-贪心" class="headerlink" title="3.2 贪心"></a>3.2 贪心</h2><p>编译已通过</p><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">integerBreak</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> </span>{<br>        <span class="hljs-keyword">if</span> (n == <span class="hljs-number">2</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">if</span> (n == <span class="hljs-number">3</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">2</span>;<br>        <span class="hljs-keyword">if</span> (n == <span class="hljs-number">4</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">4</span>; <span class="hljs-comment">// 要有 = 4的判断，不然4的没法输出</span><br>                <span class="hljs-type">int</span> result = <span class="hljs-number">1</span>;，<br>        <span class="hljs-keyword">while</span>(n &gt; <span class="hljs-number">4</span>){<br>            result *= <span class="hljs-number">3</span>;<br>            n -= <span class="hljs-number">3</span>;<br>        }<br>        <span class="hljs-keyword">return</span> result * n;<br>    }<br>};<br></code></pre></td></tr></tbody></table></figure><p><img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202207112032423.png"></p><h1 id="4-参考资料"><a href="#4-参考资料" class="headerlink" title="4 参考资料"></a>4 参考资料</h1><p><a href="https://www.bilibili.com/video/BV1Nt4y1D7gh?spm_id_from=333.337.search-card.all.click&amp;vd_source=f2340d96e99780a96b50d8096ffaaf1a">LeetCode每日打卡.343.整数拆分_哔哩哔哩_bilibili</a><br>自用跳转链接：🈚</p>]]></content>
       
       
       <categories>
@@ -763,11 +850,11 @@
     
     
     <entry>
-      <title>c++中 - ‘0’ 以及 -&#39;a&#39; 的相减操作解释</title>
-      <link href="/posts/12295/"/>
-      <url>/posts/12295/</url>
+      <title>while 循环</title>
+      <link href="/posts/36387/"/>
+      <url>/posts/36387/</url>
       
-        <content type="html"><![CDATA[<p>执行continue 函数相当于又调到了函数的开头<a href="file:///Users/yibeikongqiu/Desktop/ishot%E8%A7%86%E9%A2%91/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/23.%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA%E5%90%AB%E6%89%8B%E7%BB%AD%E8%B4%B9.mp4#t=4.619299">00:04</a><br>作用：能够控制for循环中，跳过一些代码段，然后又使i不断前进<br><a href="file:///Users/yibeikongqiu/Desktop/ishot视频/贪心算法/23.买卖股票的最佳时机含手续费.mp4">23.买卖股票的最佳时机含手续费</a></p><h1 id="1-参考资料"><a href="#1-参考资料" class="headerlink" title="1 参考资料"></a>1 参考资料</h1><p>自用跳转连接：<a href="">ob</a>， <a href="">blog</a></p>]]></content>
+        <content type="html"><![CDATA[<p>while循环是if 和 for 循环的结合体，<br>只要在while循环中增加跳出语句就行</p><p>while(i){i++}</p><p>if(){<br>for()<br>}</p>]]></content>
       
       
       <categories>
@@ -792,11 +879,11 @@
     
     
     <entry>
-      <title>while 循环</title>
-      <link href="/posts/36387/"/>
-      <url>/posts/36387/</url>
+      <title>c++中 - ‘0’ 以及 -&#39;a&#39; 的相减操作解释</title>
+      <link href="/posts/12295/"/>
+      <url>/posts/12295/</url>
       
-        <content type="html"><![CDATA[<p>while循环是if 和 for 循环的结合体，<br>只要在while循环中增加跳出语句就行</p><p>while(i){i++}</p><p>if(){<br>for()<br>}</p>]]></content>
+        <content type="html"><![CDATA[<p>执行continue 函数相当于又调到了函数的开头<a href="file:///Users/yibeikongqiu/Desktop/ishot%E8%A7%86%E9%A2%91/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/23.%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA%E5%90%AB%E6%89%8B%E7%BB%AD%E8%B4%B9.mp4#t=4.619299">00:04</a><br>作用：能够控制for循环中，跳过一些代码段，然后又使i不断前进<br><a href="file:///Users/yibeikongqiu/Desktop/ishot视频/贪心算法/23.买卖股票的最佳时机含手续费.mp4">23.买卖股票的最佳时机含手续费</a></p><h1 id="1-参考资料"><a href="#1-参考资料" class="headerlink" title="1 参考资料"></a>1 参考资料</h1><p>自用跳转连接：<a href="">ob</a>， <a href="">blog</a></p>]]></content>
       
       
       <categories>
@@ -1308,8 +1395,8 @@
     
     <entry>
       <title></title>
-      <link href="/posts/1005/"/>
-      <url>/posts/1005/</url>
+      <link href="/posts/4/"/>
+      <url>/posts/4/</url>
       
         <content type="html"><![CDATA[<p>sort函数默认从小到大排列，如需自定义需要额外写个函数</p><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">static</span> <span class="hljs-type">bool</span> <span class="hljs-title">cmp</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> </span>{<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">abs</span>(a) &gt; <span class="hljs-built_in">abs</span>(b); <span class="hljs-comment">// 返回绝对值大的</span><br>}<br></code></pre></td></tr></tbody></table></figure><h1 id="1-应用"><a href="#1-应用" class="headerlink" title="1 应用"></a>1 应用</h1><h2 id="1-1-按照绝对值从大到小排列，"><a href="#1-1-按照绝对值从大到小排列，" class="headerlink" title="1.1 按照绝对值从大到小排列，"></a>1.1 按照绝对值从大到小排列，</h2><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">static</span> <span class="hljs-type">bool</span> <span class="hljs-title">cmp</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> </span>{<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">abs</span>(a) &gt; <span class="hljs-built_in">abs</span>(b);<br></code></pre></td></tr></tbody></table></figure><h2 id="1-2-从大到小排列：-14-根据身高重建队列"><a href="#1-2-从大到小排列：-14-根据身高重建队列" class="headerlink" title="1.2 从大到小排列：[[14.根据身高重建队列]]"></a>1.2 从大到小排列：[[14.根据身高重建队列]]</h2><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// 身高从大到小排（身高相同k小的站前面）</span><br><span class="hljs-function"><span class="hljs-type">static</span> <span class="hljs-type">bool</span> <span class="hljs-title">cmp</span><span class="hljs-params">(<span class="hljs-type">const</span> vector&lt;<span class="hljs-type">int</span>&gt;&amp; a, <span class="hljs-type">const</span> vector&lt;<span class="hljs-type">int</span>&gt;&amp; b)</span> </span>{<br>        <span class="hljs-keyword">if</span> (a[<span class="hljs-number">0</span>] == b[<span class="hljs-number">0</span>]) <span class="hljs-keyword">return</span> a[<span class="hljs-number">1</span>] &lt; b[<span class="hljs-number">1</span>];<br>        <span class="hljs-keyword">return</span> a[<span class="hljs-number">0</span>] &gt; b[<span class="hljs-number">0</span>];<br>    }<br></code></pre></td></tr></tbody></table></figure><p>bool 值好像是规定的 #疑问 </p><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-built_in">sort</span>(A.<span class="hljs-built_in">begin</span>(), A.<span class="hljs-built_in">end</span>(), cmp); <span class="hljs-comment">// 第三个参数不用出入参数这是规则</span><br></code></pre></td></tr></tbody></table></figure><p>[[static 关键字]]</p>]]></content>
       
