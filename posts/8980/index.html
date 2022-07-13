@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202207121421154.jpg">
 <meta property="article:published_time" content="2022-07-12T06:55:00.000Z">
-<meta property="article:modified_time" content="2022-07-12T09:02:14.327Z">
+<meta property="article:modified_time" content="2022-07-13T09:46:36.845Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="动态规划">
 <meta name="twitter:card" content="summary_large_image">
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.1k 字
+          2.2k 字
         
       </span>
     
@@ -234,7 +234,7 @@
         
         
         
-          11 分钟
+          12 分钟
         
       </span>
     
@@ -285,7 +285,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年7月12日 下午
+                    本文最后更新于：2022年7月13日 下午
                   
                 
               </p>
@@ -297,12 +297,13 @@
 
 <p><img src="https://img-blog.csdnimg.cn/20210117171307407.png" srcset="/img/loading.gif" lazyload alt="416.分割等和子集1"></p>
 <h1 id="1-01-背包"><a href="#1-01-背包" class="headerlink" title="1 01 背包"></a>1 01 背包</h1><p>有n件物品和一个最多能背重量为w 的背包。第i件物品的重量是weight[i]，得到的价值是value[i] 。<strong>每件物品只能用一次</strong>，求解将哪些物品装入背包里物品价值总和最大。</p>
-<p><img src="https://img-blog.csdnimg.cn/20210117175428387.jpg" srcset="/img/loading.gif" lazyload alt="动态规划-背包问题|600"></p>
+<p><img src="https://img-blog.csdnimg.cn/20210117175428387.jpg" srcset="/img/loading.gif" lazyload alt="动态规划-背包问题|600"><br><strong>背包问题有多种背包方式，常见的有：01背包、完全背包、多重背包、分组背包和混合背包等等。</strong></p>
+<p>01 背包：一个商品只能放入一次<br>完全背包：一个商品可以重复放入多次</p>
 <p>原始可用暴力解法<br>每一件物品其实只有两个状态，取或者不取，所以可以使用回溯法搜索出所有的情况，那么时间复杂度就是$o(2^n)$，这里的n表示物品数量。</p>
 <p><strong>所以暴力的解法是指数级别的时间复杂度。进而才需要动态规划的解法来进行优化！</strong></p>
 <h1 id="2-二维dp数组01背包"><a href="#2-二维dp数组01背包" class="headerlink" title="2 二维dp数组01背包"></a>2 二维dp数组01背包</h1><p>背包最大重量为4。<br>|       | 重量 | 价值 |<br>| —– | —- | —- |<br>| 物品0 | 1    | 15   |<br>| 物品1 | 3    | 20   |<br>| 物品2 | 4    | 30   |<br>问背包能背的物品最大价值是多少？</p>
 <ol>
-<li> 确定dp数组以及下标的含义<br>对于背包问题，有一种写法， 是使用二维数组，即<strong>dp[i][j] 表示从下标为[0-i]的物品里任意取，放进容量为j的背包，价值总和最大是多少</strong>。<br><img src="https://img-blog.csdnimg.cn/20210110103003361.png" srcset="/img/loading.gif" lazyload alt="动态规划-背包问题1|600"></li>
+<li> 确定dp数组以及下标的含义<br>对于背包问题，有一种写法， 是使用二维数组，即**<code>dp[i][j]</code> 表示从下标为[0-i]的物品里任意取，放进容量为j的背包，价值总和最大是多少**。<br><img src="https://img-blog.csdnimg.cn/20210110103003361.png" srcset="/img/loading.gif" lazyload alt="动态规划-背包问题1|600"></li>
 </ol>
 <p>有两个方向推出来<code>dp[i][j]</code>，</p>
 <ul>
@@ -423,7 +424,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2022年7月12日</div>
+          <div>2022年7月13日</div>
         </div>
       
       <div class="license-meta-item">
