@@ -16,16 +16,16 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="文章简介：力扣题解---">
+    <meta name="description" content="1 滚动数组思路滚动数组，就是把二维dp降为一维dp如果把dp[i - 1]那一层拷贝到dp[i]上，表达式完全可以是：dp[i][j] &#x3D; max(dp[i][j], dp[i][j - weight[i]] + value[i]);  上一次的i,j 的值存在max里边，不断的比较得到最大值  滚动数组：在同一层中，不断的进行覆盖然后刷新 动规五部曲分析如下： 1.1 确定dp数组的定义dp[">
 <meta property="og:type" content="article">
 <meta property="og:title" content="12.0-1背包理论基础（二）">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/38995/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="文章简介：力扣题解---">
+<meta property="og:description" content="1 滚动数组思路滚动数组，就是把二维dp降为一维dp如果把dp[i - 1]那一层拷贝到dp[i]上，表达式完全可以是：dp[i][j] &#x3D; max(dp[i][j], dp[i][j - weight[i]] + value[i]);  上一次的i,j 的值存在max里边，不断的比较得到最大值  滚动数组：在同一层中，不断的进行覆盖然后刷新 动规五部曲分析如下： 1.1 确定dp数组的定义dp[">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20210110103614769.png">
 <meta property="article:published_time" content="2022-07-13T06:57:00.000Z">
-<meta property="article:modified_time" content="2022-07-13T09:44:09.242Z">
+<meta property="article:modified_time" content="2022-07-28T09:22:47.278Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="动态规划">
 <meta name="twitter:card" content="summary_large_image">
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.7k 字
+          2.5k 字
         
       </span>
     
@@ -234,7 +234,7 @@
         
         
         
-          9 分钟
+          13 分钟
         
       </span>
     
@@ -285,52 +285,47 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年7月13日 下午
+                    本文最后更新于：2022年7月28日 下午
                   
                 
               </p>
             
             <div class="markdown-body">
               
-              <h1 id="1-滚动数组思路"><a href="#1-滚动数组思路" class="headerlink" title="1 滚动数组思路"></a>1 滚动数组思路</h1><p>滚动数组，就是把二维dp降为一维dp<br><strong>如果把dp[i - 1]那一层拷贝到dp[i]上，表达式完全可以是：d<code>p[i][j] = max(dp[i][j], dp[i][j - weight[i]] + value[i]);</code></strong></p>
+              <h1 id="1-滚动数组思路"><a href="#1-滚动数组思路" class="headerlink" title="1 滚动数组思路"></a>1 滚动数组思路</h1><p>滚动数组，就是把二维dp降为一维dp<br><strong>如果把dp[i - 1]那一层拷贝到dp[i]上，表达式完全可以是：<code>dp[i][j] = max(dp[i][j], dp[i][j - weight[i]] + value[i]);</code></strong></p>
 <blockquote>
 <p>上一次的i,j 的值存在max里边，不断的比较得到最大值</p>
 </blockquote>
-<p>这就是滚动数组的由来，需要满足的条件是上一层可以重复利用，直接拷贝到当前层</p>
+<p>滚动数组：在同一层中，不断的进行覆盖然后刷新</p>
 <p>动规五部曲分析如下：</p>
-<ol>
-<li><p> 确定dp数组的定义<br>在一维dp数组中，dp[j]表示：容量为j的背包，所背的物品价值可以最大为dp[j]。</p>
-</li>
-<li><p> 一维dp数组的递推公式<br>dp[j]有两个选择，<br>一个是取自己dp[j] 相当于 二维dp数组中的<code>dp[i-1][j]</code>，即不放物品i，</p>
-<blockquote>
-<p>不放物品i即表示不覆盖之前的数据，因为重量没变化，所以没放</p>
-</blockquote>
-</li>
-</ol>
-<p>一个是取dp[j - weight[i]] + value[i]，即放物品i</p>
+<h2 id="1-1-确定dp数组的定义"><a href="#1-1-确定dp数组的定义" class="headerlink" title="1.1 确定dp数组的定义"></a>1.1 确定dp数组的定义</h2><p>dp[j]：容量为j的背包，所背的物品价值可以最大为dp[j]。</p>
+<h2 id="1-2-一维dp数组的递推公式"><a href="#1-2-一维dp数组的递推公式" class="headerlink" title="1.2 一维dp数组的递推公式"></a>1.2 一维dp数组的递推公式</h2><p>整体思路： 想想如何从前面的数推过来</p>
+<p>dp[j]有两个选择，<br>不放物品i：dp[j]， 未覆盖的值</p>
+<p>放物品i：dp[j - weight[i]] + value[i]，覆盖后的值<br>(总重量 - 要放物品的重量)的最大价值+要放物品的价值<br>除去要放物品的背包 的价值 + 要放物品的价值<br>Q：万一放不了呢，之前二维数组是有一个判断语句，一维中没有啊？<br>A：<code>for(int j = bagWeight; j &gt;= weight[i]; j--)</code>。一维中也有判断语句，进入for循环的条件是背包容量大于所放物品i的重量</p>
 <figure class="highlight inform7"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs inform7">dp<span class="hljs-comment">[j]</span> = max(dp<span class="hljs-comment">[j]</span>, dp<span class="hljs-comment">[j - weight<span class="hljs-comment">[i]</span>]</span> + value<span class="hljs-comment">[i]</span>);<br></code></pre></td></tr></tbody></table></figure>
 
-<ol start="3">
-<li> 一维dp数组如何初始化<br>dp[0]=0：背包容量为0所背的物品的最大价值是0<br>其他的值都初始为0就行，因为递推公式中会赋值</li>
-</ol>
-<p><strong>总结</strong>：其实全部初始化为0即可</p>
-<ol start="4">
-<li> 一维dp数组遍历顺序<br>如果使用一维dp数组，物品遍历的for循环放在外层，遍历背包的for循环放在内层，</li>
-</ol>
-<p>倒序遍历，保证物品只放入一次</p>
-<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; weight.size(); i++) { <span class="hljs-comment">// 遍历物品，二维数组的行，反复覆盖</span><br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j = bagWeight; j &gt;= weight[i]; j--) { <span class="hljs-comment">// 遍历背包容量，二维数组的列</span><br>        dp[j] = max(dp[j], dp[j - weight[i]] + value[i]);<span class="hljs-comment">// 不断更新该行的列向量</span><br><br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
-<p>为什么不能正序遍历：例子</p>
-<p>物品0的重量weight[0] = 1，价值value[0] = 15<br>如果正序遍历<br>dp[1] = dp[1 - weight[0]] + value[0] = 15<br>dp[2] = dp[2 - weight[0]] + value[0] = 30<br>此时dp[2]就已经是30了，意味着物品0，被放入了两次，所以不能正序遍历</p>
-<p>倒序遍历：<br>dp[2] = dp[2 - weight[0]] + value[0] = 15<br>dp[1] = dp[1 - weight[0]] + value[0] = 15</p>
-<ol start="5">
-<li> 举例推导dp数组<br>一维dp，分别用物品0，物品1，物品2 来遍历背包，最终得到结果如下：</li>
-</ol>
+<h2 id="1-3-一维dp数组如何初始化"><a href="#1-3-一维dp数组如何初始化" class="headerlink" title="1.3 一维dp数组如何初始化"></a>1.3 一维dp数组如何初始化</h2><p>dp[0]=0：背包容量为0所背的物品的最大价值是0<br>其他的值都初始为0就行，因为递推公式中会赋值<br>不能初始化太大的值，防止取最大值的时候覆盖掉真实结果<br><strong>总结</strong>：其实全部初始化为0即可</p>
+<h2 id="1-4-一维dp数组遍历顺序"><a href="#1-4-一维dp数组遍历顺序" class="headerlink" title="1.4 一维dp数组遍历顺序"></a>1.4 一维dp数组遍历顺序</h2><p><strong>只能先物品后背包</strong><br>    如果顺序被颠倒，那么dp数组中记录的都是一个物品的数值了<br><strong>倒序遍历：保证物品只放入一次</strong><br>    看下面的例子</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; weight.size(); i++) { <span class="hljs-comment">// 遍历物品，二维数组的行，反复覆盖</span><br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j = bagWeight; j &gt;= weight[i]; j--) { <span class="hljs-comment">// j = 背包容量，也不要忘了=（背包容量等于重量时也可以加入的）</span><br>        dp[j] = max(dp[j], dp[j - weight[i]] + value[i]);<span class="hljs-comment">// 不断更新该行的列向量</span><br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<p>为什么不能正序遍历：例子<br>?<br><code>dp[j] = max(dp[j], dp[j - weight[i]] + value[i]);</code><br>物品0的重量<strong>weight[0] = 1</strong>，价值<strong>value[0] = 15</strong><br>如果正序遍历，此时//  [[for 循环]]</p>
+<p>正序循环中的第二for循环的条件应该怎么写  #card #已解决 </p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// 先遍历物品，再遍历背包，内层for循环正序遍历</span><br><span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; weight.size(); i++) { <span class="hljs-comment">// 遍历物品</span><br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j = weight[i]; j &lt;= bagWeight ; j++) { <span class="hljs-comment">// 遍历背包容量</span><br>        dp[j] = max(dp[j], dp[j - weight[i]] + value[i]);<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+<p>^1659000167215</p>
+<p>dp[1] = dp[1 - weight[0]] + value[0] = 15<br>dp[2] = dp[2 - weight[0]] + value[0] = 30<br>此时dp[2]就已经是30了，意味着物品0，被放入了两次，所以不能正序遍历<br>说白了，当前dp[i]要使用上一层左侧的dp值，正序覆盖了上一层左侧的dp值，倒叙避免了覆盖</p>
+<p>倒序遍历：<br>  <code>vector&lt;int&gt; dp(bagWeight + 1, 0);</code> 原来的初始化是0<br>dp[2] = dp[2 - weight[0]] + value[0] = 15</p>
+<blockquote>
+<p>倒序计算时，由于 dp 数组初始化为 0，所以 dp[2-1] 为 0，所以 dp[2] 为 15</p>
+</blockquote>
+<p>dp[1] = dp[1 - weight[0]] + value[0] = 15</p>
+<h2 id="1-5-举例推导dp数组"><a href="#1-5-举例推导dp数组" class="headerlink" title="1.5 举例推导dp数组"></a>1.5 举例推导dp数组</h2><p>一维dp，分别用物品0，物品1，物品2 来遍历背包，最终得到结果如下：</p>
 <p><img src="https://img-blog.csdnimg.cn/20210110103614769.png" srcset="/img/loading.gif" lazyload alt="动态规划-背包问题9"></p>
 <h1 id="2-代码"><a href="#2-代码" class="headerlink" title="2 代码"></a>2 代码</h1><figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">test_1_wei_bag_problem</span><span class="hljs-params">()</span> {<br>    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt; weight = {<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>};<br>    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt; value = {<span class="hljs-number">15</span>, <span class="hljs-number">20</span>, <span class="hljs-number">30</span>};<br>    <span class="hljs-type">int</span> bagWeight = <span class="hljs-number">4</span>;<br><br>    <span class="hljs-comment">// 初始化</span><br>    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title function_">dp</span><span class="hljs-params">(bagWeight + <span class="hljs-number">1</span>, <span class="hljs-number">0</span>)</span>;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; weight.size(); i++) { <span class="hljs-comment">// 遍历物品</span><br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j = bagWeight; j &gt;= weight[i]; j--) { <span class="hljs-comment">// 遍历背包容量</span><br>            dp[j] = max(dp[j], dp[j - weight[i]] + value[i]);<br>        }<br>    }<br>    <span class="hljs-built_in">cout</span> &lt;&lt; dp[bagWeight] &lt;&lt; <span class="hljs-built_in">endl</span>;<br>}<br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> {<br>    test_1_wei_bag_problem();<br>}<br></code></pre></td></tr></tbody></table></figure>
 
 <p>一维dp 的01背包，要比二维简洁的多！ 初始化 和 遍历顺序相对简单了，<strong>空间复杂度还降了一个数量级</strong><br>推荐用一维数组</p>
-<h1 id="3-总结"><a href="#3-总结" class="headerlink" title="3 总结"></a>3 总结</h1><h2 id="3-1-面试问题"><a href="#3-1-面试问题" class="headerlink" title="3.1 面试问题"></a>3.1 面试问题</h2><p>要求先实现一个纯二维的01背包，如果写出来了，然后再问为什么两个for循环的嵌套顺序这么写？反过来写行不行？再讲一讲初始化的逻辑。</p>
-<p>然后要求实现一个一维数组的01背包，最后再问，一维数组的01背包，两个for循环的顺序反过来写行不行？为什么？</p>
+<h1 id="3-总结"><a href="#3-总结" class="headerlink" title="3 总结"></a>3 总结</h1><h2 id="3-1-面试问题"><a href="#3-1-面试问题" class="headerlink" title="3.1 面试问题"></a>3.1 面试问题</h2><p>要求先实现一个纯二维的01背包，如果写出来了，然后再问为什么两个for循环的嵌套顺序这么写？反过来写行不行？ #card<br>第一种是先物品后背包的遍历，根据状态转移方程可得，当前值由该位置的上方和左上上方来确定，首先初始化了第一行和第一列的值，这种先物品后背包的方式，是从左到右的一个个行遍历赋值。遍历到<code>dp[i][j]</code>时，它的上方和左上方都赋值完毕，可以推导出来<br>第二种是先背包后物品的遍历，遍历方式是从上到下的一列一列的遍历赋值。遍历到<code>dp[i][j]</code>时，它的整个左部分都赋值完毕，上方也赋值了。同理可推导出来。<br>所以反过来写是可以的<br>^1659000167218</p>
+<p>[[讲一讲01背包初始化的逻辑。]]</p>
+<p>一维数组的01背包，两个for循环的顺序反过来写行不行 #card #疑问<br>不行，<br>^1659000167219</p>
 <p>注意以上问题都是在候选人把代码写出来的情况下才问的。</p>
 <hr>
 <p><strong>参考资料</strong><br>自用跳转链接：🈚<br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1dZ4y1u7ZT?spm_id_from=333.337.search-card.all.click&amp;vd_source=f2340d96e99780a96b50d8096ffaaf1a">滚动数组详解_哔哩哔哩_bilibili</a></p>
@@ -418,7 +413,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2022年7月13日</div>
+          <div>2022年7月28日</div>
         </div>
       
       <div class="license-meta-item">
@@ -446,6 +441,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/posts/38902/" title="13.分割等和子集">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">13.分割等和子集</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
