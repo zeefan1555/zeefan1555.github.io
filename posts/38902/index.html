@@ -16,12 +16,12 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1 分割等和子集力扣题目链接 题目难易：中等 给定一个只包含正整数的非空数组。是否可以将这个数组分割成两个子集，使得两个子集的元素和相等。 注意: 每个数组中的元素不会超过 100 数组的大小不会超过 200 示例 1: 输入: [1, 5, 11, 5] 输出: true 解释: 数组可以分割成 [1, 5, 5] 和 [11]. 示例&amp;nbsp;2: 输入: [1, 2, 3, 5] 输出:">
+    <meta name="description" content="1 分割等和子集 力扣题目链接 题目难易：中等 给定一个只包含正整数的非空数组。是否可以将这个数组分割成两个子集，使得两个子集的元素和相等。 注意: 每个数组中的元素不会超过 100 数组的大小不会超过 200 示例 1: 输入: [1, 5, 11, 5] 输出: true 解释: 数组可以分割成 [1, 5, 5] 和 [11]. 示例&amp;nbsp;2: 输入: [1, 2, 3, 5] 输出">
 <meta property="og:type" content="article">
 <meta property="og:title" content="13.分割等和子集">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/38902/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="1 分割等和子集力扣题目链接 题目难易：中等 给定一个只包含正整数的非空数组。是否可以将这个数组分割成两个子集，使得两个子集的元素和相等。 注意: 每个数组中的元素不会超过 100 数组的大小不会超过 200 示例 1: 输入: [1, 5, 11, 5] 输出: true 解释: 数组可以分割成 [1, 5, 5] 和 [11]. 示例&amp;nbsp;2: 输入: [1, 2, 3, 5] 输出:">
+<meta property="og:description" content="1 分割等和子集 力扣题目链接 题目难易：中等 给定一个只包含正整数的非空数组。是否可以将这个数组分割成两个子集，使得两个子集的元素和相等。 注意: 每个数组中的元素不会超过 100 数组的大小不会超过 200 示例 1: 输入: [1, 5, 11, 5] 输出: true 解释: 数组可以分割成 [1, 5, 5] 和 [11]. 示例&amp;nbsp;2: 输入: [1, 2, 3, 5] 输出">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20210110104240545.png">
 <meta property="article:published_time" content="2022-07-13T07:58:00.000Z">
@@ -46,6 +46,8 @@
   <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.15.6/katex.min.css" />
 
 
 
@@ -223,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.6k 字
+          1.7k 字
         
       </span>
     
@@ -292,7 +294,8 @@
             
             <div class="markdown-body">
               
-              <h1 id="1-分割等和子集"><a href="#1-分割等和子集" class="headerlink" title="1 分割等和子集"></a>1 分割等和子集</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/partition-equal-subset-sum/">力扣题目链接</a></p>
+              <h1 id="1-分割等和子集"><a class="markdownIt-Anchor" href="#1-分割等和子集"></a> 1 分割等和子集</h1>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/partition-equal-subset-sum/">力扣题目链接</a></p>
 <p>题目难易：中等</p>
 <p>给定一个只包含正整数的非空数组。是否可以将这个数组分割成两个子集，使得两个子集的元素和相等。</p>
 <p>注意: 每个数组中的元素不会超过 100 数组的大小不会超过 200</p>
@@ -300,34 +303,44 @@
 <p>示例&nbsp;2: 输入: [1, 2, 3, 5] 输出: false 解释: 数组不能分割成两个元素和相等的子集.</p>
 <p>提示：</p>
 <ul>
-<li>  1 &lt;= nums.length &lt;= 200</li>
-<li>  1 &lt;= nums[i] &lt;= 100</li>
+<li>1 &lt;= nums.length &lt;= 200</li>
+<li>1 &lt;= nums[i] &lt;= 100</li>
 </ul>
-<h1 id="2-思路"><a href="#2-思路" class="headerlink" title="2 思路"></a>2 思路</h1><p>本题是可以用回溯暴力搜索出所有答案的，但最后超时了，也不想再优化了，放弃回溯，直接上01背包吧。</p>
+<h1 id="2-思路"><a class="markdownIt-Anchor" href="#2-思路"></a> 2 思路</h1>
+<p>本题是可以用回溯暴力搜索出所有答案的，但最后超时了，也不想再优化了，放弃回溯，直接上01背包吧。</p>
 <p>只要找到集合里能够出现 sum / 2 的子集总和，就算是可以分割成两个相同元素和子集了。</p>
 <p>背包的总容量为 sum/2，每个物品的价值就是他们数组值(应该是这样咯)</p>
 <p><strong>只有确定了如下四点，才能把01背包问题套到本题上来。</strong></p>
 <ul>
-<li>  背包的体积为sum / 2</li>
-<li>  背包要放入的物品（集合里的元素）重量为 元素的数值，价值也为元素的数值(重量与价值相等)</li>
-<li>  背包如果正好装满，说明找到了总和为 sum / 2 的子集。</li>
-<li>  背包中每一个元素是不可重复放入。(01背包：每个物品只放一次)</li>
+<li>背包的体积为sum / 2</li>
+<li>背包要放入的物品（集合里的元素）重量为 元素的数值，价值也为元素的数值(重量与价值相等)</li>
+<li>背包如果正好装满，说明找到了总和为 sum / 2 的子集。</li>
+<li>背包中每一个元素是不可重复放入。(01背包：每个物品只放一次)</li>
 </ul>
 <ol>
-<li> 确定dp数组以及下的含义<br>01背包中，dp[j] 表示： 容量为j的背包，所背的物品最大价值为dp[j]。</li>
-</ol>
-<p><strong>套到本题，dp[j]表示 背包总容量是j，最大可以凑成j的子集总和为dp[j]</strong></p>
-<ol start="2">
-<li><p> 确定递推公式<br>dp[j] = max(dp[j], dp[j - weight[i]] + value[i]);<br>dp[j] = max(dp[j], dp[j - nums[i]] + nums[i]);</p>
+<li>
+<p>确定dp数组以及下的含义<br>
+01背包中，dp[j] 表示： 容量为j的背包，所背的物品最大价值为dp[j]。<br>
+<strong>套到本题，dp[j]表示 背包总容量是j，最大可以凑成j的子集总和为dp[j]</strong></p>
 </li>
-<li><p>dp数组如何初始化<br>全部初始化为0</p>
-<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// 题目中说：每个数组中的元素不会超过 100，数组的大小不会超过 200</span><br><span class="hljs-comment">// 总和不会大于20000，背包最大只需要其中一半，所以10001大小就可以了</span><br><span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">dp</span><span class="hljs-params">(<span class="hljs-number">10001</span>, <span class="hljs-number">0</span>)</span></span>;<br></code></pre></td></tr></tbody></table></figure></li>
+<li>
+<p>确定递推公式<br>
+dp[j] = max(dp[j], dp[j - weight[i]] + value[i]);<br>
+dp[j] = max(dp[j], dp[j - nums[i]] + nums[i]);</p>
+</li>
+<li>
+<p>dp数组如何初始化<br>
+全部初始化为0</p>
+</li>
 </ol>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// 题目中说：每个数组中的元素不会超过 100，数组的大小不会超过 200</span><br><span class="hljs-comment">// 总和不会大于20000，背包最大只需要其中一半，所以10001大小就可以了</span><br><span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">dp</span><span class="hljs-params">(<span class="hljs-number">10001</span>, <span class="hljs-number">0</span>)</span></span>;<br></code></pre></td></tr></tbody></table></figure>
 <ol start="4">
-<li> 确定遍历顺序<br>先物品在背包，for循环第二层倒序<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// 开始 01背包</span><br><span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; nums.size(); i++) {<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j = target; j &gt;= nums[i]; j--) { <span class="hljs-comment">// 每一个元素一定是不可重复放入，所以从大到小遍历</span><br>        dp[j] = max(dp[j], dp[j - nums[i]] + nums[i]);<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure></li>
+<li>确定遍历顺序<br>
+先物品在背包，for循环第二层倒序</li>
 </ol>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// 开始 01背包</span><br><span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; nums.size(); i++) {<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j = target; j &gt;= nums[i]; j--) { <span class="hljs-comment">// 每一个元素一定是不可重复放入，所以从大到小遍历</span><br>        dp[j] = max(dp[j], dp[j - nums[i]] + nums[i]);<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
 <ol start="5">
-<li> 举例推导dp数组</li>
+<li>举例推导dp数组</li>
 </ol>
 <p>dp[j]的数值一定是小于等于j的。因为dp[j]是价值，j是背包容量</p>
 <p><strong>如果dp[j] == j 说明，集合中的子集总和正好可以凑成总和j，即价值=容量，理解这一点很重要。</strong></p>
@@ -338,11 +351,12 @@
 <p><img src="https://img-blog.csdnimg.cn/20210110104240545.png" srcset="/img/loading.gif" lazyload alt="416.分割等和子集2"></p>
 <p>一层一层的，从后往前赋值的</p>
 <p>最后dp[11] == 11，说明可以将这个数组分割成两个子集，使得两个子集的元素和相等。</p>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><p>编译已通过</p>
+<h1 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h1>
+<p>编译已通过</p>
 <figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">canPartition</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums)</span> </span>{<br>        <span class="hljs-type">int</span> sum = <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> target;<br>        <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">dp</span><span class="hljs-params">(<span class="hljs-number">10001</span>,<span class="hljs-number">0</span>)</span></span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i&lt;nums.<span class="hljs-built_in">size</span>(); i++){<br>            sum += nums[i];<br>        }<br>        target = sum/<span class="hljs-number">2</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; nums.<span class="hljs-built_in">size</span>(); i++){<br>            <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j = target; j &gt;=nums[i]; j--){<br>                dp[j] = <span class="hljs-built_in">max</span>(dp[j], dp[j-nums[i]]+nums[i]); <br>            }<br>        }<br>        <span class="hljs-keyword">if</span> (dp[target]==target) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
-
-<p><a href="file:///Users/yibeikongqiu/Desktop/ishot视频/动态规划/13.分割等和子集.mp4">13.mp4</a></p>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p>自用跳转链接：🈚</p>
+<p>[13.mp4](file:///Users/yibeikongqiu/Desktop/ishot视频/动态规划/13.分割等和子集.mp4)</p>
+<h2 id="参考资料"><a class="markdownIt-Anchor" href="#参考资料"></a> 参考资料</h2>
+<p>自用跳转链接：🈚</p>
 
               
             </div>
@@ -518,6 +532,11 @@
 
   
 
+
+
+
+  
+  
 
 
 

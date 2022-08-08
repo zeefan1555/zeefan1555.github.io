@@ -16,20 +16,21 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="插件：flashcard的使用方法：Home · reuseman&#x2F;flashcards-obsidian Wiki · GitHub 1 简单配置anki connect 添加 1234567891011{    &quot;apiKey&quot;: null,    &quot;apiLogPath&quot;: null,    &quot;webBindAddress&quot;: &quot;127.0.0.1&quot;,    &quot;webBindPort&quot;: 8">
+    <meta name="description" content="插件：flashcard的使用方法：Home · reuseman&#x2F;flashcards-obsidian Wiki · GitHub  1 简单配置 anki connect 添加 1234567891011{    &quot;apiKey&quot;: null,    &quot;apiLogPath&quot;: null,    &quot;webBindAddress&quot;: &quot;127.0.0.1&quot;,    &quot;webBindPort&quot;:">
 <meta property="og:type" content="article">
 <meta property="og:title" content="obsidian flashcard 插件">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/11266/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="插件：flashcard的使用方法：Home · reuseman&#x2F;flashcards-obsidian Wiki · GitHub 1 简单配置anki connect 添加 1234567891011{    &quot;apiKey&quot;: null,    &quot;apiLogPath&quot;: null,    &quot;webBindAddress&quot;: &quot;127.0.0.1&quot;,    &quot;webBindPort&quot;: 8">
+<meta property="og:description" content="插件：flashcard的使用方法：Home · reuseman&#x2F;flashcards-obsidian Wiki · GitHub  1 简单配置 anki connect 添加 1234567891011{    &quot;apiKey&quot;: null,    &quot;apiLogPath&quot;: null,    &quot;webBindAddress&quot;: &quot;127.0.0.1&quot;,    &quot;webBindPort&quot;:">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/20220721165055.png">
 <meta property="og:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/20220721165345.png">
 <meta property="og:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/20220721164811.png">
 <meta property="og:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/20220721164922.png">
 <meta property="article:published_time" content="2022-07-20T03:31:00.000Z">
-<meta property="article:modified_time" content="2022-07-28T08:45:23.962Z">
+<meta property="article:modified_time" content="2022-08-04T05:41:31.974Z">
 <meta property="article:author" content="zeefan">
+<meta property="article:tag" content="已迁移">
 <meta property="article:tag" content="obsidian">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/20220721165055.png">
@@ -49,6 +50,8 @@
   <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.15.6/katex.min.css" />
 
 
 
@@ -288,7 +291,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年7月28日 下午
+                    本文最后更新于：2022年8月4日 下午
                   
                 
               </p>
@@ -296,34 +299,34 @@
             <div class="markdown-body">
               
               <p>插件：flashcard的使用方法：<a target="_blank" rel="noopener" href="https://github.com/reuseman/flashcards-obsidian/wiki">Home · reuseman/flashcards-obsidian Wiki · GitHub</a></p>
-<h1 id="1-简单配置"><a href="#1-简单配置" class="headerlink" title="1 简单配置"></a>1 简单配置</h1><p>anki connect 添加</p>
+<h1 id="1-简单配置"><a class="markdownIt-Anchor" href="#1-简单配置"></a> 1 简单配置</h1>
+<p>anki connect 添加</p>
 <figure class="highlight 1c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs 1c">{<br>    <span class="hljs-string">"apiKey"</span>: <span class="hljs-literal">null</span>,<br>    <span class="hljs-string">"apiLogPath"</span>: <span class="hljs-literal">null</span>,<br>    <span class="hljs-string">"webBindAddress"</span>: <span class="hljs-string">"127.0.0.1"</span>,<br>    <span class="hljs-string">"webBindPort"</span>: <span class="hljs-number">8765</span>,<br>    <span class="hljs-string">"webCorsOrigin"</span>: <span class="hljs-string">"http://localhost"</span>,<br>    <span class="hljs-string">"webCorsOriginList"</span>: [<br>        <span class="hljs-string">"http://localhost"</span>,<br>        <span class="hljs-string">"app://obsidian.md"</span>   <span class="hljs-meta">## 添加这一个</span><br>    ] <br>}<br></code></pre></td></tr></tbody></table></figure>
-
-
-
-<h1 id="2-无法添加的解决方法"><a href="#2-无法添加的解决方法" class="headerlink" title="2 无法添加的解决方法"></a>2 无法添加的解决方法</h1><ol>
+<h1 id="2-无法添加的解决方法"><a class="markdownIt-Anchor" href="#2-无法添加的解决方法"></a> 2 无法添加的解决方法</h1>
+<ol>
 <li>anki 不能在浏览页面</li>
 <li>删除id后，anki牌组不能有之前文件</li>
 <li>问题前面加一个标题，添加后，然后在删掉就行</li>
 <li>yaml字段自动生成的card-deck 字段，相对(valut)的路径不应太长，否则就只能添加Default</li>
 </ol>
-<p>小问题<br>根据文件夹创建目录，如果文件夹的层级太多就会失效</p>
-<h1 id="3-使用"><a href="#3-使用" class="headerlink" title="3 使用"></a>3 使用</h1><h2 id="3-1-分隔符"><a href="#3-1-分隔符" class="headerlink" title="3.1 分隔符"></a>3.1 分隔符</h2><ol>
-<li>:: <center> 
-<img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/20220721165055.png" srcset="/img/loading.gif" lazyload> </center></li>
+<p>小问题<br>
+根据文件夹创建目录，如果文件夹的层级太多就会失效</p>
+<h1 id="3-使用"><a class="markdownIt-Anchor" href="#3-使用"></a> 3 使用</h1>
+<h2 id="31-分隔符"><a class="markdownIt-Anchor" href="#31-分隔符"></a> 3.1 分隔符</h2>
+<ol>
+<li>::</li>
 </ol>
+<center> 
+<img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/20220721165055.png" srcset="/img/loading.gif" lazyload> 
 <img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/20220721165345.png" srcset="/img/loading.gif" lazyload> 
-
-
-
-
+</center>
 <center> 
 <img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/20220721164811.png" srcset="/img/loading.gif" lazyload> 
 <img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/20220721164922.png" srcset="/img/loading.gif" lazyload> 
 </center>
-
 <ol start="2">
-<li>:::<br><img src="" srcset="/img/loading.gif" lazyload></li>
+<li>:::<br>
+<img src="" srcset="/img/loading.gif" lazyload alt=""></li>
 </ol>
 
               
@@ -364,6 +367,8 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
+        <a href="/tags/%E5%B7%B2%E8%BF%81%E7%A7%BB/">#已迁移</a>
+      
         <a href="/tags/obsidian/">#obsidian</a>
       
     </div>
@@ -395,7 +400,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2022年7月28日</div>
+          <div>2022年8月4日</div>
         </div>
       
       <div class="license-meta-item">
@@ -486,6 +491,11 @@
 
   
 
+
+
+
+  
+  
 
 
 

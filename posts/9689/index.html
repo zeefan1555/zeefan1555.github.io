@@ -16,16 +16,16 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="文章简介    力扣题解：714. 买卖股票的最佳时机含手续费">
+    <meta name="description" content="文章简介 力扣题解：714. 买卖股票的最佳时机含手续费">
 <meta property="og:type" content="article">
 <meta property="og:title" content="23.买卖股票的最佳时机含手续费">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/9689/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="文章简介    力扣题解：714. 买卖股票的最佳时机含手续费">
+<meta property="og:description" content="文章简介 力扣题解：714. 买卖股票的最佳时机含手续费">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202207041948383.jpg">
 <meta property="article:published_time" content="2022-07-04T09:04:00.000Z">
-<meta property="article:modified_time" content="2022-07-12T09:02:14.320Z">
+<meta property="article:modified_time" content="2022-08-04T15:27:06.913Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="贪心算法">
 <meta name="twitter:card" content="summary_large_image">
@@ -46,6 +46,8 @@
   <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.15.6/katex.min.css" />
 
 
 
@@ -223,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.8k 字
+          2.3k 字
         
       </span>
     
@@ -234,7 +236,7 @@
         
         
         
-          9 分钟
+          12 分钟
         
       </span>
     
@@ -285,17 +287,18 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年7月12日 下午
+                    本文最后更新于：2022年8月4日 晚上
                   
                 
               </p>
             
             <div class="markdown-body">
               
-              <p>文章简介<br>    力扣题解：714. 买卖股票的最佳时机含手续费</p>
+              <p>文章简介<br>
+力扣题解：714. 买卖股票的最佳时机含手续费</p>
 <span id="more"></span>
-
-<h1 id="1-买卖股票的最佳时机含手续费"><a href="#1-买卖股票的最佳时机含手续费" class="headerlink" title="1 买卖股票的最佳时机含手续费"></a>1 买卖股票的最佳时机含手续费</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/">力扣题目链接</a></p>
+<h1 id="1-买卖股票的最佳时机含手续费"><a class="markdownIt-Anchor" href="#1-买卖股票的最佳时机含手续费"></a> 1 买卖股票的最佳时机含手续费</h1>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/">力扣题目链接</a></p>
 <p>给定一个整数数组&nbsp;prices，其中第&nbsp;i&nbsp;个元素代表了第&nbsp;i&nbsp;天的股票价格 ；非负整数&nbsp;fee 代表了交易股票的手续费用。</p>
 <p>你可以无限次地完成交易，但是你每笔交易都需要付手续费。<strong>如果你已经购买了一个股票，在卖出它之前你就不能再继续购买股票了。</strong></p>
 <p><strong>返回获得利润的最大值。</strong></p>
@@ -307,37 +310,55 @@
 <p>解释: 能够达到的最大利润: 在此处买入&nbsp;prices[0] = 1 在此处卖出 prices[3] = 8 在此处买入 prices[4] = 4 在此处卖出 prices[5] = 9 总利润:&nbsp;((8 - 1) - 2) + ((9 - 4) - 2) = 8.</p>
 <p>注意:</p>
 <ul>
-<li>  0 &lt; prices.length &lt;= 50000.</li>
-<li>  0 &lt; prices[i] &lt; 50000.</li>
-<li>  0 &lt;= fee &lt; 50000.</li>
+<li>0 &lt; prices.length &lt;= 50000.</li>
+<li>0 &lt; prices[i] &lt; 50000.</li>
+<li>0 &lt;= fee &lt; 50000.</li>
 </ul>
-<h1 id="2-思路"><a href="#2-思路" class="headerlink" title="2 思路"></a>2 思路</h1><h2 id="2-1-6-买卖股票的最佳时机II"><a href="#2-1-6-买卖股票的最佳时机II" class="headerlink" title="2.1 [[6. 买卖股票的最佳时机II]]"></a>2.1 [[6. 买卖股票的最佳时机II]]</h2><p>![[6. 买卖股票的最佳时机II#2 思路]]<br>与 6的区别是多了个手续费<br>有了手续费，就要关系什么时候买卖了，因为计算所获得利润，需要考虑买卖利润可能不足以手续费的情况。<br>用贪心策略，就是最低值买，最高值（减去手续费还盈利）就卖。</p>
+<h1 id="2-思路"><a class="markdownIt-Anchor" href="#2-思路"></a> 2 思路</h1>
+<h2 id="21-6-买卖股票的最佳时机ii"><a class="markdownIt-Anchor" href="#21-6-买卖股票的最佳时机ii"></a> 2.1 [[6. 买卖股票的最佳时机II]]</h2>
+<p>![[6. 买卖股票的最佳时机II#2 思路]]<br>
+与 6的区别是多了个手续费<br>
+有了手续费，就要关系什么时候买卖了，因为计算所获得利润，需要考虑买卖利润可能不足以手续费的情况。<br>
+用贪心策略，就是最低值买，最高值（减去手续费还盈利）就卖。</p>
 <p>找到两个点</p>
 <ul>
-<li>  买入日期：其实很好想，遇到更低点就记录一下。</li>
-<li>  卖出日期：这个就不好算了，但也没有必要算出准确的卖出日期，只要当前价格大于（最低价格+手续费），就可以收获利润，至于准确的卖出日期，就是连续收获利润区间里的最后一天（并不需要计算是具体哪一天）。</li>
+<li>买入日期：其实很好想，遇到更低点就记录一下。</li>
+<li>卖出日期：这个就不好算了，但也没有必要算出准确的卖出日期，只要当前价格大于（最低价格+手续费），就可以收获利润，至于准确的卖出日期，就是连续收获利润区间里的最后一天（并不需要计算是具体哪一天）。</li>
 </ul>
 <p>做收获利润操作的时候其实有三种情况：</p>
 <ul>
-<li>  情况一：收获利润的这一天并不是收获利润区间里的最后一天（<strong>不是真正的卖出，相当于持有股票</strong>），所以后面要继续收获利润。</li>
-<li>  情况二：前一天是收获利润区间里的最后一天（相当于真正的卖出了），今天要重新记录最小价格了。</li>
-<li>  情况三：不作操作，保持原有状态（买入，卖出，不买不卖）<h3 id="2-1-1-思路总结"><a href="#2-1-1-思路总结" class="headerlink" title="2.1.1 思路总结"></a>2.1.1 思路总结</h3></li>
+<li>情况一：收获利润的这一天并不是收获利润区间里的最后一天（<strong>不是真正的卖出，相当于持有股票</strong>），所以后面要继续收获利润。</li>
+<li>情况二：前一天是收获利润区间里的最后一天（相当于真正的卖出了），今天要重新记录最小价格了。</li>
+<li>情况三：不作操作，保持原有状态（买入，卖出，不买不卖）</li>
 </ul>
+<h3 id="211-思路总结"><a class="markdownIt-Anchor" href="#211-思路总结"></a> 2.1.1 思路总结</h3>
 <ol>
 <li>不断的寻找最低点，在最低点时买入</li>
 <li>寻找有利润的时候买入，更新下一次的买入位置在循环卖出</li>
 <li>对所有利润加和</li>
 </ol>
-<h2 id="2-2-断点调试"><a href="#2-2-断点调试" class="headerlink" title="2.2 断点调试"></a>2.2 断点调试</h2><p><a href="file:///Users/yibeikongqiu/Desktop/ishot视频/贪心算法/23.买卖股票的最佳时机含手续费.mp4">23.买卖股票的最佳时机含手续费</a></p>
-<p><a href="file:///Users/yibeikongqiu/Desktop/ishot%E8%A7%86%E9%A2%91/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/23.%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA%E5%90%AB%E6%89%8B%E7%BB%AD%E8%B4%B9.mp4#t=10.471542">00:10</a> 情况三：现在的价格不是最低的，并且卖出的话亏本</p>
-<p><a href="file:///Users/yibeikongqiu/Desktop/ishot%E8%A7%86%E9%A2%91/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/23.%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA%E5%90%AB%E6%89%8B%E7%BB%AD%E8%B4%B9.mp4#t=28.795416">00:28</a><br>#疑问 #已解决<br>为什么要minPrice = prices[i]- fee呢，如果去掉了- fee 则结果不对<br><del>因为在该下标处已经交过了一次手续费，不需要在交了？？？</del></p>
-<p>输入：prices = [1,3,7,5,10,3], fee = 3<br>输出：6<br>相当于：1时买入，10时卖出(10-1-3 = 6)<br>并不是：1时买入，7时卖出，5时买入，10时卖出(7-1-3  +  10 - 5 -3 = 5)<br>minprice = price[i] - fee  有正利润就假装卖了，先收集利润，- fee 的作用是如果后边的还有利润更高的，则这次其实是不卖的<br>eg：7时有正利润的先收集起来(7-1-3=3)<br>但此时的minPrice = 7-3  =&nbsp;4， 4是后边的最小的，接下来的利润是10-4-3= 3<br>总利润就是3+3 = 6，而不是像上边计算的5，这个作用就是，看似在7处卖了，实际没卖，最后是在10的位置卖的</p>
-<h1 id="3-代码"><a href="#3-代码" class="headerlink" title="3 代码"></a>3 代码</h1><p>编译已通过</p>
+<h2 id="22-断点调试"><a class="markdownIt-Anchor" href="#22-断点调试"></a> 2.2 断点调试</h2>
+<p>[23.买卖股票的最佳时机含手续费](file:///Users/yibeikongqiu/Desktop/ishot视频/贪心算法/23.买卖股票的最佳时机含手续费.mp4)</p>
+<p>[00:10](file:///Users/yibeikongqiu/Desktop/ishot%E8%A7%86%E9%A2%91/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/23.%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA%E5%90%AB%E6%89%8B%E7%BB%AD%E8%B4%B9.mp4#t=10.471542) 情况三：现在的价格不是最低的，并且卖出的话亏本</p>
+<p>[00:28](file:///Users/yibeikongqiu/Desktop/ishot%E8%A7%86%E9%A2%91/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/23.%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA%E5%90%AB%E6%89%8B%E7%BB%AD%E8%B4%B9.mp4#t=28.795416)<br>
+#疑问 #已解决<br>
+为什么要minPrice = prices[i]- fee呢，如果去掉了- fee 则结果不对<br>
+<s>因为在该下标处已经交过了一次手续费，不需要在交了？？？</s></p>
+<p>输入：prices = [1,3,7,5,10,3], fee = 3<br>
+输出：6<br>
+相当于：1时买入，10时卖出(10-1-3 = 6)<br>
+并不是：1时买入，7时卖出，5时买入，10时卖出(7-1-3  +  10 - 5 -3 = 5)<br>
+minprice = price[i] - fee  有正利润就假装卖了，先收集利润，- fee 的作用是如果后边的还有利润更高的，则这次其实是不卖的<br>
+eg：7时有正利润的先收集起来(7-1-3=3)<br>
+但此时的minPrice = 7-3  =&nbsp;4， 4是后边的最小的，接下来的利润是10-4-3= 3<br>
+总利润就是3+3 = 6，而不是像上边计算的5，这个作用就是，看似在7处卖了，实际没卖，最后是在10的位置卖的</p>
+<h1 id="3-代码"><a class="markdownIt-Anchor" href="#3-代码"></a> 3 代码</h1>
+<p>编译已通过</p>
 <figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">maxProfit</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; prices, <span class="hljs-type">int</span> fee)</span> </span>{<br>        <span class="hljs-type">int</span> result = <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> minPrice = prices[<span class="hljs-number">0</span>];<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i =&nbsp;<span class="hljs-number">1</span>; i &lt; prices.<span class="hljs-built_in">size</span>(); i++){<br>            <span class="hljs-keyword">if</span> (prices[i] &lt; minPrice) minPrice = prices[i];<br>            <span class="hljs-keyword">if</span> (prices[i] &gt; minPrice &amp;&amp; prices[i] - minPrice - fee &lt; <span class="hljs-number">0</span>) <span class="hljs-keyword">continue</span>;<br>            <span class="hljs-keyword">if</span> (prices[i] - minPrice - fee &gt; <span class="hljs-number">0</span>){<br>                result += prices[i] -minPrice - fee;<br>                minPrice = prices[i] - fee; <br>            }<br>        }<br>        <span class="hljs-keyword">return</span> result;<br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
-
-
-<h1 id="4-知识点"><a href="#4-知识点" class="headerlink" title="4 知识点"></a>4 知识点</h1><p>[[continue]]</p>
-<h1 id="5-参考资料"><a href="#5-参考资料" class="headerlink" title="5 参考资料"></a>5 参考资料</h1><p>自用跳转连接：<a href="">ob</a>， <a href="">blog</a></p>
+<h1 id="4-知识点"><a class="markdownIt-Anchor" href="#4-知识点"></a> 4 知识点</h1>
+<p>[[continue]]</p>
+<h1 id="5-参考资料"><a class="markdownIt-Anchor" href="#5-参考资料"></a> 5 参考资料</h1>
+<p>自用跳转连接：<a href="">ob</a>， <a href="">blog</a></p>
 
               
             </div>
@@ -422,7 +443,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2022年7月12日</div>
+          <div>2022年8月4日</div>
         </div>
       
       <div class="license-meta-item">
@@ -513,6 +534,11 @@
 
   
 
+
+
+
+  
+  
 
 
 

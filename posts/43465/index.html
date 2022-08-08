@@ -16,12 +16,12 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1 分发糖果力扣题目链接 老师想给孩子们分发糖果，有 N&amp;nbsp;个孩子站成了一条直线，老师会根据每个孩子的表现，预先给他们评分。 你需要按照以下要求，帮助老师给这些孩子分发糖果：    每个孩子至少分配到 1 个糖果。   相邻的孩子中，评分高的孩子必须获得更多的糖果。  那么这样下来，老师至少需要准备多少颗糖果呢？ 示例&amp;nbsp;1:    输入: [1,0,2]   输出: 5   解释">
+    <meta name="description" content="1 分发糖果 力扣题目链接 老师想给孩子们分发糖果，有 N&amp;nbsp;个孩子站成了一条直线，老师会根据每个孩子的表现，预先给他们评分。 你需要按照以下要求，帮助老师给这些孩子分发糖果：  每个孩子至少分配到 1 个糖果。 相邻的孩子中，评分高的孩子必须获得更多的糖果。  那么这样下来，老师至少需要准备多少颗糖果呢？ 示例&amp;nbsp;1:  输入: [1,0,2] 输出: 5 解释: 你可以分别给">
 <meta property="og:type" content="article">
 <meta property="og:title" content="12.分发糖果">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/43465/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="1 分发糖果力扣题目链接 老师想给孩子们分发糖果，有 N&amp;nbsp;个孩子站成了一条直线，老师会根据每个孩子的表现，预先给他们评分。 你需要按照以下要求，帮助老师给这些孩子分发糖果：    每个孩子至少分配到 1 个糖果。   相邻的孩子中，评分高的孩子必须获得更多的糖果。  那么这样下来，老师至少需要准备多少颗糖果呢？ 示例&amp;nbsp;1:    输入: [1,0,2]   输出: 5   解释">
+<meta property="og:description" content="1 分发糖果 力扣题目链接 老师想给孩子们分发糖果，有 N&amp;nbsp;个孩子站成了一条直线，老师会根据每个孩子的表现，预先给他们评分。 你需要按照以下要求，帮助老师给这些孩子分发糖果：  每个孩子至少分配到 1 个糖果。 相邻的孩子中，评分高的孩子必须获得更多的糖果。  那么这样下来，老师至少需要准备多少颗糖果呢？ 示例&amp;nbsp;1:  输入: [1,0,2] 输出: 5 解释: 你可以分别给">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20201117114916878.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20201117115658791.png">
@@ -47,6 +47,8 @@
   <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.15.6/katex.min.css" />
 
 
 
@@ -293,36 +295,50 @@
             
             <div class="markdown-body">
               
-              <h1 id="1-分发糖果"><a href="#1-分发糖果" class="headerlink" title="1 分发糖果"></a>1 分发糖果</h1><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/candy/">力扣题目链接</a></p>
+              <h1 id="1-分发糖果"><a class="markdownIt-Anchor" href="#1-分发糖果"></a> 1 分发糖果</h1>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/candy/">力扣题目链接</a></p>
 <p>老师想给孩子们分发糖果，有 N&nbsp;个孩子站成了一条直线，老师会根据每个孩子的表现，预先给他们评分。</p>
 <p>你需要按照以下要求，帮助老师给这些孩子分发糖果：</p>
 <ul>
-<li>  每个孩子至少分配到 1 个糖果。</li>
-<li>  相邻的孩子中，评分高的孩子必须获得更多的糖果。</li>
+<li>每个孩子至少分配到 1 个糖果。</li>
+<li>相邻的孩子中，评分高的孩子必须获得更多的糖果。</li>
 </ul>
 <p>那么这样下来，老师至少需要准备多少颗糖果呢？</p>
 <p>示例&nbsp;1:</p>
 <ul>
-<li>  输入: [1,0,2]</li>
-<li>  输出: 5</li>
-<li>  解释: 你可以分别给这三个孩子分发 2、1、2 颗糖果。</li>
+<li>输入: [1,0,2]</li>
+<li>输出: 5</li>
+<li>解释: 你可以分别给这三个孩子分发 2、1、2 颗糖果。</li>
 </ul>
 <p>示例&nbsp;2:</p>
 <ul>
-<li>  输入: [1,2,2]</li>
-<li>  输出: 4</li>
-<li>  解释: 你可以分别给这三个孩子分发 1、2、1 颗糖果。第三个孩子只得到 1 颗糖果，这已满足上述两个条件。</li>
+<li>输入: [1,2,2]</li>
+<li>输出: 4</li>
+<li>解释: 你可以分别给这三个孩子分发 1、2、1 颗糖果。第三个孩子只得到 1 颗糖果，这已满足上述两个条件。</li>
 </ul>
-<h1 id="2-思路"><a href="#2-思路" class="headerlink" title="2 思路"></a>2 思路</h1><p>先比较每一个孩子的右边或者左边，<strong>如果两边一起考虑一定会顾此失彼</strong>。</p>
+<h1 id="2-思路"><a class="markdownIt-Anchor" href="#2-思路"></a> 2 思路</h1>
+<p>先比较每一个孩子的右边或者左边，<strong>如果两边一起考虑一定会顾此失彼</strong>。</p>
 <p>rate：评分；candyVec：糖果个数</p>
-<p><strong>右边</strong>：从前往后遍历<br>局部最优：如果右比左大，右边孩子就多一个糖果。<br>全局最优：总体中评分高的右孩子比左孩子多一个糖果<br><img src="https://img-blog.csdnimg.cn/20201117114916878.png" srcset="/img/loading.gif" lazyload alt="135.分发糖果|700"><br><strong>左边</strong>：从后往前遍历<br>局部最优：如果左比右大，左边孩子就多一个糖果。<br>全局最优：总体中评分高的左孩子比右孩子多一个糖果<br>#flashcards/代码随想录<br>为什么不能从前往后遍历<br>?<br>因为如果继续从前向后遍历，就无法利用上一次得出的candyVec的数组了</p>
+<p><strong>右边</strong>：从前往后遍历<br>
+局部最优：如果右比左大，右边孩子就多一个糖果。<br>
+全局最优：总体中评分高的右孩子比左孩子多一个糖果<br>
+<img src="https://img-blog.csdnimg.cn/20201117114916878.png" srcset="/img/loading.gif" lazyload alt="135.分发糖果|700"><br>
+<strong>左边</strong>：从后往前遍历<br>
+局部最优：如果左比右大，左边孩子就多一个糖果。<br>
+全局最优：总体中评分高的左孩子比右孩子多一个糖果<br>
+#flashcards/代码随想录<br>
+为什么不能从前往后遍历<br>
+?<br>
+因为如果继续从前向后遍历，就无法利用上一次得出的candyVec的数组了</p>
 <!--SR:!2022-07-31,27,250-->
-
-<p>eg：<br><img src="https://img-blog.csdnimg.cn/20201117115658791.png" srcset="/img/loading.gif" lazyload alt="135.分发糖果1|700"><br>如果是图中这样的话，就没必要用max函数了啊 #疑问 </p>
-<h1 id="3-代码"><a href="#3-代码" class="headerlink" title="3 代码"></a>3 代码</h1><p>自写代码已通过，没有用max函数</p>
+<p>eg：<br>
+<img src="https://img-blog.csdnimg.cn/20201117115658791.png" srcset="/img/loading.gif" lazyload alt="135.分发糖果1|700"><br>
+如果是图中这样的话，就没必要用max函数了啊 #疑问</p>
+<h1 id="3-代码"><a class="markdownIt-Anchor" href="#3-代码"></a> 3 代码</h1>
+<p>自写代码已通过，没有用max函数</p>
 <figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">candy</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; ratings)</span></span>{<br>        <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">candyVec</span><span class="hljs-params">(ratings.size(), <span class="hljs-number">1</span>)</span></span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; ratings.<span class="hljs-built_in">size</span>(); i++){<br>            <span class="hljs-keyword">if</span>(ratings[i+<span class="hljs-number">1</span>] &gt; ratings[i]) {<br>            candyVec[i+<span class="hljs-number">1</span>] = candyVec[i]+<span class="hljs-number">1</span>;<br>            }<br>       }<br><br>       <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = ratings.<span class="hljs-built_in">size</span>() - <span class="hljs-number">2</span>; i &gt;= <span class="hljs-number">0</span>; i-- ) { <span class="hljs-comment">// 从倒数第二位置开始比</span><br>        <span class="hljs-keyword">if</span> (ratings[i] &gt; ratings[i+<span class="hljs-number">1</span>]){<br>            candyVec[i] = candyVec[i+<span class="hljs-number">1</span>]+<span class="hljs-number">1</span>;<br>            }<br>       }<br>       <span class="hljs-type">int</span> result = <span class="hljs-number">0</span>;<br>       <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> a : candyVec) result += a; <span class="hljs-comment">// 分号后边只需要变量名就行</span><br>       <span class="hljs-keyword">return</span> result;<br>    }<br>};<br><br></code></pre></td></tr></tbody></table></figure>
-
-<p>参考资料<br>[[for 循环]]</p>
+<p>参考资料<br>
+[[for 循环]]</p>
 
               
             </div>
@@ -498,6 +514,11 @@
 
   
 
+
+
+
+  
+  
 
 
 

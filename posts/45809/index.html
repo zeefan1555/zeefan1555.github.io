@@ -47,6 +47,8 @@
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
 
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.15.6/katex.min.css" />
+
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
@@ -223,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          871 字
+          867 字
         
       </span>
     
@@ -294,34 +296,53 @@
               
               <p>文章简介：LeetCode  题解——96.不同的二叉搜索树</p>
 <span id="more"></span>
-
-
-<h1 id="1-96-不同的二叉搜索树"><a href="#1-96-不同的二叉搜索树" class="headerlink" title="1 96.不同的二叉搜索树"></a>1 96.不同的二叉搜索树</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/unique-binary-search-trees/">力扣题目链接</a></p>
-<p>给定一个整数 n，求以 1 … n 为节点组成的二叉搜索树有多少种？<br><img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202207121031374.png" srcset="/img/loading.gif" lazyload></p>
-<h1 id="2-思路"><a href="#2-思路" class="headerlink" title="2 思路"></a>2 思路</h1><p>[[二叉搜索树]]</p>
+<h1 id="1-96不同的二叉搜索树"><a class="markdownIt-Anchor" href="#1-96不同的二叉搜索树"></a> 1 96.不同的二叉搜索树</h1>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/unique-binary-search-trees/">力扣题目链接</a></p>
+<p>给定一个整数 n，求以 1 … n 为节点组成的二叉搜索树有多少种？<br>
+<img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202207121031374.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h1 id="2-思路"><a class="markdownIt-Anchor" href="#2-思路"></a> 2 思路</h1>
+<p>[[二叉搜索树]]</p>
 <p>五部曲</p>
 <ol>
-<li> 确定dp数组（dp table）以及下标的含义</li>
+<li>
+<p>确定dp数组（dp table）以及下标的含义<br>
+<strong>dp[i] ： 1到i为节点组成的二叉搜索树的个数为dp[i]</strong>。</p>
+</li>
+<li>
+<p>确定递推公式<br>
+dp[i] += dp[以j为头结点左子树节点数量] * dp[以j为头结点右子树节点数量]<br>
+<img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202207121051970.png" srcset="/img/loading.gif" lazyload alt=""></p>
+</li>
 </ol>
-<p>**dp[i] ： 1到i为节点组成的二叉搜索树的个数为dp[i]**。</p>
-<ol start="2">
-<li>确定递推公式<br>dp[i] += dp[以j为头结点左子树节点数量] * dp[以j为头结点右子树节点数量]<br><img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202207121051970.png" srcset="/img/loading.gif" lazyload></li>
-</ol>
-<p>dp[3]，就是 元素1为头结点搜索树的数量 + 元素2为头结点搜索树的数量 + 元素3为头结点搜索树的数量<br>所以是<strong>求和</strong><br><img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202207121103402.png" srcset="/img/loading.gif" lazyload></p>
+<p>dp[3]，就是 元素1为头结点搜索树的数量 + 元素2为头结点搜索树的数量 + 元素3为头结点搜索树的数量<br>
+所以是<strong>求和</strong><br>
+<img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202207121103402.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <ol start="3">
-<li><p>dp数组如何初始化<br>从定义上来讲，空节点也是一棵二叉树，也是一棵二叉搜索树<br>dp[0] = 1<br>从递归公式上来讲，dp[以j为头结点左子树节点数量] * dp[以j为头结点右子树节点数量] 中以j为头结点左子树节点数量为0，也需要dp[以j为头结点左子树节点数量] = 1， 否则乘法的结果就都变成0了。</p>
+<li>
+<p>dp数组如何初始化<br>
+从定义上来讲，空节点也是一棵二叉树，也是一棵二叉搜索树<br>
+dp[0] = 1<br>
+从递归公式上来讲，dp[以j为头结点左子树节点数量] * dp[以j为头结点右子树节点数量] 中以j为头结点左子树节点数量为0，也需要dp[以j为头结点左子树节点数量] = 1， 否则乘法的结果就都变成0了。</p>
 </li>
-<li><p> 确定遍历顺序<br>顺序遍历<br>dp[i] += dp[j - 1] * dp[i - j]可以看出，<strong>节点数为i的状态是依靠 i之前节点数的状态</strong>。</p>
+<li>
+<p>确定遍历顺序<br>
+顺序遍历<br>
+dp[i] += dp[j - 1] * dp[i - j]可以看出，<strong>节点数为i的状态是依靠 i之前节点数的状态</strong>。</p>
 </li>
-<li><p> 举例推导dp数组<br>n为5时候的dp数组状态如图：</p>
+<li>
+<p>举例推导dp数组<br>
+n为5时候的dp数组状态如图：</p>
 </li>
 </ol>
-<p><img src="https://img-blog.csdnimg.cn/20210107093253987.png" srcset="/img/loading.gif" lazyload alt="96.不同的二叉搜索树3"><br>[[vector]]</p>
-<h1 id="3-代码"><a href="#3-代码" class="headerlink" title="3 代码"></a>3 代码</h1><p>编译已通过</p>
+<p><img src="https://img-blog.csdnimg.cn/20210107093253987.png" srcset="/img/loading.gif" lazyload alt="96.不同的二叉搜索树3"><br>
+[[vector]]</p>
+<h1 id="3-代码"><a class="markdownIt-Anchor" href="#3-代码"></a> 3 代码</h1>
+<p>编译已通过</p>
 <figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">numTrees</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> </span>{<br>        <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">dp</span><span class="hljs-params">(n+<span class="hljs-number">1</span>)</span></span>;<br>        <span class="hljs-keyword">if</span> (n == <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">if</span> (n == <span class="hljs-number">2</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">2</span>;<br>        dp[<span class="hljs-number">0</span>]=<span class="hljs-number">1</span>;<br>        dp[<span class="hljs-number">1</span>]=<span class="hljs-number">1</span>;<br>        dp[<span class="hljs-number">2</span>]=<span class="hljs-number">2</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">3</span>; i &lt;= n; i++){ <span class="hljs-comment">// 从3开始赋值,如果没有上面的if就会 i = 3  ，i &lt;= 1，就错了</span><br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt;= i; j++){<span class="hljs-comment">// j从第二个数开始才能划分左右部分，所以是1</span><br>                dp[i] += dp[j - <span class="hljs-number">1</span>] * dp[i - j];<br>            }<br>        }<br>        <span class="hljs-keyword">return</span> dp[n];<br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
-
-
-<h1 id="4-参考资料"><a href="#4-参考资料" class="headerlink" title="4 参考资料"></a>4 参考资料</h1><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Qf4y1K72t?spm_id_from=333.337.search-card.all.click&amp;vd_source=f2340d96e99780a96b50d8096ffaaf1a">leetcode96题 不同的二叉搜索树_哔哩哔哩_bilibili</a><br><a target="_blank" rel="noopener" href="https://www.programmercarl.com/0096.%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91.html#%E6%80%9D%E8%B7%AF">代码随想录</a><br>自用跳转链接：🈚</p>
+<h1 id="4-参考资料"><a class="markdownIt-Anchor" href="#4-参考资料"></a> 4 参考资料</h1>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Qf4y1K72t?spm_id_from=333.337.search-card.all.click&amp;vd_source=f2340d96e99780a96b50d8096ffaaf1a">leetcode96题 不同的二叉搜索树_哔哩哔哩_bilibili</a><br>
+<a target="_blank" rel="noopener" href="https://www.programmercarl.com/0096.%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91.html#%E6%80%9D%E8%B7%AF">代码随想录</a><br>
+自用跳转链接：🈚</p>
 
               
             </div>
@@ -497,6 +518,11 @@
 
   
 
+
+
+
+  
+  
 
 
 

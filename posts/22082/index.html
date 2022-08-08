@@ -16,12 +16,12 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="文章简介    力扣题解：763.划分字母区间">
+    <meta name="description" content="文章简介 力扣题解：763.划分字母区间">
 <meta property="og:type" content="article">
 <meta property="og:title" content="19.划分字母区间">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/22082/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="文章简介    力扣题解：763.划分字母区间">
+<meta property="og:description" content="文章简介 力扣题解：763.划分字母区间">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20201222191924417.png">
 <meta property="article:published_time" content="2022-06-15T01:21:00.000Z">
@@ -46,6 +46,8 @@
   <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.15.6/katex.min.css" />
 
 
 
@@ -223,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.6k 字
+          2.3k 字
         
       </span>
     
@@ -234,7 +236,7 @@
         
         
         
-          9 分钟
+          12 分钟
         
       </span>
     
@@ -292,47 +294,53 @@
             
             <div class="markdown-body">
               
-              <p>文章简介<br>    力扣题解：763.划分字母区间</p>
+              <p>文章简介<br>
+力扣题解：763.划分字母区间</p>
 <span id="more"></span>
-
-<h1 id="1-763-划分字母区间"><a href="#1-763-划分字母区间" class="headerlink" title="1 763.划分字母区间"></a>1 763.划分字母区间</h1><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/partition-labels/">力扣题目链接</a></p>
+<h1 id="1-763划分字母区间"><a class="markdownIt-Anchor" href="#1-763划分字母区间"></a> 1 763.划分字母区间</h1>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/partition-labels/">力扣题目链接</a></p>
 <p>字符串 S 由小写字母组成。我们要把这个字符串划分为尽可能多的片段，同一字母最多出现在一个片段中。返回一个表示每个字符串片段的长度的列表。</p>
 <p>示例：</p>
 <ul>
-<li>  输入：S = “ababcbacadefegdehijhklij”</li>
-<li>  输出：[9,7,8] 解释： 划分结果为 “ababcbaca”, “defegde”, “hijhklij”。 每个字母最多出现在一个片段中。 像 “ababcbacadefegde”, “hijhklij” 的划分是错误的，因为划分的片段数较少。</li>
+<li>输入：S = “ababcbacadefegdehijhklij”</li>
+<li>输出：[9,7,8] 解释： 划分结果为 “ababcbaca”, “defegde”, “hijhklij”。 每个字母最多出现在一个片段中。 像 “ababcbacadefegde”, “hijhklij” 的划分是错误的，因为划分的片段数较少。</li>
 </ul>
 <p>提示：</p>
 <ul>
-<li>  S的长度在[1, 500]之间。</li>
-<li>  S只包含小写字母 ‘a’ 到 ‘z’ 。</li>
+<li>S的长度在[1, 500]之间。</li>
+<li>S只包含小写字母 ‘a’ 到 ‘z’ 。</li>
 </ul>
-<h1 id="2-思路"><a href="#2-思路" class="headerlink" title="2 思路"></a>2 思路</h1><p>总共分为两步：</p>
+<h1 id="2-思路"><a class="markdownIt-Anchor" href="#2-思路"></a> 2 思路</h1>
+<p>总共分为两步：</p>
 <ul>
-<li>  统计每一个字符最后出现的位置</li>
-<li>从头遍历字符，并更新字符的最远出现下标，如果找到字符最远出现位置下标和当前下标相等了，则找到了分割点<br><img src="https://img-blog.csdnimg.cn/20201222191924417.png" srcset="/img/loading.gif" lazyload alt="763.划分字母区间|900"><h1 id="3-代码"><a href="#3-代码" class="headerlink" title="3 代码"></a>3 代码</h1><h2 id="3-1-carl断点调试"><a href="#3-1-carl断点调试" class="headerlink" title="3.1 carl断点调试"></a>3.1 carl断点调试</h2><a href="file:///Users/yibeikongqiu/Desktop/ishot视频/贪心算法/19.划分字母区间(carl).mp4">19.划分字母区间(carl).MP4</a><br>  以后可以监听几个变量：S[i]，right - left +1<br>  [[c++中 - ‘0’ 以及 -‘a’ 的相减操作解释]]<br>  S = “<strong>a</strong>babcbac<strong>a</strong>defegdehijhklij”<br>  <a href="file:///Users/yibeikongqiu/Desktop/ishot%E8%A7%86%E9%A2%91/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/19.%E5%88%92%E5%88%86%E5%AD%97%E6%AF%8D%E5%8C%BA%E9%97%B4(carl).mp4#t=12.709769">00:12</a> <pre><code class="hljs">  S = "a==b==abcbacadefegdehijhklij"，相当于将b对应1，这个数存在了hash里
-  hash[S[1] - 'a'] =&nbsp;1，即hash[2] = 1
-</code></pre>
-  <a href="file:///Users/yibeikongqiu/Desktop/ishot%E8%A7%86%E9%A2%91/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/19.%E5%88%92%E5%88%86%E5%AD%97%E6%AF%8D%E5%8C%BA%E9%97%B4(carl).mp4#t=63.222835">01:03</a> <pre><code class="hljs">  S = "==**a**==babcbac==**a**==defegdehijhklij"
-  将每一个字母的所对应的下标值放到了hash数组里了，相同字母的是更新的，因为 S[1] - 'a'=&nbsp;S[9] - 'a' = 0 (第一个区间)
-</code></pre>
-  <a href="file:///Users/yibeikongqiu/Desktop/ishot%E8%A7%86%E9%A2%91/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/19.%E5%88%92%E5%88%86%E5%AD%97%E6%AF%8D%E5%8C%BA%E9%97%B4(carl).mp4#t=70.392045">01:10</a> <pre><code class="hljs">  此使 right = max(0, 8)，之道i 到下标8才会进入if 循环语句，它在下标8之前一直在比较有没有比8更大值，有的话说明第一个分割点更远
-</code></pre>
-  <a href="file:///Users/yibeikongqiu/Desktop/ishot%E8%A7%86%E9%A2%91/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/19.%E5%88%92%E5%88%86%E5%AD%97%E6%AF%8D%E5%8C%BA%E9%97%B4(carl).mp4#t=113.069755">01:53</a><pre><code class="hljs">  到达第一分割点下标8(i =&nbsp;8)处，开始push_back结果，并且更新下一个区间
-  right  - left + 1  = 8-0+1= 9 第一个区间相当于：尾 - 头 + 1
-  下个区间要在更新一下头即left = i+1 =&nbsp;9
-  
-</code></pre>
-</li>
+<li>统计每一个字符最后出现的位置</li>
+<li>从头遍历字符，并更新字符的最远出现下标，如果找到字符最远出现位置下标和当前下标相等了，则找到了分割点<br>
+<img src="https://img-blog.csdnimg.cn/20201222191924417.png" srcset="/img/loading.gif" lazyload alt="763.划分字母区间|900"></li>
 </ul>
-<h3 id="3-1-1-代码"><a href="#3-1-1-代码" class="headerlink" title="3.1.1 代码"></a>3.1.1 代码</h3><p>自写 编译已通过</p>
+<h1 id="3-代码"><a class="markdownIt-Anchor" href="#3-代码"></a> 3 代码</h1>
+<h2 id="31-carl断点调试"><a class="markdownIt-Anchor" href="#31-carl断点调试"></a> 3.1 carl断点调试</h2>
+<p>[19.划分字母区间(carl).MP4](file:///Users/yibeikongqiu/Desktop/ishot视频/贪心算法/19.划分字母区间(carl).mp4)<br>
+以后可以监听几个变量：S[i]，right - left +1<br>
+[[c++中 - ‘0’ 以及 -‘a’ 的相减操作解释]]<br>
+S = “<strong>a</strong>babcbac<strong>a</strong>defegdehijhklij”<br>
+[00:12](file:///Users/yibeikongqiu/Desktop/ishot%E8%A7%86%E9%A2%91/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/19.%E5%88%92%E5%88%86%E5%AD%97%E6%AF%8D%E5%8C%BA%E9%97%B4(carl).mp4#t=12.709769)<br>
+S = “a<mark>b</mark>abcbacadefegdehijhklij”，相当于将b对应1，这个数存在了hash里<br>
+hash[S[1] - ‘a’] =&nbsp;1，即hash[2] = 1<br>
+[01:03](file:///Users/yibeikongqiu/Desktop/ishot%E8%A7%86%E9%A2%91/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/19.%E5%88%92%E5%88%86%E5%AD%97%E6%AF%8D%E5%8C%BA%E9%97%B4(carl).mp4#t=63.222835)<br>
+S = “==<strong>a</strong><mark>babcbac</mark><strong>a</strong>==defegdehijhklij”<br>
+将每一个字母的所对应的下标值放到了hash数组里了，相同字母的是更新的，因为 S[1] - ‘a’=&nbsp;S[9] - ‘a’ = 0 (第一个区间)<br>
+[01:10](file:///Users/yibeikongqiu/Desktop/ishot%E8%A7%86%E9%A2%91/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/19.%E5%88%92%E5%88%86%E5%AD%97%E6%AF%8D%E5%8C%BA%E9%97%B4(carl).mp4#t=70.392045)<br>
+此使 right = max(0, 8)，之道i 到下标8才会进入if 循环语句，它在下标8之前一直在比较有没有比8更大值，有的话说明第一个分割点更远<br>
+[01:53](file:///Users/yibeikongqiu/Desktop/ishot%E8%A7%86%E9%A2%91/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/19.%E5%88%92%E5%88%86%E5%AD%97%E6%AF%8D%E5%8C%BA%E9%97%B4(carl).mp4#t=113.069755)<br>
+到达第一分割点下标8(i =&nbsp;8)处，开始push_back结果，并且更新下一个区间<br>
+right  - left + 1  = 8-0+1= 9 第一个区间相当于：尾 - 头 + 1<br>
+下个区间要在更新一下头即left = i+1 =&nbsp;9</p>
+<h3 id="311-代码"><a class="markdownIt-Anchor" href="#311-代码"></a> 3.1.1 代码</h3>
+<p>自写 编译已通过</p>
 <figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">partitionLabels</span><span class="hljs-params">(string S)</span> </span>{<br>       <span class="hljs-type">int</span> hash[<span class="hljs-number">27</span>] = {<span class="hljs-number">0</span>};<span class="hljs-comment">// 数组初始化必须是列表，不能是单纯的0</span><br>       <span class="hljs-comment">//int hash[S.size()] = {0}; // S.size 可变动的，错误：可变大小的对象可能未初始化</span><br><br>       <span class="hljs-comment">//hash数组中写入每个字母的所对应的最远下标值</span><br>       <span class="hljs-comment">//因每个字母的S[i] - 'a'是不变的，所以可以一直更新最远下标</span><br>       <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; S.<span class="hljs-built_in">size</span>(); i++){<br>           hash[S[i] - <span class="hljs-string">'a'</span>] = i;<br>       }<br>       <span class="hljs-type">int</span> right = <span class="hljs-number">0</span>;<br>       <span class="hljs-type">int</span> left = <span class="hljs-number">0</span>;<br>       vector&lt;<span class="hljs-type">int</span>&gt; result; <span class="hljs-comment">// vector 能够不断往里加数据</span><br>       <span class="hljs-comment">// 不断的找分割区间</span><br>       <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; S.<span class="hljs-built_in">size</span>(); i++){<br>           right = <span class="hljs-built_in">max</span> (right, hash[S[i] - <span class="hljs-string">'a'</span>]); <span class="hljs-comment">// 确定区间的尾部 不是hash[i], 是每个字母对应的最远下标</span><br>           <span class="hljs-keyword">if</span>(i == right){<br>               result.<span class="hljs-built_in">push_back</span>(right - left +<span class="hljs-number">1</span>); <span class="hljs-comment">// 返回是字符串的长度所以+1</span><br>               left = i + <span class="hljs-number">1</span>; <span class="hljs-comment">// 更新下一个区间头部，现在i是上一区间的尾，所以下个头部为 i+1</span><br>           }<br>       }<br>       <span class="hljs-keyword">return</span> result;<br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
-
-
-
-
-
-<h1 id="4-参考资料"><a href="#4-参考资料" class="headerlink" title="4 参考资料"></a>4 参考资料</h1><p><a target="_blank" rel="noopener" href="https://www.programmercarl.com/0763.%E5%88%92%E5%88%86%E5%AD%97%E6%AF%8D%E5%8C%BA%E9%97%B4.html#%E6%80%9D%E8%B7%AF">代码随想录</a><br>自用跳转链接：<a href="obsidian://advanced-uri?vault=Documents&amp;uid=13b04b05-d8f9-4a57-a909-3b6b3af97825">ob</a>，<a target="_blank" rel="noopener" href="http://localhost:4000/2022/06/15/19.hua-fen-zi-mu-qu-jian/">blog</a></p>
+<h1 id="4-参考资料"><a class="markdownIt-Anchor" href="#4-参考资料"></a> 4 参考资料</h1>
+<p><a target="_blank" rel="noopener" href="https://www.programmercarl.com/0763.%E5%88%92%E5%88%86%E5%AD%97%E6%AF%8D%E5%8C%BA%E9%97%B4.html#%E6%80%9D%E8%B7%AF">代码随想录</a><br>
+自用跳转链接：<a href="obsidian://advanced-uri?vault=Documents&amp;uid=13b04b05-d8f9-4a57-a909-3b6b3af97825">ob</a>，<a target="_blank" rel="noopener" href="http://localhost:4000/2022/06/15/19.hua-fen-zi-mu-qu-jian/">blog</a></p>
 
               
             </div>
@@ -508,6 +516,11 @@
 
   
 
+
+
+
+  
+  
 
 
 

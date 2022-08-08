@@ -47,6 +47,8 @@
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
 
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.15.6/katex.min.css" />
+
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
@@ -292,13 +294,12 @@
             
             <div class="markdown-body">
               
-              <p><img src="https://s1.vika.cn/space/2022/05/28/0b3ffbfe5ad64d388d02bceff24ab6a0" srcset="/img/loading.gif" lazyload></p>
+              <p><img src="https://s1.vika.cn/space/2022/05/28/0b3ffbfe5ad64d388d02bceff24ab6a0" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>用官网安装出现以下错误：</p>
 <figure class="highlight pgsql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">curl: (<span class="hljs-number">7</span>) Failed <span class="hljs-keyword">to</span> <span class="hljs-keyword">connect</span> <span class="hljs-keyword">to</span> raw.githubusercontent.com port <span class="hljs-number">443</span>: <span class="hljs-keyword">Connection</span> refused<br></code></pre></td></tr></tbody></table></figure>
 <p>原因是：<strong>github 的一些域名的 DNS 解析被污染</strong>，导致DNS 解析过程无法通过域名取得正确的IP地址</p>
 <p>换成国内下载地址即可</p>
 <figure class="highlight awk"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">/bin/</span>zsh -c <span class="hljs-string">"$(curl -fsSL https://gitee.com/cunkai/HomebrewCN/raw/master/Homebrew.sh)"</span><br></code></pre></td></tr></tbody></table></figure>
-
 <p>根据终端反应输入即可，过程中有中文提示</p>
 
               
@@ -468,6 +469,11 @@
 
   
 
+
+
+
+  
+  
 
 
 

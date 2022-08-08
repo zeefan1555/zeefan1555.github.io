@@ -45,6 +45,8 @@
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
 
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.15.6/katex.min.css" />
+
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
@@ -290,7 +292,8 @@
             
             <div class="markdown-body">
               
-              <h1 id="1-518零钱兑换-II"><a href="#1-518零钱兑换-II" class="headerlink" title="1 518零钱兑换 II"></a>1 518零钱兑换 II</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/coin-change-2/">力扣题目链接</a></p>
+              <h1 id="1-518零钱兑换-ii"><a class="markdownIt-Anchor" href="#1-518零钱兑换-ii"></a> 1 518零钱兑换 II</h1>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/coin-change-2/">力扣题目链接</a></p>
 <p>难度：中等</p>
 <p>给定不同面额的硬币和一个总金额。写出函数来计算可以凑成总金额的硬币组合数。假设每一种面额的硬币有无限个。</p>
 <p>示例 1:</p>
@@ -299,20 +302,30 @@
 <p>示例 3: 输入: amount = 10, coins = [10] 输出: 1</p>
 <p>注意，你可以假设：</p>
 <ul>
-<li>  0 &lt;= amount (总金额) &lt;= 5000</li>
-<li>  1 &lt;= coin (硬币面额)&nbsp;&lt;= 5000</li>
-<li>  硬币种类不超过 500 种</li>
-<li>  结果符合 32 位符号整数</li>
+<li>0 &lt;= amount (总金额) &lt;= 5000</li>
+<li>1 &lt;= coin (硬币面额)&nbsp;&lt;= 5000</li>
+<li>硬币种类不超过 500 种</li>
+<li>结果符合 32 位符号整数</li>
 </ul>
-<h1 id="2-思路"><a href="#2-思路" class="headerlink" title="2 思路"></a>2 思路</h1><p>数量无限→立即想完全背包<br>本题和纯完全背包不一样，<strong>纯完全背包是能否凑成总价值 ，而本题是要求凑成总金额的个数！</strong></p>
-<p>组合不强调顺序，排列强调顺序<br>5 = 2 + 2 + 1<br>5 = 2 + 1 + 2<br>这是一种组合，都是 2 2 1。</p>
+<h1 id="2-思路"><a class="markdownIt-Anchor" href="#2-思路"></a> 2 思路</h1>
+<p>数量无限→立即想完全背包<br>
+本题和纯完全背包不一样，<strong>纯完全背包是能否凑成总价值 ，而本题是要求凑成总金额的个数！</strong></p>
+<p>组合不强调顺序，排列强调顺序<br>
+5 = 2 + 2 + 1<br>
+5 = 2 + 1 + 2<br>
+这是一种组合，都是 2 2 1。</p>
 <p>弄清排列和组合问题与遍历顺序息息相关</p>
-<h2 id="2-1-动归五部曲"><a href="#2-1-动归五部曲" class="headerlink" title="2.1 动归五部曲"></a>2.1 动归五部曲</h2><ol>
-<li><p>dp[j] 的含义<br>凑成总金额j的货币<strong>组合</strong>数为dp[j]<br>j背包恰好有dp[j]种组合装满：即装满背包有几种方法</p>
+<h2 id="21-动归五部曲"><a class="markdownIt-Anchor" href="#21-动归五部曲"></a> 2.1 动归五部曲</h2>
+<ol>
+<li>
+<p>dp[j] 的含义<br>
+凑成总金额j的货币<strong>组合</strong>数为dp[j]<br>
+j背包恰好有dp[j]种组合装满：即装满背包有几种方法</p>
 </li>
 <li></li>
 </ol>
-<p><strong>参考资料</strong><br><a target="_blank" rel="noopener" href="https://www.programmercarl.com/0518.%E9%9B%B6%E9%92%B1%E5%85%91%E6%8D%A2II.html#_518-%E9%9B%B6%E9%92%B1%E5%85%91%E6%8D%A2-ii">代码随想录</a></p>
+<p><strong>参考资料</strong><br>
+<a target="_blank" rel="noopener" href="https://www.programmercarl.com/0518.%E9%9B%B6%E9%92%B1%E5%85%91%E6%8D%A2II.html#_518-%E9%9B%B6%E9%92%B1%E5%85%91%E6%8D%A2-ii">代码随想录</a></p>
 
               
             </div>
@@ -488,6 +501,11 @@
 
   
 
+
+
+
+  
+  
 
 
 

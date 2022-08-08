@@ -47,6 +47,8 @@
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
 
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.15.6/katex.min.css" />
+
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
@@ -223,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.6k 字
+          1.5k 字
         
       </span>
     
@@ -294,8 +296,8 @@
               
               <p>文章简介：LeetCode  题解—— 746. 使用最小花费爬楼梯</p>
 <span id="more"></span>
-
-<h1 id="1-使用最小花费爬楼梯"><a href="#1-使用最小花费爬楼梯" class="headerlink" title="1 使用最小花费爬楼梯"></a>1 使用最小花费爬楼梯</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/min-cost-climbing-stairs/">力扣题目链接</a></p>
+<h1 id="1-使用最小花费爬楼梯"><a class="markdownIt-Anchor" href="#1-使用最小花费爬楼梯"></a> 1 使用最小花费爬楼梯</h1>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/min-cost-climbing-stairs/">力扣题目链接</a></p>
 <p>数组的每个下标作为一个阶梯，第 i 个阶梯对应着一个非负数的体力花费值&nbsp;cost[i]（下标从 0 开始）。</p>
 <p><strong>每当你爬上一个阶梯你都要花费对应的体力值，一旦支付了相应的体力值，你就可以选择向上爬一个阶梯或者爬两个阶梯。</strong></p>
 <p>请你找出达到楼层顶部的最低花费。在开始时，你可以选择从下标为 0 或 1 的元素作为初始阶梯。</p>
@@ -307,23 +309,69 @@
 <p>输入：cost = [1, 100, 1, 1, 1, 100, 1, 1, 100, 1] 输出：6 解释：最低花费方式是从 cost[0] 开始，逐个经过那些 1 ，跳过 cost[3] ，一共花费 6 。</p>
 <p>提示：</p>
 <ul>
-<li>  cost 的长度范围是 [2, 1000]。</li>
-<li>  cost[i] 将会是一个整型数据，范围为 [0, 999] 。</li>
+<li>cost 的长度范围是 [2, 1000]。</li>
+<li>cost[i] 将会是一个整型数据，范围为 [0, 999] 。</li>
 </ul>
-<h1 id="2-思路"><a href="#2-思路" class="headerlink" title="2 思路"></a>2 思路</h1><p><strong>注意题目描述：每当你爬上一个阶梯你都要花费对应的体力值，一旦支付了相应的体力值，你就可以选择向上爬一个阶梯或者爬两个阶梯</strong></p>
+<h1 id="2-思路"><a class="markdownIt-Anchor" href="#2-思路"></a> 2 思路</h1>
+<p><strong>注意题目描述：每当你爬上一个阶梯你都要花费对应的体力值，一旦支付了相应的体力值，你就可以选择向上爬一个阶梯或者爬两个阶梯</strong></p>
 <p>动归五部曲</p>
-<p><font color="#F36208">1.  确定dp数组以及下标的含义</font><br>**dp[i]的定义：到达第i个台阶所花费的最<br>少体力为dp[i]**。<br>注意这里认为是第一步一定是要花费：<br>    dp[0] = cost[0];<br>    dp[1] = cost[1];<br>    <strong>dp[2] = min(dp[0], dp[1]) + cost[2];</strong><br><font color="#F36208">2.  确定递推公式</font><br>**可以有两个途径得到dp[i]，一个是dp[i-1] 一个是dp[i-2]**。</p>
+<p><font color="#F36208">1.  确定dp数组以及下标的含义</font><br>
+<strong>dp[i]的定义：到达第i个台阶所花费的最<br>
+少体力为dp[i]</strong>。<br>
+注意这里认为是第一步一定是要花费：<br>
+dp[0] = cost[0];<br>
+dp[1] = cost[1];<br>
+<strong>dp[2] = min(dp[0], dp[1]) + cost[2];</strong><br>
+<font color="#F36208">2.  确定递推公式</font><br>
+<strong>可以有两个途径得到dp[i]，一个是dp[i-1] 一个是dp[i-2]</strong>。</p>
 <blockquote>
 <p>一旦支付当前下边相应的体力值，就可向上爬一个或者两个楼梯</p>
 </blockquote>
-<p><strong>dp[i] = min(dp[i - 1], dp[i - 2]) + cost[i];</strong><br>爬上台阶i，可能是从 i - 1 层，i-2层爬上来的，然后在离开台阶i 又在需要花费cost[i]<br><font color="#F36208">3. dp数组初始化</font><br>题目说：可以选择从下标为 0 或 1 的元素作为初始阶梯。<br>从下标0处离开需要cost[0]，下标1同理</p>
+<p><strong>dp[i] = min(dp[i - 1], dp[i - 2]) + cost[i];</strong><br>
+爬上台阶i，可能是从 i - 1 层，i-2层爬上来的，然后在离开台阶i 又在需要花费cost[i]<br>
+<font color="#F36208">3. dp数组初始化</font><br>
+题目说：可以选择从下标为 0 或 1 的元素作为初始阶梯。<br>
+从下标0处离开需要cost[0]，下标1同理</p>
 <figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">dp</span><span class="hljs-params">(cost.size())</span></span>;<br>dp[<span class="hljs-number">0</span>] = cost[<span class="hljs-number">0</span>];<br>dp[<span class="hljs-number">1</span>] = cost[<span class="hljs-number">1</span>];<br></code></pre></td></tr></tbody></table></figure>
-<p><font color="#F36208">4. 遍历顺序</font><br>因为是模拟台阶，而且dp[i]又dp[i-1]dp[i-2]推出，所以是从前到后遍历cost数组就可以了。<br><strong>但是稍稍有点难度的动态规划，其遍历顺序并不容易确定下来</strong>。<br><font color="#F36208">5. 举例推导dp数组</font><br>| cost  | 10  | 15  | 20  |<br>| —– | — | — | — |<br>| dp[i] | 10  | 15  | 30  |<br>|       |     |     |     |<br><img src="https://img-blog.csdnimg.cn/2021010621363669.png" srcset="/img/loading.gif" lazyload alt="746.使用最小花费爬楼梯"><br>为什么选择最后两位的最小值呢<br>?<br>最后两位支付该值都可以到下一层，假设所求是第N层的最小开销，只需要计算min(谁能到N层)，到了N层后又不到下一层，所以相当于最后一步不用花费，就停止到那了，不用+cost[i]</p>
-<h1 id="3-代码"><a href="#3-代码" class="headerlink" title="3 代码"></a>3 代码</h1><p>编译已通过</p>
+<p><font color="#F36208">4. 遍历顺序</font><br>
+因为是模拟台阶，而且dp[i]又dp[i-1]dp[i-2]推出，所以是从前到后遍历cost数组就可以了。<br>
+<strong>但是稍稍有点难度的动态规划，其遍历顺序并不容易确定下来</strong>。<br>
+<font color="#F36208">5. 举例推导dp数组</font></p>
+<table>
+<thead>
+<tr>
+<th>cost</th>
+<th>10</th>
+<th>15</th>
+<th>20</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dp[i]</td>
+<td>10</td>
+<td>15</td>
+<td>30</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><img src="https://img-blog.csdnimg.cn/2021010621363669.png" srcset="/img/loading.gif" lazyload alt="746.使用最小花费爬楼梯"><br>
+为什么选择最后两位的最小值呢<br>
+?<br>
+最后两位支付该值都可以到下一层，假设所求是第N层的最小开销，只需要计算min(谁能到N层)，到了N层后又不到下一层，所以相当于最后一步不用花费，就停止到那了，不用+cost[i]</p>
+<h1 id="3-代码"><a class="markdownIt-Anchor" href="#3-代码"></a> 3 代码</h1>
+<p>编译已通过</p>
 <figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">minCostClimbingStairs</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; cost)</span> </span>{<br>        <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">dp</span><span class="hljs-params">(cost.size())</span></span>;<br>        dp[<span class="hljs-number">0</span>] = cost[<span class="hljs-number">0</span>];<br>        dp[<span class="hljs-number">1</span>] = cost[<span class="hljs-number">1</span>];<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">2</span>; i &lt; cost.<span class="hljs-built_in">size</span>(); i++){<span class="hljs-comment">// 这里不用&lt;=，因为下标从0开始，取不到cost.size()||从第三个元素开始，下标是2</span><br>            dp[i] = <span class="hljs-built_in">min</span>(dp[i - <span class="hljs-number">1</span>], dp[i - <span class="hljs-number">2</span>]) + cost[i];<br>        }<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">min</span>(dp[cost.<span class="hljs-built_in">size</span>()<span class="hljs-number">-1</span>], dp[cost.<span class="hljs-built_in">size</span>() - <span class="hljs-number">2</span>]);<br><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
-
-
-<h1 id="4-参考资料"><a href="#4-参考资料" class="headerlink" title="4 参考资料"></a>4 参考资料</h1><p><a target="_blank" rel="noopener" href="https://www.programmercarl.com/0746.%E4%BD%BF%E7%94%A8%E6%9C%80%E5%B0%8F%E8%8A%B1%E8%B4%B9%E7%88%AC%E6%A5%BC%E6%A2%AF.html#%E6%80%9D%E8%B7%AF">代码随想录</a><br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1fq4y1T7Uo?spm_id_from=333.337.search-card.all.click&amp;vd_source=f2340d96e99780a96b50d8096ffaaf1a">Leetcode-746.使用最小花费爬楼梯_哔哩哔哩_bilibili</a><br>自用跳转链接：🈚</p>
+<h1 id="4-参考资料"><a class="markdownIt-Anchor" href="#4-参考资料"></a> 4 参考资料</h1>
+<p><a target="_blank" rel="noopener" href="https://www.programmercarl.com/0746.%E4%BD%BF%E7%94%A8%E6%9C%80%E5%B0%8F%E8%8A%B1%E8%B4%B9%E7%88%AC%E6%A5%BC%E6%A2%AF.html#%E6%80%9D%E8%B7%AF">代码随想录</a><br>
+<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1fq4y1T7Uo?spm_id_from=333.337.search-card.all.click&amp;vd_source=f2340d96e99780a96b50d8096ffaaf1a">Leetcode-746.使用最小花费爬楼梯_哔哩哔哩_bilibili</a><br>
+自用跳转链接：🈚</p>
 
               
             </div>
@@ -499,6 +547,11 @@
 
   
 
+
+
+
+  
+  
 
 
 

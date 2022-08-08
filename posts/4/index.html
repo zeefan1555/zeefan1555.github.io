@@ -16,15 +16,15 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="sort函数默认从小到大排列，如需自定义需要额外写个函数 123static bool cmp(int a, int b) {    return abs(a) &gt; abs(b); &#x2F;&#x2F; 返回绝对值大的} 1 应用1.1 按照绝对值从大到小排列，12static bool cmp(int a, int b) {    return abs(a) &gt; abs(b); 1.2 从大到小排列">
+    <meta name="description" content="时间复杂度:nlogn sort函数默认从小到大排列，如需自定义需要额外写个函数 123static bool cmp(int a, int b) {    return abs(a) &gt; abs(b); &#x2F;&#x2F; 返回绝对值大的}  1 应用  1.1 按照绝对值从大到小排列， 12static bool cmp(int a, int b) {    return abs(a) &gt; ab">
 <meta property="og:type" content="article">
-<meta property="og:title" content="一杯空气">
+<meta property="og:title" content="sort 函数">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/4/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="sort函数默认从小到大排列，如需自定义需要额外写个函数 123static bool cmp(int a, int b) {    return abs(a) &gt; abs(b); &#x2F;&#x2F; 返回绝对值大的} 1 应用1.1 按照绝对值从大到小排列，12static bool cmp(int a, int b) {    return abs(a) &gt; abs(b); 1.2 从大到小排列">
+<meta property="og:description" content="时间复杂度:nlogn sort函数默认从小到大排列，如需自定义需要额外写个函数 123static bool cmp(int a, int b) {    return abs(a) &gt; abs(b); &#x2F;&#x2F; 返回绝对值大的}  1 应用  1.1 按照绝对值从大到小排列， 12static bool cmp(int a, int b) {    return abs(a) &gt; ab">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-05-30T13:54:51.000Z">
-<meta property="article:modified_time" content="2022-07-12T09:02:36.450Z">
+<meta property="article:modified_time" content="2022-08-08T08:58:03.375Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -32,7 +32,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>一杯空气</title>
+  <title>sort 函数 - 一杯空气</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -43,6 +43,8 @@
   <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.15.6/katex.min.css" />
 
 
 
@@ -197,7 +199,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text=""></span>
+            <span id="subtitle" data-typed-text="sort 函数"></span>
           
         </div>
 
@@ -220,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          432 字
+          443 字
         
       </span>
     
@@ -277,26 +279,28 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none"></h1>
+            <h1 style="display: none">sort 函数</h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年7月12日 下午
+                    本文最后更新于：2022年8月8日 下午
                   
                 
               </p>
             
             <div class="markdown-body">
               
-              <p>sort函数默认从小到大排列，如需自定义需要额外写个函数</p>
+              <p>时间复杂度:nlogn<br>
+sort函数默认从小到大排列，如需自定义需要额外写个函数</p>
 <figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">static</span> <span class="hljs-type">bool</span> <span class="hljs-title">cmp</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> </span>{<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">abs</span>(a) &gt; <span class="hljs-built_in">abs</span>(b); <span class="hljs-comment">// 返回绝对值大的</span><br>}<br></code></pre></td></tr></tbody></table></figure>
-<h1 id="1-应用"><a href="#1-应用" class="headerlink" title="1 应用"></a>1 应用</h1><h2 id="1-1-按照绝对值从大到小排列，"><a href="#1-1-按照绝对值从大到小排列，" class="headerlink" title="1.1 按照绝对值从大到小排列，"></a>1.1 按照绝对值从大到小排列，</h2><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">static</span> <span class="hljs-type">bool</span> <span class="hljs-title">cmp</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> </span>{<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">abs</span>(a) &gt; <span class="hljs-built_in">abs</span>(b);<br></code></pre></td></tr></tbody></table></figure>
-<h2 id="1-2-从大到小排列：-14-根据身高重建队列"><a href="#1-2-从大到小排列：-14-根据身高重建队列" class="headerlink" title="1.2 从大到小排列：[[14.根据身高重建队列]]"></a>1.2 从大到小排列：[[14.根据身高重建队列]]</h2><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// 身高从大到小排（身高相同k小的站前面）</span><br><span class="hljs-function"><span class="hljs-type">static</span> <span class="hljs-type">bool</span> <span class="hljs-title">cmp</span><span class="hljs-params">(<span class="hljs-type">const</span> vector&lt;<span class="hljs-type">int</span>&gt;&amp; a, <span class="hljs-type">const</span> vector&lt;<span class="hljs-type">int</span>&gt;&amp; b)</span> </span>{<br>        <span class="hljs-keyword">if</span> (a[<span class="hljs-number">0</span>] == b[<span class="hljs-number">0</span>]) <span class="hljs-keyword">return</span> a[<span class="hljs-number">1</span>] &lt; b[<span class="hljs-number">1</span>];<br>        <span class="hljs-keyword">return</span> a[<span class="hljs-number">0</span>] &gt; b[<span class="hljs-number">0</span>];<br>    }<br></code></pre></td></tr></tbody></table></figure>
-
-<p>bool 值好像是规定的 #疑问 </p>
+<h1 id="1-应用"><a class="markdownIt-Anchor" href="#1-应用"></a> 1 应用</h1>
+<h2 id="11-按照绝对值从大到小排列"><a class="markdownIt-Anchor" href="#11-按照绝对值从大到小排列"></a> 1.1 按照绝对值从大到小排列，</h2>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">static</span> <span class="hljs-type">bool</span> <span class="hljs-title">cmp</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> </span>{<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">abs</span>(a) &gt; <span class="hljs-built_in">abs</span>(b);<br></code></pre></td></tr></tbody></table></figure>
+<h2 id="12-从大到小排列14根据身高重建队列"><a class="markdownIt-Anchor" href="#12-从大到小排列14根据身高重建队列"></a> 1.2 从大到小排列：[[14.根据身高重建队列]]</h2>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// 身高从大到小排（身高相同k小的站前面）</span><br><span class="hljs-function"><span class="hljs-type">static</span> <span class="hljs-type">bool</span> <span class="hljs-title">cmp</span><span class="hljs-params">(<span class="hljs-type">const</span> vector&lt;<span class="hljs-type">int</span>&gt;&amp; a, <span class="hljs-type">const</span> vector&lt;<span class="hljs-type">int</span>&gt;&amp; b)</span> </span>{<br>        <span class="hljs-keyword">if</span> (a[<span class="hljs-number">0</span>] == b[<span class="hljs-number">0</span>]) <span class="hljs-keyword">return</span> a[<span class="hljs-number">1</span>] &lt; b[<span class="hljs-number">1</span>];<br>        <span class="hljs-keyword">return</span> a[<span class="hljs-number">0</span>] &gt; b[<span class="hljs-number">0</span>];<br>    }<br></code></pre></td></tr></tbody></table></figure>
+<p>bool 值好像是规定的 #疑问</p>
 <figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-built_in">sort</span>(A.<span class="hljs-built_in">begin</span>(), A.<span class="hljs-built_in">end</span>(), cmp); <span class="hljs-comment">// 第三个参数不用出入参数这是规则</span><br></code></pre></td></tr></tbody></table></figure>
-
 <p>[[static 关键字]]</p>
 
               
@@ -349,7 +353,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div></div>
+      <div>sort 函数</div>
       <div>https://zeefan1555.github.io/posts/4/</div>
     </div>
     <div class="license-meta">
@@ -368,7 +372,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2022年7月12日</div>
+          <div>2022年8月8日</div>
         </div>
       
       <div class="license-meta-item">
@@ -459,6 +463,11 @@
 
   
 
+
+
+
+  
+  
 
 
 

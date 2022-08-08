@@ -16,12 +16,12 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1 455.分发饼干力扣题目链接 假设你是一位很棒的家长，想要给你的孩子们一些小饼干。但是，每个孩子最多只能给一块饼干。 对每个孩子 i，都有一个胃口值&amp;nbsp;**g[i]**，这是能让孩子们满足胃口的饼干的最小尺寸；并且每块饼干 j，都有一个尺寸 s[j]&amp;nbsp;。如果 s[j]&amp;nbsp;&gt;&#x3D; g[i]，我们可以将这个饼干 j 分配给孩子 i ，这个孩子会得到满足。你的目标是尽可">
+    <meta name="description" content="1 455.分发饼干 力扣题目链接 假设你是一位很棒的家长，想要给你的孩子们一些小饼干。但是，每个孩子最多只能给一块饼干。 对每个孩子 i，都有一个胃口值&amp;nbsp;g[i]，这是能让孩子们满足胃口的饼干的最小尺寸；并且每块饼干 j，都有一个尺寸 s[j]&amp;nbsp;。如果 s[j]&amp;nbsp;&gt;&#x3D; g[i]，我们可以将这个饼干 j 分配给孩子 i ，这个孩子会得到满足。你的目标是尽可能满">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2.分发饼干">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/42003/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="1 455.分发饼干力扣题目链接 假设你是一位很棒的家长，想要给你的孩子们一些小饼干。但是，每个孩子最多只能给一块饼干。 对每个孩子 i，都有一个胃口值&amp;nbsp;**g[i]**，这是能让孩子们满足胃口的饼干的最小尺寸；并且每块饼干 j，都有一个尺寸 s[j]&amp;nbsp;。如果 s[j]&amp;nbsp;&gt;&#x3D; g[i]，我们可以将这个饼干 j 分配给孩子 i ，这个孩子会得到满足。你的目标是尽可">
+<meta property="og:description" content="1 455.分发饼干 力扣题目链接 假设你是一位很棒的家长，想要给你的孩子们一些小饼干。但是，每个孩子最多只能给一块饼干。 对每个孩子 i，都有一个胃口值&amp;nbsp;g[i]，这是能让孩子们满足胃口的饼干的最小尺寸；并且每块饼干 j，都有一个尺寸 s[j]&amp;nbsp;。如果 s[j]&amp;nbsp;&gt;&#x3D; g[i]，我们可以将这个饼干 j 分配给孩子 i ，这个孩子会得到满足。你的目标是尽可能满">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s1.vika.cn/space/2022/05/27/1c68ab105c2d4666a72ac61ebbca6600">
 <meta property="article:published_time" content="2022-05-27T03:07:52.000Z">
@@ -47,6 +47,8 @@
   <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.15.6/katex.min.css" />
 
 
 
@@ -224,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.1k 字
+          1k 字
         
       </span>
     
@@ -293,29 +295,36 @@
             
             <div class="markdown-body">
               
-              <h1 id="1-455-分发饼干"><a href="#1-455-分发饼干" class="headerlink" title="1 455.分发饼干"></a>1 455.分发饼干</h1><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/assign-cookies/">力扣题目链接</a></p>
+              <h1 id="1-455分发饼干"><a class="markdownIt-Anchor" href="#1-455分发饼干"></a> 1 455.分发饼干</h1>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/assign-cookies/">力扣题目链接</a></p>
 <p>假设你是一位很棒的家长，想要给你的孩子们一些小饼干。但是，每个孩子最多只能给一块饼干。</p>
-<p>对每个孩子 i，都有一个胃口值&nbsp;**g[i]**，这是能让孩子们满足胃口的饼干的最小尺寸；并且每块饼干 j，都有一个尺寸 <strong>s[j]</strong>&nbsp;。如果 s[j]&nbsp;&gt;= g[i]，我们可以将这个饼干 j 分配给孩子 i ，这个孩子会得到满足。你的目标是尽可能满足越多数量的孩子，并输出这个最大数值。</p>
+<p>对每个孩子 i，都有一个胃口值&nbsp;<strong>g[i]</strong>，这是能让孩子们满足胃口的饼干的最小尺寸；并且每块饼干 j，都有一个尺寸 <strong>s[j]</strong>&nbsp;。如果 s[j]&nbsp;&gt;= g[i]，我们可以将这个饼干 j 分配给孩子 i ，这个孩子会得到满足。你的目标是尽可能满足越多数量的孩子，并输出这个最大数值。</p>
 <p>示例&nbsp;1:</p>
 <ul>
-<li>  输入: g = [1,2,3], s = [1,1]</li>
-<li>  输出: 1 解释:你有三个孩子和两块小饼干，3个孩子的胃口值分别是：1,2,3。虽然你有两块小饼干，由于他们的尺寸都是1，你只能让胃口值是1的孩子满足。所以你应该输出1。</li>
+<li>输入: g = [1,2,3], s = [1,1]</li>
+<li>输出: 1 解释:你有三个孩子和两块小饼干，3个孩子的胃口值分别是：1,2,3。虽然你有两块小饼干，由于他们的尺寸都是1，你只能让胃口值是1的孩子满足。所以你应该输出1。</li>
 </ul>
 <p>示例&nbsp;2:</p>
 <ul>
-<li>  输入: g = [1,2], s = [1,2,3]</li>
-<li>  输出: 2</li>
-<li>  解释:你有两个孩子和三块小饼干，2个孩子的胃口值分别是1,2。你拥有的饼干数量和尺寸都足以让所有孩子满足。所以你应该输出2.</li>
+<li>输入: g = [1,2], s = [1,2,3]</li>
+<li>输出: 2</li>
+<li>解释:你有两个孩子和三块小饼干，2个孩子的胃口值分别是1,2。你拥有的饼干数量和尺寸都足以让所有孩子满足。所以你应该输出2.</li>
 </ul>
 <p>提示：</p>
 <ul>
-<li>  1 &lt;= g.length &lt;= 3 * 10^4</li>
-<li>  0 &lt;= s.length &lt;= 3 * 10^4</li>
-<li>  1 &lt;= g[i], s[j] &lt;=&nbsp;2^31 - 1</li>
+<li>1 &lt;= g.length &lt;= 3 * 10^4</li>
+<li>0 &lt;= s.length &lt;= 3 * 10^4</li>
+<li>1 &lt;= g[i], s[j] &lt;=&nbsp;2^31 - 1</li>
 </ul>
-<h1 id="2-思路"><a href="#2-思路" class="headerlink" title="2 思路"></a>2 思路</h1><p>局部最优：大饼干喂给胃口大的孩子(尽量充分利用饼干)<br>全局最优：喂饱尽可能多的小孩</p>
-<p>将饼干数组和小孩数组拍个序<br><strong>从后向前遍历</strong>，即大饼干满足胃口的大孩子，<strong>并</strong>统计满足小孩数量<br><img src="https://s1.vika.cn/space/2022/05/27/1c68ab105c2d4666a72ac61ebbca6600" srcset="/img/loading.gif" lazyload alt="|700"><br>这个例子可以看出饼干9只有喂给胃口为7的小孩，这样才是整体最优解，并想不出反例，那么就可以撸代码了。</p>
-<h1 id="3-力扣代码"><a href="#3-力扣代码" class="headerlink" title="3 力扣代码"></a>3 力扣代码</h1><p>编译已通过</p>
+<h1 id="2-思路"><a class="markdownIt-Anchor" href="#2-思路"></a> 2 思路</h1>
+<p>局部最优：大饼干喂给胃口大的孩子(尽量充分利用饼干)<br>
+全局最优：喂饱尽可能多的小孩</p>
+<p>将饼干数组和小孩数组拍个序<br>
+<strong>从后向前遍历</strong>，即大饼干满足胃口的大孩子，<strong>并</strong>统计满足小孩数量<br>
+<img src="https://s1.vika.cn/space/2022/05/27/1c68ab105c2d4666a72ac61ebbca6600" srcset="/img/loading.gif" lazyload alt="|700"><br>
+这个例子可以看出饼干9只有喂给胃口为7的小孩，这样才是整体最优解，并想不出反例，那么就可以撸代码了。</p>
+<h1 id="3-力扣代码"><a class="markdownIt-Anchor" href="#3-力扣代码"></a> 3 力扣代码</h1>
+<p>编译已通过</p>
 <figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">findContentChildren</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; g, vector&lt;<span class="hljs-type">int</span>&gt;&amp; s)</span> </span>{<br>        <span class="hljs-built_in">sort</span>(g.<span class="hljs-built_in">begin</span>(), g.<span class="hljs-built_in">end</span>());<br>        <span class="hljs-built_in">sort</span>(s.<span class="hljs-built_in">begin</span>(), s.<span class="hljs-built_in">end</span>());<br>        <span class="hljs-type">int</span> index = s.<span class="hljs-built_in">size</span>() - <span class="hljs-number">1</span>; <span class="hljs-comment">// 饼干数组的最后一个元素</span><br>        <span class="hljs-type">int</span> result = <span class="hljs-number">0</span>; <span class="hljs-comment">// 统计孩子的数</span><br>        <span class="hljs-comment">//因为想从后往前遍历对比，所以用i-- ，而不用i++，g.size() - 1是孩子数组的最后一个元素，</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = g.<span class="hljs-built_in">size</span>() - <span class="hljs-number">1</span>; i &gt;=<span class="hljs-number">0</span>  ; i--){ <span class="hljs-comment">// ”=“号为对比到最后一个孩子 </span><br>            <span class="hljs-keyword">if</span> (index  &gt;= <span class="hljs-number">0</span> &amp;&amp; s[index] &gt;= g[i]){<br>                result++;<br>                index--;<br>            }<br>        } <br>        <span class="hljs-keyword">return</span> result;<br><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
 
               
@@ -494,6 +503,11 @@
 
   
 
+
+
+
+  
+  
 
 
 

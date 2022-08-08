@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20210125120743274.jpg">
 <meta property="og:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/20220720234829.png">
 <meta property="article:published_time" content="2022-07-20T09:39:00.000Z">
-<meta property="article:modified_time" content="2022-07-28T09:22:36.372Z">
+<meta property="article:modified_time" content="2022-08-01T11:24:46.586Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="动态规划">
 <meta name="twitter:card" content="summary_large_image">
@@ -47,6 +47,8 @@
   <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.15.6/katex.min.css" />
 
 
 
@@ -286,59 +288,85 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年7月28日 下午
+                    本文最后更新于：2022年8月1日 晚上
                   
                 
               </p>
             
             <div class="markdown-body">
               
-              <h1 id="1-目标和"><a href="#1-目标和" class="headerlink" title="1 目标和"></a>1 目标和</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/target-sum/">力扣题目链接</a></p>
+              <h1 id="1-目标和"><a class="markdownIt-Anchor" href="#1-目标和"></a> 1 目标和</h1>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/target-sum/">力扣题目链接</a></p>
 <p>难度：中等</p>
 <p>给定一个非负整数数组，a1, a2, …, an, 和一个目标数，S。现在你有两个符号&nbsp;+&nbsp;和&nbsp;-。对于数组中的任意一个整数，你都可以从&nbsp;+&nbsp;或&nbsp;-中选择一个符号添加在前面。</p>
 <p>返回可以使最终数组和为目标数 S 的所有添加符号的方法数。</p>
 <p>示例：</p>
-<p>输入：nums: [1, 1, 1, 1, 1], S: 3<br>输出：5</p>
-<p>解释：<br>-1+1+1+1+1 = 3<br>+1-1+1+1+1 = 3<br>+1+1-1+1+1 = 3<br>+1+1+1-1+1 = 3<br>+1+1+1+1-1 = 3</p>
+<p>输入：nums: [1, 1, 1, 1, 1], S: 3<br>
+输出：5</p>
+<p>解释：<br>
+-1+1+1+1+1 = 3<br>
++1-1+1+1+1 = 3<br>
++1+1-1+1+1 = 3<br>
++1+1+1-1+1 = 3<br>
++1+1+1+1-1 = 3</p>
 <p>一共有5种方法让最终目标和为3。</p>
 <p>提示：</p>
 <ul>
-<li>  数组非空，且长度不会超过 20 。</li>
-<li>  初始的数组的和不会超过 1000 。</li>
-<li>  保证返回的最终结果能被 32 位整数存下。</li>
+<li>数组非空，且长度不会超过 20 。</li>
+<li>初始的数组的和不会超过 1000 。</li>
+<li>保证返回的最终结果能被 32 位整数存下。</li>
 </ul>
-<h1 id="2-思路"><a href="#2-思路" class="headerlink" title="2 思路"></a>2 思路</h1><p>假设加法总和为x， → 减法总和 = sum - x。<br>目标和 = 加法总和 - 减法总和 → S = x - (sum - x)<br>→ x = (S + sum) / 2</p>
-<p>此时化为 ：就是从数组中挑几个数加起来正好等于x </p>
+<h1 id="2-思路"><a class="markdownIt-Anchor" href="#2-思路"></a> 2 思路</h1>
+<p>假设加法总和为x， → 减法总和 = sum - x。<br>
+目标和 = 加法总和 - 减法总和 → S = x - (sum - x)<br>
+→ x = (S + sum) / 2</p>
+<p>此时化为 ：就是从数组中挑几个数加起来正好等于x</p>
 <p><strong>特例判断</strong></p>
 <ol>
-<li>假设加法和是非整数，即 (S + sum) / 2 除不尽，说明有余数，又因为加法和是整数，有余数不可能符合等号条件。所以：<figure class="highlight apache"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">if</span> ((S + sum) % <span class="hljs-number">2</span> == <span class="hljs-number">1</span>) return <span class="hljs-number">0</span>; // 此时没有方案<br></code></pre></td></tr></tbody></table></figure></li>
-<li>同时如果 S的绝对值已经大于sum，那么也是没有方案的。<figure class="highlight arcade"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arcade"><span class="hljs-keyword">if</span> (<span class="hljs-built_in">abs</span>(S) &gt; <span class="hljs-built_in">sum</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>; <span class="hljs-comment">// 此时没有方案</span><br></code></pre></td></tr></tbody></table></figure></li>
+<li>假设加法和是非整数，即 (S + sum) / 2 除不尽，说明有余数，又因为加法和是整数，有余数不可能符合等号条件。所以：</li>
 </ol>
+<figure class="highlight apache"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">if</span> ((S + sum) % <span class="hljs-number">2</span> == <span class="hljs-number">1</span>) return <span class="hljs-number">0</span>; // 此时没有方案<br></code></pre></td></tr></tbody></table></figure>
+<ol start="2">
+<li>同时如果 S的绝对值已经大于sum，那么也是没有方案的。</li>
+</ol>
+<figure class="highlight arcade"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arcade"><span class="hljs-keyword">if</span> (<span class="hljs-built_in">abs</span>(S) &gt; <span class="hljs-built_in">sum</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>; <span class="hljs-comment">// 此时没有方案</span><br></code></pre></td></tr></tbody></table></figure>
 <p>动归五部曲</p>
 <ol>
-<li><p>确定dp[j]的含义<br>恰好装满背包容量为j的背包，一共有dp[j]种方法</p>
+<li>
+<p>确定dp[j]的含义<br>
+恰好装满背包容量为j的背包，一共有dp[j]种方法</p>
 </li>
-<li><p>确定递推公式<br>先记住：在<strong>求装满背包有几种方法</strong>的情况下，递推公式一般为： #card #疑问 </p>
-<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c">dp[j] = dp[j] + dp[j - nums[i]];<br></code></pre></td></tr></tbody></table></figure>
-<p>^1659000156292</p>
+<li>
+<p>确定递推公式<br>
+先记住：在<strong>求装满背包有几种方法</strong>的情况下，递推公式一般为： #card #疑问</p>
 </li>
 </ol>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c">dp[j] = dp[j] + dp[j - nums[i]];<br></code></pre></td></tr></tbody></table></figure>
 <ol start="3">
-<li><p>dp数组的初始化<br>dp[0] = 1，显然装满容量为0的背包，有1种方法，就是装0件物品。<br>dp[j]其他下标对应的数值应该初始化为0，从递归公式也可以看出<code>dp[j] = dp[j] + dp[j - nums[i]];</code>，dp[j]要保证是0的初始值，才能正确的由dp[j - nums[i]]推导出来。</p>
+<li>
+<p>dp数组的初始化<br>
+dp[0] = 1，显然装满容量为0的背包，有1种方法，就是装0件物品。<br>
+dp[j]其他下标对应的数值应该初始化为0，从递归公式也可以看出<code>dp[j] = dp[j] + dp[j - nums[i]];</code>，dp[j]要保证是0的初始值，才能正确的由dp[j - nums[i]]推导出来。</p>
 </li>
-<li><p>确定遍历顺序<br>先物品在背包，背包for循环倒序</p>
+<li>
+<p>确定遍历顺序<br>
+先物品在背包，背包for循环倒序</p>
 </li>
-<li><p> 举例推导dp数组</p>
+<li>
+<p>举例推导dp数组</p>
 </li>
 </ol>
 <p>输入：nums: [1, 1, 1, 1, 1], S: 3</p>
 <p>bagSize = (S + sum) / 2 = (3 + 5) / 2 = 4</p>
 <p>dp数组状态变化如下：</p>
 <p><img src="https://img-blog.csdnimg.cn/20210125120743274.jpg" srcset="/img/loading.gif" lazyload alt="494.目标和"></p>
-<h1 id="3-代码"><a href="#3-代码" class="headerlink" title="3 代码"></a>3 代码</h1><p>编译未通过</p>
+<h1 id="3-代码"><a class="markdownIt-Anchor" href="#3-代码"></a> 3 代码</h1>
+<p>编译未通过</p>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> {</span><br>public:<br>    <span class="hljs-type">int</span> <span class="hljs-title function_">findTargetSumWays</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;&amp; nums, <span class="hljs-type">int</span> target)</span> {<br>        <span class="hljs-type">int</span> bagsize;<br>        <span class="hljs-type">int</span> sum = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; nums.size(); i++) sum += nums[i];<br>        bagsize = (sum + target)/<span class="hljs-number">2</span>;<br>        <span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title function_">dp</span><span class="hljs-params">(bagsize + <span class="hljs-number">1</span>, <span class="hljs-number">0</span>)</span>;<br>        dp[<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">abs</span>(target) &gt; sum) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>; <span class="hljs-comment">// 此时没有方案</span><br>        <span class="hljs-keyword">if</span> ((target + sum) % <span class="hljs-number">2</span> == <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>; <span class="hljs-comment">// 此时没有方案</span><br>        <br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; nums.size(); i++){<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = bagsize; j &gt;= nums[i]; j--){<br>                dp[j] = dp[j] + dp[j - nums[i]];<br>        <br>            }<br>        }<br>        <span class="hljs-keyword">return</span> dp[target];<br><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
-<p><img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/20220720234829.png" srcset="/img/loading.gif" lazyload></p>
-<p><strong>参考资料</strong><br>自用跳转链接：🈚<br><a target="_blank" rel="noopener" href="https://www.programmercarl.com/0494.%E7%9B%AE%E6%A0%87%E5%92%8C.html#%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92">代码随想录</a></p>
+<p><img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/20220720234829.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p><strong>参考资料</strong><br>
+自用跳转链接：🈚<br>
+<a target="_blank" rel="noopener" href="https://www.programmercarl.com/0494.%E7%9B%AE%E6%A0%87%E5%92%8C.html#%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92">代码随想录</a></p>
 
               
             </div>
@@ -423,7 +451,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2022年7月28日</div>
+          <div>2022年8月1日</div>
         </div>
       
       <div class="license-meta-item">
@@ -514,6 +542,11 @@
 
   
 
+
+
+
+  
+  
 
 
 

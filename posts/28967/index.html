@@ -16,15 +16,15 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1 基本概念for(变量i; 判断条件; 变化变量i)for循环中第二条件是判断条件，破坏了该条件则会退出for循环 2 遍历函数操作到最后一个元素时不会取到最后一个下标的后一位(也就是长度) 123for (int i &#x3D; 0; i &lt; prices.size(); i++){         result +&#x3D; max(prices[i+1] - prices[i],0);&#x2F;&#x2F; 用!&#x3D;更">
+    <meta name="description" content="1 基本概念 for(变量i; 判断条件; 变化变量i) for循环中第二条件是判断条件，破坏了该条件则会退出for循环  2 遍历函数 操作到最后一个元素时不会取到最后一个下标的后一位(也就是长度) 123for (int i &#x3D; 0; i &lt; prices.size(); i++){         result +&#x3D; max(prices[i+1] - prices[i],0);&#x2F;&#x2F;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="for 循环">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/28967/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="1 基本概念for(变量i; 判断条件; 变化变量i)for循环中第二条件是判断条件，破坏了该条件则会退出for循环 2 遍历函数操作到最后一个元素时不会取到最后一个下标的后一位(也就是长度) 123for (int i &#x3D; 0; i &lt; prices.size(); i++){         result +&#x3D; max(prices[i+1] - prices[i],0);&#x2F;&#x2F; 用!&#x3D;更">
+<meta property="og:description" content="1 基本概念 for(变量i; 判断条件; 变化变量i) for循环中第二条件是判断条件，破坏了该条件则会退出for循环  2 遍历函数 操作到最后一个元素时不会取到最后一个下标的后一位(也就是长度) 123for (int i &#x3D; 0; i &lt; prices.size(); i++){         result +&#x3D; max(prices[i+1] - prices[i],0);&#x2F;&#x2F;">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-06-06T06:08:12.000Z">
-<meta property="article:modified_time" content="2022-07-28T09:22:26.378Z">
+<meta property="article:modified_time" content="2022-08-04T14:47:21.228Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="函数">
 <meta name="twitter:card" content="summary_large_image">
@@ -44,6 +44,8 @@
   <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.15.6/katex.min.css" />
 
 
 
@@ -283,29 +285,32 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年7月28日 下午
+                    本文最后更新于：2022年8月4日 晚上
                   
                 
               </p>
             
             <div class="markdown-body">
               
-              <h1 id="1-基本概念"><a href="#1-基本概念" class="headerlink" title="1 基本概念"></a>1 基本概念</h1><p>for(变量i; 判断条件; 变化变量i)<br>for循环中第二条件是判断条件，破坏了该条件则会退出for循环</p>
-<h1 id="2-遍历函数"><a href="#2-遍历函数" class="headerlink" title="2 遍历函数"></a>2 遍历函数</h1><p>操作到最后一个元素时不会取到最后一个下标的后一位(也就是长度)</p>
+              <h1 id="1-基本概念"><a class="markdownIt-Anchor" href="#1-基本概念"></a> 1 基本概念</h1>
+<p>for(变量i; 判断条件; 变化变量i)<br>
+for循环中第二条件是判断条件，破坏了该条件则会退出for循环</p>
+<h1 id="2-遍历函数"><a class="markdownIt-Anchor" href="#2-遍历函数"></a> 2 遍历函数</h1>
+<p>操作到最后一个元素时不会取到最后一个下标的后一位(也就是长度)</p>
 <figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; prices.<span class="hljs-built_in">size</span>(); i++){<br>         result += <span class="hljs-built_in">max</span>(prices[i+<span class="hljs-number">1</span>] - prices[i],<span class="hljs-number">0</span>);<span class="hljs-comment">// 用!=更好</span><br>     }<br></code></pre></td></tr></tbody></table></figure>
-
-
 <p>从后往前遍历：<code>for (int i = num.size () - 1; i &gt; 0; i--)</code> 这个操作不了第一个元素(下标0)</p>
 <p>从前往后遍历：<code>for(int i = 0 ; i &lt; num.size(); i++)</code>，</p>
-<h1 id="3-数组求和"><a href="#3-数组求和" class="headerlink" title="3 数组求和"></a>3 数组求和</h1><h2 id="3-1-第一种写法"><a href="#3-1-第一种写法" class="headerlink" title="3.1 第一种写法"></a>3.1 第一种写法</h2><p>for (循环变量类型 循环变量名称 : 要被遍历的对象) 循环体<br>应用：对数组求和，a会从第一个元素开始遍历到最后一个元素</p>
+<h1 id="3-数组求和"><a class="markdownIt-Anchor" href="#3-数组求和"></a> 3 数组求和</h1>
+<h2 id="31-第一种写法"><a class="markdownIt-Anchor" href="#31-第一种写法"></a> 3.1 第一种写法</h2>
+<p>for (循环变量类型 循环变量名称 : 要被遍历的对象) 循环体<br>
+应用：对数组求和，a会从第一个元素开始遍历到最后一个元素</p>
 <figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">//A是数组，for循环对数组求和</span><br><span class="hljs-type">int</span> result = <span class="hljs-number">0</span>;<br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> a : A)  result += a; <span class="hljs-comment">// int a 类似于int i:后只需数组名即可</span><br></code></pre></td></tr></tbody></table></figure>
-
-<h2 id="3-2-第二种写法"><a href="#3-2-第二种写法" class="headerlink" title="3.2 第二种写法"></a>3.2 第二种写法</h2><figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> sum = <span class="hljs-number">0</span><br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; nums.size(); i++) sum += nums[i];<br></code></pre></td></tr></tbody></table></figure>
-
-
-
-
-<p>n%2 == 1什么意思 #card<br>n%2就是对n求：n除以2后的余数，这里余数只有两种情况就是0或者是1<br>eg：5%2=1<br>^1659000146318</p>
+<h2 id="32-第二种写法"><a class="markdownIt-Anchor" href="#32-第二种写法"></a> 3.2 第二种写法</h2>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> sum = <span class="hljs-number">0</span><br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; nums.size(); i++) sum += nums[i];<br></code></pre></td></tr></tbody></table></figure>
+<p>n%2 == 1什么意思 #card<br>
+n%2就是对n求：n除以2后的余数，这里余数只有两种情况就是0或者是1<br>
+eg：5%2=1<br>
+^1659000146318</p>
 <p><a href="obsidian://advanced-uri?vault=Documents&amp;uid=e21b2a82-20a3-4f7e-981e-d83e6df620a5">ob</a></p>
 
               
@@ -384,7 +389,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2022年7月28日</div>
+          <div>2022年8月4日</div>
         </div>
       
       <div class="license-meta-item">
@@ -475,6 +480,11 @@
 
   
 
+
+
+
+  
+  
 
 
 

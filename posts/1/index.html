@@ -16,12 +16,12 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1 贪心算法的题目大纲 2 什么是贪心算法局部最优推出全局最优eg：一堆钱里只能拿10张，如何拿到最大。每一次都拿的最大(局部最优)→总共拿的最大(全局最优) 3 什么时候用贪心算法看到题目时，感受到能够：局部最优→全局最优，且想不到反例。就试一试贪心.感觉贪心算法更看直觉能不能用 4 贪心算法的套路 将总问题划分为子问题 找到合适的最优解法 对子问题进行最优求解 将子问题堆积成总问题  实际上解">
+    <meta name="description" content="1 贪心算法的题目大纲   2 什么是贪心算法 局部最优推出全局最优 eg：一堆钱里只能拿10张，如何拿到最大。每一次都拿的最大(局部最优)→总共拿的最大(全局最优)  3 什么时候用贪心算法 看到题目时，感受到能够：局部最优→全局最优，且想不到反例。就试一试贪心. 感觉贪心算法更看直觉能不能用  4 贪心算法的套路  将总问题划分为子问题 找到合适的最优解法 对子问题进行最优求解 将子问题堆积">
 <meta property="og:type" content="article">
 <meta property="og:title" content="一杯空气">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/1/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="1 贪心算法的题目大纲 2 什么是贪心算法局部最优推出全局最优eg：一堆钱里只能拿10张，如何拿到最大。每一次都拿的最大(局部最优)→总共拿的最大(全局最优) 3 什么时候用贪心算法看到题目时，感受到能够：局部最优→全局最优，且想不到反例。就试一试贪心.感觉贪心算法更看直觉能不能用 4 贪心算法的套路 将总问题划分为子问题 找到合适的最优解法 对子问题进行最优求解 将子问题堆积成总问题  实际上解">
+<meta property="og:description" content="1 贪心算法的题目大纲   2 什么是贪心算法 局部最优推出全局最优 eg：一堆钱里只能拿10张，如何拿到最大。每一次都拿的最大(局部最优)→总共拿的最大(全局最优)  3 什么时候用贪心算法 看到题目时，感受到能够：局部最优→全局最优，且想不到反例。就试一试贪心. 感觉贪心算法更看直觉能不能用  4 贪心算法的套路  将总问题划分为子问题 找到合适的最优解法 对子问题进行最优求解 将子问题堆积">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://code-thinking-1253855093.file.myqcloud.com/pics/20210917104315.png">
 <meta property="article:published_time" content="2022-05-27T01:25:46.000Z">
@@ -45,6 +45,8 @@
   <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.15.6/katex.min.css" />
 
 
 
@@ -291,10 +293,16 @@
             
             <div class="markdown-body">
               
-              <h1 id="1-贪心算法的题目大纲"><a href="#1-贪心算法的题目大纲" class="headerlink" title="1 贪心算法的题目大纲"></a>1 贪心算法的题目大纲</h1><p><img src="https://code-thinking-1253855093.file.myqcloud.com/pics/20210917104315.png" srcset="/img/loading.gif" lazyload alt="贪心算法大纲"></p>
-<h1 id="2-什么是贪心算法"><a href="#2-什么是贪心算法" class="headerlink" title="2 什么是贪心算法"></a>2 什么是贪心算法</h1><p>局部最优推出全局最优<br>eg：一堆钱里只能拿10张，如何拿到最大。每一次都拿的最大(局部最优)→总共拿的最大(全局最优)</p>
-<h1 id="3-什么时候用贪心算法"><a href="#3-什么时候用贪心算法" class="headerlink" title="3 什么时候用贪心算法"></a>3 什么时候用贪心算法</h1><p>看到题目时，感受到能够：<strong>局部最优→全局最优，且想不到反例</strong>。就试一试贪心.<br>感觉贪心算法更看直觉能不能用</p>
-<h1 id="4-贪心算法的套路"><a href="#4-贪心算法的套路" class="headerlink" title="4 贪心算法的套路"></a>4 贪心算法的套路</h1><ol>
+              <h1 id="1-贪心算法的题目大纲"><a class="markdownIt-Anchor" href="#1-贪心算法的题目大纲"></a> 1 贪心算法的题目大纲</h1>
+<p><img src="https://code-thinking-1253855093.file.myqcloud.com/pics/20210917104315.png" srcset="/img/loading.gif" lazyload alt="贪心算法大纲"></p>
+<h1 id="2-什么是贪心算法"><a class="markdownIt-Anchor" href="#2-什么是贪心算法"></a> 2 什么是贪心算法</h1>
+<p>局部最优推出全局最优<br>
+eg：一堆钱里只能拿10张，如何拿到最大。每一次都拿的最大(局部最优)→总共拿的最大(全局最优)</p>
+<h1 id="3-什么时候用贪心算法"><a class="markdownIt-Anchor" href="#3-什么时候用贪心算法"></a> 3 什么时候用贪心算法</h1>
+<p>看到题目时，感受到能够：<strong>局部最优→全局最优，且想不到反例</strong>。就试一试贪心.<br>
+感觉贪心算法更看直觉能不能用</p>
+<h1 id="4-贪心算法的套路"><a class="markdownIt-Anchor" href="#4-贪心算法的套路"></a> 4 贪心算法的套路</h1>
+<ol>
 <li>将总问题划分为子问题</li>
 <li>找到合适的最优解法</li>
 <li>对子问题进行最优求解</li>
@@ -469,6 +477,11 @@
 
   
 
+
+
+
+  
+  
 
 
 

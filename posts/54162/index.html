@@ -16,18 +16,19 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1 不要把没有ymal 字段 的文章放入post文件夹中，否则会编译出错此处把零散笔记文件夹放入post中  source 文件夹中的都会被hexo s 编译，所以杂项也不能放入source 文件夹中  用hexo s 时，在myblog(存放hexo整体的文件中)进行命令操作 2 ValidationError: ‘null’ is not a string!错误说明一般都是因为文章无内容，可能">
+    <meta name="description" content="1 不要把没有ymal 字段 的文章放入post文件夹中，否则会编译出错 此处把零散笔记文件夹放入post中    source 文件夹中的md文件都会被hexo s 编译，所以杂项也不能放入source 文件夹中  用hexo s 时，在myblog(存放hexo整体的文件中)进行命令操作  2 ValidationError: ‘null’ is not a string! 错误说明 一般都">
 <meta property="og:type" content="article">
 <meta property="og:title" content="用hexo s 引发的一些错误">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/54162/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="1 不要把没有ymal 字段 的文章放入post文件夹中，否则会编译出错此处把零散笔记文件夹放入post中  source 文件夹中的都会被hexo s 编译，所以杂项也不能放入source 文件夹中  用hexo s 时，在myblog(存放hexo整体的文件中)进行命令操作 2 ValidationError: ‘null’ is not a string!错误说明一般都是因为文章无内容，可能">
+<meta property="og:description" content="1 不要把没有ymal 字段 的文章放入post文件夹中，否则会编译出错 此处把零散笔记文件夹放入post中    source 文件夹中的md文件都会被hexo s 编译，所以杂项也不能放入source 文件夹中  用hexo s 时，在myblog(存放hexo整体的文件中)进行命令操作  2 ValidationError: ‘null’ is not a string! 错误说明 一般都">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202207281050271.png">
 <meta property="og:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202207281055164.png">
+<meta property="og:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202208021056860.png">
 <meta property="og:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202207281115268.png">
 <meta property="article:published_time" content="2022-07-28T02:46:00.000Z">
-<meta property="article:modified_time" content="2022-07-28T03:25:45.914Z">
+<meta property="article:modified_time" content="2022-08-02T02:56:53.112Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="blog">
 <meta name="twitter:card" content="summary_large_image">
@@ -48,6 +49,8 @@
   <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.15.6/katex.min.css" />
 
 
 
@@ -225,7 +228,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          268 字
+          272 字
         
       </span>
     
@@ -287,19 +290,24 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年7月28日 上午
+                    本文最后更新于：2022年8月2日 上午
                   
                 
               </p>
             
             <div class="markdown-body">
               
-              <h1 id="1-不要把没有ymal-字段-的文章放入post文件夹中，否则会编译出错"><a href="#1-不要把没有ymal-字段-的文章放入post文件夹中，否则会编译出错" class="headerlink" title="1 不要把没有ymal 字段 的文章放入post文件夹中，否则会编译出错"></a>1 不要把没有ymal 字段 的文章放入post文件夹中，否则会编译出错</h1><p>此处把零散笔记文件夹放入post中<br><img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202207281050271.png" srcset="/img/loading.gif" lazyload alt="|600"></p>
-<p><img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202207281055164.png" srcset="/img/loading.gif" lazyload alt="|600"></p>
-<p>source 文件夹中的都会被hexo s 编译，所以杂项也不能放入source 文件夹中</p>
+              <h1 id="1-不要把没有ymal-字段-的文章放入post文件夹中否则会编译出错"><a class="markdownIt-Anchor" href="#1-不要把没有ymal-字段-的文章放入post文件夹中否则会编译出错"></a> 1 不要把没有ymal 字段 的文章放入post文件夹中，否则会编译出错</h1>
+<p>此处把零散笔记文件夹放入post中<br>
+<img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202207281050271.png" srcset="/img/loading.gif" lazyload alt="|600"></p>
+<p><img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202207281055164.png" srcset="/img/loading.gif" lazyload alt="|600"><br>
+<img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202208021056860.png" srcset="/img/loading.gif" lazyload alt=""><br>
+source 文件夹中的md文件都会被hexo s 编译，所以杂项也不能放入source 文件夹中</p>
 <p><img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202207281115268.png" srcset="/img/loading.gif" lazyload alt="|400"></p>
 <p>用hexo s 时，在myblog(存放hexo整体的文件中)进行命令操作</p>
-<h1 id="2-ValidationError-‘null’-is-not-a-string"><a href="#2-ValidationError-‘null’-is-not-a-string" class="headerlink" title="2 ValidationError: ‘null’ is not a string!"></a>2 <strong>ValidationError: ‘null’ is not a string!</strong></h1><p>错误说明<br>一般都是因为文章无内容，可能是因为在这篇博客文章中，有某些属性没有填写，比如author属性，tag属性，categories属性等，导致该属性是空的，即<code>null</code>，所以报错。</p>
+<h1 id="2-validationerror-null-is-not-a-string"><a class="markdownIt-Anchor" href="#2-validationerror-null-is-not-a-string"></a> 2 <strong>ValidationError: ‘null’ is not a string!</strong></h1>
+<p>错误说明<br>
+一般都是因为文章无内容，可能是因为在这篇博客文章中，有某些属性没有填写，比如author属性，tag属性，categories属性等，导致该属性是空的，即<code>null</code>，所以报错。</p>
 <hr>
 <p>自用ob链接：<a href="obsidian://advanced-uri?vault=myblog&amp;uid=858032de-484b-4d7f-a45f-5bab2ca7bb2b">obsidian</a></p>
 
@@ -379,7 +387,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2022年7月28日</div>
+          <div>2022年8月2日</div>
         </div>
       
       <div class="license-meta-item">
@@ -470,6 +478,11 @@
 
   
 
+
+
+
+  
+  
 
 
 
