@@ -16,17 +16,19 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="空间复杂度(Space Complexity)记作S(n)：S(n)&#x3D;O(f(n))。依然使用大O来表示  空间复杂度是考虑程序（可执行文件）的大小么？  空间复杂度是考虑程序运行时占用内存的大小，而不是可执行文件的大小。 利用程序的空间复杂度，可以对程序运行中需要多少内存有个预先估计。  空间复杂度是准确算出程序运行时所占用的内存么？ 不要以为空间复杂度就已经精准的掌握了程序的内存使用大小，很多">
+    <meta name="description" content="1 空间复杂度 空间复杂度(Space Complexity)记作S(n)：S(n)&#x3D;O(f(n))。依然使用大O来表示  空间复杂度是考虑程序（可执行文件）的大小么？  空间复杂度是考虑程序运行时占用内存的大小，而不是可执行文件的大小。 利用程序的空间复杂度，可以对程序运行中需要多少内存有个预先估计。  空间复杂度是准确算出程序运行时所占用的内存么？ 不要以为空间复杂度就已经精准的掌握了程序的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="空间复杂度分析">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/11552/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="空间复杂度(Space Complexity)记作S(n)：S(n)&#x3D;O(f(n))。依然使用大O来表示  空间复杂度是考虑程序（可执行文件）的大小么？  空间复杂度是考虑程序运行时占用内存的大小，而不是可执行文件的大小。 利用程序的空间复杂度，可以对程序运行中需要多少内存有个预先估计。  空间复杂度是准确算出程序运行时所占用的内存么？ 不要以为空间复杂度就已经精准的掌握了程序的内存使用大小，很多">
+<meta property="og:description" content="1 空间复杂度 空间复杂度(Space Complexity)记作S(n)：S(n)&#x3D;O(f(n))。依然使用大O来表示  空间复杂度是考虑程序（可执行文件）的大小么？  空间复杂度是考虑程序运行时占用内存的大小，而不是可执行文件的大小。 利用程序的空间复杂度，可以对程序运行中需要多少内存有个预先估计。  空间复杂度是准确算出程序运行时所占用的内存么？ 不要以为空间复杂度就已经精准的掌握了程序的">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202208111052182.png">
 <meta property="article:published_time" content="2022-08-02T10:14:00.000Z">
-<meta property="article:modified_time" content="2022-08-04T14:44:26.426Z">
+<meta property="article:modified_time" content="2022-08-12T09:54:18.917Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202208111052182.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -222,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          880 字
+          972 字
         
       </span>
     
@@ -284,14 +286,15 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年8月4日 晚上
+                    本文最后更新于：2022年8月12日 下午
                   
                 
               </p>
             
             <div class="markdown-body">
               
-              <p>空间复杂度(Space Complexity)记作S(n)：S(n)=O(f(n))。依然使用大O来表示</p>
+              <h1 id="1-空间复杂度"><a class="markdownIt-Anchor" href="#1-空间复杂度"></a> 1 空间复杂度</h1>
+<p>空间复杂度(Space Complexity)记作S(n)：S(n)=O(f(n))。依然使用大O来表示</p>
 <ol>
 <li>空间复杂度是考虑程序（可执行文件）的大小么？</li>
 </ol>
@@ -304,15 +307,24 @@
 <p>所以空间复杂度是预先大体评估程序内存使用的大小。</p>
 <p>空间复杂度O(1)： 所开辟的内存空间不会随着n的变化而变化，即空间复杂度为一个常量O(1)</p>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> j = <span class="hljs-number">0</span>;<br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) { <span class="hljs-comment">// n别超过 2^32 - 1就行。(int 的取值范围)</span><br>    j++;<br>}<br></code></pre></td></tr></tbody></table></figure>
-<p>第一段代码可以看出，随着n的变化，所需开辟的内存空间并不会随着n的变化而变化。即此算法空间复杂度为一个常量，所以表示为大O(1)。</p>
-<p>空间复杂度O(n)：消耗空间和输入参数n保持线性增长 #card</p>
+<p>第一段代码可以看出，随着n的变化，所需开辟的内存空间并不会随着n的变化而变化。即此算法空间复杂度为一个常量，所以表示为大O(1)。<br>
+空间复杂度O(n)：消耗空间和输入参数n保持线性增长</p>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span>* a = new <span class="hljs-type">int</span>(n); <span class="hljs-comment">// a指向值为n的int数</span><br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) {<br>    a[i] = i; <span class="hljs-comment">// 不断的扩大a的数组长度</span><br>}<br></code></pre></td></tr></tbody></table></figure>
 <p>new 函数</p>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-number">1.</span>new <span class="hljs-type">int</span>[] 是创建一个<span class="hljs-type">int</span>型数组，数组大小是在[]中指定<br>  <span class="hljs-type">int</span> *p = new <span class="hljs-type">int</span>[<span class="hljs-number">3</span>]; <span class="hljs-comment">//申请一个整型数组，数组的长度为[]中的值</span><br><span class="hljs-number">2.</span>new <span class="hljs-title function_">int</span><span class="hljs-params">()</span>是创建一个<span class="hljs-type">int</span>型数，并且用<span class="hljs-params">()</span>括号中的数据进行初始化,例如：<br>  <span class="hljs-type">int</span> *p = new <span class="hljs-type">int</span>(<span class="hljs-number">10</span>); <span class="hljs-comment">// p指向一个值为10的int数。</span><br></code></pre></td></tr></tbody></table></figure>
-<p>^1659436622479<br>
-这段代码的空间复杂度主要看第一行即可，随着n的增大，开辟的内存大小呈线性增长，即 O(n)<br>
+<p>这段代码的空间复杂度主要看第一行即可，随着n的增大，开辟的内存大小呈线性增长，即 O(n)<br>
 O(n^2)， O(n^3)：即2 * 2,   3 * 3 矩阵</p>
 <p>空间复杂度是<strong>logn</strong>的情况确实有些特殊，其实是在<strong>递归的时候，会出现空间复杂度为logn的情况</strong>。</p>
+<h1 id="2-总结"><a class="markdownIt-Anchor" href="#2-总结"></a> 2 总结</h1>
+<p>算法的世界里用空间换时间</p>
+<ul>
+<li>用户只关心程序的响应速度</li>
+<li>程序运行完成以后空间可以重复使用</li>
+</ul>
+<p><strong>将经常使用的数据存成变量</strong></p>
+<p>发现时间复杂度很高空间复杂度很低, 就是系统没有记住一些信息, 将常用的信息设置为变量. 以降低时间复杂度<br>
+<img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202208111052182.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<hr>
 <p>[[C++ new的用法]]<br>
 [[时间复杂度分析]]</p>
 
@@ -392,7 +404,7 @@ O(n^2)， O(n^3)：即2 * 2,   3 * 3 矩阵</p>
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2022年8月4日</div>
+          <div>2022年8月12日</div>
         </div>
       
       <div class="license-meta-item">
