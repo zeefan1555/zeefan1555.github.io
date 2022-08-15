@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20201218185902217.png">
 <meta property="article:published_time" content="2022-06-07T02:30:00.000Z">
-<meta property="article:modified_time" content="2022-08-12T14:43:30.030Z">
+<meta property="article:modified_time" content="2022-08-15T02:23:30.135Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="函数">
 <meta name="twitter:card" content="summary_large_image">
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.3k 字
+          1.4k 字
         
       </span>
     
@@ -287,7 +287,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年8月12日 晚上
+                    本文最后更新于：2022年8月15日 上午
                   
                 
               </p>
@@ -307,10 +307,18 @@ vector的长度不能是变量,必须是常量</p>
 </ol>
 <p><strong>二维数组的初始化</strong><br>
 初始化为0，0可变其他数</p>
-<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;&gt; vec(row, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt; (col,<span class="hljs-number">0</span>));<br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;&gt; vec(row, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt; (col,<span class="hljs-number">0</span>));<br><br></code></pre></td></tr></tbody></table></figure>
 <p>返回值和使用时：必须用 dp[ i ]，不能用dp(i)</p>
-<p>强转 vector 类型<code>return vector&lt;int&gt;(result_set.begin(), result_set.end());</code><sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span class="hint--top hint--rounded" aria-label="[[3. 两个数组的交集]]
+<p><strong>强转 vector 类型</strong><code>return vector&lt;int&gt;(result_set.begin(), result_set.end());</code><sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span class="hint--top hint--rounded" aria-label="[[3. 两个数组的交集]]
 ">[2]</span></a></sup></p>
+<h2 id="12-操作"><a class="markdownIt-Anchor" href="#12-操作"></a> 1.2 操作</h2>
+<ul>
+<li>添加操作
+<ul>
+<li><code>result.push_back(vector&lt;int&gt;{1, 2, 3});</code> = <code>{{1, 2, 3}, 还可以往里再加}</code></li>
+</ul>
+</li>
+</ul>
 <h1 id="2-原理"><a class="markdownIt-Anchor" href="#2-原理"></a> 2 原理</h1>
 <p>普通数组 int a [10]，一旦定义了就不能改变了，这个数组最多只能放10个元素了<br>
 动态数组vector，不用关心初始的大小，可以随意的添加数据</p>
@@ -413,7 +421,7 @@ eg：<code>vector&lt;vector&lt;int&gt;&gt; que：[[7,0],[7,1]]</code> →<code>l
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2022年8月12日</div>
+          <div>2022年8月15日</div>
         </div>
       
       <div class="license-meta-item">

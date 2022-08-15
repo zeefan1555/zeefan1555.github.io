@@ -24,7 +24,7 @@
 <meta property="og:description" content="1 第202题. 快乐数 力扣题目链接 编写一个算法来判断一个数 n 是不是快乐数。 「快乐数」定义为：对于一个正整数，每一次将该数替换为它每个位置上的数字的平方和，然后重复这个过程直到这个数变为 1，也可能是 无限循环 但始终变不到 1。如果 可以变为&amp;nbsp; 1，那么这个数就是快乐数。 如果 n 是快乐数就返回 True ；不是，则返回 False 。 示例： 输入：19 输出：true">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-08-12T14:49:00.000Z">
-<meta property="article:modified_time" content="2022-08-12T15:21:34.435Z">
+<meta property="article:modified_time" content="2022-08-13T02:48:25.063Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="哈希表">
 <meta name="twitter:card" content="summary_large_image">
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          231 字
+          807 字
         
       </span>
     
@@ -234,7 +234,7 @@
         
         
         
-          2 分钟
+          5 分钟
         
       </span>
     
@@ -285,7 +285,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年8月12日 晚上
+                    本文最后更新于：2022年8月13日 上午
                   
                 
               </p>
@@ -295,7 +295,7 @@
               <h1 id="1-第202题-快乐数"><a class="markdownIt-Anchor" href="#1-第202题-快乐数"></a> 1 第202题. 快乐数</h1>
 <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/happy-number/">力扣题目链接</a></p>
 <p>编写一个算法来判断一个数 n 是不是快乐数。</p>
-<p>「快乐数」定义为：对于一个正整数，每一次将该数替换为它每个位置上的数字的平方和，然后重复这个过程直到这个数变为 1，也可能是 无限循环 但始终变不到 1。如果 可以变为&nbsp; 1，那么这个数就是快乐数。</p>
+<p>「快乐数」定义为：对于一个正整数，每一次将该数替换为它每个位置上的数字的平方和，然后重复这个过程直到这个数变为 1，也可能是 <strong>无限循环</strong> 但始终变不到 1。如果 可以变为&nbsp; 1，那么这个数就是快乐数。</p>
 <p>如果 n 是快乐数就返回 True ；不是，则返回 False 。</p>
 <p><strong>示例：</strong></p>
 <p>输入：19<br>
@@ -306,11 +306,19 @@
 6^2 + 8^2 = 100<br>
 1^2 + 0^2 + 0^2 = 1</p>
 <h1 id="2-思路"><a class="markdownIt-Anchor" href="#2-思路"></a> 2 思路</h1>
+<p>题目中说了会 <strong>无限循环</strong>，那么也就是说<strong>求和的过程中，sum会重复出现</strong>, 重复出现就代表着无法找到 sum = 1</p>
+<p>用哈希法，来判断这个sum是否重复出现，如果重复了就是return false， 否则一直找到sum为1为止。</p>
+<p>判断sum是否重复出现就可以使用unordered_set。</p>
+<p>[[有关数值要想到的操作]]</p>
+<h1 id="3-代码"><a class="markdownIt-Anchor" href="#3-代码"></a> 3 代码</h1>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">getSum</span> <span class="hljs-params">(<span class="hljs-type">int</span> n )</span></span>{<br>            <span class="hljs-type">int</span> sum = <span class="hljs-number">0</span>;<br>            <span class="hljs-keyword">while</span> (n){ <span class="hljs-comment">// ❓为什么不会死循环 💡 n &lt; 1 即为 0,<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="[[while 循环]]
+">[1]</span></a></sup></span><br>                sum += (n % <span class="hljs-number">10</span>) * (n % <span class="hljs-number">10</span>);<br>                n /= <span class="hljs-number">10</span>;<br>            }<br>            <span class="hljs-keyword">return</span> sum;<br>        }<br><br>    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">isHappy</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> </span>{<br>        unordered_set&lt;<span class="hljs-type">int</span>&gt; set;<br>        <span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>){<br>            <span class="hljs-type">int</span> sum = <span class="hljs-built_in">getSum</span>(n);<br>            <span class="hljs-keyword">if</span> (sum == <span class="hljs-number">1</span>){<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>            }<br>            <span class="hljs-keyword">if</span>(set.<span class="hljs-built_in">find</span>(sum) != set.<span class="hljs-built_in">end</span>()){<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>            }<br>            <span class="hljs-keyword">else</span>{<br>                set.<span class="hljs-built_in">insert</span>(sum);<br>            }<br>            n = sum; <span class="hljs-comment">// 更新 sum</span><br>        }<br><br>    }<br></code></pre></td></tr></tbody></table></figure>
 <hr>
 <p><strong>参考资料</strong><br>
 <a href="obsidian://advanced-uri?vault=myblog&amp;uid=84d58a22-ffee-4e83-8c37-a0bd4cedbcb5">ob</a><br>
 <a target="_blank" rel="noopener" href="https://www.programmercarl.com/0202.%E5%BF%AB%E4%B9%90%E6%95%B0.html">代码随想录</a></p>
-
+<section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span>[[while 循环]]
+<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
               
             </div>
             <hr/>
@@ -394,7 +402,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2022年8月12日</div>
+          <div>2022年8月13日</div>
         </div>
       
       <div class="license-meta-item">
@@ -423,12 +431,18 @@
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/posts/38142/" title="有关数值要想到的操作">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">有关数值要想到的操作</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/21257/" title="unoredered_set">
-                        <span class="hidden-mobile">unoredered_set</span>
+                      <a href="/posts/13727/" title="3. 两个数组的交集">
+                        <span class="hidden-mobile">3. 两个数组的交集</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
