@@ -16,21 +16,26 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="article">
-<meta property="og:title" content="一杯空气">
-<meta property="og:url" content="https://zeefan1555.github.io/posts/1001/index.html">
+    <meta name="description" content="1 剑指offer05.替换空格 请实现一个函数，把字符串 s 中的每个空格替换成&quot;%20&quot;。 示例 1： 输入：s &#x3D; “We are happy.” 输出：“We%20are%20happy.”  2 思路 双指针法:  用第一个指针新数组的新元素, 第二个指针在新数组中赋值 首先扩充数组到每个空格替换成&quot;%20&quot;之后的大小。 然后从后向前替换空格，也就是双指针法，过程如下： i指向新长度的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="3. 替换空格">
+<meta property="og:url" content="https://zeefan1555.github.io/posts/27182/index.html">
 <meta property="og:site_name" content="一杯空气">
+<meta property="og:description" content="1 剑指offer05.替换空格 请实现一个函数，把字符串 s 中的每个空格替换成&quot;%20&quot;。 示例 1： 输入：s &#x3D; “We are happy.” 输出：“We%20are%20happy.”  2 思路 双指针法:  用第一个指针新数组的新元素, 第二个指针在新数组中赋值 首先扩充数组到每个空格替换成&quot;%20&quot;之后的大小。 然后从后向前替换空格，也就是双指针法，过程如下： i指向新长度的">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-08-15T08:09:52.882Z">
-<meta property="article:modified_time" content="2022-08-15T08:09:52.882Z">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1go6qmevhgpg20du09m4qp.gif">
+<meta property="article:published_time" content="2022-08-16T01:06:00.000Z">
+<meta property="article:modified_time" content="2022-08-16T01:44:56.071Z">
 <meta property="article:author" content="zeefan">
+<meta property="article:tag" content="字符串">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1go6qmevhgpg20du09m4qp.gif">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>一杯空气</title>
+  <title>3. 替换空格 - 一杯空气</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -197,7 +202,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text=""></span>
+            <span id="subtitle" data-typed-text="3. 替换空格"></span>
           
         </div>
 
@@ -208,8 +213,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-08-15 16:09" pubdate>
-          2022年8月15日 下午
+        <time datetime="2022-08-16 09:06" pubdate>
+          2022年8月16日 上午
         </time>
       </span>
     
@@ -220,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 字
+          893 字
         
       </span>
     
@@ -231,7 +236,7 @@
         
         
         
-          1 分钟
+          5 分钟
         
       </span>
     
@@ -277,17 +282,99 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none"></h1>
+            <h1 style="display: none">3. 替换空格</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2022年8月16日 上午
+                  
+                
+              </p>
             
             <div class="markdown-body">
               
-              
+              <h1 id="1-剑指offer05替换空格"><a class="markdownIt-Anchor" href="#1-剑指offer05替换空格"></a> 1 剑指offer05.替换空格</h1>
+<p>请实现一个函数，把字符串 s 中的每个空格替换成"%20"。</p>
+<p>示例 1： 输入：s = “We are happy.”<br>
+输出：“We%20are%20happy.”</p>
+<h1 id="2-思路"><a class="markdownIt-Anchor" href="#2-思路"></a> 2 思路</h1>
+<p>双指针法:  用第一个指针新数组的新元素, 第二个指针在新数组中赋值</p>
+<p>首先扩充数组到每个空格替换成"%20"之后的大小。<br>
+然后从后向前替换空格，也就是双指针法，过程如下：<br>
+i指向新长度的末尾，j指向旧长度的末尾。<br>
+<img src="https://tva1.sinaimg.cn/large/e6c9d24ely1go6qmevhgpg20du09m4qp.gif" srcset="/img/loading.gif" lazyload alt="替换空格"><br>
+如果从前往后填充, 就是O(n^2)的算法了，因为每次添加元素都要将添加元素之后的所有元素向后移动。</p>
+<p><strong>其实很多数组填充类的问题，都可以先预先给数组扩容带填充后的大小，然后在从后向前进行操作。</strong><br>
+这么做有两个好处：</p>
+<ol>
+<li>不用申请新数组。</li>
+<li>从后向前填充元素，避免了从前先后填充元素要来的 每次添加元素都要将添加元素之后的所有元素向后移动。</li>
+</ol>
+<h1 id="3-代码"><a class="markdownIt-Anchor" href="#3-代码"></a> 3 代码</h1>
+<p>编译已通过</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">string <span class="hljs-title">replaceSpace</span><span class="hljs-params">(string s)</span> </span>{<br>        <span class="hljs-type">int</span> count = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; s.<span class="hljs-built_in">size</span>(); i++){<br>            <span class="hljs-keyword">if</span> (s[i] == <span class="hljs-string">' '</span>) {<br>                count++;<br>            }<br>        }<br>        <span class="hljs-type">int</span> sOldSize = s.<span class="hljs-built_in">size</span>() - <span class="hljs-number">1</span>; <span class="hljs-comment">// ❗️要有减 1 操作啊</span><br>        s.<span class="hljs-built_in">resize</span>(s.<span class="hljs-built_in">size</span>() + <span class="hljs-number">2</span> * count);<span class="hljs-comment">// <sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="[[库函数]]
+">[1]</span></a></sup></span><br>        <span class="hljs-type">int</span> sNewSize = s.<span class="hljs-built_in">size</span>() - <span class="hljs-number">1</span>; <span class="hljs-comment">// </span><br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = sOldSize, j = sNewSize; i &gt; <span class="hljs-number">0</span>; i--, j--){<br>            <span class="hljs-keyword">if</span>(s[i] != <span class="hljs-string">' '</span>) s[j] = s[i];<br>            <span class="hljs-keyword">else</span>{<br>                s[j] = <span class="hljs-string">'0'</span>; <span class="hljs-comment">// ❗️不是数组 0, 是'0', 下边同理</span><br>                s[j<span class="hljs-number">-1</span>] = <span class="hljs-string">'2'</span>;<br>                s[j<span class="hljs-number">-2</span>] = <span class="hljs-string">'%'</span>;<br>                j -= <span class="hljs-number">2</span>;<br>            }<br>        }<br>        <span class="hljs-keyword">return</span> s;<br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
+<hr>
+<p><strong>参考资料</strong><br>
+<a href="obsidian://advanced-uri?vault=myblog&amp;uid=83d40fe9-2d12-48d3-8c1a-499661f2a473">ob</a></p>
+<section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span>[[库函数]]
+<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
               
             </div>
             <hr/>
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/" class="category-chain-item">👨🏻‍💻code</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" class="category-chain-item">数据结构与算法</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95/" class="category-chain-item">代码随想录</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95/%E5%AD%97%E7%AC%A6%E4%B8%B2/" class="category-chain-item">字符串</a>
+  
+  
+
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/">#字符串</a>
+      
+    </div>
   
 </div>
 
@@ -297,8 +384,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div></div>
-      <div>https://zeefan1555.github.io/posts/1001/</div>
+      <div>3. 替换空格</div>
+      <div>https://zeefan1555.github.io/posts/27182/</div>
     </div>
     <div class="license-meta">
       
@@ -310,9 +397,14 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年8月15日</div>
+          <div>2022年8月16日</div>
         </div>
       
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2022年8月16日</div>
+        </div>
       
       <div class="license-meta-item">
         <div>许可协议</div>
@@ -344,8 +436,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/7672/" title="8. 三数之和">
-                        <span class="hidden-mobile">8. 三数之和</span>
+                      <a href="/posts/62802/" title="2. 反转字符串II">
+                        <span class="hidden-mobile">2. 反转字符串II</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
