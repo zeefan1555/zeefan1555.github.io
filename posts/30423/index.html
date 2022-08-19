@@ -24,7 +24,7 @@
 <meta property="og:description" content="#card    1 取到字母字符对应数组下标值 :: ![[c++中 - ‘0’ 以及 -‘a’ 的相减操作解释#1 取到字母字符对应的数字：a→0，b→1]]   2 找到字符下标对应的元素 数组类的用的是 nums[i], 最后一个元素: nums[nums.size()- 1] 字符类的要用s.begin() + i,  最后一个元素用 s.end()  3 string 在C语言中，把一">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-08-12T09:56:00.000Z">
-<meta property="article:modified_time" content="2022-08-16T01:20:26.589Z">
+<meta property="article:modified_time" content="2022-08-18T01:22:14.265Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="总结">
 <meta name="twitter:card" content="summary_large_image">
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          537 字
+          563 字
         
       </span>
     
@@ -285,7 +285,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年8月16日 上午
+                    本文最后更新于：2022年8月18日 上午
                   
                 
               </p>
@@ -304,7 +304,7 @@
 <p>在C语言中，把一个字符串存入一个数组时，也把结束符 '\0’存入数组，并以此作为该字符串是否结束的标志。<br>
 例如这段代码：</p>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">char</span> a[<span class="hljs-number">5</span>] = <span class="hljs-string">"asd"</span>;<br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; a[i] != <span class="hljs-string">'\0'</span>; i++) {<br>}<br></code></pre></td></tr></tbody></table></figure>
-<p>string 类会提供 size 接口, 用来判断 string 类字符是否结束, 不用’/0’来判断是否结束</p>
+<p>string 类会提供 size 接口, 用来判断 string 类字符是否结束, 不用’/0’来判断是否结束 , char 类型的也可用 .size(); ^ouvyxy</p>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c++">string a = <span class="hljs-string">"asd"</span>;<br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; a.<span class="hljs-built_in">size</span>(); i++) {<br>}<br></code></pre></td></tr></tbody></table></figure>
 <p>那么vector&lt; char &gt; 和 string 又有什么区别呢？</p>
 <p>其实在基本操作上没有区别，但是 string提供更多的字符串处理的相关接口，例如string 重载了+，而vector却没有。</p>
@@ -388,7 +388,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2022年8月16日</div>
+          <div>2022年8月18日</div>
         </div>
       
       <div class="license-meta-item">

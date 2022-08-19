@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://code-thinking.cdn.bcebos.com/gifs/15.%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C.gif">
 <meta property="article:published_time" content="2022-08-15T00:51:00.000Z">
-<meta property="article:modified_time" content="2022-08-15T06:58:35.178Z">
+<meta property="article:modified_time" content="2022-08-19T08:26:22.101Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="哈希表">
 <meta name="twitter:card" content="summary_large_image">
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.6k 字
+          2.6k 字
         
       </span>
     
@@ -236,7 +236,7 @@
         
         
         
-          9 分钟
+          13 分钟
         
       </span>
     
@@ -287,7 +287,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年8月15日 下午
+                    本文最后更新于：2022年8月19日 下午
                   
                 
               </p>
@@ -308,20 +308,28 @@
 <p><strong>哈希结构里都只是单元素的去重, 无法实现集合形式的去重</strong> ^l8megb</p>
 <h2 id="22-双指针法"><a class="markdownIt-Anchor" href="#22-双指针法"></a> 2.2 双指针法</h2>
 <p><img src="https://code-thinking.cdn.bcebos.com/gifs/15.%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C.gif" srcset="/img/loading.gif" lazyload alt="15.三数之和"></p>
-<p>首先将<strong>数组排序</strong>，然后有一层for循环，i从下标0的地方开始，同时定一个下标left 定义在i+1的位置上，定义下标right 在数组结尾的位置上</p>
-<p>依然还是在数组中找到 abc 使得a + b +c =0，我们这里相当于 a = nums[i]，b = nums[left]，c = nums[right]。</p>
-<p>接下来如何移动left 和right呢， 如果nums[i] + nums[left] + nums[right] &gt; 0 就说明 此时三数之和大了，因为数组是排序后了，所以right下标就应该向左移动，这样才能让三数之和小一些。</p>
-<p>如果 nums[i] + nums[left] + nums[right] &lt; 0 说明 此时 三数之和小了，left 就向右移动，才能让三数之和大一些，直到left与right相遇为止(但不能相等, 因为相等就成两个数了)。<br>
-时间复杂度：O(n^2)<br>
+<ol>
+<li>首先将<strong>数组排序</strong>，</li>
+<li>然后有一层for循环，i从下标0的地方开始，同时定一个下left 定义在i+1的位置上(第二小的数)，定义下标right 在数组结尾的位置上(最大的数)</li>
+<li>映射a = nums[i]，b = nums[left]，c = nums[right], 依然还是在数组中找到 abc 使得a + b +c =0</li>
+<li>如果整体大了<code>nums[i] + nums[left] + nums[right] &gt; 0</code> , 说明加的数需要<strong>变小</strong>(left 指向的元素无法再小), 即 right 指针左移;</li>
+<li>如果整体小了 <code>nums[i] + nums[left] + nums[right] &lt; 0</code>, 说明加的数需要<strong>变大</strong>(right 指向的元素无法再大), left 指针右移</li>
+<li>考虑 a 的去重<code>nums[i] == nums[i - 1] continue</code>;  bc 的去重: 向中间收缩时, 不能与之前的数相等,否则就重复了</li>
+<li>循环往复, 直到left与right相遇为止(但不能相等, 因为相等就成两个数了)。</li>
+</ol>
+<p>时间复杂度：O(n^2)<br>
 ![[8. 三数之和 2022-08-15 10.25.32.excalidraw]]</p>
 <h1 id="3-代码"><a class="markdownIt-Anchor" href="#3-代码"></a> 3 代码</h1>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">threeSum</span>(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums) {<br>        vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; result;<span class="hljs-comment">// ❓为什么是二元数组💡题目定义的<sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span class="hint--top hint--rounded" aria-label="[[vector]]
+<p>二刷: 通过</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">threeSum</span>(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums) {<br>        vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; result;<br>        <span class="hljs-built_in">sort</span>(nums.<span class="hljs-built_in">begin</span>(), nums.<span class="hljs-built_in">end</span>());<br>        <span class="hljs-type">int</span> len = nums.<span class="hljs-built_in">size</span>();<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; len; i++){<br>            <span class="hljs-keyword">if</span>(nums[i] &gt; <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> result;<br>            <span class="hljs-keyword">if</span>(i &gt; <span class="hljs-number">0</span> &amp;&amp; nums[i] == nums[i<span class="hljs-number">-1</span>]) <span class="hljs-keyword">continue</span>; <span class="hljs-comment">// ❗️去重 a 放上边</span><br>            <span class="hljs-type">int</span> left = i + <span class="hljs-number">1</span>;<br>            <span class="hljs-type">int</span> right = len <span class="hljs-number">-1</span>;<br>            <span class="hljs-keyword">while</span>(left &lt; right){ <span class="hljs-comment">// ❗️整体要在 while 循环的包裹下</span><br>           <br>            <span class="hljs-keyword">if</span>(nums[i] + nums[left] + nums[right] &gt; <span class="hljs-number">0</span>){<br>                right--;<br>            }<br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (nums[i] + nums[left] + nums[right] &lt; <span class="hljs-number">0</span>){<br>                left++;<br>            }<br>            <span class="hljs-keyword">else</span>{<br>                result.<span class="hljs-built_in">push_back</span>({nums[i], nums[left], nums[right]});<br>                <span class="hljs-comment">// 💡去重逻辑应该放在找到一个三元组之后，对b 和 c去重</span><br>                <span class="hljs-keyword">while</span>(left &lt; right&amp;&amp; nums[right] == nums[right<span class="hljs-number">-1</span>]) right--;<br>                <span class="hljs-keyword">while</span>(left &lt; right&amp;&amp; nums[left] == nums[left+<span class="hljs-number">1</span>]) left++;<br>                <span class="hljs-comment">// 找到答案时，双指针同时收缩, 如果同时收缩的同时,不去重的话, 就会导致相同的结果集</span><br>                left++;<br>                right--;<br>            }<br>    }<br>            <br><br>        }<br>        <span class="hljs-keyword">return</span> result;<br><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
+<p>一刷: 通过</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">threeSum</span>(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums) {<br>        vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; result;<span class="hljs-comment">// ❓为什么是二元数组💡题目定义的<sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span class="hint--top hint--rounded" aria-label="[[vector#^1wjjr0]]
 ">[2]</span></a></sup></span><br>        <span class="hljs-built_in">sort</span>(nums.<span class="hljs-built_in">begin</span>(), nums.<span class="hljs-built_in">end</span>());<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; nums.<span class="hljs-built_in">size</span>(); i++){<br>            <span class="hljs-keyword">if</span> (nums[i] &gt; <span class="hljs-number">0</span>){<br>                <span class="hljs-keyword">return</span> result;<br>            }<br>            <span class="hljs-comment">// 去重a</span><br>            <span class="hljs-keyword">if</span> (i &gt; <span class="hljs-number">0</span> &amp;&amp; nums[i] == nums[i<span class="hljs-number">-1</span>]) <span class="hljs-keyword">continue</span>;<br>            <span class="hljs-type">int</span> left =i+<span class="hljs-number">1</span>;<br>            <span class="hljs-type">int</span> right = nums.<span class="hljs-built_in">size</span>() - <span class="hljs-number">1</span>; <br>            <span class="hljs-keyword">while</span>(left &lt; right){<br>            <span class="hljs-keyword">if</span> (nums[i] + nums[left] + nums[right] &gt; <span class="hljs-number">0</span>) right--;<br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (nums[i] + nums[left] + nums[right] &lt; <span class="hljs-number">0</span>) left++;<br>            <span class="hljs-keyword">else</span> {<br>                result.<span class="hljs-built_in">push_back</span>(vector&lt;<span class="hljs-type">int</span>&gt;{nums[i], nums[left], nums[right]});<br>                  <span class="hljs-comment">// 去重逻辑应该放在找到一个三元组之后，对b 和 c去重</span><br>                    <span class="hljs-keyword">while</span> (left &lt; right &amp;&amp; nums[right] == nums[right - <span class="hljs-number">1</span>]) right--; <span class="hljs-comment">// 已经找到了, 符合结果的 b c , 在有相同的 b c 也就重复了, 所以继续移动不添加</span><br>                    <span class="hljs-keyword">while</span> (left &lt; right &amp;&amp; nums[left] == nums[left + <span class="hljs-number">1</span>]) left++;<br><br>                    <span class="hljs-comment">// 找到答案时，双指针同时收缩, 如果同时收缩的同时,不去重的话, 就会导致相同的结果集</span><br>                    right--;<br>                    left++;<br>            }<br>            <br>            <br>            }<br><br>        }<br>        <span class="hljs-keyword">return</span> result;<br><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
 <hr>
 <p><strong>参考资料</strong><br>
 <a href="obsidian://advanced-uri?vault=myblog&amp;uid=cce04a65-4b7a-4cf7-a9db-d2259157b250">ob</a></p>
 <section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span>[[1. 哈希表理论基础]]
-<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:2" class="footnote-text"><span>[[vector]]
+<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:2" class="footnote-text"><span>[[vector#^1wjjr0]]
 <a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
               
             </div>
@@ -406,7 +414,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2022年8月15日</div>
+          <div>2022年8月19日</div>
         </div>
       
       <div class="license-meta-item">

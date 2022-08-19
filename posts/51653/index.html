@@ -16,18 +16,18 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1 42.环形链表II 力扣题目链接 题意： 给定一个链表，返回链表开始入环的第一个节点。&amp;nbsp;如果链表无环，则返回&amp;nbsp;null。 为了表示给定链表中的环，使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。 如果 pos 是 -1，则在该链表中没有环。 说明：不允许修改给定的链表。   2 思路 考察点:  判断链表是否有环 如果有环, 如何找到这个环的入口">
+    <meta name="description" content="1 42.环形链表II 力扣题目链接 题意： 给定一个链表，返回链表开始入环的第一个节点。&amp;nbsp;如果链表无环，则返回&amp;nbsp;null。 为了表示给定链表中的环，使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。 如果 pos 是 -1，则在该链表中没有环。 说明：不允许修改给定的链表。   2 思路 #card    fast slow 指向头结点, fast 每次">
 <meta property="og:type" content="article">
 <meta property="og:title" content="8. 环形链表II">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/51653/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="1 42.环形链表II 力扣题目链接 题意： 给定一个链表，返回链表开始入环的第一个节点。&amp;nbsp;如果链表无环，则返回&amp;nbsp;null。 为了表示给定链表中的环，使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。 如果 pos 是 -1，则在该链表中没有环。 说明：不允许修改给定的链表。   2 思路 考察点:  判断链表是否有环 如果有环, 如何找到这个环的入口">
+<meta property="og:description" content="1 42.环形链表II 力扣题目链接 题意： 给定一个链表，返回链表开始入环的第一个节点。&amp;nbsp;如果链表无环，则返回&amp;nbsp;null。 为了表示给定链表中的环，使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。 如果 pos 是 -1，则在该链表中没有环。 说明：不允许修改给定的链表。   2 思路 #card    fast slow 指向头结点, fast 每次">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20200816110112704.png">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/008eGmZEly1goo4xglk9yg30fs0b6u0x.gif">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/008eGmZEly1goo58gauidg30fw0bi4qr.gif">
 <meta property="article:published_time" content="2022-08-12T02:19:00.000Z">
-<meta property="article:modified_time" content="2022-08-12T03:05:54.773Z">
+<meta property="article:modified_time" content="2022-08-19T09:46:26.003Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="链表">
 <meta name="twitter:card" content="summary_large_image">
@@ -227,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          962 字
+          1.5k 字
         
       </span>
     
@@ -238,7 +238,7 @@
         
         
         
-          5 分钟
+          8 分钟
         
       </span>
     
@@ -289,7 +289,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年8月12日 上午
+                    本文最后更新于：2022年8月19日 下午
                   
                 
               </p>
@@ -303,11 +303,13 @@
 <p><strong>说明</strong>：不允许修改给定的链表。</p>
 <p><img src="https://img-blog.csdnimg.cn/20200816110112704.png" srcset="/img/loading.gif" lazyload alt="循环链表|600"></p>
 <h1 id="2-思路"><a class="markdownIt-Anchor" href="#2-思路"></a> 2 思路</h1>
-<p>考察点:</p>
+<p>#card</p>
+<!-- basicblock-start oid="Obss3RRsOmOqv7rvijEgiIq0" --> 
 <ol>
-<li>判断链表是否有环</li>
-<li>如果有环, 如何找到这个环的入口</li>
+<li>fast slow 指向头结点, fast 每次走两步, slow 每次走一步.  记相遇节点  (Index1)</li>
+<li>相遇节点(Index1) 与 头结点(Index2)在<strong>同步</strong>走, 在相遇便是入口节点</li>
 </ol>
+<!-- basicblock-end -->
 <h2 id="21-判断是否有环"><a class="markdownIt-Anchor" href="#21-判断是否有环"></a> 2.1 判断是否有环</h2>
 <p><strong>定义 fast 和 slow 指针，从头结点出发，fast指针每次移动两个节点，slow指针每次移动一个节点，如果 fast 和 slow指针在途中相遇 ，说明这个链表有环。</strong></p>
 <p>原因:</p>
@@ -317,14 +319,12 @@
 <img src="https://tva1.sinaimg.cn/large/008eGmZEly1goo4xglk9yg30fs0b6u0x.gif" srcset="/img/loading.gif" lazyload alt="141.环形链表"></li>
 </ol>
 <h2 id="22-如何找入口"><a class="markdownIt-Anchor" href="#22-如何找入口"></a> 2.2 如何找入口</h2>
-<p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1goo58gauidg30fw0bi4qr.gif" srcset="/img/loading.gif" lazyload alt="142.环形链表II（求入口）"><br>
-#card</p>
-<!-- basicblock-start oid="ObsIFP1PzYnn3E1b6jmD9yRz" --> 
-<p>如何判断环型入口::<br>
-![[8. 环形链表II 2022-08-12 10.28.07.excalidraw]]</p>
-<!-- basicblock-end -->
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1goo58gauidg30fw0bi4qr.gif" srcset="/img/loading.gif" lazyload alt="142.环形链表II（求入口）"></p>
+<p>![[8. 环形链表II 2022-08-12 10.28.07.excalidraw]]</p>
 <h1 id="3-代码"><a class="markdownIt-Anchor" href="#3-代码"></a> 3 代码</h1>
-<p>编译已通过</p>
+<p>二刷: 通过</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">ListNode *<span class="hljs-title">detectCycle</span><span class="hljs-params">(ListNode *head)</span> </span>{<br>        ListNode* fast = head; <span class="hljs-comment">// ❗️要赋值啊</span><br>        ListNode* slow = head;<br>        ListNode* index1;<br>        ListNode* index2 = head;<br>        <span class="hljs-keyword">while</span>(fast != <span class="hljs-literal">NULL</span> &amp;&amp; fast-&gt;next != <span class="hljs-literal">NULL</span>){ <span class="hljs-comment">// ❗️要把 fast != NULL 放到前边, 因为如果链表是空指针, 要先判断这个</span><br>            fast = fast-&gt;next-&gt;next;<br>            slow = slow-&gt;next;<br>            <span class="hljs-keyword">if</span>(fast == slow){<br>                index1 = fast;<br>                <span class="hljs-keyword">while</span>(index1 != index2){<br>                    index1 = index1-&gt;next;<br>                    index2 = index2-&gt;next;<br>                }<br>                <span class="hljs-keyword">return</span> index1;<br>            }<br>        }<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<br>        <br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
+<p>一刷:已通过</p>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">ListNode *<span class="hljs-title">detectCycle</span><span class="hljs-params">(ListNode *head)</span> </span>{<br>        ListNode* fast = head;<br>        ListNode* slow = head;<br>        <span class="hljs-keyword">while</span> (fast != <span class="hljs-literal">NULL</span> &amp;&amp; fast-&gt;next != <span class="hljs-literal">NULL</span>){<br>            fast = fast-&gt;next-&gt;next;<br>            slow = slow-&gt;next;<br>            <span class="hljs-keyword">if</span>(fast == slow){<br>                ListNode* index1 = fast; <span class="hljs-comment">// 定义相遇节点</span><br>                ListNode* index2 = head; <span class="hljs-comment">// 定义头结点</span><br>            <span class="hljs-keyword">while</span>(index1 != index2){ <span class="hljs-comment">// 💡让他俩同时出发,相遇时即为入口❗️index1 != NULL &amp;&amp; index1-&gt;next != NULL</span><br>            index1 = index1-&gt;next;  <br>            index2 = index2-&gt;next;<br>            }<br>            <span class="hljs-keyword">return</span> index1;<br>    }<br>}<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
 <hr>
 <p><strong>参考资料</strong><br>
@@ -413,7 +413,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2022年8月12日</div>
+          <div>2022年8月19日</div>
         </div>
       
       <div class="license-meta-item">

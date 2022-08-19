@@ -16,15 +16,15 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="while循环是if 和 for 循环的结合体， 只要在while循环中增加跳出语句就行 1234567while(i){ i++}if(){for()}  1 while (x) 123456while(i){ &#x2F;&#x2F; i 不能是变量; 可以直接写成 while(i--)i--}while(n) &#x2F;&#x2F;  n &lt; 1 即可为 0, eg: n &#x3D; 0.1 就会跳出循环">
+    <meta name="description" content="链表的指针移动用 while, 没法用 for 循环 while循环是if 和 for 循环的结合体， 只要在while循环中增加跳出语句就行 123456789while(i){ i++}等于if(){for()}  1 while (x) 123456while(i){ &#x2F;&#x2F; i 不能是变量; 可以直接写成 while(i--)i--}while(n) &#x2F;&#x2F;  n &lt; 1 即可为 0,">
 <meta property="og:type" content="article">
 <meta property="og:title" content="while 循环">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/36387/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="while循环是if 和 for 循环的结合体， 只要在while循环中增加跳出语句就行 1234567while(i){ i++}if(){for()}  1 while (x) 123456while(i){ &#x2F;&#x2F; i 不能是变量; 可以直接写成 while(i--)i--}while(n) &#x2F;&#x2F;  n &lt; 1 即可为 0, eg: n &#x3D; 0.1 就会跳出循环">
+<meta property="og:description" content="链表的指针移动用 while, 没法用 for 循环 while循环是if 和 for 循环的结合体， 只要在while循环中增加跳出语句就行 123456789while(i){ i++}等于if(){for()}  1 while (x) 123456while(i){ &#x2F;&#x2F; i 不能是变量; 可以直接写成 while(i--)i--}while(n) &#x2F;&#x2F;  n &lt; 1 即可为 0,">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-06-15T03:10:00.000Z">
-<meta property="article:modified_time" content="2022-08-13T02:47:38.458Z">
+<meta property="article:modified_time" content="2022-08-18T07:38:38.815Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="函数">
 <meta name="twitter:card" content="summary_large_image">
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          189 字
+          215 字
         
       </span>
     
@@ -234,7 +234,7 @@
         
         
         
-          1 分钟
+          2 分钟
         
       </span>
     
@@ -285,16 +285,17 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年8月13日 上午
+                    本文最后更新于：2022年8月18日 下午
                   
                 
               </p>
             
             <div class="markdown-body">
               
-              <p>while循环是if 和 for 循环的结合体，<br>
+              <p>链表的指针移动用 while, 没法用 for 循环</p>
+<p>while循环是if 和 for 循环的结合体，<br>
 只要在while循环中增加跳出语句就行</p>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">while</span>(i){<br> i++<br>}<br><br><span class="hljs-keyword">if</span>(){<br><span class="hljs-keyword">for</span>()<br>}<br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">while</span>(i){<br> i++<br>}<br><br>等于<br><br><span class="hljs-keyword">if</span>(){<br><span class="hljs-keyword">for</span>()<br>}<br></code></pre></td></tr></tbody></table></figure>
 <h1 id="1-while-x"><a class="markdownIt-Anchor" href="#1-while-x"></a> 1 while (x)</h1>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">while</span>(i){ <span class="hljs-comment">// i 不能是变量; 可以直接写成 while(i--)</span><br>i--<br>}<br><br><br><span class="hljs-keyword">while</span>(n) <span class="hljs-comment">//  n &lt; 1 即可为 0, eg: n = 0.1 就会跳出循环</span><br></code></pre></td></tr></tbody></table></figure>
 
@@ -374,7 +375,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2022年8月13日</div>
+          <div>2022年8月18日</div>
         </div>
       
       <div class="license-meta-item">
@@ -403,7 +404,7 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/12294/" title="c++中 - ‘0’ 以及 -&#39;a&#39; 的相减操作解释">
+                      <a href="/posts/12295/" title="c++中 - ‘0’ 以及 -&#39;a&#39; 的相减操作解释">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">c++中 - ‘0’ 以及 -&#39;a&#39; 的相减操作解释</span>
                         <span class="visible-mobile">上一篇</span>

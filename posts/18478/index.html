@@ -24,7 +24,7 @@
 <meta property="og:description" content="1 151.翻转字符串里的单词 力扣题目链接 给定一个字符串，逐个翻转字符串中的每个单词。 示例 1： 输入: “the sky is blue” 输出:&amp;nbsp;“blue is sky the” 示例 2： 输入: &quot; &amp;nbsp;hello world! &amp;nbsp;&quot; 输出:&amp;nbsp;“world! hello” 解释: 输入字符串可以在前面或者后面包含多余的空格，但是反转后的字符不">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-08-16T02:11:00.000Z">
-<meta property="article:modified_time" content="2022-08-16T03:13:18.846Z">
+<meta property="article:modified_time" content="2022-08-18T03:03:58.480Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="字符串">
 <meta name="twitter:card" content="summary_large_image">
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.2k 字
+          3.1k 字
         
       </span>
     
@@ -234,7 +234,7 @@
         
         
         
-          6 分钟
+          16 分钟
         
       </span>
     
@@ -285,7 +285,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年8月16日 上午
+                    本文最后更新于：2022年8月18日 上午
                   
                 
               </p>
@@ -307,22 +307,30 @@
 输出:&nbsp;“example good a”<br>
 解释: 如果两个单词间有多余的空格，将反转后单词间的空格减少到只含一个。</p>
 <h1 id="2-思路"><a class="markdownIt-Anchor" href="#2-思路"></a> 2 思路</h1>
-<p>解题思路如下：</p>
-<ul>
-<li>移除多余空格  : [[3. 移除元素]]</li>
+<ol>
+<li>移除多余空格  :
+<ol>
+<li>移除所有的空格, 思想参考:[[3. 移除元素]]</li>
+<li>除了第一个元素外, 在每个单词前边再加上一个空格</li>
+</ol>
+</li>
 <li>将整个字符串反转</li>
 <li>将每个单词反转</li>
-</ul>
+</ol>
 <p>举个例子，源字符串为："the sky is blue "</p>
-<ul>
+<ol>
 <li>移除多余空格 : “the sky is blue”</li>
-<li>字符串反转：“eulb si yks eht”</li>
+<li>字符串整体反转：“eulb si yks eht”</li>
 <li>单词反转：“blue is sky the”</li>
-</ul>
+</ol>
 <h1 id="3-代码"><a class="markdownIt-Anchor" href="#3-代码"></a> 3 代码</h1>
-<p>编译未通过<br>
+<p>二刷 : 未通过</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">reverse</span> <span class="hljs-params">(string&amp; s, <span class="hljs-type">int</span> start, <span class="hljs-type">int</span> end)</span></span>{<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = start, j = end; i &lt; j; i++, j--){<br>            <span class="hljs-type">char</span> temp = s[i];<span class="hljs-comment">// 这里用 swap 显示不行</span><br>            s[i] = s[j];<br>            s[j] = temp;<br>        }<br>    }<br><br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">removeEtraSpace</span><span class="hljs-params">(string&amp; s)</span></span>{<br>        <span class="hljs-type">int</span> fast = <span class="hljs-number">0</span>, slow = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span>(; fast &lt; s.<span class="hljs-built_in">size</span>(); fast++){<br>            <span class="hljs-keyword">if</span>(s[fast] != <span class="hljs-string">' '</span>){<br>                <span class="hljs-keyword">if</span>(slow != <span class="hljs-number">0</span>){<span class="hljs-comment">// 2️⃣除了第一个单词外, 在单词前边加空格</span><br>                    s[slow] = <span class="hljs-string">' '</span>; <br>                    slow++;<br>                }<br>                <span class="hljs-keyword">while</span>(s[fast] != <span class="hljs-string">' '</span> &amp;&amp; fast &lt; s.<span class="hljs-built_in">size</span>()){ <span class="hljs-comment">// 1️⃣ 添加单词</span><br>                    s[slow] = s[fast];<br>                    fast++;<br>                    slow++;<br>                }<br>            }<br>        }<br>        s.<span class="hljs-built_in">resize</span>(slow - <span class="hljs-number">1</span>);<br>    }<br><br>    <span class="hljs-function">string <span class="hljs-title">reverseWords</span><span class="hljs-params">(string s)</span> </span>{<br>        <span class="hljs-built_in">removeEtraSpace</span>(s);<br>        <span class="hljs-built_in">reverse</span>(s, <span class="hljs-number">0</span>, s.<span class="hljs-built_in">size</span>()<span class="hljs-number">-1</span>);<br>        <span class="hljs-type">int</span> start = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; s.<span class="hljs-built_in">size</span>(); i++){<br>            <span class="hljs-keyword">if</span>(s[i] == <span class="hljs-string">' '</span>){ <span class="hljs-comment">// 找到单词后的空格</span><br>            <span class="hljs-built_in">reverse</span>(s, start, i);<br>            start = i + <span class="hljs-number">1</span>; <span class="hljs-comment">// 下个单词的首元素下标</span><br>            }<br>        }<br>        <span class="hljs-keyword">return</span> s;<br><br>    }<br>     <br>};<br><br></code></pre></td></tr></tbody></table></figure>
+<p>一刷: 编译未通过<br>
 #疑问</p>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">reverse</span><span class="hljs-params">(string&amp; s, <span class="hljs-type">int</span> start, <span class="hljs-type">int</span> end)</span></span>{ <span class="hljs-comment">// ❗️返回值是 void 即可, 因为是引用&amp;s, 所以 s 被修改了</span><br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>, j = s.<span class="hljs-built_in">size</span>() - <span class="hljs-number">1</span>; i &lt; j; i++, j--){<br>            <span class="hljs-built_in">swap</span>(s[i], s[j]);<br>        }<br>    }<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">remeveExtraSpaces</span><span class="hljs-params">(string&amp; s)</span></span>{<br>        <span class="hljs-type">int</span> fast; <br>        <span class="hljs-type">int</span> slow;<br>        <span class="hljs-keyword">for</span>(fast = <span class="hljs-number">0</span>; fast &lt; s.<span class="hljs-built_in">size</span>(); fast++){<br>            <span class="hljs-keyword">if</span>(s[fast] != <span class="hljs-number">0</span>){<br>                <span class="hljs-keyword">if</span>(slow != <span class="hljs-number">0</span>){<br>                    s[slow] = <span class="hljs-string">' '</span>;<br>                    slow++;<br>                }<br>                <span class="hljs-keyword">while</span>(fast &lt; s.<span class="hljs-built_in">size</span>() &amp;&amp; s[fast]!=<span class="hljs-string">' '</span>){<br>                    s[slow] = s[fast];<br>                    slow++;<br>                    fast++;<br>                }<br>            }<br>        }<br>    }<br>    <br><br>    <span class="hljs-function">string <span class="hljs-title">reverseWords</span><span class="hljs-params">(string s)</span> </span>{<br>        <span class="hljs-built_in">remeveExtraSpaces</span>(s);<br>        <span class="hljs-built_in">reverse</span>(s, <span class="hljs-number">0</span>, s.<span class="hljs-built_in">size</span>() - <span class="hljs-number">1</span>);<br>        <span class="hljs-type">int</span> start = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt;= s.<span class="hljs-built_in">size</span>(); i++){<br>            <span class="hljs-keyword">if</span>(s[i] == <span class="hljs-string">' '</span> || i == s.<span class="hljs-built_in">size</span>()){<br>                <span class="hljs-built_in">reverse</span>(s, start, i<span class="hljs-number">-1</span>);<br>                start = i+<span class="hljs-number">1</span>;<br><br>            }<br>        }<br>        <span class="hljs-keyword">return</span> s;<br>        <br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
+<p>carl 代码</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">reverse</span><span class="hljs-params">(string&amp; s, <span class="hljs-type">int</span> start, <span class="hljs-type">int</span> end)</span></span>{ <span class="hljs-comment">//翻转，区间写法：左闭又闭 []</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = start, j = end; i &lt; j; i++, j--) {<br>            <span class="hljs-built_in">swap</span>(s[i], s[j]);<br>        }<br>    }<br><br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">removeExtraSpaces</span><span class="hljs-params">(string&amp; s)</span> </span>{<span class="hljs-comment">//去除所有空格并在相邻单词之间添加空格, 快慢指针。</span><br>        <span class="hljs-type">int</span> slow = <span class="hljs-number">0</span>;   <span class="hljs-comment">//整体思想参考https://programmercarl.com/0027.移除元素.html</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> fast = <span class="hljs-number">0</span>; fast &lt; s.<span class="hljs-built_in">size</span>(); fast++) { <span class="hljs-comment">//</span><br>            <span class="hljs-keyword">if</span> (s[fast] != <span class="hljs-string">' '</span>) { <span class="hljs-comment">//遇到非空格就处理，即删除所有空格。</span><br>                <span class="hljs-keyword">if</span> (slow != <span class="hljs-number">0</span>) {<br>                    s[slow] = <span class="hljs-string">' '</span>; <span class="hljs-comment">//手动控制空格，给单词之间添加空格。slow != 0说明不是第一个单词，需要在单词前添加空格。</span><br>                    slow++;<br>                }<br>                <span class="hljs-keyword">while</span> (fast &lt; s.<span class="hljs-built_in">size</span>() &amp;&amp; s[fast] != <span class="hljs-string">' '</span>) { <span class="hljs-comment">//补上该单词，遇到空格说明单词结束。</span><br>                    s[slow] = s[fast];<br>                    slow++;<br>                    fast++;<br>                }<br>            }<br>        }<br>        s.<span class="hljs-built_in">resize</span>(slow); <span class="hljs-comment">//slow的大小即为去除多余空格后的大小。</span><br>    }<br><br>    <span class="hljs-function">string <span class="hljs-title">reverseWords</span><span class="hljs-params">(string s)</span> </span>{<br>        <span class="hljs-built_in">removeExtraSpaces</span>(s); <span class="hljs-comment">// 去除多余空格，保证单词之间之只有一个空格，且字符串首尾没空格。</span><br>        <span class="hljs-built_in">reverse</span>(s, <span class="hljs-number">0</span>, s.<span class="hljs-built_in">size</span>() - <span class="hljs-number">1</span>);<br>        <span class="hljs-type">int</span> start = <span class="hljs-number">0</span>; <span class="hljs-comment">// removeExtraSpaces后保证第一个单词的开始下标一定是0。</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt;= s.<span class="hljs-built_in">size</span>(); ++i) {<br>            <span class="hljs-keyword">if</span> (i == s.<span class="hljs-built_in">size</span>() || s[i] == <span class="hljs-string">' '</span>) { <span class="hljs-comment">// 到达空格或者串尾，说明一个单词结束。进行翻转。</span><br>                <span class="hljs-built_in">reverse</span>(s, start, i - <span class="hljs-number">1</span>); <span class="hljs-comment">// 翻转，注意是左闭右闭 []的翻转。</span><br>                start = i + <span class="hljs-number">1</span>; <span class="hljs-comment">// 更新下一个单词的开始下标start</span><br>            }<br>        }<br>        <span class="hljs-keyword">return</span> s;<br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
 <hr>
 <p><strong>参考资料</strong><br>
 <a href="obsidian://advanced-uri?vault=myblog&amp;uid=28a95bf0-8bc7-43c5-866d-a1721df3d4f0">ob</a><br>
@@ -411,7 +419,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2022年8月16日</div>
+          <div>2022年8月18日</div>
         </div>
       
       <div class="license-meta-item">
