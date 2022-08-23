@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/008eGmZEly1gntrc7x9tjg30du09m1ky.gif">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/008eGmZEly1gntrds6r59g30du09mnpd.gif">
 <meta property="article:published_time" content="2022-08-08T07:06:00.000Z">
-<meta property="article:modified_time" content="2022-08-18T02:05:34.397Z">
+<meta property="article:modified_time" content="2022-08-22T01:13:19.533Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="数组">
 <meta name="twitter:card" content="summary_large_image">
@@ -288,7 +288,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年8月18日 上午
+                    本文最后更新于：2022年8月22日 上午
                   
                 
               </p>
@@ -322,7 +322,7 @@
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">removeElement</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums, <span class="hljs-type">int</span> val)</span> </span>{<br>        <span class="hljs-type">int</span> len = nums.<span class="hljs-built_in">size</span>();<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; len; i++){ <span class="hljs-comment">// ❗️如果 i &lt; nums.size() 会导致超时, 还是能用常量用常量</span><br>           <span class="hljs-keyword">if</span>(nums[i] == val){<br>               <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j = i + <span class="hljs-number">1</span>; j &lt;nums.<span class="hljs-built_in">size</span>(); j++){<br>                   nums[j<span class="hljs-number">-1</span>] =nums[j]; <span class="hljs-comment">// 💡从 i 后边的元素都往前覆盖</span><br>               }<br>                i--; <span class="hljs-comment">// ❓💡因为下标i以后的数值都向前移动了一位，所以i也向前移动一位, 会指向了移动后的元素, 继续判断</span><br>                len--;<br>           }<br><br>    }<br>    <span class="hljs-keyword">return</span> len;<br><br>    }  <br>};<br></code></pre></td></tr></tbody></table></figure>
 <h2 id="22-双指针法"><a class="markdownIt-Anchor" href="#22-双指针法"></a> 2.2 双指针法</h2>
 <p>双指针法（快慢指针法）： <strong>通过一个快指针和慢指针在一个for循环下完成两个for循环的工作。</strong></p>
-<p>快指针: 寻找新数组的元素 (查找 n 次, 即 O(n)的时间复杂度)<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="[[1.  链表理论基础#4 3 性能分析]]
+<p>快指针: 寻找新数组的元素 (查找 n 次, 即 O(n)的时间复杂度)<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label=": [[1.  链表理论基础#4 3 性能分析]]
 ">[1]</span></a></sup><br>
 慢指针: 新数组的下标值<br>
 总结: 将快指针或者的元素赋给, 慢指针的所对应的下标值</p>
@@ -336,7 +336,7 @@
 <hr>
 <p><strong>参考资料</strong><br>
 <a target="_blank" rel="noopener" href="https://www.programmercarl.com/0027.%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0.html#%E6%80%9D%E8%B7%AF">代码随想录</a></p>
-<section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span>[[1.  链表理论基础#4 3 性能分析]]
+ <section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span>: [[1.  链表理论基础#4 3 性能分析]]
 <a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
               
             </div>
@@ -421,7 +421,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2022年8月18日</div>
+          <div>2022年8月22日</div>
         </div>
       
       <div class="license-meta-item">
