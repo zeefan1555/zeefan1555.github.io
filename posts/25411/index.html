@@ -27,7 +27,7 @@
 <meta property="og:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202208111134829.gif">
 <meta property="og:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202208111219807.gif">
 <meta property="article:published_time" content="2022-08-11T02:40:00.000Z">
-<meta property="article:modified_time" content="2022-08-11T04:20:55.123Z">
+<meta property="article:modified_time" content="2022-08-24T13:46:47.707Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="数组">
 <meta name="twitter:card" content="summary_large_image">
@@ -289,7 +289,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年8月11日 中午
+                    本文最后更新于：2022年8月24日 晚上
                   
                 
               </p>
@@ -323,10 +323,10 @@
 <!-- basicblock-start oid="ObsSRgRVqGrwJjsLLBcm71oT" --> 
 <p>如何设置一个虚拟头结点来操持一个统一的删除操作::</p>
 <ol>
-<li>先创建一个表头链表 dummyhead : <code>new ListNode(0</code>); <sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="[[C++ new的用法]]
+<li>先创建一个表头链表 dummyHead : <code>new ListNode(0</code>); <sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="[[C++ new的用法]]
 ">[1]</span></a></sup></li>
 <li>在把 head 链表接到dummyhead 上 : dummyHead -&gt; next = head</li>
-<li>创建一个新 cur 链表, 以后在 cur 链表上操作</li>
+<li>创建一个新 cur 链表, 以后在 cur 链表上操作, 因为 cur 要不断变化, 不能让影响到原来的数组了</li>
 </ol>
 <p><img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202208111134829.gif" srcset="/img/loading.gif" lazyload alt="|1100"></p>
 <!-- basicblock-end -->
@@ -421,7 +421,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2022年8月11日</div>
+          <div>2022年8月24日</div>
         </div>
       
       <div class="license-meta-item">

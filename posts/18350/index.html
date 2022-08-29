@@ -16,15 +16,15 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="123table tags,datefrom #栈与队列    1 队列与栈函数:: 按熟悉程度排序 栈也可以是这样的, que 换成 stack 定义队列: queue&lt;int&gt; que; que.front(): 返回队列的一个元素 que.back(): 返回队列的最后一个元素 que.push(x): 队头添加元素 que.pop(x): 队头元素弹出 que.size():">
+    <meta name="description" content="123table tags,datefrom #栈与队列    1 队列与栈函数:: 按熟悉程度排序 栈也可以是这样的, que 换成 stack 定义队列: queue&lt;int&gt; que; que.front(): 返回队列的一个元素 que.back(): 返回队列的最后一个元素 que.push(x): 队头添加元素 ❓应该是队尾添加元素吧 que.pop(x): 队头元素弹出">
 <meta property="og:type" content="article">
 <meta property="og:title" content="栈与队列总结">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/18350/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="123table tags,datefrom #栈与队列    1 队列与栈函数:: 按熟悉程度排序 栈也可以是这样的, que 换成 stack 定义队列: queue&lt;int&gt; que; que.front(): 返回队列的一个元素 que.back(): 返回队列的最后一个元素 que.push(x): 队头添加元素 que.pop(x): 队头元素弹出 que.size():">
+<meta property="og:description" content="123table tags,datefrom #栈与队列    1 队列与栈函数:: 按熟悉程度排序 栈也可以是这样的, que 换成 stack 定义队列: queue&lt;int&gt; que; que.front(): 返回队列的一个元素 que.back(): 返回队列的最后一个元素 que.push(x): 队头添加元素 ❓应该是队尾添加元素吧 que.pop(x): 队头元素弹出">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-08-22T02:21:00.000Z">
-<meta property="article:modified_time" content="2022-08-22T05:29:10.230Z">
+<meta property="article:modified_time" content="2022-08-25T10:38:22.101Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="总结">
 <meta property="article:tag" content="算法">
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          242 字
+          349 字
         
       </span>
     
@@ -287,7 +287,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年8月22日 下午
+                    本文最后更新于：2022年8月25日 晚上
                   
                 
               </p>
@@ -295,23 +295,28 @@
             <div class="markdown-body">
               
               <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs dataview">table tags,date<br>from #栈与队列<br><br></code></pre></td></tr></tbody></table></figure>
-<!-- basicblock-start --> 
+<!-- basicblock-start oid="Obszwi46x2QRmzvre0TvhxoC" --> 
 <h1 id="1-队列与栈函数"><a class="markdownIt-Anchor" href="#1-队列与栈函数"></a> 1 队列与栈函数::</h1>
 <p>按熟悉程度排序<br>
 栈也可以是这样的, que 换成 stack</p>
 <p>定义队列: <code>queue&lt;int&gt; que;</code><br>
 que.front(): 返回队列的一个元素<br>
 que.back(): 返回队列的最后一个元素<br>
-que.push(x): 队头添加元素<br>
+que.push(x): 队头添加元素 ❓应该是队尾添加元素吧<br>
 que.pop(x): 队头元素弹出<br>
 que.size(): 返回队列的个数<br>
 que.empty(): 返回队列是否为空, 返回是 bool 值(true || false)</p>
 <!-- basicblock-end --> #card
+<h1 id="2-注意"><a class="markdownIt-Anchor" href="#2-注意"></a> 2 注意</h1>
+<p>每次要操作队列前要看是否为空, 不能操作空队列<br>
+eg: <code>if (!que.empty() &amp;&amp; value == que.front()) {</code></p>
 <hr>
 <p><strong>参考资料</strong></p>
- <!-- basicblock-start --> 
-<p>#card :: <a href="obsidian://advanced-uri?vault=myblog&amp;uid=4e713570-5bd8-48ec-b3f1-6d1c6c892f29">ob</a></p>
+ <!-- basicblock-start oid="ObsAGsuQf82L3Fyt8Q9k2z7Z" deck = "👨🏻‍💻code::数据结构与算法::代码随想录::栈与队列::栈与队列总结.md"--> 
+<p>#历史记录 ::<br>
+2022/08/24: 添加deck 数组</p>
 <!-- basicblock-end --> 
+<p>／</p>
 
               
             </div>
@@ -400,7 +405,7 @@ que.empty(): 返回队列是否为空, 返回是 bool 值(true || false)</p>
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2022年8月22日</div>
+          <div>2022年8月25日</div>
         </div>
       
       <div class="license-meta-item">

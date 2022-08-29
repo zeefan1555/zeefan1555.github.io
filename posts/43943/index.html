@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202208192343602.png">
 <meta property="og:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202208182156057.png">
 <meta property="article:published_time" content="2022-08-18T13:06:00.000Z">
-<meta property="article:modified_time" content="2022-08-21T16:55:52.797Z">
+<meta property="article:modified_time" content="2022-08-28T14:28:46.265Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="git">
 <meta name="twitter:card" content="summary_large_image">
@@ -226,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.7k 字
+          5k 字
         
       </span>
     
@@ -237,7 +237,7 @@
         
         
         
-          9 分钟
+          25 分钟
         
       </span>
     
@@ -288,7 +288,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年8月22日 凌晨
+                    本文最后更新于：2022年8月28日 晚上
                   
                 
               </p>
@@ -328,8 +328,8 @@ Rebase 的优势就是可以创造更线性的提交历史，这听上去有些�
 历史将会变得异常清晰。<br>
 ![[Learn Git 2022-08-18 21.07.57.excalidraw]]</p>
 <h1 id="5-head"><a class="markdownIt-Anchor" href="#5-head"></a> 5 HEAD</h1>
-<p>总结::<br>
-head 指针会默认在当前激活的分支上</p>
+<p>git checkout HEAD~1 : 单独操作 HEAD 指针往上一位</p>
+<p>head 指针会默认在当前激活的分支上</p>
 <p>原理<br>
 ![[Learn Git 2022-08-18 22.36.50.excalidraw]]</p>
 <h1 id="6-相对引用"><a class="markdownIt-Anchor" href="#6-相对引用"></a> 6 相对引用</h1>
@@ -349,7 +349,89 @@ head 指针会默认在当前激活的分支上</p>
 在 Git 里撤销变更的方法很多。和提交一样，撤销变更由底层部分（暂存区的独立文件或者片段）和上层部分（变更到底是通过哪种方式被撤销的）组成。我们这个应用主要关注的是后者。<br>
 主要有两种方法用来撤销变更 —— 一是 <code>git reset</code>，还有就是 <code>git revert</code>。接下来咱们逐个进行讲解。<br>
 ![[Learn Git—1 2022-08-21 23.50.51.excalidraw]]</p>
-<h1 id="9-参考资料"><a class="markdownIt-Anchor" href="#9-参考资料"></a> 9 参考资料</h1>
+<h1 id="9-git-cherry-pick"><a class="markdownIt-Anchor" href="#9-git-cherry-pick"></a> 9 Git Cherry-pick</h1>
+<p>将一些提交复制到当前所在的位置（<code>HEAD</code>）: <code>git cherry-pick &lt;提交号&gt;...</code><br>
+原理<br>
+![[Learn Git—1 2022-08-28 20.39.47.excalidraw]]</p>
+<h1 id="10-交互式的-rebase"><a class="markdownIt-Anchor" href="#10-交互式的-rebase"></a> 10 交互式的 rebase</h1>
+<p>将一些提交复制到当前所在的位置:<br>
+这个位置可用头指针来表示:<br>
+1. HEAD~4(当前位置往上数 4 位)<br>
+2. Cx: 指定的位置</p>
+<p>git rebase -i HEAD~x: 可以用当前指针的前几位来复制<br>
+git rebase -i Cx : 也可以指定到某次提交记录</p>
+<p>原理<br>
+当你知道你所需要的提交记录（<strong>并且</strong>还知道这些提交记录的哈希值）时, 用 cherry-pick 再好不过了 —— 没有比这更简单的方式了。<br>
+但是如果你不清楚你想要的提交记录的哈希值呢? 幸好 Git 帮你想到了这一点, 我们可以利用交互式的 rebase —— 如果你想从一系列的提交记录中找到想要的记录, 这就是最好的方法了<br>
+咱们具体来看一下……<br>
+交互式 rebase 指的是使用带参数 <code>--interactive</code> 的 rebase 命令, 简写为 <code>-i</code><br>
+如果你在命令后增加了这个选项, Git 会打开一个 UI 界面并列出将要被复制到目标分支的备选提交记录，它还会显示每个提交记录的哈希值和提交说明，提交说明有助于你理解这个提交进行了哪些更改。<br>
+在实际使用时，所谓的 UI 窗口一般会在文本编辑器 —— 如 Vim —— 中打开一个文件。 考虑到课程的初衷，我弄了一个对话框来模拟这些操作。<br>
+当 rebase UI界面打开时, 你能做3件事:<br>
+-   调整提交记录的顺序（通过鼠标拖放来完成）<br>
+-   删除你不想要的提交（通过切换 <code>pick</code> 的状态来完成，关闭就意味着你不想要这个提交记录）<br>
+-   合并提交。 遗憾的是由于某种逻辑的原因，我们的课程不支持此功能，因此我不会详细介绍这个操作。简而言之，它允许你把多个提交记录合并成一个。<br>
+- ![[Learn Git—1 2022-08-28 20.44.54.excalidraw]]</p>
+<h1 id="11-本地栈式提交"><a class="markdownIt-Anchor" href="#11-本地栈式提交"></a> 11 本地栈式提交</h1>
+<p>将两个提交记录复制合并一个新记录</p>
+<ol>
+<li>git rebase -i 截止位置  (在挑选不要的, 和调整顺序)</li>
+<li>git rebse 当前位置 合并位置(" * "号会自动跑到合并位置处)</li>
+</ol>
+<p>题目<br>
+来看一个在开发中经常会遇到的情况：我正在解决某个特别棘手的 Bug，为了便于调试而在代码中添加了一些调试命令并向控制台打印了一些信息。</p>
+<p>这些调试和打印语句都在它们各自的提交记录里。最后我终于找到了造成这个 Bug 的根本原因，解决掉以后觉得沾沾自喜！</p>
+<p>最后就差把 <code>bugFix</code> 分支里的工作合并回 <code>main</code> 分支了。你可以选择通过 fast-forward 快速合并到 <code>main</code> 分支上，但这样的话 <code>main</code> 分支就会包含我这些调试语句了。你肯定不想这样，应该还有更好的方式……<br>
+实际我们只要让 Git 复制解决问题的那一个提交记录就可以了。跟之前我们在“整理提交记录”中学到的一样，我们可以使用</p>
+<ul>
+<li><code>git rebase -i</code></li>
+<li><code>git cherry-pick</code></li>
+</ul>
+<p>来达到目的。<br>
+由于我们刚刚闯过类似的关卡，所以要不要再尝试一次就看你自己了。但是如果你想试一把的话，确保 <code>main</code> 分支能得到 <code>bugFix</code> 分支上的相关提交。<br>
+![[Learn Git—1 2022-08-28 21.07.11.excalidraw|600]]</p>
+<h1 id="12-提交的技巧-1"><a class="markdownIt-Anchor" href="#12-提交的技巧-1"></a> 12 提交的技巧 #1</h1>
+<p>接下来这种情况也是很常见的：你之前在 <code>newImage</code> 分支上进行了一次提交，然后又基于它创建了 <code>caption</code> 分支，然后又提交了一次。</p>
+<p>此时你想对某个以前的提交记录进行一些小小的调整。比如设计师想修改一下 <code>newImage</code> 中图片的分辨率，尽管那个提交记录并不是最新的了。</p>
+<p>我们可以通过下面的方法来克服困难：</p>
+<ul>
+<li>先用 <code>git rebase -i</code> 将提交重新排序，然后把我们想要修改的提交记录挪到最前</li>
+<li>然后用 <code>git commit --amend</code> 来进行一些小修改</li>
+<li>接着再用 <code>git rebase -i</code> 来将他们调回原来的顺序</li>
+<li>最后我们把 main 移到修改的最前端（用你自己喜欢的方法），就大功告成啦！</li>
+</ul>
+<p>当然完成这个任务的方法不止上面提到的一种（我知道你在看 cherry-pick 啦），之后我们会多点关注这些技巧啦，但现在暂时只专注上面这种方法。 最后有必要说明一下目标状态中的那几个<code>'</code> —— 我们把这个提交移动了两次，每移动一次会产生一个 <code>'</code>；而 C2 上多出来的那个是我们在使用了 amend 参数提交时产生的，所以最终结果就是这样了。</p>
+<p>也就是说，我在对比结果的时候只会对比提交树的结构，对于 <code>'</code> 的数量上的不同，并不纳入对比范围内。只要你的 <code>main</code> 分支结构与目标结构相同，我就算你通过。<br>
+![[Learn Git—1 2022-08-28 21.35.35.excalidraw]]</p>
+<h1 id="13-提交的技巧-2"><a class="markdownIt-Anchor" href="#13-提交的技巧-2"></a> 13 提交的技巧 #2</h1>
+<p>正如你在上一关所见到的，我们可以使用 <code>rebase -i</code> 对提交记录进行重新排序。只要把我们想要的提交记录挪到最前端，我们就可以很轻松的用 <code>--amend</code> 修改它，然后把它们重新排成我们想要的顺序。</p>
+<p>但这样做就唯一的问题就是要进行两次排序，而这有可能造成由 rebase 而导致的冲突。下面还是看看 <code>git cherry-pick</code> 是怎么做的吧</p>
+<p><strong>要在心里牢记 cherry-pick 可以将提交树上任何地方的提交记录取过来追加到 HEAD 上（只要不是 HEAD 上游的提交就没问题）。</strong></p>
+<p>![[Learn Git—1 2022-08-28 21.50.49.excalidraw]]</p>
+<h1 id="14-git-tags"><a class="markdownIt-Anchor" href="#14-git-tags"></a> 14 Git Tags</h1>
+<p>相信通过前面课程的学习你已经发现了：分支很容易被人为移动，并且当有新的提交时，它也会移动。分支很容易被改变，大部分分支还只是临时的，并且还一直在变。</p>
+<p>你可能会问了：有没有什么可以_永远_指向某个提交记录的标识呢，比如软件发布新的大版本，或者是修正一些重要的 Bug 或是增加了某些新特性，有没有比分支更好的可以永远指向这些提交的方法呢？</p>
+<p>当然有了！Git 的 tag 就是干这个用的啊，它们可以（在某种程度上 —— 因为标签可以被删除后重新在另外一个位置创建同名的标签）永久地将某个特定的提交命名为里程碑，然后就可以像分支一样引用了。</p>
+<p>更难得的是，它们并不会随着新的提交而移动。你也不能切换到某个标签上面进行修改提交，它就像是提交树上的一个锚点，标识了某个特定的位置。</p>
+<p>咱们来看看标签到底是什么样<br>
+![[Learn Git—1 2022-08-28 22.12.15.excalidraw]]</p>
+<h1 id="15-git-describe"><a class="markdownIt-Anchor" href="#15-git-describe"></a> 15 Git Describe</h1>
+<p>由于标签在代码库中起着“锚点”的作用，Git 还为此专门设计了一个命令用来<strong>描述</strong>离你最近的锚点（也就是标签），它就是 <code>git describe</code>！</p>
+<p>Git Describe 能帮你在提交历史中移动了多次以后找到方向；当你用 <code>git bisect</code>（一个查找产生 Bug 的提交记录的指令）找到某个提交记录时，或者是当你坐在你那刚刚度假回来的同事的电脑前时， 可能会用到这个命令。</p>
+<p><code>git describe</code> 语法是：</p>
+<p><code>git describe &lt;ref&gt;</code></p>
+<p><code>&lt;ref&gt;</code> 可以是任何能被 Git 识别成提交记录的引用，如果你没有指定的话，Git 会以你目前所检出的位置（<code>HEAD</code>）。</p>
+<p>它输出的结果是这样的：</p>
+<p><code>&lt;tag&gt;_&lt;numCommits&gt;_g&lt;hash&gt;</code></p>
+<p><code>tag</code> 表示的是离 <code>ref</code> 最近的标签， <code>numCommits</code> 是表示这个 <code>ref</code> 与 <code>tag</code> 相差有多少个提交记录， <code>hash</code> 表示的是你所给定的 <code>ref</code> 所表示的提交记录哈希值的前几位。</p>
+<p>当 <code>ref</code> 提交记录上有某个标签时，则只输出标签名称</p>
+<p>![[Learn Git—1 2022-08-28 22.20.04.excalidraw]]</p>
+<h1 id="16-多分支-rebase"><a class="markdownIt-Anchor" href="#16-多分支-rebase"></a> 16 多分支 rebase</h1>
+<p>哥们儿，我们准备了很多分支！咱们把这些分支 rebase 到 main 上吧。</p>
+<p>但是你的领导给你提了点要求 —— 他们希望得到有序的提交历史，也就是我们最终的结果应该是 <code>C6'</code> 在 <code>C7'</code> 上面， <code>C5'</code> 在 <code>C6'</code> 上面，依此类推。</p>
+<p>即使你搞砸了也没关系，用 <code>reset</code> 命令就可以重新开始了。记得看看我们提供的答案，看你能否使用更少的命令来完成任务！<br>
+![[Learn Git—1 2022-08-28 22.24.22.excalidraw]]</p>
+<h1 id="17-参考资料"><a class="markdownIt-Anchor" href="#17-参考资料"></a> 17 参考资料</h1>
 <p><a target="_blank" rel="noopener" href="https://learngitbranching.js.org/?locale=zh_CN">Learn Git Branching</a></p>
 
               
@@ -428,7 +510,7 @@ head 指针会默认在当前激活的分支上</p>
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2022年8月22日</div>
+          <div>2022年8月28日</div>
         </div>
       
       <div class="license-meta-item">

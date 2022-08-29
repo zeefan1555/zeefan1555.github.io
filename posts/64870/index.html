@@ -16,18 +16,18 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1 原理: 栈是先进后出, 队列是先进先出。 ![[1. 栈与队列理论基础 2022-08-22 14.08.54.excalidraw]]   2 深层问题  2.1 我们使用的stack是属于哪个版本的STL？ 首先大家要知道 栈和队列是STL（C标准库）里面的两个数据结构。 C标准库是有多个版本的，要知道我们使用的STL是哪个版本，才能知道对应的栈和队列的实现原理。 那么来介绍一下，三个最">
+    <meta name="description" content="e  1 原理: 栈是先进后出, 队列是先进先出。 ![[1. 栈与队列理论基础 2022-08-22 14.08.54.excalidraw]]   2 深层问题  2.1 我们使用的stack是属于哪个版本的STL？ 首先大家要知道 栈和队列是STL（C标准库）里面的两个数据结构。 C标准库是有多个版本的，要知道我们使用的STL是哪个版本，才能知道对应的栈和队列的实现原理。 那么来介绍一下，三">
 <meta property="og:type" content="article">
 <meta property="og:title" content="1. 栈与队列理论基础">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/64870/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="1 原理: 栈是先进后出, 队列是先进先出。 ![[1. 栈与队列理论基础 2022-08-22 14.08.54.excalidraw]]   2 深层问题  2.1 我们使用的stack是属于哪个版本的STL？ 首先大家要知道 栈和队列是STL（C标准库）里面的两个数据结构。 C标准库是有多个版本的，要知道我们使用的STL是哪个版本，才能知道对应的栈和队列的实现原理。 那么来介绍一下，三个最">
+<meta property="og:description" content="e  1 原理: 栈是先进后出, 队列是先进先出。 ![[1. 栈与队列理论基础 2022-08-22 14.08.54.excalidraw]]   2 深层问题  2.1 我们使用的stack是属于哪个版本的STL？ 首先大家要知道 栈和队列是STL（C标准库）里面的两个数据结构。 C标准库是有多个版本的，要知道我们使用的STL是哪个版本，才能知道对应的栈和队列的实现原理。 那么来介绍一下，三">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20210104235346563.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20210104235434905.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20210104235459376.png">
 <meta property="article:published_time" content="2022-08-18T08:49:00.000Z">
-<meta property="article:modified_time" content="2022-08-22T06:23:30.109Z">
+<meta property="article:modified_time" content="2022-08-24T14:10:17.386Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="栈与队列">
 <meta name="twitter:card" content="summary_large_image">
@@ -289,14 +289,15 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年8月22日 下午
+                    本文最后更新于：2022年8月24日 晚上
                   
                 
               </p>
             
             <div class="markdown-body">
               
-              <h1 id="1-原理"><a class="markdownIt-Anchor" href="#1-原理"></a> 1 原理:</h1>
+              <p>e</p>
+<h1 id="1-原理"><a class="markdownIt-Anchor" href="#1-原理"></a> 1 原理:</h1>
 <p>栈是先进后出, 队列是先进先出。<br>
 ![[1. 栈与队列理论基础 2022-08-22 14.08.54.excalidraw]]<br>
 <img src="https://img-blog.csdnimg.cn/20210104235346563.png" srcset="/img/loading.gif" lazyload alt="栈与队列理论1"></p>
@@ -319,14 +320,14 @@ C</ins>标准库是有多个版本的，要知道我们使用的STL是哪个版�
 不像是set 或者map 提供迭代器iterator来遍历所有元素。(这里可能说的是 set, map 里类似的 find 函数)</p>
 <!-- basicblock-end --> #card
 <!-- basicblock-start oid="ObslJ1WRHO7RLJlybQvTbPjU" --> 
-<h2 id="23-c中stack-是容器么-stack-的原理是什么"><a class="markdownIt-Anchor" href="#23-c中stack-是容器么-stack-的原理是什么"></a> 2.3 C++中stack 是容器么🌵 stack 的原理是什么 ::</h2>
-<p><strong>栈是以底层容器完成其所有的工作，对外提供统一的接口，底层容器是可插拔的（也就是说我们可以控制使用哪种容器来实现栈的功能）。</strong><br>
-所以STL中栈往往不被归类为容器，而被归类为container adapter（容器适配器）。</p>
-<p>那么问题来了，STL 中栈是用什么容器实现的？</p>
-<p>从下图中可以看出，栈的内部结构，栈的底层实现可以是vector，deque，list 都是可以的， 主要就是数组和链表的底层实现。<br>
+<h2 id="23-c中stack-是容器么-stack-的原理是什么"><a class="markdownIt-Anchor" href="#23-c中stack-是容器么-stack-的原理是什么"></a> 2.3 C++中stack 是容器么🌵 stack 的原理是什么</h2>
+<p>::<br>
+<strong>栈是以底层容器完成其所有的工作，对外提供统一的接口，底层容器是可插拔的（也就是说我们可以控制使用哪种容器来实现栈的功能）。</strong><br>
+所以STL中栈往往不被归类为容器，而被归类为container adapter（容器适配器）</p>
+<p>栈的底层实现可以是<strong>vector，deque，list</strong> 都是可以的，<br>
 一般都是用 deque, 因为 deque是一个双向队列，只要封住一段，只开通另一端就可以实现栈的逻辑了。<br>
 <img src="https://img-blog.csdnimg.cn/20210104235459376.png" srcset="/img/loading.gif" lazyload alt="栈与队列理论3|600"></p>
-<p><strong>我们常用的SGI STL，如果没有指定底层实现的话，默认是以deque为缺省情况下栈的低层结构。</strong><br>
+<p><strong>我们常用的SGI STL，如果没有指定底层实现的话，默认是以deque为缺省情况下栈的底层结构。</strong><br>
 <strong>SGI STL中 队列底层实现缺省情况下一样使用deque实现的。</strong></p>
 <p>我们也可以指定vector为栈的底层实现，初始化语句如下：</p>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++">std::stack&lt;<span class="hljs-type">int</span>, std::vector&lt;<span class="hljs-type">int</span>&gt; &gt; third;  <span class="hljs-comment">// 使用vector为底层容器的栈</span><br></code></pre></td></tr></tbody></table></figure>
@@ -337,9 +338,11 @@ C</ins>标准库是有多个版本的，要知道我们使用的STL是哪个版�
 <p>所以STL 队列也不被归类为容器，而被归类为container adapter（ 容器适配器）。</p>
 <!-- basicblock-end --> #card
 <hr>
-<p><strong>参考资料</strong><br>
-<a href="obsidian://advanced-uri?vault=myblog&amp;uid=d51a1fa3-47e6-4bd6-afaf-9bd5dd5b7ab9">ob</a></p>
-
+<p><strong>其他资料</strong></p>
+<!-- basicblock-start oid="ObsWq2mgFS7FgFOnIMQTTp3Y" deck = "👨🏻‍💻code::数据结构与算法::代码随想录::栈与队列::1. 栈与队列理论基础.md" --> 
+<p>#历史记录::<br>
+2022/8/24: 第一次创建</p>
+<!-- basicblock-end --> 
               
             </div>
             <hr/>
@@ -423,7 +426,7 @@ C</ins>标准库是有多个版本的，要知道我们使用的STL是哪个版�
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2022年8月22日</div>
+          <div>2022年8月24日</div>
         </div>
       
       <div class="license-meta-item">

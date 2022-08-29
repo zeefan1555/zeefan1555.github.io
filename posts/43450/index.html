@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202208121703566.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20210104235134572.png">
 <meta property="article:published_time" content="2022-08-13T14:03:00.000Z">
-<meta property="article:modified_time" content="2022-08-15T13:31:56.929Z">
+<meta property="article:modified_time" content="2022-08-24T01:55:00.581Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="总结">
 <meta name="twitter:card" content="summary_large_image">
@@ -226,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          799 字
+          988 字
         
       </span>
     
@@ -237,7 +237,7 @@
         
         
         
-          4 分钟
+          5 分钟
         
       </span>
     
@@ -288,7 +288,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年8月15日 晚上
+                    本文最后更新于：2022年8月24日 上午
                   
                 
               </p>
@@ -308,6 +308,8 @@ std::map 和std::multimap 的key也是有序的（这个问题也经常作为面
 不需要 key 有序的时候效率最高</p>
 <h2 id="11-操作"><a class="markdownIt-Anchor" href="#11-操作"></a> 1.1 操作</h2>
 <ul>
+<li>创建元素: unordered_map&lt;int, int&gt; map;</li>
+<li></li>
 <li>插入元素:
 <ul>
 <li>map.insert(<strong>pair&lt;int, int&gt;</strong>(a, b));</li>
@@ -317,11 +319,14 @@ std::map 和std::multimap 的key也是有序的（这个问题也经常作为面
 </li>
 <li>获取元素:
 <ul>
-<li><code>auto iter = map.find(x);</code>, <code>return iter-&gt;second</code> //  获取第二个元素</li>
+<li><code>auto iter = map.find(x);</code>, <code>return iter-&gt;second</code>  lhs.second//  获取第二个元素</li>
 <li><code>map[key]</code> = value // 获取第二个元素</li>
 </ul>
 </li>
 </ul>
+<p>for 循环中映射 , it 是指针, 指向 map 的一个完整的元素包括key 和 value ,不是单一个元素<br>
+<code>for(unordered_map&lt;int, int&gt; :: iterator it = map.begin(); it != map.end(); it++){}</code><br>
+^drp7wt</p>
 <h1 id="2-其他"><a class="markdownIt-Anchor" href="#2-其他"></a> 2 其他</h1>
 <p>这里在说一下，一些C++的经典书籍上 例如STL源码剖析，说到了hash_set hash_map，这个与unordered_set，unordered_map又有什么关系呢？</p>
 <p>实际上功能都是一样一样的， 但是unordered_set在C<ins>11的时候被引入标准库了，而hash_set并没有，所以建议还是使用unordered_set比较好，这就好比一个是官方认证的，hash_set，hash_map 是C</ins>11标准之前民间高手自发造的轮子。<br>
@@ -414,7 +419,7 @@ std::map 和std::multimap 的key也是有序的（这个问题也经常作为面
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2022年8月15日</div>
+          <div>2022年8月24日</div>
         </div>
       
       <div class="license-meta-item">
