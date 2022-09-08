@@ -16,21 +16,27 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="article">
-<meta property="og:title" content="一杯空气">
-<meta property="og:url" content="https://zeefan1555.github.io/posts/1001/index.html">
+    <meta name="description" content="1 二叉树的种类 在我们解题过程中二叉树有两种主要的形式：满二叉树和完全二叉树。    1.1 满二叉树:: 如果一棵二叉树只有度为0的结点和度为2的结点，并且度为0的结点在同一层上，则这棵二叉树为满二叉树。    度: 节点孩子的个数         1.2 完全二叉树:: 完全二叉树的定义如下：在完全二叉树中，除了最底层节点可能没填满外，其余每层节点数都达到最大值，并且最下面一层的节点都集中">
+<meta property="og:type" content="article">
+<meta property="og:title" content="1. 二叉树理论基础">
+<meta property="og:url" content="https://zeefan1555.github.io/posts/33244/index.html">
 <meta property="og:site_name" content="一杯空气">
+<meta property="og:description" content="1 二叉树的种类 在我们解题过程中二叉树有两种主要的形式：满二叉树和完全二叉树。    1.1 满二叉树:: 如果一棵二叉树只有度为0的结点和度为2的结点，并且度为0的结点在同一层上，则这棵二叉树为满二叉树。    度: 节点孩子的个数         1.2 完全二叉树:: 完全二叉树的定义如下：在完全二叉树中，除了最底层节点可能没填满外，其余每层节点数都达到最大值，并且最下面一层的节点都集中">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-08-29T01:34:49.146Z">
-<meta property="article:modified_time" content="2022-08-29T01:34:56.329Z">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200806185805576.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2020092019554618.png">
+<meta property="article:published_time" content="2022-08-29T07:07:00.000Z">
+<meta property="article:modified_time" content="2022-09-06T01:22:02.161Z">
 <meta property="article:author" content="zeefan">
+<meta property="article:tag" content="二叉树">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20200806185805576.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>一杯空气</title>
+  <title>1. 二叉树理论基础 - 一杯空气</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -197,7 +203,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text=""></span>
+            <span id="subtitle" data-typed-text="1. 二叉树理论基础"></span>
           
         </div>
 
@@ -208,8 +214,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-08-29 09:34" pubdate>
-          2022年8月29日 上午
+        <time datetime="2022-08-29 15:07" pubdate>
+          2022年8月29日 下午
         </time>
       </span>
     
@@ -220,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 字
+          1.4k 字
         
       </span>
     
@@ -231,7 +237,7 @@
         
         
         
-          1 分钟
+          7 分钟
         
       </span>
     
@@ -277,27 +283,162 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none"></h1>
+            <h1 style="display: none">1. 二叉树理论基础</h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年8月29日 上午
+                    本文最后更新于：2022年9月6日 上午
                   
                 
               </p>
             
             <div class="markdown-body">
               
-              <hr>
+              <h1 id="1-二叉树的种类"><a class="markdownIt-Anchor" href="#1-二叉树的种类"></a> 1 二叉树的种类</h1>
+<p>在我们解题过程中二叉树有两种主要的形式：<strong>满二叉树和完全二叉树。</strong></p>
+<!-- basicblock-start oid="ObskteVaQKFKXP6YheO3U5di" --> 
+<h2 id="11-满二叉树"><a class="markdownIt-Anchor" href="#11-满二叉树"></a> 1.1 满二叉树::</h2>
+<p>如果一棵二叉树只有度为0的结点和度为2的结点，并且度为0的结点在同一层上，则这棵二叉树为满二叉树。</p>
+<ul>
+<li>
+<blockquote>
+<p>度: 节点孩子的个数<br>
+<img src="https://img-blog.csdnimg.cn/20200806185805576.png" srcset="/img/loading.gif" lazyload alt="|500"></p>
+</blockquote>
+</li>
+</ul>
+<!-- basicblock-end -->
+<!-- basicblock-start oid="ObsNzJMUsBYRGzsjCpabCitj" --> 
+<h2 id="12-完全二叉树"><a class="markdownIt-Anchor" href="#12-完全二叉树"></a> 1.2 完全二叉树::</h2>
+<p>完全二叉树的定义如下：在完全二叉树中，除了最底层节点可能没填满外，其余每层节点数都达到最大值，并且最下面一层的节点都集中在该层最左边的若干位置。若最底层为第 h 层，则该层包含 1~&nbsp;2^(h-1) &nbsp;个节点.<br>
+![[1. 二叉树理论基础 2022-08-29 16.10.03.excalidraw]]<br>
+<strong>之前我们刚刚讲过优先级队列其实是一个堆，堆就是一棵完全二叉树，同时保证父子节点的顺序关系。</strong>[[小顶锥和大顶锥的原理]]  ^zkccuh</p>
+<!-- basicblock-end -->
+<!-- basicblock-start oid="Obs7bvG62xLqJrNcziFSYUW5" --> 
+<h2 id="13-二叉搜索树"><a class="markdownIt-Anchor" href="#13-二叉搜索树"></a> 1.3 二叉搜索树::</h2>
+<p>![[二叉搜索树]]</p>
+<!-- basicblock-end -->
+<!-- basicblock-start oid="ObsVtHzP3EQQzapSwfu2jGuz" --> 
+<h2 id="14-平衡二叉搜索树"><a class="markdownIt-Anchor" href="#14-平衡二叉搜索树"></a> 1.4 平衡二叉搜索树::</h2>
+<p>平衡二叉搜索树(红黑树)：又被称为AVL（Adelson-Velsky and&nbsp;Landis）树，且具有以下性质：它是一棵空树或它的左右两个子树的高度差的绝对值不超过1，并且左右两个子树都是一棵平衡二叉树。<br>
+![[1. 二叉树理论基础 2022-08-29 16.19.19.excalidraw]]<br>
+<strong>C++中map、set、multimap，multiset的底层实现都是平衡二叉搜索树</strong>，所以map、set的增删操作时间时间复杂度是logn ^bew6dm</p>
+<blockquote>
+<p>[[map]]</p>
+</blockquote>
+<!-- basicblock-end -->
+<!-- basicblock-start oid="ObsQfaa14FMYHw83FWKOmdqh" --> 
+<h1 id="2-二叉树的存储方式"><a class="markdownIt-Anchor" href="#2-二叉树的存储方式"></a> 2 二叉树的存储方式 ::</h1>
+<!-- basicblock-end -->
+<p>链式存储方式就用指针， 顺序存储的方式就是用数组。</p>
+<h2 id="21-链式存储"><a class="markdownIt-Anchor" href="#21-链式存储"></a> 2.1 链式存储</h2>
+<p><img src="https://img-blog.csdnimg.cn/2020092019554618.png" srcset="/img/loading.gif" lazyload alt="|600"></p>
+<h2 id="22-顺序存储"><a class="markdownIt-Anchor" href="#22-顺序存储"></a> 2.2 顺序存储</h2>
+<p>![[1. 二叉树理论基础 2022-08-29 16.31.41.excalidraw]]</p>
+<p>但是用链式表示的二叉树，更有利于我们理解，所以一般我们都是用链式存储二叉树。</p>
+<p><strong>所以大家要了解，用数组依然可以表示二叉树。</strong></p>
+<!-- basicblock-start oid="ObsNYOEsmvwlhRsRWieqgHEk" --> 
+<h1 id="3-二叉树的遍历方式"><a class="markdownIt-Anchor" href="#3-二叉树的遍历方式"></a> 3 二叉树的遍历方式::</h1>
+<p>二叉树主要有两种遍历方式：</p>
+<h2 id="31-深度优先遍历先往深走遇到叶子节点再往回走"><a class="markdownIt-Anchor" href="#31-深度优先遍历先往深走遇到叶子节点再往回走"></a> 3.1 深度优先遍历：先往深走，遇到叶子节点再往回走。</h2>
+<ul>
+<li>前序遍历（递归法，迭代法）</li>
+<li>中序遍历（递归法，迭代法）</li>
+<li>后序遍历（递归法，迭代法）</li>
+</ul>
+<p>![[前中后序的遍历的方式]]</p>
+<!-- basicblock-end -->
+<h2 id="32-广度优先遍历一层一层的去遍历"><a class="markdownIt-Anchor" href="#32-广度优先遍历一层一层的去遍历"></a> 3.2 广度优先遍历：一层一层的去遍历。</h2>
+<ul>
+<li>层次遍历(迭代法)</li>
+</ul>
+<!-- basicblock-start oid="ObsmI7M2pZvBxBxvtlaAwJ7h" --> 
+<h1 id="4-遍历的实现方式"><a class="markdownIt-Anchor" href="#4-遍历的实现方式"></a> 4 遍历的实现方式::</h1>
+<ol>
+<li>深度优先遍历: 优先向下查找, 在返回上一层<br>
+实现前中后序的遍历都是用的递归</li>
+</ol>
+<blockquote>
+<p><strong>栈其实就是递归的一种是实现结构</strong>，也就说前中后序遍历的逻辑其实都是可以借助栈使用非递归的方式来实现的。</p>
+</blockquote>
+<ol start="2">
+<li>广度优先遍历: 从左至右的一层层来遍历二叉树<br>
+用队列<br>
+由队列先进先出的特点所决定的，因为需要先进先出的结构，才能一层一层的来遍历二叉树</li>
+</ol>
+<!-- basicblock-end -->
+<!-- basicblock-start oid="Obset5wB2iODDSEmmzMV7TFz" --> 
+<h1 id="5-二叉树的定义"><a class="markdownIt-Anchor" href="#5-二叉树的定义"></a> 5 二叉树的定义::</h1>
+<p>链式存储的二叉树节点的定义方式。<br>
+C++代码如下：</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">TreeNode</span> {<br>    <span class="hljs-type">int</span> val;<br>    TreeNode *left;<br>    TreeNode *right;<br>    <span class="hljs-built_in">TreeNode</span>(<span class="hljs-type">int</span> x) : <span class="hljs-built_in">val</span>(x), <span class="hljs-built_in">left</span>(<span class="hljs-literal">NULL</span>), <span class="hljs-built_in">right</span>(<span class="hljs-literal">NULL</span>) {}<br>};<br></code></pre></td></tr></tbody></table></figure>
+<p>大家会发现二叉树的定义 和链表是差不多的，相对于链表 ，二叉树的节点里多了一个指针， 有两个指针，指向左右孩子。</p>
+<p>这里要提醒大家要注意二叉树节点定义的书写方式。</p>
+<p><strong>在现场面试的时候 面试官可能要求手写代码，所以数据结构的定义以及简单逻辑的代码一定要锻炼白纸写出来。</strong></p>
+<p>因为我们在刷leetcode的时候，节点的定义默认都定义好了，真到面试的时候，需要自己写节点定义的时候，有时候会一脸懵逼！</p>
+<!-- basicblock-end -->
 <hr>
-
+<p><strong>其他资料</strong></p>
+ <!-- basicblock-start oid="ObsL85uzhm7rdY1Odw8fGakA" deck = "👨🏻‍💻code::数据结构与算法::代码随想录::二叉树::1. 二叉树理论基础.md" --> 
+<p>#历史记录::<br>
+2022/8/29: 第一次创建</p>
+<!-- basicblock-end --> 
               
             </div>
             <hr/>
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/" class="category-chain-item">👨🏻‍💻code</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" class="category-chain-item">数据结构与算法</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95/" class="category-chain-item">代码随想录</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95/%E4%BA%8C%E5%8F%89%E6%A0%91/" class="category-chain-item">二叉树</a>
+  
+  
+
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/">#二叉树</a>
+      
+    </div>
   
 </div>
 
@@ -307,8 +448,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div></div>
-      <div>https://zeefan1555.github.io/posts/1001/</div>
+      <div>1. 二叉树理论基础</div>
+      <div>https://zeefan1555.github.io/posts/33244/</div>
     </div>
     <div class="license-meta">
       
@@ -326,7 +467,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2022年8月29日</div>
+          <div>2022年9月6日</div>
         </div>
       
       <div class="license-meta-item">
@@ -355,12 +496,18 @@
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/posts/59941/" title="前中后序的遍历的方式">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">前中后序的遍历的方式</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/20437/" title="小顶锥和大顶锥的原理">
-                        <span class="hidden-mobile">小顶锥和大顶锥的原理</span>
+                      <a href="/posts/7468/" title="知识星球">
+                        <span class="hidden-mobile">知识星球</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

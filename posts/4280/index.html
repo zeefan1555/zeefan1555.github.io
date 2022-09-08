@@ -1,0 +1,1188 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202206251952371.png">
+  <link rel="icon" href="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202206251952371.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="zeefan">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="0.1 静态库和动态库的对比  0.1.1 程序编译成可执行程序的过程  静态库、动态库区别来自链接阶段如何处理，链接成可执行程序。分别称为静态链接方式和动态链接方式。  静态库：GCC 进行链接时，会把静态库中代码打包到可执行程序中。 动态库：GCC 进行链接时，动态库的代码不会被打包到可执行程序中。 程序启动之后，动态库会被动态加载到内存中，通过 ldd (list dynamic depe">
+<meta property="og:type" content="article">
+<meta property="og:title" content="总笔记">
+<meta property="og:url" content="https://zeefan1555.github.io/posts/4280/index.html">
+<meta property="og:site_name" content="一杯空气">
+<meta property="og:description" content="0.1 静态库和动态库的对比  0.1.1 程序编译成可执行程序的过程  静态库、动态库区别来自链接阶段如何处理，链接成可执行程序。分别称为静态链接方式和动态链接方式。  静态库：GCC 进行链接时，会把静态库中代码打包到可执行程序中。 动态库：GCC 进行链接时，动态库的代码不会被打包到可执行程序中。 程序启动之后，动态库会被动态加载到内存中，通过 ldd (list dynamic depe">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huyup1e2n3g/WebServer/img/20220403174300.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huyup1e2n3g/WebServer/img/20220403174308.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huyup1e2n3g/WebServer/img/20220403174318.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huyup1e2n3g/WebServer/img/20220403174327.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huyup1e2n3g/WebServer/img/20220403174336.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huyup1e2n3g/WebServer/img/20220403174357.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huyup1e2n3g/WebServer/img/20220403174406.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huyup1e2n3g/WebServer/img/20220403174413.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huyup1e2n3g/WebServer/img/20220403174423.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huyup1e2n3g/WebServer/img/20220403174431.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huyup1e2n3g/WebServer/img/20220403174505.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/huyup1e2n3g/WebServer/img/20220403174524.png">
+<meta property="article:published_time" content="2022-09-05T08:52:00.000Z">
+<meta property="article:modified_time" content="2022-09-07T08:24:29.688Z">
+<meta property="article:author" content="zeefan">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/huyup1e2n3g/WebServer/img/20220403174300.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>总笔记 - 一杯空气</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.15.6/katex.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"zeefan1555.github.io","root":"/","version":"1.9.1","typing":{"enable":true,"typeSpeed":150,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"Text"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":10},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>一杯空气</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="总笔记"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-09-05 16:52" pubdate>
+          2022年9月5日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          21k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          107 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">总笔记</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2022年9月7日 下午
+                  
+                
+              </p>
+            
+            <div class="markdown-body">
+              
+              <h2 id="01-静态库和动态库的对比"><a class="markdownIt-Anchor" href="#01-静态库和动态库的对比"></a> 0.1 静态库和动态库的对比</h2>
+<h3 id="011-程序编译成可执行程序的过程"><a class="markdownIt-Anchor" href="#011-程序编译成可执行程序的过程"></a> 0.1.1 程序编译成可执行程序的过程</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/huyup1e2n3g/WebServer/img/20220403174300.png" srcset="/img/loading.gif" lazyload alt="image-20220326152148290"></p>
+<p>静态库、动态库区别来自链接阶段如何处理，链接成可执行程序。分别称为静态链接方式和动态链接方式。</p>
+<ul>
+<li>静态库：GCC 进行链接时，会把静态库中代码打包到可执行程序中。</li>
+<li>动态库：GCC 进行链接时，动态库的代码不会被打包到可执行程序中。</li>
+<li>程序启动之后，动态库会被动态加载到内存中，通过 ldd (list dynamic dependencies)命令检查动态库依赖关系。</li>
+<li>如何定位共享库文件呢：当系统加载可执行代码时候，能够知道其所依赖的库的名字，但是还需要知道绝对路 径。此时就需要系统的动态载入器来获取该绝对路径。对于elf格式的可执行程序，是 由ld-linux.so来完成的，它先后搜索elf文件的 <strong>DT_RPATH</strong>段 ——&gt; <strong>环境变量</strong> <strong>LD_LIBRARY_PATH</strong> ——&gt; <strong>/etc/ld.so.cache</strong>文件列表 ——&gt; <strong>/lib/</strong>，/usr/lib 目录找到库文件后将其载入内存。</li>
+</ul>
+<h3 id="012-静态库制作过程"><a class="markdownIt-Anchor" href="#012-静态库制作过程"></a> 0.1.2 静态库制作过程</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/huyup1e2n3g/WebServer/img/20220403174308.png" srcset="/img/loading.gif" lazyload alt="image-20220326152227377"></p>
+<h3 id="013-动态库制作过程"><a class="markdownIt-Anchor" href="#013-动态库制作过程"></a> 0.1.3 动态库制作过程</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/huyup1e2n3g/WebServer/img/20220403174318.png" srcset="/img/loading.gif" lazyload alt="image-20220326152247231"></p>
+<h3 id="014-静态库的优缺点"><a class="markdownIt-Anchor" href="#014-静态库的优缺点"></a> 0.1.4 静态库的优缺点</h3>
+<p>优点:</p>
+<ul>
+<li>静态库被打包到应用程序中加载速度快</li>
+<li>发布程序无需提供静态库，移植方便</li>
+</ul>
+<p>缺点:</p>
+<ul>
+<li>消耗系统资源，浪费内存</li>
+<li>更新、部署、发布麻烦</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/huyup1e2n3g/WebServer/img/20220403174327.png" srcset="/img/loading.gif" lazyload alt="image-20220326152407161"></p>
+<h3 id="015-动态库的优缺点"><a class="markdownIt-Anchor" href="#015-动态库的优缺点"></a> 0.1.5 动态库的优缺点</h3>
+<p>优点:</p>
+<ul>
+<li>可以实现进程间资源共享(共享库)</li>
+<li>更新、部署、发布简单</li>
+<li>可以控制何时加载动态库</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>加载速度比静态库慢</li>
+<li>发布程序时需要提供依赖的动态库</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/huyup1e2n3g/WebServer/img/20220403174336.png" srcset="/img/loading.gif" lazyload alt="image-20220326152509018"></p>
+<p>所以，库较小时建议制作静态库，库较大时建议制作动态库。</p>
+<h1 id="1-makefile"><a class="markdownIt-Anchor" href="#1-makefile"></a> 1 Makefile</h1>
+<h2 id="11-什么是-makefile"><a class="markdownIt-Anchor" href="#11-什么是-makefile"></a> 1.1 什么是 Makefile</h2>
+<p>一个工程中的源文件不计其数，其按类型、功能、模块分别放在若干个目录中， Makefile 文件定义了一系列的规则来指定哪些文件需要先编译，哪些文件需要后编译，哪些文件需要重新编译，甚至于进行更复杂的功能操作，因为 Makefile 文件就 像一个 Shell 脚本一样，也可以执行操作系统的命令。</p>
+<p>Makefile 带来的好处就是“自动化编译” ，一旦写好，只需要一个 make 命令，整 个工程完全自动编译，极大的提高了软件开发的效率。make 是一个命令工具，是一个 解释 Makefile 文件中指令的命令工具，一般来说，大多数的 IDE 都有这个命令， 比如 Delphi 的 make，Visual C++ 的 nmake，Linux 下 GNU 的 make。</p>
+<h2 id="12-makefile-文件命名和规则"><a class="markdownIt-Anchor" href="#12-makefile-文件命名和规则"></a> 1.2 Makefile 文件命名和规则</h2>
+<p>文件命名：makefile 或者 Makefile</p>
+<p>Makefile 规则：</p>
+<ul>
+<li>一个 Makefile 文件中可以有一个或者多个规则</li>
+</ul>
+<figure class="highlight jboss-cli"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">目标 <span class="hljs-string">...</span>: 依赖 <span class="hljs-string">...</span><br>    命令<span class="hljs-params">(Shell 命令)</span><br>    <span class="hljs-string">...</span><br></code></pre></td></tr></tbody></table></figure>
+<p>目标:最终要生成的文件(伪目标除外)</p>
+<p>依赖:生成目标所需要的文件或是目标</p>
+<p>命令:通过执行命令对依赖操作生成目标(命令前必须 Tab 缩进)</p>
+<ul>
+<li>Makefile 中的其它规则一般都是为第一条规则服务的。</li>
+</ul>
+<p>make默认只执行Makefile第一条语句，如果其他语句与第一条无关，则不执行。</p>
+<h3 id="121-通过-makefile-自动化编译工程"><a class="markdownIt-Anchor" href="#121-通过-makefile-自动化编译工程"></a> 1.2.1 通过 makefile 自动化编译工程</h3>
+<p>创建 makefile 文件</p>
+<figure class="highlight ebnf"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">vim Makefile</span><br></code></pre></td></tr></tbody></table></figure>
+<p>编辑 makefile ：</p>
+<figure class="highlight makefile"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-section">app: sub.c add.c mult.c div.c main.c</span><br>        gcc sub.c add.c mult.c div.c main.c -o app<br></code></pre></td></tr></tbody></table></figure>
+<p><code>make</code> 命令后，找到当前目录下的 makefile 去自动执行命令，生成了 app。</p>
+<figure class="highlight llvm"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs llvm">make<br>-&gt; gcc <span class="hljs-keyword">sub</span>.<span class="hljs-keyword">c</span> <span class="hljs-keyword">add</span>.<span class="hljs-keyword">c</span> mult.<span class="hljs-keyword">c</span> div.<span class="hljs-keyword">c</span> main.<span class="hljs-keyword">c</span> -o app<br></code></pre></td></tr></tbody></table></figure>
+<h3 id="122-工作原理"><a class="markdownIt-Anchor" href="#122-工作原理"></a> 1.2.2 工作原理</h3>
+<ul>
+<li>命令在执行之前，需要先检查规则中的依赖是否存在
+<ul>
+<li>如果存在，执行命令</li>
+<li>如果不存在，向下检查其它的规则，检查有没有一个规则是用来生成这个依赖的，如果找到了，则执行该规则中的命令。</li>
+</ul>
+</li>
+<li>检测更新，在执行规则中的命令时，会比较目标和依赖文件的时间
+<ul>
+<li>如果依赖的时间比目标的时间晚，需要重新生成目标。</li>
+<li>如果依赖的时间比目标的时间早，目标不需要更新，对应规则中的命令不需要被执行。</li>
+</ul>
+</li>
+</ul>
+<p>案例：</p>
+<p>编辑 makefile 文件。</p>
+<figure class="highlight makefile"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-section">app: sub.o add.o mult.o div.o main.o</span><br>        gcc sub.o add.o mult.o div.o main.o -o app<br><br><span class="hljs-section">sub.o:sub.c</span><br>        gcc -c sub.c -o sub.o<br><br><span class="hljs-section">add.o:add.c</span><br>        gcc -c add.c -o add.o<br><br><span class="hljs-section">mult.o:mult.c</span><br>        gcc -c mult.c -o mult.o<br><br><span class="hljs-section">div.o:div.c</span><br>        gcc -c div.c -o div.o<br><br><span class="hljs-section">main.o:main.c</span><br>        gcc -c main.c -o main.o<br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight stylus"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs stylus">make<br>-&gt;<br>gcc -c sub<span class="hljs-selector-class">.c</span> -o sub<span class="hljs-selector-class">.o</span><br>gcc -c add<span class="hljs-selector-class">.c</span> -o add<span class="hljs-selector-class">.o</span><br>gcc -c mult<span class="hljs-selector-class">.c</span> -o mult<span class="hljs-selector-class">.o</span><br>gcc -c <span class="hljs-selector-tag">div</span><span class="hljs-selector-class">.c</span> -o <span class="hljs-selector-tag">div</span><span class="hljs-selector-class">.o</span><br>gcc -c <span class="hljs-selector-tag">main</span><span class="hljs-selector-class">.c</span> -o <span class="hljs-selector-tag">main</span><span class="hljs-selector-class">.o</span><br>gcc sub<span class="hljs-selector-class">.o</span> add<span class="hljs-selector-class">.o</span> mult<span class="hljs-selector-class">.o</span> <span class="hljs-selector-tag">div</span><span class="hljs-selector-class">.o</span> <span class="hljs-selector-tag">main</span><span class="hljs-selector-class">.o</span> -o app<br></code></pre></td></tr></tbody></table></figure>
+<p>与前面的 makefile 写法对比：</p>
+<figure class="highlight makefile"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-section">app: sub.c add.c mult.c div.c main.c</span><br>        gcc sub.c add.c mult.c div.c main.c -o app<br></code></pre></td></tr></tbody></table></figure>
+<p>当 .c 文件更新时，makefile 在执行规则中的命令时，会比较目标和依赖文件的时间，如果依赖的时间比目标的时间晚，会更新目标。这种写法一旦更新某一个文件，都会执行该命令，重新编译所有的 .o 文件，再链接更新 app 。而分规则的写法，只会重新编译有修改的 .o 文件，再链接生成 app，效率更高。</p>
+<h2 id="13-变量"><a class="markdownIt-Anchor" href="#13-变量"></a> 1.3 变量</h2>
+<ul>
+<li>
+<p>自定义变量</p>
+<p><code>变量名=变量值</code>  <code>var=hello</code></p>
+</li>
+<li>
+<p>预定义变量</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>预定义变量</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AR</td>
+<td>归档维护程序的名称，默认值为 ar</td>
+</tr>
+<tr>
+<td>CC</td>
+<td>C 编译器的名称，默认值为 cc</td>
+</tr>
+<tr>
+<td>CXX</td>
+<td>C++ 编译器的名称，默认值为 g++</td>
+</tr>
+<tr>
+<td>$@</td>
+<td>目标的完整名称</td>
+</tr>
+<tr>
+<td>$&lt;</td>
+<td>第一个依赖文件的名称</td>
+</tr>
+<tr>
+<td>$^</td>
+<td>所有的依赖文件</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>
+<p>获取变量的值</p>
+<p><code>$(变量名)</code>  <code>$(var)</code></p>
+</li>
+</ul>
+<p>用变量改写：</p>
+<figure class="highlight makefile"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-section">app:main.c a.c b.c</span><br>			gcc -c main.c a.c b.c<br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight makefile"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-variable">$(CC)</span> -c <span class="hljs-variable">$^</span> -o <span class="hljs-variable">$@</span><br><span class="hljs-comment"># 自动变量只能在规则的命令中使用 app:main.c a.c b.c</span><br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight makefile"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-comment"># 定义变量</span><br>src=sub.o add.o mult.o div.o main.o<br>target=app<br><span class="hljs-variable">$(target)</span>:<span class="hljs-variable">$(src)</span><br>        <span class="hljs-variable">$(CC)</span> <span class="hljs-variable">$(src)</span> -o <span class="hljs-variable">$(target)</span><br>        <br><span class="hljs-section">sub.o:sub.c</span><br>        gcc -c sub.c -o sub.o<br><br><span class="hljs-section">add.o:add.c</span><br>        gcc -c add.c -o add.o<br><br><span class="hljs-section">mult.o:mult.c</span><br>        gcc -c mult.c -o mult.o<br><br><span class="hljs-section">div.o:div.c</span><br>        gcc -c div.c -o div.o<br><br><span class="hljs-section">main.o:main.c</span><br>        gcc -c main.c -o main.o       		 <br></code></pre></td></tr></tbody></table></figure>
+<h3 id="131-模式匹配"><a class="markdownIt-Anchor" href="#131-模式匹配"></a> 1.3.1 模式匹配</h3>
+<figure class="highlight makefile"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-section">%.o:%.c</span><br></code></pre></td></tr></tbody></table></figure>
+<ul>
+<li>%: 通配符，匹配一个字符串</li>
+<li>两个%匹配的是同一个字符串</li>
+</ul>
+<figure class="highlight makefile"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-section">%.o:%.c</span><br>    gcc -c <span class="hljs-variable">$&lt;</span> -o <span class="hljs-variable">$@</span><br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight makefile"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-section">%.o:%.c</span><br>    <span class="hljs-variable">$(CC)</span> -c <span class="hljs-variable">$&lt;</span> -o <span class="hljs-variable">$@</span><br></code></pre></td></tr></tbody></table></figure>
+<ul>
+<li><code>$&lt;</code> 为第一个依赖的名称，即 <code>%.c</code></li>
+<li><code>$@</code> 为目标的完整名称，即 <code>%.o</code></li>
+</ul>
+<p>改写后：</p>
+<figure class="highlight makefile"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-comment"># 定义变量</span><br>src=sub.o add.o mult.o div.o main.o<br>target=app<br><span class="hljs-variable">$(target)</span>:<span class="hljs-variable">$(src)</span><br>        <span class="hljs-variable">$(CC)</span> <span class="hljs-variable">$(src)</span> -o <span class="hljs-variable">$(target)</span><br>        <br><span class="hljs-section">%.o:%.c</span><br>        <span class="hljs-variable">$(CC)</span> -c <span class="hljs-variable">$&lt;</span> -o <span class="hljs-variable">$@</span><br></code></pre></td></tr></tbody></table></figure>
+<h2 id="14-函数"><a class="markdownIt-Anchor" href="#14-函数"></a> 1.4 函数</h2>
+<p>查找指定文件：</p>
+<figure class="highlight makefile"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-variable">$(<span class="hljs-built_in">wildcard</span> PATTERN...)</span><br></code></pre></td></tr></tbody></table></figure>
+<ul>
+<li>
+<p>功能：获取指定目录下指定类型的文件列表。</p>
+</li>
+<li>
+<p>参数：PATTERN 指的是某个或多个目录下的对应的某种类型的文件，如果有多个目录，一般使用空格间隔。</p>
+</li>
+<li>
+<p>返回：得到的若干个文件的文件列表，文件名之间使用空格间隔</p>
+</li>
+<li>
+<p>示例：</p>
+</li>
+</ul>
+<figure class="highlight makefile"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-variable">$(<span class="hljs-built_in">wildcard</span> *.c ./sub/*.c)</span> <br><span class="hljs-comment"># 返回值格式: a.c b.c c.c d.c e.c f.c</span><br></code></pre></td></tr></tbody></table></figure>
+<p>查找指定文件并替换：</p>
+<figure class="highlight makefile"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-variable">$(<span class="hljs-built_in">patsubst</span> &lt;pattern&gt;,&lt;replacement&gt;,&lt;text&gt;)</span><br></code></pre></td></tr></tbody></table></figure>
+<ul>
+<li>
+<p>功能：查找<text>中的单词(单词以“空格”、“Tab”或“回车”“换行”分隔)是否符合</text></p>
+<p>模式<pattern>，如果匹配的话，则以<replacement>替换。</replacement></pattern></p>
+</li>
+<li>
+<p><pattern>可以包括通配符<code>%</code>，表示任意长度的字串。如果<replacement></replacement></pattern></p>
+<p>中也包含<code>%</code>，那么，<replacement>中的这个<code>%</code>将是<pattern>中的那个%</pattern></replacement></p>
+<p>所代表的字串。(可以用<code>\</code>来转义，以<code>\%</code>来表示真实含义的<code>%</code>字符)</p>
+</li>
+<li>
+<p>返回：函数返回被替换过后的字符串</p>
+</li>
+<li>
+<p>示例：</p>
+</li>
+</ul>
+<figure class="highlight makefile"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-variable">$(<span class="hljs-built_in">patsubst</span> %.c, %.o, x.c bar.c)</span> <br><span class="hljs-comment">#返回值格式: x.o bar.o</span><br></code></pre></td></tr></tbody></table></figure>
+<p>优化后：</p>
+<figure class="highlight makefile"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-comment"># 定义变量</span><br><span class="hljs-comment"># add.c sub.c main.c mult.c div.c</span><br>src=<span class="hljs-variable">$(<span class="hljs-built_in">wildcard</span> ./*.c)</span><br>objs=<span class="hljs-variable">$(<span class="hljs-built_in">patsubst</span> %.c, %.o, <span class="hljs-variable">$(src)</span>)</span><br><br>target=app<br><span class="hljs-variable">$(target)</span>:<span class="hljs-variable">$(objs)</span><br>        <span class="hljs-variable">$(CC)</span> <span class="hljs-variable">$(objs)</span> -o <span class="hljs-variable">$(target)</span><br><br><span class="hljs-section">%.o:%.c</span><br>        <span class="hljs-variable">$(CC)</span> -c <span class="hljs-variable">$&lt;</span> -o <span class="hljs-variable">$@</span><br></code></pre></td></tr></tbody></table></figure>
+<p>编译链接后不需要 .o 文件，可以删除，在 makefile 文件里后面加上一条规则。</p>
+<figure class="highlight makefile"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-comment"># 定义变量</span><br><span class="hljs-comment"># add.c sub.c main.c mult.c div.c</span><br>src=<span class="hljs-variable">$(<span class="hljs-built_in">wildcard</span> ./*.c)</span><br>objs=<span class="hljs-variable">$(<span class="hljs-built_in">patsubst</span> %.c, %.o, <span class="hljs-variable">$(src)</span>)</span><br><br>target=app<br><span class="hljs-variable">$(target)</span>:<span class="hljs-variable">$(objs)</span><br>        <span class="hljs-variable">$(CC)</span> <span class="hljs-variable">$(objs)</span> -o <span class="hljs-variable">$(target)</span><br><br><br><span class="hljs-section">%.o:%.c</span><br>        <span class="hljs-variable">$(CC)</span> -c <span class="hljs-variable">$&lt;</span> -o <span class="hljs-variable">$@</span><br><br><span class="hljs-section">clean:</span><br>        rm <span class="hljs-variable">$(objs)</span> -f<br></code></pre></td></tr></tbody></table></figure>
+<p>可以直接执行命令删除：</p>
+<figure class="highlight ebnf"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">make clean</span><br></code></pre></td></tr></tbody></table></figure>
+<p><code>clean</code> 规则与第一条规则无关，执行 <code>make</code> 时不会执行 <code>clean</code> 规则。</p>
+<p>但当有一个名为 clean 的文件时，因为<code>clean</code> 没有依赖，执行 <code>make clean</code>与名为 clean 的文件对比而更新 clean 文件，导致无法执行 <code>clean</code> 规则。</p>
+<p>将 <code>clean</code> 定义为伪目标，这样不会生成特定的文件，就不会与名为 clean 的文件对比，而无法执行 <code>clean</code> 规则。</p>
+<figure class="highlight makefile"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-meta"><span class="hljs-keyword">.PHONY</span>:clean</span><br><span class="hljs-section">clean:</span><br>        rm <span class="hljs-variable">$(objs)</span> -f<br></code></pre></td></tr></tbody></table></figure>
+<h1 id="2-gdb"><a class="markdownIt-Anchor" href="#2-gdb"></a> 2 GDB</h1>
+<h2 id="21-什么是-gdb"><a class="markdownIt-Anchor" href="#21-什么是-gdb"></a> 2.1 什么是 GDB</h2>
+<ul>
+<li>
+<p>GDB 是由 GNU 软件系统社区提供的调试工具，同 GCC 配套组成了一套完整的开发环 境，GDB 是 Linux 和许多类 Unix 系统中的标准开发环境。</p>
+</li>
+<li>
+<p>一般来说，GDB 主要帮助你完成下面四个方面的功能:</p>
+<ol>
+<li>启动程序，可以按照自定义的要求随心所欲的运行程序。</li>
+<li>可让被调试的程序在所指定的调置的断点处停住(断点可以是条件表达式) 。</li>
+<li>当程序被停住时，可以检查此时程序中所发生的事。</li>
+<li>可以改变程序，将一个 BUG 产生的影响修正从而测试其他 BUG。</li>
+</ol>
+</li>
+</ul>
+<h2 id="22-准备工作"><a class="markdownIt-Anchor" href="#22-准备工作"></a> 2.2 准备工作</h2>
+<ul>
+<li>通常，在为调试而编译时，我们会()关掉编译器的优化选项(<code>-O</code>)， 并打开调试选项(<code>-g</code>)。另外，<code>-Wall</code> 在尽量不影响程序行为的情况下选项打开所有 warning，也可以发现许多问题，避免一些不必要的 BUG。</li>
+</ul>
+<figure class="highlight delphi"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs delphi">gcc -g -Wall <span class="hljs-keyword">program</span>.c -o <span class="hljs-keyword">program</span><br></code></pre></td></tr></tbody></table></figure>
+<ul>
+<li><code>-g</code> 选项的作用是在可执行文件中加入源代码的信息，比如可执行文件中第几条机器指令对应源代码的第几行，但并不是把整个源文件嵌入到可执行文件中，所以在调试时必须保证 gdb 能找到源文件。</li>
+</ul>
+<p>实操：</p>
+<p>编译程序时加入调试信息：</p>
+<figure class="highlight cmake"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">gcc <span class="hljs-keyword">test</span>.c -o <span class="hljs-keyword">test</span> -g <br></code></pre></td></tr></tbody></table></figure>
+<p>（出现错误：只允许在 C99 模式下使用‘<strong>for</strong>’循环初始化声明）</p>
+<p>按照提示修改：使用 -std=c99 或 -std=gnu99 来编译您的代码</p>
+<figure class="highlight x86asm"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs x86asm">gcc <span class="hljs-keyword">test</span><span class="hljs-number">.</span>c -o <span class="hljs-keyword">test</span> -g -<span class="hljs-keyword">std</span>=gnu99<br></code></pre></td></tr></tbody></table></figure>
+<p>执行GDB，进入到 GDB 模式，gdb 是 shell 命令：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">gdb <span class="hljs-built_in">test</span><br></code></pre></td></tr></tbody></table></figure>
+<p>在 GDB 模式下，给程序设置参数：</p>
+<h2 id="23-gdb-命令"><a class="markdownIt-Anchor" href="#23-gdb-命令"></a> 2.3 GDB 命令</h2>
+<h3 id="231-启动-退出-查看代码"><a class="markdownIt-Anchor" href="#231-启动-退出-查看代码"></a> 2.3.1 启动、退出、查看代码</h3>
+<p>启动和退出</p>
+<figure class="highlight cos"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cos">gdb 可执行程序<br><span class="hljs-keyword">quit</span><br></code></pre></td></tr></tbody></table></figure>
+<p>给程序设置参数/获取设置参数</p>
+<figure class="highlight gams"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs gams"><span class="hljs-keyword">set</span> args <span class="hljs-comment">10 20</span><br>show <span class="hljs-comment">args</span><br></code></pre></td></tr></tbody></table></figure>
+<p>GDB使用帮助</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">help</span><br></code></pre></td></tr></tbody></table></figure>
+<p>查看当前文件代码</p>
+<figure class="highlight 1c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs 1c">list/l					<span class="hljs-comment">// 从默认位置显示</span><br>list/l 行号			 <span class="hljs-comment">// 从指定的行显示</span><br>list/l 函数名		<span class="hljs-comment">// 从指定的函数显示</span><br></code></pre></td></tr></tbody></table></figure>
+<p>查看非当前文件代码</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">list/l 文件名:行号 <br>list/l 文件名:函数名<br></code></pre></td></tr></tbody></table></figure>
+<p>设置显示的行数</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">show list/listsize <br><span class="hljs-built_in">set</span> list/listsize 行数<br></code></pre></td></tr></tbody></table></figure>
+<h3 id="232-断点操作"><a class="markdownIt-Anchor" href="#232-断点操作"></a> 2.3.2 断点操作</h3>
+<p>设置断点</p>
+<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs kotlin">b/<span class="hljs-keyword">break</span> 行号<br>b/<span class="hljs-keyword">break</span> 函数名 <br>b/<span class="hljs-keyword">break</span> 文件名:行号 <br>b/<span class="hljs-keyword">break</span> 文件名:函数<br></code></pre></td></tr></tbody></table></figure>
+<p>查看断点</p>
+<figure class="highlight awk"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">i<span class="hljs-regexp">/info b/</span><span class="hljs-keyword">break</span><br></code></pre></td></tr></tbody></table></figure>
+<p>删除断点</p>
+<figure class="highlight awk"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">d<span class="hljs-regexp">/del/</span><span class="hljs-keyword">delete</span> 断点编号<br></code></pre></td></tr></tbody></table></figure>
+<p>设置断点无效</p>
+<figure class="highlight routeros"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">dis/<span class="hljs-built_in">disable</span> 断点编号<br></code></pre></td></tr></tbody></table></figure>
+<p>设置断点生效</p>
+<figure class="highlight routeros"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">ena/<span class="hljs-built_in">enable</span> 断点编号<br></code></pre></td></tr></tbody></table></figure>
+<p>设置条件断点(一般用在循环的位置)</p>
+<figure class="highlight abnf"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs abnf">b/break <span class="hljs-number">10</span> if i<span class="hljs-operator">=</span><span class="hljs-operator">=</span><span class="hljs-number">5</span><br></code></pre></td></tr></tbody></table></figure>
+<h3 id="233-调试命令"><a class="markdownIt-Anchor" href="#233-调试命令"></a> 2.3.3 调试命令</h3>
+<p>运行GDB程序</p>
+<figure class="highlight stylus"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs stylus"><span class="hljs-function"><span class="hljs-title">start</span><span class="hljs-params">(程序停在第一行)</span></span> <br><span class="hljs-function"><span class="hljs-title">run</span><span class="hljs-params">(遇到断点才停)</span></span><br></code></pre></td></tr></tbody></table></figure>
+<p>继续运行，到下一个断点停</p>
+<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs kotlin">c/<span class="hljs-keyword">continue</span><br></code></pre></td></tr></tbody></table></figure>
+<p>向下执行一行代码(不会进入函数体)</p>
+<figure class="highlight autoit"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs autoit">n/<span class="hljs-keyword">next</span><br></code></pre></td></tr></tbody></table></figure>
+<p>变量操作</p>
+<figure class="highlight routeros"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs routeros">p/<span class="hljs-built_in">print</span> 变量名(打印变量值) <br>ptype 变量名(打印变量类型)<br></code></pre></td></tr></tbody></table></figure>
+<p>向下单步调试(遇到函数进入函数体)</p>
+<figure class="highlight stylus"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs stylus">s/step<br><span class="hljs-function"><span class="hljs-title">finish</span><span class="hljs-params">(跳出函数体)</span></span><br></code></pre></td></tr></tbody></table></figure>
+<p>自动变量操作</p>
+<figure class="highlight css"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-attribute">display</span> 变量名(自动打印指定变量的值) <br><span class="hljs-selector-tag">i</span>/info <span class="hljs-attribute">display</span><br>undisplay 编号<br></code></pre></td></tr></tbody></table></figure>
+<p>其它操作</p>
+<figure class="highlight delphi"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs delphi"><span class="hljs-keyword">set</span> <span class="hljs-keyword">var</span> 变量名=变量值 (循环中用的较多) <br><span class="hljs-keyword">until</span> (跳出循环)<br></code></pre></td></tr></tbody></table></figure>
+<h1 id="3-文件io"><a class="markdownIt-Anchor" href="#3-文件io"></a> 3 文件IO</h1>
+<p><a href="%E8%AF%BE%E4%BB%B6/1.17%20%E6%96%87%E4%BB%B6IO.pdf">1.17 文件IO</a></p>
+<h2 id="31-标准c库io函数和linux系统io函数对比"><a class="markdownIt-Anchor" href="#31-标准c库io函数和linux系统io函数对比"></a> 3.1 标准C库IO函数和Linux系统IO函数对比</h2>
+<p><img src="https://cdn.jsdelivr.net/gh/huyup1e2n3g/WebServer/img/20220403174357.png" srcset="/img/loading.gif" lazyload alt="image-20220328130316589"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/huyup1e2n3g/WebServer/img/20220403174406.png" srcset="/img/loading.gif" lazyload alt="image-20220328130330587"></p>
+<h2 id="32-虚拟地址空间"><a class="markdownIt-Anchor" href="#32-虚拟地址空间"></a> 3.2 虚拟地址空间</h2>
+<p><img src="https://cdn.jsdelivr.net/gh/huyup1e2n3g/WebServer/img/20220403174413.png" srcset="/img/loading.gif" lazyload alt="image-20220328130352951"></p>
+<p>程序和进程的区别：</p>
+<p>程序是可执行文件，可执行文件只占用磁盘的空间，不占用内存空间。</p>
+<p>当程序运行起来后，操作系统会为程序的启动或运行分配一些资源，这时候操作系统就会创建一个进程，进程就是为程序运行所分配资源的东西。</p>
+<p>进程就是正在运行的程序，进程占用内存空间，一个程序启动以后，会生成一个虚拟地址空间，虚拟地址空间会通过 CPU 当中的 MMU 逻辑管理单元把虚拟地址空间中的数据映射到物理内存中去。</p>
+<h2 id="33-文件描述符"><a class="markdownIt-Anchor" href="#33-文件描述符"></a> 3.3 文件描述符</h2>
+<p><img src="https://cdn.jsdelivr.net/gh/huyup1e2n3g/WebServer/img/20220403174423.png" srcset="/img/loading.gif" lazyload alt="image-20220328130409222"></p>
+<p>对可执行文件进行读取或写的操作，可执行程序运行起来后，操作系统会生成一个进程，在对应的文件比如 english.txt ，进行读取或写入等操作，用标准 C 的 IO 文件库去操作，fopen 打开文件，调用 fread 读取数据，或者调用 fwrite 写入数据，为什么在程序当中用 fopen 打开文件后，调用 fread ，或者调用 fwrite ，它就能够去找到磁盘上的 english.txt 文件，对它进行操作呢？</p>
+<p>因为它里面有文件描述符，调用 fopen 函数，会返回一个 <code>FILE * fp</code> 文件指针，这个文件指针里就封装了文件描述符，文件描述符就是用来定位要操作的文件的。</p>
+<p>文件描述符在文件的内核区(3G - 4G)，由内核进行管理，在内核区的进程管理模块里 有一个 PCB 进程控制块，由它管理文件描述符。</p>
+<p>内核就是一个程序，PCB 是一个非常复杂的结构体，PCB 是进程控制块，需要管理很多东西，可以把需要管理的数据都封装到 PCB 结构体里。PCB 结构体里有一个数组，这个数组就是文件描述符表，这个数组就用来存储很多个文件描述符文件。</p>
+<p>为什么用数组来存储很多个文件描述符呢？</p>
+<p>文件描述符就是用来定位磁盘中的某个文件的。一个进程可以同时打开多个文件，所以要用数组来存储多个文件描述符，这样才可以同时定位多个文件。</p>
+<p>这个数组的默认大小是 1024，每一个进程里都有一个进程控制块，都有一个文件描述符表，每个进程默认能打开的文件个数就是 1024。</p>
+<p>这个文件描述符表的前三个是默认被占用的，默认被 标准输入、标准输出、标准错误 使用，而且默认是打开的状态，它们对应的文件就是当前终端，为什么都指向当前的终端？Linux 系统一切皆文件，不管是什么硬件设备，它最终都会虚拟成一个文件，通过文件对它进行管理，这三个也就是设备文件。</p>
+<p>一个文件可以被打开多次，但是打开多次的文件描述符是不一样的。</p>
+<p>用 fclose 关闭文件描述符的时候，这个文件描述符就会被释放，被释放后就可以重新去使用，如果文件描述符被占用，它需要到文件描述符表里找一个最小的没有被占用的，文件描述符去使用。</p>
+<h2 id="34-linux系统io函数"><a class="markdownIt-Anchor" href="#34-linux系统io函数"></a> 3.4 Linux系统IO函数</h2>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">open</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *pathname, <span class="hljs-type">int</span> flags)</span></span>;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">open</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *pathname, <span class="hljs-type">int</span> flags, <span class="hljs-type">mode_t</span> mode)</span></span>;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">close</span><span class="hljs-params">(<span class="hljs-type">int</span> fd)</span></span>;<br><span class="hljs-function"><span class="hljs-type">ssize_t</span> <span class="hljs-title">read</span><span class="hljs-params">(<span class="hljs-type">int</span> fd, <span class="hljs-type">void</span> *buf, <span class="hljs-type">size_t</span> count)</span></span>;<br><span class="hljs-function"><span class="hljs-type">ssize_t</span> <span class="hljs-title">write</span><span class="hljs-params">(<span class="hljs-type">int</span> fd, <span class="hljs-type">const</span> <span class="hljs-type">void</span> *buf, <span class="hljs-type">size_t</span> count)</span></span>;<br><span class="hljs-function"><span class="hljs-type">off_t</span> <span class="hljs-title">lseek</span><span class="hljs-params">(<span class="hljs-type">int</span> fd, <span class="hljs-type">off_t</span> offset, <span class="hljs-type">int</span> whence)</span></span>;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">stat</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *pathname, <span class="hljs-keyword">struct</span> stat *statbuf)</span></span>;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">lstat</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *pathname, <span class="hljs-keyword">struct</span> stat *statbuf)</span></span>;<br></code></pre></td></tr></tbody></table></figure>
+<h3 id="341-open函数"><a class="markdownIt-Anchor" href="#341-open函数"></a> 3.4.1 open函数</h3>
+<p>centOS安装manpages</p>
+<figure class="highlight cmake"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">yum -y <span class="hljs-keyword">install</span> man-pages<br></code></pre></td></tr></tbody></table></figure>
+<p>查看说明文档</p>
+<figure class="highlight awk"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs awk">man <span class="hljs-number">2</span> open<br><span class="hljs-regexp">//</span> 第二章是Linux系统函数说明文档，open 在第二章查找<br><span class="hljs-regexp">//</span> 第三章是标准C库说明文档<br></code></pre></td></tr></tbody></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/huyup1e2n3g/WebServer/img/20220403174431.png" srcset="/img/loading.gif" lazyload alt="image-20220403111757618"></p>
+<p>open 函数：</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// 头文件</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/stat.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;fcntl.h&gt;</span></span><br><br><span class="hljs-comment">// open 函数的声明</span><br><span class="hljs-comment">// 打开一个已经存在的文件</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">open</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *pathname, <span class="hljs-type">int</span> flags)</span>;<br><br><span class="hljs-comment">// 创建一个新的文件</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">open</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *pathname, <span class="hljs-type">int</span> flags, <span class="hljs-type">mode_t</span> mode)</span>;<br></code></pre></td></tr></tbody></table></figure>
+<p>为什么要有三个头文件？</p>
+<p>函数的申明在 <code>fcntl.h</code> 头文件里，<code>flags</code> 在Linux系统中定义为一个宏放在其他的头文件里。</p>
+<p>为什么可以有两个同名的 <code>open</code> 函数？</p>
+<p>C语言没有函数重载，通过可变参数 <code>mode_t mode</code> 实现同名函数的效果。</p>
+<h4 id="3411-open打开文件"><a class="markdownIt-Anchor" href="#3411-open打开文件"></a> 3.4.1.1 open打开文件</h4>
+<p>open函数打开文件的参数和返回值详解：</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// 头文件</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/stat.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;fcntl.h&gt;</span></span><br><br><span class="hljs-comment">// open 函数的声明</span><br><span class="hljs-comment">// 打开一个已经存在的文件</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">open</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *pathname, <span class="hljs-type">int</span> flags)</span>;<br>		参数：<br>				- pathname：要打开的文件路径<br>				- flags：对文件的操作权限设置还有其他设置<br>						- O_RDONLY：只读<br>						- O_WRONLY：只写<br>						- O_RDWR：可读可写<br>						这三个设置是互斥的(必选项)<br>		返回值：返回一个新的文件描述符，如果调用失败，返回 <span class="hljs-number">-1</span> ，系统会把错误号赋值给errno<br>		errno：属于Linux系统函数库，库里面的一个全局变量，记录的是最近的错误号<br>		perror：查看具体的错误<br><br><span class="hljs-comment">// 创建一个新的文件</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">open</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *pathname, <span class="hljs-type">int</span> flags, <span class="hljs-type">mode_t</span> mode)</span>;<br></code></pre></td></tr></tbody></table></figure>
+<p>查看返回值</p>
+<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs kotlin">/<span class="hljs-keyword">return</span> value<br></code></pre></td></tr></tbody></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/huyup1e2n3g/WebServer/img/20220403174505.png" srcset="/img/loading.gif" lazyload alt="image-20220403113343555"></p>
+<p>perror 函数（说明文档 <code>man 3 perror</code> ）</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-type">void</span> <span class="hljs-title function_">perror</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *s)</span>; <br>		作用：打印 errno 对应的错误描述<br>		s 参数：用户描述，比如 hello，最终输出的内容是 hello:xxx(实际的错误描述)<br></code></pre></td></tr></tbody></table></figure>
+<p>close 函数（说明文档 <code>man 2 close</code> ）</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-type">int</span> <span class="hljs-title function_">close</span><span class="hljs-params">(<span class="hljs-type">int</span> fd)</span>;<br></code></pre></td></tr></tbody></table></figure>
+<p>查找 <code>a.txt</code> 文件，找不到文件，文件描述符返回 -1，用 <code>perror</code> 打印错误描述，关闭文件</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// open.c</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/stat.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;fcntl.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span><br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> {<br>  	<span class="hljs-comment">// 打开一个文件</span><br>    <span class="hljs-type">int</span> fd = open(<span class="hljs-string">"a.txt"</span>, O_RDONLY);<br>    <span class="hljs-keyword">if</span>(fd == <span class="hljs-number">-1</span>) {<br>        perror(<span class="hljs-string">"open"</span>);<br>    }<br>    <span class="hljs-comment">// 关闭</span><br>    close(fd);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>}<br></code></pre></td></tr></tbody></table></figure>
+<p>编译 <code>open.c</code> 文件 <code>gcc open.c -o open</code> ，执行输出错误描述：</p>
+<figure class="highlight livecodeserver"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver"><span class="hljs-built_in">open</span>: No such <span class="hljs-built_in">file</span> <span class="hljs-keyword">or</span> <span class="hljs-built_in">directory</span><br></code></pre></td></tr></tbody></table></figure>
+<h4 id="3412-open创建新文件"><a class="markdownIt-Anchor" href="#3412-open创建新文件"></a> 3.4.1.2 open创建新文件</h4>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// 头文件</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/stat.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;fcntl.h&gt;</span></span><br><br><span class="hljs-comment">// open 函数的声明</span><br><span class="hljs-comment">// 创建一个新的文件</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">open</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *pathname, <span class="hljs-type">int</span> flags, <span class="hljs-type">mode_t</span> mode)</span>;<br>		参数：<br>				- pathname：要打开的文件路径<br>				- flags：对文件的操作权限设置还有其他设置<br>						- 必选项：O_RDONLY，O_WRONLY，O_RDWR，这三个设置是互斥的<br>						- 可选项：O_CREAT 文件不存在，创建新文件<br>      	- mode：八进制的数，表示用户对创建出的新的文件的操作权限，比如：<span class="hljs-number">0775</span><br>      	最终的权限是：mode &amp; ~umask<br>      	umask -&gt; <span class="hljs-number">0002</span>, ~umaske = <span class="hljs-number">0777</span><span class="hljs-number">-0002</span> = <span class="hljs-number">0775</span><br>      	<span class="hljs-number">0777</span>	-&gt; <span class="hljs-number">111111111</span><br>      &amp; <span class="hljs-number">0775</span>	-&gt; <span class="hljs-number">111111101</span><br>      ---------------------<br>      					 <span class="hljs-number">111111101</span>	-&gt; <span class="hljs-number">0775</span><br>      按位与：<span class="hljs-number">0</span> 和任何数都为 <span class="hljs-number">0</span><br>      umask 的作用是抹去某些权限，umask 可以自己设计<br>		返回值：返回一个新的文件描述符，如果调用失败，返回 <span class="hljs-number">-1</span> ，系统会把错误号赋值给errno<br>		errno：属于Linux系统函数库，库里面的一个全局变量，记录的是最近的错误号<br>		perror：查看具体的错误<br><br><br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// create.c</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/stat.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;fcntl.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span><br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> {<br>  	<span class="hljs-comment">// 创建一个新的文件</span><br>    <span class="hljs-type">int</span> fd = open(<span class="hljs-string">"create.txt"</span>, O_RDWR | O_CREAT, <span class="hljs-number">0777</span>);<br>    <span class="hljs-keyword">if</span>(fd == <span class="hljs-number">-1</span>) {<br>        perror(<span class="hljs-string">"open"</span>);<br>    }<br>    <span class="hljs-comment">// 关闭</span><br>    close(fd);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>}<br></code></pre></td></tr></tbody></table></figure>
+<p>编译 <code>create.c</code> 文件 <code>gcc create.c -o create</code> ，创建了新文件 <code>create.txt</code> 。</p>
+<p>查看权限，<code>ll create.txt</code> 。</p>
+<figure class="highlight tap"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs tap">-rwxr-xr-x<span class="hljs-number"> 1 </span>root root<span class="hljs-number"> 0 </span>4月  <span class="hljs-number"> 3 </span>14:49 create.txt<br></code></pre></td></tr></tbody></table></figure>
+<p><code>-rwxr-xr-x</code> 对应 0775 权限。</p>
+<p>open 函数中的 flags 为什么用按位或 <code>|</code> 来连接？</p>
+<p>flags函数是一个int类型的数据，占4个字节，32位；</p>
+<p>flags 32个位，每一位就是一个标志位。用 <code>|</code> 相当于把后一个 flag加到前一个flag上。</p>
+<h3 id="342-read函数和write函数"><a class="markdownIt-Anchor" href="#342-read函数和write函数"></a> 3.4.2 read函数和write函数</h3>
+<p>查看说明文档</p>
+<figure class="highlight powershell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">man</span> <span class="hljs-number">2</span> read<br><span class="hljs-built_in">man</span> <span class="hljs-number">2</span> <span class="hljs-built_in">write</span><br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// read 函数</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-type">ssize_t</span> <span class="hljs-title function_">read</span><span class="hljs-params">(<span class="hljs-type">int</span> fd, <span class="hljs-type">void</span> *buf, <span class="hljs-type">size_t</span> count)</span>;<br>		参数：<br>      	- fd: 文件描述符，open 得到的，通过这个文件描述符操作某个文件<br>        - buf: 需要读取数据存放的地方，数组的地址（传出参数）<br>        - count: 指定的数组的大小<br>    返回值：<br>        - 成功: <br>          	&gt; <span class="hljs-number">0</span>: 返回实际的读取到的字节数<br>            = <span class="hljs-number">0</span>: 文件已经读取完了<br>        - 失败: <span class="hljs-number">-1</span> ，并且设置 errno<br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// write 函数</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-type">ssize_t</span> <span class="hljs-title function_">write</span><span class="hljs-params">(<span class="hljs-type">int</span> fd, <span class="hljs-type">const</span> <span class="hljs-type">void</span> *buf, <span class="hljs-type">size_t</span> count)</span>;<br>		参数：<br>      	- fd: 文件描述符，open 得到的，通过这个文件描述符操作某个文件<br>        - buf: 要往磁盘写入的数据<br>        - count: 要写的数据的实际的大小<br>    返回值：<br>        - 成功: 实际写入的字节数<br>        - 失败: <span class="hljs-number">-1</span> ，并且设置 errno<br></code></pre></td></tr></tbody></table></figure>
+<p>文件拷贝：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// copyfile.c</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/stat.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;fcntl.h&gt;</span></span><br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{<br>    <span class="hljs-comment">// 1. 通过 open 打开 english.txt 文件</span><br>    <span class="hljs-type">int</span> srcfd = <span class="hljs-built_in">open</span>(<span class="hljs-string">"english.txt"</span>, O_RDONLY);  <span class="hljs-comment">// 源文件的文件描述符</span><br>    <span class="hljs-keyword">if</span> (srcfd == <span class="hljs-number">-1</span>){<br>        <span class="hljs-built_in">perror</span>(<span class="hljs-string">"open"</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>    }<br>    <span class="hljs-comment">// 2. 创建一个心的文件（拷贝文件）</span><br>    <span class="hljs-type">int</span> destfd = <span class="hljs-built_in">open</span>(<span class="hljs-string">"cpy.txt"</span>, O_WRONLY | O_CREAT, <span class="hljs-number">0664</span>); <span class="hljs-comment">// 目标文件的描述符</span><br>    <span class="hljs-keyword">if</span> (destfd == <span class="hljs-number">-1</span>){<br>        <span class="hljs-built_in">perror</span>(<span class="hljs-string">"open"</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>    }<br>    <span class="hljs-comment">// 3. 频繁的读写操作 </span><br>    <span class="hljs-type">char</span> buf[<span class="hljs-number">1024</span>] = {<span class="hljs-number">0</span>};<br>    <span class="hljs-type">int</span> len = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">while</span>((len = <span class="hljs-built_in">read</span>(srcfd, buf, <span class="hljs-built_in">sizeof</span>(buf))) &gt; <span class="hljs-number">0</span>) {<br>        <span class="hljs-built_in">write</span>(destfd, buf, len);<br>    }<br><br>    <span class="hljs-comment">// 4. 关闭文件</span><br>    <span class="hljs-built_in">close</span>(destfd);<br>    <span class="hljs-built_in">close</span>(srcfd);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>}<br></code></pre></td></tr></tbody></table></figure>
+<h3 id="343-lseek函数"><a class="markdownIt-Anchor" href="#343-lseek函数"></a> 3.4.3 lseek函数</h3>
+<p>查看说明文档</p>
+<figure class="highlight apache"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">man</span> <span class="hljs-number">2</span> lseek<br><span class="hljs-attribute">man</span> <span class="hljs-number">3</span> fseek<br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// 标准C库的函数</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-type">int</span> <span class="hljs-title function_">fseek</span><span class="hljs-params">(FILE *stream, <span class="hljs-type">long</span> offset, <span class="hljs-type">int</span> whence)</span>;<br><br><span class="hljs-comment">// Linux系统函数</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-type">off_t</span> <span class="hljs-title function_">lseek</span><span class="hljs-params">(<span class="hljs-type">int</span> fd, <span class="hljs-type">off_t</span> offset, <span class="hljs-type">int</span> whence)</span>;<br>		- 参数：<br>      	- fd: 文件描述符，通过 open 得到的，通过这个 fd 操作某个文件<br>        - offset: 偏移量<br>        - whence: <br>						SEEK_SET<br>              设置文件指针的偏移量<br>            SEEK_CUR<br>              设置偏移量：当前位置 + 第二个参数 offset 的值<br>            SEEK_END<br>              设置偏移量：文件大小 + 第二个参数 offset 的值<br>		- 返回值：返回文件指针的位置<br>              <br>作用：<br>		<span class="hljs-number">1.</span> 移动文件指针到头文件<br>    lseek(fd, <span class="hljs-number">0</span>, SEEK_SET);<br>		<span class="hljs-number">2.</span> 获取当前文件指针的位置<br>    lseek(fd, <span class="hljs-number">0</span>, SEEK_CUR);<br>		<span class="hljs-number">3.</span> 获取文件的长度<br>   	lseek(fd, <span class="hljs-number">0</span>, SEEK_END);<br>		<span class="hljs-number">4.</span> 拓展文件的长度，当前文件 <span class="hljs-number">10b</span>，<span class="hljs-number">110b</span>，增加了 <span class="hljs-number">100</span> 个字节<br>    lseek(fd, <span class="hljs-number">100</span>, SEEK_END);<br></code></pre></td></tr></tbody></table></figure>
+<p>拓展文件长度：</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// lseek.c</span><br><span class="hljs-comment">// 原 hello.txt 为 12 字节，拓展了 100 个字节，写入了 1 个空数据，最后为 113 字节大小</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/stat.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;fcntl.h&gt;</span></span><br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> {<br>    <span class="hljs-comment">// 打开文件</span><br>    <span class="hljs-type">int</span> fd = open(<span class="hljs-string">"hello.txt"</span>, O_RDWR);<br>    <span class="hljs-keyword">if</span> (fd == <span class="hljs-number">-1</span>) {<br>        perror(<span class="hljs-string">"open"</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>    }<br>    <span class="hljs-comment">//拓展文件</span><br>    <span class="hljs-type">int</span> ret = lseek(fd, <span class="hljs-number">100</span>, SEEK_END);   <span class="hljs-comment">// 从文件末尾开始拓展 100 字节</span><br>    <span class="hljs-keyword">if</span> (ret == <span class="hljs-number">-1</span>) {<br>        perror(<span class="hljs-string">"lseek"</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>    }<br><br>    <span class="hljs-comment">// 写入一个空数据</span><br>    write(fd, <span class="hljs-string">" "</span>, <span class="hljs-number">1</span>);<br><br>    <span class="hljs-comment">// 关闭文件</span><br>    close(fd);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>}<br></code></pre></td></tr></tbody></table></figure>
+<p>为什么要写入空数据？</p>
+<p>lseek()不是扩展数据的功能，只是可以利用lseek()去扩展文件，lseek()只是单纯的移动文件指针偏移。而写入数据后才能扩展数据大小，显示出字节数。</p>
+<p>拓展文件有什么实际用途？</p>
+<p>在下载文件时，先按照文件大小拓展出来，然后再慢慢往里面下载，以防磁盘空间不足。</p>
+<h3 id="344-stat函数和lstat函数"><a class="markdownIt-Anchor" href="#344-stat函数和lstat函数"></a> 3.4.4 stat函数和lstat函数</h3>
+<p>查看说明文档</p>
+<figure class="highlight apache"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">man</span> <span class="hljs-number">2</span> stat<br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/stat.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span><br><br><span class="hljs-type">int</span> <span class="hljs-title function_">stat</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *path, <span class="hljs-keyword">struct</span> stat *buf)</span>;<br>		作用：获取一个文件相关的一些信息<br>    参数：<br>      	- pathname：操作的文件的路径<br>        - statbuf：结构体变量，传出参数，用于保存获取到的文件的信息<br>    返回值：<br>      	成功：返回 <span class="hljs-number">0</span><br>      	失败：返回 <span class="hljs-number">-1</span> ，设置 errno<br><span class="hljs-type">int</span> <span class="hljs-title function_">lstat</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *path, <span class="hljs-keyword">struct</span> stat *buf)</span>;<br>		作用：获取软链接文件相关的一些信息<br>    参数：<br>      	- pathname：操作的文件的路径<br>        - statbuf：结构体变量，传出参数，用于保存获取到的文件的信息<br>    返回值：<br>      	成功：返回 <span class="hljs-number">0</span><br>      	失败：返回 <span class="hljs-number">-1</span> ，设置 errno<br></code></pre></td></tr></tbody></table></figure>
+<p>在 Linux 中也有一个命令 stat ，通过它可以查看一个文件的信息。</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">stat</span> a.txt<br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight subunit"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs subunit">  文件："a.txt"<br>  大小：13        	块：8          IO 块：4096   普通文件<br>设备：fd01h/64769d	Inode：658603      硬链接：1<br>权限：(0644/-rw-r--r--)  Uid：(    0/    root)   Gid：(    0/    root)<br>最近访问：2022<span class="hljs-string">-04</span><span class="hljs-string">-03</span> 16:07:04.823402070 <span class="hljs-string">+0800</span><br>最近更改：2022<span class="hljs-string">-04</span><span class="hljs-string">-03</span> 16:07:04.823402070 <span class="hljs-string">+0800</span><br>最近改动：2022<span class="hljs-string">-04</span><span class="hljs-string">-03</span> 16:07:04.826402123 <span class="hljs-string">+0800</span><br>创建时间：-<br></code></pre></td></tr></tbody></table></figure>
+<p>stat结构体</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">stat</span> {</span><br>		<span class="hljs-type">dev_t</span>		st_dev;						<span class="hljs-comment">// 文件的设备编号</span><br>    <span class="hljs-type">ino_t</span>		st_ino;						<span class="hljs-comment">// 节点</span><br>		<span class="hljs-type">mode_t</span>		st_mode;				<span class="hljs-comment">// 文件的类型和存取的权限</span><br>		<span class="hljs-type">nlink_t</span>		st_nlink;				<span class="hljs-comment">// 连到该文件的硬连接数目</span><br>    <span class="hljs-type">uid_t</span>			st_uid;					<span class="hljs-comment">// 用户ID</span><br>    <span class="hljs-type">gid_t</span>			st_gid;					<span class="hljs-comment">// 组ID</span><br>    <span class="hljs-type">dev_t</span>			st_rdev;				<span class="hljs-comment">// 设备文件的设备编号</span><br>    <span class="hljs-type">off_t</span>			st_size;				<span class="hljs-comment">// 文件字节数(文件大小)</span><br>    <span class="hljs-type">blksize_t</span>		st_blksize;		<span class="hljs-comment">// 块大小</span><br>    <span class="hljs-type">blkcnt_t</span> 		st_blocks;		<span class="hljs-comment">// 块数</span><br>    <span class="hljs-type">time_t</span> 			st_atime;			<span class="hljs-comment">// 最后一次访问时间</span><br>    <span class="hljs-type">time_t</span> 			st_mtime;			<span class="hljs-comment">// 最后一次修改时间</span><br>    <span class="hljs-type">time_t</span>			st_ctime;			<span class="hljs-comment">// 最后一次改变时间(指属性)</span><br> };<br></code></pre></td></tr></tbody></table></figure>
+<p>st_mode变量</p>
+<p><img src="https://cdn.jsdelivr.net/gh/huyup1e2n3g/WebServer/img/20220403174524.png" srcset="/img/loading.gif" lazyload alt="image-20220403162503909"></p>
+<p>获取 a.txt 的信息，返回大小</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/stat.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> {<br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">stat</span> <span class="hljs-title">statbuf</span>;</span><br>    <span class="hljs-type">int</span> ret = stat(<span class="hljs-string">"a.txt"</span>, &amp;statbuf);<br>    <span class="hljs-keyword">if</span>(ret == <span class="hljs-number">-1</span>){<br>        perror(<span class="hljs-string">"stat"</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>    }<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"size: %ld\n"</span>, statbuf.st_size);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>}<br></code></pre></td></tr></tbody></table></figure>
+<p>创建软链接</p>
+<figure class="highlight stylus"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus">ln -s <span class="hljs-selector-tag">a</span><span class="hljs-selector-class">.txt</span> <span class="hljs-selector-tag">b</span>.txt<br></code></pre></td></tr></tbody></table></figure>
+<p>创建出软链接 b.txt ，指向了 a.txt</p>
+<figure class="highlight apache"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">lrwxrwxrwx</span> <span class="hljs-number">1</span> root root    <span class="hljs-number">5</span> Apr  <span class="hljs-number">3</span> <span class="hljs-number">16</span>:<span class="hljs-number">41</span> b.txt -&gt; a.txt<br></code></pre></td></tr></tbody></table></figure>
+<p>用 <code>stat b.txt</code> 查看信息</p>
+<figure class="highlight apache"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs apache">  <span class="hljs-attribute">File</span>: ‘b.txt’ -&gt; ‘a.txt’<br>  <span class="hljs-attribute">Size</span>: <span class="hljs-number">5</span>               Blocks: <span class="hljs-number">0</span>          IO Block: <span class="hljs-number">4096</span>   symbolic link<br><span class="hljs-attribute">Device</span>: fd01h/<span class="hljs-number">64769</span>d    Inode: <span class="hljs-number">658601</span>      Links: <span class="hljs-number">1</span><br><span class="hljs-attribute">Access</span>: (<span class="hljs-number">0777</span>/lrwxrwxrwx)  Uid: (    <span class="hljs-number">0</span>/    root)   Gid: (    <span class="hljs-number">0</span>/    root)<br><span class="hljs-attribute">Access</span>: <span class="hljs-number">2022</span>-<span class="hljs-number">04</span>-<span class="hljs-number">03</span> <span class="hljs-number">16</span>:<span class="hljs-number">41</span>:<span class="hljs-number">44</span>.<span class="hljs-number">509931636</span> +<span class="hljs-number">0800</span><br><span class="hljs-attribute">Modify</span>: <span class="hljs-number">2022</span>-<span class="hljs-number">04</span>-<span class="hljs-number">03</span> <span class="hljs-number">16</span>:<span class="hljs-number">41</span>:<span class="hljs-number">44</span>.<span class="hljs-number">412929931</span> +<span class="hljs-number">0800</span><br><span class="hljs-attribute">Change</span>: <span class="hljs-number">2022</span>-<span class="hljs-number">04</span>-<span class="hljs-number">03</span> <span class="hljs-number">16</span>:<span class="hljs-number">41</span>:<span class="hljs-number">44</span>.<span class="hljs-number">412929931</span> +<span class="hljs-number">0800</span><br> <span class="hljs-attribute">Birth</span>: -<br></code></pre></td></tr></tbody></table></figure>
+<p>用 <code>stat</code> 获取软链接文件的信息，其实获取的是软链接 b.txt 指向的 a.txt 的信息，如果要获取 软链接 b.txt 的信息就要用 <code>lstat</code> 。</p>
+<h3 id="345-模拟实现-ls-l-命令"><a class="markdownIt-Anchor" href="#345-模拟实现-ls-l-命令"></a> 3.4.5 模拟实现 ls -l 命令</h3>
+<p>模拟实现 ls-l 命令的程序代码：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/huyup1e2n3g/WebServer/blob/main/code/lesson1.25/ls-l.c">ls-l.c</a></p>
+<h3 id="346-文件属性操作函数"><a class="markdownIt-Anchor" href="#346-文件属性操作函数"></a> 3.4.6 文件属性操作函数</h3>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// 判断文件的权限或判断文件是否存在</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">access</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *pathname, <span class="hljs-type">int</span> mode)</span>;<br><span class="hljs-comment">// 修改文件的权限</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">chmod</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *filename, <span class="hljs-type">int</span> mode)</span>;<br><span class="hljs-comment">// 修改文件的所有者或者所在组</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">chown</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *path, <span class="hljs-type">uid_t</span> owner, <span class="hljs-type">gid_t</span> group)</span>;<br><span class="hljs-comment">// 缩减或扩展文件的大小</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">truncate</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *path, <span class="hljs-type">off_t</span> length)</span>;<br></code></pre></td></tr></tbody></table></figure>
+<p>查看说明文档：</p>
+<figure class="highlight apache"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">man</span> <span class="hljs-number">2</span> access<br><span class="hljs-attribute">man</span> <span class="hljs-number">2</span> chmod<br><span class="hljs-attribute">man</span> <span class="hljs-number">2</span> chown<br><span class="hljs-attribute">man</span> <span class="hljs-number">2</span> truncate<br></code></pre></td></tr></tbody></table></figure>
+<h4 id="3461-access函数"><a class="markdownIt-Anchor" href="#3461-access函数"></a> 3.4.6.1 access函数</h4>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-type">int</span> <span class="hljs-title function_">access</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *pathname, <span class="hljs-type">int</span> mode)</span>;<br>		作用：判断某个文件是否有某个权限，或者判断文件是否存在<br>    参数：<br>      - pathname：判断的文件路径<br>      - mode：<br>      	R_OK: 判断是否有读权限<br>        W_OK: 判断是否有写权限<br>        X_OK: 判断是否有执行权限<br>        F_OK: 判断文件是否存在<br>		返回值：<br>      成功：返回 <span class="hljs-number">0</span><br>      失败：返回 <span class="hljs-number">-1</span><br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// access.c</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> {<br>    <span class="hljs-comment">// 判断文件是否存在</span><br>    <span class="hljs-type">int</span> ret = access(<span class="hljs-string">"a.txt"</span>, F_OK);<br>    <span class="hljs-keyword">if</span>(ret == <span class="hljs-number">-1</span>){<br>        perror(<span class="hljs-string">"access"</span>);<br>    }<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"文件存在\n"</span>);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>}<br></code></pre></td></tr></tbody></table></figure>
+<h4 id="3462-chmod函数"><a class="markdownIt-Anchor" href="#3462-chmod函数"></a> 3.4.6.2 chmod函数</h4>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/stat.h&gt;</span></span><br><span class="hljs-type">int</span> <span class="hljs-title function_">chmod</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *path, <span class="hljs-type">mode_t</span> mode)</span>;<br>		作用：修改文件的权限<br>    参数：<br>      - pathname: 需要修改的文件的路径<br>      - <span class="hljs-type">mode_t</span>: 需要修改的权限值，八进制的数<br>    返回值：<br>      成功：返回 <span class="hljs-number">0</span><br>      失败：返回 <span class="hljs-number">-1</span><br>        <br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// chmod.c</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/stat.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>{<br>  	<span class="hljs-comment">// 修改文件权限</span><br>    <span class="hljs-type">int</span> ret = chmod(<span class="hljs-string">"a.txt"</span>, <span class="hljs-number">0775</span>);<br>    <span class="hljs-keyword">if</span>(ret == <span class="hljs-number">-1</span>){<br>        perror(<span class="hljs-string">"chmod"</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>    }<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>}<br></code></pre></td></tr></tbody></table></figure>
+<p>修改前：</p>
+<figure class="highlight tap"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs tap">-rw-r--r--<span class="hljs-number"> 1 </span>root root  <span class="hljs-number"> 14 </span>Apr <span class="hljs-number"> 4 </span>15:52 a.txt<br></code></pre></td></tr></tbody></table></figure>
+<p>修改后：</p>
+<figure class="highlight tap"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs tap">-rwxrwxr-x<span class="hljs-number"> 1 </span>root root  <span class="hljs-number"> 14 </span>Apr <span class="hljs-number"> 4 </span>15:52 a.txt<br></code></pre></td></tr></tbody></table></figure>
+<h4 id="3463-truncate函数"><a class="markdownIt-Anchor" href="#3463-truncate函数"></a> 3.4.6.3 truncate函数</h4>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-type">int</span> <span class="hljs-title function_">truncate</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *path, <span class="hljs-type">off_t</span> length)</span>;<br>		作用：缩减或扩展文件的尺寸至指定的大小<br>    参数：<br>      - path: 需要修改的文件的路径<br>      - length: 需要最终文件变成的大小<br>    返回值：<br>      成功：返回 <span class="hljs-number">0</span><br>      失败：返回 <span class="hljs-number">-1</span><br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// truncate.c</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>{<br>    <span class="hljs-comment">// 扩大文件大小</span><br>    <span class="hljs-type">int</span> ret = truncate(<span class="hljs-string">"b.txt"</span>, <span class="hljs-number">20</span>);<br>    <span class="hljs-keyword">if</span>(ret == <span class="hljs-number">-1</span>){<br>        perror(<span class="hljs-string">"truncate"</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>    }<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>}<br></code></pre></td></tr></tbody></table></figure>
+<p>扩展前：</p>
+<figure class="highlight tap"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs tap">-rw-r--r--<span class="hljs-number"> 1 </span>root root  <span class="hljs-number"> 13 </span>Apr <span class="hljs-number"> 4 </span>16:03 b.txt<br></code></pre></td></tr></tbody></table></figure>
+<p>扩展后：</p>
+<figure class="highlight tap"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs tap">-rw-r--r--<span class="hljs-number"> 1 </span>root root  <span class="hljs-number"> 20 </span>Apr <span class="hljs-number"> 4 </span>16:03 b.txt<br></code></pre></td></tr></tbody></table></figure>
+<h3 id="347-目录操作函数"><a class="markdownIt-Anchor" href="#347-目录操作函数"></a> 3.4.7 目录操作函数</h3>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// 创建目录</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">mkdir</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *pathname, <span class="hljs-type">mode_t</span> mode)</span>;<br><span class="hljs-comment">// 删除空目录</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">rmdir</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *pathname)</span>;<br><span class="hljs-comment">// 重命名目录</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">rename</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *oldpath, <span class="hljs-type">const</span> <span class="hljs-type">char</span> *newpath)</span>; <br><span class="hljs-comment">// 更改当前的目录</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">chdir</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *path)</span>;<br><span class="hljs-comment">// 获取当前的路径</span><br><span class="hljs-type">char</span> *<span class="hljs-title function_">getcwd</span><span class="hljs-params">(<span class="hljs-type">char</span> *buf, <span class="hljs-type">size_t</span> size)</span>;<br></code></pre></td></tr></tbody></table></figure>
+<p>查看说明文档</p>
+<figure class="highlight stata"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stata"><span class="hljs-keyword">man</span> 2 <span class="hljs-keyword">mkdir</span><br></code></pre></td></tr></tbody></table></figure>
+<h4 id="3471-mkdir函数"><a class="markdownIt-Anchor" href="#3471-mkdir函数"></a> 3.4.7.1 mkdir函数</h4>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/stat.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-type">int</span> <span class="hljs-title function_">mkdir</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *pathname, <span class="hljs-type">mode_t</span> mode)</span>;<br>		作用：创建一个目录<br>    参数：<br>      - pathname: 创建的目录的路径<br>      - mode: 权限，八进制的数<br>    返回值：<br>    	成功：返回 <span class="hljs-number">0</span><br>      失败：返回 <span class="hljs-number">-1</span>   <br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// mkdir.c</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/stat.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>{<br>    <span class="hljs-comment">// 创建一个 aaa 目录</span><br>    <span class="hljs-type">int</span> ret = mkdir(<span class="hljs-string">"aaa"</span>, <span class="hljs-number">0777</span>);<br>    <span class="hljs-keyword">if</span>(ret == <span class="hljs-number">-1</span>){<br>        perror(<span class="hljs-string">"mkdir"</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>    }<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>}<br></code></pre></td></tr></tbody></table></figure>
+<p>生成 aaa 目录：</p>
+<figure class="highlight apache"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">drwxr</span>-xr-x <span class="hljs-number">2</span> root root <span class="hljs-number">4096</span> Apr  <span class="hljs-number">4</span> <span class="hljs-number">16</span>:<span class="hljs-number">20</span> aaa<br></code></pre></td></tr></tbody></table></figure>
+<h4 id="3472-rename函数"><a class="markdownIt-Anchor" href="#3472-rename函数"></a> 3.4.7.2 rename函数</h4>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-type">int</span> <span class="hljs-title function_">rename</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *oldpath, <span class="hljs-type">const</span> <span class="hljs-type">char</span> *newpath)</span>;<br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// rename.c</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>{<br>    <span class="hljs-comment">// 将 aaa 目录改名为 bbb</span><br>    <span class="hljs-type">int</span> ret = rename(<span class="hljs-string">"aaa"</span>, <span class="hljs-string">"bbb"</span>);<br>    <span class="hljs-keyword">if</span>(ret == <span class="hljs-number">-1</span>){<br>        perror(<span class="hljs-string">"rename"</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>    }<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;   <br>}<br></code></pre></td></tr></tbody></table></figure>
+<h4 id="3473-chdir函数"><a class="markdownIt-Anchor" href="#3473-chdir函数"></a> 3.4.7.3 chdir函数</h4>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-type">int</span> <span class="hljs-title function_">chdir</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *path)</span>;<br>		作用：修改进程的工作目录<br>    	比如在 /home/nowcoder 启动了一个可执行程序 a.out ，进程的工作目录就是 /home/nowcoder<br>    参数：<br>      - path: 需要修改的工作目录<br></code></pre></td></tr></tbody></table></figure>
+<h4 id="3474-getcwd函数"><a class="markdownIt-Anchor" href="#3474-getcwd函数"></a> 3.4.7.4 getcwd函数</h4>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-type">char</span> *<span class="hljs-title function_">getcwd</span><span class="hljs-params">(<span class="hljs-type">char</span> *buf, <span class="hljs-type">size_t</span> size)</span>;<br>		作用：获取当前工作目录<br>    参数：<br>      - buf: 存储的路径，指向的是一个数组（传出参数）<br>      - size: 数组的大小<br>    返回值：<br>      返回的指向的一块内存，这个数据就是第一个参数<br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// chdir.c</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/stat.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;fcntl.h&gt;</span></span><br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>{<br>    <span class="hljs-comment">// 获取当前的工作目录</span><br>    <span class="hljs-type">char</span> buf[<span class="hljs-number">128</span>];<br>    getcwd(buf, <span class="hljs-keyword">sizeof</span>(buf));<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"当前的工作目录是：%s\n"</span>, buf);<br><br>    <span class="hljs-comment">// 修改工作目录</span><br>    <span class="hljs-type">int</span> ret = chdir(<span class="hljs-string">"/root/Linux/lesson1.27/bbb"</span>);<br>    <span class="hljs-keyword">if</span>(ret == <span class="hljs-number">-1</span>){<br>        perror(<span class="hljs-string">"chdir"</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>    }<br><br>    <span class="hljs-comment">// 创建一个新的文件</span><br>    <span class="hljs-type">int</span> fd = open(<span class="hljs-string">"chdir.txt"</span>, O_CREAT | O_RDWR, <span class="hljs-number">0664</span>);<br>    <span class="hljs-keyword">if</span>(fd == <span class="hljs-number">-1</span>){<br>        perror(<span class="hljs-string">"open"</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>    }<br>    <span class="hljs-comment">// 关闭文件</span><br>    close(fd);<br><br>    <span class="hljs-comment">// 获取当前的工作目录</span><br>    <span class="hljs-type">char</span> buf1[<span class="hljs-number">128</span>];<br>    getcwd(buf1, <span class="hljs-keyword">sizeof</span>(buf1));<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"当前的工作目录是：%s\n"</span>, buf1);<br><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>}<br></code></pre></td></tr></tbody></table></figure>
+<h3 id="348-目录遍历函数"><a class="markdownIt-Anchor" href="#348-目录遍历函数"></a> 3.4.8 目录遍历函数</h3>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// 打开目录</span><br>DIR *<span class="hljs-title function_">opendir</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *name)</span>;<br><span class="hljs-comment">// 读取目录里的内容</span><br><span class="hljs-keyword">struct</span> dirent *<span class="hljs-title function_">readdir</span><span class="hljs-params">(DIR *dirp)</span>;<br><span class="hljs-comment">// 关闭目录</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">closedir</span><span class="hljs-params">(DIR *dirp)</span>;<br></code></pre></td></tr></tbody></table></figure>
+<p>查看说明文档</p>
+<figure class="highlight apache"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">man</span> <span class="hljs-number">3</span> opendir<br></code></pre></td></tr></tbody></table></figure>
+<h4 id="3481-opendir函数"><a class="markdownIt-Anchor" href="#3481-opendir函数"></a> 3.4.8.1 opendir函数</h4>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;dirent.h&gt;</span></span><br>DIR *<span class="hljs-title function_">opendir</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *name)</span>;<br>		参数：<br>      - name: 需要打开的目录的名称<br>    返回值：<br>      DIR * 类型，理解为目录流<br>      错误返回 <span class="hljs-literal">NULL</span><br></code></pre></td></tr></tbody></table></figure>
+<h4 id="3482-readdir函数"><a class="markdownIt-Anchor" href="#3482-readdir函数"></a> 3.4.8.2 readdir函数</h4>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;dirent.h&gt;</span></span><br><span class="hljs-keyword">struct</span> dirent *<span class="hljs-title function_">readdir</span><span class="hljs-params">(DIR *dirp)</span>;<br>		作用：读取目录中的数据‘<br>    参数：dirp 是 opendir 返回的结果<br>    返回值：<br>      	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">dirent</span> 代表读取到的文件的信息</span><br><span class="hljs-class">        读取到了末尾或者失败了，返回<span class="hljs-title">NULL</span></span><br></code></pre></td></tr></tbody></table></figure>
+<p>dirent 结构体</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">dirent</span> {</span><br>  	<span class="hljs-comment">// 此目录进入点的inode</span><br>		<span class="hljs-type">ino_t</span>		d_ino;       <span class="hljs-comment">/* inode number */</span><br>    <span class="hljs-comment">// 目录文件开头至此目录进入点的位移</span><br>  	<span class="hljs-type">off_t</span>   d_off;       <span class="hljs-comment">/* not an offset; see NOTES */</span><br>    <span class="hljs-comment">// d_name 的长度，不包含 NULL 字符</span><br> 		<span class="hljs-type">unsigned</span> <span class="hljs-type">short</span> d_reclen;    <span class="hljs-comment">/* length of this record */</span><br>    <span class="hljs-comment">// d_name 所指的文件类型</span><br> 		<span class="hljs-type">unsigned</span> <span class="hljs-type">char</span>  d_type;      <span class="hljs-comment">/* type of file; not supported by all file system types */</span><br>    <span class="hljs-comment">// 文件名</span><br>  	<span class="hljs-type">char</span>		d_name[<span class="hljs-number">256</span>]; <span class="hljs-comment">/* filename */</span><br>};<br></code></pre></td></tr></tbody></table></figure>
+<p>d_type</p>
+<figure class="highlight livecodeserver"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver">DT_BLK      This is <span class="hljs-keyword">a</span> block device.			块设备<br>DT_CHR      This is <span class="hljs-keyword">a</span> <span class="hljs-keyword">character</span> device.	字符设备<br>DT_DIR      This is <span class="hljs-keyword">a</span> <span class="hljs-built_in">directory</span>.				目录<br>DT_FIFO     This is <span class="hljs-keyword">a</span> named pipe (FIFO).	软连接<br>DT_LNK      This is <span class="hljs-keyword">a</span> symbolic link.			管道<br>DT_REG      This is <span class="hljs-keyword">a</span> regular <span class="hljs-built_in">file</span>.				件<br>DT_SOCK     This is <span class="hljs-keyword">a</span> UNIX domain <span class="hljs-built_in">socket</span>.	套普通文接字<br>DT_UNKNOWN  The <span class="hljs-built_in">file</span> type is unknown.			未知<br></code></pre></td></tr></tbody></table></figure>
+<h4 id="3483-closedir函数"><a class="markdownIt-Anchor" href="#3483-closedir函数"></a> 3.4.8.3 closedir函数</h4>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;dirent.h&gt;</span></span><br><span class="hljs-type">int</span> <span class="hljs-title function_">closedir</span><span class="hljs-params">(DIR *dirp)</span>;<br>		作用：关闭目录<br></code></pre></td></tr></tbody></table></figure>
+<p>遍历目录下文件数量程序代码：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/huyup1e2n3g/WebServer/blob/main/code/lesson1.28/readFileNum.c">readFileNum.c</a></p>
+<h3 id="349-dup-dup2-函数"><a class="markdownIt-Anchor" href="#349-dup-dup2-函数"></a> 3.4.9 dup、dup2 函数</h3>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// 复制文件描述符</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">dup</span><span class="hljs-params">(<span class="hljs-type">int</span> oldfd)</span>; <br><span class="hljs-comment">// 重定向文件描述符</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">dup2</span><span class="hljs-params">(<span class="hljs-type">int</span> oldfd, <span class="hljs-type">int</span> newfd)</span>; <br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-type">int</span> <span class="hljs-title function_">dup</span><span class="hljs-params">(<span class="hljs-type">int</span> oldfd)</span>;<br>		作用：复制一个新的文件描述符<br>    fd = <span class="hljs-number">3</span>, <span class="hljs-type">int</span> fd1 = dup(fd);<br>		fd 指向的是 a.txt，fd1 也是指向 a.txt<br>    从空闲的文件描述符中找一个最小的，作为新的拷贝的文件描述符<br><span class="hljs-type">int</span> <span class="hljs-title function_">dup2</span><span class="hljs-params">(<span class="hljs-type">int</span> oldfd, <span class="hljs-type">int</span> newfd)</span>;<br>  	作用：重定向文件描述符<br>    oldfd 指向 a.txt, newfd 指向 b.txt<br>    调用函数成功后：newfd 和 b.txt 做 close, newfd 指向了 a.txt<br>    oldfd 必须是一个有效的文件描述符<br>    oldfd 和 newfd 值相同，相当于什么都没有做<br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// dup.c</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;fcntl.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/stat.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span><br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> {<br>    <span class="hljs-type">int</span> fd = open(<span class="hljs-string">"a.txt"</span>, O_RDWR | O_CREAT, <span class="hljs-number">0664</span>);<br>    <span class="hljs-type">int</span> fd1 = dup(fd);<br>    <span class="hljs-keyword">if</span>(fd1 == <span class="hljs-number">-1</span>) {<br>        perror(<span class="hljs-string">"dup"</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>    }<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"fd : %d , fd1 : %d\n"</span>, fd, fd1);<br>    close(fd);<br>    <span class="hljs-type">char</span> * str = <span class="hljs-string">"hello,world"</span>;<br>    <span class="hljs-type">int</span> ret = write(fd1, str, <span class="hljs-built_in">strlen</span>(str));<br>    <span class="hljs-keyword">if</span>(ret == <span class="hljs-number">-1</span>) {<br>        perror(<span class="hljs-string">"write"</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>    }<br>    close(fd1);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>}<br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// dup2.c</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/stat.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;fcntl.h&gt;</span></span><br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> {<br>    <span class="hljs-type">int</span> fd = open(<span class="hljs-string">"1.txt"</span>, O_RDWR | O_CREAT, <span class="hljs-number">0664</span>);<br>    <span class="hljs-keyword">if</span>(fd == <span class="hljs-number">-1</span>) {<br>        perror(<span class="hljs-string">"open"</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>    }<br>    <span class="hljs-type">int</span> fd1 = open(<span class="hljs-string">"2.txt"</span>, O_RDWR | O_CREAT, <span class="hljs-number">0664</span>);<br>    <span class="hljs-keyword">if</span>(fd1 == <span class="hljs-number">-1</span>) {<br>        perror(<span class="hljs-string">"open"</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>    }<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"fd : %d, fd1 : %d\n"</span>, fd, fd1);<br>    <span class="hljs-type">int</span> fd2 = dup2(fd, fd1);<br>    <span class="hljs-keyword">if</span>(fd2 == <span class="hljs-number">-1</span>) {<br>        perror(<span class="hljs-string">"dup2"</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>    }<br>    <span class="hljs-comment">// 通过fd1去写数据，实际操作的是1.txt，而不是2.txt</span><br>    <span class="hljs-type">char</span> * str = <span class="hljs-string">"hello, dup2"</span>;<br>    <span class="hljs-type">int</span> len = write(fd1, str, <span class="hljs-built_in">strlen</span>(str));<br>    <span class="hljs-keyword">if</span>(len == <span class="hljs-number">-1</span>) {<br>        perror(<span class="hljs-string">"write"</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>    }<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"fd : %d, fd1 : %d, fd2 : %d\n"</span>, fd, fd1, fd2);<br><br>    close(fd);<br>    close(fd1);<br><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>}<br></code></pre></td></tr></tbody></table></figure>
+<h3 id="3410-fcntl-函数"><a class="markdownIt-Anchor" href="#3410-fcntl-函数"></a> 3.4.10 fcntl 函数</h3>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> <span class="hljs-title function_">fcntl</span><span class="hljs-params">(<span class="hljs-type">int</span> fd, <span class="hljs-type">int</span> cmd, ... <span class="hljs-comment">/* arg */</span> )</span>; <br><span class="hljs-comment">// 复制文件描述符</span><br><span class="hljs-comment">// 设置/获取文件的状态标志</span><br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;fcntl.h&gt;</span></span><br><span class="hljs-type">int</span> <span class="hljs-title function_">fcntl</span><span class="hljs-params">(<span class="hljs-type">int</span> fd, <span class="hljs-type">int</span> cmd, ... <span class="hljs-comment">/* arg */</span> )</span>;<br>    参数：<br>        fd : 表示需要操作的文件描述符<br>        cmd: 表示对文件描述符进行如何操作<br>            - F_DUPFD : 复制文件描述符,复制的是第一个参数fd，得到一个新的文件描述符（返回值）<br>                <span class="hljs-type">int</span> ret = fcntl(fd, F_DUPFD);<br><br>            - F_GETFL : 获取指定的文件描述符文件状态flag<br>              获取的flag和我们通过open函数传递的flag是一个东西。<br><br>            - F_SETFL : 设置文件描述符文件状态flag<br>              必选项：O_RDONLY, O_WRONLY, O_RDWR 不可以被修改<br>              可选性：O_APPEND, O)NONBLOCK<br>                O_APPEND 表示追加数据<br>                NONBLOK 设置成非阻塞<br>        <br>        阻塞和非阻塞：描述的是函数调用的行为。<br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// fcntl.c</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;fcntl.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span><br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> {<br><br>    <span class="hljs-comment">// 1.复制文件描述符</span><br>    <span class="hljs-comment">// int fd = open("1.txt", O_RDONLY);</span><br>    <span class="hljs-comment">// int ret = fcntl(fd, F_DUPFD);</span><br><br>    <span class="hljs-comment">// 2.修改或者获取文件状态flag</span><br>    <span class="hljs-type">int</span> fd = open(<span class="hljs-string">"1.txt"</span>, O_RDWR);<br>    <span class="hljs-keyword">if</span>(fd == <span class="hljs-number">-1</span>) {<br>        perror(<span class="hljs-string">"open"</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>    }<br><br>    <span class="hljs-comment">// 获取文件描述符状态flag</span><br>    <span class="hljs-type">int</span> flag = fcntl(fd, F_GETFL);<br>    <span class="hljs-keyword">if</span>(flag == <span class="hljs-number">-1</span>) {<br>        perror(<span class="hljs-string">"fcntl"</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>    }<br>    flag |= O_APPEND;   <span class="hljs-comment">// flag = flag | O_APPEND</span><br><br>    <span class="hljs-comment">// 修改文件描述符状态的flag，给flag加入O_APPEND这个标记</span><br>    <span class="hljs-type">int</span> ret = fcntl(fd, F_SETFL, flag);<br>    <span class="hljs-keyword">if</span>(ret == <span class="hljs-number">-1</span>) {<br>        perror(<span class="hljs-string">"fcntl"</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>    }<br><br>    <span class="hljs-type">char</span> * str = <span class="hljs-string">"nihao"</span>;<br>    write(fd, str, <span class="hljs-built_in">strlen</span>(str));<br><br>    close(fd);<br><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/" class="category-chain-item">👨🏻‍💻code</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/%E9%A1%B9%E7%9B%AE/" class="category-chain-item">项目</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/%E9%A1%B9%E7%9B%AE/webserver/" class="category-chain-item">webserver</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/%E9%A1%B9%E7%9B%AE/webserver/1-%E7%AC%AC%E4%B8%80%E7%AB%A0/" class="category-chain-item">1 第一章</a>
+  
+  
+
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>总笔记</div>
+      <div>https://zeefan1555.github.io/posts/4280/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>zeefan</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年9月5日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2022年9月7日</div>
+        </div>
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/11990/" title="1.1-1.2 GCC">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">1.1-1.2 GCC</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/32913/" title="11.完全二叉树的节点个数">
+                        <span class="hidden-mobile">11.完全二叉树的节点个数</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

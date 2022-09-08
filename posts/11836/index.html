@@ -1,0 +1,886 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202206251952371.png">
+  <link rel="icon" href="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202206251952371.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="zeefan">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="1 102.二叉树的层序遍历 力扣题目链接 给你一个二叉树，请你返回其按 层序遍历 得到的节点值。 （即逐层地，从左到右访问所有节点）。   2 思路 需要借用一个辅助数据结构即队列来实现，队列先进先出，符合一层一层遍历的逻辑，而是用栈先进后出适合模拟深度优先遍历也就是递归的逻辑。 而这种层序遍历方式就是图论中的广度优先遍历，只不过我们应用在二叉树上。   广度优先遍历::   加入本层元素,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="5. 二叉树的层序遍历">
+<meta property="og:url" content="https://zeefan1555.github.io/posts/11836/index.html">
+<meta property="og:site_name" content="一杯空气">
+<meta property="og:description" content="1 102.二叉树的层序遍历 力扣题目链接 给你一个二叉树，请你返回其按 层序遍历 得到的节点值。 （即逐层地，从左到右访问所有节点）。   2 思路 需要借用一个辅助数据结构即队列来实现，队列先进先出，符合一层一层遍历的逻辑，而是用栈先进后出适合模拟深度优先遍历也就是递归的逻辑。 而这种层序遍历方式就是图论中的广度优先遍历，只不过我们应用在二叉树上。   广度优先遍历::   加入本层元素,">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210203144842988.png">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008eGmZEly1gnad5itmk8g30iw0cqe83.gif">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210203151058308.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210203151307377.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210203151350500.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210203151439168.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210203151532153.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210203152044855.jpg">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210203153031914.png">
+<meta property="article:published_time" content="2022-09-02T07:19:00.000Z">
+<meta property="article:modified_time" content="2022-09-07T01:42:15.488Z">
+<meta property="article:author" content="zeefan">
+<meta property="article:tag" content="二叉树">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20210203144842988.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>5. 二叉树的层序遍历 - 一杯空气</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.15.6/katex.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"zeefan1555.github.io","root":"/","version":"1.9.1","typing":{"enable":true,"typeSpeed":150,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"Text"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":10},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>一杯空气</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="5. 二叉树的层序遍历"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-09-02 15:19" pubdate>
+          2022年9月2日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          8.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          42 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">5. 二叉树的层序遍历</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2022年9月7日 上午
+                  
+                
+              </p>
+            
+            <div class="markdown-body">
+              
+              <h1 id="1-102二叉树的层序遍历"><a class="markdownIt-Anchor" href="#1-102二叉树的层序遍历"></a> 1 102.二叉树的层序遍历</h1>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-tree-level-order-traversal/">力扣题目链接</a></p>
+<p>给你一个二叉树，请你返回其按 层序遍历 得到的节点值。 （即逐层地，从左到右访问所有节点）。</p>
+<p><img src="https://img-blog.csdnimg.cn/20210203144842988.png" srcset="/img/loading.gif" lazyload alt="102.二叉树的层序遍历"></p>
+<h1 id="2-思路"><a class="markdownIt-Anchor" href="#2-思路"></a> 2 思路</h1>
+<p>需要借用一个辅助数据结构即队列来实现，<strong>队列先进先出，符合一层一层遍历的逻辑，而是用栈先进后出适合模拟深度优先遍历也就是递归的逻辑。</strong></p>
+<p><strong>而这种层序遍历方式就是图论中的广度优先遍历，只不过我们应用在二叉树上。</strong></p>
+<!-- basicblock-start oid="ObsgsmEX6qkHg62d5cXh9pUS" --> 
+<p>广度优先遍历::<br>
+<img src="https://tva1.sinaimg.cn/large/008eGmZEly1gnad5itmk8g30iw0cqe83.gif" srcset="/img/loading.gif" lazyload alt="102二叉树的层序遍历"></p>
+<ol>
+<li>加入本层元素,</li>
+<li>获取本层元素个数,</li>
+<li>逐个弹出本层元素, 并把每个弹出节点的左右孩子加入进来, 直至弹完本层元素</li>
+<li>反复2, 3, (用 while 包住2, 3)</li>
+</ol>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">levelOrder</span>(TreeNode* root) {<br>        queue&lt;TreeNode*&gt; que;<br>        <span class="hljs-keyword">if</span> (root != <span class="hljs-literal">NULL</span>) que.<span class="hljs-built_in">push</span>(root); <span class="hljs-comment">// 加入第一层元素</span><br>        vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; result;<span class="hljs-comment">// 结果集</span><br>        <span class="hljs-keyword">while</span> (!que.<span class="hljs-built_in">empty</span>()) {<br>            <span class="hljs-type">int</span> size = que.<span class="hljs-built_in">size</span>(); <span class="hljs-comment">//  获取本层元素个数, </span><br>            vector&lt;<span class="hljs-type">int</span>&gt; vec;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; size; i++) { <span class="hljs-comment">// 逐个弹出本层元素, 并把每个弹出节点的左右孩子加入进来, 直至弹完本层元素</span><br>                TreeNode* node = que.<span class="hljs-built_in">front</span>();<br>                que.<span class="hljs-built_in">pop</span>();<br>                vec.<span class="hljs-built_in">push_back</span>(node-&gt;val);<br>                <span class="hljs-keyword">if</span> (node-&gt;left) que.<span class="hljs-built_in">push</span>(node-&gt;left);<br>                <span class="hljs-keyword">if</span> (node-&gt;right) que.<span class="hljs-built_in">push</span>(node-&gt;right);<br>            }<span class="hljs-comment">// for 循环出来后, que 中已经是下层元素了. 在进行一次 while 循环后会在获得这层元素, 反复如此, 直至队列为空</span><br>            result.<span class="hljs-built_in">push_back</span>(vec);<br>        }<br>        <span class="hljs-keyword">return</span> result;<br>    }<br>};<br><br></code></pre></td></tr></tbody></table></figure>
+<!-- basicblock-end -->
+<h1 id="3-代码"><a class="markdownIt-Anchor" href="#3-代码"></a> 3 代码</h1>
+<p>其余的十个题</p>
+<h2 id="31-102二叉树的层序遍历本题"><a class="markdownIt-Anchor" href="#31-102二叉树的层序遍历本题"></a> 3.1 102.二叉树的层序遍历(本题)</h2>
+<p>v2, 通过</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">levelOrder</span>(TreeNode* root) {<br>        queue&lt;TreeNode*&gt; que;<br>        <span class="hljs-keyword">if</span>(root != <span class="hljs-literal">NULL</span>) que.<span class="hljs-built_in">push</span>(root);<br>        vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; result;<br>        <span class="hljs-keyword">while</span>(!que.<span class="hljs-built_in">empty</span>()){<br>            <span class="hljs-type">int</span> size = que.<span class="hljs-built_in">size</span>();<br>            vector&lt;<span class="hljs-type">int</span>&gt; vec;<br>            <span class="hljs-keyword">while</span>(size--){<br>                TreeNode* node = que.<span class="hljs-built_in">front</span>();<br>                vec.<span class="hljs-built_in">push_back</span>(node-&gt;val);<span class="hljs-comment">// ❓不用 push "-&gt;val"吗, ❗️需要-&gt;val</span><br>                que.<span class="hljs-built_in">pop</span>();<br>                <span class="hljs-keyword">if</span>(node-&gt;left) que.<span class="hljs-built_in">push</span>(node-&gt;left);<br>                <span class="hljs-keyword">if</span>(node-&gt;right) que.<span class="hljs-built_in">push</span>(node-&gt;right);<br>            }<br>            result.<span class="hljs-built_in">push_back</span>(vec);<br>        }<br>        <span class="hljs-keyword">return</span> result;<br><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
+<h2 id="32-107二叉树的层次遍历ii"><a class="markdownIt-Anchor" href="#32-107二叉树的层次遍历ii"></a> 3.2 107.二叉树的层次遍历II</h2>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-tree-level-order-traversal-ii/">力扣题目链接</a><br>
+给定一个二叉树，返回其节点值自底向上的层次遍历。 （即按从叶子节点所在层到根节点所在的层，逐层从左向右遍历）</p>
+<p><img src="https://img-blog.csdnimg.cn/20210203151058308.png" srcset="/img/loading.gif" lazyload alt="107.二叉树的层次遍历II"></p>
+<p>最后反转一下 result 数组即可</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">// 已通过</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">levelOrderBottom</span>(TreeNode* root) {<br>        queue&lt;TreeNode*&gt; que;<br>        <span class="hljs-keyword">if</span>(root != <span class="hljs-literal">nullptr</span>) que.<span class="hljs-built_in">push</span>(root);<span class="hljs-comment">// 💡que 是 push</span><br>        vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; result;<br>        <span class="hljs-keyword">while</span>(!que.<span class="hljs-built_in">empty</span>()){ <span class="hljs-comment">// ❗️要有!, 是不为空的情况</span><br>            <span class="hljs-type">int</span> size = que.<span class="hljs-built_in">size</span>();<br>            vector&lt;<span class="hljs-type">int</span>&gt; vec;<br>            <span class="hljs-keyword">while</span>(size--){<br>                TreeNode* node = que.<span class="hljs-built_in">front</span>();<br>                que.<span class="hljs-built_in">pop</span>();<br>                vec.<span class="hljs-built_in">push_back</span>(node-&gt;val); <span class="hljs-comment">// ❗️要加入, 别忘了</span><br>                <span class="hljs-keyword">if</span>(node-&gt;left) que.<span class="hljs-built_in">push</span>(node-&gt;left);<br>                <span class="hljs-keyword">if</span>(node-&gt;right) que.<span class="hljs-built_in">push</span>(node-&gt;right);<br>            }<br>            result.<span class="hljs-built_in">push_back</span>(vec);<br>        }<br>        <span class="hljs-built_in">reverse</span>(result.<span class="hljs-built_in">begin</span>(), result.<span class="hljs-built_in">end</span>());<br>        <span class="hljs-keyword">return</span> result;<br><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
+<h2 id="33-199二叉树的右视图"><a class="markdownIt-Anchor" href="#33-199二叉树的右视图"></a> 3.3 199.二叉树的右视图</h2>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-tree-right-side-view/">力扣题目链接</a></p>
+<p>给定一棵二叉树，想象自己站在它的右侧，按照从顶部到底部的顺序，返回从右侧所能看到的节点值。<br>
+<img src="https://img-blog.csdnimg.cn/20210203151307377.png" srcset="/img/loading.gif" lazyload alt="199.二叉树的右视图"></p>
+<p>思路：</p>
+<p>层序遍历的时候，判断是否遍历到单层的最后面的元素，如果是，就放进result数组中，随后返回result就可以了。</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">rightSideView</span><span class="hljs-params">(TreeNode* root)</span> </span>{<br>        queue&lt;TreeNode*&gt; que;<br>        <span class="hljs-keyword">if</span>(root != <span class="hljs-literal">NULL</span>) que.<span class="hljs-built_in">push</span>(root);<br>        vector&lt;<span class="hljs-type">int</span>&gt; result; <span class="hljs-comment">// 💡只需要一个元素, 就只是一维数组就行了</span><br>        <span class="hljs-keyword">while</span>(!que.<span class="hljs-built_in">empty</span>()){<br>            <span class="hljs-type">int</span> size = que.<span class="hljs-built_in">size</span>();<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; size; i++){<br>                TreeNode* node = que.<span class="hljs-built_in">front</span>();<br>                que.<span class="hljs-built_in">pop</span>();<br>                <span class="hljs-keyword">if</span> (i == (size - <span class="hljs-number">1</span>)) result.<span class="hljs-built_in">push_back</span>(node-&gt;val); <span class="hljs-comment">// 💡最后一个元素, 因为下标从 0 开始的</span><br>                <span class="hljs-keyword">if</span>(node-&gt;left) que.<span class="hljs-built_in">push</span>(node-&gt;left);<br>                <span class="hljs-keyword">if</span>(node-&gt;right) que.<span class="hljs-built_in">push</span>(node-&gt;right);<br>            }<br>        }<br>        <span class="hljs-keyword">return</span> result;<br><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
+<h2 id="34-637二叉树的层平均值"><a class="markdownIt-Anchor" href="#34-637二叉树的层平均值"></a> 3.4 637.二叉树的层平均值</h2>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/average-of-levels-in-binary-tree/">力扣题目链接</a><br>
+给定一个非空二叉树, 返回一个由每层节点平均值组成的数组。</p>
+<p><img src="https://img-blog.csdnimg.cn/20210203151350500.png" srcset="/img/loading.gif" lazyload alt="637.二叉树的层平均值"></p>
+<p>思路:</p>
+<p>本题就是层序遍历的时候把一层求个总和在取一个均值<br>
+已通过</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">vector&lt;<span class="hljs-type">double</span>&gt; <span class="hljs-title">averageOfLevels</span><span class="hljs-params">(TreeNode* root)</span> </span>{<br>        queue&lt;TreeNode*&gt; que;<br>        vector&lt;<span class="hljs-type">double</span>&gt; result;<span class="hljs-comment">// ❗️此时的 result 不是 int, 返回值是 double</span><br>        <span class="hljs-keyword">if</span>(root != <span class="hljs-literal">NULL</span>) que.<span class="hljs-built_in">push</span>(root);<br>        <span class="hljs-keyword">while</span>(!que.<span class="hljs-built_in">empty</span>()){<br>            <span class="hljs-type">int</span> size = que.<span class="hljs-built_in">size</span>();<br>            <span class="hljs-type">double</span> sum = <span class="hljs-number">0</span>;<span class="hljs-comment">// ❗️返回值是 double 变量</span><br>            <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; size; i++){<br>                TreeNode* node = que.<span class="hljs-built_in">front</span>();<br>                que.<span class="hljs-built_in">pop</span>();<br>                sum += node-&gt;val;<br>                <span class="hljs-keyword">if</span>(node-&gt;left) que.<span class="hljs-built_in">push</span>(node-&gt;left);<br>                <span class="hljs-keyword">if</span>(node-&gt;right) que.<span class="hljs-built_in">push</span>(node-&gt;right);<br>            }<br>            result.<span class="hljs-built_in">push_back</span>(sum/size);<br>        }<br>        <span class="hljs-keyword">return</span> result;<br><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
+<h2 id="35-429n叉树的层序遍历"><a class="markdownIt-Anchor" href="#35-429n叉树的层序遍历"></a> 3.5 429.N叉树的层序遍历</h2>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/n-ary-tree-level-order-traversal/">力扣题目链接</a></p>
+<p>给定一个 N 叉树，返回其节点值的层序遍历。 (即从左到右，逐层遍历)。</p>
+<p>例如，给定一个 3叉树 :</p>
+<p><img src="https://img-blog.csdnimg.cn/20210203151439168.png" srcset="/img/loading.gif" lazyload alt="429. N叉树的层序遍历|500"></p>
+<p>返回其层序遍历:</p>
+<p>[ [1], [3,2,4], [5,6] ]</p>
+<p>思路:</p>
+<p>这道题依旧是模板题，只不过一个节点有多个孩子了<br>
+把一个节点的所有孩子都加入队列里边就行了</p>
+<!-- basicblock-start oid="ObsbS4edLzulGab31MsUvZ7Z" --> 
+<p>将 n 叉树的所有节点加入到队列中::</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; node-&gt;children.<span class="hljs-built_in">size</span>(); i++) { <span class="hljs-comment">// 将节点所有孩子加入队列</span><br>              <span class="hljs-keyword">if</span> (node-&gt;children[i]) que.<span class="hljs-built_in">push</span>(node-&gt;children[i]);<br>          }<br></code></pre></td></tr></tbody></table></figure>
+<p>多叉树的孩子用<code>-&gt;children</code>表示, 孩子个数用<code>-&gt;children.size()</code><br>
+平时是用-&gt;left ,-&gt;right</p>
+<!-- basicblock-end -->
+<p>已通过</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">levelOrder</span>(Node* root) {<br>        queue&lt;Node*&gt; que;<br>        <span class="hljs-keyword">if</span>(root != <span class="hljs-literal">NULL</span>) que.<span class="hljs-built_in">push</span>(root);<br>        vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; result;<br>        <span class="hljs-keyword">while</span>(!que.<span class="hljs-built_in">empty</span>()){<br>            <span class="hljs-type">int</span> size = que.<span class="hljs-built_in">size</span>();<br>            vector&lt;<span class="hljs-type">int</span>&gt; vec;<br>            <span class="hljs-keyword">while</span>(size--){<br>                Node* node = que.<span class="hljs-built_in">front</span>();<br>                que.<span class="hljs-built_in">pop</span>();<br>                vec.<span class="hljs-built_in">push_back</span>(node-&gt;val);<br>                <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; node-&gt;children.<span class="hljs-built_in">size</span>(); i++){<br>                    <span class="hljs-keyword">if</span>(node-&gt;children[i]) que.<span class="hljs-built_in">push</span>(node-&gt;children[i]);<br>                }<br>            }<br>            result.<span class="hljs-built_in">push_back</span>(vec);<br>        }<br>        <span class="hljs-keyword">return</span> result;<br><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
+<h2 id="36-515在每个树行中找最大值"><a class="markdownIt-Anchor" href="#36-515在每个树行中找最大值"></a> 3.6 515.在每个树行中找最大值</h2>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-largest-value-in-each-tree-row/">力扣题目链接</a></p>
+<p>您需要在二叉树的每一行中找到最大的值。</p>
+<p><img src="https://img-blog.csdnimg.cn/20210203151532153.png" srcset="/img/loading.gif" lazyload alt="515.在每个树行中找最大值"></p>
+<p>思路：</p>
+<p>层序遍历，取每一层的最大值</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">largestValues</span><span class="hljs-params">(TreeNode* root)</span> </span>{<br>        queue&lt;TreeNode*&gt; que;<br>        vector&lt;<span class="hljs-type">int</span>&gt; result;<br>        <span class="hljs-keyword">if</span>(root != <span class="hljs-literal">NULL</span>) que.<span class="hljs-built_in">push</span>(root);<br>        <span class="hljs-keyword">while</span>(!que.<span class="hljs-built_in">empty</span>()){<br>            <span class="hljs-type">int</span> size = que.<span class="hljs-built_in">size</span>();<br>            <span class="hljs-type">int</span> maxValue = INT_MIN;<br>            <span class="hljs-keyword">while</span>(size--){<br>                TreeNode* node = que.<span class="hljs-built_in">front</span>();<br>                que.<span class="hljs-built_in">pop</span>();<br>                maxValue = node-&gt;val &gt; maxValue ? node-&gt;val : maxValue; <span class="hljs-comment">// 💡该层的每一个数都来比较</span><br>                <span class="hljs-keyword">if</span>(node-&gt;left) que.<span class="hljs-built_in">push</span>(node-&gt;left);<br>                <span class="hljs-keyword">if</span>(node-&gt;right) que.<span class="hljs-built_in">push</span>(node-&gt;right);<br>            }<br>            result.<span class="hljs-built_in">push_back</span>(maxValue);<br>        }<br>        <span class="hljs-keyword">return</span> result;<br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
+<!-- basicblock-start oid="Obs4VpTv34hro3xfMo7mbyWl" --> 
+<h2 id="37-116填充每个节点的下一个右侧节点指针"><a class="markdownIt-Anchor" href="#37-116填充每个节点的下一个右侧节点指针"></a> 3.7 116.填充每个节点的下一个右侧节点指针::</h2>
+<!-- basicblock-end -->
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/populating-next-right-pointers-in-each-node/">力扣题目链接</a></p>
+<p>给定一个完美二叉树，其所有叶子节点都在同一层，每个父节点都有两个子节点。二叉树定义如下：</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span> {</span><br>  <span class="hljs-type">int</span> val;<br>  Node *left;<br>  Node *right;<br>  Node *next;<br>}<br></code></pre></td></tr></tbody></table></figure>
+<p>填充它的每个 next 指针，让这个指针指向其下一个右侧节点。如果找不到下一个右侧节点，则将 next 指针设置为 NULL。</p>
+<p>初始状态下，所有&nbsp;next 指针都被设置为 NULL。</p>
+<p><img src="https://img-blog.csdnimg.cn/20210203152044855.jpg" srcset="/img/loading.gif" lazyload alt="116.填充每个节点的下一个右侧节点指针|600"><br>
+思路:<br>
+本题依然是层序遍历，只不过在单层遍历的时候记录一下本层的头部节点，然后在遍历的时候让记录节点的 next 指针指下一个节点就可以了</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++">Node* node = que.<span class="hljs-built_in">front</span>(); <span class="hljs-comment">// 取出队首元素</span><br>que.<span class="hljs-built_in">pop</span>();<br><span class="hljs-comment">// 连接</span><br><span class="hljs-keyword">if</span> (i &lt; size - <span class="hljs-number">1</span>) node-&gt;next = que.<span class="hljs-built_in">front</span>(); <span class="hljs-comment">// 此时的 front 是之前的第二个</span><br></code></pre></td></tr></tbody></table></figure>
+<p>❓那是怎么指向 null 的呢<br>
+💡初始状态下，所有&nbsp;next 指针都被设置为 <code>NULL</code>。(题目说的), 本题中最右侧的节点的 next本来就指向 NULL</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/populating-next-right-pointers-in-each-node/solution/tian-chong-mei-ge-jie-dian-de-xia-yi-ge-you-ce-2-4/">力扣官方题解不错, 看第一种</a></p>
+<h3 id="371-使用层次遍历"><a class="markdownIt-Anchor" href="#371-使用层次遍历"></a> 3.7.1 使用层次遍历</h3>
+<p>没用代码随想录, 用力扣官方题解, 已通过</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">Node* <span class="hljs-title">connect</span><span class="hljs-params">(Node* root)</span> </span>{<br>        queue&lt;Node*&gt; que;<br>        <span class="hljs-keyword">if</span>(root != <span class="hljs-literal">NULL</span>) que.<span class="hljs-built_in">push</span>(root);<br>        <span class="hljs-keyword">while</span>(!que.<span class="hljs-built_in">empty</span>()){<br>            <span class="hljs-type">int</span> size = que.<span class="hljs-built_in">size</span>();<br>            <span class="hljs-comment">// 遍历这一层的所有节点</span><br>            <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; size; i++){<br>                Node* node = que.<span class="hljs-built_in">front</span>(); <span class="hljs-comment">// 取出队首元素</span><br>                que.<span class="hljs-built_in">pop</span>();<br>                <span class="hljs-comment">// 连接</span><br>                <span class="hljs-keyword">if</span> (i &lt; size - <span class="hljs-number">1</span>) node-&gt;next = que.<span class="hljs-built_in">front</span>(); <span class="hljs-comment">// 此时的 front 是之前的第二个, 💡最后一个 node 的 next 本身就是指向 null</span><br>                <span class="hljs-comment">// 扩展下一层节点</span><br>                <span class="hljs-keyword">if</span>(node-&gt;left) que.<span class="hljs-built_in">push</span>(node-&gt;left);<br>                <span class="hljs-keyword">if</span>(node-&gt;right) que.<span class="hljs-built_in">push</span>(node-&gt;right);<br>            }<br>        }<br>        <span class="hljs-keyword">return</span> root;<br><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
+<h3 id="372-使用已有的-next-指针"><a class="markdownIt-Anchor" href="#372-使用已有的-next-指针"></a> 3.7.2 使用已有的 next 指针</h3>
+<p>暂时不做</p>
+<!-- basicblock-start oid="ObsHHyGbzS6j99xXRZdsDUR2" --> 
+<h2 id="38-117填充每个节点的下一个右侧节点指针ii"><a class="markdownIt-Anchor" href="#38-117填充每个节点的下一个右侧节点指针ii"></a> 3.8 117.填充每个节点的下一个右侧节点指针II::</h2>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/populating-next-right-pointers-in-each-node-ii/">力扣题目链接</a></p>
+<!-- basicblock-end -->
+<p>思路：</p>
+<p>这道题目说是二叉树，但116题目说是完整二叉树，其实没有任何差别，一样的代码一样的逻辑一样的味道<br>
+同我上边写的, 编译已通过</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">Node* <span class="hljs-title">connect</span><span class="hljs-params">(Node* root)</span> </span>{<br>        queue&lt;Node*&gt; que;<br>        <span class="hljs-keyword">if</span>(root != <span class="hljs-literal">NULL</span>) que.<span class="hljs-built_in">push</span>(root);<br>        <span class="hljs-keyword">while</span>(!que.<span class="hljs-built_in">empty</span>()){<br>            <span class="hljs-type">int</span> size = que.<span class="hljs-built_in">size</span>();<br>            <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; size; i++){<br>                Node* node = que.<span class="hljs-built_in">front</span>();<br>                que.<span class="hljs-built_in">pop</span>();<br>                <span class="hljs-keyword">if</span>(i &lt; size - <span class="hljs-number">1</span>) node-&gt;next = que.<span class="hljs-built_in">front</span>(); <span class="hljs-comment">// 💡重点</span><br>                <span class="hljs-keyword">if</span>(node-&gt;left) que.<span class="hljs-built_in">push</span>(node-&gt;left);<br>                <span class="hljs-keyword">if</span>(node-&gt;right) que.<span class="hljs-built_in">push</span>(node-&gt;right);<br>            }<br>        }<br>        <span class="hljs-keyword">return</span> root;<br>        <br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
+<!-- basicblock-start oid="ObslzGeoh1X4WX2aMKWO18Bd" --> 
+<h2 id="39-104二叉树的最大深度"><a class="markdownIt-Anchor" href="#39-104二叉树的最大深度"></a> 3.9 104.二叉树的最大深度::</h2>
+<!-- basicblock-end -->
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-depth-of-binary-tree/">力扣题目链接</a></p>
+<p>给定一个二叉树，找出其最大深度。</p>
+<p>二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。</p>
+<p>说明: 叶子节点是指没有子节点的节点。</p>
+<p>示例：</p>
+<p>给定二叉树 [3,9,20,null,null,15,7]，<br>
+<img src="https://img-blog.csdnimg.cn/20210203153031914.png" srcset="/img/loading.gif" lazyload alt="104. 二叉树的最大深度|600"></p>
+<p>返回它的最大深度 3 。</p>
+<p>最大的深度就是二叉树的层数, 在记录每一层size 的下边在记录层数. <strong>每次弹出完一层就+1</strong></p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">int</span> depth = <span class="hljs-number">0</span>;<br>      <span class="hljs-keyword">while</span>(!que.<span class="hljs-built_in">empty</span>()) {<br>          <span class="hljs-type">int</span> size = que.<span class="hljs-built_in">size</span>();<br>          depth++; <span class="hljs-comment">// 记录深度, for 循环出来就是弹完一层了 </span><br>          <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; size; i++) { <br>              TreeNode* node = que.<span class="hljs-built_in">front</span>();<br>              que.<span class="hljs-built_in">pop</span>();<br>              <span class="hljs-keyword">if</span> (node-&gt;left) que.<span class="hljs-built_in">push</span>(node-&gt;left);<br>              <span class="hljs-keyword">if</span> (node-&gt;right) que.<span class="hljs-built_in">push</span>(node-&gt;right);<br>          }<br></code></pre></td></tr></tbody></table></figure>
+<p>代码如下: 已通过</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">maxDepth</span><span class="hljs-params">(TreeNode* root)</span> </span>{<br>        queue&lt;TreeNode*&gt; que;<br>        <span class="hljs-keyword">if</span>(root != <span class="hljs-literal">NULL</span>) que.<span class="hljs-built_in">push</span>(root);<br>        <span class="hljs-type">int</span> depth = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span>(!que.<span class="hljs-built_in">empty</span>()){<br>            <span class="hljs-type">int</span> size = que.<span class="hljs-built_in">size</span>();<br>            depth += <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">while</span>(size--){<br>                TreeNode* node = que.<span class="hljs-built_in">front</span>();<br>                que.<span class="hljs-built_in">pop</span>();<br>                <span class="hljs-keyword">if</span>(node-&gt;left) que.<span class="hljs-built_in">push</span>(node-&gt;left);<br>                <span class="hljs-keyword">if</span>(node-&gt;right) que.<span class="hljs-built_in">push</span>(node-&gt;right);<br>            }<br>        }<br>        <span class="hljs-keyword">return</span> depth;<br><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
+<!-- basicblock-start oid="ObsNTlSW223rhUXzpmYNUaGz" --> 
+<h2 id="310-111二叉树的最小深度"><a class="markdownIt-Anchor" href="#310-111二叉树的最小深度"></a> 3.10 111.二叉树的最小深度::</h2>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-depth-of-binary-tree/">力扣题目链接</a></p>
+<p>相对于 104.二叉树的最大深度 ，本题还也<strong>继续使用层序</strong>遍历的方式来解决，思路是一样的。<br>
+❓不是很懂, 💡画图解决了看下边</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">if</span> (!node-&gt;left &amp;&amp; !node-&gt;right) { <span class="hljs-comment">// 当左右孩子都为空的时候，说明是最低点的一层了，退出</span><br>    <span class="hljs-keyword">return</span> depth;<br>}<br><br></code></pre></td></tr></tbody></table></figure>
+<p><strong>需要注意的是，只有当左右孩子都为空的时候，才说明遍历的最低点了。如果其中一个孩子为空则不是最低点</strong><br>
+![[5. 二叉树的层序遍历 2022-09-05 22.47.29.excalidraw]]</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">minDepth</span><span class="hljs-params">(TreeNode* root)</span> </span>{<br>        <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">NULL</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> depth = <span class="hljs-number">0</span>;<br>        queue&lt;TreeNode*&gt; que;<br>        que.<span class="hljs-built_in">push</span>(root);<br>        <span class="hljs-keyword">while</span>(!que.<span class="hljs-built_in">empty</span>()) {<br>            <span class="hljs-type">int</span> size = que.<span class="hljs-built_in">size</span>();<br>            depth++; <span class="hljs-comment">// 记录遍历的层数</span><br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; size; i++) {<br>                TreeNode* node = que.<span class="hljs-built_in">front</span>();<br>                que.<span class="hljs-built_in">pop</span>();<br>                <span class="hljs-keyword">if</span> (node-&gt;left) que.<span class="hljs-built_in">push</span>(node-&gt;left);<br>                <span class="hljs-keyword">if</span> (node-&gt;right) que.<span class="hljs-built_in">push</span>(node-&gt;right);<br>                <span class="hljs-keyword">if</span> (!node-&gt;left &amp;&amp; !node-&gt;right) { <span class="hljs-comment">// 当左右孩子都为空的时候，说明是最低点的一层了，退出</span><br>                    <span class="hljs-keyword">return</span> depth;<br>                }<br>            }<br>        }<br>        <span class="hljs-keyword">return</span> depth;<br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
+<!-- basicblock-start --> 
+<p>如何判断左右节点是否为空::</p>
+<ol>
+<li>不为空: <code>if(node-&gt;left) que.push(node-&gt;left</code>), ❓💡node-&gt;left 如果不是空, 会返回 1</li>
+<li>为空:     <code>if (!node-&gt;left &amp;&amp; !node-&gt;right) return depth</code>, 💡同理</li>
+</ol>
+<!-- basicblock-end -->
+<!-- basicblock-end -->
+<hr>
+<p><strong>其他资料</strong></p>
+ <!-- basicblock-start oid="ObsrJa0fCCW6D2bZN7WD0iw7" deck = "👨🏻‍💻code::数据结构与算法::代码随想录::二叉树::5. 二叉树的层序遍历.md" --> 
+<p>#历史记录::<br>
+2022/09/02: 5. <a target="_blank" rel="noopener" href="http://xn--4kq24jzfy32af2chru20x4x9b.md">二叉树的层序遍历.md</a>: 思路挺简单的, 多练吧<br>
+2022/09/05: 比较顺利, 中间干了其他一些事, 所以时间长了, 下次把其余九道题, 单独做成文件 deck⏱0-20</p>
+<!-- basicblock-end --> 
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/" class="category-chain-item">👨🏻‍💻code</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" class="category-chain-item">数据结构与算法</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95/" class="category-chain-item">代码随想录</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95/%E4%BA%8C%E5%8F%89%E6%A0%91/" class="category-chain-item">二叉树</a>
+  
+  
+
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/">#二叉树</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>5. 二叉树的层序遍历</div>
+      <div>https://zeefan1555.github.io/posts/11836/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>zeefan</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年9月2日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2022年9月7日</div>
+        </div>
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/42763/" title="6. 反转二叉树">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">6. 反转二叉树</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/7027/" title="4. 二叉树的统一迭代法">
+                        <span class="hidden-mobile">4. 二叉树的统一迭代法</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
