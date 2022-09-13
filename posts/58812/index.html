@@ -16,16 +16,16 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="0.1 两两交换链表中的节点 力扣题目链接 给定一个链表，两两交换其中相邻的节点，并返回交换后的链表。 你不能只是单纯的改变节点内部的值，而是需要实际的进行节点交换。   1 思路 使用虚拟头结点 要想交换两个节点, 首先要把 cur 指针指向两节点的前一个节点 ![[5. 两两交换链表中的节点 2022-08-11 23.49.26.excalidraw]] 有关 whil 终止条件的判断 !">
+    <meta name="description" content="1 两两交换链表中的节点 力扣题目链接 给定一个链表，两两交换其中相邻的节点，并返回交换后的链表。 你不能只是单纯的改变节点内部的值，而是需要实际的进行节点交换。     2 思路::  使用虚拟头结点 要想交换两个节点, 首先要把 cur 指针指向两节点的前一个节点 ![[5. 两两交换链表中的节点 2022-08-11 23.49.26.excalidraw]] 有关 while 终止条件的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="5. 两两交换链表中的节点">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/58812/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="0.1 两两交换链表中的节点 力扣题目链接 给定一个链表，两两交换其中相邻的节点，并返回交换后的链表。 你不能只是单纯的改变节点内部的值，而是需要实际的进行节点交换。   1 思路 使用虚拟头结点 要想交换两个节点, 首先要把 cur 指针指向两节点的前一个节点 ![[5. 两两交换链表中的节点 2022-08-11 23.49.26.excalidraw]] 有关 whil 终止条件的判断 !">
+<meta property="og:description" content="1 两两交换链表中的节点 力扣题目链接 给定一个链表，两两交换其中相邻的节点，并返回交换后的链表。 你不能只是单纯的改变节点内部的值，而是需要实际的进行节点交换。     2 思路::  使用虚拟头结点 要想交换两个节点, 首先要把 cur 指针指向两节点的前一个节点 ![[5. 两两交换链表中的节点 2022-08-11 23.49.26.excalidraw]] 有关 while 终止条件的">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://code-thinking.cdn.bcebos.com/pics/24.%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9-%E9%A2%98%E6%84%8F.jpg">
 <meta property="article:published_time" content="2022-08-11T14:23:00.000Z">
-<meta property="article:modified_time" content="2022-08-12T01:46:28.333Z">
+<meta property="article:modified_time" content="2022-09-13T15:18:37.590Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://code-thinking.cdn.bcebos.com/pics/24.%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9-%E9%A2%98%E6%84%8F.jpg">
@@ -224,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          971 字
+          1.5k 字
         
       </span>
     
@@ -235,7 +235,7 @@
         
         
         
-          5 分钟
+          8 分钟
         
       </span>
     
@@ -286,30 +286,37 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年8月12日 上午
+                    本文最后更新于：2022年9月13日 晚上
                   
                 
               </p>
             
             <div class="markdown-body">
               
-              <h2 id="01-两两交换链表中的节点"><a class="markdownIt-Anchor" href="#01-两两交换链表中的节点"></a> 0.1 两两交换链表中的节点</h2>
+              <h1 id="1-两两交换链表中的节点"><a class="markdownIt-Anchor" href="#1-两两交换链表中的节点"></a> 1 两两交换链表中的节点</h1>
 <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/swap-nodes-in-pairs/">力扣题目链接</a></p>
 <p>给定一个链表，两两交换其中相邻的节点，并返回交换后的链表。<br>
 你不能只是单纯的改变节点内部的值，而是需要实际的进行节点交换。<br>
 <img src="https://code-thinking.cdn.bcebos.com/pics/24.%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9-%E9%A2%98%E6%84%8F.jpg" srcset="/img/loading.gif" lazyload alt="24.两两交换链表中的节点-题意|500"></p>
-<h1 id="1-思路"><a class="markdownIt-Anchor" href="#1-思路"></a> 1 思路</h1>
+<!-- basicblock-start oid="Obsm7Zbax7XAcUZ1TeeM3sor" --> 
+<h1 id="2-思路"><a class="markdownIt-Anchor" href="#2-思路"></a> 2 思路::</h1>
+<!-- basicblock-end -->
 <p>使用虚拟头结点</p>
 <p>要想交换两个节点, 首先要把 cur 指针指向两节点的前一个节点</p>
 <p>![[5. 两两交换链表中的节点 2022-08-11 23.49.26.excalidraw]]<br>
-有关 whil 终止条件的判断<br>
+有关 while 终止条件的判断<br>
 ![[5. 两两交换链表中的节点 2022-08-12 00.20.24.excalidraw]]</p>
-<h1 id="2-代码"><a class="markdownIt-Anchor" href="#2-代码"></a> 2 代码</h1>
-<p>编译已通过</p>
+<h1 id="3-代码"><a class="markdownIt-Anchor" href="#3-代码"></a> 3 代码</h1>
+<p>v1, 编译已通过</p>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">ListNode* <span class="hljs-title">swapPairs</span><span class="hljs-params">(ListNode* head)</span> </span>{<br>        ListNode* dummyHead = <span class="hljs-keyword">new</span> <span class="hljs-built_in">ListNode</span>(<span class="hljs-number">0</span>); <span class="hljs-comment">// ❗️dummyHead 前需要 ListNode*</span><br>        dummyHead-&gt;next = head;<br>        ListNode* cur = dummyHead;<br>        <span class="hljs-keyword">while</span> (cur-&gt;next!=<span class="hljs-literal">nullptr</span> &amp;&amp; cur-&gt;next-&gt;next!=<span class="hljs-literal">nullptr</span>){ <br>        <span class="hljs-comment">// 💡如果是链表是偶数,最后cur跑到的下一位是 null,如果是奇数位,cur-&gt;next-&gt;next是 null. </span><br>        <span class="hljs-comment">// 两者的位置不能换,如果把 cur-&gt;next-&gt;next!=nullptr, 有可能忽视 cur-&gt;next!=nullptr 的情况</span><br><br>            ListNode* temp1 = cur-&gt;next;<br>            ListNode* temp2 = cur-&gt;next-&gt;next-&gt;next;<br><br>            cur-&gt;next = cur-&gt;next-&gt;next; <span class="hljs-comment">// ❗️不需要-&gt;val,cur-&gt;next-&gt;next-&gt;val 💡cur 连到 2</span><br>            cur-&gt;next-&gt;next = temp1;<span class="hljs-comment">// 💡2 连到 1</span><br>            temp1-&gt;next= temp2;<span class="hljs-comment">// ❗️1 连到 3,不能用 </span><br><br>            cur = cur-&gt;next-&gt;next; <span class="hljs-comment">// 移动两位 准备下一轮交换</span><br>        }<br>        <span class="hljs-keyword">return</span> dummyHead-&gt;next;<br><br><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
+<p>v2通过, 赋值的时候用 tem1. tem2 也行</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">ListNode* <span class="hljs-title">swapPairs</span><span class="hljs-params">(ListNode* head)</span> </span>{<br>        ListNode* dummyHead = <span class="hljs-keyword">new</span> <span class="hljs-built_in">ListNode</span>(<span class="hljs-number">0</span>);<br>        dummyHead-&gt;next = head;<br>        ListNode* cur = dummyHead;<br>        <span class="hljs-keyword">while</span>(cur-&gt;next != <span class="hljs-literal">NULL</span> &amp;&amp;&nbsp;cur-&gt;next-&gt;next != <span class="hljs-literal">NULL</span>){<br>            ListNode* temp1 = cur-&gt;next;<br>            ListNode* temp2 = cur-&gt;next-&gt;next-&gt;next;<br>            cur-&gt;next = temp1-&gt;next;<br>            temp1-&gt;next-&gt;next = temp1;<br>            temp1-&gt;next = temp2;<br>            cur = cur-&gt;next-&gt;next;<br>        }<br>        <span class="hljs-keyword">return</span> dummyHead-&gt;next;<br><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
 <hr>
 <p><strong>参考资料</strong></p>
-
+ <!-- basicblock-start oid="Obst2RY54cHyIFOBYSYzWBnP" deck = "👨🏻‍💻code::数据结构与算法::代码随想录::链表::5. 两两交换链表中的节点.md" --> 
+<p>#历史记录::<br>
+2022/9/13🌵5. 两两交换链表中的节点 :v2通过, 赋值的时候用 tem1. tem2 也行⏱0-17</p>
+<!-- basicblock-end -->
               
             </div>
             <hr/>
@@ -386,7 +393,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2022年8月12日</div>
+          <div>2022年9月13日</div>
         </div>
       
       <div class="license-meta-item">

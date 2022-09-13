@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20210203153031914.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/2021020315313214.png">
 <meta property="article:published_time" content="2022-09-04T09:52:00.000Z">
-<meta property="article:modified_time" content="2022-09-04T14:04:27.191Z">
+<meta property="article:modified_time" content="2022-09-13T01:14:20.607Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="二叉树">
 <meta name="twitter:card" content="summary_large_image">
@@ -226,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.4k 字
+          1.6k 字
         
       </span>
     
@@ -237,7 +237,7 @@
         
         
         
-          7 分钟
+          9 分钟
         
       </span>
     
@@ -288,7 +288,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年9月4日 晚上
+                    本文最后更新于：2022年9月13日 上午
                   
                 
               </p>
@@ -311,33 +311,46 @@
 <p>二叉树的高度和深度::<br>
 ![[9. 二叉树的最大深度 2022-09-04 19.59.06.excalidraw]]</p>
 <!-- basicblock-end -->
-<p>用后序遍历求最大深度, 左中右, 先获取到左右孩子的高度, 那么父节点就是"max(左右孩子高度) + 1", 然后逐层返回父节点</p>
-<h3 id="221-代码"><a class="markdownIt-Anchor" href="#221-代码"></a> 2.2.1 代码</h3>
+<!-- basicblock-start oid="ObswhABnljcw5OZTk71GpUMW" --> 
+<p>思路::<br>
+用后序遍历求最大深度, 左中右, 先获取到左右孩子的高度, 那么父节点就是" 1 + max(左右孩子高度) ", 然后逐层返回父节点</p>
+<!-- basicblock-end -->                    
+<!-- basicblock-start oid="ObsSO8HawpB9c1etxyG3uioF" --> 
+<h3 id="221-代码"><a class="markdownIt-Anchor" href="#221-代码"></a> 2.2.1 代码::</h3>
+<!-- basicblock-end -->
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">getdepth</span><span class="hljs-params">(treenode* node)</span> </span>{<br>        <span class="hljs-keyword">if</span> (node == <span class="hljs-literal">NULL</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>; <span class="hljs-comment">// 💡因为最后一层的孩子是 NULL, 高度为 0</span><br>        <span class="hljs-type">int</span> leftdepth = <span class="hljs-built_in">getdepth</span>(node-&gt;left);       <span class="hljs-comment">// 左</span><br>        <span class="hljs-type">int</span> rightdepth = <span class="hljs-built_in">getdepth</span>(node-&gt;right);     <span class="hljs-comment">// 右</span><br>        <span class="hljs-type">int</span> depth = <span class="hljs-number">1</span> + <span class="hljs-built_in">max</span>(leftdepth, rightdepth); <span class="hljs-comment">// 中</span><br>        <span class="hljs-keyword">return</span> depth;<br>    }<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">maxdepth</span><span class="hljs-params">(treenode* root)</span> </span>{<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">getdepth</span>(root);<br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
+<p>v2, 通过</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">maxDepth</span><span class="hljs-params">(TreeNode* root)</span> </span>{<br>        <span class="hljs-keyword">if</span>(root == <span class="hljs-literal">NULL</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> leftDepth = <span class="hljs-built_in">maxDepth</span>(root-&gt;left);<br>        <span class="hljs-type">int</span> rightDepth = <span class="hljs-built_in">maxDepth</span>(root-&gt;right);<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span> + <span class="hljs-built_in">max</span>(leftDepth, rightDepth);<br><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
 <h1 id="3-拓展题目"><a class="markdownIt-Anchor" href="#3-拓展题目"></a> 3 拓展题目</h1>
 <h2 id="31-559n叉树的最大深度"><a class="markdownIt-Anchor" href="#31-559n叉树的最大深度"></a> 3.1 559.n叉树的最大深度</h2>
 <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-depth-of-n-ary-tree/">力扣题目链接</a></p>
 <p>给定一个 n 叉树，找到其最大深度。</p>
 <p>最大深度是指从根节点到最远叶子节点的最长路径上的节点总数。</p>
-<p>例如，给定一个 3叉树 :</p>
-<p><img src="https://img-blog.csdnimg.cn/2021020315313214.png" srcset="/img/loading.gif" lazyload alt="559.n叉树的最大深度"></p>
-<p>我们应返回其最大深度，3。<br>
-二叉树最大深度: 从最下层开始找到左右孩子的高度的最大值, 然后+1 返回个上一层.<br>
-二叉树的最大深度：比较多个孩子的最大值, 然后"+1"返回给上一层</p>
-<h2 id="32-代码"><a class="markdownIt-Anchor" href="#32-代码"></a> 3.2 代码</h2>
-<p>通过</p>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">getdepth</span><span class="hljs-params">(Node* node)</span></span>{<br>        <span class="hljs-keyword">if</span> (node == <span class="hljs-literal">NULL</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> depth = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; node-&gt;children.<span class="hljs-built_in">size</span>(); i++){<br>            depth = <span class="hljs-built_in">max</span>(depth, <span class="hljs-built_in">getdepth</span>(node-&gt;children[i]));<br>        }<br>        <span class="hljs-keyword">return</span> depth+<span class="hljs-number">1</span>;<br><br>    }<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">maxDepth</span><span class="hljs-params">(Node* root)</span> </span>{<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">getdepth</span>(root);<br>        <br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
+<p>例如，给定一个 3叉树 :我们应返回其最大深度，3。<br>
+<img src="https://img-blog.csdnimg.cn/2021020315313214.png" srcset="/img/loading.gif" lazyload alt="559.n叉树的最大深度"></p>
+<!-- basicblock-start oid="ObsFKYfVGEDD0vDqi8Zr81qG" --> 
+<p>N叉树最大深度思路::</p>
+<pre><code class="hljs">二叉树最大深度: 从最下层开始找到左右孩子的高度的最大值, 然后+1 返回给上一层. 
+</code></pre>
+<p>N叉树的最大深度：比较多个孩子的最大值, 然后"+1"返回给上一层</p>
+<!-- basicblock-end -->
 <!-- basicblock-start oid="ObsGWBYwdE46PteMIqVCwmaW" --> 
 <p>如何操做 N叉树的所有孩子::<br>
 二叉树直接可以用 node-&gt;left, node-&gt;right. 因为只有两孩子. 所以好操作<br>
 N 叉树</p>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; node-&gt;children.size(); i++){ <span class="hljs-comment">// 遍历每个孩子</span><br>	node-&gt;children[i] <span class="hljs-comment">// 具体操作每个一个孩子</span><br>	<br>}<br></code></pre></td></tr></tbody></table></figure>
 <!-- basicblock-end -->
+<!-- basicblock-start oid="ObstwUhG4JxAiSUAPVl4VIBS" deck = "👨🏻‍💻code::数据结构与算法::代码随想录::二叉树::9. 二叉树的最大深度.md" --> 
+<h2 id="32-代码"><a class="markdownIt-Anchor" href="#32-代码"></a> 3.2 代码::</h2>
+<!-- basicblock-end -->
+<p>通过</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">getdepth</span><span class="hljs-params">(Node* node)</span></span>{<br>        <span class="hljs-keyword">if</span> (node == <span class="hljs-literal">NULL</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> depth = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; node-&gt;children.<span class="hljs-built_in">size</span>(); i++){<br>            depth = <span class="hljs-built_in">max</span>(depth, <span class="hljs-built_in">getdepth</span>(node-&gt;children[i]));<br>        }<br>        <span class="hljs-keyword">return</span> depth+<span class="hljs-number">1</span>;<br><br>    }<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">maxDepth</span><span class="hljs-params">(Node* root)</span> </span>{<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">getdepth</span>(root);<br>        <br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
 <hr>
 <p><strong>其他资料</strong></p>
  <!-- basicblock-start oid="ObssIwbunz9uwD7YWpg3gxSl" deck = "👨🏻‍💻code::数据结构与算法::代码随想录::二叉树::9. 二叉树的最大深度.md" --> 
 <p>#历史记录::<br>
-2022/9/4🌵9. 二叉树的最大深度, 用递归(后序遍历)实现, 获取最后一层的节点的高度, 然后"+1"逐层返回到上一层⏱0.68</p>
+2022/09/04🌵9. 二叉树的最大深度, 用递归(后序遍历)实现, 获取最后一层的节点的高度, 然后"+1"逐层返回到上一层⏱0.68<br>
+2022/09/12🌵9. 二叉树的最大深度:  正常复习, 不难⏱0-20</p>
 <!-- basicblock-end --> 
               
             </div>
@@ -422,7 +435,7 @@ N 叉树</p>
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2022年9月4日</div>
+          <div>2022年9月13日</div>
         </div>
       
       <div class="license-meta-item">

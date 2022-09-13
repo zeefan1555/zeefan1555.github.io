@@ -16,15 +16,15 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="通过快慢指针给新数组赋值(快指针指向元素, 慢指针指向下标)   快指针找新数组的元素 快指针给慢指针对应的下标赋值  常规赋值: [[4. 有序数组的平方]] [[3. 移除元素]] 需要给新数组扩容的, 在赋值: [[3. 替换空格]]      通过双指针构建滑动窗口  .  起始指针 i , 终止指针 j, 通过操作 i 与 j 之间值来达到所需目的. eg: 求窗口之间的元素和 [[5">
+    <meta name="description" content="1 通过快慢指针给新数组赋值(快指针指向元素, 慢指针指向下标)  快指针找新数组的元素 (查找 n 次, 即 O(n)的时间复杂度) 快指针给慢指针对应的新数组的下标赋值  常规赋值: [[4. 有序数组的平方]] [[3. 移除元素]] 需要给新数组扩容的, 在赋值: [[3. 替换空格]]     2 通过双指针构建滑动窗口 - .  起始指针 i , 终止指针 j, 通过操作 i 与 j">
 <meta property="og:type" content="article">
 <meta property="og:title" content="双指针目录">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/23871/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="通过快慢指针给新数组赋值(快指针指向元素, 慢指针指向下标)   快指针找新数组的元素 快指针给慢指针对应的下标赋值  常规赋值: [[4. 有序数组的平方]] [[3. 移除元素]] 需要给新数组扩容的, 在赋值: [[3. 替换空格]]      通过双指针构建滑动窗口  .  起始指针 i , 终止指针 j, 通过操作 i 与 j 之间值来达到所需目的. eg: 求窗口之间的元素和 [[5">
+<meta property="og:description" content="1 通过快慢指针给新数组赋值(快指针指向元素, 慢指针指向下标)  快指针找新数组的元素 (查找 n 次, 即 O(n)的时间复杂度) 快指针给慢指针对应的新数组的下标赋值  常规赋值: [[4. 有序数组的平方]] [[3. 移除元素]] 需要给新数组扩容的, 在赋值: [[3. 替换空格]]     2 通过双指针构建滑动窗口 - .  起始指针 i , 终止指针 j, 通过操作 i 与 j">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-08-17T12:36:00.000Z">
-<meta property="article:modified_time" content="2022-08-19T08:28:35.856Z">
+<meta property="article:modified_time" content="2022-09-11T10:59:03.696Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="双指针">
 <meta name="twitter:card" content="summary_large_image">
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          566 字
+          605 字
         
       </span>
     
@@ -234,7 +234,7 @@
         
         
         
-          3 分钟
+          4 分钟
         
       </span>
     
@@ -285,49 +285,36 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年8月19日 下午
+                    本文最后更新于：2022年9月11日 晚上
                   
                 
               </p>
             
             <div class="markdown-body">
               
-              <ul>
-<li><strong>通过快慢指针给新数组赋值</strong>(快指针指向元素, 慢指针指向下标)</li>
-</ul>
+              <h1 id="1-通过快慢指针给新数组赋值快指针指向元素-慢指针指向下标"><a class="markdownIt-Anchor" href="#1-通过快慢指针给新数组赋值快指针指向元素-慢指针指向下标"></a> 1 <strong>通过快慢指针给新数组赋值</strong>(快指针指向元素, 慢指针指向下标)</h1>
 <ol>
-<li>快指针找新数组的元素</li>
-<li>快指针给慢指针对应的下标赋值
+<li>快指针找新数组的元素 (查找 n 次, 即 O(n)的时间复杂度)</li>
+<li>快指针给<strong>慢指针对应的新数组的下标</strong>赋值
 <ol>
 <li>常规赋值: [[4. 有序数组的平方]] [[3. 移除元素]]</li>
 <li>需要给新数组扩容的, 在赋值: [[3. 替换空格]]</li>
 </ol>
 </li>
 </ol>
-<ul>
-<li>
-<p><strong>通过双指针构建滑动窗口</strong></p>
-<ul>
-<li>.  起始指针 i , 终止指针 j, 通过操作 i 与 j 之间值来达到所需目的. eg: 求窗口之间的元素和 [[5. 长度最小的子数组]]</li>
-</ul>
-</li>
-<li>
-<p><strong>反转元素</strong></p>
-<ol>
-<li>常规反转 reverse 原理: [[1. 反转字符串]]</li>
-<li>多一些复杂规则的翻转 [[4. 翻转字符串里的单词]]</li>
-<li>两个指针挨着的翻转链表[[4. 翻转链表]]</li>
-</ol>
-</li>
-<li>
-<p><strong>其他</strong></p>
-<ol>
-<li>[[6.删除链表的倒数第N个节点]]: 通过两指针移动的步数不同, 来达到, slow 指针想到移动到的位置, 来实现删除链表元素</li>
-<li>[[7. 链表相交]]: 两个数组用两个指针来判断是不是有元素相同</li>
-<li></li>
-</ol>
-</li>
-</ul>
+<h1 id="2-通过双指针构建滑动窗口"><a class="markdownIt-Anchor" href="#2-通过双指针构建滑动窗口"></a> 2 <strong>通过双指针构建滑动窗口</strong></h1>
+<pre><code class="hljs">- .  起始指针 i , 终止指针 j, 通过操作 i 与 j 之间值来达到所需目的. eg: 求窗口之间的元素和 [[5. 长度最小的子数组]]
+</code></pre>
+<h1 id="3-反转元素"><a class="markdownIt-Anchor" href="#3-反转元素"></a> 3 <strong>反转元素</strong></h1>
+<pre><code class="hljs">1. 常规反转 reverse 原理: [[1. 反转字符串]]
+2. 多一些复杂规则的翻转 [[4. 翻转字符串里的单词]]
+3. 两个指针挨着的翻转链表[[4. 翻转链表]]
+</code></pre>
+<h1 id="4-其他"><a class="markdownIt-Anchor" href="#4-其他"></a> 4 <strong>其他</strong></h1>
+<pre><code class="hljs">1. [[6.删除链表的倒数第N个节点]]: 通过两指针移动的步数不同, 来达到, slow 指针想到移动到的位置, 来实现删除链表元素
+2. [[7. 链表相交]]: 两个数组用两个指针来判断是不是有元素相同
+3. 
+</code></pre>
 <p>题目目录</p>
 <ol>
 <li>[[3. 移除元素]]</li>
@@ -429,7 +416,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2022年8月19日</div>
+          <div>2022年9月11日</div>
         </div>
       
       <div class="license-meta-item">

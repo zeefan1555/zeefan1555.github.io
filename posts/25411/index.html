@@ -16,18 +16,17 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1 203.移除链表元素 力扣题目链接 题意：删除链表中等于给定值 val 的所有节点。 示例 1： 输入：head &#x3D; [1,2,6,3,4,5,6], val &#x3D; 6 输出：[1,2,3,4,5] 示例 2： 输入：head &#x3D; [], val &#x3D; 1 输出：[] 示例 3： 输入：head &#x3D; [7,7,7,7], val &#x3D; 7 输出：[]  2 思路 删除普通元素 使用 C, C++语">
+    <meta name="description" content="1 203.移除链表元素 力扣题目链接 题意：删除链表中等于给定值 val 的所有节点。 示例 1： 输入：head &#x3D; [1,2,6,3,4,5,6], val &#x3D; 6 输出：[1,2,3,4,5] 示例 2： 输入：head &#x3D; [], val &#x3D; 1 输出：[] 示例 3： 输入：head &#x3D; [7,7,7,7], val &#x3D; 7 输出：[]    2 思路::  删除普通元素 使用 C,">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2. 移除链表元素">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/25411/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="1 203.移除链表元素 力扣题目链接 题意：删除链表中等于给定值 val 的所有节点。 示例 1： 输入：head &#x3D; [1,2,6,3,4,5,6], val &#x3D; 6 输出：[1,2,3,4,5] 示例 2： 输入：head &#x3D; [], val &#x3D; 1 输出：[] 示例 3： 输入：head &#x3D; [7,7,7,7], val &#x3D; 7 输出：[]  2 思路 删除普通元素 使用 C, C++语">
+<meta property="og:description" content="1 203.移除链表元素 力扣题目链接 题意：删除链表中等于给定值 val 的所有节点。 示例 1： 输入：head &#x3D; [1,2,6,3,4,5,6], val &#x3D; 6 输出：[1,2,3,4,5] 示例 2： 输入：head &#x3D; [], val &#x3D; 1 输出：[] 示例 3： 输入：head &#x3D; [7,7,7,7], val &#x3D; 7 输出：[]    2 思路::  删除普通元素 使用 C,">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20210316095351161.png">
 <meta property="og:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202208111134829.gif">
-<meta property="og:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202208111219807.gif">
 <meta property="article:published_time" content="2022-08-11T02:40:00.000Z">
-<meta property="article:modified_time" content="2022-08-24T13:46:47.707Z">
+<meta property="article:modified_time" content="2022-09-13T15:18:40.793Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="数组">
 <meta name="twitter:card" content="summary_large_image">
@@ -227,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.1k 字
+          1.6k 字
         
       </span>
     
@@ -238,7 +237,7 @@
         
         
         
-          6 分钟
+          9 分钟
         
       </span>
     
@@ -289,7 +288,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年8月24日 晚上
+                    本文最后更新于：2022年9月13日 晚上
                   
                 
               </p>
@@ -308,7 +307,9 @@
 <p>示例 3：<br>
 输入：head = [7,7,7,7], val = 7<br>
 输出：[]</p>
-<h1 id="2-思路"><a class="markdownIt-Anchor" href="#2-思路"></a> 2 思路</h1>
+<!-- basicblock-start oid="ObsToulOLeqVDEnA8N2uNNiV" --> 
+<h1 id="2-思路"><a class="markdownIt-Anchor" href="#2-思路"></a> 2 思路::</h1>
+<!-- basicblock-end -->
 <p>删除普通元素<br>
 使用 C, C++语言记得要清理删除的内存<br>
 <img src="https://img-blog.csdnimg.cn/20210316095351161.png" srcset="/img/loading.gif" lazyload alt="203_链表删除元素1|600"></p>
@@ -319,7 +320,6 @@
 </ul>
 <p>![[2. 移除链表元素 2022-08-11 11.00.43.excalidraw|1500]]</p>
 <h2 id="21-总结"><a class="markdownIt-Anchor" href="#21-总结"></a> 2.1 总结</h2>
-<p>#card</p>
 <!-- basicblock-start oid="ObsSRgRVqGrwJjsLLBcm71oT" --> 
 <p>如何设置一个虚拟头结点来操持一个统一的删除操作::</p>
 <ol>
@@ -331,13 +331,22 @@
 <p><img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202208111134829.gif" srcset="/img/loading.gif" lazyload alt="|1100"></p>
 <!-- basicblock-end -->
 <h1 id="3-代码"><a class="markdownIt-Anchor" href="#3-代码"></a> 3 代码</h1>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">ListNode* <span class="hljs-title">removeElements</span><span class="hljs-params">(ListNode* head, <span class="hljs-type">int</span> val)</span> </span>{<br>        ListNode* dummyHead  = <span class="hljs-keyword">new</span> <span class="hljs-built_in">ListNode</span>(<span class="hljs-number">0</span>); <br>        dummyHead-&gt;next = head; <br>        ListNode* cur  = dummyHead; <span class="hljs-comment">// 💡用了一个指针指向了 dummyHead 用来操作 dummyHead 中元素</span><br>							        <span class="hljs-comment">// ❗️不能直接用 dummyHead-&gt;next, 因为只要就把 dummyHead 的链表改变了</span><br>        <span class="hljs-keyword">while</span>(cur-&gt;next != <span class="hljs-literal">nullptr</span>){<br>            <span class="hljs-keyword">if</span>(cur-&gt;next-&gt;val == val){<span class="hljs-comment">// ❗️是cur-&gt;next-&gt;val,不是 cur-&gt;next</span><br>                ListNode* temp = cur-&gt;next;<br>                cur-&gt;next = cur-&gt;next-&gt;next;<br>                <span class="hljs-keyword">delete</span> temp;<span class="hljs-comment">// 💡删除的是 dummyHead 的元素,因为操作的是指针</span><br>            }<br>            <span class="hljs-keyword">else</span> cur = cur-&gt;next;<span class="hljs-comment">// 将下一个元素做为头结点</span><br><br>        } <br>        <span class="hljs-comment">// return cur // ❗️因为 cur 的链表是越来越小的</span><br>        head = dummyHead-&gt;next;<span class="hljs-comment">// 💡因为dummyHead 的一个元素是创造出来的</span><br>        <span class="hljs-keyword">delete</span> dummyHead;<br>        <span class="hljs-keyword">return</span> head;<br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
-<p><img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202208111219807.gif" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>v1</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">ListNode* <span class="hljs-title">removeElements</span><span class="hljs-params">(ListNode* head, <span class="hljs-type">int</span> val)</span> </span>{<br>        ListNode* dummyHead  = <span class="hljs-keyword">new</span> <span class="hljs-built_in">ListNode</span>(<span class="hljs-number">0</span>); <br>        dummyHead-&gt;next = head; <br>        ListNode* cur  = dummyHead; <span class="hljs-comment">// 💡用了一个指针指向了 dummyHead 用来操作 dummyHead 中元素</span><br>							        <span class="hljs-comment">// ❗️不能直接用 dummyHead-&gt;next, 因为只要就把 dummyHead 的链表改变了</span><br>        <span class="hljs-keyword">while</span>(cur-&gt;next != <span class="hljs-literal">nullptr</span>){<br>            <span class="hljs-keyword">if</span>(cur-&gt;next-&gt;val == val){<span class="hljs-comment">// ❗️是cur-&gt;next-&gt;val,不是 cur-&gt;next</span><br>                ListNode* temp = cur-&gt;next;<br>                cur-&gt;next = cur-&gt;next-&gt;next;<br>                <span class="hljs-keyword">delete</span> temp;<span class="hljs-comment">// 💡💡删除的是 dummyHead 的元素,因为操作的是指针</span><br>            }<br>            <span class="hljs-keyword">else</span> cur = cur-&gt;next;<span class="hljs-comment">// 将下一个元素做为头结点</span><br><br>        } <br>        <span class="hljs-comment">// return cur // ❗️因为 cur 的链表是越来越小的</span><br>        head = dummyHead-&gt;next;<span class="hljs-comment">// 💡因为dummyHead 的一个元素是创造出来的</span><br>        <span class="hljs-keyword">delete</span> dummyHead;<br>        <span class="hljs-keyword">return</span> head;<br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
+<!-- basicblock-start oid="Obs2fSenrd948BZYQ4eNfI6H" --> 
+<p>v2通过::<br>
+构造虚拟头结点:         ListNode* dummyHead = new ListNode(0);</p>
+<!-- basicblock-end -->
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">ListNode* <span class="hljs-title">removeElements</span><span class="hljs-params">(ListNode* head, <span class="hljs-type">int</span> val)</span> </span>{<br>        ListNode* dummyHead = <span class="hljs-keyword">new</span> <span class="hljs-built_in">ListNode</span>(<span class="hljs-number">0</span>);<br>        dummyHead-&gt;next = head;<br>        ListNode* cur = dummyHead;<br>        <span class="hljs-keyword">while</span>(cur-&gt;next != <span class="hljs-literal">NULL</span>){ <span class="hljs-comment">// ❗️不是 cur != NULL</span><br>            <span class="hljs-keyword">if</span>(cur-&gt;next-&gt;val == val){<br>                ListNode* temp = cur-&gt;next;<br>                cur-&gt;next = cur-&gt;next-&gt;next;<br>                <span class="hljs-keyword">delete</span> temp;<br>            }<br>            <span class="hljs-keyword">else</span>{<br>                cur = cur-&gt;next;<br>            }<br>        }<br>        <span class="hljs-keyword">return</span> dummyHead-&gt;next;<br><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
 <hr>
 <p><strong>参考资料</strong><br>
 <a target="_blank" rel="noopener" href="https://www.programmercarl.com/0203.%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0.html#%E5%85%B6%E4%BB%96%E8%AF%AD%E8%A8%80%E7%89%88%E6%9C%AC">代码随想录</a></p>
-<section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span>[[C++ new的用法]]
-<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
+<!-- basicblock-start oid="ObsngUPBW6FCyRYJz7EGM9UV" deck = "👨🏻‍💻code::数据结构与算法::代码随想录::链表::2. 移除链表元素.md" --> 
+<p>#历史记录::<br>
+2022/9/13🌵2. 移除链表元素 : v2, 熟悉一下⏱0-25</p>
+<!-- basicblock-end --><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span>[[C++ new的用法]]
+<p><a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></p></span></span></li></ol></div></section><p></p>
+
               
             </div>
             <hr/>
@@ -421,7 +430,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2022年8月24日</div>
+          <div>2022年9月13日</div>
         </div>
       
       <div class="license-meta-item">

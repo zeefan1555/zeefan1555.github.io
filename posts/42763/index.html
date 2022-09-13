@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20210203192644329.png">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/008eGmZEly1gnakm26jtog30e409s4qp.gif">
 <meta property="article:published_time" content="2022-09-03T08:38:00.000Z">
-<meta property="article:modified_time" content="2022-09-07T01:47:10.106Z">
+<meta property="article:modified_time" content="2022-09-13T01:11:58.322Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="二叉树">
 <meta name="twitter:card" content="summary_large_image">
@@ -226,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.5k 字
+          3k 字
         
       </span>
     
@@ -237,7 +237,7 @@
         
         
         
-          13 分钟
+          16 分钟
         
       </span>
     
@@ -288,7 +288,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年9月7日 上午
+                    本文最后更新于：2022年9月13日 上午
                   
                 
               </p>
@@ -344,6 +344,12 @@
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">TreeNode* <span class="hljs-title">invert</span> <span class="hljs-params">(TreeNode* node)</span></span>{ <span class="hljs-comment">// ❗️返回类型是 TreeNode*, 不是 void, 💡只是操作树, 不需要返回信息用 TreeNode*</span><br><br>        <span class="hljs-keyword">if</span> (node == <span class="hljs-literal">NULL</span>) <span class="hljs-keyword">return</span> node; <span class="hljs-comment">// ❓必须要 return node, 因为返回值是TreeNode 类型</span><br>        <span class="hljs-built_in">swap</span>(node-&gt;left, node-&gt;right);<br>        <span class="hljs-built_in">invert</span>(node-&gt;left);<br>        <span class="hljs-built_in">invert</span>(node-&gt;right);<br>        <span class="hljs-keyword">return</span> node;  <span class="hljs-comment">// ❓这里不懂</span><br>    }<br><br>    <span class="hljs-function">TreeNode* <span class="hljs-title">invertTree</span><span class="hljs-params">(TreeNode* root)</span> </span>{<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">invert</span>(root);<br><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
 <p>v3</p>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">TreeNode* <span class="hljs-title">invert</span> <span class="hljs-params">(TreeNode* node)</span></span>{ <br>        <span class="hljs-keyword">if</span> (node == <span class="hljs-literal">NULL</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>; <span class="hljs-comment">// NULL 意思是空节点呗, ❓然后自动返回上一层</span><br>        <span class="hljs-built_in">swap</span>(node-&gt;left, node-&gt;right);<br>        <span class="hljs-built_in">invert</span>(node-&gt;left);<br>        <span class="hljs-built_in">invert</span>(node-&gt;right);<br>        <span class="hljs-comment">//函数返回时就表示当前这个节点，以及它的左右子树</span><br>		<span class="hljs-comment">//都已经交换完了, ❓然后就到上一层了?</span><br>        <span class="hljs-keyword">return</span> node;  <span class="hljs-comment">// 💡每个节点交换完都返回一次, 直至处理到最后一个节点</span><br>    }<br><br>    <span class="hljs-function">TreeNode* <span class="hljs-title">invertTree</span><span class="hljs-params">(TreeNode* root)</span> </span>{<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">invert</span>(root);<br><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
+<p>v4, 通过</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">TreeNode*  <span class="hljs-title">traversal</span> <span class="hljs-params">(TreeNode* node)</span></span>{<br>        <span class="hljs-keyword">if</span>(node == <span class="hljs-literal">NULL</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span> ;<span class="hljs-comment">// ❗️返回值类型为 TreeNode* 的, 返回值是 node 或者 NULL</span><br>        <span class="hljs-built_in">swap</span>(node-&gt;left, node-&gt;right);<br>        <span class="hljs-built_in">invertTree</span>(node-&gt;left);<br>        <span class="hljs-built_in">invertTree</span>(node-&gt;right);<br>        <span class="hljs-keyword">return</span> node;<br>    }<br>    <span class="hljs-function">TreeNode* <span class="hljs-title">invertTree</span><span class="hljs-params">(TreeNode* root)</span> </span>{<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">traversal</span>(root);<br><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
+<!-- basicblock-start oid="Obsy1jpTtYeUXshW3JwWnfWQ" --> 
+<p>返回值类型为 TreeNode* 时 ,应当 return 什么::</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function">TreeNode*  <span class="hljs-title">traversal</span> <span class="hljs-params">(TreeNode* node)</span></span>{<br>    <span class="hljs-keyword">if</span>(node == <span class="hljs-literal">NULL</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span> ;<span class="hljs-comment">// ❗️返回值类型为 TreeNode* 的, 返回值起码是 NULL, 普通的就是二叉树指针</span><br></code></pre></td></tr></tbody></table></figure>
+<!-- basicblock-end -->
 <hr>
 <p><strong>参考资料</strong></p>
  <!-- basicblock-start oid="ObsqQ3qh1SYiiESPsf4ZuD01" deck = "👨🏻‍💻code::数据结构与算法::代码随想录::二叉树::6. 反转二叉树.md" --> 
@@ -352,8 +358,9 @@
 1. 用前序或后序递归遍历, 到中间节点的时候, 把节点的左右孩子给交换一下. <mark>中</mark>左右: <mark>中</mark>其实是处理逻辑, 因为每个节点都会遍历到. 自然交换了所有节点的左右孩子.<br>
 - &amp; 不能用中序遍历, 会导致左右两个孩子交换两次<br>
 2.  用层序遍历模板, 就是弹出本层元素的同时, 在把该节点的左右孩子互换一下即可<br>
-2022/09/05: 递归代码v3有疑问待解决 ⏱1-10<br>
-2022/09/07: anki 复习, v3 还是感觉有点迷糊, 可能动写一下代码就好一些</p>
+2022/09/05🌵6. 反转二叉树: 递归代码v3有疑问待解决 ⏱1-10<br>
+2022/09/07🌵6. 反转二叉树: anki 复习, v3 还是感觉有点迷糊, 可能动写一下代码就好一些<br>
+2022/09/07🌵6. 反转二叉树: v4, 进一步熟悉了, ⏱0-14</p>
 <!-- basicblock-end --> 
 
               
@@ -439,7 +446,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2022年9月7日</div>
+          <div>2022年9月13日</div>
         </div>
       
       <div class="license-meta-item">

@@ -24,7 +24,7 @@
 <meta property="og:description" content="1 704二分查找 力扣题目链接 给定一个&amp;nbsp;n&amp;nbsp;个元素有序的（升序）整型数组&amp;nbsp;nums 和一个目标值&amp;nbsp;target &amp;nbsp;，写一个函数搜索&amp;nbsp;nums&amp;nbsp;中的 target，如果目标值存在返回下标，否则返回 -1。 示例 1: 123输入: nums &#x3D; [-1,0,3,5,9,12], target &#x3D; 9     输出: 4">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-08-08T02:52:00.000Z">
-<meta property="article:modified_time" content="2022-08-08T07:53:04.638Z">
+<meta property="article:modified_time" content="2022-09-13T01:26:47.144Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="数组">
 <meta name="twitter:card" content="summary_large_image">
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.9k 字
+          2.3k 字
         
       </span>
     
@@ -234,7 +234,7 @@
         
         
         
-          10 分钟
+          12 分钟
         
       </span>
     
@@ -285,7 +285,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年8月8日 下午
+                    本文最后更新于：2022年9月13日 上午
                   
                 
               </p>
@@ -306,7 +306,8 @@
 <li>nums&nbsp;的每个元素都将在&nbsp;[-9999, 9999]之间。</li>
 </ul>
 <h1 id="2-思路"><a class="markdownIt-Anchor" href="#2-思路"></a> 2 思路</h1>
-<p>二分法使用的前提</p>
+<!-- basicblock-start oid="ObssiM911QvHWwBhMfNhzsy3" --> 
+<p>二分法使用的前提::</p>
 <ol>
 <li>有序数组
 <ol>
@@ -325,14 +326,18 @@
 <li>左闭右闭要一直保持左闭右闭</li>
 <li>左闭右开要一直保持左闭右开</li>
 </ul>
-<h2 id="21-数组为左闭右闭区间-a-g"><a class="markdownIt-Anchor" href="#21-数组为左闭右闭区间-a-g"></a> 2.1 数组为左闭右闭区间: [a, … ,g]</h2>
-<p>也就是target 在一个[left, right]数组中,left 可能等于 right</p>
+<!-- basicblock-end -->
+<!-- basicblock-start oid="Obsf8CaPBZHUma8XPIymDnOP" --> 
+<h2 id="21-数组为左闭右闭区间-a-g"><a class="markdownIt-Anchor" href="#21-数组为左闭右闭区间-a-g"></a> 2.1 数组为左闭右闭区间: [a, … ,g] ::</h2>
+<p>定义int 类型的 left(头), right(尾)<br>
+也就是target 在一个[left, right]数组中,left 可能等于 right</p>
 <p>![[二分查找 2022-08-08 12.08.05.excalidraw|1500]]</p>
 <p><strong>定义target在[left, right]区间，所以有如下两点：</strong></p>
 <ul>
 <li>while (left &lt;= right) 要使用 &lt;= ，因为left == right是有意义的，所以使用 &lt;=</li>
-<li>if (nums[middle] &gt; target) ,right 赋值middle - 1，因为当前这个nums[middle]一定不是target(已经大于了,当然不是) ，那么接下来要查找的左区间结束下标位置就是 middle - 1</li>
+<li>if (target &lt; nums[middle] ) ,right 赋值middle - 1，因为当前这个nums[middle]一定不是target(已经大于了,当然不是) ，那么接下来要查找的左区间(小区间), 结束下标位置就是 middle - 1</li>
 </ul>
+<!-- basicblock-end -->
 <h2 id="22-数组为左闭右开"><a class="markdownIt-Anchor" href="#22-数组为左闭右开"></a> 2.2 数组为左闭右开</h2>
 <p>target 是在一个在左闭右开的区间里，也就是[left, right) ，那么二分法的边界处理方式则截然不同。</p>
 <p>有如下两点：</p>
@@ -345,13 +350,20 @@
 </li>
 </ul>
 <h1 id="3-代码"><a class="markdownIt-Anchor" href="#3-代码"></a> 3 代码</h1>
-<p>左闭右闭编译已通过,💡表示出错的地方</p>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">search</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums, <span class="hljs-type">int</span> target)</span> </span>{<br>        <span class="hljs-type">int</span> left = <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> right = nums.<span class="hljs-built_in">size</span>()<span class="hljs-number">-1</span>;<br><br>        <span class="hljs-keyword">while</span> (left &lt;= right){<br>            <span class="hljs-type">int</span> middle =  left + (right - left)/<span class="hljs-number">2</span>; <span class="hljs-comment">//💡 middle 要不断的更新所以要放到里边去</span><br>            <span class="hljs-keyword">if</span> (target &lt; nums[middle]) { <span class="hljs-comment">// 在左区间里,更新右边界</span><br>            right = middle <span class="hljs-number">-1</span>;<br>            }<br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (target &gt; nums[middle]){ <span class="hljs-comment">// 在右区间里更新,更新左边界</span><br>            left = middle +<span class="hljs-number">1</span>;<br>            }<br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> middle;<span class="hljs-comment">// 💡返回下标值,前边要加 else 不然直接返回 middle 了</span><br>        }<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
+<h2 id="31-左闭右闭"><a class="markdownIt-Anchor" href="#31-左闭右闭"></a> 3.1 左闭右闭</h2>
+<p>v1,左闭右闭编译已通过,</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">search</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums, <span class="hljs-type">int</span> target)</span> </span>{<br>        <span class="hljs-type">int</span> left = <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> right = nums.<span class="hljs-built_in">size</span>()<span class="hljs-number">-1</span>;<br><br>        <span class="hljs-keyword">while</span> (left &lt;= right){<br>            <span class="hljs-type">int</span> middle =  left + (right - left)/<span class="hljs-number">2</span>; <span class="hljs-comment">//❗️ middle 要不断的更新所以要放到while里边去</span><br>            <span class="hljs-keyword">if</span> (target &lt; nums[middle]) { <span class="hljs-comment">// 在左区间里,更新右边界</span><br>            right = middle <span class="hljs-number">-1</span>;<br>            }<br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (target &gt; nums[middle]){ <span class="hljs-comment">// 在右区间里更新,更新左边界</span><br>            left = middle +<span class="hljs-number">1</span>;<br>            }<br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> middle;<span class="hljs-comment">// ❗️返回下标值,前边要加 else 不然直接返回 middle 了</span><br>        }<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
+<p>v2</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">search</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums, <span class="hljs-type">int</span> target)</span> </span>{<br>        <span class="hljs-type">int</span> left = <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> right = nums.<span class="hljs-built_in">size</span>()<span class="hljs-number">-1</span>;<br>        <span class="hljs-keyword">while</span>(left &lt;= right){<br>            <span class="hljs-type">int</span> middle = left + (right - left) / <span class="hljs-number">2</span>;<br>            <span class="hljs-keyword">if</span>(target &gt; nums[middle]) left = middle + <span class="hljs-number">1</span>; <span class="hljs-comment">// ❗️不是 target &lt; middle 哦</span><br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(target &lt; nums[middle]) right = middle - <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> middle; <span class="hljs-comment">// 💡最后一个就是 target = middle 的情况</span><br>        }<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>      <br><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
+<h2 id="32-左开右开"><a class="markdownIt-Anchor" href="#32-左开右开"></a> 3.2 左开右开</h2>
 <p>左闭右开的无法填入示例</p>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">// 整体区间要一直保持左闭右开</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">search</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums, <span class="hljs-type">int</span> target)</span> </span>{<br>        <span class="hljs-type">int</span> left = <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> right = nums.<span class="hljs-built_in">size</span>()<span class="hljs-number">-1</span>;<br><br>        <span class="hljs-keyword">while</span> (left &lt;= right){<br>            <span class="hljs-type">int</span> middle =  left + (right - left)/<span class="hljs-number">2</span>; <span class="hljs-comment">//💡 middle 要不断的更新所以要放到里边去</span><br>            <span class="hljs-keyword">if</span> (target &lt; nums[middle]) { <span class="hljs-comment">// 在左区间里,更新右边界</span><br>            right = middle; <span class="hljs-comment">// 保持右开</span><br>            }<br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (target &gt; nums[middle]){ <span class="hljs-comment">// 在右区间里更新,更新左边界</span><br>            left = middle +<span class="hljs-number">1</span>; <span class="hljs-comment">//保持左闭</span><br>            }<br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> middle;<span class="hljs-comment">// 💡返回下标值,前边要加 else 不然直接返回 middle 了</span><br>        }<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
 <hr>
-<p><strong>参考资料</strong><br>
-<a target="_blank" rel="noopener" href="https://www.programmercarl.com/0704.%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE.html#_704-%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE">代码随想录</a></p>
+<p><strong>其他资料</strong></p>
+<!-- basicblock-start oid="ObsjIzNqB6ALbk7VC1vTeqQq" deck = "👨🏻‍💻code::数据结构与算法::代码随想录::数组::2.  二分查找.md" --> 
+<p>#历史记录::<br>
+2022/9/11🌵2. 二分查找 : 只看了左闭右闭 , 完成v2 代码⏱0-37</p>
+<!-- basicblock-end -->
 
               
             </div>
@@ -436,7 +448,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2022年8月8日</div>
+          <div>2022年9月13日</div>
         </div>
       
       <div class="license-meta-item">

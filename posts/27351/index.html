@@ -16,15 +16,15 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1 动态库加载失败的原因 工作原理：  静态库：GCC 进行链接时，会把静态库中代码打包到可执行程序中。 动态库：GCC 进行链接时，动态库的代码不会被打包到可执行程序中。 程序启动之后，动态库会被动态加载到内存中，通过 ldd (list dynamic dependencies)命令检查动态库依赖关系。 如何定位共享库文件呢：当系统加载可执行代码时候，能够知道其所依赖的库的名字，但是还需要知">
+    <meta name="description" content="1 动态库加载失败的原因 工作原理：  静态库：GCC 进行链接时，会把静态库中代码打包到可执行程序中。 动态库：GCC 进行链接时，动态库的代码不会被打包到可执行程序中。(报错的原因) 程序启动之后，动态库会被动态加载到内存中，通过 ldd (list dynamic dependencies)命令检查动态库依赖关系。列出动态的依赖 如何定位共享库文件呢：当系统加载可执行代码时候，能够知道其所">
 <meta property="og:type" content="article">
-<meta property="og:title" content="1.7 动态库加载失败原因">
+<meta property="og:title" content="1.7 - 1.8 动态库加载失败原因">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/27351/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="1 动态库加载失败的原因 工作原理：  静态库：GCC 进行链接时，会把静态库中代码打包到可执行程序中。 动态库：GCC 进行链接时，动态库的代码不会被打包到可执行程序中。 程序启动之后，动态库会被动态加载到内存中，通过 ldd (list dynamic dependencies)命令检查动态库依赖关系。 如何定位共享库文件呢：当系统加载可执行代码时候，能够知道其所依赖的库的名字，但是还需要知">
+<meta property="og:description" content="1 动态库加载失败的原因 工作原理：  静态库：GCC 进行链接时，会把静态库中代码打包到可执行程序中。 动态库：GCC 进行链接时，动态库的代码不会被打包到可执行程序中。(报错的原因) 程序启动之后，动态库会被动态加载到内存中，通过 ldd (list dynamic dependencies)命令检查动态库依赖关系。列出动态的依赖 如何定位共享库文件呢：当系统加载可执行代码时候，能够知道其所">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-09-07T08:22:00.000Z">
-<meta property="article:modified_time" content="2022-09-07T08:24:19.694Z">
+<meta property="article:modified_time" content="2022-09-13T06:49:43.723Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="静态库与动态库">
 <meta name="twitter:card" content="summary_large_image">
@@ -33,7 +33,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>1.7 动态库加载失败原因 - 一杯空气</title>
+  <title>1.7 - 1.8 动态库加载失败原因 - 一杯空气</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -200,7 +200,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="1.7 动态库加载失败原因"></span>
+            <span id="subtitle" data-typed-text="1.7 - 1.8 动态库加载失败原因"></span>
           
         </div>
 
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.4k 字
+          2.5k 字
         
       </span>
     
@@ -280,12 +280,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">1.7 动态库加载失败原因</h1>
+            <h1 style="display: none">1.7 - 1.8 动态库加载失败原因</h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年9月7日 下午
+                    本文最后更新于：2022年9月13日 下午
                   
                 
               </p>
@@ -296,9 +296,14 @@
 <p>工作原理：</p>
 <ul>
 <li>静态库：GCC 进行链接时，会把静态库中代码打包到可执行程序中。</li>
-<li>动态库：GCC 进行链接时，动态库的代码不会被打包到可执行程序中。</li>
-<li>程序启动之后，动态库会被动态加载到内存中，通过 ldd (list dynamic dependencies)命令检查动态库依赖关系。</li>
-<li>如何定位共享库文件呢：当系统加载可执行代码时候，能够知道其所依赖的库的名字，但是还需要知道绝对路 径。此时就需要系统的动态载入器来获取该绝对路径。对于elf格式的可执行程序，是 由ld-linux.so来完成的，它先后搜索elf文件的 <strong>DT_RPATH</strong>段 ——&gt; <strong>环境变量</strong> <strong>LD_LIBRARY_PATH</strong> ——&gt; <strong>/etc/ld.so.cache</strong>文件列表 ——&gt; <strong>/lib/</strong>，/usr/lib 目录找到库文件后将其载入内存。</li>
+<li><strong>动态库：GCC 进行链接时，动态库的代码不会被打包到可执行程序中。(报错的原因)</strong></li>
+<li>程序启动之后，动态库会被动态加载到内存中，通过 ldd (list dynamic dependencies)命令检查动态库依赖关系。<strong>列出动态的依赖</strong></li>
+<li>如何定位共享库文件呢：当系统加载可执行代码时候，能够知道其所依赖的库的名字，但是还需要知道绝对路径。此时就需要系统的<strong>动态载入器</strong>来获取该绝对路径。</li>
+<li>对于elf格式的可执行程序，是 由<strong><a target="_blank" rel="noopener" href="http://ld-linux.so">ld-linux.so</a></strong>(<strong>动态载入器</strong>)来完成的，它先后搜索elf文件的 <strong>DT_RPATH</strong>段 ——&gt; <strong>环境变量</strong> <strong>LD_LIBRARY_PATH</strong> ——&gt; <strong>/etc/ld.so.cache</strong>文件列表 ——&gt; <strong>/lib/</strong>，/usr/lib (这个不建议)目录找到库文件后将其载入内存。
+<ul>
+<li>&amp; 就在这几个目录中，放入你的动态库，让系统找到就行了</li>
+</ul>
+</li>
 </ul>
 <p>ldd 命令检查动态库依赖关系：</p>
 <figure class="highlight avrasm"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs avrasm"><span class="hljs-keyword">ldd</span> main<br></code></pre></td></tr></tbody></table></figure>
@@ -306,8 +311,10 @@
 <figure class="highlight stata"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs stata">linux-vdso.<span class="hljs-keyword">so</span>.1 =&gt;  (0x00007ffcd55f8000)<br>libcalc.<span class="hljs-keyword">so</span> =&gt; not found<br>libc.<span class="hljs-keyword">so</span>.6 =&gt; /lib64/libc.<span class="hljs-keyword">so</span>.6 (0x00007fe2ddf8f000)<br>/lib64/ld-linux-x86-64.<span class="hljs-keyword">so</span>.2 (0x000055996189f000)<br></code></pre></td></tr></tbody></table></figure>
 <p>动态库加载失败的原因：查找动态库的时候找不到动态库，因为没有指定动态库的绝对路径。</p>
 <p>解决方法：在搜索 elf 文件的路径下配置，这样在查找的时候就能找到。</p>
-<p><strong>DT_RPATH</strong>段改变不了，就需要修改环境变量。</p>
+<p><strong>DT_RPATH</strong>段改变不了，就需要修改环境变量。<br>
+发森</p>
 <h2 id="11-配置动态库环境变量"><a class="markdownIt-Anchor" href="#11-配置动态库环境变量"></a> 1.1 配置动态库环境变量</h2>
+<p>海红灯神岛</p>
 <h3 id="111-修改环境变量-ld_library_path"><a class="markdownIt-Anchor" href="#111-修改环境变量-ld_library_path"></a> 1.1.1 修改<strong>环境变量</strong> <strong>LD_LIBRARY_PATH</strong>。</h3>
 <p>方法一：临时修改 <strong>环境变量</strong> <strong>LD_LIBRARY_PATH</strong>。</p>
 <p>首先确定动态库所在路径：</p>
@@ -362,9 +369,9 @@
 <p>不建议用这种方法，因为该目录下有很多系统库，如果自己的库与系统库重名，放进去就会把系统库覆盖掉。</p>
 <hr>
 <p><strong>其他资料</strong></p>
- <!-- basicblock-start deck = "👨🏻‍💻code::项目::webserver::1 第一章::1.7 动态库加载失败原因.md" --> 
+ <!-- basicblock-start oid="ObsFwg8X1xKotZmab6Q5JrPy" deck = "👨🏻‍💻code::项目::webserver::1 第一章::1.7 动态库加载失败原因.md" --> 
 <p>#历史记录::<br>
-2022/9/7🌵1.7 动态库加载失败原因</p>
+2022/9/7🌵1.7 动态库加载失败原因 : 没看</p>
 <!-- basicblock-end -->
               
             </div>
@@ -430,7 +437,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>1.7 动态库加载失败原因</div>
+      <div>1.7 - 1.8 动态库加载失败原因</div>
       <div>https://zeefan1555.github.io/posts/27351/</div>
     </div>
     <div class="license-meta">
@@ -449,7 +456,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2022年9月7日</div>
+          <div>2022年9月13日</div>
         </div>
       
       <div class="license-meta-item">

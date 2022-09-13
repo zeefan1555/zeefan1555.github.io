@@ -16,15 +16,15 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1 206.反转链表 力扣题目链接 题意：反转一个单链表。 示例: 输入: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL 输出: 5-&gt;4-&gt;3-&gt;2-&gt;1-&gt;NULL  2 思路 定义一个 cur 指针指向头结点 定义一个 pre 指针初始化为 null 把 cur-&gt;next的指针用 tmp 保存一下, 不保存的话一会操作 cur-">
+    <meta name="description" content="1 206.反转链表 力扣题目链接 题意：反转一个单链表。 示例: 输入: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL 输出: 5-&gt;4-&gt;3-&gt;2-&gt;1-&gt;NULL    2 思路::  定义一个 cur 指针指向头结点 定义一个 pre 指针初始化为 null   把 cur-&gt;next的指针用 tmp 保存一下:: 不保存的话一">
 <meta property="og:type" content="article">
 <meta property="og:title" content="4. 翻转链表">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/32071/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="1 206.反转链表 力扣题目链接 题意：反转一个单链表。 示例: 输入: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL 输出: 5-&gt;4-&gt;3-&gt;2-&gt;1-&gt;NULL  2 思路 定义一个 cur 指针指向头结点 定义一个 pre 指针初始化为 null 把 cur-&gt;next的指针用 tmp 保存一下, 不保存的话一会操作 cur-">
+<meta property="og:description" content="1 206.反转链表 力扣题目链接 题意：反转一个单链表。 示例: 输入: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL 输出: 5-&gt;4-&gt;3-&gt;2-&gt;1-&gt;NULL    2 思路::  定义一个 cur 指针指向头结点 定义一个 pre 指针初始化为 null   把 cur-&gt;next的指针用 tmp 保存一下:: 不保存的话一">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-08-11T13:28:00.000Z">
-<meta property="article:modified_time" content="2022-08-18T07:41:17.706Z">
+<meta property="article:modified_time" content="2022-09-13T15:18:38.694Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.3k 字
+          2.1k 字
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          7 分钟
+          11 分钟
         
       </span>
     
@@ -284,7 +284,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年8月18日 下午
+                    本文最后更新于：2022年9月13日 晚上
                   
                 
               </p>
@@ -295,11 +295,15 @@
 <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-linked-list/">力扣题目链接</a></p>
 <p>题意：反转一个单链表。</p>
 <p>示例: 输入: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL 输出: 5-&gt;4-&gt;3-&gt;2-&gt;1-&gt;NULL</p>
-<h1 id="2-思路"><a class="markdownIt-Anchor" href="#2-思路"></a> 2 思路</h1>
+<!-- basicblock-start oid="ObszBzLzJJYMnKT1ZE20GtzE" --> 
+<h1 id="2-思路"><a class="markdownIt-Anchor" href="#2-思路"></a> 2 思路::</h1>
+<!-- basicblock-end -->
 <p>定义一个 cur 指针指向头结点<br>
-定义一个 pre 指针初始化为 null<br>
-把 cur-&gt;next的指针用 tmp 保存一下,<br>
+定义一个 pre 指针初始化为 null</p>
+<!-- basicblock-start oid="ObsdHorCNRIzYgrekNFQjNvX" --> 
+<p>把 cur-&gt;next的指针用 tmp 保存一下::<br>
 不保存的话一会操作 cur-&gt;next 指针, 原来 cur-&gt;next 连接的元素就会找不到</p>
+<!-- basicblock-end -->
 <ol>
 <li>改变方向
 <ol>
@@ -315,19 +319,39 @@
 </li>
 </ol>
 <p>![[4. 翻转链表 2022-08-11 21.51.33.excalidraw]]</p>
+<ul>
+<li>时间复杂度：O(n)，其中 nnn 是链表的长度。需要遍历链表一次。</li>
+<li>空间复杂度：O(1)。</li>
+</ul>
 <h1 id="3-代码"><a class="markdownIt-Anchor" href="#3-代码"></a> 3 代码</h1>
-<p>二刷: 通过</p>
-<h2 id="-code0-"><a class="markdownIt-Anchor" href="#-code0-"></a> <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">ListNode* <span class="hljs-title">reverseList</span><span class="hljs-params">(ListNode* head)</span> </span>{<br>        ListNode* cur = head; <span class="hljs-comment">// ❗️链表指针的定义: ListNode*</span><br>        ListNode* pre = <span class="hljs-literal">NULL</span>;<br>        ListNode* temp;<br>        <span class="hljs-keyword">while</span>(cur){ <span class="hljs-comment">// <sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="[[while 循环]]
-">[1]</span></a></sup></span><br>            temp = cur-&gt;next; <span class="hljs-comment">// ❗️写反了, 是赋值操作</span><br>            cur-&gt;next = pre;<br>            pre = cur;<br>            cur = temp;<br>        }<br>        <span class="hljs-keyword">return</span> pre; <span class="hljs-comment">// ❗️pre 最后走到了第一个元素, cur 走向了 null</span><br><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure></h2>
-<p>一刷: 编译已通过<br>
-双指针</p>
+<h2 id="31-迭代法"><a class="markdownIt-Anchor" href="#31-迭代法"></a> 3.1 迭代法</h2>
+<p>v1通过,  双指针</p>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">ListNode* <span class="hljs-title">reverseList</span><span class="hljs-params">(ListNode* head)</span> </span>{<br>        ListNode* cur = head;<br>        ListNode* pre = <span class="hljs-literal">nullptr</span>;<br>        ListNode* tmp;<br><br>        <span class="hljs-keyword">while</span>(cur){<br>            tmp = cur-&gt;next; <span class="hljs-comment">// ❗️cur-&gt;next = tmp; 目的要把 cur-&gt;next 指针先保存下来,而不是改变他</span><br>            cur-&gt;next = pre;<br>            pre = cur;<br>            cur = tmp;<br>        }<br>        <span class="hljs-keyword">return</span> pre;<br>    <br><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
-<p>递归写法</p>
+<p>二刷: 通过</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">ListNode* <span class="hljs-title">reverseList</span><span class="hljs-params">(ListNode* head)</span> </span>{<br>        ListNode* cur = head; <span class="hljs-comment">// ❗️链表指针的定义: ListNode*</span><br>        ListNode* pre = <span class="hljs-literal">NULL</span>;<br>        ListNode* temp;<br>        <span class="hljs-keyword">while</span>(cur){ <span class="hljs-comment">// <sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="[[while 循环]]
+ 
+#历史记录::
+2022/9/13🌵4. 翻转链表 :“v3: 通过”, “递归法也看了, 很秒, 中间有疑问的” ⏱0-50
+
+">[1]</span></a></sup></span><br>            temp = cur-&gt;next; <span class="hljs-comment">// ❗️写反了, 是赋值操作</span><br>            cur-&gt;next = pre;<br>            pre = cur;<br>            cur = temp;<br>        }<br>        <span class="hljs-keyword">return</span> pre; <span class="hljs-comment">// ❗️pre 最后走到了第一个元素, cur 走向了 null</span><br><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
+<p><s>v3: 没通过, 思路是的对的, 力扣上的参数好像变了,  💡模式是 java 模式</s>~~~~~~~~<br>
+v3: 通过</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>: <br>     <span class="hljs-function">ListNode* <span class="hljs-title">reverseList</span><span class="hljs-params">(ListNode* head)</span> </span>{<br>        ListNode* cur = head;<br>        ListNode* pre = <span class="hljs-literal">nullptr</span>;<br>        <span class="hljs-keyword">while</span>(cur){<br>            ListNode* temp = cur-&gt;next;<br>            cur-&gt;next = pre;<br>            pre = cur;<br>            cur = temp;<br>        }<br>        <span class="hljs-keyword">return</span> pre;<br><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
+<h2 id="32-递归法"><a class="markdownIt-Anchor" href="#32-递归法"></a> 3.2 递归法</h2>
+<p>递归写法<br>
+v1</p>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">ListNode* <span class="hljs-title">reverse</span><span class="hljs-params">(ListNode* pre, ListNode* cur)</span></span>{<br>        <span class="hljs-keyword">if</span> (cur == <span class="hljs-literal">nullptr</span>) <span class="hljs-keyword">return</span> pre;<br>        ListNode* tmp = cur-&gt;next;<br>        cur-&gt;next = pre;<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">reverse</span>(cur, tmp);<span class="hljs-comment">// ❗️前边还有 return, 把参数返回给下一层</span><br>    }<br>    <span class="hljs-function">ListNode* <span class="hljs-title">reverseList</span><span class="hljs-params">(ListNode* head)</span> </span>{<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">reverse</span>(<span class="hljs-literal">nullptr</span>, head);<br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
+<!-- basicblock-start oid="ObsFtou7Uh8VHZEr09yW74ms" deck = "👨🏻‍💻code::数据结构与算法::代码随想录::链表::4. 翻转链表.md" --> 
+<p>v2通过::在递归中要想返回 if语句中的返回值, 就在递归前直接加 return, 不要在下边再加操作(会导致回溯)</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">ListNode* <span class="hljs-title">reverse</span><span class="hljs-params">(ListNode* pre, ListNode* cur)</span></span>{<br>        <span class="hljs-keyword">if</span>(cur == <span class="hljs-literal">NULL</span>) <span class="hljs-keyword">return</span> pre;<br>        ListNode* temp = cur-&gt;next;<br>        cur-&gt;next = pre;<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">reverse</span>(cur, temp);<span class="hljs-comment">// 💡没有回溯过程 直接执行的是 if 语句里的操作就退出了</span><br>        <br>        <span class="hljs-comment">// ❗️return pre; 放到 reverse 下边就回溯了, 会不断的回退 pre 指针 </span><br>        <span class="hljs-comment">// ❓有关栈中的操作还不太明白</span><br>        <br>    }<br>    <span class="hljs-function">ListNode* <span class="hljs-title">reverseList</span><span class="hljs-params">(ListNode* head)</span> </span>{<br>        ListNode* cur = head;<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">reverse</span>(<span class="hljs-literal">nullptr</span>, cur);<br><br><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
+<!-- basicblock-end -->
 <hr>
 <p><strong>参考资料</strong></p>
 <section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span>[[while 循环]]
-<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
+<!-- basicblock-start oid="ObsPTlHFiqnNhfmgjUwEkUPi" deck = "👨🏻‍💻code::数据结构与算法::代码随想录::链表::4. 翻转链表.md" --> 
+#历史记录::<br>
+2022/9/13🌵4. 翻转链表 :“v3: 通过”, “递归法也看了, 很秒, 中间有疑问的” ⏱0-50
+<!-- basicblock-end --><a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
               
             </div>
             <hr/>
@@ -404,7 +428,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2022年8月18日</div>
+          <div>2022年9月13日</div>
         </div>
       
       <div class="license-meta-item">

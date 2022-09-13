@@ -16,18 +16,18 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="递归的实现就是：每一次递归调用都会把函数的局部变量、参数值和返回地址等压入调用栈中，然后递归返回的时候，从栈顶弹出上一次递归的各项参数，所以这就是递归为什么可以返回上一层位置的原因。 此时大家应该知道我们用栈也可以是实现二叉树的前后中序遍历了。 144.二叉树的前序遍历 94.二叉树的中序遍历 145.二叉树的后序遍历    1 前序遍历(迭代法):: 先将根节点放入栈中后弹出，然后将右孩子加入栈">
+    <meta name="description" content="递归的实现就是：每一次递归调用都会把函数的局部变量、参数值和返回地址等压入调用栈中，然后递归返回的时候，从栈顶弹出上一次递归的各项参数，所以这就是递归为什么可以返回上一层位置的原因。 此时大家应该知道我们用栈也可以是实现二叉树的前后中序遍历了。 144.二叉树的前序遍历 94.二叉树的中序遍历 145.二叉树的后序遍历    1 前序遍历(迭代法):: 先将根节点放入栈中后弹出，然后先加入右孩子入">
 <meta property="og:type" content="article">
 <meta property="og:title" content="3. 二叉树的迭代遍历">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/8180/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="递归的实现就是：每一次递归调用都会把函数的局部变量、参数值和返回地址等压入调用栈中，然后递归返回的时候，从栈顶弹出上一次递归的各项参数，所以这就是递归为什么可以返回上一层位置的原因。 此时大家应该知道我们用栈也可以是实现二叉树的前后中序遍历了。 144.二叉树的前序遍历 94.二叉树的中序遍历 145.二叉树的后序遍历    1 前序遍历(迭代法):: 先将根节点放入栈中后弹出，然后将右孩子加入栈">
+<meta property="og:description" content="递归的实现就是：每一次递归调用都会把函数的局部变量、参数值和返回地址等压入调用栈中，然后递归返回的时候，从栈顶弹出上一次递归的各项参数，所以这就是递归为什么可以返回上一层位置的原因。 此时大家应该知道我们用栈也可以是实现二叉树的前后中序遍历了。 144.二叉树的前序遍历 94.二叉树的中序遍历 145.二叉树的后序遍历    1 前序遍历(迭代法):: 先将根节点放入栈中后弹出，然后先加入右孩子入">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/008eGmZEly1gnbmss7603g30eq0d4b2a.gif">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/008eGmZEly1gnbmuj244bg30eq0d4kjm.gif">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20200808200338924.png">
 <meta property="article:published_time" content="2022-09-02T01:29:00.000Z">
-<meta property="article:modified_time" content="2022-09-07T01:37:19.307Z">
+<meta property="article:modified_time" content="2022-09-11T01:39:58.826Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="二叉树">
 <meta name="twitter:card" content="summary_large_image">
@@ -289,7 +289,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年9月7日 上午
+                    本文最后更新于：2022年9月11日 上午
                   
                 
               </p>
@@ -303,7 +303,7 @@
 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-tree-postorder-traversal/">145.二叉树的后序遍历</a></p>
 <!-- basicblock-start oid="ObsnXiRU0AMeO0AokNDOO4DN" --> 
 <h1 id="1-前序遍历迭代法"><a class="markdownIt-Anchor" href="#1-前序遍历迭代法"></a> 1 前序遍历(迭代法)::</h1>
-<p>先将根节点放入栈中<strong>后弹出</strong>，然后将右孩子加入栈<strong>后弹出</strong>，再加入左孩子<strong>后弹出</strong>。</p>
+<p>先将根节点放入栈中<strong>后弹出</strong>，然后<strong>先加入右孩子</strong>入栈<strong>后弹出</strong>，<strong>后加入左孩子后弹出</strong>。</p>
 <p>为什么要先加入 右孩子，再加入左孩子呢？ 因为这样出栈的时候才是中左右的顺序。</p>
 <p>动画如下：<br>
 <img src="https://tva1.sinaimg.cn/large/008eGmZEly1gnbmss7603g30eq0d4b2a.gif" srcset="/img/loading.gif" lazyload alt="二叉树前序遍历（迭代法）"></p>
@@ -414,7 +414,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2022年9月7日</div>
+          <div>2022年9月11日</div>
         </div>
       
       <div class="license-meta-item">
