@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>C++基础</title>
+    <link href="/posts/44179/"/>
+    <url>/posts/44179/</url>
+    
+    <content type="html"><![CDATA[<h1 id="1-指针与引用"><a class="markdownIt-Anchor" href="#1-指针与引用"></a> 1 指针与引用::</h1><p>指针存放某个对象的地址，❓其本身就是变量（命了名的对象）❓，<br>本身就有地址，所以可以有指向指针的指针；<br>所指向的地址和其指向的地址中所存放的数据, 都可以改变.</p><p>引用就是变量的别名，从一而终，不可变，必须初始化, 不存在指向空值的引用，但是存在指向空值的指针</p><!-- basicblock-end --><!-- basicblock-start oid="Obs2B8oGr5nTzAffAQrPykHp"  extra = "[margin](marginnote3app://note/DF7FE30B-C7ED-4374-AA09-FDD201AA5A93)"--> <h1 id="2-const关键字"><a class="markdownIt-Anchor" href="#2-const关键字"></a> 2 const关键字::</h1><p>const的作用： 被它修饰的值不能改变，是只读变量。必须在定义的时候就给它赋初值。</p><h2 id="21-1-常量指针底层const-底层数据无法通过指针改变"><a class="markdownIt-Anchor" href="#21-1-常量指针底层const-底层数据无法通过指针改变"></a> 2.1 1、常量指针（底层const) : 底层数据无法通过指针改变</h2><p><mark>常量指针</mark>： 是指定义了一个指针，这个指针指向一个只读的对象，<strong>不能通过常量指针来改变这个对象的值。</strong><br>常量指针强调的是<strong>指针对其所指对象的不可改变性</strong>。<br>特点： 靠近变量名。<br>形式：</p><figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">// 1 常量指针, 💡指针在后边</span><br><span class="hljs-type">int</span> temp = <span class="hljs-number">10</span>;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> *p = &amp;temp;<span class="hljs-comment">// (1) const 数据类型 *指针变量 = &amp;变量名</span><br><span class="hljs-type">int</span> <span class="hljs-type">const</span> *p = &amp;temp;<span class="hljs-comment">// (2)数据类型 const *指针变量 = &amp;变量名</span><br><br>*p = <span class="hljs-number">9</span>; <span class="hljs-comment">// 错误,不能通过常量指针来改变这个对象的值。</span><br>temp = <span class="hljs-number">9</span>; <span class="hljs-comment">// 正确, 直接改变原来对象可以</span><br><br></code></pre></td></tr></tbody></table></figure><h2 id="22-2-指针常量-顶层const-指针指向的对象无法改变"><a class="markdownIt-Anchor" href="#22-2-指针常量-顶层const-指针指向的对象无法改变"></a> 2.2 2、指针常量 (顶层const): 指针指向的对象无法改变</h2><p>指针常量： 指针常量是指定义了一个指针，这个指针的值只能在定义时初始化，其他地方不能改变。<br>指针常量强调的是指针的不可改变性。<br>特点： 靠近变量类型。</p><figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c++">形式： 数据类型* <span class="hljs-type">const</span> 指针变量 = &amp;变量名<br><br><span class="hljs-comment">//2.指针常量, 💡指针在前边</span><br><span class="hljs-type">int</span> tmp3 = <span class="hljs-number">12</span>;<br><span class="hljs-type">int</span> tmp4 = <span class="hljs-number">13</span>;<br><span class="hljs-type">int</span>* <span class="hljs-type">const</span> p = &amp;tmp3；<span class="hljs-comment">// 常量指针</span><br>*p = <span class="hljs-number">9</span>; <span class="hljs-comment">//正确：可以更改指向对象的值</span><br> p = &amp;tmp4；<span class="hljs-comment">//错误：不可以指向新的对象, 💡指针不可以修改</span><br></code></pre></td></tr></tbody></table></figure><!-- basicblock-end --><!-- basicblock-start oid="ObsgLK5epyESFi7Y3d3ciOJg"  extra = "[margin](marginnote3app://note/53F1C912-5C26-418E-AF65-412FA8360CD4)"--> <h1 id="3-define和typedef的区别"><a class="markdownIt-Anchor" href="#3-define和typedef的区别"></a> 3 define和typedef的区别::</h1><!-- basicblock-end --><p>都是用来起别名的</p><h2 id="31-使用区别"><a class="markdownIt-Anchor" href="#31-使用区别"></a> 3.1 使用区别</h2><h3 id="311-define"><a class="markdownIt-Anchor" href="#311-define"></a> 3.1.1 <strong>define</strong></h3><ol><li>可以给常量起别名 ,</li><li>也可以给类型起别名, 但是只能用一次, 不能连续用<br>eg:</li></ol><figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c">define MAX <span class="hljs-number">255</span>; <span class="hljs-comment">// max = 255</span><br>define st <span class="hljs-built_in">string</span>;  <span class="hljs-comment">// st = string</span><br>st a = <span class="hljs-string">"hello"</span> <span class="hljs-comment">//  string a = "hello"</span><br>st b = <span class="hljs-string">"world"</span> <span class="hljs-comment">// 💡只能用一次, 这里就失效了</span><br></code></pre></td></tr></tbody></table></figure><h3 id="312-typedef"><a class="markdownIt-Anchor" href="#312-typedef"></a> 3.1.2 <strong>typedef</strong></h3><p>只能给类型起别名, 可以连续用</p><blockquote><p>有些类型特别长, 每次写比较复杂, 所以用一个简单的来代替它</p></blockquote><figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-keyword">typedef</span> <span class="hljs-built_in">string</span> st;  <span class="hljs-comment">// st = string</span><br>st a = <span class="hljs-string">"hello"</span> <span class="hljs-comment">//  string a = "hello"</span><br>st b = <span class="hljs-string">"world"</span> <span class="hljs-comment">//  string b = "world"</span><br></code></pre></td></tr></tbody></table></figure><p><img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202209142129292.png" alt="|500"></p><p>一般来说, 我们用 define 给常量起别名, 用 typedef 给类型起别名</p><p>![[1.1-1.2 GCC 2022-09-06 20.50.17.excalidraw]]</p><h2 id="32-定义区别"><a class="markdownIt-Anchor" href="#32-定义区别"></a> 3.2 定义区别</h2><h3 id="321-define"><a class="markdownIt-Anchor" href="#321-define"></a> 3.2.1 define:</h3><ol><li>被称为宏定义是 C 语言的一种预处指令, 宏定义的本质是单纯的字符中替换,没有类型检查, 不安全</li><li>是在编译的预处理阶段, 直接进行文本替换<ol start="3"><li><img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202209142145810.png" alt=""></li><li><a href="https://www.bilibili.com/video/BV1si4y1x781?spm_id_from=333.337.search-card.all.click&amp;vd_source=f2340d96e99780a96b50d8096ffaaf1a">C语言：typedef和define到底有什么不同_哔哩哔哩_bilibili</a></li></ol></li></ol><!-- basicblock-start oid="ObsgLK5epyESFi7Y3d3ciOJg" deck="❓疑问::👨🏻‍💻code::C++::C++基础.md"--><ol start="3"><li>可以用来防止头文件重复引用</li><li>不分配内存，给出的是立即数，有多少次使用就进行多少次替换</li></ol><!-- basicblock-end --><p>^6azck6</p><h3 id="322-typedef"><a class="markdownIt-Anchor" href="#322-typedef"></a> 3.2.2 typedef</h3><ol><li><p>为一种类型起一个新的名字</p></li><li><p>是在编译、运行的时候处理的, 不是在预处理的时候进行替换的</p></li><li><p>有对应的数据类型，是要进行判断.</p><ul><li>💡检查传入的参数, 是否符合我要进行计算的类型</li></ul></li></ol><!-- basicblock-start oid="ObsU6IgmxT0EsYQGwT1vlvgL" deck="❓疑问::👨🏻‍💻code::C++::C++基础.md"--><ol start="4"><li>在静态存储区中分配空间，在程序运行过程中内存中只有一个拷贝</li></ol><!-- basicblock-end --><!-- basicblock-start oid="Obsy1SMLwOpHxSLCrrHTVBF9"  extra = "[margin](marginnote3app://note/2C28D3E0-C477-4881-85C5-7E06660DD83B)"--> <h1 id="4-define和inline的区别"><a class="markdownIt-Anchor" href="#4-define和inline的区别"></a> 4 define和inline的区别::</h1><ol><li>define<br>![[C++基础#3 2 1 define]]</li></ol><p>2、inline:<br>调用简单函数时, 直接把简单函数的内容放到调用的地方</p><p>inline是先将内联函数编译完成生成了函数体直接插入被调用的地方，减少了压栈，跳转和返回的操作。没有普通函数调用时的额外开销；</p><p>内联函数是一种特殊的函数，会进行类型检查, 这是比 define 宏定义的优势</p><p>对编译器的一种<strong>建议</strong>，编译器有可能拒绝这种请求,</p><ul><li>&amp; 自己不定义内联函数, 编译器也会为简单函数执行内联操作</li><li>&amp; 自己定义的内联函数, 如果太复杂, 编译器也会拒绝</li></ul><p>![[C++基础 2022-09-14 22.23.18.excalidraw]]</p><!-- basicblock-end -->]]></content>
+    
+    
+    <categories>
+      
+      <category>👨🏻‍💻code</category>
+      
+      <category>C++</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>C++基础</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>18. 路径总和</title>
     <link href="/posts/38740/"/>
     <url>/posts/38740/</url>
@@ -2705,9 +2732,9 @@
     
     <tags>
       
-      <tag>待解决</tag>
-      
       <tag>复杂度</tag>
+      
+      <tag>待解决</tag>
       
     </tags>
     
@@ -4130,29 +4157,6 @@
   
   <entry>
     <title>c++中 - ‘0’ 以及 -&#39;a&#39; 的相减操作解释</title>
-    <link href="/posts/12294/"/>
-    <url>/posts/12294/</url>
-    
-    <content type="html"><![CDATA[<p>#card</p><!-- basicblock-start oid="Obsjxsm7GHlDNaFEJ8JDaRpy" --> <p>c++中 - ‘0’ 的相减操作解释::</p><p>将数字字符转为整形变量</p><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// 将str 字符串"1234"里的各个数字字符转成整型，存入整型数组x：</span><br><span class="hljs-type">char</span> str[]=<span class="hljs-string">"1234"</span>;<br><span class="hljs-type">int</span> x[<span class="hljs-number">4</span>] = <span class="hljs-number">0</span>;<br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>; i&lt;<span class="hljs-number">4</span>; i++) x[i] = str[i] - <span class="hljs-string">'0'</span>; <br></code></pre></td></tr></tbody></table></figure><blockquote><p>数字字符减去‘0’就得到了该数字。减去字符0，也就是减去0的ASCII码值48。</p></blockquote><!-- basicblock-end --><p>#card</p><!-- basicblock-start oid="Obsi6n6UMJL06B3xTO9d9jTl" --> <p>c++中 -‘a’ 的相减操作解释::</p><h1 id="1-取到字母字符对应的数字a0b1"><a class="markdownIt-Anchor" href="#1-取到字母字符对应的数字a0b1"></a> 1 取到字母字符对应的数字：a→0，b→1…</h1><p><strong>原理：a - ‘a’ = 0, b - ‘a’ = 1 …</strong></p><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-type">int</span> hash[<span class="hljs-number">27</span>] = {<span class="hljs-number">0</span>};<br>S = <span class="hljs-string">"ababcbacadefegdehijhklij"</span><span class="hljs-comment">// S[0] - 'a'= 0</span><br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; S.<span class="hljs-built_in">size</span>(); i++) { <br>            hash[S[i] - <span class="hljs-string">'a'</span>] = i; <span class="hljs-comment">//</span><br>        }<br></code></pre></td></tr></tbody></table></figure><p>eg :[[19.划分字母区间#^dhg2oc]]  , [[2. 有效的字母异位词]]<br>[01:03](file:///Users/yibeikongqiu/Desktop/ishot%E8%A7%86%E9%A2%91/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/19.%E5%88%92%E5%88%86%E5%AD%97%E6%AF%8D%E5%8C%BA%E9%97%B4(carl).mp4#t=63.222835)<br>S = “<strong>a</strong>babcbac<strong>a</strong>defegdehijhklij”<br>将每一个字母的所对应的下标值放到了hash数组里了，相同字母的是更新的，因为 S[1] - ‘a’=&nbsp;S[6] - ‘a’ = 0</p><h1 id="2-将字母由小写转为大写"><a class="markdownIt-Anchor" href="#2-将字母由小写转为大写"></a> 2 将字母由小写转为大写</h1><p>字母字符- 'a’得到 该字母下的下标</p><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// 把字符串中字母，小写变大写</span><br><span class="hljs-type">char</span> str[]=<span class="hljs-string">"aBcxYz"</span>;<br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>; i&lt;<span class="hljs-built_in">strlen</span>(str); i++)<br><span class="hljs-keyword">if</span> (str[i] &gt;=<span class="hljs-string">'a'</span> &amp;&amp; str[i] &lt;=<span class="hljs-string">'z'</span>) str[i] = str[i] -<span class="hljs-string">'a'</span> + <span class="hljs-string">'A'</span>;<br></code></pre></td></tr></tbody></table></figure><p>本质是减去 a 的 ASII 值, 在加上 A 的 ASII 值. 改变了字母的 起始 ASII 值</p><!-- basicblock-end --><p>[[有关字符要想到的操作]]</p>]]></content>
-    
-    
-    <categories>
-      
-      <category>👨🏻‍💻code</category>
-      
-      <category>C++</category>
-      
-      <category>C++ primer plus</category>
-      
-    </categories>
-    
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>c++中 - ‘0’ 以及 -&#39;a&#39; 的相减操作解释</title>
     <link href="/posts/12295/"/>
     <url>/posts/12295/</url>
     
@@ -4175,6 +4179,29 @@
       <tag>函数</tag>
       
     </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>c++中 - ‘0’ 以及 -&#39;a&#39; 的相减操作解释</title>
+    <link href="/posts/12294/"/>
+    <url>/posts/12294/</url>
+    
+    <content type="html"><![CDATA[<p>#card</p><!-- basicblock-start oid="Obsjxsm7GHlDNaFEJ8JDaRpy" --> <p>c++中 - ‘0’ 的相减操作解释::</p><p>将数字字符转为整形变量</p><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// 将str 字符串"1234"里的各个数字字符转成整型，存入整型数组x：</span><br><span class="hljs-type">char</span> str[]=<span class="hljs-string">"1234"</span>;<br><span class="hljs-type">int</span> x[<span class="hljs-number">4</span>] = <span class="hljs-number">0</span>;<br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>; i&lt;<span class="hljs-number">4</span>; i++) x[i] = str[i] - <span class="hljs-string">'0'</span>; <br></code></pre></td></tr></tbody></table></figure><blockquote><p>数字字符减去‘0’就得到了该数字。减去字符0，也就是减去0的ASCII码值48。</p></blockquote><!-- basicblock-end --><p>#card</p><!-- basicblock-start oid="Obsi6n6UMJL06B3xTO9d9jTl" --> <p>c++中 -‘a’ 的相减操作解释::</p><h1 id="1-取到字母字符对应的数字a0b1"><a class="markdownIt-Anchor" href="#1-取到字母字符对应的数字a0b1"></a> 1 取到字母字符对应的数字：a→0，b→1…</h1><p><strong>原理：a - ‘a’ = 0, b - ‘a’ = 1 …</strong></p><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-type">int</span> hash[<span class="hljs-number">27</span>] = {<span class="hljs-number">0</span>};<br>S = <span class="hljs-string">"ababcbacadefegdehijhklij"</span><span class="hljs-comment">// S[0] - 'a'= 0</span><br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; S.<span class="hljs-built_in">size</span>(); i++) { <br>            hash[S[i] - <span class="hljs-string">'a'</span>] = i; <span class="hljs-comment">//</span><br>        }<br></code></pre></td></tr></tbody></table></figure><p>eg :[[19.划分字母区间#^dhg2oc]]  , [[2. 有效的字母异位词]]<br>[01:03](file:///Users/yibeikongqiu/Desktop/ishot%E8%A7%86%E9%A2%91/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/19.%E5%88%92%E5%88%86%E5%AD%97%E6%AF%8D%E5%8C%BA%E9%97%B4(carl).mp4#t=63.222835)<br>S = “<strong>a</strong>babcbac<strong>a</strong>defegdehijhklij”<br>将每一个字母的所对应的下标值放到了hash数组里了，相同字母的是更新的，因为 S[1] - ‘a’=&nbsp;S[6] - ‘a’ = 0</p><h1 id="2-将字母由小写转为大写"><a class="markdownIt-Anchor" href="#2-将字母由小写转为大写"></a> 2 将字母由小写转为大写</h1><p>字母字符- 'a’得到 该字母下的下标</p><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// 把字符串中字母，小写变大写</span><br><span class="hljs-type">char</span> str[]=<span class="hljs-string">"aBcxYz"</span>;<br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>; i&lt;<span class="hljs-built_in">strlen</span>(str); i++)<br><span class="hljs-keyword">if</span> (str[i] &gt;=<span class="hljs-string">'a'</span> &amp;&amp; str[i] &lt;=<span class="hljs-string">'z'</span>) str[i] = str[i] -<span class="hljs-string">'a'</span> + <span class="hljs-string">'A'</span>;<br></code></pre></td></tr></tbody></table></figure><p>本质是减去 a 的 ASII 值, 在加上 A 的 ASII 值. 改变了字母的 起始 ASII 值</p><!-- basicblock-end --><p>[[有关字符要想到的操作]]</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>👨🏻‍💻code</category>
+      
+      <category>C++</category>
+      
+      <category>C++ primer plus</category>
+      
+    </categories>
+    
     
   </entry>
   
