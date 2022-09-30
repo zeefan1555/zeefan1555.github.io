@@ -1,0 +1,955 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202206251952371.png">
+  <link rel="icon" href="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202206251952371.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="zeefan">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="1 Makefile    1.1 什么是 Makefile:: 一个工程中的源文件不计其数，其按类型、功能、模块分别放在若干个目录中， Makefile 文件定义了一系列的规则来指定哪些文件需要先编译，哪些文件需要后编译，哪些文件需要重新编译，甚至于进行更复杂的功能操作，因为 Makefile 文件就 像一个 Shell 脚本一样，也可以执行操作系统的命令。 Makefile 带来的好处就是“">
+<meta property="og:type" content="article">
+<meta property="og:title" content="1.10 - 1.12 makefile">
+<meta property="og:url" content="https://zeefan1555.github.io/posts/55359/index.html">
+<meta property="og:site_name" content="一杯空气">
+<meta property="og:description" content="1 Makefile    1.1 什么是 Makefile:: 一个工程中的源文件不计其数，其按类型、功能、模块分别放在若干个目录中， Makefile 文件定义了一系列的规则来指定哪些文件需要先编译，哪些文件需要后编译，哪些文件需要重新编译，甚至于进行更复杂的功能操作，因为 Makefile 文件就 像一个 Shell 脚本一样，也可以执行操作系统的命令。 Makefile 带来的好处就是“">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202209211553114.png">
+<meta property="article:published_time" content="2022-09-18T07:06:00.000Z">
+<meta property="article:modified_time" content="2022-09-25T07:08:10.639Z">
+<meta property="article:author" content="zeefan">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202209211553114.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>1.10 - 1.12 makefile - 一杯空气</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.15.6/katex.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"zeefan1555.github.io","root":"/","version":"1.9.1","typing":{"enable":true,"typeSpeed":150,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"Text"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":10},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>一杯空气</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="1.10 - 1.12 makefile"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-09-18 15:06" pubdate>
+          2022年9月18日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          27 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">1.10 - 1.12 makefile</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2022年9月25日 下午
+                  
+                
+              </p>
+            
+            <div class="markdown-body">
+              
+              <h1 id="1-makefile"><a class="markdownIt-Anchor" href="#1-makefile"></a> 1 Makefile</h1>
+<!-- basicblock-start oid="ObsVCbaeXVzkBEHxQDAmKbkk" --> 
+<h2 id="11-什么是-makefile"><a class="markdownIt-Anchor" href="#11-什么是-makefile"></a> 1.1 什么是 Makefile::</h2>
+<p>一个工程中的源文件不计其数，其按类型、功能、模块分别放在若干个目录中， <strong>Makefile 文件定义了一系列的规则来指定哪些文件需要先编译，哪些文件需要后编译，哪些文件需要重新编译，甚至于进行更复杂的功能操作</strong>，因为 Makefile 文件就 像一个 Shell 脚本一样，也可以执行操作系统的命令。</p>
+<p>Makefile 带来的好处就是“自动化编译” ，一旦写好，只需要一个 make 命令，整 个工程完全自动编译，极大的提高了软件开发的效率。make 是一个命令工具，是一个 解释 Makefile 文件中指令的命令工具，一般来说，大多数的 IDE 都有这个命令， 比如 Delphi 的 make，Visual C++ 的 nmake，Linux 下 GNU 的 make。</p>
+<!-- basicblock-end -->
+<!-- basicblock-start oid="ObsAmYpEFlk60gco2w0pNYQs" --> 
+<h2 id="12-makefile-文件命名和规则"><a class="markdownIt-Anchor" href="#12-makefile-文件命名和规则"></a> 1.2 Makefile 文件命名和规则::</h2>
+<!-- basicblock-end -->
+<p>文件命名：makefile 或者 Makefile</p>
+<p>Makefile 规则：</p>
+<ul>
+<li>一个 Makefile 文件中可以有一个或者多个规则</li>
+</ul>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c">目标 : 依赖 <br>    命令(Shell 命令)<span class="hljs-comment">// 前边是 tab 缩进</span><br>    <br></code></pre></td></tr></tbody></table></figure>
+<p>目标:最终要生成的文件(伪目标除外)</p>
+<p>依赖:生成目标所需要的文件或是目标</p>
+<p>命令:通过执行命令对依赖操作生成目标(命令前必须 Tab 缩进)</p>
+<p><strong>- Makefile 中的其它规则一般都是为第一条规则服务的。</strong></p>
+<p>make默认只执行Makefile第一条语句，如果其他语句与第一条无关，则不执行。</p>
+<!-- basicblock-start oid="Obs6liwB1xuL7V0E3XVnOAaY" deck = "👨🏻‍💻code::项目::webserver::1 第一章::1.10 - 1.12 makefile.md" --> 
+<h3 id="121-通过-makefile-自动化编译工程"><a class="markdownIt-Anchor" href="#121-通过-makefile-自动化编译工程"></a> 1.2.1 通过 makefile 自动化编译工程::</h3>
+<p>先安裝一下 make 命令：sudo apt install make</p>
+<p>目标: 对calc中的进行编译一起生成一个app可执行文件</p>
+<p>创建 makefile 文件</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c">vim Makefile <span class="hljs-comment">// Makefile 文件一定命名为Makefile 或者makefile, 不然识别不了</span><br></code></pre></td></tr></tbody></table></figure>
+<p>编辑 makefile ：</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c">app: sub.c add.c mult.c div.c main.c<span class="hljs-comment">// 目标 : 依赖</span><br>        gcc sub.c add.c mult.c div.c main.c -o app <span class="hljs-comment">// 命令</span><br></code></pre></td></tr></tbody></table></figure>
+<p><code>make</code> 命令: <strong>按<mark>当前目录下</mark>的 makefile 去自动执行命令</strong>，生成了 app。</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c">make   <span class="hljs-comment">// 相当于执行了:  gcc sub.c add.c mult.c div.c main.c -o app</span><br></code></pre></td></tr></tbody></table></figure>
+<!-- basicblock-end -->
+<!-- basicblock-start oid="Obs1xOoIzB6f6HvBbnut4dKl" deck = "👨🏻‍💻code::项目::webserver::1 第一章::1.10 - 1.12 makefile.md" --> 
+<h3 id="122-工作原理"><a class="markdownIt-Anchor" href="#122-工作原理"></a> 1.2.2 工作原理::</h3>
+<!-- basicblock-end -->
+<ul>
+<li>&amp; Makefile 中的其它规则一般都是为第一条规则服务的。</li>
+<li>命令在执行之前，<strong>需要先检查规则中的依赖是否存在</strong></li>
+<li>如果存在，执行命令</li>
+<li>如果不存在，向下检查其它的规则，检查有没有一个规则是用来生成这个依赖的，如果找到了，则执行该规则中的命令。</li>
+<li>检测更新，在执行规则中的命令时，会比较目标和依赖文件的时间</li>
+<li>如果依赖的时间比目标的时间晚，需要重新生成目标。<br>
+eg: main.c 被修改了<br>
+main.o: main.c<br>
+gcc -c main.c -o main.o<br>
+因为main.c的时间比main.o的时间晚，说明了它更新过了。所以要重新执行该命令生成最新的main.o</li>
+<li>如果依赖的时间比目标的时间早，目标不需要更新，对应规则中的命令不需要被执行。</li>
+</ul>
+<p>案例：</p>
+<p>编辑 makefile 文件。</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs c">app: sub.o add.o mult.o div.o main.o <span class="hljs-comment">//💡app 是目标: 后边是他的依赖</span><br>        gcc sub.o add.o mult.o div.o main.o -o app<br><br>sub.o:sub.c <span class="hljs-comment">// 💡二级目标和依赖</span><br>        gcc -c sub.c -o sub.o<br><br>add.o:add.c<br>        gcc -c add.c -o add.o<br><br>mult.o:mult.c<br>        gcc -c mult.c -o mult.o<br><br>div.o:div.c<br>        gcc -c div.c -o div.o<br><br>main.o:main.c<br>        gcc -c main.c -o main.o<br><br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c">make<br><span class="hljs-comment">// 相当于执行了以下命令</span><br>-&gt;<br>gcc -c sub.c -o sub.o <span class="hljs-comment">// 先执行二级目标依赖, 他们是为一级目标依赖提供支持的</span><br>gcc -c add.c -o add.o<br>gcc -c mult.c -o mult.o<br>gcc -c div.c -o div.o<br>gcc -c main.c -o main.o<br>gcc sub.o add.o mult.o div.o main.o -o app<br></code></pre></td></tr></tbody></table></figure>
+<p>而<strong>分规则的</strong>写法，只会重新编译有修改的 .o 文件，再链接生成 app，效率更高。<br>
+假设只有add.c 修改了，后边只会执行 add.o:add.c 这个命令<br>
+只更新修改过的</p>
+<p>与前面的 makefile 写法对比：</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// 这里直接一步到位的, -o 命令直接使.c 文件生成了.o 文件</span><br>app: sub.c add.c mult.c div.c main.c<br>        gcc sub.c add.c mult.c div.c main.c -o app<br></code></pre></td></tr></tbody></table></figure>
+<p>当 .c 文件更新时，makefile 在执行规则中的命令时，会比较目标和依赖文件的时间，如果依赖的时间比目标的时间晚，会更新目标。这种写法一旦更新某一个文件，都会执行该命令，重新编译所有的 .o 文件，再链接更新 app 。</p>
+<ul>
+<li>&amp; 所有的规则都是服务于第一条规则的，如果下边的规则生成的不是第一个规则所需的依赖，或者与第一条规则没关系就不会执行(除非特别指定）</li>
+</ul>
+<!-- basicblock-start oid="Obs4fvRLFfjnlOxNz9YXPNdy" --> 
+<h2 id="13-如何简化-makefile-的写法"><a class="markdownIt-Anchor" href="#13-如何简化-makefile-的写法"></a> 1.3 如何简化 makefile 的写法::</h2>
+<ul>
+<li>? 这些好像只能在 makefile 文件下用, 我在外边使用说找不到该命令</li>
+<li>? <img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202209211553114.png" srcset="/img/loading.gif" lazyload alt=""></li>
+</ul>
+<!-- basicblock-end -->
+<ul>
+<li>
+<p>自定义变量</p>
+<p><code>变量名=变量值</code>  <code>var=hello</code></p>
+</li>
+</ul>
+<!-- basicblock-start oid="Obs4ecx2iEKtVarUMlbJgmPl" --> 
+<ul>
+<li>预定义变量(提前定义好的变量)::</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>预定义变量</th>
+<th></th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AR</td>
+<td>归档维护程序的名称，默认值为 ar</td>
+<td>之前静态库打包用的</td>
+</tr>
+<tr>
+<td>CC</td>
+<td>C 编译器的名称，默认值为 cc</td>
+<td>可以理解成 gcc</td>
+</tr>
+<tr>
+<td>CXX</td>
+<td>C++ 编译器的名称，默认值为 g++</td>
+<td></td>
+</tr>
+<tr>
+<td>$@</td>
+<td>目标的完整名称</td>
+<td>获取某一个内容</td>
+</tr>
+<tr>
+<td>$&lt;</td>
+<td>第一个依赖文件的名称</td>
+<td></td>
+</tr>
+<tr>
+<td>$^</td>
+<td>所有的依赖文件</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<!-- basicblock-end -->
+<ul>
+<li>如何获取变量的值<br>
+<code>$(变量名)</code><br>
+eg:<br>
+<code>$(cc)</code>就获取到了 cc<br>
+<code>$(var)</code> 就获取到了 hello</li>
+</ul>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c">$@         $&lt;         $^       <br>这三个是自动变量, 只能在规则的命令中使用, 不能用到规则当中<br><br><span class="hljs-comment">// eg</span><br>目标 ...: 依赖 ... <span class="hljs-comment">// 这是规则</span><br>    命令(Shell 命令)<span class="hljs-comment">// 💡这是规则命令, 只能在这个部分使用</span><br></code></pre></td></tr></tbody></table></figure>
+<!-- basicblock-start oid="ObsfKH9K0Es2e68hifPe4hHn" deck = "👨🏻‍💻code::项目::webserver::1 第一章::1.10 - 1.12 makefile.md" --> 
+<p>用变量简化 makfile 命令::</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c">app:main.c a.c b.c <span class="hljs-comment">// 💡app 是目标, main.c a.c b.c 是他的依赖</span><br>			gcc -c main.c a.c b.c <br>			<span class="hljs-comment">// 上面的命令可以直接写成这样</span><br>			$(CC) -c $^ <br><span class="hljs-comment">/*</span><br><span class="hljs-comment">$(cc): gcc</span><br><span class="hljs-comment">$^ : 所有的依赖文件 : main.c a.c b.c</span><br><span class="hljs-comment">$@ : 目标的完整名称 :&nbsp;app          </span><br><span class="hljs-comment">*/</span><br></code></pre></td></tr></tbody></table></figure>
+<!-- basicblock-end -->
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs c"># 定义变量<br>src=sub.o add.o mult.o div.o main.o<span class="hljs-comment">// 定义依赖</span><br>target=app <span class="hljs-comment">// 定义目标</span><br><br>$(target):$(src)<br>        $(CC) $(src) -o $(target)<br><br><span class="hljs-comment">// 下边的二级目标和依赖还要手动写, 怎么解决看下边 ### 1.3.1</span><br>sub.o:sub.c<br>        gcc -c sub.c -o sub.o<br><br>add.o:add.c<br>        gcc -c add.c -o add.o<br><br>mult.o:mult.c<br>        gcc -c mult.c -o mult.o<br><br>div.o:div.c<br>        gcc -c div.c -o div.o<br><br>main.o:main.c<br>        gcc -c main.c -o main.o       		 <br></code></pre></td></tr></tbody></table></figure>
+<!-- basicblock-start oid="ObsUdagLCQlNQvY2DaxKOpZy"  deck = "source::_posts::👨🏻‍💻code::项目::Linux"--> 
+<p>复制与删除::</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c">cp text.c text2.c <span class="hljs-comment">// 在当前目录习复制 text.c</span><br>rm * .o<span class="hljs-comment">// 删除具体后缀的文件</span><br>rm app <span class="hljs-comment">// 删除 app</span><br></code></pre></td></tr></tbody></table></figure>
+<!-- basicblock-end -->
+<!-- basicblock-start oid="ObseiWUainM23AW7mSTZZRBo" --> 
+<h3 id="131-模式匹配二级目标和依赖怎么简化"><a class="markdownIt-Anchor" href="#131-模式匹配二级目标和依赖怎么简化"></a> 1.3.1 模式匹配(二级目标和依赖怎么简化)::</h3>
+<p>^a51e57</p>
+<!-- basicblock-end -->
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// 怎么简化</span><br>sub.o:sub.c<br>        gcc -c sub.c -o sub.o<br>add.o:add.c<br>        gcc -c add.c -o add.o<br>mult.o:mult.c<br>        gcc -c mult.c -o mult.o<br>div.o:div.c<br>        gcc -c div.c -o div.o<br>main.o:main.c<br>        gcc -c main.c -o main.o <br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c">%.o:%.c<br></code></pre></td></tr></tbody></table></figure>
+<!-- basicblock-start oid="ObsDMcIqwYCJ4cTQuls17TCN" --> 
+<p>通配符%::</p>
+<ul>
+<li>%:通配符，匹配一个字符串</li>
+<li>两个%匹配的是同一个字符串</li>
+</ul>
+<!-- basicblock-end -->
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c">%.o:%.c <span class="hljs-comment">// 会匹配, sub.o : sub.c, add, mult, div main 同理</span><br>    $(cc) -c $&lt; -o $@ <span class="hljs-comment">// gcc - c sub.o -o app</span><br><span class="hljs-comment">/*</span><br><span class="hljs-comment">$(cc): gcc</span><br><span class="hljs-comment">$^ : 所有的依赖文件 : main.c a.c b.c</span><br><span class="hljs-comment">$@ : 目标的完整名称 :&nbsp;app   </span><br><span class="hljs-comment">$&lt; : 第一个依赖文件的名称</span><br><span class="hljs-comment">*/</span><br></code></pre></td></tr></tbody></table></figure>
+<p>改写后：</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c"># 定义变量<br>src=sub.o add.o mult.o div.o main.o<br>target=app<br>$(target):$(src)<br>        $(CC) $(src) -o $(target)<br>        <br>%.o:%.c<br>        $(CC) -c $&lt; -o $@ <span class="hljs-comment">// gcc - c sub.o -o app</span><br></code></pre></td></tr></tbody></table></figure>
+<ul>
+<li><code>$&lt;</code> 为第一个依赖的名称，</li>
+<li><code>$@</code> 为目标的完整名称，<br>
+<code>%.o:%.c</code>: 首先为 sub.c 生成 sub.o, 后边 add.c, mult.c, div.c, main.c 也能匹配这个规则, 因为一级目标 需要这些二级目标, 所以也会逐个生成</li>
+</ul>
+<!-- basicblock-start oid="ObscwTRNP3NVw5IXIfpM1fDb" --> 
+<h3 id="132-如何简化定义变量的操作"><a class="markdownIt-Anchor" href="#132-如何简化定义变量的操作"></a> 1.3.2 如何简化定义变量的操作::</h3>
+<!-- basicblock-end -->
+<p>定义变量的时候如何自动获取 “.x” 后缀的文件</p>
+<blockquote>
+<p>可以简化定义变量的操作, eg: src=sub.o add.o mult.o div.o main.o</p>
+</blockquote>
+<p>查找指定文件：</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c">$(wildcard PATTERN...) <span class="hljs-comment">// $(函数名 函数参数)</span><br></code></pre></td></tr></tbody></table></figure>
+<ul>
+<li>
+<p>功能：获取指定目录下<strong>指定类型</strong>的文件列表。</p>
+</li>
+<li>
+<p>参数：PATTERN 指的是某个或多个目录下的对应的某种类型的文件，如果有多个目录，一般使用空格间隔。</p>
+</li>
+<li>
+<p>返回：得到的若干个文件的文件列表，文件名之间使用空格间隔</p>
+</li>
+<li>
+<p>示例：</p>
+</li>
+</ul>
+<!-- basicblock-start oid="undefined" --> 
+<p><code>*</code>通配符::表示任意的</p>
+<!-- basicblock-end -->
+<p><code>$(wildcard ./*.c ./sub/*.c)</code> : 获取当前目录下的.c 文件 和 sub 目录下的.c 文件<br>
+返回值格式: a.c b.c c.c d.c e.c f.c</p>
+<!-- basicblock-start oid="Obs3pv8eLTaVfMMSJQLJRtpF" --> 
+<h4 id="1321-如何将c-文件变成o-文件"><a class="markdownIt-Anchor" href="#1321-如何将c-文件变成o-文件"></a> 1.3.2.1 如何将.c 文件变成.o 文件::</h4>
+<!-- basicblock-end -->
+<p>查找指定文件并替换：</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c">$(patsubst &lt;pattern&gt;,&lt;replacement&gt;,&lt;text&gt;)<br></code></pre></td></tr></tbody></table></figure>
+<ul>
+<li>示例：</li>
+</ul>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c">$(patsubst %.c, %.o, a.c b.c)<span class="hljs-comment">// 将a.c, b.c 变成 a.o, b.o</span><br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs c">- 功能：查找&lt;text&gt;中的单词(单词以“空格”、“Tab”或“回车”“换行”分隔)是否符合<br><br>  模式&lt;pattern&gt;，如果匹配的话，则以&lt;replacement&gt;替换。<br><br>- &lt;pattern&gt;可以包括通配符`%`，表示任意长度的字串。如果&lt;replacement&gt;<br><br>  中也包含`%`，那么，&lt;replacement&gt;中的这个`%`将是&lt;pattern&gt;中的那个%<br><br>  所代表的字串。(可以用`\`来转义，以`\%`来表示真实含义的`%`字符)<br><br>- 返回：函数返回被替换过后的字符串<br></code></pre></td></tr></tbody></table></figure>
+<p>优化后：</p>
+<figure class="highlight makefile"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-comment"># 定义变量</span><br><span class="hljs-comment"># add.c sub.c main.c mult.c div.c</span><br>src=<span class="hljs-variable">$(<span class="hljs-built_in">wildcard</span> ./*.c)</span> // 查找当前目录下的.c 文件<br>objs=<span class="hljs-variable">$(<span class="hljs-built_in">patsubst</span> %.c, %.o, <span class="hljs-variable">$(src)</span>)</span> // 💡将.c 文件替换成.o 文件<br><br>// 💡target=app<br><span class="hljs-variable">$(target)</span>:<span class="hljs-variable">$(objs)</span><br>        <span class="hljs-variable">$(CC)</span> <span class="hljs-variable">$(objs)</span> -o <span class="hljs-variable">$(target)</span><br><br><span class="hljs-section">%.o:%.c</span><br>        <span class="hljs-variable">$(CC)</span> -c <span class="hljs-variable">$&lt;</span> -o <span class="hljs-variable">$@</span><br></code></pre></td></tr></tbody></table></figure>
+<!-- basicblock-start oid="Obs3KbfmFrEGqbKcT09Oa6yw" deck = "👨🏻‍💻code::项目::webserver::1 第一章::1.10 - 1.12 makefile.md" --> 
+<h1 id="2-最终版本"><a class="markdownIt-Anchor" href="#2-最终版本"></a> 2 最终版本::</h1>
+<!-- basicblock-end -->
+<p>编译链接后不需要 .o 文件，可以删除，在 makefile 文件里后面加上一条规则。<br>
+^9qsu74</p>
+<figure class="highlight makefile"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-comment"># 定义变量</span><br><span class="hljs-comment"># add.c sub.c main.c mult.c div.c</span><br>src=<span class="hljs-variable">$(<span class="hljs-built_in">wildcard</span> ./*.c)</span><br>objs=<span class="hljs-variable">$(<span class="hljs-built_in">patsubst</span> %.c, %.o, <span class="hljs-variable">$(src)</span>)</span>//💡 .o 文件<br><br>target=app<br><span class="hljs-variable">$(target)</span>:<span class="hljs-variable">$(objs)</span><br>        <span class="hljs-variable">$(CC)</span> <span class="hljs-variable">$(objs)</span> -o <span class="hljs-variable">$(target)</span><br><br><br><span class="hljs-section">%.o:%.c</span><br>        <span class="hljs-variable">$(CC)</span> -c <span class="hljs-variable">$&lt;</span> -o <span class="hljs-variable">$@</span><br><br><span class="hljs-section">clean:</span><br>        rm <span class="hljs-variable">$(objs)</span> -f<br></code></pre></td></tr></tbody></table></figure>
+<p><code>clean</code> 规则与第一条规则无关，执行 <code>make</code> 时不会执行 <code>clean</code> 规则。<br>
+所以只能执行命令make clean删除：</p>
+<figure class="highlight awk"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">make clean <span class="hljs-regexp">//</span> 单独执行 clean 命令<br></code></pre></td></tr></tbody></table></figure>
+<hr>
+<p>但当有一个名为 clean 的文件时，因为<code>clean</code> 没有依赖，执行 <code>make clean</code>与名为 clean 的文件对比而更新 clean 文件，导致无法执行 <code>clean</code> 规则。<br>
+将 <code>clean</code> 定义为伪目标，这样不会生成特定的文件，就不会与名为 clean 的文件对比而无法执行 <code>clean</code> 规则了。</p>
+<figure class="highlight makefile"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-meta"><span class="hljs-keyword">.PHONY</span>:clean // 定义一个伪目标, 这样使用 make clean 就不会与外边的 clean 文件做对比了</span><br><span class="hljs-section">clean:</span><br>        rm <span class="hljs-variable">$(objs)</span> -f<br></code></pre></td></tr></tbody></table></figure>
+<ul>
+<li>&amp; 其实也没必要, 不要在当前目录下创建文件名字为 clean 的文件就行了</li>
+</ul>
+<hr>
+<p><strong>其他资料</strong></p>
+ <!-- basicblock-start oid="ObshDhqIzljSgBC0Idg3cMFj" deck = "👨🏻‍💻code::项目::webserver::1 第一章::1.10 - 1.12 makefile.md" --> 
+<p>#历史记录::<br>
+2022/9/18🌵1.10 - 1.12 makefile : 简单一点就不用那个简化版本, 复杂的需要简化版本, 我觉得学会原始版本就行. 先掌握了原始版本, 在说简化版的(那个感觉像正则表达式),最终复习版本: [[1.10 - 1.12 makefile#^9qsu74]]⏱2-0,<br>
+2022/9/19🌵整体复习了一遍, 都看懂了, 简单的⏱0-30</p>
+<!-- basicblock-end -->
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/" class="category-chain-item">👨🏻‍💻code</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/%E9%A1%B9%E7%9B%AE/" class="category-chain-item">项目</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/%E9%A1%B9%E7%9B%AE/webserver/" class="category-chain-item">webserver</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/%E9%A1%B9%E7%9B%AE/webserver/1-%E7%AC%AC%E4%B8%80%E7%AB%A0/" class="category-chain-item">1 第一章</a>
+  
+  
+
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>1.10 - 1.12 makefile</div>
+      <div>https://zeefan1555.github.io/posts/55359/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>zeefan</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年9月18日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2022年9月25日</div>
+        </div>
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/53653/" title="1.13 - 1.16 GDB调试">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">1.13 - 1.16 GDB调试</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/31429/" title="18. 从中序与后序遍历序列构造二叉树">
+                        <span class="hidden-mobile">18. 从中序与后序遍历序列构造二叉树</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

@@ -1,0 +1,807 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202206251952371.png">
+  <link rel="icon" href="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202206251952371.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="zeefan">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="1 106.从中序与后序遍历序列构造二叉树 力扣题目链接 根据一棵树的中序遍历与后序遍历构造二叉树。 注意: 你可以假设树中没有重复的元素。 例如，给出 中序遍历 inorder &#x3D;&amp;nbsp;[9,3,15,20,7] 后序遍历 postorder &#x3D; [9,15,7,20,3] 返回如下的二叉树：     2 思路::  ![[18. 从中序与后序遍历序列构造二叉树 2022-09-18 1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="18. 从中序与后序遍历序列构造二叉树">
+<meta property="og:url" content="https://zeefan1555.github.io/posts/31429/index.html">
+<meta property="og:site_name" content="一杯空气">
+<meta property="og:description" content="1 106.从中序与后序遍历序列构造二叉树 力扣题目链接 根据一棵树的中序遍历与后序遍历构造二叉树。 注意: 你可以假设树中没有重复的元素。 例如，给出 中序遍历 inorder &#x3D;&amp;nbsp;[9,3,15,20,7] 后序遍历 postorder &#x3D; [9,15,7,20,3] 返回如下的二叉树：     2 思路::  ![[18. 从中序与后序遍历序列构造二叉树 2022-09-18 1">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210203154316774.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210203154720326.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210203154626672.png">
+<meta property="article:published_time" content="2022-09-18T02:21:00.000Z">
+<meta property="article:modified_time" content="2022-09-29T01:25:45.487Z">
+<meta property="article:author" content="zeefan">
+<meta property="article:tag" content="二叉树">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20210203154316774.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>18. 从中序与后序遍历序列构造二叉树 - 一杯空气</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.15.6/katex.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"zeefan1555.github.io","root":"/","version":"1.9.1","typing":{"enable":true,"typeSpeed":150,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"Text"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":10},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>一杯空气</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="18. 从中序与后序遍历序列构造二叉树"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-09-18 10:21" pubdate>
+          2022年9月18日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.5k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          28 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">18. 从中序与后序遍历序列构造二叉树</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2022年9月29日 上午
+                  
+                
+              </p>
+            
+            <div class="markdown-body">
+              
+              <h1 id="1-106从中序与后序遍历序列构造二叉树"><a class="markdownIt-Anchor" href="#1-106从中序与后序遍历序列构造二叉树"></a> 1 106.从中序与后序遍历序列构造二叉树</h1>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/construct-binary-tree-from-inorder-and-postorder-traversal/">力扣题目链接</a></p>
+<p>根据一棵树的中序遍历与后序遍历构造二叉树。</p>
+<p>注意: 你可以假设树中没有重复的元素。</p>
+<p>例如，给出</p>
+<p>中序遍历 inorder =&nbsp;[9,3,15,20,7] 后序遍历 postorder = [9,15,7,20,3] 返回如下的二叉树：</p>
+<p><img src="https://img-blog.csdnimg.cn/20210203154316774.png" srcset="/img/loading.gif" lazyload alt="106. 从中序与后序遍历序列构造二叉树1"></p>
+<!-- basicblock-start oid="ObsulTdKbfPEN1jUOcdIrH7S" --> 
+<h1 id="2-思路"><a class="markdownIt-Anchor" href="#2-思路"></a> 2 思路::</h1>
+<!-- basicblock-end -->
+<p>![[18. 从中序与后序遍历序列构造二叉树 2022-09-18 10.42.17.excalidraw]]</p>
+<ol>
+<li>后序数组为 0, 空节点
+<ul>
+<li>&amp; 递归终止条件</li>
+</ul>
+</li>
+<li>后序数组最后一个节点元素为中节点</li>
+<li>寻找中序数组中的中节点,作为切割点</li>
+<li>切中序数组,切成中序左数组和中序右数组 <strong>（顺序别搞反了，一定是先切中序数组）</strong>
+<ul>
+<li>&amp; 因为中序: 左中右: 通过中能够把左右区间找到, 而后序: 左右中, 没法通过中节点把左右区间找到</li>
+</ul>
+</li>
+<li>切后序数组, 切成后序左数组和后序右数组</li>
+<li>递归处理左区间和右区间</li>
+</ol>
+<h2 id="21-思考"><a class="markdownIt-Anchor" href="#21-思考"></a> 2.1 思考</h2>
+<p>前序和中序可以唯一确定一棵二叉树。<br>
+后序和中序可以唯一确定一棵二叉树。<br>
+那么前序和后序可不可以唯一确定一棵二叉树呢？<br>
+<strong>前序和后序不能唯一确定一棵二叉树！</strong>，因为没有中序遍历无法确定左右部分，也就是无法分割。<br>
+举一个例子：</p>
+<p><img src="https://img-blog.csdnimg.cn/20210203154720326.png" srcset="/img/loading.gif" lazyload alt="106.从中序与后序遍历序列构造二叉树2|700"></p>
+<p>tree1 的前序遍历是[1 2 3]， 后序遍历是[3 2 1]。<br>
+tree2 的前序遍历是[1 2 3]， 后序遍历是[3 2 1]。<br>
+那么tree1 和 tree2 的前序和后序完全相同，这是一棵树么，很明显是两棵树！<br>
+所以前序和后序不能唯一确定一棵二叉树！</p>
+<!-- basicblock-start --> 
+<h1 id="3-代码"><a class="markdownIt-Anchor" href="#3-代码"></a> 3 代码::</h1>
+<!-- basicblock-end -->
+<p>v1, 通过, 看懂了, 抄了一遍</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><code class="hljs c++"><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">TreeNode* <span class="hljs-title">traversal</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; inorder, vector&lt;<span class="hljs-type">int</span>&gt;&amp; postorder)</span></span>{<br>        <span class="hljs-keyword">if</span>(postorder.<span class="hljs-built_in">size</span>() == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<br>        <span class="hljs-comment">// 💡定义中节点j</span><br>        <span class="hljs-type">int</span> rootValue = postorder[postorder.<span class="hljs-built_in">size</span>() - <span class="hljs-number">1</span>];<br>        TreeNode* root = <span class="hljs-keyword">new</span> <span class="hljs-built_in">TreeNode</span>(rootValue); <br><br>        <span class="hljs-keyword">if</span>(postorder.<span class="hljs-built_in">size</span>() == <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> root; <span class="hljs-comment">// 💡剪枝</span><br><br>        <span class="hljs-type">int</span> delimiterIndex; <span class="hljs-comment">// 分割符用来确定中序数组中的 "中节点位置下标": 💡用middleINdex更好看一些</span><br>        <span class="hljs-keyword">for</span>(delimiterIndex = <span class="hljs-number">0</span>; delimiterIndex &lt; inorder.<span class="hljs-built_in">size</span>(); delimiterIndex++){<br>            <span class="hljs-keyword">if</span>(inorder[delimiterIndex] == rootValue) <span class="hljs-keyword">break</span>; <span class="hljs-comment">// 此时 break 出去后,得到了中节点的下标值</span><br>        }<br>        <span class="hljs-comment">// 💡循环不变量: 左闭右开</span><br>        <span class="hljs-comment">// 切割中序数组: 左中右</span><br>        <span class="hljs-comment">//中序数组的: 左子树区间：[0, delimiterIndex)</span><br>        <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">leftInorder</span><span class="hljs-params">(inorder.begin(), inorder.begin() + delimiterIndex)</span></span>;<span class="hljs-comment">// 💡下标从 0 开始的, 取不到delimiterIndex</span><br>        <span class="hljs-comment">//中序数组的: 右子树区间: [delimiterIndex + 1, end)</span><br>        <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">rightInorder</span><span class="hljs-params">(inorder.begin() + delimiterIndex + <span class="hljs-number">1</span>, inorder.end())</span></span>;<br><br>        <span class="hljs-comment">//后序数组 postorder 舍弃末尾元素</span><br>        postorder.<span class="hljs-built_in">resize</span>(postorder.<span class="hljs-built_in">size</span>() - <span class="hljs-number">1</span>);<br><br><br>        <span class="hljs-comment">// 切割后序数组: 左右中</span><br>        <span class="hljs-comment">// 依然左闭右开，注意这里使用了左中序数组大小作为切割点</span><br>        <span class="hljs-comment">// 后序数组的: 左子树区间[0, leftInorder.size)</span><br>        <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">leftPostorder</span><span class="hljs-params">(postorder.begin(), postorder.begin() + leftInorder.size())</span></span>;<br>        <span class="hljs-comment">// 后序数组的: 右子树区间[leftInorder.size(), end)</span><br>        <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">rightPostorder</span><span class="hljs-params">(postorder.begin() + leftInorder.size(), postorder.end())</span></span>;<br><br>        <span class="hljs-comment">// 递归处理</span><br>        <span class="hljs-comment">// 构建左子树, 传入中序数组的左子树区间, 后序数组的左子树区间.这样又是一个中序数组, 一个后序数组, 又可以按照上面的逻辑</span><br>        root-&gt;left = <span class="hljs-built_in">traversal</span>(leftInorder, leftPostorder);<br><br>        <span class="hljs-comment">// 构建右子树</span><br>        root-&gt;right = <span class="hljs-built_in">traversal</span>(rightInorder, rightPostorder);<br>        <span class="hljs-keyword">return</span> root;<br><br>        <br><br>    }<br>    <span class="hljs-function">TreeNode* <span class="hljs-title">buildTree</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; inorder, vector&lt;<span class="hljs-type">int</span>&gt;&amp; postorder)</span> </span>{<br>        <span class="hljs-keyword">if</span> (inorder.<span class="hljs-built_in">size</span>() == <span class="hljs-number">0</span> || postorder.<span class="hljs-built_in">size</span>() == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">traversal</span>(inorder, postorder);<br><br><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
+<p>v2, 通过</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">TreeNode* <span class="hljs-title">traversal</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; inorder, vector&lt;<span class="hljs-type">int</span>&gt; postorder)</span></span>{<br>        <span class="hljs-keyword">if</span>(postorder.<span class="hljs-built_in">size</span>() == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<br>        <span class="hljs-type">int</span> rootValue = postorder[postorder.<span class="hljs-built_in">size</span>() - <span class="hljs-number">1</span>];<br>        TreeNode* root = <span class="hljs-keyword">new</span> <span class="hljs-built_in">TreeNode</span>(rootValue);<br><br>        <span class="hljs-keyword">if</span>(postorder.<span class="hljs-built_in">size</span>() == <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> root;<span class="hljs-comment">// 💡可以先忽略剪枝</span><br><br>        <span class="hljs-type">int</span> middleIndex = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span>(; middleIndex &lt; inorder.<span class="hljs-built_in">size</span>(); middleIndex++){<br>            <span class="hljs-keyword">if</span>(inorder[middleIndex] == rootValue) <span class="hljs-keyword">break</span>; <span class="hljs-comment">// 取出中序数组的中的中节点</span><br>        }<br>		<span class="hljs-comment">// 💡循环不变量: 左闭右开</span><br>		<span class="hljs-comment">// 重新定义中序数组的左右区间</span><br>        <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">leftInorder</span><span class="hljs-params">(inorder.begin(), inorder.begin() + middleIndex)</span></span>;<br>        <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">rightInorder</span><span class="hljs-params">(inorder.begin() + middleIndex + <span class="hljs-number">1</span>, inorder.end())</span></span>;<br>        postorder.<span class="hljs-built_in">resize</span>(postorder.<span class="hljs-built_in">size</span>() - <span class="hljs-number">1</span>);<br>		<span class="hljs-comment">// 重新定义后序数组的左右区间</span><br>        <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">leftPostorder</span><span class="hljs-params">(postorder.begin(), postorder.begin() + leftInorder.size())</span></span>;<br>        <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">rightPostorder</span><span class="hljs-params">(postorder.begin() + leftInorder.size() , postorder.end())</span></span>; <span class="hljs-comment">// 💡左闭右开, 取得到 middleIndex 那个位置, 看一下exclidraw 就明白了</span><br>        <br>		<span class="hljs-comment">// 递归处理左右区间</span><br>        root-&gt;left = <span class="hljs-built_in">traversal</span>(leftInorder, leftPostorder); <span class="hljs-comment">// 左</span><br>        root-&gt;right = <span class="hljs-built_in">traversal</span>(rightInorder, rightPostorder); <span class="hljs-comment">// 右</span><br>        <span class="hljs-keyword">return</span> root;<br><br>    }<br>    <span class="hljs-function">TreeNode* <span class="hljs-title">buildTree</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; inorder, vector&lt;<span class="hljs-type">int</span>&gt;&amp; postorder)</span> </span>{<br>	    <span class="hljs-comment">// 💡这里也可以先忽略剪枝</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">traversal</span>(inorder, postorder);<br><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
+<p><strong>此时应该发现了，如上的代码性能并不好，应为每层递归定定义了新的vector（就是数组），既耗时又耗空间，但上面的代码是最好理解的，为了方便读者理解，所以用如上的代码来讲解。</strong><br>
+下面给出用下标索引写出的代码版本：（思路是一样的，只不过不用重复定义vector了，每次用下标索引来分割）</p>
+<p>carl</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">private</span>:<br>    <span class="hljs-comment">// 中序区间：[inorderBegin, inorderEnd)，后序区间[postorderBegin, postorderEnd)</span><br>    <span class="hljs-function">TreeNode* <span class="hljs-title">traversal</span> <span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; inorder, <span class="hljs-type">int</span> inorderBegin, <span class="hljs-type">int</span> inorderEnd, vector&lt;<span class="hljs-type">int</span>&gt;&amp; postorder, <span class="hljs-type">int</span> postorderBegin, <span class="hljs-type">int</span> postorderEnd)</span> </span>{<br>        <span class="hljs-keyword">if</span> (postorderBegin == postorderEnd) <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<br><br>        <span class="hljs-type">int</span> rootValue = postorder[postorderEnd - <span class="hljs-number">1</span>];<br>        TreeNode* root = <span class="hljs-keyword">new</span> <span class="hljs-built_in">TreeNode</span>(rootValue);<br><br>        <span class="hljs-keyword">if</span> (postorderEnd - postorderBegin == <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> root;<br><br>        <span class="hljs-type">int</span> delimiterIndex;<br>        <span class="hljs-keyword">for</span> (delimiterIndex = inorderBegin; delimiterIndex &lt; inorderEnd; delimiterIndex++) {<br>            <span class="hljs-keyword">if</span> (inorder[delimiterIndex] == rootValue) <span class="hljs-keyword">break</span>;<br>        }<br>        <span class="hljs-comment">// 切割中序数组</span><br>        <span class="hljs-comment">// 左中序区间，左闭右开[leftInorderBegin, leftInorderEnd)</span><br>        <span class="hljs-type">int</span> leftInorderBegin = inorderBegin;<br>        <span class="hljs-type">int</span> leftInorderEnd = delimiterIndex;<br>        <span class="hljs-comment">// 右中序区间，左闭右开[rightInorderBegin, rightInorderEnd)</span><br>        <span class="hljs-type">int</span> rightInorderBegin = delimiterIndex + <span class="hljs-number">1</span>;<br>        <span class="hljs-type">int</span> rightInorderEnd = inorderEnd;<br><br>        <span class="hljs-comment">// 切割后序数组</span><br>        <span class="hljs-comment">// 左后序区间，左闭右开[leftPostorderBegin, leftPostorderEnd)</span><br>        <span class="hljs-type">int</span> leftPostorderBegin =  postorderBegin;<br>        <span class="hljs-type">int</span> leftPostorderEnd = postorderBegin + delimiterIndex - inorderBegin; <span class="hljs-comment">// 终止位置是 需要加上 中序区间的大小size</span><br>        <span class="hljs-comment">// 右后序区间，左闭右开[rightPostorderBegin, rightPostorderEnd)</span><br>        <span class="hljs-type">int</span> rightPostorderBegin = postorderBegin + (delimiterIndex - inorderBegin);<br>        <span class="hljs-type">int</span> rightPostorderEnd = postorderEnd - <span class="hljs-number">1</span>; <span class="hljs-comment">// 排除最后一个元素，已经作为节点了</span><br><br>        root-&gt;left = <span class="hljs-built_in">traversal</span>(inorder, leftInorderBegin, leftInorderEnd,  postorder, leftPostorderBegin, leftPostorderEnd);<br>        root-&gt;right = <span class="hljs-built_in">traversal</span>(inorder, rightInorderBegin, rightInorderEnd, postorder, rightPostorderBegin, rightPostorderEnd);<br><br>        <span class="hljs-keyword">return</span> root;<br>    }<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">TreeNode* <span class="hljs-title">buildTree</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; inorder, vector&lt;<span class="hljs-type">int</span>&gt;&amp; postorder)</span> </span>{<br>        <span class="hljs-keyword">if</span> (inorder.<span class="hljs-built_in">size</span>() == <span class="hljs-number">0</span> || postorder.<span class="hljs-built_in">size</span>() == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<br>        <span class="hljs-comment">// 左闭右开的原则</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">traversal</span>(inorder, <span class="hljs-number">0</span>, inorder.<span class="hljs-built_in">size</span>(), postorder, <span class="hljs-number">0</span>, postorder.<span class="hljs-built_in">size</span>());<br>    }<br>};<br><br></code></pre></td></tr></tbody></table></figure>
+<h1 id="4-105从前序与中序遍历序列构造二叉树"><a class="markdownIt-Anchor" href="#4-105从前序与中序遍历序列构造二叉树"></a> 4 105.从前序与中序遍历序列构造二叉树</h1>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/construct-binary-tree-from-preorder-and-inorder-traversal/">力扣题目链接</a></p>
+<p>根据一棵树的前序遍历与中序遍历构造二叉树。</p>
+<p>注意: 你可以假设树中没有重复的元素。</p>
+<p>例如，给出</p>
+<p>前序遍历 preorder =&nbsp;[3,9,20,15,7] 中序遍历 inorder = [9,3,15,20,7] 返回如下的二叉树：</p>
+<p><img src="https://img-blog.csdnimg.cn/20210203154626672.png" srcset="/img/loading.gif" lazyload alt="105. 从前序与中序遍历序列构造二叉树"></p>
+<hr>
+<p><strong>其他资料</strong></p>
+ <!-- basicblock-start oid="ObsZWXTX5hBxE5V1bPIDc5LR" deck = "👨🏻‍💻code::数据结构与算法::代码随想录::二叉树::18. 从中序与后序遍历序列构造二叉树.md" --> 
+<p>#历史记录::<br>
+2022/9/18🌵18. 从中序与后序遍历序列构造二叉树 :v1, 通过看懂了, 抄了一遍 , # 105.从前序与中序遍历序列构造二叉树没做⏱1-10<br>
+2022/9/18🌵18. 从中序与后序遍历序列构造二叉树: v2, 抄了一遍⏱0-15</p>
+<!-- basicblock-end -->
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/" class="category-chain-item">👨🏻‍💻code</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" class="category-chain-item">数据结构与算法</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95/" class="category-chain-item">代码随想录</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95/%E4%BA%8C%E5%8F%89%E6%A0%91/" class="category-chain-item">二叉树</a>
+  
+  
+
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/">#二叉树</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>18. 从中序与后序遍历序列构造二叉树</div>
+      <div>https://zeefan1555.github.io/posts/31429/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>zeefan</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年9月18日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2022年9月29日</div>
+        </div>
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/55359/" title="1.10 - 1.12 makefile">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">1.10 - 1.12 makefile</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/9190/" title="2022年09月15日 实验设计">
+                        <span class="hidden-mobile">2022年09月15日 实验设计</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

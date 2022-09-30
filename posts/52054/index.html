@@ -28,7 +28,7 @@
 <meta property="og:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202209071614735.png">
 <meta property="og:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202209071616365.png">
 <meta property="article:published_time" content="2022-09-06T12:44:00.000Z">
-<meta property="article:modified_time" content="2022-09-11T09:06:40.277Z">
+<meta property="article:modified_time" content="2022-09-21T07:59:43.597Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202209062211463.png">
@@ -227,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.4k 字
+          2.5k 字
         
       </span>
     
@@ -289,7 +289,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年9月11日 下午
+                    本文最后更新于：2022年9月21日 下午
                   
                 
               </p>
@@ -339,7 +339,7 @@ calc 文件夹下是要制作成库的源文件，library 是完整的工程文�
 </ul>
 <!-- basicblock-start oid="ObskPvKcbu0ivoF9JzGAvkh4" --> 
 <p>-I 是什么意思::</p>
-<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// 进入到 src 文件夹中，将源文件编译生成 -o 文件，因为源文件中使用到了 include 下的 head.c 文件(使用里边头文件)，所以用 `-I` 搜索头文件所在目录，如果不加就是在当前目录下搜索：</span><br>gcc -c add.c div.c mult.c sub.c -I ../include/ <span class="hljs-comment">// </span><br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// 进入到 src 文件夹中，将源文件编译生成 -o 文件，因为源文件中使用到了 include 下的 head.c 文件(使用里边头文件)，所以用 `-I` 搜索头文件所在目录，如果不加就是在当前目录下搜索：</span><br>gcc -c add.c div.c mult.c sub.c -I ../include/ <span class="hljs-comment">// ../include/ 表示上一层文件夹的 include 目录, ./ : 表示这层</span><br></code></pre></td></tr></tbody></table></figure>
 <!-- basicblock-end -->
 <p>生成后的文件：</p>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c">.<br>├── add.c<br>├── add.o<br>├── div.c<br>├── div.o<br>├── mult.c<br>├── mult.o<br>├── sub.c<br>└── sub.o<br></code></pre></td></tr></tbody></table></figure>
@@ -391,6 +391,7 @@ gcc -v  gcc - - version(更简单一些)查看版本</p>
 <li>gcc 得到动态库</li>
 </ol>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c">gcc -shared a.o b.o -o libcalc.so<br></code></pre></td></tr></tbody></table></figure>
+<p>[[1.10 - 1.12 makefile#^a51e57]]</p>
 <!-- basicblock-end -->
 <!-- basicblock-start oid="ObsMyJ0Wxxext7hatQD3jNuN"  deck = "👨🏻‍💻code::项目::webserver::1 第一章::1.4-1.6  静态库和动态库.md" --> 
 <p>动态库制作实操::</p>
@@ -416,11 +417,11 @@ gcc -v  gcc - - version(更简单一些)查看版本</p>
 <p>执行 main 文件：</p>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c">./main<br></code></pre></td></tr></tbody></table></figure>
 <p><img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202209071616365.png" srcset="/img/loading.gif" lazyload alt="|800"></p>
+<p>出现错误，找不到动态库文件：</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c">./main: error <span class="hljs-keyword">while</span> loading shared libraries: libcalc.so: cannot open shared object file: No such file or directory<br></code></pre></td></tr></tbody></table></figure>
 <ul>
 <li>&amp; 我没出现错误</li>
 </ul>
-<p>出现错误，找不到动态库文件：</p>
-<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c">./main: error <span class="hljs-keyword">while</span> loading shared libraries: libcalc.so: cannot open shared object file: No such file or directory<br></code></pre></td></tr></tbody></table></figure>
 <!-- basicblock-end -->
 <hr>
 <p><strong>其他资料</strong></p>
@@ -507,7 +508,7 @@ gcc -v  gcc - - version(更简单一些)查看版本</p>
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2022年9月11日</div>
+          <div>2022年9月21日</div>
         </div>
       
       <div class="license-meta-item">

@@ -16,16 +16,16 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1 404.左叶子之和 力扣题目链接 计算给定二叉树的所有左叶子之和。 示例：   2 思路 首先要注意是判断左叶子，不是二叉树左侧节点，所以不要上来想着层序遍历。   如何判断左叶子节点:: 通过当前节点无法判断, 要通过节点的父节点来判断其左孩子是不是左叶子。  如果该节点的左节点不为空， 该节点的左节点的左节点为空，该节点的左节点的右节点为空，  123if (node-&gt;left">
+    <meta name="description" content="1 404.左叶子之和 力扣题目链接 计算给定二叉树的所有左叶子之和。 示例：   2 思路 首先要注意是判断左叶子，不是二叉树左侧节点，所以不要上来想着层序遍历。   如何判断左叶子节点:: 通过当前节点无法判断, 要通过节点的父节点来判断其左孩子是不是左叶子。  如果该节点的左节点不为空， 该节点的左节点的左节点为空(左孙子)，该节点的左节点的右节点为空，  123if (node-&gt;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="16.左叶子之和">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/50095/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="1 404.左叶子之和 力扣题目链接 计算给定二叉树的所有左叶子之和。 示例：   2 思路 首先要注意是判断左叶子，不是二叉树左侧节点，所以不要上来想着层序遍历。   如何判断左叶子节点:: 通过当前节点无法判断, 要通过节点的父节点来判断其左孩子是不是左叶子。  如果该节点的左节点不为空， 该节点的左节点的左节点为空，该节点的左节点的右节点为空，  123if (node-&gt;left">
+<meta property="og:description" content="1 404.左叶子之和 力扣题目链接 计算给定二叉树的所有左叶子之和。 示例：   2 思路 首先要注意是判断左叶子，不是二叉树左侧节点，所以不要上来想着层序遍历。   如何判断左叶子节点:: 通过当前节点无法判断, 要通过节点的父节点来判断其左孩子是不是左叶子。  如果该节点的左节点不为空， 该节点的左节点的左节点为空(左孙子)，该节点的左节点的右节点为空，  123if (node-&gt;">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20210204151927654.png">
 <meta property="article:published_time" content="2022-09-10T08:24:00.000Z">
-<meta property="article:modified_time" content="2022-09-12T02:04:58.660Z">
+<meta property="article:modified_time" content="2022-09-19T06:46:46.217Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="二叉树">
 <meta name="twitter:card" content="summary_large_image">
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.4k 字
+          1.5k 字
         
       </span>
     
@@ -287,7 +287,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年9月12日 上午
+                    本文最后更新于：2022年9月19日 下午
                   
                 
               </p>
@@ -306,10 +306,11 @@
 通过当前节点无法判断, <strong>要通过节点的父节点来判断其左孩子是不是左叶子。</strong></p>
 <ol>
 <li>如果该节点的左节点不为空，</li>
-<li>该节点的左节点的左节点为空，该节点的左节点的右节点为空，</li>
+<li>该节点的左节点的左节点为空(左孙子)，该节点的左节点的右节点为空，</li>
 </ol>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">if</span> (node-&gt;left != <span class="hljs-literal">NULL</span> &amp;&amp; node-&gt;left-&gt;left == <span class="hljs-literal">NULL</span> &amp;&amp; node-&gt;left-&gt;right == <span class="hljs-literal">NULL</span>) {<br>    左叶子节点处理逻辑<br>}<br></code></pre></td></tr></tbody></table></figure>
 <!-- basicblock-end -->
+<p>2022/9/19;;;;;;;fsdfsf；;　;张,i。。。。1150-220=930.00</p>
 <h1 id="3-代码"><a class="markdownIt-Anchor" href="#3-代码"></a> 3 代码</h1>
 <p>v1</p>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">sumOfLeftLeaves</span><span class="hljs-params">(TreeNode* root)</span> </span>{<br>        <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">NULL</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> leftlValue = <span class="hljs-built_in">sumOfLeftLeaves</span>(root-&gt;left); <span class="hljs-comment">// 💡收集左子树的左叶子和,</span><br>        <span class="hljs-type">int</span> rightValue = <span class="hljs-built_in">sumOfLeftLeaves</span>(root-&gt;right);<span class="hljs-comment">// 💡收集右子树的左叶子和,</span><br>        <span class="hljs-type">int</span> midValue = <span class="hljs-number">0</span>;<br>        <span class="hljs-comment">// 如果是判断是左叶子, 就把它的值收集起来(辅给一个中间变量)</span><br>        <span class="hljs-keyword">if</span>(root-&gt;left != <span class="hljs-literal">NULL</span> &amp;&amp; root-&gt;left-&gt;left == <span class="hljs-literal">NULL</span> &amp;&amp; root-&gt;left-&gt;right == <span class="hljs-literal">NULL</span>){<br>            midValue = root-&gt;left-&gt;val;<br>        } <br>        <span class="hljs-comment">// 不断叠加</span><br>        <span class="hljs-type">int</span> sum = midValue + leftlValue +  rightValue;<span class="hljs-comment">// 💡 某个子树的根节点的左叶子和是其左右子树的和,然后返回给该节点, 该节点又成为上一层的左/右子树, 最后不断递归到原始根节点</span><br>        <span class="hljs-keyword">return</span> sum;<br><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
@@ -405,7 +406,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2022年9月12日</div>
+          <div>2022年9月19日</div>
         </div>
       
       <div class="license-meta-item">

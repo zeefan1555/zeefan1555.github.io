@@ -24,7 +24,7 @@
 <meta property="og:description" content="此时大家可以做一做leetcode上三道题目，分别是：  144.二叉树的前序遍历 145.二叉树的后序遍历 94.二叉树的中序遍历     1 递归三部曲::   确定递归函数的参数和返回值：  确定哪些参数是递归的过程中需要处理的，那么就在递归函数里加上这个参数， 并且还要明确每次递归的返回值是什么, 进而确定递归函数的返回类型。 二叉树: 一般是传入一个根节点, 传入一个数组(用来放我们的结">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-08-29T09:40:00.000Z">
-<meta property="article:modified_time" content="2022-09-06T01:26:40.682Z">
+<meta property="article:modified_time" content="2022-09-19T02:45:13.817Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="二叉树">
 <meta name="twitter:card" content="summary_large_image">
@@ -285,7 +285,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年9月6日 上午
+                    本文最后更新于：2022年9月19日 上午
                   
                 
               </p>
@@ -306,12 +306,12 @@
 <ol>
 <li>确定哪些参数是递归的过程中需要处理的，那么就在递归函数里加上这个参数，</li>
 <li>并且还要明确每次递归的返回值是什么, 进而确定递归函数的返回类型。<br>
-<strong>二叉树: 一般是传入一个根节点, 传入一个数组(用来放我们的结果)</strong></li>
+<strong>二叉树: 一般是传入一个根节点, 传入一个数组(用来放我们的结果)</strong><br>
+一般是 void, 因为我们把想要的结果都放到参数了</li>
 </ol>
 </li>
 <li>
-<p><strong>确定终止条件：</strong> 写完了递归算法, 运行的时候，经常会遇到栈溢出的错误，就是没写终止条件或者终止条件写的不对，操作系统也是用一个栈的结构来保存每一层递归的信息，如果递归没有终止，操作系统的内存栈必然就会溢出。<br>
-一般是 void, 因为我们把想要的结果都放到参数了</p>
+<p><strong>确定终止条件：</strong> 写完了递归算法, 运行的时候，经常会遇到栈溢出的错误，就是没写终止条件或者终止条件写的不对，操作系统也是用一个栈的结构来保存每一层递归的信息，如果递归没有终止，操作系统的内存栈必然就会溢出。</p>
 </li>
 <li>
 <p><strong>确定单层递归的逻辑：</strong> 确定每一层递归需要处理的信息。在这里也就会重复调用自己来实现递归的过程。</p>
@@ -429,7 +429,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2022年9月6日</div>
+          <div>2022年9月19日</div>
         </div>
       
       <div class="license-meta-item">

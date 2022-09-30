@@ -24,7 +24,7 @@
 <meta property="og:description" content="1 206.反转链表 力扣题目链接 题意：反转一个单链表。 示例: 输入: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL 输出: 5-&gt;4-&gt;3-&gt;2-&gt;1-&gt;NULL    2 思路::  定义一个 cur 指针指向头结点 定义一个 pre 指针初始化为 null   把 cur-&gt;next的指针用 tmp 保存一下:: 不保存的话一">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-08-11T13:28:00.000Z">
-<meta property="article:modified_time" content="2022-09-13T15:18:38.694Z">
+<meta property="article:modified_time" content="2022-09-25T02:54:57.473Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.1k 字
+          2.2k 字
         
       </span>
     
@@ -284,7 +284,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年9月13日 晚上
+                    本文最后更新于：2022年9月25日 上午
                   
                 
               </p>
@@ -307,14 +307,14 @@
 <ol>
 <li>改变方向
 <ol>
-<li>cur-&gt;next =  pre;</li>
+<li>cur-&gt;next =  pre;# 2 思路:</li>
 </ol>
 </li>
-<li>while 循环,.移动下一个位置, 直至cur 指向NULL
+<li>while 循环,.移动下一个位置, 直至cur 指向NULL(💡为了让 pre 走到最后一个元素)
 <ol>
 <li>pre = cur;</li>
 <li>cur = tmp<br>
-最后，cur 指针已经指向了null，循环结束，链表也反转完毕了。 此时我们return pre指针就可以了，pre指针就指向了新的头结点。</li>
+最后，cur 指针已经指向了null，💡pre 指向了最后一个元素(即是第一个节点)循环结束，return pre</li>
 </ol>
 </li>
 </ol>
@@ -337,6 +337,7 @@
 <p><s>v3: 没通过, 思路是的对的, 力扣上的参数好像变了,  💡模式是 java 模式</s>~~~~~~~~<br>
 v3: 通过</p>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>: <br>     <span class="hljs-function">ListNode* <span class="hljs-title">reverseList</span><span class="hljs-params">(ListNode* head)</span> </span>{<br>        ListNode* cur = head;<br>        ListNode* pre = <span class="hljs-literal">nullptr</span>;<br>        <span class="hljs-keyword">while</span>(cur){<br>            ListNode* temp = cur-&gt;next;<br>            cur-&gt;next = pre;<br>            pre = cur;<br>            cur = temp;<br>        }<br>        <span class="hljs-keyword">return</span> pre;<br><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
+<p>v4:  while 循环里怎么走又忘了, 总结在图里了, 2022/09/25</p>
 <h2 id="32-递归法"><a class="markdownIt-Anchor" href="#32-递归法"></a> 3.2 递归法</h2>
 <p>递归写法<br>
 v1</p>
@@ -428,7 +429,7 @@ v1</p>
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2022年9月13日</div>
+          <div>2022年9月25日</div>
         </div>
       
       <div class="license-meta-item">

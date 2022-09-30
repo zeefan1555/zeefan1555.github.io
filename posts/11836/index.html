@@ -32,7 +32,7 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20210203152044855.jpg">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20210203153031914.png">
 <meta property="article:published_time" content="2022-09-02T07:19:00.000Z">
-<meta property="article:modified_time" content="2022-09-12T10:12:22.645Z">
+<meta property="article:modified_time" content="2022-09-19T03:03:42.997Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="二叉树">
 <meta name="twitter:card" content="summary_large_image">
@@ -294,7 +294,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年9月12日 晚上
+                    本文最后更新于：2022年9月19日 上午
                   
                 
               </p>
@@ -314,10 +314,10 @@
 <ol>
 <li>加入本层元素,</li>
 <li>获取本层元素个数,</li>
-<li>逐个弹出本层元素, 并把每个弹出节点的左右孩子加入进来, 直至弹完本层元素</li>
+<li>逐个弹出本层元素, 弹出的同时并把该节点的左右孩子加入进来, 直至弹完本层元素</li>
 <li>反复2, 3, (用 while 包住2, 3)</li>
 </ol>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">levelOrder</span>(TreeNode* root) {<br>        queue&lt;TreeNode*&gt; que;<br>        <span class="hljs-keyword">if</span> (root != <span class="hljs-literal">NULL</span>) que.<span class="hljs-built_in">push</span>(root); <span class="hljs-comment">// 加入第一层元素</span><br>        vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; result;<span class="hljs-comment">// 结果集</span><br>        <span class="hljs-keyword">while</span> (!que.<span class="hljs-built_in">empty</span>()) {<br>            <span class="hljs-type">int</span> size = que.<span class="hljs-built_in">size</span>(); <span class="hljs-comment">//  获取本层元素个数, </span><br>            vector&lt;<span class="hljs-type">int</span>&gt; vec;<span class="hljs-comment">// / ❗️不能放到 while 外边, 下边的 while 每用一次都要重置的, 放到大 while 外边就一直往里添东西了</span><br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; size; i++) { <span class="hljs-comment">// 逐个弹出本层元素, 并把每个弹出节点的左右孩子加入进来, 直至弹完本层元素</span><br>                TreeNode* node = que.<span class="hljs-built_in">front</span>();<br>                que.<span class="hljs-built_in">pop</span>();<br>                vec.<span class="hljs-built_in">push_back</span>(node-&gt;val);<br>                <span class="hljs-keyword">if</span> (node-&gt;left) que.<span class="hljs-built_in">push</span>(node-&gt;left);<br>                <span class="hljs-keyword">if</span> (node-&gt;right) que.<span class="hljs-built_in">push</span>(node-&gt;right);<br>            }<span class="hljs-comment">// for 循环出来后, que 中已经是下层元素了. 在进行一次 while 循环后会在获得这层元素, 反复如此, 直至队列为空</span><br>            result.<span class="hljs-built_in">push_back</span>(vec);<br>        }<br>        <span class="hljs-keyword">return</span> result;<br>    }<br>};<br><br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">levelOrder</span>(TreeNode* root) {<br>        queue&lt;TreeNode*&gt; que;<br>        <span class="hljs-keyword">if</span> (root != <span class="hljs-literal">NULL</span>) que.<span class="hljs-built_in">push</span>(root); <span class="hljs-comment">// 加入第一层元素</span><br>        vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; result;<span class="hljs-comment">// 结果集</span><br>        <span class="hljs-keyword">while</span> (!que.<span class="hljs-built_in">empty</span>()) {<br>            <span class="hljs-type">int</span> size = que.<span class="hljs-built_in">size</span>(); <span class="hljs-comment">//  获取本层元素个数, </span><br>            vector&lt;<span class="hljs-type">int</span>&gt; vec;<span class="hljs-comment">// / ❗️不能放到 while 外边,每进行一次大while 都会重置 vec, 放到大 while 外边就一直往里添东西了</span><br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; size; i++) { <span class="hljs-comment">// 逐个弹出本层元素, 并把每个弹出节点的左右孩子加入进来, 直至弹完本层元素</span><br>                TreeNode* node = que.<span class="hljs-built_in">front</span>();<br>                que.<span class="hljs-built_in">pop</span>();<br>                vec.<span class="hljs-built_in">push_back</span>(node-&gt;val);<br>                <span class="hljs-keyword">if</span> (node-&gt;left) que.<span class="hljs-built_in">push</span>(node-&gt;left);<br>                <span class="hljs-keyword">if</span> (node-&gt;right) que.<span class="hljs-built_in">push</span>(node-&gt;right);<br>            }<span class="hljs-comment">// for 循环出来后, que 中已经是下层元素了. 在进行一次 while 循环后会在获得这层元素, 反复如此, 直至队列为空</span><br>            result.<span class="hljs-built_in">push_back</span>(vec);<br>        }<br>        <span class="hljs-keyword">return</span> result;<br>    }<br>};<br><br></code></pre></td></tr></tbody></table></figure>
 <!-- basicblock-end -->
 <h1 id="3-代码"><a class="markdownIt-Anchor" href="#3-代码"></a> 3 代码</h1>
 <p>其余的十个题</p>
@@ -371,7 +371,7 @@
 把一个节点的所有孩子都加入队列里边就行了</p>
 <!-- basicblock-start oid="ObsbS4edLzulGab31MsUvZ7Z" --> 
 <p>将 n 叉树的所有节点加入到队列中::</p>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; node-&gt;children.<span class="hljs-built_in">size</span>(); i++) { <span class="hljs-comment">// 将节点所有孩子加入队列</span><br>              <span class="hljs-keyword">if</span> (node-&gt;children[i]) que.<span class="hljs-built_in">push</span>(node-&gt;children[i]);<br>          }<br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; node-&gt;children.<span class="hljs-built_in">size</span>(); i++) { <span class="hljs-comment">// 将节点所有孩子加入队列</span><br>              <span class="hljs-keyword">if</span> (node-&gt;children[i]) que.<span class="hljs-built_in">push</span>(node-&gt;children[i]);<span class="hljs-comment">// if(node-&gt;left)</span><br>          }<br></code></pre></td></tr></tbody></table></figure>
 <p>多叉树的孩子用<code>-&gt;children</code>表示, 孩子个数用<code>-&gt;children.size()</code><br>
 平时是用-&gt;left ,-&gt;right</p>
 <!-- basicblock-end -->
@@ -531,7 +531,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2022年9月12日</div>
+          <div>2022年9月19日</div>
         </div>
       
       <div class="license-meta-item">

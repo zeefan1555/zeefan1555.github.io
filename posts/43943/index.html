@@ -16,17 +16,16 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="github git 流程 git init git add README.md git commit -m “first commit” git branch -M main git remote add origin https:&#x2F;&#x2F;github.com&#x2F;zeefan1555&#x2F;myblog.git git push -u origin main   1 git add;  git commit">
+    <meta name="description" content="github git 流程 git init git add README.md git commit -m “first commit” git branch -M main git remote add origin https:&#x2F;&#x2F;github.com&#x2F;zeefan1555&#x2F;myblog.git git push -u origin main     1 git add;  git comm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Learn Git">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/43943/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="github git 流程 git init git add README.md git commit -m “first commit” git branch -M main git remote add origin https:&#x2F;&#x2F;github.com&#x2F;zeefan1555&#x2F;myblog.git git push -u origin main   1 git add;  git commit">
+<meta property="og:description" content="github git 流程 git init git add README.md git commit -m “first commit” git branch -M main git remote add origin https:&#x2F;&#x2F;github.com&#x2F;zeefan1555&#x2F;myblog.git git push -u origin main     1 git add;  git comm">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202208192343602.png">
-<meta property="og:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202208182156057.png">
 <meta property="article:published_time" content="2022-08-18T13:06:00.000Z">
-<meta property="article:modified_time" content="2022-08-28T14:28:46.265Z">
+<meta property="article:modified_time" content="2022-09-28T13:55:30.974Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="git">
 <meta name="twitter:card" content="summary_large_image">
@@ -226,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5k 字
+          5.9k 字
         
       </span>
     
@@ -237,7 +236,7 @@
         
         
         
-          25 分钟
+          30 分钟
         
       </span>
     
@@ -288,7 +287,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年8月28日 晚上
+                    本文最后更新于：2022年9月28日 晚上
                   
                 
               </p>
@@ -303,7 +302,9 @@ git branch -M main<br>
 git remote add origin <a target="_blank" rel="noopener" href="https://github.com/zeefan1555/myblog.git">https://github.com/zeefan1555/myblog.git</a><br>
 git push -u origin main<br>
 <img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202208192343602.png" srcset="/img/loading.gif" lazyload alt=""></p>
-<h1 id="1-git-add-git-commit"><a class="markdownIt-Anchor" href="#1-git-add-git-commit"></a> 1 git add;  git commit</h1>
+<!-- basicblock-start oid="Obso0XVAmfT8aQUtIodnEGAE" --> 
+<h1 id="1-git-add-git-commit"><a class="markdownIt-Anchor" href="#1-git-add-git-commit"></a> 1 git add;  git commit::</h1>
+<!-- basicblock-end -->
 <p>git add 文件 : 加入暂存区<br>
 git commit -m “提交信息”</p>
 <h2 id="11-原理"><a class="markdownIt-Anchor" href="#11-原理"></a> 1.1 原理</h2>
@@ -312,23 +313,72 @@ git commit -m “提交信息”</p>
 <p>Git 还保存了提交的历史记录。这也是为什么大多数提交记录的上面都有父节点的原因 —我们会在图示中用箭头来表示这种关系。对于项目组的成员来说，维护提交历史对大家都有好处。</p>
 <p>关于提交记录太深入的东西咱们就不再继续探讨了，现在你可以把提交记录看作是项目的快照。提交记录非常轻量，可以快速地在这些提交记录之间切换！</p>
 <p>![[Learn Git 2022-08-18 21.36.48.excalidraw]]</p>
-<h1 id="2-git-branch-git-checkout"><a class="markdownIt-Anchor" href="#2-git-branch-git-checkout"></a> 2 git branch, git checkout</h1>
+<!-- basicblock-start oid="ObsKeJLyaq1yOseGn8ZnhteZ" --> 
+<h1 id="2-git-branch-git-checkout"><a class="markdownIt-Anchor" href="#2-git-branch-git-checkout"></a> 2 git branch, git checkout::</h1>
+<!-- basicblock-end -->
+<p>git checkout -b “branch name”: 创建分支 , 并切换</p>
+<h2 id="21-原理"><a class="markdownIt-Anchor" href="#21-原理"></a> 2.1 原理</h2>
 <p>Git 的分支也非常轻量。它们只是筒单地指向某个提交纪录仅此而已。所以许多 Git 爱好者传颂：<br>
 <strong>早建分支！多用分支！</strong><br>
 这是因为即使创建再多的分支也不会造成储存或内存上的开销，并且按逻辑分解工作到不同的分支要比维护那些特别臃肿的分支简单多了。</p>
 <p>在将分支和提交记录结合起来后，我们会看到两者如何协作。现在只要记住使用分支其实就相当于在说：“我想基于这个提交以及它所有的父提交进行新的工作。<br>
 ![[Learn Git 2022-08-18 21.39.58.excalidraw]]</p>
-<h1 id="3-git-merge"><a class="markdownIt-Anchor" href="#3-git-merge"></a> 3 git merge</h1>
-<p><img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202208182156057.png" srcset="/img/loading.gif" lazyload alt="|800"></p>
+<!-- basicblock-start oid="ObsVAkLZbaOR71Cub5FUYro8" --> 
+<h1 id="3-git-merge"><a class="markdownIt-Anchor" href="#3-git-merge"></a> 3 git merge::</h1>
+<!-- basicblock-end -->
+<p>git merge xxx: 就把 xxx分支 合并到 当前分支, 即使一个分支包含所有我们修改的内容<br>
+将 bugFix 合并到 main 中<br>
+git checkout main<br>
+git merge bugFix</p>
+<ul>
+<li>相同分支下:
+<ul>
+<li>当前分支在子分支, git merge 父分支, 子分支多一个指向上边就行</li>
+<li>当前分支在父分支, git merge 子分支 , 两者就合并</li>
+</ul>
+</li>
+</ul>
+<h2 id="31-分支与合并"><a class="markdownIt-Anchor" href="#31-分支与合并"></a> 3.1 分支与合并</h2>
+<p>太好了! 我们已经知道如何提交以及如何使用分支了。接下来咱们看看如何将两个分支合并到一起。就是说我们新建一个分支，在其上开发某个新功能，开发完成后再合并回主线。<br>
+咱们先来看一下第一种方法 —— <code>git merge</code>。在 Git 中合并两个分支时会产生一个特殊的提交记录，它有两个父节点。翻译成自然语言相当于：“我要把这两个父节点本身及它们所有的祖先都包含进来。”<br>
+通过图示更容易理解一些，咱们到下一页看一下。</p>
 <p>![[Learn Git 2022-08-18 21.57.05.excalidraw]]</p>
 <h1 id="4-git-rebase"><a class="markdownIt-Anchor" href="#4-git-rebase"></a> 4 git rebase</h1>
+<p>Rebase 实际上就是取出一系列的提交记录，"<strong>复制</strong>”它们搞出一个副本，然后在另外一个地方,逐个的放下去。原先本来的会隐藏掉</p>
+<ul>
+<li><strong>不同分支下</strong>: git rebase 谁 , 就移到 “谁” 的底部:
+<ul>
+<li>eg : 当前分支为 bugFix, 运行git rebase main, 会将 bugFix 放到 main 底部</li>
+</ul>
+</li>
+<li><strong>相同分支下</strong>: 当前分支在父分支, git rebase 子分支 , 两者就合并
+<ul>
+<li>由于 <code>bugFix</code> 继承自 <code>main</code>，所以 Git 只是简单的把 <code>main</code> 分支的引用向前移动了一下而已。</li>
+</ul>
+</li>
+</ul>
+<h2 id="41-原理"><a class="markdownIt-Anchor" href="#41-原理"></a> 4.1 原理</h2>
 <p>第二种合并分支的方法是 <code>git rebase</code><br>
 Rebase 实际上就是取出一系列的提交记录，"复制”它们，然后在另外一个地方,逐个的放下去。<br>
 Rebase 的优势就是可以创造更线性的提交历史，这听上去有些难以理解。如果只允许使用 Rebase 的话，代码库的提交<br>
 历史将会变得异常清晰。<br>
 ![[Learn Git 2022-08-18 21.07.57.excalidraw]]</p>
-<h1 id="5-head"><a class="markdownIt-Anchor" href="#5-head"></a> 5 HEAD</h1>
+<ul>
+<li>$ 高级篇</li>
+</ul>
+<!-- basicblock-start oid="ObsKcDpYuxBIirA1BDUYdxam" --> 
+<h1 id="5-head"><a class="markdownIt-Anchor" href="#5-head"></a> 5 HEAD::</h1>
+<!-- basicblock-end -->
+<p>通过切换当前对象, 可以改变 HEAD 指针: 用 git checkout xxx</p>
 <p>git checkout HEAD~1 : 单独操作 HEAD 指针往上一位</p>
+<h2 id="51-定义"><a class="markdownIt-Anchor" href="#51-定义"></a> 5.1 定义</h2>
+<p>我们首先看一下 “HEAD”。 HEAD 是一个对当前检出记录的符号引用 —— 也就是指向你正在其基础上进行工作的提交记录。<br>
+HEAD 总是指向当前分支上最近一次提交记录。大多数修改提交树的 Git 命令都是从改变 HEAD 的指向开始的。<br>
+HEAD 通常情况下是指向分支名的（如 bugFix）。在你提交时，改变了 bugFix 的状态，这一变化通过 HEAD 变得可见。</p>
+<h2 id="52-分离的-head"><a class="markdownIt-Anchor" href="#52-分离的-head"></a> 5.2 分离的 HEAD</h2>
+<p>分离的 HEAD 就是让其指向了某个具体的提交记录而不是分支名。在命令执行之前的状态如下所示：</p>
+<p>HEAD -&gt; main -&gt; C1</p>
+<p>HEAD 指向 main， main 指向 C1</p>
 <p>head 指针会默认在当前激活的分支上</p>
 <p>原理<br>
 ![[Learn Git 2022-08-18 22.36.50.excalidraw]]</p>
@@ -510,7 +560,7 @@ git rebase -i Cx : 也可以指定到某次提交记录</p>
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2022年8月28日</div>
+          <div>2022年9月28日</div>
         </div>
       
       <div class="license-meta-item">
