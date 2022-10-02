@@ -1,0 +1,791 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202206251952371.png">
+  <link rel="icon" href="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202206251952371.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="zeefan">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="1 理论::  12345678&#x2F;&#x2F; 单列模式: 系统只有一个对象class A{};int main (void){A a; &#x2F;&#x2F; 这个系统中只能有一个 A 类型的对象} 单例模式是一种常用的软件设计模式。在它的核心结构中只包含一个被称为单例的特殊类。通过单例模式可以保证系统中一个类只有一个实例而且该实例易于外界访问，从而方便对实例个数的控制并节约系统资源。如果希望在系统中某个类的对象只能存在">
+<meta property="og:type" content="article">
+<meta property="og:title" content="单例模式">
+<meta property="og:url" content="https://zeefan1555.github.io/posts/56170/index.html">
+<meta property="og:site_name" content="一杯空气">
+<meta property="og:description" content="1 理论::  12345678&#x2F;&#x2F; 单列模式: 系统只有一个对象class A{};int main (void){A a; &#x2F;&#x2F; 这个系统中只能有一个 A 类型的对象} 单例模式是一种常用的软件设计模式。在它的核心结构中只包含一个被称为单例的特殊类。通过单例模式可以保证系统中一个类只有一个实例而且该实例易于外界访问，从而方便对实例个数的控制并节约系统资源。如果希望在系统中某个类的对象只能存在">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-10-02T08:33:00.000Z">
+<meta property="article:modified_time" content="2022-10-02T13:17:27.729Z">
+<meta property="article:author" content="zeefan">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>单例模式 - 一杯空气</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.15.6/katex.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"zeefan1555.github.io","root":"/","version":"1.9.1","typing":{"enable":true,"typeSpeed":150,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"Text"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":10},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>一杯空气</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="单例模式"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-10-02 16:33" pubdate>
+          2022年10月2日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          25 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">单例模式</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2022年10月2日 晚上
+                  
+                
+              </p>
+            
+            <div class="markdown-body">
+              
+              <h1 id="1-理论"><a class="markdownIt-Anchor" href="#1-理论"></a> 1 理论::</h1>
+<!-- basicblock-end -->
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">// 单列模式: 系统只有一个对象</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span>{};<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span> <span class="hljs-params">(<span class="hljs-type">void</span>)</span></span>{<br><br>A a; <span class="hljs-comment">// 这个系统中只能有一个 A 类型的对象</span><br><br>}<br><br></code></pre></td></tr></tbody></table></figure>
+<p>单例模式是一种常用的软件设计模式。在它的核心结构中只包含一个被称为单例的特殊类。通过单例模式可以保证系统中一个类只有一个实例而且该实例易于外界访问，从而方便对实例个数的控制并节约系统资源。如果希望在<strong>系统中某个类的对象只能存在一个</strong>，单例模式是最好的解决方案。</p>
+<h1 id="2-案例"><a class="markdownIt-Anchor" href="#2-案例"></a> 2 案例</h1>
+<!-- basicblock-start oid="ObsHlpWnjsCHM3IRkNfhQlY8" --> 
+<h2 id="21-实现单例步骤"><a class="markdownIt-Anchor" href="#21-实现单例步骤"></a> 2.1 实现单例步骤::</h2>
+<!-- basicblock-end -->
+<p>实现单例步骤::❓<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Mb411t7ut?p=23&amp;vd_source=f2340d96e99780a96b50d8096ffaaf1a#t=256.728737">04:16</a>:不是很懂大约 5 分钟</p>
+<p>1.构造函数私有化 : 不能让别人 new 它<br>
+2.增加静态私有的当前类的指针变量<br>
+3.提供静态对外接口，可以让用户获得单例对象</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span> {<br><span class="hljs-keyword">private</span>: <span class="hljs-comment">// 1️⃣.构造函数私有化 : 不能让别人 new 它</span><br>	<span class="hljs-built_in">A</span>() {<br>		a = <span class="hljs-keyword">new</span> A;<br>	}<br>	<br><span class="hljs-keyword">private</span>:<span class="hljs-comment">//2️⃣.增加静态 + 私有, 的当前类的指针变量</span><br><span class="hljs-comment">// private 的原因是不能让别人直接访问到 a, 想访问它只能通过 getInstance</span><br><span class="hljs-comment">// 如果用 public, 别人可以直接通过 A::a 访问到 A</span><br>	<span class="hljs-type">static</span> A* a; <span class="hljs-comment">// 💡加了 static 后, 静态的成员函数可以通过类名去调用: A::a;</span><br>	<br><span class="hljs-keyword">public</span>:<span class="hljs-comment">//3️⃣.提供静态对外接口(public)，可以让用户获得单例对象</span><br>	<span class="hljs-function"><span class="hljs-type">static</span> A* <span class="hljs-title">getInstance</span><span class="hljs-params">()</span> </span>{<br>		<span class="hljs-keyword">return</span> a;<br>	}<br>};<br><br><br>A* A::a = <span class="hljs-literal">NULL</span>;<span class="hljs-comment">// 类外初始化</span><br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span> <span class="hljs-params">(<span class="hljs-type">void</span>)</span></span>{<br>	A a; <span class="hljs-comment">// ❗️或A*a=new A;  这两个会调用构造函数，要让不能构造函数, 想访问它只能通过 getInstance</span><br>	A::<span class="hljs-built_in">getInstance</span>();<span class="hljs-comment">// 访问 a</span><br>}<br><br></code></pre></td></tr></tbody></table></figure>
+<!-- basicblock-start oid="Obs7JAJIyiYk5eIowHrKVi9b" --> 
+<h2 id="22-类别"><a class="markdownIt-Anchor" href="#22-类别"></a> 2.2 类别::</h2>
+<!-- basicblock-end -->
+<p>1.懒汉式(需要的时候才会创建)</p>
+<p>2.饿汉式(直接创建，理解为main执行前，就创建好了)</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><code class="hljs c++"><br><span class="hljs-comment">//单例 分为懒汉式 饿汉式</span><br><br><span class="hljs-comment">// ---💡接着上面的代码的---</span><br><span class="hljs-comment">//1.懒汉式(需要的时候才会创建)</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Singleton_lazy</span> {<br><span class="hljs-keyword">private</span>:<br>	<span class="hljs-built_in">Singleton_lazy</span>() { cout &lt;&lt; <span class="hljs-string">"我是懒汉构造！"</span> &lt;&lt; endl; }<br><span class="hljs-keyword">public</span>:<br>	<span class="hljs-function"><span class="hljs-type">static</span> Singleton_lazy* <span class="hljs-title">getInstance</span><span class="hljs-params">()</span> </span>{ <span class="hljs-comment">// 第一次用的时候在创建</span><br>		<span class="hljs-keyword">if</span> (pSingleton == <span class="hljs-literal">NULL</span>) {<br>			pSingleton = <span class="hljs-keyword">new</span> Singleton_lazy;<br>		}<br>		<span class="hljs-keyword">return</span> pSingleton;<br>	}<br><span class="hljs-keyword">private</span>:<br>	<span class="hljs-type">static</span> Singleton_lazy* pSingleton;<br>};<br><br><span class="hljs-comment">//类外初始化</span><br>Singleton_lazy* Singleton_lazy::pSingleton = <span class="hljs-literal">NULL</span>;<br><br><span class="hljs-comment">//2.饿汉式</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Singleton_hungry</span> {<br><span class="hljs-keyword">private</span>:<br>	<span class="hljs-built_in">Singleton_hungry</span>() { cout &lt;&lt; <span class="hljs-string">"我是饿汉构造！"</span> &lt;&lt; endl; }<span class="hljs-comment">// 💡在 main 函数之前就创建了</span><br><span class="hljs-keyword">public</span>:<br>	<span class="hljs-function"><span class="hljs-type">static</span> Singleton_hungry* <span class="hljs-title">getInstance</span><span class="hljs-params">()</span> </span>{<br>		<span class="hljs-keyword">return</span> pSingleton;<span class="hljs-comment">// 💡上面没有判断了</span><br>	}<br><span class="hljs-keyword">private</span>:<br>	<span class="hljs-type">static</span> Singleton_hungry* pSingleton;<br>};<br><br><span class="hljs-comment">//类外初始化</span><br>Singleton_hungry* Singleton_hungry::pSingleton = <span class="hljs-keyword">new</span> Singleton_hungry;<span class="hljs-comment">// 💡在这 new, 在 main 函数之前就创建了</span><br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">test01</span><span class="hljs-params">()</span> </span>{<br>	Singleton_lazy* p1 = Singleton_lazy::<span class="hljs-built_in">getInstance</span>();<span class="hljs-comment">// 💡取到单例对象</span><br>	Singleton_lazy* p2 = Singleton_lazy::<span class="hljs-built_in">getInstance</span>();<br>	<span class="hljs-keyword">if</span> (p1 == p2) {<br>		cout &lt;&lt; <span class="hljs-string">"两个指针指向同一块内存空间，是单例！"</span> &lt;&lt; endl;<br>	}<br>	<span class="hljs-keyword">else</span> {<br>		cout &lt;&lt; <span class="hljs-string">"不是单例模式！"</span> &lt;&lt; endl;<br>	}<br><br>	Singleton_hungry* p3 = Singleton_hungry::<span class="hljs-built_in">getInstance</span>();<span class="hljs-comment">// 💡取到单例对象</span><br>	Singleton_hungry* p4 = Singleton_hungry::<span class="hljs-built_in">getInstance</span>();<br>	<span class="hljs-keyword">if</span> (p3 == p4) {<br>		cout &lt;&lt; <span class="hljs-string">"两个指针指向同一块内存空间，是单例！"</span> &lt;&lt; endl;<br>	}<br>	<span class="hljs-keyword">else</span> {<br>		cout &lt;&lt; <span class="hljs-string">"不是单例模式!"</span> &lt;&lt; endl;<br>	}<br>}<br><span class="hljs-comment">// 💡经测试, 以上两个都是单例对象</span><br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{<br><br>	<span class="hljs-comment">//A a; // 或A*a=new A;  这两个会调用构造函数，要让不能构造函数</span><br>	<span class="hljs-comment">//A::getInstance();💡静态的成员函数可以通过类名去调用</span><br><br>	<span class="hljs-built_in">test01</span>();<br>	cout &lt;&lt; <span class="hljs-string">"main函数开始执行！"</span> &lt;&lt; endl;<br><br><br><br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>}<br></code></pre></td></tr></tbody></table></figure>
+<!-- basicblock-start oid="ObsTE2UQF3DlSrNjS7wSnSIc" --> 
+<h1 id="3-单例对象释放"><a class="markdownIt-Anchor" href="#3-单例对象释放"></a> 3 单例对象释放::</h1>
+<!-- basicblock-end -->
+<p>如果在类中提供一个函数去释放, 那么只要有一个人调用了函数, 整个代码其他用到单例对象的地方都不管用了<br>
+所以不能提供释放的函数</p>
+<p><strong>其实可以不用考虑内存释放问题</strong></p>
+<blockquote>
+<p>1.单例对象从头到尾就一份内存，也不大, 没必要释放</p>
+<p>2.如果非要提供释放，可以写一个析构函数: 运行完自动释放：</p>
+</blockquote>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-comment">//实现单例步骤</span><br><span class="hljs-comment">//1.构造函数私有化</span><br><span class="hljs-comment">//2.增加静态私有的当前类的指针变量</span><br><span class="hljs-comment">//3.提供静态对外接口，可以让用户获得单例对象</span><br><br><span class="hljs-comment">//单例 分为懒汉式 饿汉式</span><br><br><span class="hljs-comment">//1.懒汉式(需要的时候才会创建)</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Singleton_lazy</span> {<br><span class="hljs-keyword">private</span>:<br>	<span class="hljs-built_in">Singleton_lazy</span>() { cout &lt;&lt; <span class="hljs-string">"我是懒汉构造！"</span> &lt;&lt; endl; }<br><span class="hljs-keyword">public</span>:<br>	<span class="hljs-function"><span class="hljs-type">static</span> Singleton_lazy* <span class="hljs-title">getInstance</span><span class="hljs-params">()</span> </span>{<br>		<span class="hljs-keyword">if</span> (pSingleton == <span class="hljs-literal">NULL</span>) {<br>			pSingleton = <span class="hljs-keyword">new</span> Singleton_lazy;<br>		}<br>		<span class="hljs-keyword">return</span> pSingleton;<br>	}<br><span class="hljs-meta">#<span class="hljs-keyword">if</span> 0 </span><br>	<span class="hljs-comment">//💡💡这样释放不行，万一谁手贱释放，就直接没了，这个权限不能给</span><br>	<span class="hljs-function"><span class="hljs-type">static</span> <span class="hljs-type">void</span> <span class="hljs-title">freeSpace</span><span class="hljs-params">()</span> </span>{<br>		<span class="hljs-keyword">if</span> (pSingleton != <span class="hljs-literal">NULL</span>) {<br>			<span class="hljs-keyword">delete</span> pSingleton;<br>		}<br>	}<br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br>	<span class="hljs-comment">//💡💡如果非要写，可以加个这个，运行完自动释放</span><br>	<span class="hljs-keyword">class</span> <span class="hljs-title class_">Garbo</span> {<br>		~<span class="hljs-built_in">Garbo</span>() {<br>			<span class="hljs-keyword">if</span> (pSingleton != <span class="hljs-literal">NULL</span>) {<br>				<span class="hljs-keyword">delete</span> pSingleton;<br>			}<br>		}<br>	};<br><br><br><span class="hljs-keyword">private</span>:<br>	<span class="hljs-type">static</span> Singleton_lazy* pSingleton;<br>	<span class="hljs-type">static</span> Garbo garbo;<br>};<br><br><span class="hljs-comment">//类外初始化</span><br>Singleton_lazy* Singleton_lazy::pSingleton = <span class="hljs-literal">NULL</span>;<br><br><span class="hljs-comment">//2.饿汉式</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Singleton_hungry</span> {<br><span class="hljs-keyword">private</span>:<br>	<span class="hljs-built_in">Singleton_hungry</span>() { cout &lt;&lt; <span class="hljs-string">"我是饿汉构造！"</span> &lt;&lt; endl; }<br><span class="hljs-keyword">public</span>:<br>	<span class="hljs-function"><span class="hljs-type">static</span> Singleton_hungry* <span class="hljs-title">getInstance</span><span class="hljs-params">()</span> </span>{<br>		<span class="hljs-keyword">return</span> pSingleton;<br>	}<br><span class="hljs-keyword">private</span>:<br>	<span class="hljs-type">static</span> Singleton_hungry* pSingleton;<br>};<br><br><span class="hljs-comment">//类外初始化</span><br>Singleton_hungry* Singleton_hungry::pSingleton = <span class="hljs-keyword">new</span> Singleton_hungry;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">test01</span><span class="hljs-params">()</span> </span>{<br>	Singleton_lazy* p1 = Singleton_lazy::<span class="hljs-built_in">getInstance</span>();<br>	Singleton_lazy* p2 = Singleton_lazy::<span class="hljs-built_in">getInstance</span>();<br>	<span class="hljs-keyword">if</span> (p1 == p2) {<br>		cout &lt;&lt; <span class="hljs-string">"两个指针指向同一块内存空间，是单例！"</span> &lt;&lt; endl;<br>	}<br>	<span class="hljs-keyword">else</span> {<br>		cout &lt;&lt; <span class="hljs-string">"不是单例模式！"</span> &lt;&lt; endl;<br>	}<br><br>	Singleton_hungry* p3 = Singleton_hungry::<span class="hljs-built_in">getInstance</span>();<br>	Singleton_hungry* p4 = Singleton_hungry::<span class="hljs-built_in">getInstance</span>();<br>	<span class="hljs-keyword">if</span> (p3 == p4) {<br>		cout &lt;&lt; <span class="hljs-string">"两个指针指向同一块内存空间，是单例！"</span> &lt;&lt; endl;<br>	}<br>	<span class="hljs-keyword">else</span> {<br>		cout &lt;&lt; <span class="hljs-string">"不是单例模式!"</span> &lt;&lt; endl;<br>	}<br>}<br><br><span class="hljs-meta">#<span class="hljs-keyword">if</span> 0</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">test02</span><span class="hljs-params">()</span> </span>{<br>	Singleton_lazy::<span class="hljs-built_in">freeSpace</span>();<br>}<br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br><br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{<br><br>	<span class="hljs-built_in">test01</span>();<br>	cout &lt;&lt; <span class="hljs-string">"main函数开始执行！"</span> &lt;&lt; endl;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>}<br></code></pre></td></tr></tbody></table></figure>
+<!-- basicblock-start oid="Obs2tmw6KXu2AvKCaCR5If1g" --> 
+<h1 id="4-单例模式遇到多线程"><a class="markdownIt-Anchor" href="#4-单例模式遇到多线程"></a> 4 单例模式遇到多线程::</h1>
+<!-- basicblock-end -->
+<!-- basicblock-start oid="ObsQhGVkIZ2Q9Bkn6O5B6sLf" --> 
+<p>多线程概念::![[多线程.excalidraw]]</p>
+<!-- basicblock-end -->
+<p>![[单例模式 2022-10-02 20.29.32.excalidraw]]</p>
+<!-- basicblock-start oid="ObsN7XTfOhM7pW8auRlyPK27" --> 
+<h1 id="5-单例模式的优缺点"><a class="markdownIt-Anchor" href="#5-单例模式的优缺点"></a> 5 单例模式的优缺点::</h1>
+<!-- basicblock-end -->
+<p><strong>优点：</strong></p>
+<p>(1)单例模式提供了对唯一实例的受控访问</p>
+<p>(2)节约系统资源。由于在系统内存中只存在一个对象。</p>
+<p><strong>缺点：</strong></p>
+<p>(1) 扩展略难。单例模式中没有抽象层。<br>
+(2) 单例类的职责过重。</p>
+<!-- basicblock-start oid="Obsa0pwoZD3yUTwIhPW3JRi6" --> 
+<h1 id="6-适用场景"><a class="markdownIt-Anchor" href="#6-适用场景"></a> 6 适用场景::</h1>
+<!-- basicblock-end -->
+<p>(1) 系统只需要一个实例对象，如系统要求提供一个唯一的序列号生成器或资源管理器（像windows的资源管理器），或者需要考虑资源消耗太大而只允许创建一个对象。</p>
+<p>(2) 客户调用类的单个实例只允许使用一个公共访问点，除了该公共访问点，不能通过其他途径访问该实例。</p>
+<hr>
+<p><strong>其他资料</strong></p>
+ <!-- basicblock-start oid="ObsNrP9PIGHBwETRCuXiR300" deck = "👨🏻‍💻code::设计模式::C++ 设计模式::创建型模型::单列模式.md" --> 
+<p>#历史记录::<br>
+2022/10/2🌵单列模式 : 第一次创建: ⏱1-18</p>
+<!-- basicblock-end -->
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Mb411t7ut?p=23&amp;vd_source=f2340d96e99780a96b50d8096ffaaf1a">2-08 单例模式_饿汉式和懒汉式创建_哔哩哔哩_bilibili</a></p>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/" class="category-chain-item">👨🏻‍💻code</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="category-chain-item">设计模式</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/C-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="category-chain-item">C++ 设计模式</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/C-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA%E5%9E%8B%E6%A8%A1%E5%9E%8B/" class="category-chain-item">创建型模型</a>
+  
+  
+
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>单例模式</div>
+      <div>https://zeefan1555.github.io/posts/56170/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>zeefan</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年10月2日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2022年10月2日</div>
+        </div>
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/48004/" title="代理模式">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">代理模式</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/56456/" title="抽象工厂模式">
+                        <span class="hidden-mobile">抽象工厂模式</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

@@ -24,7 +24,7 @@
 <meta property="og:description" content="1 题目描述 向一个集合中找出和为n的组合，所有的数字都可以被重复选取 示例 1： 输入：candidates &#x3D; [2,3,6,7], target &#x3D; 7, 所求解集为： [ [7], [2,2,3] ]    2 思路::  ![[7.组合总和 2022-09-29 10.20.32.excalidraw]] sum等于target的时候，需要收集结果，代码如下： 123456789101">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-05-18T02:51:00.000Z">
-<meta property="article:modified_time" content="2022-09-29T03:32:02.514Z">
+<meta property="article:modified_time" content="2022-10-02T13:17:54.309Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -284,7 +284,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年9月29日 中午
+                    本文最后更新于：2022年10月2日 晚上
                   
                 
               </p>
@@ -294,7 +294,7 @@
               <h1 id="1-题目描述"><a class="markdownIt-Anchor" href="#1-题目描述"></a> 1 题目描述</h1>
 <p>向一个集合中找出和为n的组合，所有的数字都可以被重复选取<br>
 示例 1： 输入：candidates = [2,3,6,7], target = 7, 所求解集为： [ [7], [2,2,3] ]</p>
-<!-- basicblock-start --> 
+<!-- basicblock-start oid="Obs9dRGMbbJuMyOi26UHtHvK" --> 
 <h1 id="2-思路"><a class="markdownIt-Anchor" href="#2-思路"></a> 2 思路::</h1>
 <!-- basicblock-end -->
 <p>![[7.组合总和 2022-09-29 10.20.32.excalidraw]]<br>
@@ -316,14 +316,14 @@ startIndex：来控制for循环的起始位置</p>
 <h3 id="212-终止条件-存放结果-return"><a class="markdownIt-Anchor" href="#212-终止条件-存放结果-return"></a> 2.1.2 终止条件, 存放结果, return</h3>
 <p>sum=目标和就可以终止</p>
 <h3 id="213-单层搜索过程"><a class="markdownIt-Anchor" href="#213-单层搜索过程"></a> 2.1.3 单层搜索过程</h3>
-<!-- basicblock-start --> 
+<!-- basicblock-start oid="ObsHuryuOlHk6rmYpKeO4HHM" --> 
 <p>如何重复选取元素呢，看代码，注释部分::<br>
 必须得有 startIndex, 不能没有, startIndex 控制着回溯的下一层的起始位置, 如果没有的话, 那都没法回溯了</p>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = startIndex; i &lt; candidates.<span class="hljs-built_in">size</span>(); i++) {<br>    sum += candidates[i];<br>    path.<span class="hljs-built_in">push_back</span>(candidates[i]);<br>    <span class="hljs-built_in">backtracking</span>(candidates, target, sum, i); <span class="hljs-comment">// 关键点:不用i+1了，表示可以重复读取当前的数</span><br>    sum -= candidates[i];   <span class="hljs-comment">// 回溯</span><br>    path.<span class="hljs-built_in">pop_back</span>();        <span class="hljs-comment">// 回溯</span><br>}<br></code></pre></td></tr></tbody></table></figure>
 <p>从startIndex开始，搜索sum = 目标和的path集合<br>
 <strong>for循环横向遍历，递归纵向遍历，回溯不断调整结果集</strong></p>
 <!-- basicblock-end -->
-<!-- basicblock-start --> 
+<!-- basicblock-start oid="ObsoZvmim85JtPIXAi9wcHRc" --> 
 <h1 id="3-代码"><a class="markdownIt-Anchor" href="#3-代码"></a> 3 代码::</h1>
 <!-- basicblock-end -->
 <p>v1, 2022年05月18日，编译已通过</p>
@@ -331,7 +331,7 @@ startIndex：来控制for循环的起始位置</p>
 <p>v2通过: 看注释: ⏱0-54</p>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>: <br>    vector&lt;<span class="hljs-type">int</span>&gt; path;<br>    vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; result;<br><br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">backtraking</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; candidates, <span class="hljs-type">int</span> target, <span class="hljs-type">int</span> sum, <span class="hljs-type">int</span> startIndex)</span></span>{<br>        <span class="hljs-keyword">if</span>(sum == target){<br>            result.<span class="hljs-built_in">push_back</span>(path);<br>            <span class="hljs-keyword">return</span>;<span class="hljs-comment">// 把一个符合结果的返回, return 之后, 就开始执行 pop_back 了, 所以又会找下一个递归的元素</span><br>        }<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = startIndex; i &lt; candidates.<span class="hljs-built_in">size</span>() &amp;&amp; sum + candidates[i] &lt;= target; i++){<br>            path.<span class="hljs-built_in">push_back</span>(candidates[i]);<br>            <span class="hljs-built_in">backtraking</span>(candidates, target, sum + candidates[i], i);<br>            path.<span class="hljs-built_in">pop_back</span>();<br>        }<br>    }<br><br>    vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">combinationSum</span>(vector&lt;<span class="hljs-type">int</span>&gt;&amp; candidates, <span class="hljs-type">int</span> target) {<br>        <span class="hljs-built_in">sort</span>(candidates.<span class="hljs-built_in">begin</span>(), candidates.<span class="hljs-built_in">end</span>());<br>        <span class="hljs-built_in">backtraking</span>(candidates, target, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);<br>        <span class="hljs-keyword">return</span> result;<br>        <br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
 <p><strong>其他资料</strong></p>
-<!-- basicblock-start deck = "👨🏻‍💻code::数据结构与算法::代码随想录::回溯算法::7.组合总和.md" --> 
+<!-- basicblock-start oid="Obs0sw6w0p8tQRyHhfUIoTar" deck = "👨🏻‍💻code::数据结构与算法::代码随想录::回溯算法::7.组合总和.md" --> 
 <p>#历史记录::<br>
 2022/9/29🌵7.组合总和 : v2通过: 看注释: ⏱0-54</p>
 <!-- basicblock-end -->
@@ -411,7 +411,7 @@ startIndex：来控制for循环的起始位置</p>
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2022年9月29日</div>
+          <div>2022年10月2日</div>
         </div>
       
       <div class="license-meta-item">

@@ -24,7 +24,7 @@
 <meta property="og:description" content="1 40.组合总和II 力扣题目链接 给定一个数组&amp;nbsp;candidates&amp;nbsp;和一个目标数&amp;nbsp;target&amp;nbsp;，找出&amp;nbsp;candidates&amp;nbsp;中所有可以使数字和为&amp;nbsp;target&amp;nbsp;的组合。 candidates&amp;nbsp;中的每个数字在每个组合中只能使用一次。 说明： 所有数字（包括目标数）都是正整数。 解集不能包含重复的组合。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-05-19T01:25:00.000Z">
-<meta property="article:modified_time" content="2022-09-29T04:32:49.785Z">
+<meta property="article:modified_time" content="2022-10-02T13:17:53.031Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -284,7 +284,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年9月29日 下午
+                    本文最后更新于：2022年10月2日 晚上
                   
                 
               </p>
@@ -299,7 +299,7 @@
 <p>示例&nbsp;1: 输入: candidates =&nbsp;[10,1,2,7,6,1,5], target =&nbsp;8, 所求解集为: [ [1, 7], [1, 2, 5], [2, 6], [1, 1, 6] ]</p>
 <p>示例&nbsp;2: 输入: candidates =&nbsp;[2,5,2,1,2], target =&nbsp;5, 所求解集为: [ &nbsp; [1,2,2], &nbsp; [5] ]</p>
 <h1 id="2-思路"><a class="markdownIt-Anchor" href="#2-思路"></a> 2 思路</h1>
-<!-- basicblock-start --> 
+<!-- basicblock-start oid="Obs8smtYwS0kltN4pmhaNvPe" --> 
 <p>回溯算法去重问题::</p>
 <p>与[[7.组合总和]]区别是：不能重复的使用元素<br>
 最后也要不能有重复的组合<br>
@@ -348,7 +348,7 @@ used[i - 1] == true，说明同一树枝candidates[i - 1]使用过</p>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    vector&lt;<span class="hljs-type">int</span>&gt; path;<br>    vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; result;<br>    <br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">backtacking</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; candidates, <span class="hljs-type">int</span> target, <span class="hljs-type">int</span> sum, <span class="hljs-type">int</span> startIndex)</span></span>{<br>        <span class="hljs-keyword">if</span>(sum == target){<br>            result.<span class="hljs-built_in">push_back</span>(path);<br>            <span class="hljs-keyword">return</span>;<br>        }<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = startIndex; i &lt; candidates.<span class="hljs-built_in">size</span>() &amp;&amp; sum +  candidates[i] &lt;= target; i++){<br>            <span class="hljs-comment">// 💡要对同一树层使用过的元素进行去重</span><br>            <span class="hljs-keyword">if</span> (i &gt; startIndex &amp;&amp; candidates[i] == candidates[i - <span class="hljs-number">1</span>]) {<br>                <span class="hljs-keyword">continue</span>;<br>            }<br>            path.<span class="hljs-built_in">push_back</span>(candidates[i]);<br>            <span class="hljs-built_in">backtacking</span>(candidates, target, sum+candidates[i], i+<span class="hljs-number">1</span>);<span class="hljs-comment">// ❗️和39.组合总和的区别1，这里是i+1，每个数字在每个组合中只能使用一次</span><br>            path.<span class="hljs-built_in">pop_back</span>();<br><br><br>        }<br>    }<br>    vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">combinationSum2</span>(vector&lt;<span class="hljs-type">int</span>&gt;&amp; candidates, <span class="hljs-type">int</span> target) {<br>        <span class="hljs-built_in">sort</span>(candidates.<span class="hljs-built_in">begin</span>(), candidates.<span class="hljs-built_in">end</span>());<br>        <span class="hljs-built_in">backtacking</span>(candidates, target, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);<br>        <span class="hljs-keyword">return</span> result;<br><br><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
 <hr>
 <p><strong>其他资料</strong></p>
-<!-- basicblock-start deck = "👨🏻‍💻code::数据结构与算法::代码随想录::回溯算法::8.组合总和II.md" --> 
+<!-- basicblock-start oid="Obssn8rRIikeW5Mxy9vXZl1r" deck = "👨🏻‍💻code::数据结构与算法::代码随想录::回溯算法::8.组合总和II.md" --> 
 <p>#历史记录::<br>
 2022/9/29🌵8.组合总和II : v2通过 只用 startIndex 来给树层去重:&nbsp;⏱1-0</p>
 <!-- basicblock-end -->
@@ -428,7 +428,7 @@ used[i - 1] == true，说明同一树枝candidates[i - 1]使用过</p>
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2022年9月29日</div>
+          <div>2022年10月2日</div>
         </div>
       
       <div class="license-meta-item">
@@ -457,9 +457,9 @@ used[i - 1] == true，说明同一树枝candidates[i - 1]使用过</p>
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/1001/" title="">
+                      <a href="/posts/15279/" title="9.分割回文串">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile"></span>
+                        <span class="hidden-mobile">9.分割回文串</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     

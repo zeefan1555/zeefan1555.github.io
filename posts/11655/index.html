@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20210204155522476.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20200812190213280.png">
 <meta property="article:published_time" content="2022-09-21T01:52:00.000Z">
-<meta property="article:modified_time" content="2022-09-29T01:31:03.099Z">
+<meta property="article:modified_time" content="2022-10-02T13:18:29.132Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="二叉树">
 <meta name="twitter:card" content="summary_large_image">
@@ -288,7 +288,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年9月29日 上午
+                    本文最后更新于：2022年10月2日 晚上
                   
                 
               </p>
@@ -316,7 +316,7 @@
 <p>v1</p>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">TreeNode* <span class="hljs-title">searchBST</span><span class="hljs-params">(TreeNode* root, <span class="hljs-type">int</span> val)</span> </span>{<br>        <span class="hljs-keyword">while</span>(root != <span class="hljs-literal">NULL</span>){<br>            <span class="hljs-keyword">if</span>(root-&gt;val &gt; val) root = root-&gt;left;<span class="hljs-comment">// 节点值比目标值大, 就往小的地方找即左子树</span><br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(root-&gt;val &lt; val) root = root-&gt;right;<span class="hljs-comment">// 同理</span><br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> root;<span class="hljs-comment">// 此处就是找到的情况了</span><br>        }<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>; <span class="hljs-comment">// ❗️要有找不到的情况</span><br><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
 <p>第一次看到了如此简单的迭代法，是不是感动的痛哭流涕，哭一会~</p>
-<!-- basicblock-start --> 
+<!-- basicblock-start oid="ObsUEjBtpnDNEmm4clXZSc4h" --> 
 <h2 id="22-递归法"><a class="markdownIt-Anchor" href="#22-递归法"></a> 2.2 递归法::</h2>
 <!-- basicblock-end -->
 <p>在递归遍历的时候，什么时候直接return 递归函数的返回值，什么时候不用加这个 return呢。<br>
@@ -414,7 +414,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2022年9月29日</div>
+          <div>2022年10月2日</div>
         </div>
       
       <div class="license-meta-item">
