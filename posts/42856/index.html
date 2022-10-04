@@ -16,21 +16,25 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="article">
-<meta property="og:title" content="一杯空气">
-<meta property="og:url" content="https://zeefan1555.github.io/posts/1001/index.html">
+    <meta name="description" content="行为型模式: 用来对类或对象怎样交互和怎样分配职责进行描述。    1 模板方法的理论::  ![[模板方法模式 2022-10-02 22.58.16.excalidraw]]  &amp; 定义一个操作中算法的框架，而将一些步骤延迟到子类中。模板方法模式使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤。     2 模板方法的案例::   12345678910111213141">
+<meta property="og:type" content="article">
+<meta property="og:title" content="模板方法模式">
+<meta property="og:url" content="https://zeefan1555.github.io/posts/42856/index.html">
 <meta property="og:site_name" content="一杯空气">
+<meta property="og:description" content="行为型模式: 用来对类或对象怎样交互和怎样分配职责进行描述。    1 模板方法的理论::  ![[模板方法模式 2022-10-02 22.58.16.excalidraw]]  &amp; 定义一个操作中算法的框架，而将一些步骤延迟到子类中。模板方法模式使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤。     2 模板方法的案例::   12345678910111213141">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-10-02T13:28:48.511Z">
-<meta property="article:modified_time" content="2022-10-02T13:28:48.511Z">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/618b7109db364e98bb0b9e99870ed137.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5q-V5Yqg57Si5p2l5Za9,size_18,color_FFFFFF,t_70,g_se,x_16#pic_center">
+<meta property="article:published_time" content="2022-10-02T14:55:00.000Z">
+<meta property="article:modified_time" content="2022-10-04T06:18:00.646Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/618b7109db364e98bb0b9e99870ed137.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5q-V5Yqg57Si5p2l5Za9,size_18,color_FFFFFF,t_70,g_se,x_16#pic_center">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>一杯空气</title>
+  <title>模板方法模式 - 一杯空气</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -197,7 +201,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text=""></span>
+            <span id="subtitle" data-typed-text="模板方法模式"></span>
           
         </div>
 
@@ -208,7 +212,7 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-10-02 21:28" pubdate>
+        <time datetime="2022-10-02 22:55" pubdate>
           2022年10月2日 晚上
         </time>
       </span>
@@ -220,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 字
+          2k 字
         
       </span>
     
@@ -231,7 +235,7 @@
         
         
         
-          1 分钟
+          11 分钟
         
       </span>
     
@@ -277,16 +281,94 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none"></h1>
+            <h1 style="display: none">模板方法模式</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2022年10月4日 下午
+                  
+                
+              </p>
             
             <div class="markdown-body">
               
-              
+              <p>行为型模式: 用来对类或对象怎样交互和怎样分配职责进行描述。</p>
+<!-- basicblock-start oid="Obs0wj56nH90qhsOwgG1cLQt" --> 
+<h1 id="1-模板方法的理论"><a class="markdownIt-Anchor" href="#1-模板方法的理论"></a> 1 模板方法的理论::</h1>
+<!-- basicblock-end -->
+<p>![[模板方法模式 2022-10-02 22.58.16.excalidraw]]</p>
+<ul>
+<li>&amp; 定义一个操作中算法的<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E6%A1%86%E6%9E%B6&amp;spm=1001.2101.3001.7020">框架</a>，而将一些步骤延迟到子类中。模板方法模式使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤。</li>
+</ul>
+<!-- basicblock-start oid="ObsdstvOGbnX9W0wLZrnfd9r" --> 
+<h1 id="2-模板方法的案例"><a class="markdownIt-Anchor" href="#2-模板方法的案例"></a> 2 模板方法的案例::</h1>
+<!-- basicblock-end -->
+<p><img src="https://img-blog.csdnimg.cn/618b7109db364e98bb0b9e99870ed137.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5q-V5Yqg57Si5p2l5Za9,size_18,color_FFFFFF,t_70,g_se,x_16#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">DrinkTemplate</span> {<br><span class="hljs-keyword">public</span>:<br>	<span class="hljs-comment">//注水</span><br>	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">void</span> <span class="hljs-title">Boildwater</span><span class="hljs-params">()</span> </span>= <span class="hljs-number">0</span>;<br>	<span class="hljs-comment">//冲泡</span><br>	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">void</span> <span class="hljs-title">Brew</span><span class="hljs-params">()</span> </span>= <span class="hljs-number">0</span>;<br>	<span class="hljs-comment">//倒入杯中</span><br>	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">void</span> <span class="hljs-title">PourInCup</span><span class="hljs-params">()</span> </span>= <span class="hljs-number">0</span>;<br>	<span class="hljs-comment">//加辅助料</span><br>	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">void</span> <span class="hljs-title">AddSomething</span><span class="hljs-params">()</span> </span>= <span class="hljs-number">0</span>;<br><br>	<span class="hljs-comment">//模板方法</span><br>	<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">Make</span><span class="hljs-params">()</span> </span>{<br>		<span class="hljs-built_in">Boildwater</span>();<br>		<span class="hljs-built_in">Brew</span>();<br>		<span class="hljs-built_in">PourInCup</span>();<br>		<span class="hljs-built_in">AddSomething</span>();<br>	}<br>};<br><br><span class="hljs-comment">//冲泡咖啡</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Coffee</span> : <span class="hljs-keyword">public</span> DrinkTemplate {<br><span class="hljs-keyword">public</span>:<br>	<span class="hljs-comment">//注水</span><br>	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">void</span> <span class="hljs-title">Boildwater</span><span class="hljs-params">()</span> </span>{<br>		cout &lt;&lt; <span class="hljs-string">"煮山泉水..."</span> &lt;&lt; endl;<br>	}<br>	<span class="hljs-comment">//冲泡</span><br>	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">void</span> <span class="hljs-title">Brew</span><span class="hljs-params">()</span> </span>{<br>		cout &lt;&lt; <span class="hljs-string">"冲泡咖啡..."</span> &lt;&lt; endl;<br>	}<br>	<span class="hljs-comment">//倒入杯中</span><br>	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">void</span> <span class="hljs-title">PourInCup</span><span class="hljs-params">()</span> </span>{<br>		cout &lt;&lt; <span class="hljs-string">"咖啡倒入杯中..."</span> &lt;&lt; endl;<br>	}<br>	<span class="hljs-comment">//加辅助料</span><br>	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">void</span> <span class="hljs-title">AddSomething</span><span class="hljs-params">()</span> </span>{<br>		cout &lt;&lt; <span class="hljs-string">"加糖，加牛奶，加点醋..."</span> &lt;&lt; endl;<br>	}<br>};<br><br><span class="hljs-comment">//冲泡茶</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Tea</span> : <span class="hljs-keyword">public</span> DrinkTemplate {<br><span class="hljs-keyword">public</span>:<br>	<span class="hljs-comment">//注水</span><br>	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">void</span> <span class="hljs-title">Boildwater</span><span class="hljs-params">()</span> </span>{<br>		cout &lt;&lt; <span class="hljs-string">"煮自来水..."</span> &lt;&lt; endl;<br>	}<br>	<span class="hljs-comment">//冲泡</span><br>	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">void</span> <span class="hljs-title">Brew</span><span class="hljs-params">()</span> </span>{<br>		cout &lt;&lt; <span class="hljs-string">"冲泡铁观音..."</span> &lt;&lt; endl;<br>	}<br>	<span class="hljs-comment">//倒入杯中</span><br>	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">void</span> <span class="hljs-title">PourInCup</span><span class="hljs-params">()</span> </span>{<br>		cout &lt;&lt; <span class="hljs-string">"茶水倒入杯中..."</span> &lt;&lt; endl;<br>	}<br>	<span class="hljs-comment">//加辅助料</span><br>	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">void</span> <span class="hljs-title">AddSomething</span><span class="hljs-params">()</span> </span>{<br>		cout &lt;&lt; <span class="hljs-string">"加糖，加柠檬，加生姜..."</span> &lt;&lt; endl;<br>	}<br>};<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">test01</span><span class="hljs-params">()</span> </span>{<br>	<br>	DrinkTemplate* tea = <span class="hljs-keyword">new</span> Tea;<br>	tea-&gt;<span class="hljs-built_in">Make</span>();<br><br>	cout &lt;&lt; <span class="hljs-string">"----------------"</span> &lt;&lt; endl;<br><br>	DrinkTemplate* coffee = <span class="hljs-keyword">new</span> Coffee;<br>	coffee-&gt;<span class="hljs-built_in">Make</span>();<br><br>	<span class="hljs-keyword">delete</span> tea;<br>	<span class="hljs-keyword">delete</span> coffee;<br>}<br><br><br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{<br>	<span class="hljs-built_in">test01</span>();<br>	<span class="hljs-built_in">system</span>(<span class="hljs-string">"pause"</span>);<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>}<br></code></pre></td></tr></tbody></table></figure>
+<!-- basicblock-start oid="ObsSJ1jlWHX1gT3RxypseEhf" --> 
+<h1 id="3-模板方法模式的优缺点"><a class="markdownIt-Anchor" href="#3-模板方法模式的优缺点"></a> 3 模板方法模式的优缺点::</h1>
+<!-- basicblock-end -->
+<p><strong>优点：</strong></p>
+<p>(1)在父类中形式化地定义一个算法，而由它的子类来实现细节的处理，在子类实现详细的处理算法时并不会改变算法中步骤的执行次序。</p>
+<p>(2)模板方法模式是一种代码复用技术，它在类库设计中尤为重要，它提取了类库中的公共行为，将公共行为放在父类中，而通过其子类来实现不同的行为，它鼓励我们恰当使用继承来实现代码复用。</p>
+<p>(3)可实现一种反向控制结构，通过子类覆盖父类的钩子方法来决定某一特定步骤是否需要执行。</p>
+<p>(4)在模板方法模式中可以通过子类来覆盖父类的基本方法，不同的子类可以提供基本方法的不同实现，更换和增加新的子类很方便，符合单一职责原则和开闭原则。</p>
+<p><strong>缺点：</strong><br>
+需要为每一个基本方法的不同实现提供一个子类，如果父类中可变的基本方法太多，将会导致类的个数增加，系统更加庞大，设计也更加抽象。</p>
+<hr>
+<p><strong>其他资料</strong></p>
+ <!-- basicblock-start oid="Obs2PZn2klaTlt8zwXXH41qS" deck = "👨🏻‍💻code::设计模式::C++ 设计模式::行为型模式::模板方法模式.md" --> 
+<p>#历史记录::<br>
+2022/10/2🌵模板方法模式 : 第一次创建</p>
+<!-- basicblock-end -->
               
             </div>
             <hr/>
             <div>
               <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/" class="category-chain-item">👨🏻‍💻code</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="category-chain-item">设计模式</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/C-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="category-chain-item">C++ 设计模式</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/C-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F/" class="category-chain-item">行为型模式</a>
+  
+  
+
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
   
   
 </div>
@@ -297,8 +379,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div></div>
-      <div>https://zeefan1555.github.io/posts/1001/</div>
+      <div>模板方法模式</div>
+      <div>https://zeefan1555.github.io/posts/42856/</div>
     </div>
     <div class="license-meta">
       
@@ -313,6 +395,11 @@
           <div>2022年10月2日</div>
         </div>
       
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2022年10月4日</div>
+        </div>
       
       <div class="license-meta-item">
         <div>许可协议</div>
@@ -340,12 +427,18 @@
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/posts/22978/" title="命令模式">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">命令模式</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/48004/" title="代理模式">
-                        <span class="hidden-mobile">代理模式</span>
+                      <a href="/posts/39555/" title="适配器模式">
+                        <span class="hidden-mobile">适配器模式</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
