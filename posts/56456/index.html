@@ -16,15 +16,15 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1 原理::  ![[抽象工厂模式 2022-10-02 15.48.45.excalidraw]]    2 案例::  12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273">
+    <meta name="description" content="1 原理::  工厂方法模式通过引入工厂等级结构，解决了简单工厂模式中工厂类职责太重的问题， 但由于工厂方法模式中的每个工厂只生产一类产品，可能会导致系统中存在大量的工厂类，势必会增加系统的开销。 抽象工厂模式为工厂方法模式的进一步延伸，其将一些相关的产品组成一个“产品族”，由同一个工厂来统一生产。 虽然对于新增一个产品族很方面，并且也符合开闭原则，但是新增一个产品等级结构，会对整个工厂结构进行">
 <meta property="og:type" content="article">
 <meta property="og:title" content="抽象工厂模式">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/56456/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="1 原理::  ![[抽象工厂模式 2022-10-02 15.48.45.excalidraw]]    2 案例::  12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273">
+<meta property="og:description" content="1 原理::  工厂方法模式通过引入工厂等级结构，解决了简单工厂模式中工厂类职责太重的问题， 但由于工厂方法模式中的每个工厂只生产一类产品，可能会导致系统中存在大量的工厂类，势必会增加系统的开销。 抽象工厂模式为工厂方法模式的进一步延伸，其将一些相关的产品组成一个“产品族”，由同一个工厂来统一生产。 虽然对于新增一个产品族很方面，并且也符合开闭原则，但是新增一个产品等级结构，会对整个工厂结构进行">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-10-02T07:41:00.000Z">
-<meta property="article:modified_time" content="2022-10-02T13:17:22.777Z">
+<meta property="article:modified_time" content="2022-10-04T13:34:18.228Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.6k 字
+          3.8k 字
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          18 分钟
+          19 分钟
         
       </span>
     
@@ -284,7 +284,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年10月2日 晚上
+                    本文最后更新于：2022年10月4日 晚上
                   
                 
               </p>
@@ -293,7 +293,13 @@
               
               <h1 id="1-原理"><a class="markdownIt-Anchor" href="#1-原理"></a> 1 原理::</h1>
 <!-- basicblock-end -->
-<p>![[抽象工厂模式 2022-10-02 15.48.45.excalidraw]]</p>
+<p>工厂方法模式通过引入工厂等级结构，解决了简单工厂模式中工厂类职责太重的问题，<br>
+但由于工厂方法模式中的每个工厂只生产一类产品，可能会导致系统中存在大量的工厂类，势必会增加系统的开销。</p>
+<p>抽象工厂模式为工厂方法模式的进一步延伸，其将一些相关的产品组成一个“产品族”，由同一个工厂来统一生产。<br>
+<strong>虽然对于新增一个产品族很方面，并且也符合开闭原则，但是新增一个产品等级结构，会对整个工厂结构进行大改</strong><br>
+![[抽象工厂模式 2022-10-02 15.48.45.excalidraw]]</p>
+<p><strong>应用</strong><br>
+Spring中的BeanFactory</p>
 <!-- basicblock-start oid="Obs1Jlpb4R0dITwPu3xzPFJ4" --> 
 <h1 id="2-案例"><a class="markdownIt-Anchor" href="#2-案例"></a> 2 案例::</h1>
 <!-- basicblock-end -->
@@ -397,7 +403,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2022年10月2日</div>
+          <div>2022年10月4日</div>
         </div>
       
       <div class="license-meta-item">

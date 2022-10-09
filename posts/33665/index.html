@@ -1,0 +1,793 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202206251952371.png">
+  <link rel="icon" href="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202206251952371.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="zeefan">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="1 创建型模式::   1.1 工厂方法(factory method)模式：[[工厂方法模式]] 定义一个创建对象的接口，但由子类决定需要实例化哪一个类。工厂方法使得子类实例化的过程推迟  1.2 抽象工厂(abstract factory)模式：[[抽象工厂模式]] 提供一个接口，可以创建一系列相关或相互依赖的对象，而无需指定他们具体的类  1.3 原型(prototype)模式： 用原型实">
+<meta property="og:type" content="article">
+<meta property="og:title" content="23 种设计模式的概念">
+<meta property="og:url" content="https://zeefan1555.github.io/posts/33665/index.html">
+<meta property="og:site_name" content="一杯空气">
+<meta property="og:description" content="1 创建型模式::   1.1 工厂方法(factory method)模式：[[工厂方法模式]] 定义一个创建对象的接口，但由子类决定需要实例化哪一个类。工厂方法使得子类实例化的过程推迟  1.2 抽象工厂(abstract factory)模式：[[抽象工厂模式]] 提供一个接口，可以创建一系列相关或相互依赖的对象，而无需指定他们具体的类  1.3 原型(prototype)模式： 用原型实">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-10-04T14:07:00.000Z">
+<meta property="article:modified_time" content="2022-10-04T14:21:33.100Z">
+<meta property="article:author" content="zeefan">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>23 种设计模式的概念 - 一杯空气</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.15.6/katex.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"zeefan1555.github.io","root":"/","version":"1.9.1","typing":{"enable":true,"typeSpeed":150,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"Text"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":10},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>一杯空气</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="23 种设计模式的概念"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-10-04 22:07" pubdate>
+          2022年10月4日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          9 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">23 种设计模式的概念</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2022年10月4日 晚上
+                  
+                
+              </p>
+            
+            <div class="markdown-body">
+              
+              <h1 id="1-创建型模式"><a class="markdownIt-Anchor" href="#1-创建型模式"></a> 1 创建型模式::</h1>
+<!-- basicblock-end -->
+<h2 id="11-工厂方法factory-method模式工厂方法模式"><a class="markdownIt-Anchor" href="#11-工厂方法factory-method模式工厂方法模式"></a> 1.1 工厂方法(factory method)模式：[[工厂方法模式]]</h2>
+<p>定义一个创建对象的接口，但由子类决定需要实例化哪一个类。工厂方法使得子类实例化的过程推迟</p>
+<h2 id="12-抽象工厂abstract-factory模式抽象工厂模式"><a class="markdownIt-Anchor" href="#12-抽象工厂abstract-factory模式抽象工厂模式"></a> 1.2 抽象工厂(abstract factory)模式：[[抽象工厂模式]]</h2>
+<p>提供一个接口，可以创建一系列相关或相互依赖的对象，而无需指定他们具体的类</p>
+<h2 id="13-原型prototype模式"><a class="markdownIt-Anchor" href="#13-原型prototype模式"></a> 1.3 原型(prototype)模式：</h2>
+<p>用原型实例指定创建对象的类型，并且通过拷贝这个原型来创建新的对象</p>
+<h2 id="14-单例singleton模式单例模式"><a class="markdownIt-Anchor" href="#14-单例singleton模式单例模式"></a> 1.4 单例(singleton)模式：[[单例模式]]</h2>
+<p>保证一个类只有一个实例，并提供一个访问它的全局访问点</p>
+<h2 id="15-构建器builder模式"><a class="markdownIt-Anchor" href="#15-构建器builder模式"></a> 1.5 构建器(builder)模式：</h2>
+<p>将一个复杂类的表示与其构造相分离，使得相同的构建过程能够得出不同的表示</p>
+<!-- basicblock-start oid="ObsKWo536mEWs62dfYTTMUIw" --> 
+<h1 id="2-结构型模式"><a class="markdownIt-Anchor" href="#2-结构型模式"></a> 2 结构型模式::</h1>
+<p><strong>让类和类进行组合，获得更大的结构。</strong></p>
+<!-- basicblock-end -->
+<h2 id="21-适配器adapter模式适配器模式"><a class="markdownIt-Anchor" href="#21-适配器adapter模式适配器模式"></a> 2.1 适配器(adapter)模式：[[适配器模式]]</h2>
+<p>将一个类的接口转换成用户希望得到的另一个接口。它使原本不相容的接口得以协同工作—一速记关键字：转换接口</p>
+<h2 id="22-桥接bridge模式"><a class="markdownIt-Anchor" href="#22-桥接bridge模式"></a> 2.2 桥接(bridge)模式：</h2>
+<p>将类的抽象部分和它的实现部分分离开来，使它们可以独立地变化一一速记关键字：继承树拆分</p>
+<h2 id="23-组合composite模式"><a class="markdownIt-Anchor" href="#23-组合composite模式"></a> 2.3 组合(composite)模式：</h2>
+<p>将对象组合成树型结构以表示"整体-部分"的层次结构，使得用户对单个对象和组合对象的使用具有一致性一一速记<br>
+关键字：树形目录结构</p>
+<h2 id="24-装饰decorator模式装饰模式"><a class="markdownIt-Anchor" href="#24-装饰decorator模式装饰模式"></a> 2.4 装饰(decorator)模式：[[装饰模式]]</h2>
+<p>动态地给一个对象添加一些额外的职责。它提供了用子类扩展功能的一个灵活的替代，比派生一个子类更加灵活一一速记关键字：附加职责</p>
+<h2 id="25-外观facade模式外观模式"><a class="markdownIt-Anchor" href="#25-外观facade模式外观模式"></a> 2.5 外观(facade)模式：[[外观模式]]</h2>
+<p>定义一个高层接口，为子系统中的一组接口提供一个一致的外观，从而简化了该子系统的使用一一速记关键字：对外统一接口</p>
+<h2 id="26-享元flyweight模式"><a class="markdownIt-Anchor" href="#26-享元flyweight模式"></a> 2.6 享元(flyweight)模式：</h2>
+<p>提供支持大量细粒度对象共享的有效方法</p>
+<h2 id="27-代理proxy模式代理模式"><a class="markdownIt-Anchor" href="#27-代理proxy模式代理模式"></a> 2.7 代理(proxy)模式：[[代理模式]]</h2>
+<p>为其他对象提供一种代理以控制这个对象的访问</p>
+<!-- basicblock-start oid="Obsi4OYJSSfluYBmiXxIJ5us" --> 
+<h1 id="3-行为型模式"><a class="markdownIt-Anchor" href="#3-行为型模式"></a> 3 行为型模式::</h1>
+<!-- basicblock-end -->
+<p>用来对类或对象怎样交互和怎样分配职责进行描述。</p>
+<h2 id="31-职责链chain-of-responsibility模式"><a class="markdownIt-Anchor" href="#31-职责链chain-of-responsibility模式"></a> 3.1 职责链(chain of responsibility)模式：</h2>
+<p>通过给多个对象处理请求的机会，减少请求的发送者与接收者之间的耦合。将接收对象链接起来，在链中传递请<br>
+求，直到有一个对象处理这个请求一一速记关键字：传递职责</p>
+<h2 id="32-命令command模式命令模式"><a class="markdownIt-Anchor" href="#32-命令command模式命令模式"></a> 3.2 命令(command)模式：[[命令模式]]</h2>
+<p>将一个请求封装为一个对象，从而可用不同的请求对客户进行参数化，将请求排队或记录请求日志，支持可撤销的<br>
+操作一一速记关键字：日志记录，可撤销</p>
+<h2 id="33-解释器interpreter模式"><a class="markdownIt-Anchor" href="#33-解释器interpreter模式"></a> 3.3 解释器(interpreter)模式：</h2>
+<p>给定一种语言，定义它的文法表示，并定义一个解释器，该解释器用来根据文法表示来解释语言中的句子</p>
+<h2 id="34-迭代器iterator模式"><a class="markdownIt-Anchor" href="#34-迭代器iterator模式"></a> 3.4 迭代器(iterator)模式：</h2>
+<p>提供一种方法来顺序访问一个聚合对象中的各个元素而不需要暴露该对象的内部表示</p>
+<h2 id="35-中介者mediator模式"><a class="markdownIt-Anchor" href="#35-中介者mediator模式"></a> 3.5 中介者(mediator)模式：</h2>
+<p>用一个中介对象来封装一系列的对象交互。它使各对象不需要显式地相互调用，从而达到低耦合，还可以独立地改<br>
+变对象间的交互一一速记关键字：不直接引用</p>
+<h2 id="36-备忘录memento模式"><a class="markdownIt-Anchor" href="#36-备忘录memento模式"></a> 3.6 备忘录(memento)模式：</h2>
+<p>在不破坏封装性的前提下，捕获一个对象的内部状态，并在该对象之外保存这个状态，从而可用在以后将该对象恢复到原先保存的状态</p>
+<h2 id="37-观察者observer模式观察者模式"><a class="markdownIt-Anchor" href="#37-观察者observer模式观察者模式"></a> 3.7 观察者(observer)模式：[[观察者模式]]</h2>
+<p>定义对象间的一种一对多的依赖关系，当一个对象的状态发生改变时，所有依赖于它的对象都得到通知并自动更新</p>
+<h2 id="38-状态state模式"><a class="markdownIt-Anchor" href="#38-状态state模式"></a> 3.8 状态(state)模式：</h2>
+<p>允许一个对象在其内部状态改变时改变它的行为—一速记关键字：状态变成类</p>
+<h2 id="39-策略strategy模式策略模式"><a class="markdownIt-Anchor" href="#39-策略strategy模式策略模式"></a> 3.9 策略(strategy)模式：[[策略模式]]</h2>
+<p>定义一系列算法，把它们一个个封装起来，并且使它们之间可互相替换，从而让算法可以独立于使用它的用户而变化</p>
+<h2 id="310-模板方法template-method模式模板方法模式"><a class="markdownIt-Anchor" href="#310-模板方法template-method模式模板方法模式"></a> 3.10 模板方法(template method)模式：[[模板方法模式]]</h2>
+<p>定义一个操作中的算法骨架，而将一些步骤延迟到子类中，使得子类可以不改变一个算法的结构即可重新定义算法的某些特定步骤</p>
+<h2 id="311-访问者visitor模式"><a class="markdownIt-Anchor" href="#311-访问者visitor模式"></a> 3.11 访问者(visitor)模式：</h2>
+<p>表示一个作用于某对象结构中的各元素的操作，使得在不改变各元素的类的前提下定义作用于这些元素的新操作</p>
+<hr>
+<p><strong>其他资料</strong></p>
+ <!-- basicblock-start oid="ObsQ6vFJBCtQkl42MCnlF6AL" deck = "👨🏻‍💻code::设计模式::C++ 设计模式::23 种设计模式的概念.md" --> 
+<p>#历史记录::<br>
+2022/10/4🌵23 种设计模式的概念 : 第一次创建</p>
+<!-- basicblock-end -->
+<p><a href="marginnote3app://note/BACBD414-669E-47DC-AE8C-336DEA8B6050">margin: 23种设计模式的概念</a></p>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/" class="category-chain-item">👨🏻‍💻code</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="category-chain-item">设计模式</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/C-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="category-chain-item">C++ 设计模式</a>
+  
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>23 种设计模式的概念</div>
+      <div>https://zeefan1555.github.io/posts/33665/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>zeefan</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年10月4日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2022年10月4日</div>
+        </div>
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/11/" title="">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/6014/" title="工厂模式">
+                        <span class="hidden-mobile">工厂模式</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
