@@ -16,15 +16,15 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1 理论::  12345678&#x2F;&#x2F; 单列模式: 系统只有一个对象class A{};int main (void){A a; &#x2F;&#x2F; 这个系统中只能有一个 A 类型的对象} 单例模式: 保证一个类仅有一个实例，并提供一个访问它的全局访问点 方便对实例个数的控制并节约系统资源。 ![[单例模式 2022-10-04 14.40.48.excalidraw]]    2 实现单例步骤::  实现单例">
+    <meta name="description" content="1 理论::  12345678&#x2F;&#x2F; 单列模式: 系统只有一个对象class A{};int main (void){A a; &#x2F;&#x2F; 这个系统中只能有一个 A 类型的对象}  [!summary] 单例模式: 保证一个类仅有一个实例，并提供一个访问它的全局访问点 方便对实例个数的控制并节约系统资源。  ![[单例模式 2022-10-04 14.40.48.excalidraw]]    2 实">
 <meta property="og:type" content="article">
 <meta property="og:title" content="单例模式">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/56170/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="1 理论::  12345678&#x2F;&#x2F; 单列模式: 系统只有一个对象class A{};int main (void){A a; &#x2F;&#x2F; 这个系统中只能有一个 A 类型的对象} 单例模式: 保证一个类仅有一个实例，并提供一个访问它的全局访问点 方便对实例个数的控制并节约系统资源。 ![[单例模式 2022-10-04 14.40.48.excalidraw]]    2 实现单例步骤::  实现单例">
+<meta property="og:description" content="1 理论::  12345678&#x2F;&#x2F; 单列模式: 系统只有一个对象class A{};int main (void){A a; &#x2F;&#x2F; 这个系统中只能有一个 A 类型的对象}  [!summary] 单例模式: 保证一个类仅有一个实例，并提供一个访问它的全局访问点 方便对实例个数的控制并节约系统资源。  ![[单例模式 2022-10-04 14.40.48.excalidraw]]    2 实">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-10-02T08:33:00.000Z">
-<meta property="article:modified_time" content="2022-10-04T08:16:19.350Z">
+<meta property="article:modified_time" content="2022-10-19T12:38:44.798Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5.1k 字
+          5.3k 字
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          26 分钟
+          27 分钟
         
       </span>
     
@@ -284,7 +284,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年10月4日 下午
+                    本文最后更新于：2022年10月19日 晚上
                   
                 
               </p>
@@ -294,32 +294,47 @@
               <h1 id="1-理论"><a class="markdownIt-Anchor" href="#1-理论"></a> 1 理论::</h1>
 <!-- basicblock-end -->
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">// 单列模式: 系统只有一个对象</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span>{};<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span> <span class="hljs-params">(<span class="hljs-type">void</span>)</span></span>{<br><br>A a; <span class="hljs-comment">// 这个系统中只能有一个 A 类型的对象</span><br><br>}<br><br></code></pre></td></tr></tbody></table></figure>
-<p>单例模式: 保证一个类仅有一个实例，并提供一个访问它的全局访问点<br>
+<blockquote>
+<p>[!summary] 单例模式: 保证一个类仅有一个实例，并提供一个访问它的全局访问点<br>
 方便对实例个数的控制并节约系统资源。</p>
+</blockquote>
 <p>![[单例模式 2022-10-04 14.40.48.excalidraw]]</p>
 <!-- basicblock-start oid="ObsHlpWnjsCHM3IRkNfhQlY8" --> 
 <h1 id="2-实现单例步骤"><a class="markdownIt-Anchor" href="#2-实现单例步骤"></a> 2 实现单例步骤::</h1>
 <!-- basicblock-end -->
-<p>实现单例步骤::❓<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Mb411t7ut?p=23&amp;vd_source=f2340d96e99780a96b50d8096ffaaf1a#t=256.728737">04:16</a>:不是很懂大约 5 分钟</p>
-<ol>
-<li>构造函数私有化 : 不能让别人 new 它<br>
-确保单例类只能自己创建实例</li>
-<li>增加<strong>私有静态</strong>的变量 (当前类的指针变量)
-<ol>
-<li>确保只有一个实例</li>
-</ol>
-</li>
-<li>提供静态对外接口，
-<ol>
-<li>可以让用户获得单例对象</li>
-</ol>
-</li>
-</ol>
+<p><strong>使用</strong></p>
 <ul>
-<li>&amp; 简单来说就是，单例类的构造方不让其他人修改和使用；</li>
-<li>&amp; 并且单例类自己只创建一个实例，这个实例，其他人也无法修改和直接使用；</li>
-<li>&amp; 然后单例类提供一个调用方法，想用这个实例，只能调用。这样就确保了全局只创建了一个实例。</li>
+<li>私有构造函数
+<ul>
+<li>不能让别人 new 它， 确保单例类只能自己创建实例</li>
 </ul>
+</li>
+<li>私有静态变量
+<ul>
+<li>确保只有一个实例</li>
+</ul>
+</li>
+<li>公有静态函数
+<ul>
+<li>提供静态对外接口，可以让用户获得单例对象</li>
+</ul>
+</li>
+</ul>
+<p>私有构造函数保证了不能通过构造函数来创建对象，只能通过公有静态函数返回唯一私有静态变量<br>
+<strong>原则:</strong></p>
+<ol>
+<li>私有构造 (防止类通过常规方法实例化)</li>
+<li>以静态方法或者枚举返回实例。 (保证实例的唯一性)</li>
+<li>确保实例只有一个，尤其是多线程环境。(保证创建实例的线程安全)</li>
+<li>确保反序列化时不会重新构造对象。(在有序列化反序列化的场景下防止单例被莫名破坏)</li>
+</ol>
+<blockquote>
+<p>[!tip]<br>
+简单来说就是，单例类的构造方不让其他人修改和使用；<br>
+并且单例类自己只创建一个实例，这个实例，其他人也无法修改和直接使用；<br>
+然后单例类提供一个调用方法，想用这个实例，只能调用。这样就确保了全局只创建了一个实例。<br>
+<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Mb411t7ut?p=23&amp;vd_source=f2340d96e99780a96b50d8096ffaaf1a#t=256.728737">04:16</a></p>
+</blockquote>
 <figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span> {<br><span class="hljs-keyword">private</span>: <span class="hljs-comment">// 1️⃣.构造函数私有化 : 不能让别人 new 它</span><br>	<span class="hljs-built_in">A</span>() {<br>		a = <span class="hljs-keyword">new</span> A;<br>	}<br>	<br><span class="hljs-keyword">private</span>:<span class="hljs-comment">//2️⃣.增加静态 + 私有, 的当前类的指针变量</span><br><span class="hljs-comment">// private 的原因是不能让别人直接访问到 a, 想访问它只能通过 getInstance</span><br><span class="hljs-comment">// 如果用 public, 别人可以直接通过 A::a 访问到 A</span><br>	<span class="hljs-type">static</span> A* a; <span class="hljs-comment">// 💡加了 static 后, 静态的成员函数可以通过类名去调用: A::a;</span><br>	<br><span class="hljs-keyword">public</span>:<span class="hljs-comment">//3️⃣.提供静态对外接口(public)，可以让用户获得单例对象</span><br>	<span class="hljs-function"><span class="hljs-type">static</span> A* <span class="hljs-title">getInstance</span><span class="hljs-params">()</span> </span>{<br>		<span class="hljs-keyword">return</span> a;<br>	}<br>};<br><br><br>A* A::a = <span class="hljs-literal">NULL</span>;<span class="hljs-comment">// 类外初始化</span><br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span> <span class="hljs-params">(<span class="hljs-type">void</span>)</span></span>{<br>	A a; <span class="hljs-comment">// ❗️或A*a=new A;  这两个会调用构造函数，要让不能构造函数, 想访问它只能通过 getInstance</span><br>	A::<span class="hljs-built_in">getInstance</span>();<span class="hljs-comment">// 访问 a</span><br>}<br><br></code></pre></td></tr></tbody></table></figure>
 <!-- basicblock-start oid="Obs7JAJIyiYk5eIowHrKVi9b" --> 
 <h1 id="3-单例模式的类别"><a class="markdownIt-Anchor" href="#3-单例模式的类别"></a> 3 [[单例模式的类别]]::</h1>
@@ -336,6 +351,7 @@
 </blockquote>
 <p>如果在类中提供一个函数去释放, 那么只要有一个人调用了函数, 整个代码其他用到单例对象的地方都不管用了<br>
 所以不能提供释放的函数</p>
+<p>//💡💡如果非要写，可以加个析构函数，运行完自动释放</p>
 <p>看💡💡</p>
 <figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-comment">//实现单例步骤</span><br><span class="hljs-comment">//1.构造函数私有化</span><br><span class="hljs-comment">//2.增加静态私有的当前类的指针变量</span><br><span class="hljs-comment">//3.提供静态对外接口，可以让用户获得单例对象</span><br><br><span class="hljs-comment">//单例 分为懒汉式 饿汉式</span><br><br><span class="hljs-comment">//1.懒汉式(需要的时候才会创建)</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Singleton_lazy</span> {<br><span class="hljs-keyword">private</span>:<br>	<span class="hljs-built_in">Singleton_lazy</span>() { cout &lt;&lt; <span class="hljs-string">"我是懒汉构造！"</span> &lt;&lt; endl; }<br><span class="hljs-keyword">public</span>:<br>	<span class="hljs-function"><span class="hljs-type">static</span> Singleton_lazy* <span class="hljs-title">getInstance</span><span class="hljs-params">()</span> </span>{<br>		<span class="hljs-keyword">if</span> (pSingleton == <span class="hljs-literal">NULL</span>) {<br>			pSingleton = <span class="hljs-keyword">new</span> Singleton_lazy;<br>		}<br>		<span class="hljs-keyword">return</span> pSingleton;<br>	}<br><span class="hljs-meta">#<span class="hljs-keyword">if</span> 0 </span><br>	<span class="hljs-comment">//💡💡这样释放不行，万一谁手贱释放，就直接没了，这个权限不能给</span><br>	<span class="hljs-function"><span class="hljs-type">static</span> <span class="hljs-type">void</span> <span class="hljs-title">freeSpace</span><span class="hljs-params">()</span> </span>{<br>		<span class="hljs-keyword">if</span> (pSingleton != <span class="hljs-literal">NULL</span>) {<br>			<span class="hljs-keyword">delete</span> pSingleton;<br>		}<br>	}<br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br>	<span class="hljs-comment">//💡💡如果非要写，可以加个这个，运行完自动释放</span><br>	<span class="hljs-keyword">class</span> <span class="hljs-title class_">Garbo</span> {<br>		~<span class="hljs-built_in">Garbo</span>() {<br>			<span class="hljs-keyword">if</span> (pSingleton != <span class="hljs-literal">NULL</span>) {<br>				<span class="hljs-keyword">delete</span> pSingleton;<br>			}<br>		}<br>	};<br><br><br><span class="hljs-keyword">private</span>:<br>	<span class="hljs-type">static</span> Singleton_lazy* pSingleton;<br>	<span class="hljs-type">static</span> Garbo garbo;<br>};<br><br><span class="hljs-comment">//类外初始化</span><br>Singleton_lazy* Singleton_lazy::pSingleton = <span class="hljs-literal">NULL</span>;<br><br><span class="hljs-comment">//2.饿汉式</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Singleton_hungry</span> {<br><span class="hljs-keyword">private</span>:<br>	<span class="hljs-built_in">Singleton_hungry</span>() { cout &lt;&lt; <span class="hljs-string">"我是饿汉构造！"</span> &lt;&lt; endl; }<br><span class="hljs-keyword">public</span>:<br>	<span class="hljs-function"><span class="hljs-type">static</span> Singleton_hungry* <span class="hljs-title">getInstance</span><span class="hljs-params">()</span> </span>{<br>		<span class="hljs-keyword">return</span> pSingleton;<br>	}<br><span class="hljs-keyword">private</span>:<br>	<span class="hljs-type">static</span> Singleton_hungry* pSingleton;<br>};<br><br><span class="hljs-comment">//类外初始化</span><br>Singleton_hungry* Singleton_hungry::pSingleton = <span class="hljs-keyword">new</span> Singleton_hungry;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">test01</span><span class="hljs-params">()</span> </span>{<br>	Singleton_lazy* p1 = Singleton_lazy::<span class="hljs-built_in">getInstance</span>();<br>	Singleton_lazy* p2 = Singleton_lazy::<span class="hljs-built_in">getInstance</span>();<br>	<span class="hljs-keyword">if</span> (p1 == p2) {<br>		cout &lt;&lt; <span class="hljs-string">"两个指针指向同一块内存空间，是单例！"</span> &lt;&lt; endl;<br>	}<br>	<span class="hljs-keyword">else</span> {<br>		cout &lt;&lt; <span class="hljs-string">"不是单例模式！"</span> &lt;&lt; endl;<br>	}<br><br>	Singleton_hungry* p3 = Singleton_hungry::<span class="hljs-built_in">getInstance</span>();<br>	Singleton_hungry* p4 = Singleton_hungry::<span class="hljs-built_in">getInstance</span>();<br>	<span class="hljs-keyword">if</span> (p3 == p4) {<br>		cout &lt;&lt; <span class="hljs-string">"两个指针指向同一块内存空间，是单例！"</span> &lt;&lt; endl;<br>	}<br>	<span class="hljs-keyword">else</span> {<br>		cout &lt;&lt; <span class="hljs-string">"不是单例模式!"</span> &lt;&lt; endl;<br>	}<br>}<br><br><span class="hljs-meta">#<span class="hljs-keyword">if</span> 0</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">test02</span><span class="hljs-params">()</span> </span>{<br>	Singleton_lazy::<span class="hljs-built_in">freeSpace</span>();<br>}<br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br><br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{<br><br>	<span class="hljs-built_in">test01</span>();<br>	cout &lt;&lt; <span class="hljs-string">"main函数开始执行！"</span> &lt;&lt; endl;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>}<br></code></pre></td></tr></tbody></table></figure>
 <!-- basicblock-start oid="ObsQhGVkIZ2Q9Bkn6O5B6sLf" --> 
@@ -368,18 +384,17 @@
 <li>客户调用类的单个实例<strong>只允许使用一个公共访问点</strong>，除了该公共访问点，不能通过其他途径访问该实例。</li>
 <li><strong>频繁实例化然后又销毁的对象</strong>，使用单例模式可以提高性能</li>
 <li><strong>经常使用的对象，但实例化时耗费时间或者资源多，</strong><br>
-如数据库连接池，使用单例模式，可以提高性能，降低资源损坏</li>
+如<strong>数据库连接池</strong>，使用单例模式，可以提高性能，降低资源损坏</li>
 <li>使用线程池之类的控制资源时，使用单例模式，可以方便资源之间的通信</li>
 </ul>
 <!-- basicblock-end -->
 <hr>
 <p><strong>其他资料</strong></p>
  <!-- basicblock-start oid="ObsNrP9PIGHBwETRCuXiR300" deck = "👨🏻‍💻code::设计模式::C++ 设计模式::创建型模型::单列模式.md" --> 
-<p>#历史记录::<br>
+<p>#历史记录:: <a href="marginnote3app://note/70635F09-3528-44A0-AA4B-85CB0B593041">margin</a><br>
 2022/10/2🌵单列模式 : 第一次创建: ⏱1-18</p>
 <!-- basicblock-end -->
-<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Mb411t7ut?p=23&amp;vd_source=f2340d96e99780a96b50d8096ffaaf1a">2-08 单例模式_饿汉式和懒汉式创建_哔哩哔哩_bilibili</a><br>
-<a href="marginnote3app://note/70635F09-3528-44A0-AA4B-85CB0B593041">margin</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Mb411t7ut?p=23&amp;vd_source=f2340d96e99780a96b50d8096ffaaf1a">2-08 单例模式_饿汉式和懒汉式创建_哔哩哔哩_bilibili</a></p>
 
               
             </div>
@@ -434,52 +449,6 @@
 
 
               
-  
-
-  <div class="license-box my-3">
-    <div class="license-title">
-      <div>单例模式</div>
-      <div>https://zeefan1555.github.io/posts/56170/</div>
-    </div>
-    <div class="license-meta">
-      
-        <div class="license-meta-item">
-          <div>作者</div>
-          <div>zeefan</div>
-        </div>
-      
-      
-        <div class="license-meta-item license-meta-date">
-          <div>发布于</div>
-          <div>2022年10月2日</div>
-        </div>
-      
-      
-        <div class="license-meta-item license-meta-date">
-          <div>更新于</div>
-          <div>2022年10月4日</div>
-        </div>
-      
-      <div class="license-meta-item">
-        <div>许可协议</div>
-        <div>
-          
-            
-            
-              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-              <span class="hint--top hint--rounded" aria-label="BY - 署名">
-                <i class="iconfont icon-by"></i>
-              </span>
-              </a>
-            
-          
-        </div>
-      </div>
-    </div>
-    <div class="license-icon iconfont"></div>
-  </div>
-
-
 
               
                 <div class="post-prevnext my-3">

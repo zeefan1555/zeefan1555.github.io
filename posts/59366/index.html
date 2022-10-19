@@ -16,16 +16,16 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1 理论::  ![[简单工厂模式理论.excalidraw]] 优点：  客户端和具体实现类解耦（不直接发生关系） 对于某些对象创建过程比较复杂情况，我们不用考虑这些了  缺点  简单工厂模式，增加新的功能是通过修改源代码实现，不符合开闭原则   增加水果需要修改水果源代码，简单的新建对象需要修改工厂源代码   这个类职责过重，这个类发生问题，影响很多实用这个工厂的模块   并且若是有多个判断">
+    <meta name="description" content="1 理论::  ![[简单工厂模式理论.excalidraw]] 优点：  客户端和具体实现类解耦（不直接发生关系） 对于某些对象创建过程比较复杂情况，我们不用考虑这些了  缺点  简单工厂模式，增加新的功能是通过修改源代码实现，不符合开闭原则   增加水果需要修改水果源代码，简单的新建对象需要修改工厂源代码   这个类职责过重，这个类发生问题，影响很多使用这个工厂的模块   并且若是有多个判断">
 <meta property="og:type" content="article">
 <meta property="og:title" content="简单工厂模式">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/59366/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="1 理论::  ![[简单工厂模式理论.excalidraw]] 优点：  客户端和具体实现类解耦（不直接发生关系） 对于某些对象创建过程比较复杂情况，我们不用考虑这些了  缺点  简单工厂模式，增加新的功能是通过修改源代码实现，不符合开闭原则   增加水果需要修改水果源代码，简单的新建对象需要修改工厂源代码   这个类职责过重，这个类发生问题，影响很多实用这个工厂的模块   并且若是有多个判断">
+<meta property="og:description" content="1 理论::  ![[简单工厂模式理论.excalidraw]] 优点：  客户端和具体实现类解耦（不直接发生关系） 对于某些对象创建过程比较复杂情况，我们不用考虑这些了  缺点  简单工厂模式，增加新的功能是通过修改源代码实现，不符合开闭原则   增加水果需要修改水果源代码，简单的新建对象需要修改工厂源代码   这个类职责过重，这个类发生问题，影响很多使用这个工厂的模块   并且若是有多个判断">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202210042102793.png">
 <meta property="article:published_time" content="2022-09-30T13:56:00.000Z">
-<meta property="article:modified_time" content="2022-10-04T14:21:52.684Z">
+<meta property="article:modified_time" content="2022-10-16T08:03:43.443Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202210042102793.png">
@@ -224,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.2k 字
+          2.3k 字
         
       </span>
     
@@ -286,7 +286,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年10月4日 晚上
+                    本文最后更新于：2022年10月16日 下午
                   
                 
               </p>
@@ -309,7 +309,7 @@
 <p>增加水果需要修改水果源代码，简单的新建对象需要修改工厂源代码</p>
 </blockquote>
 <ul>
-<li>这个类职责过重，这个类发生问题，影响很多实用这个工厂的模块</li>
+<li>这个类职责过重，这个类发生问题，影响很多使用这个工厂的模块</li>
 </ul>
 <blockquote>
 <p>并且若是有多个判断条件共同决定创建对象，则后期修改会越来越复杂。</p>
@@ -321,6 +321,7 @@ JDK中的DateFormate、Calendar类都有使用，通过不同参数返回我们�
 <!-- basicblock-end -->
 <p><img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202210042102793.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-comment">//抽象水果</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">AbstractFruit</span> {<br><span class="hljs-keyword">public</span>:<br>	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">void</span> <span class="hljs-title">ShowName</span><span class="hljs-params">()</span> </span>= <span class="hljs-number">0</span>;<br>};<br><br><span class="hljs-comment">//苹果</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Apple</span> :<span class="hljs-keyword">public</span> AbstractFruit { <span class="hljs-comment">// 继承</span><br><span class="hljs-keyword">public</span>:<br>	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">void</span> <span class="hljs-title">ShowName</span><span class="hljs-params">()</span> </span>{<span class="hljs-comment">// 重写</span><br>		cout &lt;&lt; <span class="hljs-string">"我是苹果!"</span> &lt;&lt; endl;<br>	}<br>};<br><br><span class="hljs-comment">//香蕉</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Banana</span> :<span class="hljs-keyword">public</span> AbstractFruit {<br><span class="hljs-keyword">public</span>:<br>	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">void</span> <span class="hljs-title">ShowName</span><span class="hljs-params">()</span> </span>{<br>		cout &lt;&lt; <span class="hljs-string">"我是香蕉!"</span> &lt;&lt; endl;<br>	}<br>};<br><br><span class="hljs-comment">//鸭梨</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Pear</span> :<span class="hljs-keyword">public</span> AbstractFruit {<br><span class="hljs-keyword">public</span>:<br>	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">void</span> <span class="hljs-title">ShowName</span><span class="hljs-params">()</span> </span>{<br>		cout &lt;&lt; <span class="hljs-string">"我是鸭梨!"</span> &lt;&lt; endl;<br>	}<br>};<br><br><span class="hljs-comment">//水果工厂</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">FruitFactor</span> {<br><span class="hljs-keyword">public</span>:<br>	<span class="hljs-comment">// 直接拿来用, 不用关心创建对象</span><br>	<span class="hljs-function"><span class="hljs-type">static</span> AbstractFruit * <span class="hljs-title">CreateFruit</span><span class="hljs-params">(string flag)</span> </span>{ <span class="hljs-comment">// 💡要设置成静态方法</span><br>	<span class="hljs-comment">// 静态可以不用对象调用，直接类名加点方法，不是静态需要创建对象然后调用, 不用static 无法创建对象</span><br>		<span class="hljs-keyword">if</span> (flag == <span class="hljs-string">"apple"</span>) {<br>			<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Apple;<br>		}<br>		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (flag == <span class="hljs-string">"banana"</span>) {<br>			<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Banana;<br>		}<br>		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (flag == <span class="hljs-string">"pear"</span>) {<br>			<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Pear;<br>		}<br>		<span class="hljs-keyword">else</span> {<br>			<span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<br>		}<br>	}<br>};<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">test01</span><span class="hljs-params">()</span> </span>{<br>	FruitFactor* factory = <span class="hljs-keyword">new</span> FruitFactor;<span class="hljs-comment">// 创建变量</span><br>	AbstractFruit* fruit = factory-&gt;<span class="hljs-built_in">CreateFruit</span>(<span class="hljs-string">"apple"</span>);<br>	fruit-&gt;<span class="hljs-built_in">ShowName</span>();<br>	<span class="hljs-keyword">delete</span> fruit;<br><br>	fruit = factory-&gt;<span class="hljs-built_in">CreateFruit</span>(<span class="hljs-string">"banana"</span>);<br>	fruit-&gt;<span class="hljs-built_in">ShowName</span>();<br>	<span class="hljs-keyword">delete</span> fruit;<br><br>	fruit = factory-&gt;<span class="hljs-built_in">CreateFruit</span>(<span class="hljs-string">"pear"</span>);<br>	fruit-&gt;<span class="hljs-built_in">ShowName</span>();<br>	<span class="hljs-keyword">delete</span> fruit;<br><br>	fruit = <span class="hljs-literal">NULL</span>;<br>	<span class="hljs-keyword">delete</span> factory;<br>	factory = <span class="hljs-literal">NULL</span>;<br>}<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{<br>	<span class="hljs-built_in">test01</span>();<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>}<br></code></pre></td></tr></tbody></table></figure>
+<p>^jw3irr</p>
 <p>不难看出，Fruit类是一个“巨大的”类，在该类的设计中存在如下几个问题：</p>
 <p>(1) 在Fruit类中包含很多“if…else…”代码块，整个类的代码相当冗长，代码越长，阅读难度、维护难度和测试难度也越大；而且大量条件语句的存在还将影响系统的性能，程序在执行过程中需要做大量的条件判断。</p>
 <p>(2) Fruit类的职责过重，它负责初始化和显示所有的水果对象，将各种水果对象的初始化代码和显示代码集中在一个类中实现，违反了“单一职责原则”，不利于类的重用和维护；</p>
@@ -348,6 +349,7 @@ JDK中的DateFormate、Calendar类都有使用，通过不同参数返回我们�
 <p>#历史记录::<br>
 2022/9/30🌵简单工厂模式 : 第一次创建</p>
 <!-- basicblock-end -->
+
               
             </div>
             <hr/>
@@ -401,59 +403,13 @@ JDK中的DateFormate、Calendar类都有使用，通过不同参数返回我们�
 
 
               
-  
-
-  <div class="license-box my-3">
-    <div class="license-title">
-      <div>简单工厂模式</div>
-      <div>https://zeefan1555.github.io/posts/59366/</div>
-    </div>
-    <div class="license-meta">
-      
-        <div class="license-meta-item">
-          <div>作者</div>
-          <div>zeefan</div>
-        </div>
-      
-      
-        <div class="license-meta-item license-meta-date">
-          <div>发布于</div>
-          <div>2022年9月30日</div>
-        </div>
-      
-      
-        <div class="license-meta-item license-meta-date">
-          <div>更新于</div>
-          <div>2022年10月4日</div>
-        </div>
-      
-      <div class="license-meta-item">
-        <div>许可协议</div>
-        <div>
-          
-            
-            
-              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-              <span class="hint--top hint--rounded" aria-label="BY - 署名">
-                <i class="iconfont icon-by"></i>
-              </span>
-              </a>
-            
-          
-        </div>
-      </div>
-    </div>
-    <div class="license-icon iconfont"></div>
-  </div>
-
-
 
               
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/31153/" title="工厂方法模式">
+                      <a href="/posts/31151/" title="工厂方法模式">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">工厂方法模式</span>
                         <span class="visible-mobile">上一篇</span>

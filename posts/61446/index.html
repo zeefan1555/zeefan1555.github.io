@@ -16,15 +16,15 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1 第77题. 组合 力扣题目链接 给定两个整数 n 和 k，返回 1 … n 中所有可能的 k 个数的组合。 示例: 输入:&amp;nbsp;n &#x3D; 4, k &#x3D; 2 输出: 123456789[  [2,4],  [3,4],  [2,3],  [1,2],  [1,3],  [1,4],  ]    2 思路::  [[回溯法能解决n层for循环的问题]] ![[2.组合问题 2022-09-2">
+    <meta name="description" content="1 第77题. 组合 力扣题目链接 给定两个整数 n 和 k，返回 1 … n 中所有可能的 k 个数的组合。 12345678910111213示例:  输入:&amp;nbsp;n &#x3D; 4, k &#x3D; 2  输出:  [  [1,2],  [1,3],  [1,4],  [2,3], [2,4],  [3,4],  ]  2 思路 [[回溯法能解决n层for循环的问题]] ![[2.组合问题 2022">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2.组合问题">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/61446/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="1 第77题. 组合 力扣题目链接 给定两个整数 n 和 k，返回 1 … n 中所有可能的 k 个数的组合。 示例: 输入:&amp;nbsp;n &#x3D; 4, k &#x3D; 2 输出: 123456789[  [2,4],  [3,4],  [2,3],  [1,2],  [1,3],  [1,4],  ]    2 思路::  [[回溯法能解决n层for循环的问题]] ![[2.组合问题 2022-09-2">
+<meta property="og:description" content="1 第77题. 组合 力扣题目链接 给定两个整数 n 和 k，返回 1 … n 中所有可能的 k 个数的组合。 12345678910111213示例:  输入:&amp;nbsp;n &#x3D; 4, k &#x3D; 2  输出:  [  [1,2],  [1,3],  [1,4],  [2,3], [2,4],  [3,4],  ]  2 思路 [[回溯法能解决n层for循环的问题]] ![[2.组合问题 2022">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-05-13T12:31:00.000Z">
-<meta property="article:modified_time" content="2022-09-28T13:56:00.296Z">
+<meta property="article:modified_time" content="2022-10-19T03:53:40.008Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          792 字
+          847 字
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          4 分钟
+          5 分钟
         
       </span>
     
@@ -284,7 +284,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年9月28日 晚上
+                    本文最后更新于：2022年10月19日 中午
                   
                 
               </p>
@@ -294,26 +294,20 @@
               <h1 id="1-第77题-组合"><a class="markdownIt-Anchor" href="#1-第77题-组合"></a> 1 第77题. 组合</h1>
 <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/combinations/">力扣题目链接</a></p>
 <p>给定两个整数 n 和 k，返回 1 … n 中所有可能的 k 个数的组合。</p>
-<p>示例:<br>
-输入:&nbsp;n = 4, k = 2<br>
-输出:</p>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c++">[  <br>[<span class="hljs-number">2</span>,<span class="hljs-number">4</span>],  <br>[<span class="hljs-number">3</span>,<span class="hljs-number">4</span>],  <br>[<span class="hljs-number">2</span>,<span class="hljs-number">3</span>],  <br>[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>],  <br>[<span class="hljs-number">1</span>,<span class="hljs-number">3</span>],  <br>[<span class="hljs-number">1</span>,<span class="hljs-number">4</span>],  <br>]<br><br></code></pre></td></tr></tbody></table></figure>
-<!-- basicblock-start oid="ObsOif1wkWhbN9rDJAUXZd0t" --> 
-<h1 id="2-思路"><a class="markdownIt-Anchor" href="#2-思路"></a> 2 思路::</h1>
-<!-- basicblock-end -->
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs c++">示例:  <br>输入:&nbsp;n = <span class="hljs-number">4</span>, k = <span class="hljs-number">2</span>  <br>输出:  <br><br>[  <br>[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>],  <br>[<span class="hljs-number">1</span>,<span class="hljs-number">3</span>],  <br>[<span class="hljs-number">1</span>,<span class="hljs-number">4</span>],  <br>[<span class="hljs-number">2</span>,<span class="hljs-number">3</span>], <br>[<span class="hljs-number">2</span>,<span class="hljs-number">4</span>],  <br>[<span class="hljs-number">3</span>,<span class="hljs-number">4</span>],  <br>]<br><br></code></pre></td></tr></tbody></table></figure>
+<h1 id="2-思路"><a class="markdownIt-Anchor" href="#2-思路"></a> 2 思路</h1>
 <p>[[回溯法能解决n层for循环的问题]]</p>
 <p>![[2.组合问题 2022-09-28 15.32.18.excalidraw]]</p>
-<!-- basicblock-start oid="ObsLuZht9pz4yVfBIHSaymiU" --> 
-<h1 id="3-代码"><a class="markdownIt-Anchor" href="#3-代码"></a> 3 代码::</h1>
-<!-- basicblock-end -->
+<h1 id="3-代码"><a class="markdownIt-Anchor" href="#3-代码"></a> 3 代码</h1>
 <p>v1, 通过, 算是抄一遍⏱0-46</p>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    vector%<span class="hljs-number">3</span>Cint%<span class="hljs-number">3</span>E path;<br>    vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; result;<br><br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">backtracking</span> <span class="hljs-params">(<span class="hljs-type">int</span> n, <span class="hljs-type">int</span> k, <span class="hljs-type">int</span> startIndex)</span></span>{<br>        <span class="hljs-keyword">if</span>(path.<span class="hljs-built_in">size</span>() == k){<br>            result.<span class="hljs-built_in">push_back</span>(path);<br>            <span class="hljs-keyword">return</span>;<br>        }<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = startIndex; i &lt;= n; i++){<span class="hljs-comment">// ❗️ i 是 &lt;= n, ❗️startIndex这里不是下标的意思 </span><br>            path.<span class="hljs-built_in">push_back</span>(i);<br>            <span class="hljs-built_in">backtracking</span>(n, k, i+<span class="hljs-number">1</span>);<span class="hljs-comment">// k 控制着递归的层数, ❗️不是startindex+1, 而是 i+1, i 控制着 startIndex</span><br>            path.<span class="hljs-built_in">pop_back</span>();<span class="hljs-comment">// ❗️vector 是 pop_back()</span><br><br>        }<br><br>    }<br>    vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">combine</span>(<span class="hljs-type">int</span> n, <span class="hljs-type">int</span> k) {<br>        <span class="hljs-built_in">backtracking</span>(n, k, <span class="hljs-number">1</span>);<br>        <span class="hljs-keyword">return</span> result;<br><br><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    vector&lt;vector&gt; path;<br>    vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; result;<br><br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">backtracking</span> <span class="hljs-params">(<span class="hljs-type">int</span> n, <span class="hljs-type">int</span> k, <span class="hljs-type">int</span> startIndex)</span></span>{<br>        <span class="hljs-keyword">if</span>(path.<span class="hljs-built_in">size</span>() == k){<br>            result.<span class="hljs-built_in">push_back</span>(path);<br>            <span class="hljs-keyword">return</span>;<br>        }<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = startIndex; i &lt;= n; i++){<span class="hljs-comment">// ❗️ i 是 &lt;= n, ❗️startIndex这里不是下标的意思 </span><br>            path.<span class="hljs-built_in">push_back</span>(i);<span class="hljs-comment">// 加入本层的第一个数</span><br>            <span class="hljs-comment">// 到下一层， 随后又会加入本层的第一个数</span><br>            <span class="hljs-built_in">backtracking</span>(n, k, i+<span class="hljs-number">1</span>);<span class="hljs-comment">// k 控制着递归的层数, ❗️不是startindex+1, 而是 i+1, i 控制着 startIndex</span><br>            <span class="hljs-comment">// 弹出上一层加入的数</span><br>            path.<span class="hljs-built_in">pop_back</span>();<span class="hljs-comment">// ❗️vector 是 pop_back()</span><br><br>        }<br><br>    }<br>    vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">combine</span>(<span class="hljs-type">int</span> n, <span class="hljs-type">int</span> k) {<br>        <span class="hljs-built_in">backtracking</span>(n, k, <span class="hljs-number">1</span>);<br>        <span class="hljs-keyword">return</span> result;<br><br><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
 <p>[[回溯算法模板]]</p>
 <p><strong>其他资料</strong></p>
-<!-- basicblock-start oid="ObsmV74o0U0NglfPn3zHTM24" deck = "👨🏻‍💻code::数据结构与算法::代码随想录::回溯算法::2.组合问题.md" --> 
+<!-- basicblock-start oid="ObsmV74o0U0NglfPn3zHTM24"  --> 
 <p>#历史记录::<br>
 2022/9/28🌵 <a target="_blank" rel="noopener" href="http://2.xn--8pr770hlso7nc.md">2.组合问题.md</a>: v1, 通过, 算是抄一遍⏱0-46</p>
 <!-- basicblock-end -->
+
               
             </div>
             <hr/>
@@ -367,52 +361,6 @@
 
 
               
-  
-
-  <div class="license-box my-3">
-    <div class="license-title">
-      <div>2.组合问题</div>
-      <div>https://zeefan1555.github.io/posts/61446/</div>
-    </div>
-    <div class="license-meta">
-      
-        <div class="license-meta-item">
-          <div>作者</div>
-          <div>zeefan</div>
-        </div>
-      
-      
-        <div class="license-meta-item license-meta-date">
-          <div>发布于</div>
-          <div>2022年5月13日</div>
-        </div>
-      
-      
-        <div class="license-meta-item license-meta-date">
-          <div>更新于</div>
-          <div>2022年9月28日</div>
-        </div>
-      
-      <div class="license-meta-item">
-        <div>许可协议</div>
-        <div>
-          
-            
-            
-              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-              <span class="hint--top hint--rounded" aria-label="BY - 署名">
-                <i class="iconfont icon-by"></i>
-              </span>
-              </a>
-            
-          
-        </div>
-      </div>
-    </div>
-    <div class="license-icon iconfont"></div>
-  </div>
-
-
 
               
                 <div class="post-prevnext my-3">

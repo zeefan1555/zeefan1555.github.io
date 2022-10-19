@@ -16,15 +16,15 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="组合是不强调元素顺序的，排列是强调元素顺序：组合无序，排列有序 {1, 2} 和 {2, 1}：组合是一样的，排列是不一样的    1 回溯法能解决的问题::   组合问题：N个数里面按一定规则找出k个数的集合  [[2.组合问题]] [[4.组合总和III]] [[5.电话号码的字母组合]]   排列问题：N个数按一定规则全排列，有几种排列方式 切割问题：一个字符串按一定规则有几种切割方式 子集">
+    <meta name="description" content="组合是不强调元素顺序的，排列是强调元素顺序：组合无序，排列有序 {1, 2} 和 {2, 1}：组合是一样的，排列是不一样的    1 回溯法能解决的问题::   组合问题：N个数里面按一定规则找出k个数的集合  [[2.组合问题]] [[4.组合总和III]] [[5.电话号码的字母组合]]   切割问题：一个字符串按一定规则有几种切割方式 子集问题：一个N个数的集合里有多少符合条件的子集 排列">
 <meta property="og:type" content="article">
 <meta property="og:title" content="1.回溯算法理论基础">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/25363/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="组合是不强调元素顺序的，排列是强调元素顺序：组合无序，排列有序 {1, 2} 和 {2, 1}：组合是一样的，排列是不一样的    1 回溯法能解决的问题::   组合问题：N个数里面按一定规则找出k个数的集合  [[2.组合问题]] [[4.组合总和III]] [[5.电话号码的字母组合]]   排列问题：N个数按一定规则全排列，有几种排列方式 切割问题：一个字符串按一定规则有几种切割方式 子集">
+<meta property="og:description" content="组合是不强调元素顺序的，排列是强调元素顺序：组合无序，排列有序 {1, 2} 和 {2, 1}：组合是一样的，排列是不一样的    1 回溯法能解决的问题::   组合问题：N个数里面按一定规则找出k个数的集合  [[2.组合问题]] [[4.组合总和III]] [[5.电话号码的字母组合]]   切割问题：一个字符串按一定规则有几种切割方式 子集问题：一个N个数的集合里有多少符合条件的子集 排列">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-05-13T12:11:00.000Z">
-<meta property="article:modified_time" content="2022-09-30T01:31:19.530Z">
+<meta property="article:modified_time" content="2022-10-19T03:23:48.125Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.1k 字
+          1.2k 字
         
       </span>
     
@@ -284,7 +284,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年9月30日 上午
+                    本文最后更新于：2022年10月19日 上午
                   
                 
               </p>
@@ -302,9 +302,9 @@
 <li>[[2.组合问题]] [[4.组合总和III]] [[5.电话号码的字母组合]]</li>
 </ul>
 </li>
-<li>排列问题：N个数按一定规则全排列，有几种排列方式</li>
 <li>切割问题：一个字符串按一定规则有几种切割方式</li>
 <li>子集问题：一个N个数的集合里有多少符合条件的子集</li>
+<li>排列问题：N个数按一定规则全排列，有几种排列方式</li>
 <li>棋盘问题：N皇后，解数独等等</li>
 <li>$ [[回溯法能解决n层for循环的问题]]</li>
 </ul>
@@ -312,37 +312,32 @@
 <h1 id="2-如何理解回溯法"><a class="markdownIt-Anchor" href="#2-如何理解回溯法"></a> 2 如何理解回溯法::</h1>
 <!-- basicblock-end -->
 <ul>
-<li>$ 回溯法解决的问题都可以抽象为树形结构（N叉树）</li>
+<li>$ 回溯法解决的问题都可以抽象为树形结构（N叉树）<br>
+<strong>回溯法解决的问题都可以抽象为树形结构</strong>，是的，我指的是所有回溯法的问题都可以抽象为树形结构！</li>
 </ul>
-<p>把回溯法抽象为一个图形，每一道回溯法的题目都可以抽象为树形结构。</p>
-<p><strong>回溯法解决的问题都可以抽象为树形结构</strong>，是的，我指的是所有回溯法的问题都可以抽象为树形结构！<br>
-因为回溯法解决的都是在集合中递归查找子集，<strong>集合的大小就构成了树的宽度，递归的深度，都构成的树的深度</strong>。<br>
+<p>如果把子集问题、组合问题、分割问题都抽象为一棵树的话，<strong>那么组合问题和分割问题都是收集树的叶子节点，而子集问题是找树的所有节点！</strong></p>
+<p>因为回溯法解决的都是在集合中递归查找子集，<strong>集合的大小就构成了树的宽度，递归的深度，都构成的树的深度</strong>。<br>
 递归就要有终止条件，所以必然是一棵高度有限的树（N叉树）。</p>
-<h1 id="3-回溯三部曲"><a class="markdownIt-Anchor" href="#3-回溯三部曲"></a> 3 回溯三部曲：</h1>
-<!-- basicblock-start oid="ObsuzEf6GjBirRMBd0icN175" --> 
-<h2 id="31-回溯函数模板返回值以及参数"><a class="markdownIt-Anchor" href="#31-回溯函数模板返回值以及参数"></a> 3.1 回溯函数模板返回值以及参数::</h2>
-<!-- basicblock-end -->
+<h1 id="3-回溯三部曲"><a class="markdownIt-Anchor" href="#3-回溯三部曲"></a> 3 回溯三部曲</h1>
+<h2 id="31-回溯函数模板返回值以及参数"><a class="markdownIt-Anchor" href="#31-回溯函数模板返回值以及参数"></a> 3.1 回溯函数模板返回值以及参数</h2>
 <figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">backtracking</span><span class="hljs-params">(参数)</span></span><br></code></pre></td></tr></tbody></table></figure>
-<p>返回值一般为void。</p>
-<p>参数:  因为回溯算法需要的参数可不像二叉树递归的时候那么容易一次性确定下来，所以一般是先写逻辑，然后需要什么参数，就填什么参数。</p>
-<!-- basicblock-start oid="ObsBNFBaQY0qeeQDhZt08q7F" --> 
-<h2 id="32-回溯函数终止条件"><a class="markdownIt-Anchor" href="#32-回溯函数终止条件"></a> 3.2 回溯函数终止条件::</h2>
-<!-- basicblock-end -->
+<p>返回值一般为void。<br>
+参数:  因为回溯算法需要的参数可不像二叉树递归的时候那么容易一次性确定下来，所以一般是先写逻辑，然后需要什么参数，就填什么参数。</p>
+<h2 id="32-回溯函数终止条件"><a class="markdownIt-Anchor" href="#32-回溯函数终止条件"></a> 3.2 回溯函数终止条件</h2>
 <figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">if</span> (终止条件) {<br>    存放结果;<br>    <span class="hljs-keyword">return</span>;<span class="hljs-comment">// 结束本轮递归开始回溯</span><br>}<br></code></pre></td></tr></tbody></table></figure>
 <p>终止条件：一般来说搜到叶子节点了，也就找到了满足条件的一条答案，把这个答案存放起来，并结束本层递归。</p>
-<!-- basicblock-start oid="ObsW65nFOatgctIPgrEiyaoN" --> 
-<h2 id="33-回溯搜索的遍历过程"><a class="markdownIt-Anchor" href="#33-回溯搜索的遍历过程"></a> 3.3 回溯搜索的遍历过程::</h2>
-<!-- basicblock-end -->
-<p>回溯法一般是在集合中递归搜索，集合的大小构成了树的宽度，递归的深度构成的树的深度。</p>
-<p>![[回溯算法过程.excalidraw]]</p>
+<h2 id="33-回溯搜索的遍历过程"><a class="markdownIt-Anchor" href="#33-回溯搜索的遍历过程"></a> 3.3 回溯搜索的遍历过程</h2>
+<p>回溯法一般是在集合中递归搜索，集合的大小构成了树的宽度，递归的深度构成的树的深度。<br>
+![[回溯算法过程.excalidraw|900]]</p>
 <p>回溯函数遍历过程伪代码如下：<br>
 <strong>for循环可以理解是横向遍历，backtracking（递归）就是纵向遍历，这样就把这棵树全遍历完了，一般来说，搜索叶子节点就是找的其中一个结果了。</strong></p>
 <figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">for</span> (选择：本层集合中元素（树中节点孩子的数量就是集合的大小）) {<br>    处理节点;<br>    <span class="hljs-built_in">backtracking</span>(路径，选择列表); <span class="hljs-comment">// 递归</span><br>    回溯，撤销处理结果<br>}<br></code></pre></td></tr></tbody></table></figure>
+<h1 id="4-总结"><a class="markdownIt-Anchor" href="#4-总结"></a> 4 总结</h1>
 <p>回溯算法模板框架</p>
-<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">backtracking</span><span class="hljs-params">(参数)</span> </span>{<br>    <span class="hljs-keyword">if</span> (终止条件) {<br>        存放结果;<br>        <span class="hljs-keyword">return</span>;<br>    }<br><br>    <span class="hljs-keyword">for</span> (选择：本层集合中元素（树中节点孩子的数量就是集合的大小）) {<br>        处理节点;<br>        <span class="hljs-built_in">backtracking</span>(路径，选择列表); <span class="hljs-comment">// 递归</span><br>        回溯，撤销处理结果<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">backtracking</span><span class="hljs-params">(参数)</span> </span>{<br>    <span class="hljs-keyword">if</span> (终止条件) {<br>        存放结果;<br>        <span class="hljs-keyword">return</span>;<span class="hljs-comment">// 结束本轮递归开始回溯</span><br>    }<br><br>    <span class="hljs-keyword">for</span> (选择：本层集合中元素（树中节点孩子的数量就是集合的大小）) {<br>        处理节点;<br>        <span class="hljs-built_in">backtracking</span>(路径，选择列表); <span class="hljs-comment">// 递归</span><br>        回溯，撤销处理结果<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
 <hr>
 <p><strong>其他资料</strong></p>
-<!-- basicblock-start oid="ObsY0FqZyXLZ0e7IoC61Et8q" deck = "👨🏻‍💻code::数据结构与算法::代码随想录::回溯算法::1.回溯算法理论基础.md" --> 
+<!-- basicblock-start oid="ObsY0FqZyXLZ0e7IoC61Et8q"  --> 
 <p>#历史记录::<br>
 2022/9/28🌵1.回溯算法理论基础.md: 第一次创建: ⏱0-26</p>
 <!-- basicblock-end --> 
@@ -400,52 +395,6 @@
 
 
               
-  
-
-  <div class="license-box my-3">
-    <div class="license-title">
-      <div>1.回溯算法理论基础</div>
-      <div>https://zeefan1555.github.io/posts/25363/</div>
-    </div>
-    <div class="license-meta">
-      
-        <div class="license-meta-item">
-          <div>作者</div>
-          <div>zeefan</div>
-        </div>
-      
-      
-        <div class="license-meta-item license-meta-date">
-          <div>发布于</div>
-          <div>2022年5月13日</div>
-        </div>
-      
-      
-        <div class="license-meta-item license-meta-date">
-          <div>更新于</div>
-          <div>2022年9月30日</div>
-        </div>
-      
-      <div class="license-meta-item">
-        <div>许可协议</div>
-        <div>
-          
-            
-            
-              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-              <span class="hint--top hint--rounded" aria-label="BY - 署名">
-                <i class="iconfont icon-by"></i>
-              </span>
-              </a>
-            
-          
-        </div>
-      </div>
-    </div>
-    <div class="license-icon iconfont"></div>
-  </div>
-
-
 
               
                 <div class="post-prevnext my-3">
@@ -462,8 +411,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/61467/" title="二叉搜索树">
-                        <span class="hidden-mobile">二叉搜索树</span>
+                      <a href="/posts/12103/" title="TCP通信代码案例">
+                        <span class="hidden-mobile">TCP通信代码案例</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

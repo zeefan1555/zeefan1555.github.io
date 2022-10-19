@@ -16,15 +16,15 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="[[2.组合问题]] Loading Question… - 力扣（LeetCode）    1 思路::  ![[3.组合优化 2022-09-28 16.11.10.excalidraw]]   **剪枝精髓是:: for循环时候要有一个范围，如果不满足这个范围, 就没有必要搜索了**。 注意代码中i，就是for循环里选择的起始位置。 1for (int i &#x3D; startIndex; i &amp;">
+    <meta name="description" content="[[2.组合问题]] Loading Question… - 力扣（LeetCode）    1 思路::  ![[3.组合优化 2022-09-28 16.11.10.excalidraw]]   剪枝精髓是:: for循环时候要有一个范围，如果不满足这个范围, 就没有必要搜索了。 注意代码中i，就是for循环里选择的起始位置。 1for (int i &#x3D; startIndex; i &lt;&#x3D;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="3.组合优化">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/50548/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="[[2.组合问题]] Loading Question… - 力扣（LeetCode）    1 思路::  ![[3.组合优化 2022-09-28 16.11.10.excalidraw]]   **剪枝精髓是:: for循环时候要有一个范围，如果不满足这个范围, 就没有必要搜索了**。 注意代码中i，就是for循环里选择的起始位置。 1for (int i &#x3D; startIndex; i &amp;">
+<meta property="og:description" content="[[2.组合问题]] Loading Question… - 力扣（LeetCode）    1 思路::  ![[3.组合优化 2022-09-28 16.11.10.excalidraw]]   剪枝精髓是:: for循环时候要有一个范围，如果不满足这个范围, 就没有必要搜索了。 注意代码中i，就是for循环里选择的起始位置。 1for (int i &#x3D; startIndex; i &lt;&#x3D;">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-05-17T02:04:00.000Z">
-<meta property="article:modified_time" content="2022-09-28T13:56:02.707Z">
+<meta property="article:modified_time" content="2022-10-10T03:26:36.516Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          981 字
+          975 字
         
       </span>
     
@@ -284,7 +284,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年9月28日 晚上
+                    本文最后更新于：2022年10月10日 上午
                   
                 
               </p>
@@ -298,8 +298,8 @@
 <!-- basicblock-end -->
 <p>![[3.组合优化 2022-09-28 16.11.10.excalidraw]]</p>
 <!-- basicblock-start oid="ObsDbgREId29fWXbspKsmegB" --> 
-<p>**剪枝精髓是::</p>
-<p>for循环时候要有一个范围，如果不满足这个范围, 就没有必要搜索了**。<br>
+<p><strong>剪枝精髓是::</strong></p>
+<p>for循环时候要有一个范围，如果不满足这个范围, 就没有必要搜索了。<br>
 注意代码中i，就是for循环里选择的起始位置。</p>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = startIndex; i &lt;= n; i++)<br></code></pre></td></tr></tbody></table></figure>
 <p>startIndex是起始位置, n是遍历的终止位置，<br>
@@ -311,9 +311,9 @@
 <ol>
 <li>已经添加到path(单一数组如[1,2])的个数为：path.size()</li>
 <li>还需要的元素个数：k - path.size()</li>
-<li>终止位置为：<strong>n -  (k - path.size()) + 1</strong> <mark>(总共的元素个数 - 还需要的元素个数 + 1)</mark>  -
+<li>终止位置为：<strong>n -  (k - path.size()) + 1</strong> <mark>(总共的元素个数 - 还需要的元素个数 + 1)</mark>
 <ul>
-<li>? 为什么+1❓: ✅ 是因为要包括起始位置，总体是左闭的区间</li>
+<li>? 为什么+1: ✅ 是因为要包括起始位置，总体是左闭的区间</li>
 <li>&amp; eg：目前添加path中的元素个数为0，4 - (4 - 0) + 1 = 1 (跟图上一样，最多遍历1个就终止)</li>
 </ul>
 </li>
@@ -322,7 +322,7 @@
 <h1 id="2-代码"><a class="markdownIt-Anchor" href="#2-代码"></a> 2 代码::</h1>
 <!-- basicblock-end -->
 <p>v1, 有点懵吧,还好 ⏱0-37</p>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    vector&lt;<span class="hljs-type">int</span>&gt; path;<br>    vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; result;<br><br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">backtracking</span> <span class="hljs-params">(<span class="hljs-type">int</span> n, <span class="hljs-type">int</span> k, <span class="hljs-type">int</span> startIndex)</span></span>{<br>        <span class="hljs-keyword">if</span>(path.<span class="hljs-built_in">size</span>() == k){<br>            result.<span class="hljs-built_in">push_back</span>(path);<br>            <span class="hljs-keyword">return</span>;<span class="hljs-comment">// 跳出 if 循环</span><br>        }<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = startIndex; i &lt;= n - (k - path.<span class="hljs-built_in">size</span>()) + <span class="hljs-number">1</span> ; i++){ <span class="hljs-comment">// 💡在这里剪枝</span><br>            path.<span class="hljs-built_in">push_back</span>(i);<br>            <span class="hljs-built_in">backtracking</span>(n, k, i+<span class="hljs-number">1</span>);<br>            path.<span class="hljs-built_in">pop_back</span>();<br>        }<br>    }<br>    vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">combine</span>(<span class="hljs-type">int</span> n, <span class="hljs-type">int</span> k) {<br>        <span class="hljs-built_in">backtracking</span>(n, k, <span class="hljs-number">1</span>);<br>        <span class="hljs-keyword">return</span> result;<br><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    vector&lt;<span class="hljs-type">int</span>&gt; path;<br>    vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; result;<br><br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">backtracking</span> <span class="hljs-params">(<span class="hljs-type">int</span> n, <span class="hljs-type">int</span> k, <span class="hljs-type">int</span> startIndex)</span></span>{<br>        <span class="hljs-keyword">if</span>(path.<span class="hljs-built_in">size</span>() == k){<br>            result.<span class="hljs-built_in">push_back</span>(path);<br>            <span class="hljs-keyword">return</span>;<span class="hljs-comment">// 跳出 if 循环</span><br>         }<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = startIndex; i &lt;= n - (k - path.<span class="hljs-built_in">size</span>()) + <span class="hljs-number">1</span> ; i++){ <span class="hljs-comment">// 💡在这里剪枝</span><br>            path.<span class="hljs-built_in">push_back</span>(i);<br>            <span class="hljs-built_in">backtracking</span>(n, k, i+<span class="hljs-number">1</span>);<br>            path.<span class="hljs-built_in">pop_back</span>();<br>        }<br>    }<br>    vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">combine</span>(<span class="hljs-type">int</span> n, <span class="hljs-type">int</span> k) {<br>        <span class="hljs-built_in">backtracking</span>(n, k, <span class="hljs-number">1</span>);<br>        <span class="hljs-keyword">return</span> result;<br><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
 <!-- basicblock-start oid="ObsGT1INYurrpkRdg7gy9Lhd" deck = "👨🏻‍💻code::数据结构与算法::代码随想录::回溯算法::3.组合优化.md" --> 
 <p>#历史记录::<br>
 2022/9/28🌵3.组合优化.md:  v1, 有点懵吧,还好 ⏱0-37</p>
@@ -380,52 +380,6 @@
 
 
               
-  
-
-  <div class="license-box my-3">
-    <div class="license-title">
-      <div>3.组合优化</div>
-      <div>https://zeefan1555.github.io/posts/50548/</div>
-    </div>
-    <div class="license-meta">
-      
-        <div class="license-meta-item">
-          <div>作者</div>
-          <div>zeefan</div>
-        </div>
-      
-      
-        <div class="license-meta-item license-meta-date">
-          <div>发布于</div>
-          <div>2022年5月17日</div>
-        </div>
-      
-      
-        <div class="license-meta-item license-meta-date">
-          <div>更新于</div>
-          <div>2022年9月28日</div>
-        </div>
-      
-      <div class="license-meta-item">
-        <div>许可协议</div>
-        <div>
-          
-            
-            
-              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-              <span class="hint--top hint--rounded" aria-label="BY - 署名">
-                <i class="iconfont icon-by"></i>
-              </span>
-              </a>
-            
-          
-        </div>
-      </div>
-    </div>
-    <div class="license-icon iconfont"></div>
-  </div>
-
-
 
               
                 <div class="post-prevnext my-3">

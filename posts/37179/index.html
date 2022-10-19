@@ -16,15 +16,15 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="static 关键字有三种用法  static 修饰局部变量 → 静态局部变量  改变局部变量的生命周期，下次使用该局部变量是上次使用完后的值，而不是初始值   static 修饰全局变量 →静态全局变量  只能在本文件内使用，不能在其他文件中访问，extern外边声明也不行(无static时默认是可以被外部访问的)   static 修饰函数 →静态函数  只能在本文件中调用，同2">
+    <meta name="description" content="static 关键字有三种用法  static 修饰局部变量 → 静态局部变量  改变局部变量的生命周期，下次使用该局部变量是上次使用完后的值，而不是初始值   static 修饰全局变量 →静态全局变量  只能在本文件内使用，不能在其他文件中访问，extern外边声明也不行(无static时默认是可以被外部访问的)   static 修饰函数 →静态函数  只能在本文件中调用，同2 &#x2F;&#x2F; 静态可">
 <meta property="og:type" content="article">
 <meta property="og:title" content="static 关键字">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/37179/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="static 关键字有三种用法  static 修饰局部变量 → 静态局部变量  改变局部变量的生命周期，下次使用该局部变量是上次使用完后的值，而不是初始值   static 修饰全局变量 →静态全局变量  只能在本文件内使用，不能在其他文件中访问，extern外边声明也不行(无static时默认是可以被外部访问的)   static 修饰函数 →静态函数  只能在本文件中调用，同2">
+<meta property="og:description" content="static 关键字有三种用法  static 修饰局部变量 → 静态局部变量  改变局部变量的生命周期，下次使用该局部变量是上次使用完后的值，而不是初始值   static 修饰全局变量 →静态全局变量  只能在本文件内使用，不能在其他文件中访问，extern外边声明也不行(无static时默认是可以被外部访问的)   static 修饰函数 →静态函数  只能在本文件中调用，同2 &#x2F;&#x2F; 静态可">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-05-29T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-07-12T09:02:14.280Z">
+<meta property="article:modified_time" content="2022-10-16T08:17:49.492Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="C++">
 <meta name="twitter:card" content="summary_large_image">
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          171 字
+          282 字
         
       </span>
     
@@ -234,7 +234,7 @@
         
         
         
-          1 分钟
+          2 分钟
         
       </span>
     
@@ -285,7 +285,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年7月12日 下午
+                    本文最后更新于：2022年10月16日 下午
                   
                 
               </p>
@@ -306,10 +306,12 @@
 </li>
 <li>static 修饰函数 →静态函数
 <ol>
-<li>只能在本文件中<strong>调用</strong>，同2</li>
+<li>只能在本文件中<strong>调用</strong>，同2<br>
+// 静态可以不用对象调用，直接类名加点方法，不是静态需要创建对象然后调用, 不用 static 无法创建对象</li>
 </ol>
 </li>
 </ol>
+<p>static 修饰的类, 不会随着大类一块加载进内存, 只有当调用的时候, 才会加载进内存[[单例模式的类别#^ougi2n]]</p>
 
               
             </div>
@@ -364,52 +366,6 @@
 
 
               
-  
-
-  <div class="license-box my-3">
-    <div class="license-title">
-      <div>static 关键字</div>
-      <div>https://zeefan1555.github.io/posts/37179/</div>
-    </div>
-    <div class="license-meta">
-      
-        <div class="license-meta-item">
-          <div>作者</div>
-          <div>zeefan</div>
-        </div>
-      
-      
-        <div class="license-meta-item license-meta-date">
-          <div>发布于</div>
-          <div>2022年5月30日</div>
-        </div>
-      
-      
-        <div class="license-meta-item license-meta-date">
-          <div>更新于</div>
-          <div>2022年7月12日</div>
-        </div>
-      
-      <div class="license-meta-item">
-        <div>许可协议</div>
-        <div>
-          
-            
-            
-              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-              <span class="hint--top hint--rounded" aria-label="BY - 署名">
-                <i class="iconfont icon-by"></i>
-              </span>
-              </a>
-            
-          
-        </div>
-      </div>
-    </div>
-    <div class="license-icon iconfont"></div>
-  </div>
-
-
 
               
                 <div class="post-prevnext my-3">

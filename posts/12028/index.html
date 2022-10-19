@@ -1,0 +1,727 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202206251952371.png">
+  <link rel="icon" href="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202206251952371.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="zeefan">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="1 有限状态机 逻辑单元内部的一种高效编程方法:有限状态机(finite state machine)。 测试 有的应用层协议头部包含数据包类型字段，每种类型可以映射为逻辑单元的一种执行状态，服务器可以根据它来编写相应的处理逻辑。如下是一种状态独立的有限状态机: 12345678910111213141516STATE_MACHINE( Package _pack ){    PackageTy">
+<meta property="og:type" content="article">
+<meta property="og:title" content="5.6 项目整体流程代码实现">
+<meta property="og:url" content="https://zeefan1555.github.io/posts/12028/index.html">
+<meta property="og:site_name" content="一杯空气">
+<meta property="og:description" content="1 有限状态机 逻辑单元内部的一种高效编程方法:有限状态机(finite state machine)。 测试 有的应用层协议头部包含数据包类型字段，每种类型可以映射为逻辑单元的一种执行状态，服务器可以根据它来编写相应的处理逻辑。如下是一种状态独立的有限状态机: 12345678910111213141516STATE_MACHINE( Package _pack ){    PackageTy">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-10-10T08:33:00.000Z">
+<meta property="article:modified_time" content="2022-10-14T07:24:30.477Z">
+<meta property="article:author" content="zeefan">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>5.6 项目整体流程代码实现 - 一杯空气</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.15.6/katex.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"zeefan1555.github.io","root":"/","version":"1.9.1","typing":{"enable":true,"typeSpeed":150,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"Text"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":10},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>一杯空气</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="5.6 项目整体流程代码实现"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-10-10 16:33" pubdate>
+          2022年10月10日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          18k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          88 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">5.6 项目整体流程代码实现</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2022年10月14日 下午
+                  
+                
+              </p>
+            
+            <div class="markdown-body">
+              
+              <h1 id="1-有限状态机"><a class="markdownIt-Anchor" href="#1-有限状态机"></a> 1 有限状态机</h1>
+<p>逻辑单元内部的一种高效编程方法:有限状态机(finite state machine)。<br>
+测试<br>
+有的应用层协议头部包含数据包类型字段，每种类型可以映射为逻辑单元的一种执行状态，服务器可以根据它来编写相应的处理逻辑。如下是一种状态独立的有限状态机:</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-built_in">STATE_MACHINE</span>( Package _pack )<br>{<br>    PackageType _type = _pack.<span class="hljs-built_in">GetType</span>();<br>    <span class="hljs-keyword">switch</span>( _type )<br>    {<br>	    <span class="hljs-keyword">case</span> type_A:<br>	    <span class="hljs-built_in">process_package_A</span>( _pack );<br>	    <span class="hljs-keyword">break</span>;<br>	<br>		<span class="hljs-keyword">case</span> type_B:<br>	    <span class="hljs-built_in">process_package_B</span>( _pack );<br>	    <span class="hljs-keyword">break</span>;<br>	} <br>}<br><br><br></code></pre></td></tr></tbody></table></figure>
+<p>这是一个简单的有限状态机，只不过该状态机的每个状态都是相互独立的，即状态之间没有相互转移。<br>
+状态之间的转移是需要状态机内部驱动，如下代码:</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-built_in">STATE_MACHINE</span>()<br>{<br>	State cur_State = type_A;<br>	<span class="hljs-keyword">while</span>( cur_State != type_C )<br>	{<br><br>    Package _pack = <span class="hljs-built_in">getNewPackage</span>();<br>    <span class="hljs-keyword">switch</span>( cur_State )<br>	    {<br>	    <span class="hljs-keyword">case</span> type_A:<br>		    <span class="hljs-built_in">process_package_state_A</span>( _pack );<br>		    cur_State = type_B;<br>		    <span class="hljs-keyword">break</span>;<br>		<span class="hljs-keyword">case</span> type_B:<br>		    <span class="hljs-built_in">process_package_state_B</span>( _pack );<br>		    cur_State = type_C;<br>		    <span class="hljs-keyword">break</span>;<br>		} <br>	}<br>}<br><br></code></pre></td></tr></tbody></table></figure>
+<p>该状态机包含三种状态:type_A、type_B 和 type_C，其中 type_A 是状态机的开始状态，type_C 是状 态机的结束状态。状态机的当前状态记录在 cur_State 变量中。在一趟循环过程中，状态机先通过 getNewPackage 方法获得一个新的数据包，然后根据 cur_State 变量的值判断如何处理该数据包。数据 包处理完之后，状态机通过给 cur_State 变量传递目标状态值来实现状态转移。那么当状态机进入下一 趟循环时，它将执行新的状态对应的逻辑。</p>
+<h1 id="2-epolloneshot事件"><a class="markdownIt-Anchor" href="#2-epolloneshot事件"></a> 2 EPOLLONESHOT事件</h1>
+<blockquote>
+<p>[!summary] 即使可以使用 ET 模式<br>
+边缘触发模式(ET 模式): 有数据到来了,没有读完前, 是不会触发的<br>
+水平触发模式: 一有数据到来, 就会触发</p>
+</blockquote>
+<p>一个socket 上的某个事件还是可能被触发多次。这在并发程序中就会引起一个 问题。<br>
+比如一个线程在读取完某个 socket 上的数据后开始处理这些数据，而在数据的处理过程中该 socket 上又有新数据可读(EPOLLIN 再次被触发)，此时另外一个线程被唤醒来读取这些新的数据。<br>
+于 是就出现了两个线程同时操作一个 socket 的局面。<br>
+<strong>一个socket连接在任一时刻都只被一个线程处理，可以使用 epoll 的 EPOLLONESHOT 事件实现。</strong></p>
+<p>对于注册了 EPOLLONESHOT 事件的文件描述符，操作系统最多触发其上注册的一个可读、可写或者异 常事件，且只触发一次，除非我们使用 epoll_ctl 函数重置该文件描述符上注册的 EPOLLONESHOT 事 件。</p>
+<p>这样，当一个线程在处理某个 socket 时，其他线程是不可能有机会操作该 socket 的。但反过来思 考，注册了 EPOLLONESHOT 事件的 socket 一旦被某个线程处理完毕， 该线程就应该立即重置这个 socket 上的 EPOLLONESHOT 事件，以确保这个 socket 下一次可读时，其 EPOLLIN 事件能被触发，进 而让其他工作线程有机会继续处理这个 socket。</p>
+<h1 id="3-服务器压力测试"><a class="markdownIt-Anchor" href="#3-服务器压力测试"></a> 3 服务器压力测试</h1>
+<p>Webbench 是 Linux 上一款知名的、优秀的 web 性能压力测试工具。它是由Lionbridge公司开发。</p>
+<pre><code class="hljs">测试处在相同硬件上，不同服务的性能以及不同硬件上同一个服务的运行状况。
+展示服务器的两项内容:每秒钟响应请求数和每秒钟传输数据量。
+</code></pre>
+<p>基本原理:Webbench 首先 fork 出多个子进程，每个子进程都循环做 web 访问测试。子进程把访问的 结果通过pipe 告诉父进程，父进程做最终的统计结果。<br>
+测试示例</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c">webbench -c <span class="hljs-number">1000</span>  -t  <span class="hljs-number">30</span>   http:<span class="hljs-comment">//192.168.110.129:10000/index.html</span><br><br>参数:  <br>	-c 表示客户端数<br>	-t 表示时间<br></code></pre></td></tr></tbody></table></figure>
+<h1 id="4-代码"><a class="markdownIt-Anchor" href="#4-代码"></a> 4 代码</h1>
+<p>http_conn.cpp</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br><span class="line">371</span><br><span class="line">372</span><br><span class="line">373</span><br><span class="line">374</span><br><span class="line">375</span><br><span class="line">376</span><br><span class="line">377</span><br><span class="line">378</span><br><span class="line">379</span><br><span class="line">380</span><br><span class="line">381</span><br><span class="line">382</span><br><span class="line">383</span><br><span class="line">384</span><br><span class="line">385</span><br><span class="line">386</span><br><span class="line">387</span><br><span class="line">388</span><br><span class="line">389</span><br><span class="line">390</span><br><span class="line">391</span><br><span class="line">392</span><br><span class="line">393</span><br><span class="line">394</span><br><span class="line">395</span><br><span class="line">396</span><br><span class="line">397</span><br><span class="line">398</span><br><span class="line">399</span><br><span class="line">400</span><br><span class="line">401</span><br><span class="line">402</span><br><span class="line">403</span><br><span class="line">404</span><br><span class="line">405</span><br><span class="line">406</span><br><span class="line">407</span><br><span class="line">408</span><br><span class="line">409</span><br><span class="line">410</span><br><span class="line">411</span><br><span class="line">412</span><br><span class="line">413</span><br><span class="line">414</span><br><span class="line">415</span><br><span class="line">416</span><br><span class="line">417</span><br><span class="line">418</span><br><span class="line">419</span><br><span class="line">420</span><br><span class="line">421</span><br><span class="line">422</span><br><span class="line">423</span><br><span class="line">424</span><br><span class="line">425</span><br><span class="line">426</span><br><span class="line">427</span><br><span class="line">428</span><br><span class="line">429</span><br><span class="line">430</span><br><span class="line">431</span><br><span class="line">432</span><br><span class="line">433</span><br><span class="line">434</span><br><span class="line">435</span><br><span class="line">436</span><br><span class="line">437</span><br><span class="line">438</span><br><span class="line">439</span><br><span class="line">440</span><br><span class="line">441</span><br><span class="line">442</span><br><span class="line">443</span><br><span class="line">444</span><br><span class="line">445</span><br><span class="line">446</span><br><span class="line">447</span><br><span class="line">448</span><br><span class="line">449</span><br><span class="line">450</span><br><span class="line">451</span><br><span class="line">452</span><br><span class="line">453</span><br><span class="line">454</span><br><span class="line">455</span><br><span class="line">456</span><br><span class="line">457</span><br><span class="line">458</span><br><span class="line">459</span><br><span class="line">460</span><br><span class="line">461</span><br><span class="line">462</span><br><span class="line">463</span><br><span class="line">464</span><br><span class="line">465</span><br><span class="line">466</span><br><span class="line">467</span><br><span class="line">468</span><br><span class="line">469</span><br><span class="line">470</span><br><span class="line">471</span><br><span class="line">472</span><br><span class="line">473</span><br><span class="line">474</span><br><span class="line">475</span><br><span class="line">476</span><br><span class="line">477</span><br><span class="line">478</span><br><span class="line">479</span><br><span class="line">480</span><br><span class="line">481</span><br><span class="line">482</span><br><span class="line">483</span><br><span class="line">484</span><br><span class="line">485</span><br><span class="line">486</span><br><span class="line">487</span><br><span class="line">488</span><br><span class="line">489</span><br><span class="line">490</span><br><span class="line">491</span><br><span class="line">492</span><br><span class="line">493</span><br><span class="line">494</span><br><span class="line">495</span><br><span class="line">496</span><br><span class="line">497</span><br><span class="line">498</span><br><span class="line">499</span><br><span class="line">500</span><br><span class="line">501</span><br><span class="line">502</span><br><span class="line">503</span><br><span class="line">504</span><br><span class="line">505</span><br><span class="line">506</span><br><span class="line">507</span><br><span class="line">508</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">"http_conn.h"</span> <span class="hljs-comment">// 导入头文件</span></span><br><br><span class="hljs-comment">// 定义HTTP响应的一些状态信息</span><br><span class="hljs-type">const</span> <span class="hljs-type">char</span>* ok_200_title = <span class="hljs-string">"OK"</span>;<br><span class="hljs-type">const</span> <span class="hljs-type">char</span>* error_400_title = <span class="hljs-string">"Bad Request"</span>;<br><span class="hljs-type">const</span> <span class="hljs-type">char</span>* error_400_form = <span class="hljs-string">"Your request has bad syntax or is inherently impossible to satisfy.\n"</span>;<br><span class="hljs-type">const</span> <span class="hljs-type">char</span>* error_403_title = <span class="hljs-string">"Forbidden"</span>;<br><span class="hljs-type">const</span> <span class="hljs-type">char</span>* error_403_form = <span class="hljs-string">"You do not have permission to get file from this server.\n"</span>;<br><span class="hljs-type">const</span> <span class="hljs-type">char</span>* error_404_title = <span class="hljs-string">"Not Found"</span>;<br><span class="hljs-type">const</span> <span class="hljs-type">char</span>* error_404_form = <span class="hljs-string">"The requested file was not found on this server.\n"</span>;<br><span class="hljs-type">const</span> <span class="hljs-type">char</span>* error_500_title = <span class="hljs-string">"Internal Error"</span>;<br><span class="hljs-type">const</span> <span class="hljs-type">char</span>* error_500_form = <span class="hljs-string">"There was an unusual problem serving the requested file.\n"</span>;<br><br><span class="hljs-comment">// 网站的根目录</span><br><span class="hljs-type">const</span> <span class="hljs-type">char</span>* doc_root = <span class="hljs-string">"/home/nowcoder/webserver/resources"</span>;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">setnonblocking</span><span class="hljs-params">( <span class="hljs-type">int</span> fd )</span> </span>{<br>    <span class="hljs-type">int</span> old_option = <span class="hljs-built_in">fcntl</span>( fd, F_GETFL );<br>    <span class="hljs-type">int</span> new_option = old_option | O_NONBLOCK;<br>    <span class="hljs-built_in">fcntl</span>( fd, F_SETFL, new_option );<br>    <span class="hljs-keyword">return</span> old_option;<br>}<br><br><span class="hljs-comment">// 向epoll中添加需要监听的文件描述符</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">addfd</span><span class="hljs-params">( <span class="hljs-type">int</span> epollfd, <span class="hljs-type">int</span> fd, <span class="hljs-type">bool</span> one_shot )</span> </span>{<br>    epoll_event event;<br>    event.data.fd = fd;<br>    event.events = EPOLLIN | EPOLLRDHUP;<br>    <span class="hljs-keyword">if</span>(one_shot) <br>    {<br>        <span class="hljs-comment">// 防止同一个通信被不同的线程处理</span><br>        event.events |= EPOLLONESHOT;<br>    }<br>    <span class="hljs-built_in">epoll_ctl</span>(epollfd, EPOLL_CTL_ADD, fd, &amp;event);<br>    <span class="hljs-comment">// 设置文件描述符非阻塞</span><br>    <span class="hljs-built_in">setnonblocking</span>(fd);  <br>}<br><br><span class="hljs-comment">// 从epoll中移除监听的文件描述符</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">removefd</span><span class="hljs-params">( <span class="hljs-type">int</span> epollfd, <span class="hljs-type">int</span> fd )</span> </span>{<br>    <span class="hljs-built_in">epoll_ctl</span>( epollfd, EPOLL_CTL_DEL, fd, <span class="hljs-number">0</span> );<br>    <span class="hljs-built_in">close</span>(fd);<br>}<br><br><span class="hljs-comment">// 修改文件描述符，重置socket上的EPOLLONESHOT事件，以确保下一次可读时，EPOLLIN事件能被触发</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">modfd</span><span class="hljs-params">(<span class="hljs-type">int</span> epollfd, <span class="hljs-type">int</span> fd, <span class="hljs-type">int</span> ev)</span> </span>{<br>    epoll_event event;<br>    event.data.fd = fd;<br>    event.events = ev | EPOLLET | EPOLLONESHOT | EPOLLRDHUP;<br>    <span class="hljs-built_in">epoll_ctl</span>( epollfd, EPOLL_CTL_MOD, fd, &amp;event );<br>}<br><br><span class="hljs-comment">// 所有的客户数</span><br><span class="hljs-type">int</span> http_conn::m_user_count = <span class="hljs-number">0</span>;<br><span class="hljs-comment">// 所有socket上的事件都被注册到同一个epoll内核事件中，所以设置成静态的</span><br><span class="hljs-type">int</span> http_conn::m_epollfd = <span class="hljs-number">-1</span>;<br><br><span class="hljs-comment">// 关闭连接</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">http_conn::close_conn</span><span class="hljs-params">()</span> </span>{<br>    <span class="hljs-keyword">if</span>(m_sockfd != <span class="hljs-number">-1</span>) {<br>        <span class="hljs-built_in">removefd</span>(m_epollfd, m_sockfd);<br>        m_sockfd = <span class="hljs-number">-1</span>;<br>        m_user_count--; <span class="hljs-comment">// 关闭一个连接，将客户总数量-1</span><br>    }<br>}<br><br><span class="hljs-comment">// 初始化连接,外部调用初始化套接字地址</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">http_conn::init</span><span class="hljs-params">(<span class="hljs-type">int</span> sockfd, <span class="hljs-type">const</span> sockaddr_in&amp; addr)</span></span>{<br>    m_sockfd = sockfd;<br>    m_address = addr;<br>    <br>    <span class="hljs-comment">// 端口复用</span><br>    <span class="hljs-type">int</span> reuse = <span class="hljs-number">1</span>;<br>    <span class="hljs-built_in">setsockopt</span>( m_sockfd, SOL_SOCKET, SO_REUSEADDR, &amp;reuse, <span class="hljs-built_in">sizeof</span>( reuse ) );<br>    <span class="hljs-built_in">addfd</span>( m_epollfd, sockfd, <span class="hljs-literal">true</span> );<br>    m_user_count++;<br>    <span class="hljs-built_in">init</span>();<br>}<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">http_conn::init</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>{<br><br>    bytes_to_send = <span class="hljs-number">0</span>;<br>    bytes_have_send = <span class="hljs-number">0</span>;<br><br>    m_check_state = CHECK_STATE_REQUESTLINE;    <span class="hljs-comment">// 初始状态为检查请求行</span><br>    m_linger = <span class="hljs-literal">false</span>;       <span class="hljs-comment">// 默认不保持链接  Connection : keep-alive保持连接</span><br><br>    m_method = GET;         <span class="hljs-comment">// 默认请求方式为GET</span><br>    m_url = <span class="hljs-number">0</span>;              <br>    m_version = <span class="hljs-number">0</span>;<br>    m_content_length = <span class="hljs-number">0</span>;<br>    m_host = <span class="hljs-number">0</span>;<br>    m_start_line = <span class="hljs-number">0</span>;<br>    m_checked_idx = <span class="hljs-number">0</span>;<br>    m_read_idx = <span class="hljs-number">0</span>;<br>    m_write_idx = <span class="hljs-number">0</span>;<br><br>    <span class="hljs-built_in">bzero</span>(m_read_buf, READ_BUFFER_SIZE);<br>    <span class="hljs-built_in">bzero</span>(m_write_buf, READ_BUFFER_SIZE);<br>    <span class="hljs-built_in">bzero</span>(m_real_file, FILENAME_LEN);<br>}<br><br><span class="hljs-comment">// 循环读取客户数据，直到无数据可读或者对方关闭连接</span><br><span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">http_conn::read</span><span class="hljs-params">()</span> </span>{<br>    <span class="hljs-keyword">if</span>( m_read_idx &gt;= READ_BUFFER_SIZE ) {<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    }<br>    <span class="hljs-type">int</span> bytes_read = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">while</span>(<span class="hljs-literal">true</span>) {<br>        <span class="hljs-comment">// 从m_read_buf + m_read_idx索引出开始保存数据，大小是READ_BUFFER_SIZE - m_read_idx</span><br>        bytes_read = <span class="hljs-built_in">recv</span>(m_sockfd, m_read_buf + m_read_idx, <br>        READ_BUFFER_SIZE - m_read_idx, <span class="hljs-number">0</span> );<br>        <span class="hljs-keyword">if</span> (bytes_read == <span class="hljs-number">-1</span>) {<br>            <span class="hljs-keyword">if</span>( errno == EAGAIN || errno == EWOULDBLOCK ) {<br>                <span class="hljs-comment">// 没有数据</span><br>                <span class="hljs-keyword">break</span>;<br>            }<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;   <br>        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (bytes_read == <span class="hljs-number">0</span>) {   <span class="hljs-comment">// 对方关闭连接</span><br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        }<br>        m_read_idx += bytes_read;<br>    }<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>}<br><br><span class="hljs-comment">// 解析一行，判断依据\r\n</span><br><span class="hljs-function">http_conn::LINE_STATUS <span class="hljs-title">http_conn::parse_line</span><span class="hljs-params">()</span> </span>{<br>    <span class="hljs-type">char</span> temp;<br>    <span class="hljs-keyword">for</span> ( ; m_checked_idx &lt; m_read_idx; ++m_checked_idx ) {<br>        temp = m_read_buf[ m_checked_idx ];<br>        <span class="hljs-keyword">if</span> ( temp == <span class="hljs-string">'\r'</span> ) {<br>            <span class="hljs-keyword">if</span> ( ( m_checked_idx + <span class="hljs-number">1</span> ) == m_read_idx ) {<br>                <span class="hljs-keyword">return</span> LINE_OPEN;<br>            } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> ( m_read_buf[ m_checked_idx + <span class="hljs-number">1</span> ] == <span class="hljs-string">'\n'</span> ) {<br>                m_read_buf[ m_checked_idx++ ] = <span class="hljs-string">'\0'</span>;<br>                m_read_buf[ m_checked_idx++ ] = <span class="hljs-string">'\0'</span>;<br>                <span class="hljs-keyword">return</span> LINE_OK;<br>            }<br>            <span class="hljs-keyword">return</span> LINE_BAD;<br>        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>( temp == <span class="hljs-string">'\n'</span> )  {<br>            <span class="hljs-keyword">if</span>( ( m_checked_idx &gt; <span class="hljs-number">1</span>) &amp;&amp; ( m_read_buf[ m_checked_idx - <span class="hljs-number">1</span> ] == <span class="hljs-string">'\r'</span> ) ) {<br>                m_read_buf[ m_checked_idx<span class="hljs-number">-1</span> ] = <span class="hljs-string">'\0'</span>;<br>                m_read_buf[ m_checked_idx++ ] = <span class="hljs-string">'\0'</span>;<br>                <span class="hljs-keyword">return</span> LINE_OK;<br>            }<br>            <span class="hljs-keyword">return</span> LINE_BAD;<br>        }<br>    }<br>    <span class="hljs-keyword">return</span> LINE_OPEN;<br>}<br><br><span class="hljs-comment">// 解析HTTP请求行，获得请求方法，目标URL,以及HTTP版本号</span><br><span class="hljs-function">http_conn::HTTP_CODE <span class="hljs-title">http_conn::parse_request_line</span><span class="hljs-params">(<span class="hljs-type">char</span>* text)</span> </span>{<br>    <span class="hljs-comment">// GET /index.html HTTP/1.1</span><br>    m_url = <span class="hljs-built_in">strpbrk</span>(text, <span class="hljs-string">" \t"</span>); <span class="hljs-comment">// 判断第二个参数中的字符哪个在text中最先出现</span><br>    <span class="hljs-keyword">if</span> (! m_url) { <br>        <span class="hljs-keyword">return</span> BAD_REQUEST;<br>    }<br>    <span class="hljs-comment">// GET\0/index.html HTTP/1.1</span><br>    *m_url++ = <span class="hljs-string">'\0'</span>;    <span class="hljs-comment">// 置位空字符，字符串结束符</span><br>    <span class="hljs-type">char</span>* method = text;<br>    <span class="hljs-keyword">if</span> ( <span class="hljs-built_in">strcasecmp</span>(method, <span class="hljs-string">"GET"</span>) == <span class="hljs-number">0</span> ) { <span class="hljs-comment">// 忽略大小写比较</span><br>        m_method = GET;<br>    } <span class="hljs-keyword">else</span> {<br>        <span class="hljs-keyword">return</span> BAD_REQUEST;<br>    }<br>    <span class="hljs-comment">// /index.html HTTP/1.1</span><br>    <span class="hljs-comment">// 检索字符串 str1 中第一个不在字符串 str2 中出现的字符下标。</span><br>    m_version = <span class="hljs-built_in">strpbrk</span>( m_url, <span class="hljs-string">" \t"</span> );<br>    <span class="hljs-keyword">if</span> (!m_version) {<br>        <span class="hljs-keyword">return</span> BAD_REQUEST;<br>    }<br>    *m_version++ = <span class="hljs-string">'\0'</span>;<br>    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">strcasecmp</span>( m_version, <span class="hljs-string">"HTTP/1.1"</span>) != <span class="hljs-number">0</span> ) {<br>        <span class="hljs-keyword">return</span> BAD_REQUEST;<br>    }<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * http://192.168.110.129:10000/index.html</span><br><span class="hljs-comment">    */</span><br>    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">strncasecmp</span>(m_url, <span class="hljs-string">"http://"</span>, <span class="hljs-number">7</span>) == <span class="hljs-number">0</span> ) {   <br>        m_url += <span class="hljs-number">7</span>;<br>        <span class="hljs-comment">// 在参数 str 所指向的字符串中搜索第一次出现字符 c（一个无符号字符）的位置。</span><br>        m_url = <span class="hljs-built_in">strchr</span>( m_url, <span class="hljs-string">'/'</span> );<br>    }<br>    <span class="hljs-keyword">if</span> ( !m_url || m_url[<span class="hljs-number">0</span>] != <span class="hljs-string">'/'</span> ) {<br>        <span class="hljs-keyword">return</span> BAD_REQUEST;<br>    }<br>    m_check_state = CHECK_STATE_HEADER; <span class="hljs-comment">// 检查状态变成检查头</span><br>    <span class="hljs-keyword">return</span> NO_REQUEST;<br>}<br><br><span class="hljs-comment">// 解析HTTP请求的一个头部信息</span><br><span class="hljs-function">http_conn::HTTP_CODE <span class="hljs-title">http_conn::parse_headers</span><span class="hljs-params">(<span class="hljs-type">char</span>* text)</span> </span>{   <br>    <span class="hljs-comment">// 遇到空行，表示头部字段解析完毕</span><br>    <span class="hljs-keyword">if</span>( text[<span class="hljs-number">0</span>] == <span class="hljs-string">'\0'</span> ) {<br>        <span class="hljs-comment">// 如果HTTP请求有消息体，则还需要读取m_content_length字节的消息体，</span><br>        <span class="hljs-comment">// 状态机转移到CHECK_STATE_CONTENT状态</span><br>        <span class="hljs-keyword">if</span> ( m_content_length != <span class="hljs-number">0</span> ) {<br>            m_check_state = CHECK_STATE_CONTENT;<br>            <span class="hljs-keyword">return</span> NO_REQUEST;<br>        }<br>        <span class="hljs-comment">// 否则说明我们已经得到了一个完整的HTTP请求</span><br>        <span class="hljs-keyword">return</span> GET_REQUEST;<br>    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> ( <span class="hljs-built_in">strncasecmp</span>( text, <span class="hljs-string">"Connection:"</span>, <span class="hljs-number">11</span> ) == <span class="hljs-number">0</span> ) {<br>        <span class="hljs-comment">// 处理Connection 头部字段  Connection: keep-alive</span><br>        text += <span class="hljs-number">11</span>;<br>        text += <span class="hljs-built_in">strspn</span>( text, <span class="hljs-string">" \t"</span> );<br>        <span class="hljs-keyword">if</span> ( <span class="hljs-built_in">strcasecmp</span>( text, <span class="hljs-string">"keep-alive"</span> ) == <span class="hljs-number">0</span> ) {<br>            m_linger = <span class="hljs-literal">true</span>;<br>        }<br>    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> ( <span class="hljs-built_in">strncasecmp</span>( text, <span class="hljs-string">"Content-Length:"</span>, <span class="hljs-number">15</span> ) == <span class="hljs-number">0</span> ) {<br>        <span class="hljs-comment">// 处理Content-Length头部字段</span><br>        text += <span class="hljs-number">15</span>;<br>        text += <span class="hljs-built_in">strspn</span>( text, <span class="hljs-string">" \t"</span> );<br>        m_content_length = <span class="hljs-built_in">atol</span>(text);<br>    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> ( <span class="hljs-built_in">strncasecmp</span>( text, <span class="hljs-string">"Host:"</span>, <span class="hljs-number">5</span> ) == <span class="hljs-number">0</span> ) {<br>        <span class="hljs-comment">// 处理Host头部字段</span><br>        text += <span class="hljs-number">5</span>;<br>        text += <span class="hljs-built_in">strspn</span>( text, <span class="hljs-string">" \t"</span> );<br>        m_host = text;<br>    } <span class="hljs-keyword">else</span> {<br>        <span class="hljs-built_in">printf</span>( <span class="hljs-string">"oop! unknow header %s\n"</span>, text );<br>    }<br>    <span class="hljs-keyword">return</span> NO_REQUEST;<br>}<br><br><span class="hljs-comment">// 我们没有真正解析HTTP请求的消息体，只是判断它是否被完整的读入了</span><br><span class="hljs-function">http_conn::HTTP_CODE <span class="hljs-title">http_conn::parse_content</span><span class="hljs-params">( <span class="hljs-type">char</span>* text )</span> </span>{<br>    <span class="hljs-keyword">if</span> ( m_read_idx &gt;= ( m_content_length + m_checked_idx ) )<br>    {<br>        text[ m_content_length ] = <span class="hljs-string">'\0'</span>;<br>        <span class="hljs-keyword">return</span> GET_REQUEST;<br>    }<br>    <span class="hljs-keyword">return</span> NO_REQUEST;<br>}<br><br><span class="hljs-comment">// 主状态机，解析请求</span><br><span class="hljs-function">http_conn::HTTP_CODE <span class="hljs-title">http_conn::process_read</span><span class="hljs-params">()</span> </span>{<br>    LINE_STATUS line_status = LINE_OK;<br>    HTTP_CODE ret = NO_REQUEST;<br>    <span class="hljs-type">char</span>* text = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">while</span> (((m_check_state == CHECK_STATE_CONTENT) &amp;&amp; (line_status == LINE_OK))<br>                || ((line_status = <span class="hljs-built_in">parse_line</span>()) == LINE_OK)) {<br>        <span class="hljs-comment">// 获取一行数据</span><br>        text = <span class="hljs-built_in">get_line</span>();<br>        m_start_line = m_checked_idx;<br>        <span class="hljs-built_in">printf</span>( <span class="hljs-string">"got 1 http line: %s\n"</span>, text );<br><br>        <span class="hljs-keyword">switch</span> ( m_check_state ) {<br>            <span class="hljs-keyword">case</span> CHECK_STATE_REQUESTLINE: {<br>                ret = <span class="hljs-built_in">parse_request_line</span>( text );<br>                <span class="hljs-keyword">if</span> ( ret == BAD_REQUEST ) {<br>                    <span class="hljs-keyword">return</span> BAD_REQUEST;<br>                }<br>                <span class="hljs-keyword">break</span>;<br>            }<br>            <span class="hljs-keyword">case</span> CHECK_STATE_HEADER: {<br>                ret = <span class="hljs-built_in">parse_headers</span>( text );<br>                <span class="hljs-keyword">if</span> ( ret == BAD_REQUEST ) {<br>                    <span class="hljs-keyword">return</span> BAD_REQUEST;<br>                } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> ( ret == GET_REQUEST ) {<br>                    <span class="hljs-keyword">return</span> <span class="hljs-built_in">do_request</span>();<br>                }<br>                <span class="hljs-keyword">break</span>;<br>            }<br>            <span class="hljs-keyword">case</span> CHECK_STATE_CONTENT: {<br>                ret = <span class="hljs-built_in">parse_content</span>( text );<br>                <span class="hljs-keyword">if</span> ( ret == GET_REQUEST ) {<br>                    <span class="hljs-keyword">return</span> <span class="hljs-built_in">do_request</span>();<br>                }<br>                line_status = LINE_OPEN;<br>                <span class="hljs-keyword">break</span>;<br>            }<br>            <span class="hljs-keyword">default</span>: {<br>                <span class="hljs-keyword">return</span> INTERNAL_ERROR;<br>            }<br>        }<br>    }<br>    <span class="hljs-keyword">return</span> NO_REQUEST;<br>}<br><br><span class="hljs-comment">// 当得到一个完整、正确的HTTP请求时，我们就分析目标文件的属性，</span><br><span class="hljs-comment">// 如果目标文件存在、对所有用户可读，且不是目录，则使用mmap将其</span><br><span class="hljs-comment">// 映射到内存地址m_file_address处，并告诉调用者获取文件成功</span><br><span class="hljs-function">http_conn::HTTP_CODE <span class="hljs-title">http_conn::do_request</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>{<br>    <span class="hljs-comment">// "/home/nowcoder/webserver/resources"</span><br>    <span class="hljs-built_in">strcpy</span>( m_real_file, doc_root );<br>    <span class="hljs-type">int</span> len = <span class="hljs-built_in">strlen</span>( doc_root );<br>    <span class="hljs-built_in">strncpy</span>( m_real_file + len, m_url, FILENAME_LEN - len - <span class="hljs-number">1</span> );<br>    <span class="hljs-comment">// 获取m_real_file文件的相关的状态信息，-1失败，0成功</span><br>    <span class="hljs-keyword">if</span> ( <span class="hljs-built_in">stat</span>( m_real_file, &amp;m_file_stat ) &lt; <span class="hljs-number">0</span> ) {<br>        <span class="hljs-keyword">return</span> NO_RESOURCE;<br>    }<br><br>    <span class="hljs-comment">// 判断访问权限</span><br>    <span class="hljs-keyword">if</span> ( ! ( m_file_stat.st_mode &amp; S_IROTH ) ) {<br>        <span class="hljs-keyword">return</span> FORBIDDEN_REQUEST;<br>    }<br><br>    <span class="hljs-comment">// 判断是否是目录</span><br>    <span class="hljs-keyword">if</span> ( <span class="hljs-built_in">S_ISDIR</span>( m_file_stat.st_mode ) ) {<br>        <span class="hljs-keyword">return</span> BAD_REQUEST;<br>    }<br><br>    <span class="hljs-comment">// 以只读方式打开文件</span><br>    <span class="hljs-type">int</span> fd = <span class="hljs-built_in">open</span>( m_real_file, O_RDONLY );<br>    <span class="hljs-comment">// 创建内存映射</span><br>    m_file_address = ( <span class="hljs-type">char</span>* )<span class="hljs-built_in">mmap</span>( <span class="hljs-number">0</span>, m_file_stat.st_size, PROT_READ, MAP_PRIVATE, fd, <span class="hljs-number">0</span> );<br>    <span class="hljs-built_in">close</span>( fd );<br>    <span class="hljs-keyword">return</span> FILE_REQUEST;<br>}<br><br><span class="hljs-comment">// 对内存映射区执行munmap操作</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">http_conn::unmap</span><span class="hljs-params">()</span> </span>{<br>    <span class="hljs-keyword">if</span>( m_file_address )<br>    {<br>        <span class="hljs-built_in">munmap</span>( m_file_address, m_file_stat.st_size );<br>        m_file_address = <span class="hljs-number">0</span>;<br>    }<br>}<br><br><span class="hljs-comment">// 写HTTP响应</span><br><span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">http_conn::write</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>{<br>    <span class="hljs-type">int</span> temp = <span class="hljs-number">0</span>;<br>    <br>    <span class="hljs-keyword">if</span> ( bytes_to_send == <span class="hljs-number">0</span> ) {<br>        <span class="hljs-comment">// 将要发送的字节为0，这一次响应结束。</span><br>        <span class="hljs-built_in">modfd</span>( m_epollfd, m_sockfd, EPOLLIN ); <br>        <span class="hljs-built_in">init</span>();<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    }<br><br>    <span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>) {<br>        <span class="hljs-comment">// 分散写</span><br>        temp = <span class="hljs-built_in">writev</span>(m_sockfd, m_iv, m_iv_count);<br>        <span class="hljs-keyword">if</span> ( temp &lt;= <span class="hljs-number">-1</span> ) {<br>            <span class="hljs-comment">// 如果TCP写缓冲没有空间，则等待下一轮EPOLLOUT事件，虽然在此期间，</span><br>            <span class="hljs-comment">// 服务器无法立即接收到同一客户的下一个请求，但可以保证连接的完整性。</span><br>            <span class="hljs-keyword">if</span>( errno == EAGAIN ) {<br>                <span class="hljs-built_in">modfd</span>( m_epollfd, m_sockfd, EPOLLOUT );<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>            }<br>            <span class="hljs-built_in">unmap</span>();<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        }<br><br>        bytes_have_send += temp;<br>        bytes_to_send -= temp;<br><br>        <span class="hljs-keyword">if</span> (bytes_have_send &gt;= m_iv[<span class="hljs-number">0</span>].iov_len)<br>        {<br>            m_iv[<span class="hljs-number">0</span>].iov_len = <span class="hljs-number">0</span>;<br>            m_iv[<span class="hljs-number">1</span>].iov_base = m_file_address + (bytes_have_send - m_write_idx);<br>            m_iv[<span class="hljs-number">1</span>].iov_len = bytes_to_send;<br>        }<br>        <span class="hljs-keyword">else</span><br>        {<br>            m_iv[<span class="hljs-number">0</span>].iov_base = m_write_buf + bytes_have_send;<br>            m_iv[<span class="hljs-number">0</span>].iov_len = m_iv[<span class="hljs-number">0</span>].iov_len - temp;<br>        }<br><br>        <span class="hljs-keyword">if</span> (bytes_to_send &lt;= <span class="hljs-number">0</span>)<br>        {<br>            <span class="hljs-comment">// 没有数据要发送了</span><br>            <span class="hljs-built_in">unmap</span>();<br>            <span class="hljs-built_in">modfd</span>(m_epollfd, m_sockfd, EPOLLIN);<br><br>            <span class="hljs-keyword">if</span> (m_linger)<br>            {<br>                <span class="hljs-built_in">init</span>();<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>            }<br>            <span class="hljs-keyword">else</span><br>            {<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>            }<br>        }<br><br>    }<br><br>    <br>}<br><br><span class="hljs-comment">// 往写缓冲中写入待发送的数据</span><br><span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">http_conn::add_response</span><span class="hljs-params">( <span class="hljs-type">const</span> <span class="hljs-type">char</span>* format, ... )</span> </span>{<br>    <span class="hljs-keyword">if</span>( m_write_idx &gt;= WRITE_BUFFER_SIZE ) {<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    }<br>    va_list arg_list;<br>    <span class="hljs-built_in">va_start</span>( arg_list, format );<br>    <span class="hljs-type">int</span> len = <span class="hljs-built_in">vsnprintf</span>( m_write_buf + m_write_idx, WRITE_BUFFER_SIZE - <span class="hljs-number">1</span> - m_write_idx, format, arg_list );<br>    <span class="hljs-keyword">if</span>( len &gt;= ( WRITE_BUFFER_SIZE - <span class="hljs-number">1</span> - m_write_idx ) ) {<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    }<br>    m_write_idx += len;<br>    <span class="hljs-built_in">va_end</span>( arg_list );<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>}<br><br><span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">http_conn::add_status_line</span><span class="hljs-params">( <span class="hljs-type">int</span> status, <span class="hljs-type">const</span> <span class="hljs-type">char</span>* title )</span> </span>{<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">add_response</span>( <span class="hljs-string">"%s %d %s\r\n"</span>, <span class="hljs-string">"HTTP/1.1"</span>, status, title );<br>}<br><br><span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">http_conn::add_headers</span><span class="hljs-params">(<span class="hljs-type">int</span> content_len)</span> </span>{<br>    <span class="hljs-built_in">add_content_length</span>(content_len);<br>    <span class="hljs-built_in">add_content_type</span>();<br>    <span class="hljs-built_in">add_linger</span>();<br>    <span class="hljs-built_in">add_blank_line</span>();<br>}<br><br><span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">http_conn::add_content_length</span><span class="hljs-params">(<span class="hljs-type">int</span> content_len)</span> </span>{<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">add_response</span>( <span class="hljs-string">"Content-Length: %d\r\n"</span>, content_len );<br>}<br><br><span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">http_conn::add_linger</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>{<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">add_response</span>( <span class="hljs-string">"Connection: %s\r\n"</span>, ( m_linger == <span class="hljs-literal">true</span> ) ? <span class="hljs-string">"keep-alive"</span> : <span class="hljs-string">"close"</span> );<br>}<br><br><span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">http_conn::add_blank_line</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>{<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">add_response</span>( <span class="hljs-string">"%s"</span>, <span class="hljs-string">"\r\n"</span> );<br>}<br><br><span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">http_conn::add_content</span><span class="hljs-params">( <span class="hljs-type">const</span> <span class="hljs-type">char</span>* content )</span></span><br><span class="hljs-function"></span>{<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">add_response</span>( <span class="hljs-string">"%s"</span>, content );<br>}<br><br><span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">http_conn::add_content_type</span><span class="hljs-params">()</span> </span>{<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">add_response</span>(<span class="hljs-string">"Content-Type:%s\r\n"</span>, <span class="hljs-string">"text/html"</span>);<br>}<br><br><span class="hljs-comment">// 根据服务器处理HTTP请求的结果，决定返回给客户端的内容</span><br><span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">http_conn::process_write</span><span class="hljs-params">(HTTP_CODE ret)</span> </span>{<br>    <span class="hljs-keyword">switch</span> (ret)<br>    {<br>        <span class="hljs-keyword">case</span> INTERNAL_ERROR:<br>            <span class="hljs-built_in">add_status_line</span>( <span class="hljs-number">500</span>, error_500_title );<br>            <span class="hljs-built_in">add_headers</span>( <span class="hljs-built_in">strlen</span>( error_500_form ) );<br>            <span class="hljs-keyword">if</span> ( ! <span class="hljs-built_in">add_content</span>( error_500_form ) ) {<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>            }<br>            <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> BAD_REQUEST:<br>            <span class="hljs-built_in">add_status_line</span>( <span class="hljs-number">400</span>, error_400_title );<br>            <span class="hljs-built_in">add_headers</span>( <span class="hljs-built_in">strlen</span>( error_400_form ) );<br>            <span class="hljs-keyword">if</span> ( ! <span class="hljs-built_in">add_content</span>( error_400_form ) ) {<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>            }<br>            <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> NO_RESOURCE:<br>            <span class="hljs-built_in">add_status_line</span>( <span class="hljs-number">404</span>, error_404_title );<br>            <span class="hljs-built_in">add_headers</span>( <span class="hljs-built_in">strlen</span>( error_404_form ) );<br>            <span class="hljs-keyword">if</span> ( ! <span class="hljs-built_in">add_content</span>( error_404_form ) ) {<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>            }<br>            <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> FORBIDDEN_REQUEST:<br>            <span class="hljs-built_in">add_status_line</span>( <span class="hljs-number">403</span>, error_403_title );<br>            <span class="hljs-built_in">add_headers</span>(<span class="hljs-built_in">strlen</span>( error_403_form));<br>            <span class="hljs-keyword">if</span> ( ! <span class="hljs-built_in">add_content</span>( error_403_form ) ) {<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>            }<br>            <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> FILE_REQUEST:<br>            <span class="hljs-built_in">add_status_line</span>(<span class="hljs-number">200</span>, ok_200_title );<br>            <span class="hljs-built_in">add_headers</span>(m_file_stat.st_size);<br>            m_iv[ <span class="hljs-number">0</span> ].iov_base = m_write_buf;<br>            m_iv[ <span class="hljs-number">0</span> ].iov_len = m_write_idx;<br>            m_iv[ <span class="hljs-number">1</span> ].iov_base = m_file_address;<br>            m_iv[ <span class="hljs-number">1</span> ].iov_len = m_file_stat.st_size;<br>            m_iv_count = <span class="hljs-number">2</span>;<br><br>            bytes_to_send = m_write_idx + m_file_stat.st_size;<br><br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        <span class="hljs-keyword">default</span>:<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    }<br><br>    m_iv[ <span class="hljs-number">0</span> ].iov_base = m_write_buf;<br>    m_iv[ <span class="hljs-number">0</span> ].iov_len = m_write_idx;<br>    m_iv_count = <span class="hljs-number">1</span>;<br>    bytes_to_send = m_write_idx;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>}<br><br><span class="hljs-comment">// 由线程池中的工作线程调用，这是处理HTTP请求的入口函数</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">http_conn::process</span><span class="hljs-params">()</span> </span>{<br>    <span class="hljs-comment">// 解析HTTP请求</span><br>    HTTP_CODE read_ret = <span class="hljs-built_in">process_read</span>();<br>    <span class="hljs-keyword">if</span> ( read_ret == NO_REQUEST ) {<br>        <span class="hljs-built_in">modfd</span>( m_epollfd, m_sockfd, EPOLLIN );<br>        <span class="hljs-keyword">return</span>;<br>    }<br>    <br>    <span class="hljs-comment">// 生成响应</span><br>    <span class="hljs-type">bool</span> write_ret = <span class="hljs-built_in">process_write</span>( read_ret );<br>    <span class="hljs-keyword">if</span> ( !write_ret ) {<br>        <span class="hljs-built_in">close_conn</span>();<br>    }<br>    <span class="hljs-built_in">modfd</span>( m_epollfd, m_sockfd, EPOLLOUT);<br>}<br></code></pre></td></tr></tbody></table></figure>
+<p>main.cpp</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/socket.h&gt;</span> </span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;netinet/in.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;arpa/inet.h&gt;</span><span class="hljs-comment">// 网络相关, 导入这个上面两个不用导了</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;errno.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;fcntl.h&gt;</span> <span class="hljs-comment">// 文件描述符</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/epoll.h&gt;</span></span><br><span class="hljs-comment">// 同步的类</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">"locker.h"</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">"threadpool.h"</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">"http_conn.h"</span></span><br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> MAX_FD 65536   <span class="hljs-comment">// 最大的文件描述符个数</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> MAX_EVENT_NUMBER 10000  <span class="hljs-comment">// 一次可以监听的最大的事件数量</span></span><br><br><span class="hljs-comment">// 添加文件描述符 到 epoll 中</span><br><span class="hljs-function"><span class="hljs-keyword">extern</span> <span class="hljs-type">void</span> <span class="hljs-title">addfd</span><span class="hljs-params">( <span class="hljs-type">int</span> epollfd, <span class="hljs-type">int</span> fd, <span class="hljs-type">bool</span> one_shot )</span></span>;<span class="hljs-comment">// 声明成外部的, 写到 http_conn 中</span><br><span class="hljs-comment">// 从 epoll 删除文件描述符</span><br><span class="hljs-function"><span class="hljs-keyword">extern</span> <span class="hljs-type">void</span> <span class="hljs-title">removefd</span><span class="hljs-params">( <span class="hljs-type">int</span> epollfd, <span class="hljs-type">int</span> fd )</span></span>;<br><span class="hljs-comment">// 修改文件活述符</span><br><span class="hljs-function"><span class="hljs-keyword">extern</span> <span class="hljs-type">void</span> <span class="hljs-title">modfd</span><span class="hljs-params">(<span class="hljs-type">int</span> epollfd, <span class="hljs-type">int</span> fd, <span class="hljs-type">int</span> ev)</span></span>;<br><br><span class="hljs-comment">// 添加信号捕捉</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">addsig</span><span class="hljs-params">(<span class="hljs-type">int</span> sig, <span class="hljs-type">void</span>( handler )(<span class="hljs-type">int</span>))</span></span>{<br>    <span class="hljs-keyword">struct</span> <span class="hljs-title class_">sigaction</span> sa;<br>    <span class="hljs-built_in">memset</span>( &amp;sa, <span class="hljs-string">'\0'</span>, <span class="hljs-built_in">sizeof</span>( sa ) ); <span class="hljs-comment">// 清空 sa</span><br>    sa.sa_handler = handler;<span class="hljs-comment">// 用我们传递进来的handler</span><br>    <span class="hljs-built_in">sigfillset</span>( &amp;sa.sa_mask );<span class="hljs-comment">// 设置临时阻塞的信号集</span><br>    <span class="hljs-built_in">assert</span>( <span class="hljs-built_in">sigaction</span>( sig, &amp;sa, <span class="hljs-literal">NULL</span> ) != <span class="hljs-number">-1</span> );<br>}<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">( <span class="hljs-type">int</span> argc, <span class="hljs-type">char</span>* argv[] )</span> </span>{<br>    <br>    <span class="hljs-keyword">if</span>( argc &lt;= <span class="hljs-number">1</span> ) { <span class="hljs-comment">// ,没有端口号</span><br>        <span class="hljs-built_in">printf</span>( <span class="hljs-string">"usage: %s port_number\n"</span>, <span class="hljs-built_in">basename</span>(argv[<span class="hljs-number">0</span>]));<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>    }<br>    <span class="hljs-comment">// 获取端口号, atoi: 转化成整数</span><br>    <span class="hljs-type">int</span> port = <span class="hljs-built_in">atoi</span>( argv[<span class="hljs-number">1</span>] );<br>    <span class="hljs-comment">// 对 SIGPIE 信号处理: 忽略它</span><br>    <span class="hljs-built_in">addsig</span>( SIGPIPE, SIG_IGN );<br>    <span class="hljs-comment">// 创建线程池，初始化线程池</span><br>    <span class="hljs-comment">// http_conn 是处理任务的类</span><br>    threadpool&lt; http_conn &gt;* pool = <span class="hljs-literal">NULL</span>;<br>    <span class="hljs-keyword">try</span> {<br>        pool = <span class="hljs-keyword">new</span> threadpool&lt;http_conn&gt;;<br>    } <span class="hljs-built_in">catch</span>( ... ) {<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>    }<br>    <span class="hljs-comment">// 创建一个数组用于保存所有客户端的信息</span><br>    http_conn* users = <span class="hljs-keyword">new</span> http_conn[ MAX_FD ];<span class="hljs-comment">// MAX_FD: 宏定义(在上边)</span><br>    <span class="hljs-comment">// 创建监听的套接字</span><br>    <span class="hljs-type">int</span> listenfd = <span class="hljs-built_in">socket</span>( PF_INET, SOCK_STREAM, <span class="hljs-number">0</span> );<br><br>    <span class="hljs-type">int</span> ret = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">struct</span> <span class="hljs-title class_">sockaddr_in</span> address;<br>    address.sin_addr.s_addr = INADDR_ANY;<br>    address.sin_family = AF_INET;<br>    address.sin_port = <span class="hljs-built_in">htons</span>( port ); <span class="hljs-comment">// 大端小端转换字节序</span><br><br>    <span class="hljs-comment">// 设置端口复用 在绑定之前设置</span><br>    <span class="hljs-type">int</span> reuse = <span class="hljs-number">1</span>;<br>    <span class="hljs-built_in">setsockopt</span>( listenfd, SOL_SOCKET, SO_REUSEADDR, &amp;reuse, <span class="hljs-built_in">sizeof</span>( reuse ) );<br><br>    <span class="hljs-comment">// 绑定</span><br>    ret = <span class="hljs-built_in">bind</span>( listenfd, ( <span class="hljs-keyword">struct</span> sockaddr* )&amp;address, <span class="hljs-built_in">sizeof</span>( address ) );<br>    <br>    <span class="hljs-comment">// 监听</span><br>    ret = <span class="hljs-built_in">listen</span>( listenfd, <span class="hljs-number">5</span> );<br><br>    <span class="hljs-comment">// 创建epoll对象，和事件数组，添加</span><br>    epoll_event events[ MAX_EVENT_NUMBER ]; <span class="hljs-comment">//  [宏定义] : 最大可以监听的个数</span><br>    <span class="hljs-type">int</span> epollfd = <span class="hljs-built_in">epoll_create</span>( <span class="hljs-number">5</span> );<br><br>    <span class="hljs-comment">// 将监听的文件描述符添加到epoll对象中</span><br>    <span class="hljs-built_in">addfd</span>( epollfd, listenfd, <span class="hljs-literal">false</span> );<br>    http_conn::m_epollfd = epollfd;<br><br>    <span class="hljs-keyword">while</span>(<span class="hljs-literal">true</span>) {<br>        <br>        <span class="hljs-type">int</span> number = <span class="hljs-built_in">epoll_wait</span>( epollfd, events, MAX_EVENT_NUMBER, <span class="hljs-number">-1</span> );<br>        <br>        <span class="hljs-keyword">if</span> ( ( number &lt; <span class="hljs-number">0</span> ) &amp;&amp; ( errno != EINTR ) ) {<br>            <span class="hljs-built_in">printf</span>( <span class="hljs-string">"epoll failure\n"</span> );<br>            <span class="hljs-keyword">break</span>;<br>        }<br><br>        <span class="hljs-keyword">for</span> ( <span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; number; i++ ) {<br>            <br>            <span class="hljs-type">int</span> sockfd = events[i].data.fd;<br>            <br>            <span class="hljs-keyword">if</span>( sockfd == listenfd ) {<br>                <br>                <span class="hljs-keyword">struct</span> <span class="hljs-title class_">sockaddr_in</span> client_address;<br>                <span class="hljs-type">socklen_t</span> client_addrlength = <span class="hljs-built_in">sizeof</span>( client_address );<br>                <span class="hljs-type">int</span> connfd = <span class="hljs-built_in">accept</span>( listenfd, ( <span class="hljs-keyword">struct</span> sockaddr* )&amp;client_address, &amp;client_addrlength );<br>                <br>                <span class="hljs-keyword">if</span> ( connfd &lt; <span class="hljs-number">0</span> ) {<br>                    <span class="hljs-built_in">printf</span>( <span class="hljs-string">"errno is: %d\n"</span>, errno );<br>                    <span class="hljs-keyword">continue</span>;<br>                } <br><br>                <span class="hljs-keyword">if</span>( http_conn::m_user_count &gt;= MAX_FD ) {<br>                    <span class="hljs-built_in">close</span>(connfd);<br>                    <span class="hljs-keyword">continue</span>;<br>                }<br>                users[connfd].<span class="hljs-built_in">init</span>( connfd, client_address);<br><br>            } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>( events[i].events &amp; ( EPOLLRDHUP | EPOLLHUP | EPOLLERR ) ) {<br><br>                users[sockfd].<span class="hljs-built_in">close_conn</span>();<br><br>            } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(events[i].events &amp; EPOLLIN) {<br><br>                <span class="hljs-keyword">if</span>(users[sockfd].<span class="hljs-built_in">read</span>()) {<br>                    pool-&gt;<span class="hljs-built_in">append</span>(users + sockfd);<br>                } <span class="hljs-keyword">else</span> {<br>                    users[sockfd].<span class="hljs-built_in">close_conn</span>();<br>                }<br><br>            }  <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>( events[i].events &amp; EPOLLOUT ) {<br><br>                <span class="hljs-keyword">if</span>( !users[sockfd].<span class="hljs-built_in">write</span>() ) {<br>                    users[sockfd].<span class="hljs-built_in">close_conn</span>();<br>                }<br><br>            }<br>        }<br>    }<br>    <br>    <span class="hljs-built_in">close</span>( epollfd );<br>    <span class="hljs-built_in">close</span>( listenfd );<br>    <span class="hljs-keyword">delete</span> [] users;<br>    <span class="hljs-keyword">delete</span> pool;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>}<br></code></pre></td></tr></tbody></table></figure>
+<hr>
+<p><strong>其他资料</strong></p>
+ <!-- basicblock-start oid="ObsRqHai9rjyzxK3vO20JNy5" deck = "👨🏻‍💻code::项目::webserver::5 第五章::5.6 项目整体流程代码实现.md" --> 
+<p>#历史记录::<br>
+2022/10/10🌵5.6 项目整体流程代码实现 : 第一次创建</p>
+<!-- basicblock-end -->
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/" class="category-chain-item">👨🏻‍💻code</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/%E9%A1%B9%E7%9B%AE/" class="category-chain-item">项目</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/%E9%A1%B9%E7%9B%AE/webserver/" class="category-chain-item">webserver</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/%E9%A1%B9%E7%9B%AE/webserver/5-%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98%E4%B8%8E%E6%80%BB%E7%BB%93/" class="category-chain-item">5  项目实战与总结</a>
+  
+  
+
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/3465/" title="epoll">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">epoll</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/5144/" title="The formation mechanism, mechanical properties and thermal stability of">
+                        <span class="hidden-mobile">The formation mechanism, mechanical properties and thermal stability of</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

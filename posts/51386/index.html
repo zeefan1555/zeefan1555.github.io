@@ -16,16 +16,16 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1 单例模式的类别::     1.1 懒汉式::  ![[懒汉式.excalidraw|1200]]  1.1.1 线程不安全 优点： 延迟了实例化，如果不需要使用该类，就不会被实例化，节约了系统资源。 需要时才创建 缺点： 线程不安全，多线程环境下，如果多个线程同时进入了if(uniquelnstance &#x3D;&#x3D; nul), 若此时还未实例化，也就是uniquelnstance&#x3D;&#x3D;null,那">
+    <meta name="description" content="[!summary] 单例模式的特点： 单例类只有一个实例对象 该单例对象必须由单例类自行创建 单例类对外提供一个访问该单例的全局访问点  创建步骤:  构造方法私有, 避免外部随便 new 定义私有的静态单例对象 对外提供一个访问单例对象的全局访问点 重点是单例对象是怎么创建的     1 懒汉式::  ![[懒汉式.excalidraw|1200]]  1.1 线程不安全 优点： 延迟了实例">
 <meta property="og:type" content="article">
 <meta property="og:title" content="单例模式的类别">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/51386/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="1 单例模式的类别::     1.1 懒汉式::  ![[懒汉式.excalidraw|1200]]  1.1.1 线程不安全 优点： 延迟了实例化，如果不需要使用该类，就不会被实例化，节约了系统资源。 需要时才创建 缺点： 线程不安全，多线程环境下，如果多个线程同时进入了if(uniquelnstance &#x3D;&#x3D; nul), 若此时还未实例化，也就是uniquelnstance&#x3D;&#x3D;null,那">
+<meta property="og:description" content="[!summary] 单例模式的特点： 单例类只有一个实例对象 该单例对象必须由单例类自行创建 单例类对外提供一个访问该单例的全局访问点  创建步骤:  构造方法私有, 避免外部随便 new 定义私有的静态单例对象 对外提供一个访问单例对象的全局访问点 重点是单例对象是怎么创建的     1 懒汉式::  ![[懒汉式.excalidraw|1200]]  1.1 线程不安全 优点： 延迟了实例">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202210041606500.png">
 <meta property="article:published_time" content="2022-10-04T07:09:00.000Z">
-<meta property="article:modified_time" content="2022-10-04T12:58:42.133Z">
+<meta property="article:modified_time" content="2022-10-19T13:05:18.899Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202210041606500.png">
@@ -224,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          986 字
+          1.2k 字
         
       </span>
     
@@ -235,7 +235,7 @@
         
         
         
-          5 分钟
+          6 分钟
         
       </span>
     
@@ -286,40 +286,48 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年10月4日 晚上
+                    本文最后更新于：2022年10月19日 晚上
                   
                 
               </p>
             
             <div class="markdown-body">
               
-              <h1 id="1-单例模式的类别"><a class="markdownIt-Anchor" href="#1-单例模式的类别"></a> 1 单例模式的类别::</h1>
-<!-- basicblock-end -->
+              <blockquote>
+<p>[!summary] 单例模式的特点：<br>
+单例类只有一个实例对象<br>
+该单例对象必须由单例类自行创建<br>
+单例类对外提供一个访问该单例的全局访问点</p>
+</blockquote>
+<p>创建步骤:</p>
+<ol>
+<li>构造方法私有, 避免外部随便 new</li>
+<li>定义私有的静态单例对象</li>
+<li>对外提供一个访问单例对象的全局访问点<br>
+重点是单例对象是怎么创建的</li>
+</ol>
 <!-- basicblock-start oid="ObsSYsFf2je5c3qMeVyD8CfH" --> 
-<h2 id="11-懒汉式"><a class="markdownIt-Anchor" href="#11-懒汉式"></a> 1.1 懒汉式::</h2>
+<h1 id="1-懒汉式"><a class="markdownIt-Anchor" href="#1-懒汉式"></a> 1 懒汉式::</h1>
 <!-- basicblock-end -->
 <p>![[懒汉式.excalidraw|1200]]</p>
-<h3 id="111-线程不安全"><a class="markdownIt-Anchor" href="#111-线程不安全"></a> 1.1.1 线程不安全</h3>
+<h2 id="11-线程不安全"><a class="markdownIt-Anchor" href="#11-线程不安全"></a> 1.1 线程不安全</h2>
 <p><strong>优点</strong>： 延迟了实例化，如果不需要使用该类，就不会被实例化，节约了系统资源。<br>
-需要时才创建</p>
+<strong>需要时才创建</strong></p>
 <p><strong>缺点：</strong><br>
 线程不安全，多线程环境下，如果多个线程同时进入了<code>if(uniquelnstance == nul)</code>,<br>
 若此时还未实例化，也就是<code>uniquelnstance==null</code>,那么就会有多个线程执行<code>uniquelnstance=new Singleton();</code>,就会实例化多个实例；此时就不是单例模式了</p>
-<h3 id="112-线程安全"><a class="markdownIt-Anchor" href="#112-线程安全"></a> 1.1.2 线程安全</h3>
-<p>优点： 延迟实例化，节约了资源，并且是线程安全的。<br>
-缺点： 虽然解决了线程安全问题，但是性能降低了。每次只能拿到锁的线程进入该方法, **使线程阻塞，等待时间过长。</p>
-<h3 id="113-双重检查锁实现线程安全"><a class="markdownIt-Anchor" href="#113-双重检查锁实现线程安全"></a> 1.1.3 双重检查锁实现（线程安全）</h3>
-<p>![[双重检查锁实现（线程安全）.excalidraw|1700]]</p>
+<h2 id="12-线程安全"><a class="markdownIt-Anchor" href="#12-线程安全"></a> 1.2 线程安全</h2>
+<p>优点： 延迟实例化，节约了资源，并且是线程安全的。</p>
+<p>缺点： 性能降低了, 实例已经实例化，依然每次都会有锁, 每次只能拿到锁的线程进入该方法, **使线程阻塞，等待时间过长。</p>
+<h2 id="13-双重检查锁实现线程安全"><a class="markdownIt-Anchor" href="#13-双重检查锁实现线程安全"></a> 1.3 双重检查锁实现（线程安全）</h2>
+<p>![[双重检查锁实现（线程安全）.excalidraw|1500]]</p>
 <p>优点： 延迟实例化，节约了资源；线程安全；并且相对于线程安全的懒汉式，性能提高了。<br>
 缺点： volatile关键字，对性能也有一些影响。</p>
-<ul>
-<li>&amp; volatile 好像是 java 里的知识, 先不学吧</li>
-</ul>
 <!-- basicblock-start oid="Obs8gNBKJObBARZqzMYgfTub" --> 
-<h2 id="12-饿汉式线程安全"><a class="markdownIt-Anchor" href="#12-饿汉式线程安全"></a> 1.2 饿汉式(线程安全)::</h2>
+<h1 id="2-饿汉式线程安全"><a class="markdownIt-Anchor" href="#2-饿汉式线程安全"></a> 2 饿汉式(线程安全)::</h1>
 <!-- basicblock-end -->
-<p>(直接创建，理解为main执行前，就创建好了)</p>
-<p>![[饿 汉式.02.excalidraw]]</p>
+<p><strong>(直接创建，理解为main执行前，就创建好了)</strong></p>
+<p>![[饿 汉式.02.excalidraw|1200]]</p>
 <p>优点： 提起实例化好了一个实例，避免了线程不安全问题的出现，</p>
 <p>缺点：</p>
 <ul>
@@ -328,12 +336,18 @@
 <ul>
 <li>若系统没有使用这个实例，或者系统运行很久之后才需要使用这个实例，<strong>都会使操作系统的资源浪费。</strong></li>
 </ul>
+<blockquote>
+<p>[!example]<br>
+这种方式导致的问题就像你下载个游戏软件，可能你游戏地图还没有打开呢，但是程序已经将这些地图全部实例化。<br>
+到你手机上最明显体验就一开游戏内存满了，手机卡了，需要换了。</p>
+</blockquote>
 <!-- basicblock-start oid="ObsSygJ8Gefm1ic4Z2atOcij" --> 
-<h2 id="13-静态内部类实现线程安全"><a class="markdownIt-Anchor" href="#13-静态内部类实现线程安全"></a> 1.3 静态内部类实现（线程安全）::</h2>
+<h1 id="3-静态内部类实现线程安全"><a class="markdownIt-Anchor" href="#3-静态内部类实现线程安全"></a> 3 	静态内部类实现（线程安全）::</h1>
+<p>[[static 关键字]] ^ougi2n</p>
 <!-- basicblock-end -->
-<p>![[静态内部类实现（线程安全）.excalidraw]]</p>
-<!-- basicblock-start oid="ObsRTxgWAepgBiCzKMRMbpVR" --> 
-<h2 id="14-枚举类实现线程安全-这个是-java-中的知识-先不学吧"><a class="markdownIt-Anchor" href="#14-枚举类实现线程安全-这个是-java-中的知识-先不学吧"></a> 1.4 枚举类实现（线程安全):: 这个是 java 中的知识, 先不学吧</h2>
+<p>![[静态内部类实现（线程安全）.excalidraw|1000]]</p>
+<!-- basicblock-start deck= "❓疑问::👨🏻‍💻code::设计模式::C++ 设计模式::创建型模型::单例模式的类别.md"-->
+<h1 id="4-枚举类实现线程安全-不懂"><a class="markdownIt-Anchor" href="#4-枚举类实现线程安全-不懂"></a> 4 枚举类实现（线程安全):: 不懂</h1>
 <!-- basicblock-end -->
 <p>![[枚举类实现（线程安全).excalidraw]]</p>
 <p>优点： 写法简单，线程安全，天然防止反射和反序列化调用。防止反序列化</p>
@@ -345,14 +359,14 @@
 反序列化将一个单例实例对象写到磁盘再读回来，从而获得了一个新的实例。<br>
 我们要防止反序列化，避免得到多个实例，枚举类天然防止反序列化。<br>
 其他单例模式可以通过重写readResolve()方法，从而防止反序列化，使实例唯一重写</p>
-<p><img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202210041606500.png" srcset="/img/loading.gif" lazyload alt="|600"></p>
+<p><img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202210041606500.png" srcset="/img/loading.gif" lazyload alt="|800"></p>
 <hr>
 <p><strong>其他资料</strong></p>
- <!-- basicblock-start oid="Obs55CGtGg3QXrFKt66EazYc" deck = "👨🏻‍💻code::设计模式::C++ 设计模式::创建型模型::单例模式的类别.md" --> 
-<p>#历史记录::<br>
+ <!-- basicblock-start oid="Obs55CGtGg3QXrFKt66EazYc"  --> 
+<p>#历史记录:: <a href="marginnote3app://note/0188497B-BEF3-46C4-8B7E-56873D2DB0D9">margin : 单例模型6种实现及各实现的优缺点</a><br>
 2022/10/4🌵单例模式的类别 : 第一次创建</p>
 <!-- basicblock-end -->
-<p><a href="marginnote3app://note/0188497B-BEF3-46C4-8B7E-56873D2DB0D9">margin : 单例模型6种实现及各实现的优缺点</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1344y1g7CL/?spm_id_from=333.337.search-card.all.click&amp;vd_source=f2340d96e99780a96b50d8096ffaaf1a">单例模式之静态内部类方式_哔哩哔哩_bilibili</a></p>
 
               
             </div>
@@ -407,52 +421,6 @@
 
 
               
-  
-
-  <div class="license-box my-3">
-    <div class="license-title">
-      <div>单例模式的类别</div>
-      <div>https://zeefan1555.github.io/posts/51386/</div>
-    </div>
-    <div class="license-meta">
-      
-        <div class="license-meta-item">
-          <div>作者</div>
-          <div>zeefan</div>
-        </div>
-      
-      
-        <div class="license-meta-item license-meta-date">
-          <div>发布于</div>
-          <div>2022年10月4日</div>
-        </div>
-      
-      
-        <div class="license-meta-item license-meta-date">
-          <div>更新于</div>
-          <div>2022年10月4日</div>
-        </div>
-      
-      <div class="license-meta-item">
-        <div>许可协议</div>
-        <div>
-          
-            
-            
-              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-              <span class="hint--top hint--rounded" aria-label="BY - 署名">
-                <i class="iconfont icon-by"></i>
-              </span>
-              </a>
-            
-          
-        </div>
-      </div>
-    </div>
-    <div class="license-icon iconfont"></div>
-  </div>
-
-
 
               
                 <div class="post-prevnext my-3">

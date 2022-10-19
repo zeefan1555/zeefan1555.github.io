@@ -16,17 +16,17 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1 定义::  在map 是一个key value 的数据结构，map中，对key是有限制，对value没有限制的，因为key的存储方式使用红黑树实现的。 虽然std::set、std::multiset 的底层实现是红黑树，不是哈希表，但是std::set、std::multiset 依然使用哈希函数来做映射，只不过底层的符号表使用了红黑树来存储数据，所以使用这些数据结构来解决映射问题的方法，">
+    <meta name="description" content="[!example] [[6. 四数相加II]]     1 定义::  在map 是一个key value 的数据结构，map中，对key是有限制，对value没有限制的，因为key的存储方式使用红黑树实现的。 虽然std::set、std::multiset 的底层实现是红黑树，不是哈希表，但是std::set、std::multiset 依然使用哈希函数来做映射，只不过底层的符号表使用了红">
 <meta property="og:type" content="article">
 <meta property="og:title" content="map">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/43450/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="1 定义::  在map 是一个key value 的数据结构，map中，对key是有限制，对value没有限制的，因为key的存储方式使用红黑树实现的。 虽然std::set、std::multiset 的底层实现是红黑树，不是哈希表，但是std::set、std::multiset 依然使用哈希函数来做映射，只不过底层的符号表使用了红黑树来存储数据，所以使用这些数据结构来解决映射问题的方法，">
+<meta property="og:description" content="[!example] [[6. 四数相加II]]     1 定义::  在map 是一个key value 的数据结构，map中，对key是有限制，对value没有限制的，因为key的存储方式使用红黑树实现的。 虽然std::set、std::multiset 的底层实现是红黑树，不是哈希表，但是std::set、std::multiset 依然使用哈希函数来做映射，只不过底层的符号表使用了红">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202208121703566.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20210104235134572.png">
 <meta property="article:published_time" content="2022-08-13T14:03:00.000Z">
-<meta property="article:modified_time" content="2022-10-02T13:18:02.857Z">
+<meta property="article:modified_time" content="2022-10-10T02:40:13.771Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="总结">
 <meta name="twitter:card" content="summary_large_image">
@@ -226,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.1k 字
+          1.2k 字
         
       </span>
     
@@ -288,18 +288,23 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年10月2日 晚上
+                    本文最后更新于：2022年10月10日 上午
                   
                 
               </p>
             
             <div class="markdown-body">
               
-              <h1 id="1-定义"><a class="markdownIt-Anchor" href="#1-定义"></a> 1 定义::</h1>
+              <blockquote>
+<p>[!example]<br>
+[[6. 四数相加II]]</p>
+</blockquote>
+<!-- basicblock-start oid="Obsto9SToTNQ22dWM6KcNmYu" --> 
+<h1 id="1-定义"><a class="markdownIt-Anchor" href="#1-定义"></a> 1 定义::</h1>
 <!-- basicblock-end -->
 <p>在map 是一个key value 的数据结构，map中，对key是有限制，对value没有限制的，因为key的存储方式使用红黑树实现的。<br>
 虽然std::set、std::multiset 的底层实现是红黑树，不是哈希表，但是std::set、std::multiset 依然使用哈希函数来做映射，只不过底层的符号表使用了红黑树来存储数据，所以使用这些数据结构来解决映射问题的方法，我们依然称之为哈希法。 map也是一样的道理。</p>
-<p>有 key 和 value 对应的用 map<br>
+<p>有 key 和 value 对应的: 用 map<br>
 map 能在最快的时间内, 去查找这个 key 是否在 map<br>
 <img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202208121703566.png" srcset="/img/loading.gif" lazyload alt="|600"></p>
 <p>红黑树可以自动排序<br>
@@ -318,12 +323,15 @@ std::map 和std::multimap 的key也是有序的（这个问题也经常作为面
 <h2 id="21-操作"><a class="markdownIt-Anchor" href="#21-操作"></a> 2.1 操作</h2>
 <ul>
 <li>创建元素: unordered_map&lt;int, int&gt; map;</li>
-<li>? 哪个是 key, 哪个是 value</li>
+</ul>
+<blockquote>
+<p>[!question] 哪个是 key, 哪个是 value</p>
+</blockquote>
+<ul>
 <li>插入元素:
 <ul>
 <li>map.insert(<strong>pair&lt;int, int&gt;</strong>(a, b));</li>
-<li><code>map[key]++</code>  //  存在key则 value 值++, 没有 key 则自动创造 key 在 value 值++<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="[[6. 四数相加II]]
-">[1]</span></a></sup></li>
+<li><code>map[key]++</code>  //  存在key则 value 值++, 没有 key 则自动创造 key 在 value 值++[^1]</li>
 </ul>
 </li>
 <li>获取元素:
@@ -332,6 +340,8 @@ std::map 和std::multimap 的key也是有序的（这个问题也经常作为面
 <li><code>map[key]</code> = value // 获取第二个元素</li>
 </ul>
 </li>
+<li>查找元素<br>
+-<code>if(map.find(x) != map.end())</code>:&nbsp;相当于找到 x 时进入 if 语句</li>
 </ul>
 <p>for 循环中映射 , it 是指针, 指向 map 的一个完整的元素包括key 和 value ,不是单一个元素<br>
 <code>for(unordered_map&lt;int, int&gt; :: iterator it = map.begin(); it != map.end(); it++){}</code><br>
@@ -345,8 +355,7 @@ std::map 和std::multimap 的key也是有序的（这个问题也经常作为面
 <hr>
 <p><strong>参考资料</strong><br>
 <a href="obsidian://advanced-uri?vault=myblog&amp;uid=4f623914-706e-4174-b798-c6e8b4ee184c">ob</a></p>
-<section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span>[[6. 四数相加II]]
-<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
+
               
             </div>
             <hr/>
@@ -407,52 +416,6 @@ std::map 和std::multimap 的key也是有序的（这个问题也经常作为面
 
 
               
-  
-
-  <div class="license-box my-3">
-    <div class="license-title">
-      <div>map</div>
-      <div>https://zeefan1555.github.io/posts/43450/</div>
-    </div>
-    <div class="license-meta">
-      
-        <div class="license-meta-item">
-          <div>作者</div>
-          <div>zeefan</div>
-        </div>
-      
-      
-        <div class="license-meta-item license-meta-date">
-          <div>发布于</div>
-          <div>2022年8月13日</div>
-        </div>
-      
-      
-        <div class="license-meta-item license-meta-date">
-          <div>更新于</div>
-          <div>2022年10月2日</div>
-        </div>
-      
-      <div class="license-meta-item">
-        <div>许可协议</div>
-        <div>
-          
-            
-            
-              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-              <span class="hint--top hint--rounded" aria-label="BY - 署名">
-                <i class="iconfont icon-by"></i>
-              </span>
-              </a>
-            
-          
-        </div>
-      </div>
-    </div>
-    <div class="license-icon iconfont"></div>
-  </div>
-
-
 
               
                 <div class="post-prevnext my-3">

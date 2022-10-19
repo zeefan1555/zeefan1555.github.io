@@ -16,19 +16,17 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1 131.分割回文串 力扣题目链接 给定一个字符串 s，将 s 分割成一些子串，使每个子串都是回文串。 返回 s 所有可能的分割方案。 示例: 输入:&amp;nbsp;“aab” 输出: [ [“aa”,“b”], [“a”,“a”,“b”] ] &quot;回文串”是一个正读和反读都一样的字符串，比如“level”或者“noon”等等就是回文串。 1. 顾名思义，“回文子串”的意思是一个字符串中的回文串，比">
+    <meta name="description" content="1 131.分割回文串 力扣题目链接 给定一个字符串 s，将 s 分割成一些子串，使每个子串都是回文串。 返回 s 所有可能的分割方案。 1示例: 输入:&amp;nbsp;&quot;aab&quot; 输出: [ [&quot;aa&quot;,&quot;b&quot;], [&quot;a&quot;,&quot;a&quot;,&quot;b&quot;] ] &quot;回文串”是一个正读和反读都一样的字符串，比如“level”或者“noon”等等就是回文串。 1. 顾名思义，“回文子串”的意思是一个字符串中的回文串，">
 <meta property="og:type" content="article">
 <meta property="og:title" content="9.分割回文串">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/15279/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="1 131.分割回文串 力扣题目链接 给定一个字符串 s，将 s 分割成一些子串，使每个子串都是回文串。 返回 s 所有可能的分割方案。 示例: 输入:&amp;nbsp;“aab” 输出: [ [“aa”,“b”], [“a”,“a”,“b”] ] &quot;回文串”是一个正读和反读都一样的字符串，比如“level”或者“noon”等等就是回文串。 1. 顾名思义，“回文子串”的意思是一个字符串中的回文串，比">
+<meta property="og:description" content="1 131.分割回文串 力扣题目链接 给定一个字符串 s，将 s 分割成一些子串，使每个子串都是回文串。 返回 s 所有可能的分割方案。 1示例: 输入:&amp;nbsp;&quot;aab&quot; 输出: [ [&quot;aa&quot;,&quot;b&quot;], [&quot;a&quot;,&quot;a&quot;,&quot;b&quot;] ] &quot;回文串”是一个正读和反读都一样的字符串，比如“level”或者“noon”等等就是回文串。 1. 顾名思义，“回文子串”的意思是一个字符串中的回文串，">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://code-thinking.cdn.bcebos.com/pics/131.%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2.jpg">
 <meta property="article:published_time" content="2022-05-20T01:10:00.000Z">
-<meta property="article:modified_time" content="2022-10-02T13:17:52.584Z">
+<meta property="article:modified_time" content="2022-10-19T03:14:21.772Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://code-thinking.cdn.bcebos.com/pics/131.%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2.jpg">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -224,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.7k 字
+          2.8k 字
         
       </span>
     
@@ -286,7 +284,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年10月2日 晚上
+                    本文最后更新于：2022年10月19日 上午
                   
                 
               </p>
@@ -297,7 +295,7 @@
 <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/palindrome-partitioning/">力扣题目链接</a></p>
 <p>给定一个字符串 s，将 s 分割成一些子串，使每个子串都是回文串。</p>
 <p>返回 s 所有可能的分割方案。</p>
-<p>示例: 输入:&nbsp;“aab” 输出: [ [“aa”,“b”], [“a”,“a”,“b”] ]</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++">示例: 输入:&nbsp;<span class="hljs-string">"aab"</span> 输出: [ [<span class="hljs-string">"aa"</span>,<span class="hljs-string">"b"</span>], [<span class="hljs-string">"a"</span>,<span class="hljs-string">"a"</span>,<span class="hljs-string">"b"</span>] ]<br></code></pre></td></tr></tbody></table></figure>
 <p><strong>"回文串”是一个正读和反读都一样的字符串，比如“level”或者“noon”等等就是回文串。</strong><br>
 1. 顾名思义，“回文子串”的意思是一个字符串中的回文串，比如字符串“baba”中t就包含有“bab”和“aba”这两个回文子串<br>
 2. <strong>单个字母也是回文串</strong></p>
@@ -315,7 +313,7 @@
 </ul>
 <p>所以切割问题，也可以抽象为一棵树形结构，如图：<br>
 ![[9.分割回文串 2022-05-20 11.47.01.excalidraw]]<br>
-<img src="https://code-thinking.cdn.bcebos.com/pics/131.%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2.jpg" srcset="/img/loading.gif" lazyload alt="131.分割回文串">切割问题的回溯搜索的过程和组合问题的回溯搜索的过程是差不多的。</p>
+切割问题的回溯搜索的过程和组合问题的回溯搜索的过程是差不多的。</p>
 <figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">backtracking</span><span class="hljs-params">(参数)</span> </span>{<br>    <span class="hljs-keyword">if</span> (终止条件) {<br>        存放结果;<br>        <span class="hljs-keyword">return</span>;<br>    }<br><br>    <span class="hljs-keyword">for</span> (选择：本层集合中元素（树中节点孩子的数量就是集合的大小）) {<br>        处理节点;<br>        <span class="hljs-built_in">backtracking</span>(路径，选择列表); <span class="hljs-comment">// 递归</span><br>        回溯，撤销处理结果<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
 <h1 id="3-回溯三部曲"><a class="markdownIt-Anchor" href="#3-回溯三部曲"></a> 3 回溯三部曲</h1>
 <p>定义一些变量<br>
@@ -326,37 +324,15 @@ path，result</p>
 <figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp">vector&lt;vector&lt;string&gt;&gt; result;<br>vector&lt;string&gt; path; <span class="hljs-comment">// 放已经回文的子串</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">backtracking</span> <span class="hljs-params">(<span class="hljs-type">const</span> string&amp; s, <span class="hljs-type">int</span> startIndex)</span> </span>{<br></code></pre></td></tr></tbody></table></figure>
 <p>![[Pasted image 20220520092428.png|1000]]</p>
 <h2 id="32-终止条件-存放结果-return"><a class="markdownIt-Anchor" href="#32-终止条件-存放结果-return"></a> 3.2 终止条件, 存放结果, return</h2>
-<p>切割线切到了字符串最后面，说明找到了一种切割方法，此时就是本层递归的终止终止条件。<br>
-如果起始位置已经大于s的大小，说明已经找到了一组分割方案了<br>
-</p><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">backtracking</span> <span class="hljs-params">(<span class="hljs-type">const</span> string&amp; s, <span class="hljs-type">int</span> startIndex)</span> </span>{<br>    <span class="hljs-comment">// 如果起始位置已经大于s的大小，说明已经找到了一组分割方案了</span><br>    <span class="hljs-keyword">if</span> (startIndex &gt;= s.<span class="hljs-built_in">size</span>()) {<br>        result.<span class="hljs-built_in">push_back</span>(path);<br>        <span class="hljs-keyword">return</span>;<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure><p></p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs c">切割线切到了字符串最后面，说明找到了一种切割方法，此时就是本层递归的终止终止条件。<br>	如果起始位置已经大于s的大小，说明已经找到了一组分割方案了<br>	<br>	<span class="hljs-type">void</span> <span class="hljs-title function_">backtracking</span> <span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-built_in">string</span>&amp; s, <span class="hljs-type">int</span> startIndex)</span> {<br>	    <span class="hljs-comment">// 如果起始位置已经大于s的大小，说明已经找到了一组分割方案了，💡横向遍历完了</span><br>	    <span class="hljs-keyword">if</span> (startIndex &gt;= s.size()) {<br>	        result.push_back(path);<br>	        <span class="hljs-keyword">return</span>;<br>	    }<br>	}<br>	<br></code></pre></td></tr></tbody></table></figure>
 <h2 id="33-单层搜索过程"><a class="markdownIt-Anchor" href="#33-单层搜索过程"></a> 3.3 单层搜索过程</h2>
-<p>截取子串<br>
-<code>for (int i = startIndex; i &lt; s.size(); i++)</code>，我们定义了起始位置startIndex，那么 [startIndex, i] 就是要截取的子串。	<br>
-判断子串是否为回文串<font color="#F36208">(用一个函数)</font>，<br>
-用双指针法，一个指针从前向后，一个指针从后先前，如果前后指针所指向的元素是相等的，就是回文字符串了。这里是无所谓顺序的，只要满足条件就跳出函数，否则一直<br>
-bool isPalindrome(const string&amp; s, int start, int end) {<br>
-for (int i = start, j = end; i &lt; j; i++, j–) {<br>
-if (s[i] != s[j]) {<br>
-return false;<br>
-}<br>
-}<br>
-return true;<br>
-}<br>
-将回文串加入path<br>
-string str = s.substr(startIndex, i - startIndex + 1);<br>
-path.push_back(str);	<br>
-递归下去<br>
-<code>backtracking(s, i + 1)</code>;<br>
-<strong>注意切割过的位置，不能重复切割，所以，传入下一层的起始位置为i + 1</strong>。<br>
-弹出回溯<br>
-path.pop_back(); // 回溯过程，弹出本次已经填在的子串</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs c">截取子串<br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = startIndex; i &lt; s.size(); i++)`，我们定义了起始位置startIndex，那么 [startIndex, i] 就是要截取的子串。	<br>判断子串是否为回文串： (用一个函数)<br>	用双指针法，一个指针从前向后，一个指针从后先前，如果前后指针所指向的元素是相等的，就是回文字符串了。这里是无所谓顺序的，只要满足条件就跳出函数，否则一直<br>		<span class="hljs-type">bool</span> <span class="hljs-title function_">isPalindrome</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-built_in">string</span>&amp; s, <span class="hljs-type">int</span> start, <span class="hljs-type">int</span> end)</span> {<br>	        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = start, j = end; i &lt; j; i++, j--) {<br>	            <span class="hljs-keyword">if</span> (s[i] != s[j]) {<br>	                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>	            }<br>	        }<br>	        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>		}<br>将回文串加入path<br>	<span class="hljs-built_in">string</span> str = s.substr(startIndex, i - startIndex + <span class="hljs-number">1</span>);<br>	                path.push_back(str);	<br>递归下去<br>	backtracking(s, i + <span class="hljs-number">1</span>); <br>	注意切割过的位置，不能重复切割，所以，传入下一层的起始位置为i + <span class="hljs-number">1</span>。<br>弹出回溯<br>	path.pop_back(); <span class="hljs-comment">// 回溯过程，弹出本次已经填在的子串</span><br><br></code></pre></td></tr></tbody></table></figure>
 <h2 id="34-c整体代码"><a class="markdownIt-Anchor" href="#34-c整体代码"></a> 3.4 C++整体代码</h2>
 <figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">private</span>:<br>    vector&lt;vector&lt;string&gt;&gt; result;<br>    vector&lt;string&gt; path; <span class="hljs-comment">// 放已经回文的子串</span><br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">backtracking</span> <span class="hljs-params">(<span class="hljs-type">const</span> string&amp; s, <span class="hljs-type">int</span> startIndex)</span> </span>{<br>        <span class="hljs-comment">// 如果起始位置已经大于s的大小，说明已经找到了一组分割方案了</span><br>        <span class="hljs-keyword">if</span> (startIndex &gt;= s.<span class="hljs-built_in">size</span>()) {<br>            result.<span class="hljs-built_in">push_back</span>(path);<br>            <span class="hljs-keyword">return</span>;<br>        }<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = startIndex; i &lt; s.<span class="hljs-built_in">size</span>(); i++) {<br>            <span class="hljs-keyword">if</span> (<span class="hljs-built_in">isPalindrome</span>(s, startIndex, i)) {   <span class="hljs-comment">// 是回文子串</span><br>                <span class="hljs-comment">// 获取[startIndex,i]在s中的子串</span><br>                string str = s.<span class="hljs-built_in">substr</span>(startIndex, i - startIndex + <span class="hljs-number">1</span>);<br>                path.<span class="hljs-built_in">push_back</span>(str);<br>            } <span class="hljs-keyword">else</span> {                                <span class="hljs-comment">// 不是回文，跳过</span><br>                <span class="hljs-keyword">continue</span>;<br>            }<br>            <span class="hljs-built_in">backtracking</span>(s, i + <span class="hljs-number">1</span>); <span class="hljs-comment">// 寻找i+1为起始位置的子串</span><br>            path.<span class="hljs-built_in">pop_back</span>(); <span class="hljs-comment">// 回溯过程，弹出本次已经填在的子串</span><br>        }<br>    }<br>    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">isPalindrome</span><span class="hljs-params">(<span class="hljs-type">const</span> string&amp; s, <span class="hljs-type">int</span> start, <span class="hljs-type">int</span> end)</span> </span>{<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = start, j = end; i &lt; j; i++, j--) {<br>            <span class="hljs-keyword">if</span> (s[i] != s[j]) {<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>            }<br>        }<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    }<br><span class="hljs-keyword">public</span>:<br>    vector&lt;vector&lt;string&gt;&gt; <span class="hljs-built_in">partition</span>(string s) {<br>        result.<span class="hljs-built_in">clear</span>();<br>        path.<span class="hljs-built_in">clear</span>();<br>        <span class="hljs-built_in">backtracking</span>(s, <span class="hljs-number">0</span>);<br>        <span class="hljs-keyword">return</span> result;<br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
-<p>[[9.分割回文串(carl).mp4]]</p>
 <p>[[9.分割回文串.自写代码]]</p>
 <hr>
 <p><strong>其他资料</strong></p>
-<!-- basicblock-start oid="ObsLaWYYJ2RF5oMy6ebwp0wc" deck = "👨🏻‍💻code::数据结构与算法::代码随想录::回溯算法::9.分割回文串.md" --> 
+<!-- basicblock-start oid="ObsLaWYYJ2RF5oMy6ebwp0wc"--> 
 <p>#历史记录::<br>
 2022/9/30🌵9.分割回文串 :</p>
 <!-- basicblock-end -->
@@ -414,61 +390,15 @@ path.pop_back(); // 回溯过程，弹出本次已经填在的子串</p>
 
 
               
-  
-
-  <div class="license-box my-3">
-    <div class="license-title">
-      <div>9.分割回文串</div>
-      <div>https://zeefan1555.github.io/posts/15279/</div>
-    </div>
-    <div class="license-meta">
-      
-        <div class="license-meta-item">
-          <div>作者</div>
-          <div>zeefan</div>
-        </div>
-      
-      
-        <div class="license-meta-item license-meta-date">
-          <div>发布于</div>
-          <div>2022年5月20日</div>
-        </div>
-      
-      
-        <div class="license-meta-item license-meta-date">
-          <div>更新于</div>
-          <div>2022年10月2日</div>
-        </div>
-      
-      <div class="license-meta-item">
-        <div>许可协议</div>
-        <div>
-          
-            
-            
-              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-              <span class="hint--top hint--rounded" aria-label="BY - 署名">
-                <i class="iconfont icon-by"></i>
-              </span>
-              </a>
-            
-          
-        </div>
-      </div>
-    </div>
-    <div class="license-icon iconfont"></div>
-  </div>
-
-
 
               
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/18499/" title="20.N皇后">
+                      <a href="/posts/58780/" title="socket">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">20.N皇后</span>
+                        <span class="hidden-mobile">socket</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
