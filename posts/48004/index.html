@@ -16,16 +16,16 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1 理论::  代理模式的定义：为其他对象提供一种代理(方式)以控制对这个对象的访问。 在某些情况下，一个对象不适合或者不能直接引用另一个对象，而代理对象可以在客户端和目标对象之间起到中介的作用。 ![[代理模式结构图.excalidraw]] ![[代理模式 2022-10-02 20.43.18.excalidraw]]    2 代理模式的应用::   2.1 远程代理 一个对象在不同的地">
+    <meta name="description" content="1 理论:: 代理模式的定义：为其他对象提供一种代理(方式)以控制对这个对象的访问。 在某些情况下，一个对象不适合或者不能直接引用另一个对象，而代理对象可以在客户端和目标对象之间起到中介的作用。 ![[代理模式结构图.excalidraw]] ![[代理模式 2022-10-02 20.43.18.excalidraw]]  1.1 远程代理 一个对象在不同的地址空间提供局部代表。这样可以隐藏一">
 <meta property="og:type" content="article">
 <meta property="og:title" content="代理模式">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/48004/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="1 理论::  代理模式的定义：为其他对象提供一种代理(方式)以控制对这个对象的访问。 在某些情况下，一个对象不适合或者不能直接引用另一个对象，而代理对象可以在客户端和目标对象之间起到中介的作用。 ![[代理模式结构图.excalidraw]] ![[代理模式 2022-10-02 20.43.18.excalidraw]]    2 代理模式的应用::   2.1 远程代理 一个对象在不同的地">
+<meta property="og:description" content="1 理论:: 代理模式的定义：为其他对象提供一种代理(方式)以控制对这个对象的访问。 在某些情况下，一个对象不适合或者不能直接引用另一个对象，而代理对象可以在客户端和目标对象之间起到中介的作用。 ![[代理模式结构图.excalidraw]] ![[代理模式 2022-10-02 20.43.18.excalidraw]]  1.1 远程代理 一个对象在不同的地址空间提供局部代表。这样可以隐藏一">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/ab34facdb3e74edf86bf646b2491cd0d.png#pic_center">
 <meta property="article:published_time" content="2022-10-02T12:41:00.000Z">
-<meta property="article:modified_time" content="2022-10-05T03:07:20.377Z">
+<meta property="article:modified_time" content="2022-10-20T11:59:15.998Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://img-blog.csdnimg.cn/ab34facdb3e74edf86bf646b2491cd0d.png#pic_center">
@@ -224,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.7k 字
+          2.9k 字
         
       </span>
     
@@ -235,7 +235,7 @@
         
         
         
-          14 分钟
+          15 分钟
         
       </span>
     
@@ -286,7 +286,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年10月5日 上午
+                    本文最后更新于：2022年10月20日 晚上
                   
                 
               </p>
@@ -294,52 +294,47 @@
             <div class="markdown-body">
               
               <h1 id="1-理论"><a class="markdownIt-Anchor" href="#1-理论"></a> 1 理论::</h1>
-<!-- basicblock-end -->
 <p>代理模式的定义：<strong>为其他对象提供一种代理(方式)以控制对这个对象的访问</strong>。<br>
 在某些情况下，一个对象不适合或者不能直接引用另一个对象，而代理对象可以在客户端和目标对象之间起到中介的作用。</p>
 <p>![[代理模式结构图.excalidraw]]<br>
 ![[代理模式 2022-10-02 20.43.18.excalidraw]]</p>
-<!-- basicblock-start oid="ObsFH0kd6rhRmjqiNj592kqs" --> 
-<h1 id="2-代理模式的应用"><a class="markdownIt-Anchor" href="#2-代理模式的应用"></a> 2 代理模式的应用::</h1>
-<!-- basicblock-end -->
-<h2 id="21-远程代理"><a class="markdownIt-Anchor" href="#21-远程代理"></a> 2.1 远程代理</h2>
+<h2 id="11-远程代理"><a class="markdownIt-Anchor" href="#11-远程代理"></a> 1.1 远程代理</h2>
 <p>一个对象在不同的地址空间提供局部代表。这样可以隐藏一个对象存在于不同地址空间的事实。</p>
-<h2 id="22-虚拟代理"><a class="markdownIt-Anchor" href="#22-虚拟代理"></a> 2.2 虚拟代理</h2>
+<blockquote>
+<p>[!example]<br>
+“哈，其实你是一定用过的，WebService <a target="_blank" rel="noopener" href="http://xn--3ds.NET">在.NET</a> 中的应用是怎么做的？”<br>
+“哦，我明白什么叫远程代理了，当我在应用程序的项目中加入一个 web 引用，引用一个 webService,<br>
+时会在项目中生成一个 WebReference 的文件夹和一些文件，其实它们就是代理，这就使得客户端程序<br>
+用代理就可以解决远程访问的问题。原来这就是代理模式的应用呀。”</p>
+</blockquote>
+<h2 id="12-虚拟代理"><a class="markdownIt-Anchor" href="#12-虚拟代理"></a> 1.2 虚拟代理</h2>
 <p>根据需要创建开销很大的对象。通过它来存放实例化需要很长时间的真实对象，这样就可以达到性能的最优化。</p>
 <blockquote>
-<p>[!cite] 比如说你打开一个很大的HTML网页时，里面可能有很多的文字和图片，但你还是可以很快打开它，此时你所看到的是所有的文字，但图片却是一张一张地下载后才能看到。那些未打开的图片框，就是通过虚拟代理来替代了真实的图片，此时代理存储了真实图片的路径和尺寸。</p>
+<p>[!example]<br>
+比如说你打开一个很大的 HTML 网页时，里面可能有很多的文字和图片，但你还是可以很快打开它，此时你所看到的是所有的文字，但图片却是一张一张地下载后才能看到。那些未打开的图片框，就是通过虚拟代理来替代了真实的图片，此时代理存储了真实图片的路径和尺寸。<br>
+原来浏览器当中是用代理模式来优化下载的。</p>
 </blockquote>
-<h2 id="23-安全代理"><a class="markdownIt-Anchor" href="#23-安全代理"></a> 2.3 安全代理</h2>
+<h2 id="13-安全代理"><a class="markdownIt-Anchor" href="#13-安全代理"></a> 1.3 安全代理</h2>
 <p>用来控制真实对象访问时的权限。一般用于对象应该有不同的访问权限的时候。</p>
-<h2 id="24-智能指引"><a class="markdownIt-Anchor" href="#24-智能指引"></a> 2.4 智能指引</h2>
-<p>是指当调用真实的对象时，代理处理另外一些事。如计算真实对象的引用次数，这样当该对象没有引用时，可以自动释放它；或当第一次引用一个持久对象时，将它装入内存；或在访问一个实际对象前，检查是否已经锁定它，以确保其他对象不能改变它。它们都是通过代理在访问一个对象时附加一些内务处理。</p>
-<!-- basicblock-start oid="ObszpwY2yolLPzcco4WJnSpt" --> 
-<h1 id="3-代理模式的案例"><a class="markdownIt-Anchor" href="#3-代理模式的案例"></a> 3 代理模式的案例::</h1>
-<!-- basicblock-end -->
+<h2 id="14-智能指引"><a class="markdownIt-Anchor" href="#14-智能指引"></a> 1.4 智能指引</h2>
+<p>是指当调用真实的对象时，代理处理另外一些事。</p>
+<p>1如计算真实对象的引用次数，这样当该对象没有引用时，可以自动释放它；或当第一次引用一个持久对象时，将它装入内存；或在访问一个实际对象前，检查是否已经锁定它，以确保其他对象不能改变它。它们都是通过代理在访问一个对象时附加一些内务处理。</p>
+<p>代理模式其实就是在访问对象时引入一定程度的间接性，因为这种间接性，可以附加多种用途。<br>
+“哦，明白。说白了，代理就是真实对象的代表。</p>
+<h1 id="2-代理模式的案例"><a class="markdownIt-Anchor" href="#2-代理模式的案例"></a> 2 代理模式的案例::</h1>
 <blockquote>
 <p>传统方法局限：是个人都能调用</p>
 </blockquote>
 <figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><br><span class="hljs-comment">//提供一种代理来控制对其他对象的访问</span><br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">AbstraactCommonInterface</span> {<br><span class="hljs-keyword">public</span>:<br>	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>= <span class="hljs-number">0</span>;<br><br>};<br><br><span class="hljs-comment">//我已经写好的系统</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Mysystem</span> {<br><span class="hljs-keyword">public</span>:<br>	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>{<br>		cout &lt;&lt; <span class="hljs-string">"系统启动..."</span> &lt;&lt; endl;<br>	}<br>};<br><br><span class="hljs-comment">//必须有权限验证，不是所有人都能来启动我的启动，必须提供用户名和密码</span><br><br><br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{<br>	<span class="hljs-comment">//这样不行。是个人都能启动</span><br>	Mysystem* system = <span class="hljs-keyword">new</span> Mysystem;<br>	system -&gt; <span class="hljs-built_in">run</span>();<br><br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>}<br></code></pre></td></tr></tbody></table></figure>
-<ul>
-<li>
-<blockquote>
-<p>代理模式: 优点：必须有权限验证，不是所有人都能来启动我的启动，必须提供用户名和密码</p>
-</blockquote>
-</li>
-</ul>
 <figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-comment">//提供一种代理来控制对其他对象的访问</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">AbstraactCommonInterface</span> {<br><span class="hljs-keyword">public</span>:<br>	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>= <span class="hljs-number">0</span>;<br><br>};<br><br><span class="hljs-comment">//我已经写好的系统</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Mysystem</span> :<span class="hljs-keyword">public</span> AbstraactCommonInterface{<br><span class="hljs-keyword">public</span>:<br>	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>{<br>		cout &lt;&lt; <span class="hljs-string">"系统启动..."</span> &lt;&lt; endl;<br>	}<br>};<br><br><span class="hljs-comment">//💡: 用一个代理类来管理用户</span><br><span class="hljs-comment">// 必须有权限验证，不是所有人都能来启动我的启动，必须提供用户名和密码</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">MysystemProxy</span> :<span class="hljs-keyword">public</span> AbstraactCommonInterface {<br><span class="hljs-keyword">public</span>:<br>	<span class="hljs-built_in">MysystemProxy</span>(string username,string password) {<br>		<span class="hljs-keyword">this</span>-&gt;mUsername = username;<br>		<span class="hljs-keyword">this</span>-&gt;mPassword = mPassword;<br>		<br>	}<br>	<span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">checkUsernameAndPassword</span><span class="hljs-params">()</span> </span>{<br>		<span class="hljs-keyword">if</span> (mUsername == <span class="hljs-string">"admin"</span>&amp;&amp;mPassword == <span class="hljs-string">"admin"</span>) { <span class="hljs-comment">// admin 只是一个例子</span><br>			<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>		}<br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>	}<br>	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>{<br>		<span class="hljs-keyword">if</span> (<span class="hljs-built_in">checkUsernameAndPassword</span>()) {<br>			cout &lt;&lt; <span class="hljs-string">"用户名和密码正确，验证通过..."</span> &lt;&lt; endl;<br>			<span class="hljs-keyword">this</span>-&gt;pSystem-&gt;<span class="hljs-built_in">run</span>();<br>		}<br>		<span class="hljs-keyword">else</span> {<br>			cout &lt;&lt; <span class="hljs-string">"用户名或密码错误，权限不足...."</span> &lt;&lt; endl;<br>		}<br>	}<br>	~<span class="hljs-built_in">MysystemProxy</span>() { <span class="hljs-comment">// 析构函数</span><br>		<span class="hljs-keyword">if</span> (pSystem != <span class="hljs-literal">NULL</span>) {<br>			<span class="hljs-keyword">delete</span> pSystem;<br>		}<br>	}<br><span class="hljs-keyword">public</span>: <span class="hljs-comment">// 💡需要的变量</span><br>	Mysystem* pSystem;<br>	string mUsername;<br>	string mPassword;<br>};<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">test01</span><span class="hljs-params">()</span> </span>{<br>	MysystemProxy* proxy = <span class="hljs-keyword">new</span> <span class="hljs-built_in">MysystemProxy</span>(<span class="hljs-string">"root"</span>,<span class="hljs-string">"admin"</span>); <span class="hljs-comment">// 💡通过代理启动</span><br>	proxy-&gt;<span class="hljs-built_in">run</span>();<br>}<br><br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{<br><span class="hljs-meta">#<span class="hljs-keyword">if</span> 0</span><br>	<span class="hljs-comment">//这样不行。是个人都能启动</span><br>	Mysystem* system = <span class="hljs-keyword">new</span> Mysystem;<br>	system -&gt; <span class="hljs-built_in">run</span>();<br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br>	<span class="hljs-comment">//调用代理模式</span><br>	<span class="hljs-built_in">test01</span>();<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>}<br></code></pre></td></tr></tbody></table></figure>
 <p><img src="https://img-blog.csdnimg.cn/ab34facdb3e74edf86bf646b2491cd0d.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
-<!-- basicblock-start oid="ObsxfCWnZRGXQZ1t48VRK0ls" --> 
-<h1 id="4-代理模式的优缺点"><a class="markdownIt-Anchor" href="#4-代理模式的优缺点"></a> 4 代理模式的优缺点::</h1>
-<!-- basicblock-end -->
+<h1 id="3-代理模式的优缺点"><a class="markdownIt-Anchor" href="#3-代理模式的优缺点"></a> 3 代理模式的优缺点::</h1>
 <p><strong>优点：</strong></p>
-<p>(1)能够协调调用者和被调用者，在一定程度上降低了系统的耦合度。</p>
-<p>(2)客户端可以针对抽象主题角色进行编程，增加和更换代理类无须修改源代码，符合开闭原则，系统具有较好的灵活性和可扩展性。</p>
-<p><strong>缺点：</strong></p>
-<p>代理实现较为复杂。</p>
-<!-- basicblock-start oid="ObsR4FyRwZNERlwX8vyFKqMg" --> 
-<h1 id="5-代理模式的适用场景"><a class="markdownIt-Anchor" href="#5-代理模式的适用场景"></a> 5 代理模式的适用场景::</h1>
-<!-- basicblock-end -->
+<p>(1)能够协调调用者和被调用者，在一定程度上降低了系统的耦合度。<br>
+(2)客户端可以针对抽象主题角色进行编程，增加和更换代理类无须修改源代码，<strong>符合开闭原则</strong>，系统具有较好的灵活性和可扩展性。</p>
+<p><strong>缺点：</strong><br>
+代理实现较为复杂。</p>
+<h1 id="4-代理模式的适用场景"><a class="markdownIt-Anchor" href="#4-代理模式的适用场景"></a> 4 代理模式的适用场景::</h1>
 <p>为其他对象提供一种代理以控制对这个对象的访问。</p>
 <hr>
 <p><strong>其他资料</strong></p>

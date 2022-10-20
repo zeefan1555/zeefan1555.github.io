@@ -24,7 +24,7 @@
 <meta property="og:description" content="1 理论::  12345678&#x2F;&#x2F; 单列模式: 系统只有一个对象class A{};int main (void){A a; &#x2F;&#x2F; 这个系统中只能有一个 A 类型的对象}  [!summary] 单例模式: 保证一个类仅有一个实例，并提供一个访问它的全局访问点 方便对实例个数的控制并节约系统资源。  ![[单例模式 2022-10-04 14.40.48.excalidraw]]    2 实">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-10-02T08:33:00.000Z">
-<meta property="article:modified_time" content="2022-10-19T12:38:44.798Z">
+<meta property="article:modified_time" content="2022-10-20T07:18:36.934Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -284,7 +284,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年10月19日 晚上
+                    本文最后更新于：2022年10月20日 下午
                   
                 
               </p>
@@ -320,14 +320,16 @@
 </ul>
 </li>
 </ul>
-<p>私有构造函数保证了不能通过构造函数来创建对象，只能通过公有静态函数返回唯一私有静态变量<br>
-<strong>原则:</strong></p>
+<p>私有构造函数保证了不能通过构造函数来创建对象，只能通过公有静态函数返回唯一私有静态变量</p>
+<!-- basicblock-start oid="ObsdmaP5SKhIhMztoi9JmS5M" deck= "❓疑问::👨🏻‍💻code::设计模式::C++ 设计模式::创建型模型::单例模式.md"-->
+<p><strong>原则:</strong></p>
 <ol>
 <li>私有构造 (防止类通过常规方法实例化)</li>
 <li>以静态方法或者枚举返回实例。 (保证实例的唯一性)</li>
 <li>确保实例只有一个，尤其是多线程环境。(保证创建实例的线程安全)</li>
-<li>确保反序列化时不会重新构造对象。(在有序列化反序列化的场景下防止单例被莫名破坏)</li>
+<li>❓确保反序列化时不会重新构造对象。(在有序列化反序列化的场景下防止单例被莫名破坏)</li>
 </ol>
+ <!-- basicblock-end -->
 <blockquote>
 <p>[!tip]<br>
 简单来说就是，单例类的构造方不让其他人修改和使用；<br>
@@ -360,12 +362,13 @@
 <!-- basicblock-start oid="ObsN7XTfOhM7pW8auRlyPK27" --> 
 <h1 id="6-单例模式的优缺点"><a class="markdownIt-Anchor" href="#6-单例模式的优缺点"></a> 6 单例模式的优缺点::</h1>
 <!-- basicblock-end -->
-<p><strong>优点：</strong></p>
-<p>(1)单例模式提供了对唯一实例的受控访问</p>
-<p>(2)节约系统资源。由于在系统内存中只存在一个对象。<br>
-有些实例，全局只需要一个就够了，使用单例模式就可以避免一个全局使用的类，频繁的创建与销毁，耗费系统资源。</p>
-<p><strong>缺点：</strong></p>
-<p>(1) 扩展略难。单例模式中没有抽象层。<br>
+<p><strong>优点：</strong><br>
+先说个定义<br>
+(1)单例模式提供了对唯一实例的受控访问<br>
+(2)节约系统资源。由于在系统内存中只存在一个对象。<br>
+<strong>有些实例，全局只需要一个就够了，使用单例模式就可以避免一个全局使用的类，频繁的创建与销毁，耗费系统资源。</strong></p>
+<p><strong>缺点：</strong><br>
+(1) 扩展略难。单例模式中没有抽象层。<br>
 (2) 单例类的职责过重。</p>
 <!-- basicblock-start oid="Obsa0pwoZD3yUTwIhPW3JRi6" --> 
 <h1 id="7-单例模式的适用场景"><a class="markdownIt-Anchor" href="#7-单例模式的适用场景"></a> 7 单例模式的适用场景::</h1>
@@ -373,7 +376,7 @@
 <p>1.网站计数器<br>
 2.应用程序的日志应用<br>
 3.Web项目中的配置对象的读取<br>
-4.数据库连接池<br>
+4.<strong>数据库连接池</strong><br>
 5.多线程池<br>
 6.windows的资源管理器</p>
 <h2 id="72-使用场景总结"><a class="markdownIt-Anchor" href="#72-使用场景总结"></a> 7.2 使用场景总结：</h2>
@@ -390,7 +393,7 @@
 <!-- basicblock-end -->
 <hr>
 <p><strong>其他资料</strong></p>
- <!-- basicblock-start oid="ObsNrP9PIGHBwETRCuXiR300" deck = "👨🏻‍💻code::设计模式::C++ 设计模式::创建型模型::单列模式.md" --> 
+ <!-- basicblock-start oid="ObsNrP9PIGHBwETRCuXiR300"--> 
 <p>#历史记录:: <a href="marginnote3app://note/70635F09-3528-44A0-AA4B-85CB0B593041">margin</a><br>
 2022/10/2🌵单列模式 : 第一次创建: ⏱1-18</p>
 <!-- basicblock-end -->

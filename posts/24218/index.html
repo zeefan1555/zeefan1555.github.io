@@ -24,7 +24,7 @@
 <meta property="og:description" content="1 套接字函数  1.1 socket ![[socket API]]  1.2 [[bind]]  1.3 listen 1234567int listen(int sockfd, int backlog);    &#x2F;&#x2F; &#x2F;proc&#x2F;sys&#x2F;net&#x2F;core&#x2F;somaxconn(能够连接的最大数所在的文档目录)     - 功能:监听这个socket上的连接    - 参数:">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-10-19T09:17:00.000Z">
-<meta property="article:modified_time" content="2022-10-19T09:19:17.744Z">
+<meta property="article:modified_time" content="2022-10-20T07:17:49.228Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -284,7 +284,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年10月19日 下午
+                    本文最后更新于：2022年10月20日 下午
                   
                 
               </p>
@@ -304,7 +304,7 @@
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> <span class="hljs-title function_">connect</span><span class="hljs-params">(<span class="hljs-type">int</span> sockfd, <span class="hljs-type">const</span> <span class="hljs-keyword">struct</span> sockaddr *addr, <span class="hljs-type">socklen_t</span> addrlen)</span>; <br>    - 功能: 客户端连接服务器    <br>    - 参数:             <br>        - sockfd : 用于通信的文件描述符            <br>        - addr : 客户端要连接的服务器的地址信息            <br>        - addrlen : 第二个参数的内存大小    <br>    - 返回值:成功 <span class="hljs-number">0</span>, 失败 <span class="hljs-number">-1</span> <br><br><span class="hljs-type">ssize_t</span> <span class="hljs-title function_">write</span><span class="hljs-params">(<span class="hljs-type">int</span> fd, <span class="hljs-type">const</span> <span class="hljs-type">void</span> *buf, <span class="hljs-type">size_t</span> count)</span>;   <span class="hljs-comment">// 写数据</span><br><span class="hljs-type">ssize_t</span> <span class="hljs-title function_">read</span><span class="hljs-params">(<span class="hljs-type">int</span> fd, <span class="hljs-type">void</span> *buf, <span class="hljs-type">size_t</span> count)</span>;          <span class="hljs-comment">// 读数据</span><br><br><br><br></code></pre></td></tr></tbody></table></figure>
 <hr>
 <p><strong>其他资料</strong></p>
- <!-- basicblock-start  --> 
+ <!-- basicblock-start oid="ObsCnFBsDEfv249MNnBn3Fxl"  --> 
 <p>#历史记录::<br>
 2022/10/19🌵套接字函数 : 第一次创建</p>
 <!-- basicblock-end -->

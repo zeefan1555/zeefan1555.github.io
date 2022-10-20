@@ -24,7 +24,7 @@
 <meta property="og:description" content="访问权限 C++通过public、.protected、private三个关键字来控制成员变量和成员函数的访问权限，它们分别表示公有的、受保护的、私有的，被称为成员访问限定符。 在类的内部（定义类的代码内部），无论成员被声明为public、protected还是private,都是可以互相访问的， 没有访问权限的限制。 在类的外部（定义类的代码之外），只能通过对象访问成员，并且通过对象只能访问pu">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-09-21T12:10:00.000Z">
-<meta property="article:modified_time" content="2022-09-27T12:22:19.150Z">
+<meta property="article:modified_time" content="2022-10-20T07:36:37.451Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -284,7 +284,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年9月27日 晚上
+                    本文最后更新于：2022年10月20日 下午
                   
                 
               </p>
@@ -297,15 +297,11 @@
 在类的外部（定义类的代码之外），只能通过对象访问成员，并且通过对象只能访问pubc属性的成员，不能访问private、protected属性的成员。<br>
 无论共有继承、私有和保护继承，私有成员不能被“派生类”访问，基类中的共有和保护成员能被“派生类"访问。<br>
 对于共有继承，只有基类中的共有成员能被“派生类对象”访问，保护和私有成员不能被“派生类对象"”访问。对于私有和保护继承，基类中的所有成员不能被“派生类对象"访问。</p>
-<!-- basicblock-start oid="ObsVr7MBh3ORlxu0auzq94jm" --> 
 <h1 id="1-封装"><a class="markdownIt-Anchor" href="#1-封装"></a> 1 封装::</h1>
-<!-- basicblock-end -->
 <p><strong>定义</strong>： 数据和代码捆绑在一起，避免外界干扰和不确定性访问；</p>
 <p><strong>功能</strong>： 把客观事物封装成抽象的类，并且类可以把自己的数据和方法只让可信的类或者对象操作，对不可信的进行信息隐藏，<br>
 例如：将公共的数据或方法使用public修饰，而不希望被访问的数据或方法采用private修饰。</p>
-<!-- basicblock-start oid="Obs7envCDH7x0BUKrGQGS5Pd" --> 
 <h1 id="2-继承"><a class="markdownIt-Anchor" href="#2-继承"></a> 2 继承::</h1>
-<!-- basicblock-end -->
 <p><strong>定义</strong>： 让某种类型对象获得另一个类型对象的属性和方法</p>
 <p><strong>功能</strong>： 它可以使用现有类的所有功能，并在无需重新编写原来的类的情况下对这些功能进行扩展<br>
 常见的继承有三种方式：<br>
@@ -320,12 +316,10 @@
 </ul>
 <p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1wZ4y1B7A7/?spm_id_from=333.337.search-card.all.click&amp;vd_source=f2340d96e99780a96b50d8096ffaaf1a">8分钟搞懂面向对象编程 | 面向过程vs面向对象 | OOP | 封装 继承 多态_哔哩哔哩_bilibili</a><br>
 ![[C++ 三大特性 2022-09-27 20.22.16.excalidraw]]</p>
-<!-- basicblock-start oid="Obs9Fwib17iPHvtCLtmgBIdg" --> 
 <h1 id="3-多态"><a class="markdownIt-Anchor" href="#3-多态"></a> 3 [[多态]]::</h1>
-<!-- basicblock-end -->
 <hr>
 <p><strong>其他资料</strong></p>
- <!-- basicblock-start oid="ObsRKwqyYulceDLT0e3L5TCR" deck = "👨🏻‍💻code::C++::C++基础::C++ 三大特性.md" --> 
+ <!-- basicblock-start oid="ObsRKwqyYulceDLT0e3L5TCR"  --> 
 <p>#历史记录::<br>
 2022/9/21🌵C++ 三大特性 : <a href="marginnote3app://note/025A6CAE-DC4A-44BE-85DF-74E7B59576A5">margin</a></p>
 <!-- basicblock-end -->

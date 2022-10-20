@@ -16,16 +16,16 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1 理论::   废话理论（建议直接看总结）： 根据迪米特法则，如果两个类不必彼此直接通信，那么这两个类就不应当发生直接的相互作用。 Facade模式也叫外观模式，是由GoF提出的23种设计模式中的一种。Facade模式为一组具有类似功能的类群，比如类库，子系统等等，提供一个一致的简单的界面。这个一致的简单的界面被称作facade。   $ 总结：外观模式就是将复杂的子类系统抽象到同一个的接口进">
+    <meta name="description" content="1 理论::   废话理论（建议直接看总结）： 根据迪米特法则，如果两个类不必彼此直接通信，那么这两个类就不应当发生直接的相互作用。 Facade模式也叫外观模式，是由GoF提出的23种设计模式中的一种。Facade模式为一组具有类似功能的类群，比如类库，子系统等等，提供一个一致的简单的界面。这个一致的简单的界面被称作facade。   [!summary] 总结： 外观模式就是将复杂的子类系统">
 <meta property="og:type" content="article">
 <meta property="og:title" content="外观模式">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/33101/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="1 理论::   废话理论（建议直接看总结）： 根据迪米特法则，如果两个类不必彼此直接通信，那么这两个类就不应当发生直接的相互作用。 Facade模式也叫外观模式，是由GoF提出的23种设计模式中的一种。Facade模式为一组具有类似功能的类群，比如类库，子系统等等，提供一个一致的简单的界面。这个一致的简单的界面被称作facade。   $ 总结：外观模式就是将复杂的子类系统抽象到同一个的接口进">
+<meta property="og:description" content="1 理论::   废话理论（建议直接看总结）： 根据迪米特法则，如果两个类不必彼此直接通信，那么这两个类就不应当发生直接的相互作用。 Facade模式也叫外观模式，是由GoF提出的23种设计模式中的一种。Facade模式为一组具有类似功能的类群，比如类库，子系统等等，提供一个一致的简单的界面。这个一致的简单的界面被称作facade。   [!summary] 总结： 外观模式就是将复杂的子类系统">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/6b54a7eca1714ea4983ec47f238ce192.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5q-V5Yqg57Si5p2l5Za9,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center">
 <meta property="article:published_time" content="2022-10-02T13:28:00.000Z">
-<meta property="article:modified_time" content="2022-10-04T06:18:09.996Z">
+<meta property="article:modified_time" content="2022-10-20T12:09:21.595Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://img-blog.csdnimg.cn/6b54a7eca1714ea4983ec47f238ce192.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5q-V5Yqg57Si5p2l5Za9,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center">
@@ -286,7 +286,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年10月4日 下午
+                    本文最后更新于：2022年10月20日 晚上
                   
                 
               </p>
@@ -300,9 +300,10 @@
 <p>根据迪米特法则，如果两个类不必彼此直接通信，那么这两个类就不应当发生直接的相互作用。</p>
 <p>Facade模式也叫外观模式，是由GoF提出的23种设计模式中的一种。Facade模式为一组具有类似功能的类群，比如类库，子系统等等，提供一个一致的简单的界面。这个一致的简单的界面被称作facade。</p>
 </blockquote>
-<ul>
-<li>$ <strong>总结：外观模式就是将复杂的子类系统抽象到同一个的接口进行管理，外界只需要通过此接口与子类系统进行交互，而不必要直接与复杂的子类系统进行交互</strong>。</li>
-</ul>
+<blockquote>
+<p>[!summary] 总结：<br>
+外观模式就是将复杂的子类系统抽象到同一个的接口进行管理，外界只需要通过此接口与子类系统进行交互，而不必要直接与复杂的子类系统进行交互。</p>
+</blockquote>
 <!-- basicblock-start oid="ObsNzszGnr0QFlXbyTcA0BUi" --> 
 <h1 id="2-外观模式的案例"><a class="markdownIt-Anchor" href="#2-外观模式的案例"></a> 2 外观模式的案例::</h1>
 <!-- basicblock-end -->
@@ -315,12 +316,13 @@
 <h1 id="3-外观模式的优缺点"><a class="markdownIt-Anchor" href="#3-外观模式的优缺点"></a> 3 外观模式的优缺点::</h1>
 <!-- basicblock-end -->
 <p><strong>优点：</strong></p>
-<p>(1)它对客户端屏蔽了子系统组件，减少了客户端所需处理的对象数目，并使得子系统使用起来更加容易。通过引入外观模式，客户端代码将变得很简单，与之关联的对象也很少。</p>
-<p>(2)它实现了子系统与客户端之间的松耦合关系，这使得子系统的变化不会影响到调用它的客户端，只需要调整外观类即可。</p>
+<p>(1) 它对客户端屏蔽了子系统组件，减少了客户端所需处理的对象数目，并使得子系统使用起来更加容易。<br>
+通过引入外观模式，客户端代码将变得很简单，与之关联的对象也很少。</p>
+<p>(2)它实现了子系统与客户端之间的松耦合关系，这使得子系统的变化不会影响到调用它的客户端，<strong>只需要调整外观类</strong>即可。</p>
 <p>(3)一个子系统的修改对其他子系统没有任何影响。</p>
 <p><strong>缺点：</strong></p>
 <p>(1)不能很好地限制客户端直接使用子系统类，如果对客户端访问子系统类做太多的限制则减少了可变性和灵活性。</p>
-<p>(2)如果设计不当，增加新的子系统可能需要修改外观类的源代码，违背了开闭原则。</p>
+<p>(2)如果设计不当，<strong>增加新的子系统可能需要修改外观类的源代码，违背了开闭原则。</strong></p>
 <!-- basicblock-start oid="Obsa9mNTBwX4GDzWgvOJKc2m" --> 
 <h1 id="4-外观模式的适用场景"><a class="markdownIt-Anchor" href="#4-外观模式的适用场景"></a> 4 外观模式的适用场景::</h1>
 <!-- basicblock-end -->
@@ -329,7 +331,7 @@
 <p>(3) 在层次化结构中，可以使用外观模式定义系统中每一层的入口，层与层之间不直接产生联系，而通过外观类建立联系，降低层之间的耦合度。</p>
 <hr>
 <p><strong>其他资料</strong></p>
- <!-- basicblock-start oid="Obsew9tJ8MecAJrNV6P29x4s" deck = "👨🏻‍💻code::设计模式::C++ 设计模式::结构型模式::外观模式.md" --> 
+ <!-- basicblock-start oid="Obsew9tJ8MecAJrNV6P29x4s"  --> 
 <p>#历史记录::<br>
 2022/10/2🌵外观模式 : 第一次创建</p>
 <!-- basicblock-end -->
