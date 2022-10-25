@@ -16,27 +16,23 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="[!example] [[6. 四数相加II]]     1 定义::  在map 是一个key value 的数据结构，map中，对key是有限制，对value没有限制的，因为key的存储方式使用红黑树实现的。 虽然std::set、std::multiset 的底层实现是红黑树，不是哈希表，但是std::set、std::multiset 依然使用哈希函数来做映射，只不过底层的符号表使用了红">
+    <meta name="description" content="1、binary_semaphore 定义： 可以当事件来用，只有有信号和无信号两种状态，一次只能被一个线程所持有。 使用步骤： (1) 初始创建信号量，并且一开始将其置位成无信号状态 std: binary_semaphore sem (0) (2）线程使用 acquire () 方法等待被唤醒 (3) 主线程中使用 release() 方法，将信号量变成有信号状态 2.counting_sem">
 <meta property="og:type" content="article">
-<meta property="og:title" content="map">
-<meta property="og:url" content="https://zeefan1555.github.io/posts/43450/index.html">
+<meta property="og:title" content="信号量">
+<meta property="og:url" content="https://zeefan1555.github.io/posts/1176/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="[!example] [[6. 四数相加II]]     1 定义::  在map 是一个key value 的数据结构，map中，对key是有限制，对value没有限制的，因为key的存储方式使用红黑树实现的。 虽然std::set、std::multiset 的底层实现是红黑树，不是哈希表，但是std::set、std::multiset 依然使用哈希函数来做映射，只不过底层的符号表使用了红">
+<meta property="og:description" content="1、binary_semaphore 定义： 可以当事件来用，只有有信号和无信号两种状态，一次只能被一个线程所持有。 使用步骤： (1) 初始创建信号量，并且一开始将其置位成无信号状态 std: binary_semaphore sem (0) (2）线程使用 acquire () 方法等待被唤醒 (3) 主线程中使用 release() 方法，将信号量变成有信号状态 2.counting_sem">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202208121703566.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20210104235134572.png">
-<meta property="article:published_time" content="2022-08-13T14:03:00.000Z">
-<meta property="article:modified_time" content="2022-10-10T02:40:13.771Z">
+<meta property="article:published_time" content="2022-10-21T05:05:00.000Z">
+<meta property="article:modified_time" content="2022-10-21T05:32:42.555Z">
 <meta property="article:author" content="zeefan">
-<meta property="article:tag" content="总结">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202208121703566.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>map - 一杯空气</title>
+  <title>信号量 - 一杯空气</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -203,7 +199,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="map"></span>
+            <span id="subtitle" data-typed-text="信号量"></span>
           
         </div>
 
@@ -214,8 +210,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-08-13 22:03" pubdate>
-          2022年8月13日 晚上
+        <time datetime="2022-10-21 13:05" pubdate>
+          2022年10月21日 下午
         </time>
       </span>
     
@@ -226,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.2k 字
+          410 字
         
       </span>
     
@@ -237,7 +233,7 @@
         
         
         
-          6 分钟
+          3 分钟
         
       </span>
     
@@ -283,79 +279,36 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">map</h1>
+            <h1 style="display: none">信号量</h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年10月10日 上午
+                    本文最后更新于：2022年10月21日 下午
                   
                 
               </p>
             
             <div class="markdown-body">
               
-              <blockquote>
-<p>[!example]<br>
-[[6. 四数相加II]]</p>
-</blockquote>
-<!-- basicblock-start oid="Obsto9SToTNQ22dWM6KcNmYu" --> 
-<h1 id="1-定义"><a class="markdownIt-Anchor" href="#1-定义"></a> 1 定义::</h1>
-<!-- basicblock-end -->
-<p>在map 是一个key value 的数据结构，map中，对key是有限制，对value没有限制的，因为key的存储方式使用红黑树实现的。<br>
-虽然std::set、std::multiset 的底层实现是红黑树，不是哈希表，但是std::set、std::multiset 依然使用哈希函数来做映射，只不过底层的符号表使用了红黑树来存储数据，所以使用这些数据结构来解决映射问题的方法，我们依然称之为哈希法。 map也是一样的道理。</p>
-<p>有 key 和 value 对应的: 用 map<br>
-map 能在最快的时间内, 去查找这个 key 是否在 map<br>
-<img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202208121703566.png" srcset="/img/loading.gif" lazyload alt="|600"></p>
-<p>红黑树可以自动排序<br>
-std::map 和std::multimap 的key也是有序的（这个问题也经常作为面试题，考察对语言容器底层的理解</p>
-<p>![[8. 三数之和#^l8megb]]<br>
-![[1. 二叉树理论基础#^bew6dm]]</p>
-<!-- basicblock-start oid="ObsUHia8uLVbkzLiSsYrjhDO" --> 
-<h1 id="2-unordered_map"><a class="markdownIt-Anchor" href="#2-unordered_map"></a> 2 unordered_map::</h1>
-<!-- basicblock-end -->
-<p>key 是主要的元素, value 是附属<br>
-不需要 key 有序的时候效率最高</p>
-<!-- basicblock-start oid="Obspbw0byOHXD1bztoDaIKU1" --> 
-<p>C++中如果使用::</p>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++">std::map或者std::multimap可以对key排序，但不能对value排序。<br></code></pre></td></tr></tbody></table></figure>
-<!-- basicblock-end -->
-<h2 id="21-操作"><a class="markdownIt-Anchor" href="#21-操作"></a> 2.1 操作</h2>
-<ul>
-<li>创建元素: unordered_map&lt;int, int&gt; map;</li>
-</ul>
-<blockquote>
-<p>[!question] 哪个是 key, 哪个是 value</p>
-</blockquote>
-<ul>
-<li>插入元素:
-<ul>
-<li>map.insert(<strong>pair&lt;int, int&gt;</strong>(a, b));</li>
-<li><code>map[key]++</code>  //  存在key则 value 值++, 没有 key 则自动创造 key 在 value 值++[^1]</li>
-</ul>
-</li>
-<li>获取元素:
-<ul>
-<li><code>auto iter = map.find(x);</code>, <code>return iter-&gt;second</code>  lhs.second//  获取第二个元素</li>
-<li><code>map[key]</code> = value // 获取第二个元素</li>
-</ul>
-</li>
-<li>查找元素<br>
--<code>if(map.find(x) != map.end())</code>:&nbsp;相当于找到 x 时进入 if 语句</li>
-</ul>
-<p>for 循环中映射 , it 是指针, 指向 map 的一个完整的元素包括key 和 value ,不是单一个元素<br>
-<code>for(unordered_map&lt;int, int&gt; :: iterator it = map.begin(); it != map.end(); it++){}</code><br>
-^drp7wt</p>
-<!-- basicblock-start oid="ObsMxwL9HOXX4c5s5L1CeDQa" --> 
-<h1 id="3-其他"><a class="markdownIt-Anchor" href="#3-其他"></a> 3 其他::</h1>
-<!-- basicblock-end -->
-<p>这里在说一下，一些C++的经典书籍上 例如STL源码剖析，说到了hash_set hash_map，这个与unordered_set，unordered_map又有什么关系呢？</p>
-<p>实际上功能都是一样一样的， 但是unordered_set在C<ins>11的时候被引入标准库了，而hash_set并没有，所以建议还是使用unordered_set比较好，这就好比一个是官方认证的，hash_set，hash_map 是C</ins>11标准之前民间高手自发造的轮子。<br>
-<img src="https://img-blog.csdnimg.cn/20210104235134572.png" srcset="/img/loading.gif" lazyload alt="哈希表6"></p>
+              <p>1、binary_semaphore<br>
+定义： 可以当事件来用，只有有信号和无信号两种状态，一次只能被一个线程所持有。</p>
+<p>使用步骤：<br>
+(1) 初始创建信号量，并且一开始将其置位成无信号状态 std: binary_semaphore sem (0)<br>
+(2）线程使用 acquire () 方法等待被唤醒<br>
+(3) 主线程中使用 release() 方法，将信号量变成有信号状态</p>
+<p>2.counting_semaphore<br>
+定义： 一次可以被很多线程所持有，线程的数量由自己指定</p>
+<p>使用步骤：<br>
+(1) 创建信号量指定一次可以进入的线程的最大数量，并在最开始将其置位成无信号状态：std:biinary_semaphore&lt;8&gt;sem (0)</p>
+<p>(2) 主线程中创建 10 个线程并且这些线程全部调用 acquire () 方法等待被唤醒。<br>
+但是主线程使用 release (6) 方法就只能随机启用 6 个线程。</p>
 <hr>
-<p><strong>参考资料</strong><br>
-<a href="obsidian://advanced-uri?vault=myblog&amp;uid=4f623914-706e-4174-b798-c6e8b4ee184c">ob</a></p>
-
+<p><strong>其他资料</strong></p>
+ <!-- basicblock-start  --> 
+<p>#历史记录:: <a href="marginnote3app://note/C7559B6D-F761-4F9A-915E-77B898CE122E">margin: 信号量</a><br>
+2022/10/21🌵信号量 : 第一次创建</p>
+<!-- basicblock-end -->
               
             </div>
             <hr/>
@@ -377,20 +330,13 @@ std::map 和std::multimap 的key也是有序的（这个问题也经常作为面
   
     <span>></span>
     
-  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" class="category-chain-item">数据结构与算法</a>
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/C/" class="category-chain-item">C++</a>
   
   
     <span>></span>
     
-  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95/" class="category-chain-item">代码随想录</a>
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/C/C-%E5%9F%BA%E7%A1%80/" class="category-chain-item">C++基础</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95/%E5%93%88%E5%B8%8C%E8%A1%A8/" class="category-chain-item">哈希表</a>
-  
-  
-
   
 
   
@@ -405,13 +351,6 @@ std::map 和std::multimap 的key也是有序的（这个问题也经常作为面
     </div>
   
   
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/%E6%80%BB%E7%BB%93/">#总结</a>
-      
-    </div>
-  
 </div>
 
 
@@ -422,9 +361,9 @@ std::map 和std::multimap 的key也是有序的（这个问题也经常作为面
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/56281/" title="6. 四数相加II">
+                      <a href="/posts/50165/" title="future 库">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">6. 四数相加II</span>
+                        <span class="hidden-mobile">future 库</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -432,8 +371,8 @@ std::map 和std::multimap 的key也是有序的（这个问题也经常作为面
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/44253/" title="set">
-                        <span class="hidden-mobile">set</span>
+                      <a href="/posts/1228/" title="副作用编程">
+                        <span class="hidden-mobile">副作用编程</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

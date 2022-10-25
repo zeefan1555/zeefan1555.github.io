@@ -24,7 +24,7 @@
 <meta property="og:description" content="1 347.前 K 个高频元素 力扣题目链接 给定一个非空的整数数组，返回其中出现频率前 k 高的元素。 示例 1:  输入: nums &#x3D; [1,1,1,2,2,3], k &#x3D; 2 输出: [1,2]  示例 2:  输入: nums &#x3D; [1], k &#x3D; 1 输出: [1]  提示：  你可以假设给定的 k 总是合理的，且 1 ≤ k ≤ 数组中不相同的元素的个数。 你的算法的时间复杂度必须">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-08-23T08:35:00.000Z">
-<meta property="article:modified_time" content="2022-08-24T14:08:39.555Z">
+<meta property="article:modified_time" content="2022-10-24T08:42:30.581Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="栈与队列">
 <meta name="twitter:card" content="summary_large_image">
@@ -234,7 +234,7 @@
         
         
         
-          7 分钟
+          8 分钟
         
       </span>
     
@@ -285,7 +285,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年8月24日 晚上
+                    本文最后更新于：2022年10月24日 下午
                   
                 
               </p>
@@ -324,6 +324,7 @@
 ![[8. 前K个高频元素 2022-08-23 18.30.49.excalidraw]]</li>
 </ol>
 <h2 id="21-小顶锥和大顶锥的原理"><a class="markdownIt-Anchor" href="#21-小顶锥和大顶锥的原理"></a> 2.1 ![[小顶锥和大顶锥的原理]]</h2>
+<p>^5fcfcc</p>
 <h1 id="3-代码"><a class="markdownIt-Anchor" href="#3-代码"></a> 3 代码</h1>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">// v1, 对着抄, 熟悉函数 ,未通过</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-keyword">class</span> <span class="hljs-title class_">mycomparison</span>{ <span class="hljs-comment">// 左 &gt; 右 是小顶锥, 与平时的感觉相反</span><br>        <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">operator</span><span class="hljs-params">()</span><span class="hljs-params">(<span class="hljs-type">const</span> pair&lt;<span class="hljs-type">int</span>, <span class="hljs-type">int</span>&gt;&amp; lhs, <span class="hljs-type">const</span> pair&lt;<span class="hljs-type">int</span>, <span class="hljs-type">int</span>&gt;&amp; rhs)</span></span>{<br>            <span class="hljs-keyword">return</span> lhs.second &gt; rhs.second;<br>        }<br>    };<br>    <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">topKFrequent</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums, <span class="hljs-type">int</span> k)</span> </span>{<br>        unordered_map&lt;<span class="hljs-type">int</span>, <span class="hljs-type">int</span>&gt; map;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; nums.<span class="hljs-built_in">size</span>(); i++) {<br>            map[nums[i]]++;<br>        }<br>        <span class="hljs-comment">/*for(int a : nums){</span><br><span class="hljs-comment">            map[a]++;</span><br><span class="hljs-comment">        }</span><br><span class="hljs-comment">        */</span><br>        <span class="hljs-comment">// 💡定义小顶锥</span><br>        priority_queue&lt;pair&lt;<span class="hljs-type">int</span>, <span class="hljs-type">int</span>&gt;, vector&lt;pair&lt;<span class="hljs-type">int</span>, <span class="hljs-type">int</span>&gt;&gt;, mycomparison&gt; pri_que;<br>        <span class="hljs-comment">// 用固定大小为k的小顶堆，扫面所有频率的数值</span><br>        <span class="hljs-comment">// for 循环的一种</span><br>        <span class="hljs-keyword">for</span>(unordered_map&lt;<span class="hljs-type">int</span>, <span class="hljs-type">int</span>&gt; :: iterator it = map.<span class="hljs-built_in">begin</span>(); it != map.<span class="hljs-built_in">end</span>(); it++){<br>            pri_que.<span class="hljs-built_in">push</span>(*it);<br>            <span class="hljs-keyword">if</span> (pri_que.<span class="hljs-built_in">size</span>() &gt; k){<br>                pri_que.<span class="hljs-built_in">pop</span>();<br>            }<br>        }<br>        <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">result</span><span class="hljs-params">(k)</span></span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = k - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--){<br>            result[i] = pri_que.<span class="hljs-built_in">top</span>().first;<br>            pri_que.<span class="hljs-built_in">pop</span>();<br>        }<br>        <span class="hljs-keyword">return</span> result;<br><br><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
 <hr>

@@ -16,26 +16,23 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1 用法  1.1 初始化 一维数组的初始化 vector的长度不能是变量,必须是常量  vector&lt;int&gt; a(10); 默认是0 vector&lt;int&gt; a(10,1);(10个变量每个为1) vector&lt;int&gt; a(b); &#x2F;&#x2F;用b向量来创建a向量，整体复制性赋值 vector&lt;int&gt; a(b.begin(),b.begin+3);">
+    <meta name="description" content="没看完  重载运算符函数可以对运算符作出新的解释，但原有基本语义不变： 不改变运算符的优先级 不改变运算符的结合性 不改变运算符所需要的操作数 不能创建新的运算符   [ ]  重载运算符函数，本质还是函数调用，所以重载后：::  #疑问   (1) 可以是和调用运算符的方式调用，data1+data2 (2)也可以是调用函数的方式，operator+(data1,data2), 这就要注意运算">
 <meta property="og:type" content="article">
-<meta property="og:title" content="vector">
-<meta property="og:url" content="https://zeefan1555.github.io/posts/54708/index.html">
+<meta property="og:title" content="运算符重载">
+<meta property="og:url" content="https://zeefan1555.github.io/posts/22011/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="1 用法  1.1 初始化 一维数组的初始化 vector的长度不能是变量,必须是常量  vector&lt;int&gt; a(10); 默认是0 vector&lt;int&gt; a(10,1);(10个变量每个为1) vector&lt;int&gt; a(b); &#x2F;&#x2F;用b向量来创建a向量，整体复制性赋值 vector&lt;int&gt; a(b.begin(),b.begin+3);">
+<meta property="og:description" content="没看完  重载运算符函数可以对运算符作出新的解释，但原有基本语义不变： 不改变运算符的优先级 不改变运算符的结合性 不改变运算符所需要的操作数 不能创建新的运算符   [ ]  重载运算符函数，本质还是函数调用，所以重载后：::  #疑问   (1) 可以是和调用运算符的方式调用，data1+data2 (2)也可以是调用函数的方式，operator+(data1,data2), 这就要注意运算">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201218185902217.png">
-<meta property="article:published_time" content="2022-06-07T02:30:00.000Z">
-<meta property="article:modified_time" content="2022-08-19T08:06:26.485Z">
+<meta property="article:published_time" content="2022-10-21T07:13:00.000Z">
+<meta property="article:modified_time" content="2022-10-21T08:29:52.863Z">
 <meta property="article:author" content="zeefan">
-<meta property="article:tag" content="函数">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20201218185902217.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>vector - 一杯空气</title>
+  <title>运算符重载 - 一杯空气</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -202,7 +199,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="vector"></span>
+            <span id="subtitle" data-typed-text="运算符重载"></span>
           
         </div>
 
@@ -213,8 +210,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-06-07 10:30" pubdate>
-          2022年6月7日 上午
+        <time datetime="2022-10-21 15:13" pubdate>
+          2022年10月21日 下午
         </time>
       </span>
     
@@ -225,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.5k 字
+          373 字
         
       </span>
     
@@ -236,7 +233,7 @@
         
         
         
-          8 分钟
+          2 分钟
         
       </span>
     
@@ -282,70 +279,42 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">vector</h1>
+            <h1 style="display: none">运算符重载</h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年8月19日 下午
+                    本文最后更新于：2022年10月21日 下午
                   
                 
               </p>
             
             <div class="markdown-body">
               
-              <h1 id="1-用法"><a class="markdownIt-Anchor" href="#1-用法"></a> 1 用法</h1>
-<h2 id="11-初始化"><a class="markdownIt-Anchor" href="#11-初始化"></a> 1.1 初始化</h2>
-<p><strong>一维数组的初始化</strong><br>
-vector的长度不能是变量,必须是常量</p>
-<ol>
-<li><code>vector&lt;int&gt; a(10)</code>; 默认是0</li>
-<li><code>vector&lt;int&gt; a(10,1)</code>;(10个变量每个为1)</li>
-<li><code>vector&lt;int&gt; a(b)</code>; //用b向量来创建a向量，整体复制性赋值</li>
-<li><code>vector&lt;int&gt; a(b.begin(),b.begin+3)</code>; //定义了a值为b中第0个到第2个（共3个）元素</li>
-<li>int b[7]={1,2,3,4,5,9,8}; <code>vector&lt;int&gt; a(b,b+7);</code> //从数组中获得初值</li>
-</ol>
-<p><strong>二维数组的初始化</strong><br>
-初始化为0，0可变其他数</p>
-<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;&gt; vec(row, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt; (col,<span class="hljs-number">0</span>));<br><br></code></pre></td></tr></tbody></table></figure>
-<p><code>{{1, 2, 3}, {3, 4, 5}......}</code>: 这种类型的是二维数组 ^1wjjr0</p>
-<p>返回值和使用时：必须用 dp[ i ]，不能用dp(i)</p>
-<p><strong>强转 vector 类型</strong><code>return vector&lt;int&gt;(result_set.begin(), result_set.end());</code><sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span class="hint--top hint--rounded" aria-label="[[3. 两个数组的交集]]
-">[2]</span></a></sup></p>
-<h2 id="12-操作"><a class="markdownIt-Anchor" href="#12-操作"></a> 1.2 操作</h2>
-<ul>
-<li>添加操作
-<ul>
-<li><code>result.push_back(vector&lt;int&gt;{1, 2, 3});</code> = <code>{{1, 2, 3}, 还可以往里再加}</code></li>
-</ul>
-</li>
-</ul>
-<h1 id="2-原理"><a class="markdownIt-Anchor" href="#2-原理"></a> 2 原理</h1>
-<p>普通数组 int a [10]，一旦定义了就不能改变了，这个数组最多只能放10个元素了<br>
-动态数组vector，不用关心初始的大小，可以随意的添加数据</p>
-<p><strong>vector的底层实现也是普通数组</strong>。</p>
-<blockquote>
-<p>vector的底层实现是array，严格来讲vector是容器，不是数组。<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="[[1. 数组理论基础]]
-">[1]</span></a></sup></p>
+              <blockquote>
+<p>没看完</p>
 </blockquote>
-<p>vector的大小有两个维度一个是size一个是capicity，<br>
-size就是我们平时用来遍历vector时候用的，例如：<code>for (int i = 0; i &lt; vec.size(); i++)</code><br>
-而capicity是vector底层数组（就是普通数组）的大小，capicity可不一定就是size<br>
-当insert数据的时候，如果已经大于capicity，capicity会成倍扩容，但对外暴露的size其实仅仅是+1而已，剩下的位置还是空闲的</p>
-<p>C++中vector（可以理解是一个动态数组，底层是普通数组实现的）如果插入元素大于预先普通数组大小，vector底部会有一个扩容的操作，即申请两倍于原先普通数组的大小，然后把数据拷贝到另一个更大的数组上，然后在释放原数组内存。<br>
-eg：<br>
-原vector中的size和capicity相同都是3，初始化为1 2 3，此时要push_back一个元素4。<br>
-那么底层其实就要申请一个大小为6的普通数组，并且把原元素拷贝过去，释放原数组内存，<br>
-<strong>注意图中底层数组的内存起始地址已经变了</strong>。<br>
-<img src="https://img-blog.csdnimg.cn/20201218185902217.png" srcset="/img/loading.gif" lazyload alt="vector原理|800"></p>
-<p>所以使用vector（动态数组）来insert，是费时的，插入再拷贝的话，单纯一个插入的操作就是O(n<sup>2)了，甚至可能拷贝好几次，就不止O(n</sup>2)了。</p>
-<p>解决办法：可以采用链表来进行插入操作<br>
-eg：<code>vector&lt;vector&lt;int&gt;&gt; que：[[7,0],[7,1]]</code> →<code>list&lt;vector&lt;int&gt;&gt; que：[7,0]→[7,1]</code></p>
-<h1 id="3-参考"><a class="markdownIt-Anchor" href="#3-参考"></a> 3 参考</h1>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/wkq0825/article/details/82255984?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522165701148116781683956725%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=165701148116781683956725&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-82255984-null-null.142%5Ev30%5Econtrol,185%5Ev2%5Econtrol&amp;utm_term=vector%2Bc%2B%2B%2B%E7%94%A8%E6%B3%95&amp;spm=1018.2226.3001.4187">C++ vector的用法（整理）_一个幽默且帅气的程序员的博客-CSDN博客_c++ vector</a></p>
-<section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span>[[1. 数组理论基础]]
-<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:2" class="footnote-text"><span>[[3. 两个数组的交集]]
-<a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
+<p>重载运算符函数可以对运算符作出新的解释，但原有基本语义不变：<br>
+不改变运算符的优先级<br>
+不改变运算符的结合性<br>
+不改变运算符所需要的操作数<br>
+不能创建新的运算符</p>
+<!-- basicblock-start deck= "❓疑问::👨🏻‍💻code::C++::C++基础::运算符重载.md"-->
+<ul>
+<li>[ ]  重载运算符函数，本质还是函数调用，所以重载后：::  #疑问</li>
+</ul>
+<!-- basicblock-end -->
+<p>(1) 可以是和调用运算符的方式调用，data1+data2</p>
+<p>(2)也可以是调用函数的方式，operator+(data1,data2), 这就要注意运算符函数的名字是“operator运算符’ 在可以重载的运算符里有逗号、取地址、逻辑与、逻辑或</p>
+<p>不建议重载:<br>
+逗号、取地址，本身就对类类型有特殊定义；逻辑与、逻辑或，有短路求值属性；逗号、逻辑与、或，定义了求值顺序。<br>
+运算符重载应该是作为类的成员函数 or 非成员函数（具体后面各小节会涉及）。有个对应知识点，</p>
+<hr>
+<p><strong>其他资料</strong></p>
+ <!-- basicblock-start  --> 
+<p>#历史记录:: <a href="marginnote3app://note/23F5AC69-4A7F-4B31-85FC-19D4ADF45155">margin: 运算符重载</a><br>
+2022/10/21🌵运算符重载 : 第一次创建</p>
+<!-- basicblock-end -->
               
             </div>
             <hr/>
@@ -372,7 +341,7 @@ eg：<code>vector&lt;vector&lt;int&gt;&gt; que：[[7,0],[7,1]]</code> →<code>l
   
     <span>></span>
     
-  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/C/C-primer-plus/" class="category-chain-item">C++ primer plus</a>
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/C/C-%E5%9F%BA%E7%A1%80/" class="category-chain-item">C++基础</a>
   
   
 
@@ -388,13 +357,6 @@ eg：<code>vector&lt;vector&lt;int&gt;&gt; que：[[7,0],[7,1]]</code> →<code>l
     </div>
   
   
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/%E5%87%BD%E6%95%B0/">#函数</a>
-      
-    </div>
-  
 </div>
 
 
@@ -405,9 +367,9 @@ eg：<code>vector&lt;vector&lt;int&gt;&gt; que：[[7,0],[7,1]]</code> →<code>l
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/44424/" title="insert函数">
+                      <a href="/posts/49299/" title="C++模板全特化和偏特化">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">insert函数</span>
+                        <span class="hidden-mobile">C++模板全特化和偏特化</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -415,8 +377,8 @@ eg：<code>vector&lt;vector&lt;int&gt;&gt; que：[[7,0],[7,1]]</code> →<code>l
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/43465/" title="12.分发糖果">
-                        <span class="hidden-mobile">12.分发糖果</span>
+                      <a href="/posts/50165/" title="future 库">
+                        <span class="hidden-mobile">future 库</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
