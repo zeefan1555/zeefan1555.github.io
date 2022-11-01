@@ -1,0 +1,782 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202206251952371.png">
+  <link rel="icon" href="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202206251952371.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="zeefan">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="1 概念 在 C++中，所有的值不是左值，就是右值。 左值是指表达式结束后依然存在的持久化对象， 左值: 可以放在等号左边, 可以取地址并由名字 右值是指表达式结束后就不再存在的临时对象。 右值: 不可以放在 i 等号左边, 不能取地址, 没有名字  [!tip] 判断方法 有名字的对象都是左值，右值没有名字。 看能不能对表达式取地址，如果能，则为左值，否则为右值。 ![[左右值引用 2022-">
+<meta property="og:type" content="article">
+<meta property="og:title" content="左右值引用">
+<meta property="og:url" content="https://zeefan1555.github.io/posts/62414/index.html">
+<meta property="og:site_name" content="一杯空气">
+<meta property="og:description" content="1 概念 在 C++中，所有的值不是左值，就是右值。 左值是指表达式结束后依然存在的持久化对象， 左值: 可以放在等号左边, 可以取地址并由名字 右值是指表达式结束后就不再存在的临时对象。 右值: 不可以放在 i 等号左边, 不能取地址, 没有名字  [!tip] 判断方法 有名字的对象都是左值，右值没有名字。 看能不能对表达式取地址，如果能，则为左值，否则为右值。 ![[左右值引用 2022-">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-10-29T08:32:00.000Z">
+<meta property="article:modified_time" content="2022-11-01T11:58:15.387Z">
+<meta property="article:author" content="zeefan">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>左右值引用 - 一杯空气</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.15.6/katex.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"zeefan1555.github.io","root":"/","version":"1.9.1","typing":{"enable":true,"typeSpeed":150,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"Text"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":10},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>一杯空气</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="左右值引用"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-10-29 16:32" pubdate>
+          2022年10月29日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          12 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">左右值引用</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2022年11月1日 晚上
+                  
+                
+              </p>
+            
+            <div class="markdown-body">
+              
+              <h1 id="1-概念"><a class="markdownIt-Anchor" href="#1-概念"></a> 1 概念</h1>
+<p>在 C++中，所有的值不是左值，就是右值。</p>
+<p>左值是指<strong>表达式结束后依然存在的持久化对象</strong>，<br>
+左值: 可以放在等号左边, 可以取地址并由名字<br>
+右值是指<strong>表达式结束后就不再存在的临时对象</strong>。<br>
+右值: 不可以放在 i 等号左边, 不能取地址, 没有名字</p>
+<blockquote>
+<p>[!tip] 判断方法<br>
+有名字的对象都是左值，右值没有名字。<br>
+<strong>看能不能对表达式取地址</strong>，如果能，则为左值，否则为右值。<br>
+![[左右值引用 2022-10-29 17.04.42.excalidraw]]</p>
+</blockquote>
+<!-- basicblock-start -->
+<blockquote>
+<p>[!question]<br>
+<ins>i、–i 是左值, i</ins>、i–是右值<br>
+字符串字面值"abcd"也是左值, 不是右值<br>
+::  ❓ #疑问</p>
+</blockquote>
+<!-- basicblock-end -->
+<h2 id="11-右值"><a class="markdownIt-Anchor" href="#11-右值"></a> 1.1 右值。</h2>
+<p>C++11扩展了右值的概念，将右值分为了纯右值和将亡值。</p>
+<blockquote>
+<p>[!example]-  <strong>将亡值的定义</strong><br>
+将亡值是指 C++11 新增的和右值引用相关的表达式<br>
+将亡值可以理解为即将要销毁的值, 通过"盜取”其它变量内存空问方式获取的值,<br>
+在确保其它变量不再被使用或者即将被销毀时, 可以避免内存空间的释放和分配,<br>
+延长变量值的生命周期,常用来完成移动构造或者移动赋值的特殊任务</p>
+</blockquote>
+<p><strong>纯右值：</strong><br>
+a）非引用返回的临时变量；<br>
+b) 运算表达式产生的结果；<br>
+c）字面常量（C 风格字符串除外，它是地址）。</p>
+<p><strong>将亡值：</strong><br>
+与右值引用相关的表达式，<br>
+例如：将要被移动的对象、T&amp;&amp;函数返回的值、std:move()的返回值、转换成 T&amp;&amp;的类型的转换函数的返回值。</p>
+<blockquote>
+<p>[!tip] 不懂纯右值和将亡值的区别其实没关系，统一看作右值即可，不影响使用。</p>
+</blockquote>
+<h1 id="2-右值引用"><a class="markdownIt-Anchor" href="#2-右值引用"></a> 2 右值引用</h1>
+<blockquote>
+<p>[!cite]<br>
+C<ins>98 中的引1用很常见，就是给变量取个别名，在C</ins>11中，因为增加了右值引用(rvalue reference)的概念，所以C++98 中的引用都称为了左值引用(lvalue reference)。</p>
+</blockquote>
+<p><strong>普通的引用是左值引用</strong></p>
+<p>右值引用就是给右值取个名字。<br>
+右值有了名字之后，就成了一个普通变量，可以像使用左值一样使用它们: eg: ++, 取址, 加 const 等等</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++">语法：数据类型&amp;&amp; 变量名=右值;<br></code></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>[!example]<br>
+![[左右值引用 2022-10-29 17.09.39.excalidraw]]</p>
+</blockquote>
+<p><strong>引入右值引用的主要目的是实现移动语义。</strong></p>
+<p>左值引用只能绑定（关联、指向)左值，右值引用只能绑定右值，如果绑定的不对，编译就会失败。<br>
+但是，<strong>常量左值引用</strong>却是个奇葩，它可以算是一个万能的引用类型，<br>
+它可以绑定<strong>非常量左值</strong>、<strong>常量左值</strong>、<strong>右值</strong>，<br>
+而且在绑定右值的时候，常量左值引用还可以像右值引用一样将右值的生命期延长，<br>
+缺点是，只能读不能改。</p>
+<p>![[左右值引用 2022-10-29 17.23.49.excalidraw]]</p>
+<h2 id="21-总结"><a class="markdownIt-Anchor" href="#21-总结"></a> 2.1 总结</h2>
+<p>总结一下，其中T是一个具体类型：<br>
+1）左值引用，使用T&amp;，只能绑定左值。<br>
+2）右值引用，使用T&amp;＆，只能绑定右值。<br>
+3）已命名的右值引用是左值。<br>
+4）常量左值，使用 const T&amp;，既可以绑定左值又可以绑定右值。</p>
+<h1 id="3-移动语义"><a class="markdownIt-Anchor" href="#3-移动语义"></a> 3 移动语义</h1>
+<blockquote>
+<p>[!tip]<br>
+浅拷贝: a 和 b 的指针指向了同一块内存, 就是浅拷贝, 只是数据的简单赋值;</p>
+<p>深拷贝: 深拷贝就是再拷贝对象时, 如果被拷贝对象内部还有指针引用指向其它资源, 自己需要重新开辟一块新内存存储资源</p>
+</blockquote>
+<p>如果一个对象中有堆区资源，需要编写拷贝构造函数和赋值函数，实现深拷贝。<br>
+深拷贝把对象中的堆区资源复制了一份，<br>
+如果源对象（被拷贝的对象）是临时对象，拷贝完就没什么用了，这样会造成没有意义的资源申请和释放操作。<br>
+如果能够直接使用源对象拥有的资源，可以节省资源申请和释放的时间。<br>
+C++11新增加的移动语义就能够做到这一点。</p>
+<p>可以理解为转移所有权, 对于移动语义, 类似于转让或者资源窃取的意思, 对于那块资源, 转为自己所拥有, 别人不再拥有也不会再使用。</p>
+<p>通过移动构造函数使用移动语义, 也就是 std:: move; <strong>移动语义仅针对于那些实现了移动构造函数的类的对象</strong>,<br>
+对于那种基本类型 int、float 等没有任何优化作用, 还是会拷贝, 因为它们实现没有对应的移动构造函数</p>
+<blockquote>
+<p>[!summary] 注意<br>
+1）对于一个左值，会调用拷贝构造函数，但是有些左值是局部变量，生命周期也很短，能不能也移动而不是拷贝呢？<br>
+C<ins>11 为了解决这个问题，提供了 std:move()方法来将左值转义为右值，从而方便使用移动语义。它其实就是告诉编译器，虽然我是一个左值，但不要对我用拷贝构造函数，用移动构造<br>
+函数吧。<br>
+左值对象被转移资源后，不会立刻析构，只有在离开自己的作用域的时候才会析构，如果继续使用左值中的资源，可能会发生意想不到的错误。<br>
+2）如果没有提供移动构造/赋值函数，只提供了拷贝构造/赋值函数，编译器找不到移动构造/赋值函数就去寻找拷贝构造/赋值函数。<br>
+3)C</ins>11 中的所有容器都实现了移动语义，避免对含有资源的对象发生无谓的拷贝。<br>
+4）移动语义对于拥有资源（如内存、文件句柄）对象有效，如果是基本类型，使用移动语义没有意义。</p>
+</blockquote>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++">移动构造函数的语法：<br>类名 (类名&amp;&amp; 源对象）{.....}<br>移动赋值函数的语法：<br>类名&amp; <span class="hljs-keyword">operator</span>=(类名&amp;＆ 源对象）{.....}<br></code></pre></td></tr></tbody></table></figure>
+<p>![[左右值引用 2022-10-29 17.36.40.excalidraw]]</p>
+<h1 id="4-完美转发"><a class="markdownIt-Anchor" href="#4-完美转发"></a> 4 、完美转发</h1>
+<p>实现写一个接受任意实参的函数模板, 并转发到其它函数, 目标函数会收到与转发函数完全相同的实参, 通过 std:: forward () 实现</p>
+<blockquote>
+<p>[!tip] 还没看<br>
+<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1D84y1z7kT?p=3&amp;vd_source=f2340d96e99780a96b50d8096ffaaf1a">C++11完美转发_哔哩哔哩_bilibili</a></p>
+</blockquote>
+<hr>
+<p><strong>其他资料</strong></p>
+ <!-- basicblock-start oid="ObsBNL6CNVpHXe0EXZ9bQ7rl"  --> 
+<p>📝左右值引用:: <a href="marginnote3app://note/D712A772-10A2-4337-8F11-A8DEB29AA98A">margin: 右值引用</a><br>
+2022/10/29: 第一次创建</p>
+<!-- basicblock-end -->
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/" class="category-chain-item">👨🏻‍💻code</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/C/" class="category-chain-item">C++</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/C/C-11-%E6%96%B0%E7%89%B9%E6%80%A7/" class="category-chain-item">C++ 11 新特性</a>
+  
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/1200/" title="nullptr">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">nullptr</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/211/" title="操作系统如何让 CPU 执行程序">
+                        <span class="hidden-mobile">操作系统如何让 CPU 执行程序</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

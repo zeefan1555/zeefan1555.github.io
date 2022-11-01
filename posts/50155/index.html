@@ -24,7 +24,7 @@
 <meta property="og:description" content="1 不含函数或者含有函数:: ![[空类 2022-09-21 22.16.00.excalidraw]] 多重继承的空类的大小也是1。 12class Father1{}; class Father2{};class Child:Father1, Father2{};  2 含有虚函数:: ![[空类 2022-09-21 22.21.22.excalidraw]]   3 何时共享虚函数地址">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-09-21T14:11:00.000Z">
-<meta property="article:modified_time" content="2022-10-20T07:43:26.380Z">
+<meta property="article:modified_time" content="2022-10-25T15:02:13.659Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -284,7 +284,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年10月20日 下午
+                    本文最后更新于：2022年10月25日 晚上
                   
                 
               </p>
@@ -297,7 +297,7 @@
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Father1</span>{}; <span class="hljs-keyword">class</span> <span class="hljs-title class_">Father2</span>{};<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Child</span>:Father1, Father2{};<br></code></pre></td></tr></tbody></table></figure>
 <h1 id="2-含有虚函数"><a class="markdownIt-Anchor" href="#2-含有虚函数"></a> 2 含有虚函数::</h1>
 <p>![[空类 2022-09-21 22.21.22.excalidraw]]</p>
-<!-- basicblock-start deck= "❓疑问::👨🏻‍💻code::C++::C++基础::空类.md"-->
+<!-- basicblock-start oid="ObsKtq9Flxcv4NbeB7B91Ryi" deck= "❓疑问::👨🏻‍💻code::C++::C++基础::空类.md"-->
 <h1 id="3-何时共享虚函数地址表"><a class="markdownIt-Anchor" href="#3-何时共享虚函数地址表"></a> 3 何时共享虚函数地址表::</h1>
 <!-- basicblock-end -->
 <p>如果派生类继承的第一个是基类，且该基类定义了虚函数地址表，则派生类就共享该表首址占用的存储单元。<br>

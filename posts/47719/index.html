@@ -16,15 +16,15 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1 分类 智能指针是为了解决动态分配内存导致内存泄露和多次释放同一内存所提出的，C11 标准中放在 &lt;memory&gt; 头文件。 包括：独占指针，共享指针，弱指针 c++中为什么要有智能指针 ‌‌‌ ![[智能指针 2022-10-20 17.17.29.excalidraw]]  1.1 unique_ptr‌![[unique_ptr.excalidraw]] 1、unique_p">
+    <meta name="description" content="1 分类 智能指针是为了解决动态分配内存导致内存泄露和多次释放同一内存所提出的，C11 标准中放在 &lt;memory&gt; 头文件。 包括：独占指针，共享指针，弱指针 c++中为什么要有智能指针: 解决不用的指针未释放的问题 ‌  1.1 unique_ptr‌![[unique_ptr.excalidraw]] 1、unique_ptr&quot;唯一&quot;拥有其所指对象 同一时刻只能有一个 uniq">
 <meta property="og:type" content="article">
 <meta property="og:title" content="智能指针">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/47719/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="1 分类 智能指针是为了解决动态分配内存导致内存泄露和多次释放同一内存所提出的，C11 标准中放在 &lt;memory&gt; 头文件。 包括：独占指针，共享指针，弱指针 c++中为什么要有智能指针 ‌‌‌ ![[智能指针 2022-10-20 17.17.29.excalidraw]]  1.1 unique_ptr‌![[unique_ptr.excalidraw]] 1、unique_p">
+<meta property="og:description" content="1 分类 智能指针是为了解决动态分配内存导致内存泄露和多次释放同一内存所提出的，C11 标准中放在 &lt;memory&gt; 头文件。 包括：独占指针，共享指针，弱指针 c++中为什么要有智能指针: 解决不用的指针未释放的问题 ‌  1.1 unique_ptr‌![[unique_ptr.excalidraw]] 1、unique_ptr&quot;唯一&quot;拥有其所指对象 同一时刻只能有一个 uniq">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-10-20T08:00:00.000Z">
-<meta property="article:modified_time" content="2022-10-20T13:07:55.768Z">
+<meta property="article:modified_time" content="2022-10-26T13:17:15.860Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -284,7 +284,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年10月20日 晚上
+                    本文最后更新于：2022年10月26日 晚上
                   
                 
               </p>
@@ -294,9 +294,8 @@
               <h1 id="1-分类"><a class="markdownIt-Anchor" href="#1-分类"></a> 1 分类</h1>
 <p>智能指针是为了解决动态分配内存导致内存泄露和多次释放同一内存所提出的，C11 标准中放在 <code>&lt;memory&gt;</code> 头文件。<br>
 包括：独占指针，共享指针，弱指针</p>
-<p>c++中为什么要有智能指针<br>
-‌‌‌<br>
-![[智能指针 2022-10-20 17.17.29.excalidraw]]</p>
+<p>c++中为什么要有智能指针: 解决不用的指针未释放的问题<br>
+‌</p>
 <h2 id="11-unique_ptrunique_ptrexcalidraw"><a class="markdownIt-Anchor" href="#11-unique_ptrunique_ptrexcalidraw"></a> 1.1 unique_ptr‌![[unique_ptr.excalidraw]]</h2>
 <p>1、unique_ptr"唯一"拥有其所指对象<br>
 同一时刻只能有一个 unique_ptr 指向给定对象，离开作用域时，若其指向对象，则将其所指对象销毁（默认 delete<br>
@@ -305,7 +304,7 @@
 需要将其绑定到一个 new /make_unique 返回的指针上</p>
 <p>3、unique_ptr 不支持普通的拷贝和赋值（因为拥有指向的对象）<br>
 但是可以拷贝和赋值一个将要被销毁的 unique_ptr; 可以通过 move /  (❓或者 release reset) 将指针所有权从一个（非 const) unique_ptr 转移到另一个 unique。</p>
-<!-- basicblock-start deck= "❓疑问::👨🏻‍💻code::C++::C++基础::智能指针.md"-->
+<!-- basicblock-start oid="ObsZ97PlOXcHxxw2mpsr48lI" deck= "❓疑问::👨🏻‍💻code::C++::C++基础::智能指针.md"-->
 <h2 id="12-shared_ptr"><a class="markdownIt-Anchor" href="#12-shared_ptr"></a> 1.2 shared_ptr::</h2>
 <!-- basicblock-end -->
 <p>顾名思义 共享指针可以被共享 不像唯一指针 共享指针可以被多个所有者共享这意味着你可以将一个原始指针分配给多个所有者</p>
@@ -328,13 +327,13 @@
 但 weak_ptr 没有共享资源，它的构造不会引起指针引用计数的增加。</p>
 <p>2、和 shared_ptr 指向相同内存 shared_ptr 析构之后内存释放，<br>
 在使用之前使用函数 Iock () 检查 weak_ptr 是否为空指针。</p>
-<!-- basicblock-start deck= "❓疑问::👨🏻‍💻code::C++::C++基础::智能指针.md"-->
+<!-- basicblock-start oid="ObsrsNRG1IxVnVdh4RXwgrG1" deck= "❓疑问::👨🏻‍💻code::C++::C++基础::智能指针.md"-->
 <p>那个视频里没听懂::</p>
 <!-- basicblock-end -->
 <p>![[weak_ptr.excalidraw]]</p>
 <hr>
 <p><strong>其他资料</strong></p>
- <!-- basicblock-start  --> 
+ <!-- basicblock-start oid="ObsqttRZJHmd5hOUSyNURDzt"  --> 
 <p>#历史记录:: <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV123411T747/?spm_id_from=333.788.recommend_more_video.4&amp;vd_source=f2340d96e99780a96b50d8096ffaaf1a">C++智能指针初学者20分钟入门[搬运自油管#code_beauty]_哔哩哔哩_bilibili</a><br>
 2022/10/20🌵智能指针 : 第一次创建</p>
 <!-- basicblock-end -->

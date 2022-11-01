@@ -24,7 +24,7 @@
 <meta property="og:description" content="1 git clone 直到现在, 教程都聚焦于本地仓库的操作（branch、merge、rebase 等等）。但我们现在需要学习远程仓库的操作 —— 我们需要一个配置这种环境的命令, 它就是 git clone。 从技术上来讲，git clone 命令在真实的环境下的作用是在本地创建一个远程仓库的拷贝（比如从 github.com）。 但在我们的教程中使用这个命令会有一些不同 —— 它会在远程">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-08-19T15:53:00.000Z">
-<meta property="article:modified_time" content="2022-08-22T06:01:13.625Z">
+<meta property="article:modified_time" content="2022-11-01T13:09:40.664Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="git">
 <meta name="twitter:card" content="summary_large_image">
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          297 字
+          468 字
         
       </span>
     
@@ -234,7 +234,7 @@
         
         
         
-          2 分钟
+          3 分钟
         
       </span>
     
@@ -285,7 +285,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年8月22日 下午
+                    本文最后更新于：2022年11月1日 晚上
                   
                 
               </p>
@@ -295,6 +295,8 @@
               <h1 id="1-git-clone"><a class="markdownIt-Anchor" href="#1-git-clone"></a> 1 git clone</h1>
 <p>直到现在, 教程都聚焦于<strong>本地</strong>仓库的操作（branch、merge、rebase 等等）。但我们现在需要学习远程仓库的操作 —— 我们需要一个配置这种环境的命令, 它就是 <code>git clone</code>。 从技术上来讲，<code>git clone</code> 命令在真实的环境下的作用是在<strong>本地</strong>创建一个远程仓库的拷贝（比如从 <a target="_blank" rel="noopener" href="http://github.com">github.com</a>）。 但在我们的教程中使用这个命令会有一些不同 —— 它会在远程创建一个你本地仓库的副本。显然这和真实命令的意思刚好相反，但是它帮咱们把本地仓库和远程仓库关联到了一起，在教程中就凑合着用吧。</p>
 <p>![[Learn G’i’t—2 2022-08-20 00.14.03.excalidraw]]</p>
+<h1 id="2-git-remote"><a class="markdownIt-Anchor" href="#2-git-remote"></a> 2 git remote</h1>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// 删除原有的地址</span><br>git remote rm origin <br><span class="hljs-comment">// 重新添加</span><br>git remote add origin [url]<span class="hljs-comment">// url 要用 SSH 格式的</span><br><span class="hljs-comment">// 查看仓库</span><br>git remote -v<br><br><span class="hljs-comment">// eg</span><br>git remote add origin git@github.com:zeefan1555/obsidian-backup.git<br></code></pre></td></tr></tbody></table></figure>
 <hr>
 <p><strong>参考资料</strong><br>
 <a href="obsidian://advanced-uri?vault=myblog&amp;uid=8e7c76fb-e269-49fb-b27e-09f50b0da5f0">ob</a></p>

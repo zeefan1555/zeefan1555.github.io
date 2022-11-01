@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202210202046126.png">
 <meta property="og:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202210202049202.png">
 <meta property="article:published_time" content="2022-10-20T12:38:00.000Z">
-<meta property="article:modified_time" content="2022-10-20T13:58:32.701Z">
+<meta property="article:modified_time" content="2022-10-25T15:02:16.507Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202210202046126.png">
@@ -287,7 +287,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年10月20日 晚上
+                    本文最后更新于：2022年10月25日 晚上
                   
                 
               </p>
@@ -298,13 +298,13 @@
 <p>把从 strsrc 地址开始且含有 <code>\O</code> 结束符的字符串, 复制到以 strdest 开始的地址空间，<br>
 返回值的类型为 char*</p>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">char</span> *<span class="hljs-title function_">strcpy</span> <span class="hljs-params">( <span class="hljs-type">char</span> *strDest, <span class="hljs-type">const</span> <span class="hljs-type">char</span> strSrc)</span><br></code></pre></td></tr></tbody></table></figure>
-<!-- basicblock-start deck= "❓疑问::👨🏻‍💻code::C++::C++基础::字符串函数.md"-->
+<!-- basicblock-start oid="ObsQnb3jtH3OQohGpwGiXsuq" deck= "❓疑问::👨🏻‍💻code::C++::C++基础::字符串函数.md"-->
 <h2 id="11-实现内存拷贝函数"><a class="markdownIt-Anchor" href="#11-实现内存拷贝函数"></a> 1.1 实现内存拷贝函数::</h2>
 <!-- basicblock-end -->
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">char</span> *<span class="hljs-title">strcpy</span> <span class="hljs-params">( <span class="hljs-type">char</span> *strDest, <span class="hljs-type">const</span> <span class="hljs-type">char</span> strSrc)</span></span><br><span class="hljs-function"></span><br><span class="hljs-function"><span class="hljs-title">assert</span> <span class="hljs-params">( (strDest != <span class="hljs-literal">NULL</span>) &amp;&amp; (strsrc!= <span class="hljs-literal">NULL</span>) )</span></span>;<br><span class="hljs-type">char</span> *address = strDest <br><span class="hljs-keyword">while</span>( (*strDest++ = *strSrc++) != <span class="hljs-string">'\0'</span>) ;<br><span class="hljs-keyword">return</span> address;<br><br></code></pre></td></tr></tbody></table></figure>
 <p>‌‌‌<br>
 ![[字符串函数 2022-10-20 21.46.36.excalidraw]]</p>
-<!-- basicblock-start deck= "❓疑问::👨🏻‍💻code::C++::C++基础::字符串函数.md"-->
+<!-- basicblock-start oid="ObsXtfED8VBBxOlbKX5O3Wgd" deck= "❓疑问::👨🏻‍💻code::C++::C++基础::字符串函数.md"-->
 <h2 id="12-假如考虑-dst-和-src-内存重叠的情况strcpy-该怎么实现"><a class="markdownIt-Anchor" href="#12-假如考虑-dst-和-src-内存重叠的情况strcpy-该怎么实现"></a> 1.2 假如考虑 dst 和 src 内存重叠的情况，strcpy 该怎么实现::</h2>
 <!-- basicblock-end -->
 <p><a href="marginnote3app://note/B3CCC4DA-EBFC-40FB-8E82-2126D75E1395">margin: 假如考虑dst和src内存重叠的情况,strcpy该怎么实现</a><br>
@@ -327,7 +327,7 @@
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs c"><br><span class="hljs-comment">//strcmp的实现</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">strcmp</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> str1,<span class="hljs-type">const</span> <span class="hljs-type">char</span> str2)</span>{<br>比较两个字符串设这两个字符串为 str1,str2, <br>若 str1 == str2, 则返回零<br>若 str1 &lt; str2, 则返回负数<br>若 str1 &gt; str2, 则返回正<br><br><br><br>assert(str1 &amp;str2); <br><span class="hljs-comment">//找到首个不相等的字符</span><br><span class="hljs-keyword">while</span>(*str1 &amp;&amp; *str2 &amp;&amp; (*str1 == *str2)) { <br>        str1++;<br>        str2++; <br>    }<br><span class="hljs-keyword">return</span> *str1 -*str2; <br>}<br></code></pre></td></tr></tbody></table></figure>
 <hr>
 <p><strong>其他资料</strong></p>
- <!-- basicblock-start  --> 
+ <!-- basicblock-start oid="ObsMDrHBn9MXdAT3ksQnLEcD"  --> 
 <p>#历史记录:: <a href="marginnote3app://note/56EA588D-C1FA-4C28-8B3A-C621894541E4">margin: C++内存模型</a><br>
 2022/10/20🌵字符串操作函数 : 第一次创建</p>
 <!-- basicblock-end -->

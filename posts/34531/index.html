@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://code-thinking-1253855093.file.myqcloud.com/pics/20211027181706.png">
 <meta property="article:published_time" content="2022-10-21T02:42:00.000Z">
-<meta property="article:modified_time" content="2022-10-21T03:15:56.317Z">
+<meta property="article:modified_time" content="2022-10-25T15:00:44.879Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://code-thinking-1253855093.file.myqcloud.com/pics/20211027181706.png">
@@ -286,7 +286,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年10月21日 上午
+                    本文最后更新于：2022年10月25日 晚上
                   
                 
               </p>
@@ -323,7 +323,7 @@
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">private</span>:<br>    vector&lt;<span class="hljs-type">int</span>&gt; path;<br>    vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; result;<br>    <br>    <br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">backtracking</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums, vector&lt;<span class="hljs-type">bool</span>&gt; used)</span></span>{<br>        <span class="hljs-keyword">if</span>(path.<span class="hljs-built_in">size</span>() == nums.<span class="hljs-built_in">size</span>()){<br>            result.<span class="hljs-built_in">push_back</span>(path);<br>            <span class="hljs-keyword">return</span>;<br>        }<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; nums.<span class="hljs-built_in">size</span>(); i++){<br>            <span class="hljs-keyword">if</span>(used[i] == <span class="hljs-literal">true</span>) <span class="hljs-keyword">continue</span>; <span class="hljs-comment">// 目的是: 跳到收集过元素的下一个位置</span><br>            used[i] = <span class="hljs-literal">true</span>;<br>            path.<span class="hljs-built_in">push_back</span>(nums[i]);<br>            <span class="hljs-built_in">backtracking</span>(nums, used);<br>            path.<span class="hljs-built_in">pop_back</span>();<br>            used[i] = <span class="hljs-literal">false</span>;<br>            <br>        }<br>    }<br><br><span class="hljs-keyword">public</span>:<br>    vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">permute</span>(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums) {<br>        <span class="hljs-function">vector&lt;<span class="hljs-type">bool</span>&gt; <span class="hljs-title">used</span><span class="hljs-params">(nums.size(), <span class="hljs-literal">false</span>)</span></span>; <span class="hljs-comment">// ❗️在这里赋值, 在上面赋值找不到nums.size()</span><br>        <span class="hljs-built_in">backtracking</span>(nums, used);<br>        <span class="hljs-keyword">return</span> result;<br>        <br><br><br>    }<br>};<br><br><br></code></pre></td></tr></tbody></table></figure>
 <hr>
 <p><strong>其他资料</strong></p>
- <!-- basicblock-start  --> 
+ <!-- basicblock-start oid="ObsusRGQqgaBQJWOkxb3HnBj"  --> 
 <p>#历史记录::<br>
 2022/10/21🌵15. 全排列 : 第一次创建</p>
 <!-- basicblock-end -->
@@ -386,7 +386,7 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/580/" title="排列问题">
+                      <a href="/posts/581/" title="排列问题">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">排列问题</span>
                         <span class="visible-mobile">上一篇</span>
@@ -396,8 +396,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/30121/" title="14. 递增子序列">
-                        <span class="hidden-mobile">14. 递增子序列</span>
+                      <a href="/posts/20568/" title="子集问题">
+                        <span class="hidden-mobile">子集问题</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

@@ -23,12 +23,10 @@
 <meta property="og:site_name" content="一杯空气">
 <meta property="og:description" content="我们之前在讲解SQL语句的时候,讲解了DQL语句,也就是数据查询语句,但是之前讲解的查询都是单表查询,而本章节我们要学习的则是多表查询操作,主要从以下几个方面进行讲解。::   0.1 数据准备 1). 删除之前 emp, dept表的测试数据 2). 执行如下脚本,创建emp表与dept表并插入测试数据 1234567891011121314151617181920212223242526272">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202210082212714.png">
 <meta property="article:published_time" content="2022-10-08T12:08:00.000Z">
-<meta property="article:modified_time" content="2022-10-09T14:39:52.261Z">
+<meta property="article:modified_time" content="2022-11-01T07:41:38.855Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202210082212714.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -224,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          8.6k 字
+          4.7k 字
         
       </span>
     
@@ -235,7 +233,7 @@
         
         
         
-          44 分钟
+          24 分钟
         
       </span>
     
@@ -286,7 +284,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年10月9日 晚上
+                    本文最后更新于：2022年11月1日 下午
                   
                 
               </p>
@@ -301,9 +299,7 @@
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs MySQL">-- 创建dept表,并插入数据<br>create table dept(     <br>	id   int auto_increment comment 'ID' primary key,<br>	name varchar(50) not null comment '部门名称' )comment '部门表'; <br><br>INSERT INTO dept (id, name) VALUES (1, '研发部'), (2, '市场部'),(3, '财务部'), (4, '销售部'), (5, '总经办'), (6, '人事部');<br><br><br>-- 创建emp表,并插入数据<br>create table emp(     <br>	id  int auto_increment comment 'ID' primary key,<br>	name varchar(50) not null comment '姓名',     <br>	age  int comment '年龄',     <br>	job varchar(20) comment '职位',     <br>	salary int comment '薪资',    <br>	entrydate date comment '入职时间',     <br>	managerid int comment '直属领导ID',     <br>	dept_id int comment '部门ID' <br>)comment '员工表';<br>	<br>-- 添加外键<br>alter table emp add constraint fk_emp_dept_id foreign key (dept_id) references dept(id);<br>INSERT INTO emp (id, name, age, job,salary, entrydate, managerid, dept_id)<br>	VALUES             <br>	(1, '金庸', 66, '总裁',20000, '2000-01-01', null,5),             <br>	(2, '张无忌', 20, '项目经理',12500, '2005-12-05', 1,1),             <br>	(3, '杨逍', 33, '开发', 8400,'2000-11-03', 2,1),             <br>	(4, '韦一笑', 48, '开发',11000, '2002-02-05', 2,1),             <br>	(5, '常遇春', 43, '开发',10500, '2004-09-07', 3,1),             <br>	(6, '小昭', 19, '程序员鼓励师',6600, '2004-10-12', 2,1),             <br>	(7, '灭绝', 60, '财务总监',8500, '2002-09-12', 1,3),            <br>	(8, '周芷若', 19, '会计',48000, '2006-06-02', 7,3),             <br>	(9, '丁敏君', 23, '出纳',5250, '2009-05-13', 7,3),             <br>	(10, '赵敏', 20, '市场部总监',12500, '2004-10-12', 1,2),             <br>	(11, '鹿杖客', 56, '职员',3750, '2006-10-03', 10,2),             <br>	(12, '鹤笔翁', 19, '职员',3750, '2007-05-09', 10,2),             <br>	(13, '方东白', 19, '职员',5500, '2009-02-12', 10,2),             <br>	(14, '张三丰', 88, '销售总监',14000, '2004-10-12', 1,4),             <br>	(15, '俞莲舟', 38, '销售',4600, '2004-10-12', 14,4),             <br>	(16, '宋远桥', 40, '销售',4600, '2004-10-12', 14,4),             <br>	(17, '陈友谅', 42, null,2000, '2011-10-12', 1,null);<br><br><br><br></code></pre></td></tr></tbody></table></figure>
 <pre><code class="hljs">dept表共6条记录,emp表共17条记录。
 </code></pre>
-<!-- basicblock-start oid="Obs5jJI2XSF86UxAkYwgQEbE" --> 
 <h1 id="1-概述"><a class="markdownIt-Anchor" href="#1-概述"></a> 1 概述::</h1>
-<!-- basicblock-end -->
 <p><strong>多表查询就是指从多张表中查询数据。</strong><br>
 原来查询单表数据,执行的SQL形式为:select * from emp;<br>
 那么我们要执行多表查询,就只需要使用逗号分隔多张表即可,如: select * from emp , dept ; 具体的执行结果如下:</p>
@@ -311,12 +307,10 @@
 <p>[!example]- 笛卡尔积<br>
 ![[笛卡尔积.excalidraw]]</p>
 </blockquote>
-<!-- basicblock-start oid="Obs9pzzKwkHDnW6SFWiqwAg5" --> 
 <h1 id="2-多表关系"><a class="markdownIt-Anchor" href="#2-多表关系"></a> 2 多表关系::</h1>
 <blockquote>
 <p>2022/10/08: ⏱0-34, 感觉时间都花在了弄图上边, 调格式上了</p>
 </blockquote>
-<!-- basicblock-end -->
 <p>由于业务之间相互关联,所以各个表结构之间也存在着各种联系,基本上分为三种:</p>
 <ul>
 <li>一对多(多对一)</li>
@@ -327,163 +321,9 @@
 <p>[!example]-<br>
 ![[5.1 多表关系 2022-10-08 20.14.43.excalidraw]]</p>
 </blockquote>
-<p>用到的代码<br>
-create table student_course(<br>
-id int auto_increment comment ‘主键’ primary key,<br>
-studentid int not null comment ‘学生ID’,<br>
-courseid  int not null comment ‘课程ID’,<br>
-constraint fk_courseid foreign key (courseid) references course (id),<br>
-constraint fk_studentid foreign key (studentid) references student (id)<br>
-)comment ‘学生课程中间表’;</p>
-<!-- basicblock-start oid="Obsxh6hLLAl5lpkpAzsYbPOT" --> 
-<h1 id="3-分类"><a class="markdownIt-Anchor" href="#3-分类"></a> 3 分类::</h1>
-<!-- basicblock-end -->
-<ul>
-<li>连接查询
-<ul>
-<li>内连接:相当于查询A、B交集部分数据</li>
-<li>外连接:</li>
-<li>左外连接:查询左表所有数据,以及两张表交集部分数据</li>
-<li>右外连接:查询右表所有数据,以及两张表交集部分数据</li>
-<li>自连接:当前表与自身的连接查询,自连接必须使用表别名</li>
-</ul>
-</li>
-<li>子查询</li>
-</ul>
-<!-- basicblock-start oid="ObsJsY39bMq3maKLKjNFE1xL" --> 
-<h2 id="31-内连接"><a class="markdownIt-Anchor" href="#31-内连接"></a> 3.1 内连接::</h2>
-<!-- basicblock-end -->
-<p>内连接查询的是两张表交集部分的数据</p>
-<p>内连接的语法分为两种: 隐式内连接、显式内连接</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs MySQL">1). 隐式内连接<br>SELECT  字段列表   FROM   表1 , 表2   WHERE   条件 ... ;<br><br><br>2). 显式内连接<br>SELECT  字段列表   FROM   表1  [ INNER ]  JOIN 表2  ON  连接条件 ... ; -- inner 可以省略<br><br>-- 说明<br>相当于多了几个关键字显示的说明他们连接了<br>隐式只是没有关键字, 也连接了<br><br>-- 💡统一用显式连接, 因为可以和外连接保持一致<br></code></pre></td></tr></tbody></table></figure>
-<blockquote>
-<p>[!example]-<br>
-![[5. 多表查询 2022-10-08 21.45.28.excalidraw]]</p>
-</blockquote>
-<p>多表查询和起别名联立使用<br>
-表的别名:</p>
-<ol>
-<li>tablea as 别名1 , tableb as 别名2 ;  /💡as 可以省略</li>
-<li>tablea 别名1 , tableb 别名2 ;</li>
-</ol>
-<blockquote>
-<p>[!tip] 一旦为表起了别名,就不能再使用表名来指定对应的字段了,此时只能够使用别名来指定字段。</p>
-</blockquote>
-<!-- basicblock-start oid="ObsbnzRwEGow4zlkoaxIesmf" --> 
-<h2 id="32-外连接"><a class="markdownIt-Anchor" href="#32-外连接"></a> 3.2 外连接::</h2>
-<!-- basicblock-end -->
-<p><img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202210082212714.png" srcset="/img/loading.gif" lazyload alt="|500"></p>
-<p>外连接分为两种,分别是:左外连接 和 右外连接。<br>
-1). 左外连接</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs MySQL">SELECT  字段列表   FROM   表1  LEFT  [ OUTER ]  JOIN 表2  ON  条件 ... ;<br><br>-- 案例查询emp表的所有数据, 和对应的部门信息<br>select e.*, d.name from emp e left join dept d on e.dept_id = d.id;<br></code></pre></td></tr></tbody></table></figure>
-<p><strong>左外连接相当于查询表1(左表)的所有数据</strong>,当然也包含表1和表2交集部分的数据。</p>
-<p>2). 右外连接</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs MySQL">SELECT  字段列表   FROM   表1  RIGHT  [ OUTER ]  JOIN 表2  ON  条件 ... ;<br><br>-- 查询dept表的所有数据, 和对应的员工信息(右外连接)<br>select e.*, d.name from emp e right join dept d on e.dept_id = d.id;<br>select d.*, e.* from dept d left  join emp e on e.dept_id = d.id;<br><br><br></code></pre></td></tr></tbody></table></figure>
-<p><strong>右外连接相当于查询表2(右表)的所有数据</strong>,当然也包含表1和表2交集部分的数据。</p>
-<blockquote>
-<p>[!example]-<br>
-![[外连接.excalidraw]]</p>
-</blockquote>
-<blockquote>
-<p>[!tip]<br>
-注意事项:  左外连接和右外连接是可以相互替换的,只需要调整在连接查询时SQL中,表结构的先后顺序就可以了。<br>
-而我们在日常开发使用时,<strong>更偏向于左外连接</strong>。</p>
-</blockquote>
-<!-- basicblock-start oid="ObsRlpyhmGYW4D4lbLGhTRtz" --> 
-<h2 id="33-自连接"><a class="markdownIt-Anchor" href="#33-自连接"></a> 3.3 自连接::</h2>
-<!-- basicblock-end -->
-<h3 id="331-自连接查询"><a class="markdownIt-Anchor" href="#331-自连接查询"></a> 3.3.1 自连接查询</h3>
-<p>自连接查询,顾名思义,就是自己连接自己,也就是把一张表连接查询多次。</p>
-<p>语法</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs MySQL">SELECT  字段列表   FROM   表A   别名A   JOIN  表A    别名B   ON  条件 ... ;<br></code></pre></td></tr></tbody></table></figure>
-<p>而对于自连接查询,可以是内连接查询,也可以是外连接查询。</p>
-<blockquote>
-<p>[!example]-<br>
-![[5. 多表查询 2022-10-09 20.23.21.excalidraw]]</p>
-</blockquote>
-<blockquote>
-<p>[!tip]  注意事项:<br>
-在自连接查询中,必须要为表起别名,要不然我们不清楚所指定的条件、返回的字段,到底是哪一张表的字段。</p>
-</blockquote>
-<h3 id="332-联合查询"><a class="markdownIt-Anchor" href="#332-联合查询"></a> 3.3.2 联合查询</h3>
-<p>对于union查询,就是把多次查询的结果合并起来,形成一个新的查询结果集。</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs MySQL">SELECT  字段列表   FROM   表A  ...  <br>UNION [ ALL ] <br>SELECT  字段列表  FROM   表B  ....;<br><br></code></pre></td></tr></tbody></table></figure>
-<blockquote>
-<p>[!tip]<br>
-对于联合查询的多张表的列数必须保持一致,字段类型也需要保持一致。<br>
-union all 会将全部的数据直接合并在一起,union 会对合并之后的数据去重。<br>
-如果多条查询语句查询出来的结果，字段数量不一致，在进行union/union al1联合查询时，将会报错。</p>
-</blockquote>
-<blockquote>
-<p>[!example]-<br>
-![[5. 多表查询 2022-10-09 20.42.15.excalidraw]]</p>
-</blockquote>
-<!-- basicblock-start oid="Obsur8Pwpz1zDWswxu0WuwcZ" --> 
-<h2 id="34-子查询"><a class="markdownIt-Anchor" href="#34-子查询"></a> 3.4 子查询::</h2>
-<!-- basicblock-end -->
-<p>SQL语句中嵌套SELECT语句,称为嵌套查询,又称子查询。</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs MySQL">SELECT  *  FROM   t1   WHERE  column1 =  ( SELECT  column1  FROM  t2 );<br></code></pre></td></tr></tbody></table></figure>
-<p>子查询外部的语句可以是INSERT / UPDATE / DELETE / SELECT 的任何一个</p>
-<blockquote>
-<p>[!summary] 分类<br>
-根据子查询结果不同,分为:<br>
-A. 标量子查询(子查询结果为单个值)<br>
-B. 列子查询(子查询结果为一列)<br>
-C. 行子查询(子查询结果为一行)<br>
-D. 表子查询(子查询结果为多行多列)</p>
-</blockquote>
-<p>根据子查询位置,分为:<br>
-A. WHERE之后<br>
-B. FROM之后<br>
-C. SELECT之后</p>
-<h3 id="341-标量子查询"><a class="markdownIt-Anchor" href="#341-标量子查询"></a> 3.4.1 标量子查询</h3>
-<p>子查询返回的结果是单个值(数字、字符串、日期等),最简单的形式,这种子查询称为标量子查询。<br>
-常用的操作符:=  &lt;&gt;  &gt;   &gt;=   &lt;  &lt;=</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs MySQL">-- A. 查询 "销售部" 的所有员工信息<br>完成这个需求时,我们可以将需求分解为两步: <br><br>1. 查询 "销售部" 部门ID<br>select id from dept where name = '销售部';<br><br>2. 根据 "销售部" 部门ID, 查询员工信息<br>select * from emp where dept_id = (select id from dept where name = '销售部');<br><br>-- B. 查询在 "方东白" 入职之后的员工信息<br>完成这个需求时,我们可以将需求分解为两步: <br><br>1. 查询 方东白 的入职日期<br>select entrydate from emp where name = '方东白'; <br><br>1. 查询指定入职日期之后入职的员工信息<br>select * from emp where entrydate &gt; (select entrydate from emp where name = '方东白');<br><br><br><br></code></pre></td></tr></tbody></table></figure>
-<h3 id="342-列子查询"><a class="markdownIt-Anchor" href="#342-列子查询"></a> 3.4.2 列子查询</h3>
-<p>子查询返回的结果是一列(可以是多行),这种子查询称为列子查询。<br>
-常用的操作符:IN 、NOT IN 、 ANY 、SOME 、 ALL</p>
-<table>
-<thead>
-<tr>
-<th>操作符</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>IN</td>
-<td>在指定的集合范围内，多选一</td>
-</tr>
-<tr>
-<td>NOT IN</td>
-<td>不在指定的集合范围内</td>
-</tr>
-<tr>
-<td>ANY</td>
-<td>子查询返回列表中，有任意一个满足即可</td>
-</tr>
-<tr>
-<td>SOME</td>
-<td>与ANY等同，使用SOME的地方都可以使用ANY</td>
-</tr>
-<tr>
-<td>ALL</td>
-<td>子查询返回列表的所有值都必须满足</td>
-</tr>
-</tbody>
-</table>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs mysql">-- 查询销售部和市场部的所有员工信息<br>1. 查询 "销售部" 和 "市场部" 的部门ID<br>2. 根据部门ID, 查询员工信息<br><br>select * from employee where dept in (select id from dept where name = '销售部' or name = '市场部');<br><br>-- 查询比财务部所有人工资都高的员工信息<br>select * from employee where salary &gt; all(select salary from employee where dept = (select id from dept where name = '财务部'));<br><br>-- 查询比研发部任意一人工资高的员工信息<br>select * from employee where salary &gt; any (select salary from employee where dept = (select id from dept where name = '研发部'));<br></code></pre></td></tr></tbody></table></figure>
-<h3 id="343-行子查询"><a class="markdownIt-Anchor" href="#343-行子查询"></a> 3.4.3 行子查询</h3>
-<p>返回的结果是一行（可以是多列）。<br>
-常用操作符：=, &lt;, &gt;, IN, NOT IN</p>
-<p>例子：</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs mysql">-- 查询与'张无忌'的薪资及直属领导 相同的员工信息<br>1. 查询 "张无忌" 的薪资及直属领导<br>2. 查询与 "张无忌" 的薪资及直属领导相同的员工信息 ;<br><br>select salary, managerid from emp where name = '张无忌';<br>select * from emp where (salary,managerid) = (select salary, managerid from emp where name = '张无忌');<br><br><br><br><br></code></pre></td></tr></tbody></table></figure>
-<h3 id="344-表子查询"><a class="markdownIt-Anchor" href="#344-表子查询"></a> 3.4.4 表子查询</h3>
-<p>返回的结果是多行多列<br>
-常用操作符：IN</p>
-<p>例子：</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs mysql">A. 查询与 "鹿杖客" , "宋远桥" 的职位和薪资相同的员工信息<br>1. 查询 "鹿杖客" , "宋远桥" 的职位和薪资<br>2. 查询与 "鹿杖客" , "宋远桥" 的职位和薪资相同的员工信息<br><br><br>select job, salary from emp where name = '鹿杖客' or name = '宋远桥';<br>select * from emp where (job,salary) in ( select job, salary from emp where name = '鹿杖客' or name = '宋远桥' );<br><br><br><br>B. 查询入职日期是 "2006-01-01" 之后的员工信息 , 及其部门信息<br>分解为两步执行: <br>1. 入职日期是 "2006-01-01" 之后的员工信息<br>2. 查询这部分员工, 对应的部门信息;<br>select * from emp where entrydate &gt; '2006-01-01';<br>select e.*, d.* from (select * from emp where entrydate &gt; '2006-01-01') e left join dept d on e.dept_id = d.id ;<br><br><br><br><br><br></code></pre></td></tr></tbody></table></figure>
+<p>用到的代码</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs MySQL">create table student_course(<br>	id int auto_increment comment '主键' primary key,     <br>	studentid int not null comment '学生ID',     <br>	courseid  int not null comment '课程ID',     <br>	constraint fk_courseid foreign key (courseid) references course (id),     <br>	constraint fk_studentid foreign key (studentid) references student (id) <br>	)comment '学生课程中间表';<br></code></pre></td></tr></tbody></table></figure>
+<h1 id="3-多表查询的分类"><a class="markdownIt-Anchor" href="#3-多表查询的分类"></a> 3 [[多表查询的分类]]::</h1>
 <!-- basicblock-start oid="ObsKoFz2LyD20rQpsImLWiV4" --> 
 <h1 id="4-多表查询案例"><a class="markdownIt-Anchor" href="#4-多表查询案例"></a> 4 多表查询案例::</h1>
 <!-- basicblock-end -->
