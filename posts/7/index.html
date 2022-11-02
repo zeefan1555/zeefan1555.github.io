@@ -1,0 +1,827 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202206251952371.png">
+  <link rel="icon" href="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202206251952371.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="zeefan">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="无法修改是因为, 文档被 typor 锁定了   1 Variadic Template  数量不定的模板参数：这个东西是C++11一个非常意思的东西，他可以接受任意个参数，然后输出出来 使用的时候也是需要注意，对于一个数量不定的模板参数，记得需要一个同名的函数来对最后一个进行“垫底”的操作 一般来讲，有参数的比无参数的更加特化一点，无参数的更加泛化  12345678void print(){">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一杯空气">
+<meta property="og:url" content="https://zeefan1555.github.io/posts/7/index.html">
+<meta property="og:site_name" content="一杯空气">
+<meta property="og:description" content="无法修改是因为, 文档被 typor 锁定了   1 Variadic Template  数量不定的模板参数：这个东西是C++11一个非常意思的东西，他可以接受任意个参数，然后输出出来 使用的时候也是需要注意，对于一个数量不定的模板参数，记得需要一个同名的函数来对最后一个进行“垫底”的操作 一般来讲，有参数的比无参数的更加特化一点，无参数的更加泛化  12345678void print(){">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-11-02T00:58:06.169Z">
+<meta property="article:modified_time" content="2022-11-02T01:20:27.575Z">
+<meta property="article:author" content="zeefan">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>一杯空气</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.15.6/katex.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"zeefan1555.github.io","root":"/","version":"1.9.1","typing":{"enable":true,"typeSpeed":150,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"Text"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":10},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>一杯空气</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text=""></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-11-02 08:58" pubdate>
+          2022年11月2日 早上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          23 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none"></h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2022年11月2日 上午
+                  
+                
+              </p>
+            
+            <div class="markdown-body">
+              
+              <blockquote>
+<p>无法修改是因为, 文档被 typor 锁定了</p>
+</blockquote>
+<h1 id="1-variadic-template"><a class="markdownIt-Anchor" href="#1-variadic-template"></a> 1 Variadic Template</h1>
+<ul>
+<li>数量不定的模板参数：这个东西是C++11一个非常意思的东西，他可以接受任意个参数，然后输出出来</li>
+<li>使用的时候也是需要注意，对于一个数量不定的模板参数，记得需要一个同名的函数来对最后一个进行“垫底”的操作</li>
+<li>一般来讲，有参数的比无参数的更加特化一点，无参数的更加泛化</li>
+</ul>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">print</span><span class="hljs-params">()</span></span>{<br>    <span class="hljs-comment">//这里为空，作为最后的一个垫底操作</span><br>}<br><span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">typename</span> T,<span class="hljs-keyword">typename</span>... Types&gt;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">print</span><span class="hljs-params">(<span class="hljs-type">const</span> T&amp; firstargs,<span class="hljs-type">const</span> Types&amp; ...args)</span></span>{<br>	cout&lt;&lt;firstargs&lt;&lt;endl;<br>    <span class="hljs-built_in">print</span>(args...);<br>}<br></code></pre></td></tr></tbody></table></figure>
+<h1 id="2-initializer-list"><a class="markdownIt-Anchor" href="#2-initializer-list"></a> 2 Initializer-list</h1>
+<p>Initializer-list的使用</p>
+<ul>
+<li>对于何时使用initializer-list，一般情况下，我们在使用{}时候，如果构造函数有接受一个initializer-list，那么整个{}里面的内容就会被打包进去，然后传递给函数进行调用</li>
+<li>{}就会构造出一个array&lt;T,N&gt;,然后传入进去</li>
+</ul>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">print</span><span class="hljs-params">(std::initializer_list&lt;<span class="hljs-type">int</span>&gt; val)</span></span>{<br>	<span class="hljs-keyword">for</span>(<span class="hljs-keyword">auto</span> p=val.<span class="hljs-built_in">begin</span>();p!=val.<span class="hljs-built_in">end</span>();p++){<br>		std::cout&lt;&lt;*p&lt;&lt;std::endl;<br>	}<br>}<br></code></pre></td></tr></tbody></table></figure>
+<p>Initializer-list与初始化</p>
+<ul>
+<li>对于初始化，使用{}可以达到合适的初始化目标</li>
+</ul>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">int</span> j{}<span class="hljs-comment">//j=0;</span><br><span class="hljs-type">int</span> j<span class="hljs-comment">//undefine</span><br><span class="hljs-type">int</span> *p{}<span class="hljs-comment">//p=nullptr</span><br><span class="hljs-type">int</span> *p<span class="hljs-comment">//undefine</span><br></code></pre></td></tr></tbody></table></figure>
+<ul>
+<li>initializer-list对于隐式转换会报错/warning</li>
+</ul>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">int</span> j{<span class="hljs-number">5.0</span>}<span class="hljs-comment">//error</span><br></code></pre></td></tr></tbody></table></figure>
+<ul>
+<li>
+<p>initializer-list的初始化与拷贝</p>
+<p>对于其初始化，我们一般需要知道，其内部只是存储了一个指向第一个元素的指针指针和对应的函数</p>
+<p>所以如果我们拷贝他。其并不会把元素全部都复制一份，而是复制了其对应的指针。</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">//内部储存数据</span><br>iterator array<span class="hljs-comment">//指向头部</span><br>size_type len<span class="hljs-comment">//表示长度</span><br></code></pre></td></tr></tbody></table></figure>
+</li>
+</ul>
+<p>Initializer-list对标准库的影响</p>
+<ul>
+<li>标准库很多都使用了initializer-list，在C++11中，利用这个特性，我们可以将“一包”东西进行统一的操作，而不是单一单一一个一个来</li>
+</ul>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">auto</span> c=<span class="hljs-built_in">max</span>({<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>});<span class="hljs-comment">//寻找三个值中最大的</span><br>vector&lt;<span class="hljs-type">int</span>&gt; a{<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>};<span class="hljs-comment">//初始化</span><br><span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">ax</span><span class="hljs-params">({<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>})</span></span>;<span class="hljs-comment">//初始化</span><br>ax.<span class="hljs-built_in">insert</span>(ax.<span class="hljs-built_in">begin</span>()+<span class="hljs-number">3</span>,{<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>});<span class="hljs-comment">//一次性插入多个元素</span><br></code></pre></td></tr></tbody></table></figure>
+<h1 id="3-explicit"><a class="markdownIt-Anchor" href="#3-explicit"></a> 3 explicit</h1>
+<p>explicit它可以保证：不让编译器做隐式的类型转换</p>
+<p>C++11的explict可以使用在传入多个参数的explicit上了</p>
+<h1 id="4-defaultdelete"><a class="markdownIt-Anchor" href="#4-defaultdelete"></a> 4 =default，=delete</h1>
+<p>=delete可以用在任意函数身上</p>
+<p>=default则不能</p>
+<p>拷贝构造，移动构造以及对应的operator=只能有一份，所以不能在设定自己的函数之后再来一份default</p>
+<p>一般情况下，如果成员有指针类型，那么一般都要自己定义，否则使用default版本就可以了</p>
+<h1 id="5-alias-templatetype-alias"><a class="markdownIt-Anchor" href="#5-alias-templatetype-alias"></a> 5 Alias Template,type alias</h1>
+<p>using关键字代表别名，在cpp11中，using的功能更加强大</p>
+<ul>
+<li>using的命名效果甚至可以在template中使用，完美的进行调用</li>
+</ul>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">using</span> Vec＝std::vector&lt;T,mymalloc&lt;T&gt;&gt;;<br>Vec&lt;<span class="hljs-type">int</span>&gt; an<br><span class="hljs-comment">//这样可以成功的调用std::vector&lt;int,mymalloc&lt;int&gt;&gt;</span><br><span class="hljs-comment">//define和typedef都达不到对应的效果</span><br></code></pre></td></tr></tbody></table></figure>
+<ul>
+<li>但是这种方法到局限就是，没有办法进行偏特化和全特化</li>
+</ul>
+<p>using关键字还有一个作用就是作为类型别名</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">typedef</span> <span class="hljs-title">void</span><span class="hljs-params">(*func)</span><span class="hljs-params">(<span class="hljs-type">int</span>,<span class="hljs-type">int</span>)</span></span>;<span class="hljs-comment">//C语言就有的用法</span><br><span class="hljs-keyword">using</span> func=<span class="hljs-built_in">void</span>(*)(<span class="hljs-type">int</span>,<span class="hljs-type">int</span>);<span class="hljs-comment">//C++的用法，更加直观</span><br><span class="hljs-comment">//两者作用相同</span><br></code></pre></td></tr></tbody></table></figure>
+<p>using常用的几种方式</p>
+<ul>
+<li>using namespace std； using std：：cout</li>
+<li>using class：：member；//明确表明我需要使用那个函数（重载的时候可能会用到之类的）</li>
+<li>type alias，alias template</li>
+</ul>
+<p>using关键字总的来说就是能记录某一个状态</p>
+<ul>
+<li>记录vector的状态：（Vec）的例子，可以完美记录vector需要调用的函数，以及对应的默认函数</li>
+<li>记录一个名字：也就是作为类型别名</li>
+</ul>
+<h1 id="6-template-template-paramber"><a class="markdownIt-Anchor" href="#6-template-template-paramber"></a> 6 Template template paramber</h1>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">typename</span> T,<span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">class</span>,T&gt; <span class="hljs-keyword">class</span> <span class="hljs-title class_">container</span>&gt;<br></code></pre></td></tr></tbody></table></figure>
+<h1 id="7-noexpect"><a class="markdownIt-Anchor" href="#7-noexpect"></a> 7 noexpect</h1>
+<p>定义：保证函数不会丢出异常</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">f</span><span class="hljs-params">()</span>noexpect</span>;<span class="hljs-comment">//无论如何，函数都不能丢出异常</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">f</span><span class="hljs-params">()</span><span class="hljs-title">noexpect</span><span class="hljs-params">(<span class="hljs-literal">true</span>)</span></span>;<span class="hljs-comment">//在某种条件下，函数不会丢出异常</span><br></code></pre></td></tr></tbody></table></figure>
+<p>在使用move语义的时候，记得函数一定不能抛出异常，并且后面加上noexpect</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-built_in">mystring</span>(string &amp;&amp;s)noexpect....<br></code></pre></td></tr></tbody></table></figure>
+<h1 id="8-overridefinal"><a class="markdownIt-Anchor" href="#8-overridefinal"></a> 8 override，final</h1>
+<ul>
+<li>override检验是否是原来的函数重载</li>
+<li>final有两个地方
+<ul>
+<li>阻止子类继承父类的class</li>
+<li>阻止子类继承父类的virtual function</li>
+</ul>
+</li>
+</ul>
+<h1 id="9-decltype"><a class="markdownIt-Anchor" href="#9-decltype"></a> 9 decltype</h1>
+<p>decltype的三种使用方法</p>
+<ul>
+<li>用来声告一个return type</li>
+</ul>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-function"><span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">typename</span> T,<span class="hljs-keyword">typename</span> Q&gt;</span><br><span class="hljs-function"><span class="hljs-keyword">auto</span> <span class="hljs-title">add</span><span class="hljs-params">(T x,Q y)</span>-&gt;<span class="hljs-title">decltype</span><span class="hljs-params">(x+y)</span></span>;<br></code></pre></td></tr></tbody></table></figure>
+<ul>
+<li>适用于模板元编程</li>
+</ul>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs C++">map&lt;string,<span class="hljs-type">int</span>&gt; a;<br><span class="hljs-keyword">decltype</span>(a)::value_type elem;<span class="hljs-comment">//</span><br></code></pre></td></tr></tbody></table></figure>
+<ul>
+<li>传递一个由lambda对象返回的返回值的类型</li>
+</ul>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">auto</span> cmp=[](<span class="hljs-type">const</span> <span class="hljs-type">int</span> &amp;a,<span class="hljs-type">const</span> <span class="hljs-type">int</span> &amp;b){<br>		<span class="hljs-keyword">return</span> a&gt;b;<br>}<br><span class="hljs-function">std::set&lt;<span class="hljs-type">int</span>,<span class="hljs-title">decltype</span><span class="hljs-params">(cmp)</span>&gt; <span class="hljs-title">xx</span><span class="hljs-params">(cmp)</span></span>;<br></code></pre></td></tr></tbody></table></figure>
+<h1 id="10-lambdas"><a class="markdownIt-Anchor" href="#10-lambdas"></a> 10 Lambdas</h1>
+<p>C++ 11允许通过lambda定义一个inline function或功能单元， 他可以被用在local object或者parameter</p>
+<p>lambdas本身就是一个对象，如果要直接调用他，需要加一个括号</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs C++">[]{<br>   std::cout&lt;&lt;<span class="hljs-string">"hello"</span><br>}<br><span class="hljs-comment">//以上这个不能直接调用，如果需要直接调用的话需要按照下面这样写</span><br>[]{<br>   std::cout&lt;&lt;<span class="hljs-string">"hello"</span><br>}();<span class="hljs-comment">//注意这个括号，使用括号能够进行调用</span><br><span class="hljs-comment">//或者</span><br><span class="hljs-keyword">auto</span> I=[]{<br>   std::cout&lt;&lt;<span class="hljs-string">"hello"</span><br>}<br><span class="hljs-built_in">I</span>();<span class="hljs-comment">//发生调用</span><br><br></code></pre></td></tr></tbody></table></figure>
+<p>lambda格式回顾</p>
+<figure class="highlight elm"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs elm">[]()mutable throwspec-&gt;rec<span class="hljs-keyword">type</span>{}<br>/*<br>[] 捕获外部的非static objects<br>() 参数（行为像函数）<br><span class="hljs-title">mutable</span> 可以改动[]里面的数据<br><span class="hljs-title">throwspec</span> 丢出异常<br><span class="hljs-title">rettype</span> 描述返回lambda的返回类型<br>如果mutable throwspec，ret<span class="hljs-keyword">type</span>都没有，则可以不写括号，否则不可以<br>*/<br></code></pre></td></tr></tbody></table></figure>
+<p>[]的特别注意</p>
+<ul>
+<li>[]可以取用外部的变量</li>
+<li>[=]代表pass by value</li>
+<li>[&amp;]代表pass by reference</li>
+</ul>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-type">int</span> x=<span class="hljs-number">0</span>;<br><span class="hljs-type">int</span> y=<span class="hljs-number">2</span>;<br><span class="hljs-keyword">auto</span> x=[x,&amp;y]<span class="hljs-comment">//代表y是reference，x是value</span><br><span class="hljs-keyword">auto</span> y=[=,&amp;y]<span class="hljs-comment">//除了y是reference，其他的所有变量都以reference进行传递</span><br><br><span class="hljs-type">int</span> a=<span class="hljs-number">0</span><br><span class="hljs-keyword">auto</span> f=[a]()<span class="hljs-keyword">mutable</span>{<br>    a++;<br>}<br>a=<span class="hljs-number">42</span>;<br><span class="hljs-comment">//但是在调用f完成的时候，a是1，因为a记录的是当时的值</span><br><br><span class="hljs-type">int</span> a=<span class="hljs-number">0</span><br><span class="hljs-keyword">auto</span> f=[&amp;a]()<span class="hljs-keyword">mutable</span>{<br>    a++;<br>}<br>a=<span class="hljs-number">42</span>;<br><span class="hljs-comment">//但是在调用f完成的时候，a是43，因为a记录的是当时的变量的引用</span><br></code></pre></td></tr></tbody></table></figure>
+<p>lambda与stl使用的时候的特别注意</p>
+<ul>
+<li>lambda在与stl库搭配使用的时候，因为lambda没有默认构造函数，没有assignment operator 所以当lambda作为比较函数的时候需要特别注意</li>
+</ul>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">auto</span> cmp=[](<span class="hljs-type">const</span> <span class="hljs-type">int</span> &amp;a,<span class="hljs-type">const</span> <span class="hljs-type">int</span> &amp;b){<span class="hljs-keyword">return</span> a&gt;b;};<br><span class="hljs-function">std::set&lt;<span class="hljs-type">int</span>,<span class="hljs-title">decltype</span><span class="hljs-params">(cmp)</span>&gt; <span class="hljs-title">a</span><span class="hljs-params">(cmp)</span></span>;<span class="hljs-comment">//注意这里必须要放cmp，否则就会调用默认的构造函数</span><br></code></pre></td></tr></tbody></table></figure>
+<h1 id="11-rvalue-referencesperfect-forwarding"><a class="markdownIt-Anchor" href="#11-rvalue-referencesperfect-forwarding"></a> 11 Rvalue references，perfect forwarding</h1>
+<p>右值引用就是他做了一个“偷”的动作，将值直接移动，而不是使用一个allocator进行分配然后赋予</p>
+<p>左值只能出现在左边，而右值只能出现在右边</p>
+<p>所有被“偷”的左值，都必须确保后面不再被使用</p>
+<p>copy作一个深拷贝，move则是一个浅拷贝</p>
+<p>对于浅拷贝和深拷贝没有区别的操作，则是否move就是没有区别的。</p>
+<p>move在deque和vector影响最为巨大，其他的则不一定</p>
+<p>move只是交换对应类的指针，如果没有指针，那么效率lei’s</p>
+<p><strong>写移动类函数的三个操作</strong></p>
+<ul>
+<li>传入函数使用 &amp;&amp; ，然后可以使用初始化队列进行构造</li>
+<li>将对应的值设为0</li>
+<li>将其带有的指针设为null（原因：必须设为null，否则会在临时对象调用析构函数的的时候将本来不能析构调的资源析构，导致空悬指针）</li>
+</ul>
+<h1 id="12-hashtable"><a class="markdownIt-Anchor" href="#12-hashtable"></a> 12 hashtable</h1>
+<ul>
+<li>
+<p>hashtable对于C++中unordered的容器，</p>
+</li>
+<li>
+<p>他的基本原理是使用一个可以增长的buckets，每一个bucket是一个指针，指向一个对应的单向链表</p>
+</li>
+<li>
+<p>当元素个数大于buckets个数的时候，buckets的个数会增长到原来的两倍左右，但是是一个素数，然后重新将元素放入</p>
+</li>
+<li>
+<p>如何编写一个万用的hash function：30，25：32</p>
+</li>
+</ul>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/" class="category-chain-item">👨🏻‍💻code</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/C/" class="category-chain-item">C++</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/C/Effective-STL/" class="category-chain-item">Effective STL</a>
+  
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/31886/" title="深度探索 C++对象模型目录">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">深度探索 C++对象模型目录</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/63884/" title="7-10">
+                        <span class="hidden-mobile">7-10</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

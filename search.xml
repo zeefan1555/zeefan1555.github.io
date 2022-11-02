@@ -4,6 +4,100 @@
   
     
     <entry>
+      <title>深度探索 C++对象模型目录</title>
+      <link href="/posts/31886/"/>
+      <url>/posts/31886/</url>
+      
+        <content type="html"><![CDATA[<ul><li>1.1：C++对象模型<ul><li>模型简介<ul><li>每一个 class产生出一堆指向 virtual functions 的指针，放在表格之中。这个表格被称为 virtual table（vtbl）。</li><li>每一个 class object被安插一个指针，指向相关的 virtual table。通常这个指针被称为 vptr。vptr 的设定（setting）和重置（resetting）都由每一个 class的 constructor、destructor和 copy assignment运算符自动完成（我将在第5章讨论这个问题）。每一个 class所关联的 type_info object（用以支持 runtime type identification，RTTI）也经由 virtual table被指出来，通常放在表格的第一个 slot。</li></ul></li><li>模型优点和缺点<ul><li>优点：空间和存取时间优秀</li><li>缺点：如果应用程序代码本身未曾改变，但是所用的class object的nonstatic data member有更改就需要重新编译，因为多了一层间接性，就需要符出空间和执行效率的两方面的代价</li></ul></li></ul></li></ul><p>![[深度探索 C++对象模型目录 2022-11-02 09.32.35.excalidraw]]</p><ul><li>1.2： 关键词所带来的差异<ul><li>对于C<ins>为了维护和C之间的兼容性，C</ins>为此付出了很多牺牲。<ul><li>对于struct，C++更多的类似于class，而非C中的数据集合体</li><li>部分C中的技巧到了C++中失效的可能性很大，并不建议</li></ul></li><li>struct的一个合理用途便是可以将某个数据做一个简单的封装，达到与C的兼容</li><li>struct并不能兼容template</li></ul></li><li>1.3：对象的差异<ul><li>C++程序设计模型直接支持三种程序设计范式</li><li>C++通过三种方式支持多态<ul><li>经由一组隐式的转化操作，把一个derived class的指针转化为一个指向base type指针的操作</li><li>经由virtual function 机制</li><li>经由dynamic -case的typeid运算符</li><li>多态的主要用途就是经过一个共同的接口来影响类型的封装，这个接口通常被定义在抽象的base class中</li></ul></li><li>class object 的所需内存大小<ul><li>其nonstatic data members的总和大小</li><li>加上任何由于译注的需求而填补上去的空间（可能存在于members边界，也可能存在于集合体边界）<ul><li>译注：将数值调整到某个数的倍数，32位上通常为4，使得bus的运输量达到最高效率</li><li>这里的译注从某种角度上就是内存对齐，让cpu的命中率更高？</li></ul></li><li>加上为了支持virtual而由内部产生的任何额外负担</li></ul></li><li>指向一个<code>array&lt;string&gt;</code>的指针和一个指向证书的指针的不同<ul><li>一个指向正数1000的整数指针，int大小为16bits，会占掉1000-1003这块空间</li><li>string则是8个</li></ul></li></ul></li></ul><hr><p><strong>其他资料</strong></p> <!-- basicblock-start  --> <p>📝深度探索 C++对象模型目录::<br>2022/11/2: 第一次创建</p><!-- basicblock-end -->]]></content>
+      
+      
+      <categories>
+          
+          <category> 👨🏻‍💻code </category>
+          
+          <category> C++ </category>
+          
+          <category> C++基础 </category>
+          
+          <category> 深度探索 C++对象模型 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title></title>
+      <link href="/posts/7/"/>
+      <url>/posts/7/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>无法修改是因为, 文档被 typor 锁定了</p></blockquote><h1 id="1-variadic-template"><a class="markdownIt-Anchor" href="#1-variadic-template"></a> 1 Variadic Template</h1><ul><li>数量不定的模板参数：这个东西是C++11一个非常意思的东西，他可以接受任意个参数，然后输出出来</li><li>使用的时候也是需要注意，对于一个数量不定的模板参数，记得需要一个同名的函数来对最后一个进行“垫底”的操作</li><li>一般来讲，有参数的比无参数的更加特化一点，无参数的更加泛化</li></ul><figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">print</span><span class="hljs-params">()</span></span>{<br>    <span class="hljs-comment">//这里为空，作为最后的一个垫底操作</span><br>}<br><span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">typename</span> T,<span class="hljs-keyword">typename</span>... Types&gt;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">print</span><span class="hljs-params">(<span class="hljs-type">const</span> T&amp; firstargs,<span class="hljs-type">const</span> Types&amp; ...args)</span></span>{<br>cout&lt;&lt;firstargs&lt;&lt;endl;<br>    <span class="hljs-built_in">print</span>(args...);<br>}<br></code></pre></td></tr></tbody></table></figure><h1 id="2-initializer-list"><a class="markdownIt-Anchor" href="#2-initializer-list"></a> 2 Initializer-list</h1><p>Initializer-list的使用</p><ul><li>对于何时使用initializer-list，一般情况下，我们在使用{}时候，如果构造函数有接受一个initializer-list，那么整个{}里面的内容就会被打包进去，然后传递给函数进行调用</li><li>{}就会构造出一个array&lt;T,N&gt;,然后传入进去</li></ul><figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">print</span><span class="hljs-params">(std::initializer_list&lt;<span class="hljs-type">int</span>&gt; val)</span></span>{<br><span class="hljs-keyword">for</span>(<span class="hljs-keyword">auto</span> p=val.<span class="hljs-built_in">begin</span>();p!=val.<span class="hljs-built_in">end</span>();p++){<br>std::cout&lt;&lt;*p&lt;&lt;std::endl;<br>}<br>}<br></code></pre></td></tr></tbody></table></figure><p>Initializer-list与初始化</p><ul><li>对于初始化，使用{}可以达到合适的初始化目标</li></ul><figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">int</span> j{}<span class="hljs-comment">//j=0;</span><br><span class="hljs-type">int</span> j<span class="hljs-comment">//undefine</span><br><span class="hljs-type">int</span> *p{}<span class="hljs-comment">//p=nullptr</span><br><span class="hljs-type">int</span> *p<span class="hljs-comment">//undefine</span><br></code></pre></td></tr></tbody></table></figure><ul><li>initializer-list对于隐式转换会报错/warning</li></ul><figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">int</span> j{<span class="hljs-number">5.0</span>}<span class="hljs-comment">//error</span><br></code></pre></td></tr></tbody></table></figure><ul><li><p>initializer-list的初始化与拷贝</p><p>对于其初始化，我们一般需要知道，其内部只是存储了一个指向第一个元素的指针指针和对应的函数</p><p>所以如果我们拷贝他。其并不会把元素全部都复制一份，而是复制了其对应的指针。</p><figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">//内部储存数据</span><br>iterator array<span class="hljs-comment">//指向头部</span><br>size_type len<span class="hljs-comment">//表示长度</span><br></code></pre></td></tr></tbody></table></figure></li></ul><p>Initializer-list对标准库的影响</p><ul><li>标准库很多都使用了initializer-list，在C++11中，利用这个特性，我们可以将“一包”东西进行统一的操作，而不是单一单一一个一个来</li></ul><figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">auto</span> c=<span class="hljs-built_in">max</span>({<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>});<span class="hljs-comment">//寻找三个值中最大的</span><br>vector&lt;<span class="hljs-type">int</span>&gt; a{<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>};<span class="hljs-comment">//初始化</span><br><span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">ax</span><span class="hljs-params">({<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>})</span></span>;<span class="hljs-comment">//初始化</span><br>ax.<span class="hljs-built_in">insert</span>(ax.<span class="hljs-built_in">begin</span>()+<span class="hljs-number">3</span>,{<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>});<span class="hljs-comment">//一次性插入多个元素</span><br></code></pre></td></tr></tbody></table></figure><h1 id="3-explicit"><a class="markdownIt-Anchor" href="#3-explicit"></a> 3 explicit</h1><p>explicit它可以保证：不让编译器做隐式的类型转换</p><p>C++11的explict可以使用在传入多个参数的explicit上了</p><h1 id="4-defaultdelete"><a class="markdownIt-Anchor" href="#4-defaultdelete"></a> 4 =default，=delete</h1><p>=delete可以用在任意函数身上</p><p>=default则不能</p><p>拷贝构造，移动构造以及对应的operator=只能有一份，所以不能在设定自己的函数之后再来一份default</p><p>一般情况下，如果成员有指针类型，那么一般都要自己定义，否则使用default版本就可以了</p><h1 id="5-alias-templatetype-alias"><a class="markdownIt-Anchor" href="#5-alias-templatetype-alias"></a> 5 Alias Template,type alias</h1><p>using关键字代表别名，在cpp11中，using的功能更加强大</p><ul><li>using的命名效果甚至可以在template中使用，完美的进行调用</li></ul><figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">using</span> Vec＝std::vector&lt;T,mymalloc&lt;T&gt;&gt;;<br>Vec&lt;<span class="hljs-type">int</span>&gt; an<br><span class="hljs-comment">//这样可以成功的调用std::vector&lt;int,mymalloc&lt;int&gt;&gt;</span><br><span class="hljs-comment">//define和typedef都达不到对应的效果</span><br></code></pre></td></tr></tbody></table></figure><ul><li>但是这种方法到局限就是，没有办法进行偏特化和全特化</li></ul><p>using关键字还有一个作用就是作为类型别名</p><figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">typedef</span> <span class="hljs-title">void</span><span class="hljs-params">(*func)</span><span class="hljs-params">(<span class="hljs-type">int</span>,<span class="hljs-type">int</span>)</span></span>;<span class="hljs-comment">//C语言就有的用法</span><br><span class="hljs-keyword">using</span> func=<span class="hljs-built_in">void</span>(*)(<span class="hljs-type">int</span>,<span class="hljs-type">int</span>);<span class="hljs-comment">//C++的用法，更加直观</span><br><span class="hljs-comment">//两者作用相同</span><br></code></pre></td></tr></tbody></table></figure><p>using常用的几种方式</p><ul><li>using namespace std； using std：：cout</li><li>using class：：member；//明确表明我需要使用那个函数（重载的时候可能会用到之类的）</li><li>type alias，alias template</li></ul><p>using关键字总的来说就是能记录某一个状态</p><ul><li>记录vector的状态：（Vec）的例子，可以完美记录vector需要调用的函数，以及对应的默认函数</li><li>记录一个名字：也就是作为类型别名</li></ul><h1 id="6-template-template-paramber"><a class="markdownIt-Anchor" href="#6-template-template-paramber"></a> 6 Template template paramber</h1><figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">typename</span> T,<span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">class</span>,T&gt; <span class="hljs-keyword">class</span> <span class="hljs-title class_">container</span>&gt;<br></code></pre></td></tr></tbody></table></figure><h1 id="7-noexpect"><a class="markdownIt-Anchor" href="#7-noexpect"></a> 7 noexpect</h1><p>定义：保证函数不会丢出异常</p><figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">f</span><span class="hljs-params">()</span>noexpect</span>;<span class="hljs-comment">//无论如何，函数都不能丢出异常</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">f</span><span class="hljs-params">()</span><span class="hljs-title">noexpect</span><span class="hljs-params">(<span class="hljs-literal">true</span>)</span></span>;<span class="hljs-comment">//在某种条件下，函数不会丢出异常</span><br></code></pre></td></tr></tbody></table></figure><p>在使用move语义的时候，记得函数一定不能抛出异常，并且后面加上noexpect</p><figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-built_in">mystring</span>(string &amp;&amp;s)noexpect....<br></code></pre></td></tr></tbody></table></figure><h1 id="8-overridefinal"><a class="markdownIt-Anchor" href="#8-overridefinal"></a> 8 override，final</h1><ul><li>override检验是否是原来的函数重载</li><li>final有两个地方<ul><li>阻止子类继承父类的class</li><li>阻止子类继承父类的virtual function</li></ul></li></ul><h1 id="9-decltype"><a class="markdownIt-Anchor" href="#9-decltype"></a> 9 decltype</h1><p>decltype的三种使用方法</p><ul><li>用来声告一个return type</li></ul><figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-function"><span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">typename</span> T,<span class="hljs-keyword">typename</span> Q&gt;</span><br><span class="hljs-function"><span class="hljs-keyword">auto</span> <span class="hljs-title">add</span><span class="hljs-params">(T x,Q y)</span>-&gt;<span class="hljs-title">decltype</span><span class="hljs-params">(x+y)</span></span>;<br></code></pre></td></tr></tbody></table></figure><ul><li>适用于模板元编程</li></ul><figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs C++">map&lt;string,<span class="hljs-type">int</span>&gt; a;<br><span class="hljs-keyword">decltype</span>(a)::value_type elem;<span class="hljs-comment">//</span><br></code></pre></td></tr></tbody></table></figure><ul><li>传递一个由lambda对象返回的返回值的类型</li></ul><figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">auto</span> cmp=[](<span class="hljs-type">const</span> <span class="hljs-type">int</span> &amp;a,<span class="hljs-type">const</span> <span class="hljs-type">int</span> &amp;b){<br><span class="hljs-keyword">return</span> a&gt;b;<br>}<br><span class="hljs-function">std::set&lt;<span class="hljs-type">int</span>,<span class="hljs-title">decltype</span><span class="hljs-params">(cmp)</span>&gt; <span class="hljs-title">xx</span><span class="hljs-params">(cmp)</span></span>;<br></code></pre></td></tr></tbody></table></figure><h1 id="10-lambdas"><a class="markdownIt-Anchor" href="#10-lambdas"></a> 10 Lambdas</h1><p>C++ 11允许通过lambda定义一个inline function或功能单元， 他可以被用在local object或者parameter</p><p>lambdas本身就是一个对象，如果要直接调用他，需要加一个括号</p><figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs C++">[]{<br>   std::cout&lt;&lt;<span class="hljs-string">"hello"</span><br>}<br><span class="hljs-comment">//以上这个不能直接调用，如果需要直接调用的话需要按照下面这样写</span><br>[]{<br>   std::cout&lt;&lt;<span class="hljs-string">"hello"</span><br>}();<span class="hljs-comment">//注意这个括号，使用括号能够进行调用</span><br><span class="hljs-comment">//或者</span><br><span class="hljs-keyword">auto</span> I=[]{<br>   std::cout&lt;&lt;<span class="hljs-string">"hello"</span><br>}<br><span class="hljs-built_in">I</span>();<span class="hljs-comment">//发生调用</span><br><br></code></pre></td></tr></tbody></table></figure><p>lambda格式回顾</p><figure class="highlight elm"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs elm">[]()mutable throwspec-&gt;rec<span class="hljs-keyword">type</span>{}<br>/*<br>[] 捕获外部的非static objects<br>() 参数（行为像函数）<br><span class="hljs-title">mutable</span> 可以改动[]里面的数据<br><span class="hljs-title">throwspec</span> 丢出异常<br><span class="hljs-title">rettype</span> 描述返回lambda的返回类型<br>如果mutable throwspec，ret<span class="hljs-keyword">type</span>都没有，则可以不写括号，否则不可以<br>*/<br></code></pre></td></tr></tbody></table></figure><p>[]的特别注意</p><ul><li>[]可以取用外部的变量</li><li>[=]代表pass by value</li><li>[&amp;]代表pass by reference</li></ul><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-type">int</span> x=<span class="hljs-number">0</span>;<br><span class="hljs-type">int</span> y=<span class="hljs-number">2</span>;<br><span class="hljs-keyword">auto</span> x=[x,&amp;y]<span class="hljs-comment">//代表y是reference，x是value</span><br><span class="hljs-keyword">auto</span> y=[=,&amp;y]<span class="hljs-comment">//除了y是reference，其他的所有变量都以reference进行传递</span><br><br><span class="hljs-type">int</span> a=<span class="hljs-number">0</span><br><span class="hljs-keyword">auto</span> f=[a]()<span class="hljs-keyword">mutable</span>{<br>    a++;<br>}<br>a=<span class="hljs-number">42</span>;<br><span class="hljs-comment">//但是在调用f完成的时候，a是1，因为a记录的是当时的值</span><br><br><span class="hljs-type">int</span> a=<span class="hljs-number">0</span><br><span class="hljs-keyword">auto</span> f=[&amp;a]()<span class="hljs-keyword">mutable</span>{<br>    a++;<br>}<br>a=<span class="hljs-number">42</span>;<br><span class="hljs-comment">//但是在调用f完成的时候，a是43，因为a记录的是当时的变量的引用</span><br></code></pre></td></tr></tbody></table></figure><p>lambda与stl使用的时候的特别注意</p><ul><li>lambda在与stl库搭配使用的时候，因为lambda没有默认构造函数，没有assignment operator 所以当lambda作为比较函数的时候需要特别注意</li></ul><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">auto</span> cmp=[](<span class="hljs-type">const</span> <span class="hljs-type">int</span> &amp;a,<span class="hljs-type">const</span> <span class="hljs-type">int</span> &amp;b){<span class="hljs-keyword">return</span> a&gt;b;};<br><span class="hljs-function">std::set&lt;<span class="hljs-type">int</span>,<span class="hljs-title">decltype</span><span class="hljs-params">(cmp)</span>&gt; <span class="hljs-title">a</span><span class="hljs-params">(cmp)</span></span>;<span class="hljs-comment">//注意这里必须要放cmp，否则就会调用默认的构造函数</span><br></code></pre></td></tr></tbody></table></figure><h1 id="11-rvalue-referencesperfect-forwarding"><a class="markdownIt-Anchor" href="#11-rvalue-referencesperfect-forwarding"></a> 11 Rvalue references，perfect forwarding</h1><p>右值引用就是他做了一个“偷”的动作，将值直接移动，而不是使用一个allocator进行分配然后赋予</p><p>左值只能出现在左边，而右值只能出现在右边</p><p>所有被“偷”的左值，都必须确保后面不再被使用</p><p>copy作一个深拷贝，move则是一个浅拷贝</p><p>对于浅拷贝和深拷贝没有区别的操作，则是否move就是没有区别的。</p><p>move在deque和vector影响最为巨大，其他的则不一定</p><p>move只是交换对应类的指针，如果没有指针，那么效率lei’s</p><p><strong>写移动类函数的三个操作</strong></p><ul><li>传入函数使用 &amp;&amp; ，然后可以使用初始化队列进行构造</li><li>将对应的值设为0</li><li>将其带有的指针设为null（原因：必须设为null，否则会在临时对象调用析构函数的的时候将本来不能析构调的资源析构，导致空悬指针）</li></ul><h1 id="12-hashtable"><a class="markdownIt-Anchor" href="#12-hashtable"></a> 12 hashtable</h1><ul><li><p>hashtable对于C++中unordered的容器，</p></li><li><p>他的基本原理是使用一个可以增长的buckets，每一个bucket是一个指针，指向一个对应的单向链表</p></li><li><p>当元素个数大于buckets个数的时候，buckets的个数会增长到原来的两倍左右，但是是一个素数，然后重新将元素放入</p></li><li><p>如何编写一个万用的hash function：30，25：32</p></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 👨🏻‍💻code </category>
+          
+          <category> C++ </category>
+          
+          <category> Effective STL </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>7-10</title>
+      <link href="/posts/63884/"/>
+      <url>/posts/63884/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-条款-7如果容器中包含了通过-new-操作创建的指针切记在容器对象析构前将指针-delete-掉"><a class="markdownIt-Anchor" href="#1-条款-7如果容器中包含了通过-new-操作创建的指针切记在容器对象析构前将指针-delete-掉"></a> 1 条款 7：如果容器中包含了通过 new 操作创建的指针，切记在容器对象析构前将指针 delete 掉</h1><h2 id="11-知识点-1delete-指针"><a class="markdownIt-Anchor" href="#11-知识点-1delete-指针"></a> 1.1 知识点 1：delete 指针</h2><p>虽然说容器在销毁的时候会对每一个对象进行delete，但是指针不是所谓的“对象”没有析构函数，所以不会做任何事情。如果不对指针进行<br>delete 就会导致资源泄露</p><ul><li><p>解决方法1：在销毁容器之前，使用for循环挨个delete指针</p></li><li><p>解决方法2：编写一个template函数，用来挨个删除，这种方法是类型安全的而不是异常安全的，当有资源泄露的时候还是会出现错误</p><ul><li><img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202211012205070.png" alt="|700"></li></ul></li><li><p><strong>解决办法 3：使用智能指针，确保资源不泄露</strong></p></li></ul><h1 id="2-条款-8切勿创建包含-auto-ptr-的对象对于-c11-过时"><a class="markdownIt-Anchor" href="#2-条款-8切勿创建包含-auto-ptr-的对象对于-c11-过时"></a> 2 条款 8：切勿创建包含 auto-ptr 的对象（对于 C++11 过时）</h1><h1 id="3-条款9慎重选择刪除元素的方法"><a class="markdownIt-Anchor" href="#3-条款9慎重选择刪除元素的方法"></a> 3 条款9：慎重选择刪除元素的方法</h1><h2 id="31-知识点-1删除容器对象选择的方法"><a class="markdownIt-Anchor" href="#31-知识点-1删除容器对象选择的方法"></a> 3.1 知识点 1：删除容器对象选择的方法</h2><!-- basicblock-start --><p>![[7-10 2022-11-01 22.07.08.excalidraw]]::  ❓ #疑问</p><!-- basicblock-end --><h1 id="4-条款10了解分配子allocator的约定和限制"><a class="markdownIt-Anchor" href="#4-条款10了解分配子allocator的约定和限制"></a> 4 条款10：了解分配子allocator的约定和限制</h1><blockquote><p>快下班了, 没仔细看, 晚上还要打电话: <a href="marginnote3app://note/74C153BA-1566-4B11-9E7F-EC58B9603992">margin: 条款10</a></p></blockquote><p>[[static 关键字|static 关键字]]</p><ul><li>确保你的分配子是一个模板，模板参 T代表你为他分配内存的对象的类型</li><li>提供类型定义 pointer 和 reference，但是始终让 pointer 为 T*，reference 为 T&amp;，这是标准库所规定的</li><li>千万不要让你的分配子拥有随对象而不同的状态，通常分配子不应该有非静态类型的数据成员，因为 STL 实现假定同一类型的分配子是等价的</li><li>传给 allocator 成员西数的是那些要求内存对象的个数，而不是所需要的字节数，同时要记住，这些西数返回<code>T*</code>指针（(通过 pointer 类型定义，即使尚未有 T 对象被构造出来</li><li>通过嵌套的rebind模板，因为标准容器依靠模板取得类的成员的类型来分配内存</li></ul><hr><p><strong>其他资料</strong></p> <!-- basicblock-start  --> <p>📝7-10::<br>2022/11/1: 第一次创建</p><!-- basicblock-end -->]]></content>
+      
+      
+      <categories>
+          
+          <category> 👨🏻‍💻code </category>
+          
+          <category> C++ </category>
+          
+          <category> Effective STL </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>3 - 6</title>
+      <link href="/posts/6919/"/>
+      <url>/posts/6919/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-确保容器中的对象拷贝正确且高效"><a class="markdownIt-Anchor" href="#1-确保容器中的对象拷贝正确且高效"></a> 1 确保容器中的对象拷贝正确且高效</h1><h2 id="11-知识点-1拷贝对象时-stl-的工作方式"><a class="markdownIt-Anchor" href="#11-知识点-1拷贝对象时-stl-的工作方式"></a> 1.1 知识点 1：拷贝对象时 STL 的工作方式</h2><p>首先我们可以认为，STL 的工作方式为拷贝（但是在 C<ins>11 中，这种工作方式需要再加上一个，移动）<br>在 C</ins>11 中，对于一个左值，我们依然会调用拷贝构造函数进行创建，<br>但是对于一个临时创建出来的变量或者纯右值就会调用<strong>移动构造函数</strong><br>![[3. 确保容器中的对象拷贝正确且高效 2022-11-01 21.33.12.excalidraw]]</p><h2 id="12-知识点-2了解基类的容器不能承载继承类"><a class="markdownIt-Anchor" href="#12-知识点-2了解基类的容器不能承载继承类"></a> 1.2 知识点 2：了解基类的容器不能承载继承类</h2><p>因为上面的原因可以看的出来，基类的容器是无法装在继承类的，如果装载了继承类那么原来继承类的数据就面临丢失的风险。因为调用的是基类的拷贝构造函数。<br><strong>如果希望插入后的对象依然表现的像派生类对象一样那么可以考虑使用指针或者智能指针</strong>，这样有两个好处</p><p>拷贝指针的速度非常快：可以快速的通过指针去排序，而不用调用一大堆的拷贝构造函数等等拖慢速度</p><p>保留对象的“继承性”通过动态鄉定，指针可以让其调用virtual函数，从而完整的保留派生类及其特性</p><h1 id="2-条款-4调用-empty-而不是检查-size-是否为-0"><a class="markdownIt-Anchor" href="#2-条款-4调用-empty-而不是检查-size-是否为-0"></a> 2 条款 4：调用 empty 而不是检查 size 是否为 0</h1><p>原因：empty在大多数标准容器都是常数时间操作，而对于一些list的实现，size会耗费线性时间（主要是list)</p><h1 id="3-条款5区间成员函数优先于与之对应的单元素成员函数"><a class="markdownIt-Anchor" href="#3-条款5区间成员函数优先于与之对应的单元素成员函数"></a> 3 条款5：区间成员函数优先于与之对应的单元素成员函数</h1><h2 id="31-知识点-1优先考虑区间成员函数-说的应该是本身的函数吧"><a class="markdownIt-Anchor" href="#31-知识点-1优先考虑区间成员函数-说的应该是本身的函数吧"></a> 3.1 知识点 1：优先考虑区间成员函数 (❓说的应该是本身的函数吧)</h2><ul><li>区间成员函数的定义：使用两个迭代器作为参数传入的函数</li><li>使用区间成员函数的好处<ul><li>使得代码更加容易被理解，copy函数总比使用for循环好理解的多</li><li>使用合适的区间成员函数可以大幅减少完成工作的时间。提升效率</li><li>使用区间成员函数的效率，最差为和for循环一样，比如说对istream使用的时候2者相同，但大多数比这个好</li></ul></li></ul><h2 id="32-知识点-2使用区间成员函数的时候优先考虑非泛型函数"><a class="markdownIt-Anchor" href="#32-知识点-2使用区间成员函数的时候优先考虑非泛型函数"></a> 3.2 知识点 2：使用区间成员函数的时候，优先考虑非泛型函数</h2><ul><li>所有的标准容器都提供了以下几个构造函数</li><li>区间创建函数</li><li>区间插入函数insert</li><li>区间删除函数erase</li><li>区间赋值函数assign</li><li>可以考虑优先选用stl自带的函数，毕竟大多数时候自己人更懂自己人，效率更高速度更快</li></ul><!-- basicblock-start --><h1 id="4-条款-6当心-c编译器最烦人的分析机制情景-疑问"><a class="markdownIt-Anchor" href="#4-条款-6当心-c编译器最烦人的分析机制情景-疑问"></a> 4 条款 6：当心 C++编译器最烦人的分析机制情景::  ❓ #疑问</h1><!-- basicblock-end --><p>![[3. 确保容器中的对象拷贝正确且高效 2022-11-01 21.51.48.excalidraw]]</p><hr><p><strong>其他资料</strong></p><!-- basicblock-start --> <p>📝3 - 6::<br>2022/11/1 : 第一次创建</p><!-- basicblock-end -->]]></content>
+      
+      
+      <categories>
+          
+          <category> 👨🏻‍💻code </category>
+          
+          <category> C++ </category>
+          
+          <category> Effective STL </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>2. 不要试图编写独立于容器类型的代码</title>
       <link href="/posts/4728/"/>
       <url>/posts/4728/</url>
@@ -473,7 +567,7 @@
       <link href="/posts/44463/"/>
       <url>/posts/44463/</url>
       
-        <content type="html"><![CDATA[<p>![[基础正则表达式速查表 2022-10-28 16.36.24.excalidraw|2400]]</p><hr><p><strong>其他资料</strong></p> <!-- basicblock-start oid="ObsdzNYqGcqvdz5zjVQN9tBi"  --> <p>📝基础正则表达式速查表::<br>2022/10/28: 第一次创建</p><!-- basicblock-end -->]]></content>
+        <content type="html"><![CDATA[<p>![[基础正则表达式速查表 2022-10-28 16.36.24.excalidraw|2400]]</p><p>![[正则案例.excalidraw]]</p><figure class="highlight awk"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">//</span> 替换中文字符<br>^[\u4e00-\u9fa5]{<span class="hljs-number">0</span>,<span class="hljs-number">3</span>}\s?\d.<br><br></code></pre></td></tr></tbody></table></figure><hr><p><strong>其他资料</strong></p> <!-- basicblock-start oid="ObsdzNYqGcqvdz5zjVQN9tBi"  --> <p>📝基础正则表达式速查表::<br>2022/10/28: 第一次创建</p><!-- basicblock-end -->]]></content>
       
       
       <categories>
@@ -584,11 +678,11 @@
     
     
     <entry>
-      <title>云盘秒传的原理</title>
-      <link href="/posts/59172/"/>
-      <url>/posts/59172/</url>
+      <title>线程池</title>
+      <link href="/posts/227/"/>
+      <url>/posts/227/</url>
       
-        <content type="html"><![CDATA[<p>上传大文件时，会对文件进行比对操作，这里的对比操作其实: 就是将我们要上传的文件进行"哈希值"的计算，跟百度的"哈希值"数据库中的文件进行匹配操作。</p><p>如果发现两者的"哈希值"相同，那么，将已存在于百度数据库里面的文件对应的文件链接到我们对应的帐号里，做一个关联就可以，</p><p>其实并没有对本地文件进行上传，所以我们也就看到了秒传的效果。</p><blockquote><p>[!summary]<br>百度网盘将我们要上传的文件与它数据库中的文件进行哈希值匹配, 如果匹配上了就做一个关联操作, 其实并没有对本地文件进行上传</p></blockquote><hr><p><strong>其他资料</strong></p> <!-- basicblock-start oid="ObsjIzOb9rzg3wtAwNXWmAvJ"  --> <p>📝云盘秒传的原理::<br>2022/10/27: 第一次创建</p><!-- basicblock-end -->]]></content>
+        <content type="html"><![CDATA[<h1 id="1-什么是线程池"><a class="markdownIt-Anchor" href="#1-什么是线程池"></a> 1 什么是线程池</h1><p>1、对网络服务器，单位时间内必须处理数目巨大的连接请求，但是处理时间却是比较短的，<strong>系统不断的启动和关闭新线程，成本高，会消耗系统资源</strong>，以及带来切换线程的危险，从而可能导致系统资源的崩溃。这时我们可以使用线程池。</p><p>2、线程池是服务器预先创建的一组空闲线程，它们的集合称为线程池；这些线程都是处于阻塞状态，这些线程只占一点内存，不占用 CPU。</p><p>3、任务到来的时候，程序将一个任务传给线程池，线程池就会启动一条线程来执行这个任务，执行结束以后，该线程并不会死亡，而是再次返回线程池中成为空闲状态，等待执行下一个任务。<strong>减少创建和销毁对象的次数</strong>，提高程序的运行效率。</p><p>![[线程池 2022-10-27 20.15.42.excalidraw]]</p><p><strong>应用范围：</strong></p><ol><li>需要大量的线程来完成任务，且完成任务的时间比较短，不适合具有可能会长时间运行（并因此阻塞其他任务） 的任务。</li><li>对性能要求苛刻的应用，比如要求服务器迅速响应客户请求。</li></ol><h1 id="2-线程池线程数量"><a class="markdownIt-Anchor" href="#2-线程池线程数量"></a> 2 线程池线程数量</h1><h2 id="21-cpu-计算-密集型任务"><a class="markdownIt-Anchor" href="#21-cpu-计算-密集型任务"></a> 2.1 CPU (计算) 密集型任务：</h2><p>将线程数设置为 N (CPU 核心数)+1，比 CPU 核心数多出来的一个线程是为了防止线程偶发的缺页中断，或者其它原因导致的任务暂停而带来的影响</p><h2 id="22-io-密集型任务"><a class="markdownIt-Anchor" href="#22-io-密集型任务"></a> 2.2 IO 密集型任务：</h2><p>这种任务应用起来，系统会用大部分的时间来处理 I/O 交互，而线程在处理 I/O 的时间段内不会占用 CPU 来处理，这时就可以将 CPU 交出给其它线程使用。因此在/○密集型任务的应用中，可以多配置一些线程，具体的计算方法是 2N。</p><h1 id="3-主进程的工作步骤"><a class="markdownIt-Anchor" href="#3-主进程的工作步骤"></a> 3 主进程的工作步骤</h1><ol><li>打开熟知端口（端口号为 21），使客户进程能够连接上。</li><li>等待客户进程发出连接请求。</li><li>启动从属进程来处理客户进程发来的请求。<ol><li>从属进程对客户进程的请求处理完毕后即终止，但从属进程在运行期间根据需要还可能创建其他一些子进程。</li></ol></li><li>回到等待状态，继续接受其他客户进程发来的请求。<ol><li>主进程和从属进程的处理是并发地进行。</li></ol></li></ol><h1 id="4-ftp-工作流程"><a class="markdownIt-Anchor" href="#4-ftp-工作流程"></a> 4 FTP 工作流程</h1><p>文件传送协议 FTP 只提供文件传送的一些基本的服务，它使用 TCP 可靠的传输服务。<br>FTP 的主要功能是减少或消除在不同操作系统下处理文件的不兼容性。</p><p>FTP 使用客户服务器方式，一个 FTP 服务器进程可同时为多个客户进程提供服务。</p><p>FTP 的服务器进程由两大部分组成：</p><ul><li>一个主进程，负责接受新的请求；</li><li>另外有若干个从属进程，负责处理单个请求。</li></ul><hr><p><strong>其他资料</strong></p> <!-- basicblock-start oid="Obs5LZSKbJTfruxJt2sCQocx"  --> <p>📝线程池::<br>2022/10/27: 第一次创建</p><!-- basicblock-end -->]]></content>
       
       
       <categories>
@@ -605,11 +699,11 @@
     
     
     <entry>
-      <title>线程池</title>
-      <link href="/posts/227/"/>
-      <url>/posts/227/</url>
+      <title>云盘秒传的原理</title>
+      <link href="/posts/59172/"/>
+      <url>/posts/59172/</url>
       
-        <content type="html"><![CDATA[<h1 id="1-什么是线程池"><a class="markdownIt-Anchor" href="#1-什么是线程池"></a> 1 什么是线程池</h1><p>1、对网络服务器，单位时间内必须处理数目巨大的连接请求，但是处理时间却是比较短的，<strong>系统不断的启动和关闭新线程，成本高，会消耗系统资源</strong>，以及带来切换线程的危险，从而可能导致系统资源的崩溃。这时我们可以使用线程池。</p><p>2、线程池是服务器预先创建的一组空闲线程，它们的集合称为线程池；这些线程都是处于阻塞状态，这些线程只占一点内存，不占用 CPU。</p><p>3、任务到来的时候，程序将一个任务传给线程池，线程池就会启动一条线程来执行这个任务，执行结束以后，该线程并不会死亡，而是再次返回线程池中成为空闲状态，等待执行下一个任务。<strong>减少创建和销毁对象的次数</strong>，提高程序的运行效率。</p><p>![[线程池 2022-10-27 20.15.42.excalidraw]]</p><p><strong>应用范围：</strong></p><ol><li>需要大量的线程来完成任务，且完成任务的时间比较短，不适合具有可能会长时间运行（并因此阻塞其他任务） 的任务。</li><li>对性能要求苛刻的应用，比如要求服务器迅速响应客户请求。</li></ol><h1 id="2-线程池线程数量"><a class="markdownIt-Anchor" href="#2-线程池线程数量"></a> 2 线程池线程数量</h1><h2 id="21-cpu-计算-密集型任务"><a class="markdownIt-Anchor" href="#21-cpu-计算-密集型任务"></a> 2.1 CPU (计算) 密集型任务：</h2><p>将线程数设置为 N (CPU 核心数)+1，比 CPU 核心数多出来的一个线程是为了防止线程偶发的缺页中断，或者其它原因导致的任务暂停而带来的影响</p><h2 id="22-io-密集型任务"><a class="markdownIt-Anchor" href="#22-io-密集型任务"></a> 2.2 IO 密集型任务：</h2><p>这种任务应用起来，系统会用大部分的时间来处理 I/O 交互，而线程在处理 I/O 的时间段内不会占用 CPU 来处理，这时就可以将 CPU 交出给其它线程使用。因此在/○密集型任务的应用中，可以多配置一些线程，具体的计算方法是 2N。</p><h1 id="3-主进程的工作步骤"><a class="markdownIt-Anchor" href="#3-主进程的工作步骤"></a> 3 主进程的工作步骤</h1><ol><li>打开熟知端口（端口号为 21），使客户进程能够连接上。</li><li>等待客户进程发出连接请求。</li><li>启动从属进程来处理客户进程发来的请求。<ol><li>从属进程对客户进程的请求处理完毕后即终止，但从属进程在运行期间根据需要还可能创建其他一些子进程。</li></ol></li><li>回到等待状态，继续接受其他客户进程发来的请求。<ol><li>主进程和从属进程的处理是并发地进行。</li></ol></li></ol><h1 id="4-ftp-工作流程"><a class="markdownIt-Anchor" href="#4-ftp-工作流程"></a> 4 FTP 工作流程</h1><p>文件传送协议 FTP 只提供文件传送的一些基本的服务，它使用 TCP 可靠的传输服务。<br>FTP 的主要功能是减少或消除在不同操作系统下处理文件的不兼容性。</p><p>FTP 使用客户服务器方式，一个 FTP 服务器进程可同时为多个客户进程提供服务。</p><p>FTP 的服务器进程由两大部分组成：</p><ul><li>一个主进程，负责接受新的请求；</li><li>另外有若干个从属进程，负责处理单个请求。</li></ul><hr><p><strong>其他资料</strong></p> <!-- basicblock-start oid="Obs5LZSKbJTfruxJt2sCQocx"  --> <p>📝线程池::<br>2022/10/27: 第一次创建</p><!-- basicblock-end -->]]></content>
+        <content type="html"><![CDATA[<p>上传大文件时，会对文件进行比对操作，这里的对比操作其实: 就是将我们要上传的文件进行"哈希值"的计算，跟百度的"哈希值"数据库中的文件进行匹配操作。</p><p>如果发现两者的"哈希值"相同，那么，将已存在于百度数据库里面的文件对应的文件链接到我们对应的帐号里，做一个关联就可以，</p><p>其实并没有对本地文件进行上传，所以我们也就看到了秒传的效果。</p><blockquote><p>[!summary]<br>百度网盘将我们要上传的文件与它数据库中的文件进行哈希值匹配, 如果匹配上了就做一个关联操作, 其实并没有对本地文件进行上传</p></blockquote><hr><p><strong>其他资料</strong></p> <!-- basicblock-start oid="ObsjIzOb9rzg3wtAwNXWmAvJ"  --> <p>📝云盘秒传的原理::<br>2022/10/27: 第一次创建</p><!-- basicblock-end -->]]></content>
       
       
       <categories>
@@ -6836,9 +6930,9 @@
       
         <tags>
             
-            <tag> 已迁移 </tag>
-            
             <tag> 技能 </tag>
+            
+            <tag> 已迁移 </tag>
             
         </tags>
       
@@ -8202,11 +8296,11 @@
     
     
     <entry>
-      <title>while 循环</title>
-      <link href="/posts/36387/"/>
-      <url>/posts/36387/</url>
+      <title>c++中 - ‘0’ 以及 -&#39;a&#39; 的相减操作解释</title>
+      <link href="/posts/12295/"/>
+      <url>/posts/12295/</url>
       
-        <content type="html"><![CDATA[<p>链表的指针移动用 while, 没法用 for 循环</p><p>while循环是if 和 for 循环的结合体，<br>只要在while循环中增加跳出语句就行</p><figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">while</span>(i){<br> i++<br>}<br><br>等于<br><br><span class="hljs-keyword">if</span>(){<br><span class="hljs-keyword">for</span>()<br>}<br></code></pre></td></tr></tbody></table></figure><h1 id="1-while-x"><a class="markdownIt-Anchor" href="#1-while-x"></a> 1 while (x)</h1><figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">while</span>(i){ <span class="hljs-comment">// i 不能是变量; 可以直接写成 while(i--)</span><br>i--<br>}<br><br><br><span class="hljs-keyword">while</span>(n) <span class="hljs-comment">//  n &lt; 1 即可为 0, eg: n = 0.1 就会跳出循环</span><br></code></pre></td></tr></tbody></table></figure>]]></content>
+        <content type="html"><![CDATA[<p>执行continue 函数相当于又调到了函数的开头[00:04](file:///Users/yibeikongqiu/Desktop/ishot%E8%A7%86%E9%A2%91/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/23.%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA%E5%90%AB%E6%89%8B%E7%BB%AD%E8%B4%B9.mp4#t=4.619299)<br>作用：能够控制for循环中，跳过一些代码段，然后又使i不断前进<br>[23.买卖股票的最佳时机含手续费](file:///Users/yibeikongqiu/Desktop/ishot视频/贪心算法/23.买卖股票的最佳时机含手续费.mp4)</p><h1 id="1-参考资料"><a class="markdownIt-Anchor" href="#1-参考资料"></a> 1 参考资料</h1><p>自用跳转连接：<a href="">ob</a>， <a href="">blog</a></p>]]></content>
       
       
       <categories>
@@ -8231,11 +8325,11 @@
     
     
     <entry>
-      <title>c++中 - ‘0’ 以及 -&#39;a&#39; 的相减操作解释</title>
-      <link href="/posts/12295/"/>
-      <url>/posts/12295/</url>
+      <title>while 循环</title>
+      <link href="/posts/36387/"/>
+      <url>/posts/36387/</url>
       
-        <content type="html"><![CDATA[<p>执行continue 函数相当于又调到了函数的开头[00:04](file:///Users/yibeikongqiu/Desktop/ishot%E8%A7%86%E9%A2%91/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/23.%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA%E5%90%AB%E6%89%8B%E7%BB%AD%E8%B4%B9.mp4#t=4.619299)<br>作用：能够控制for循环中，跳过一些代码段，然后又使i不断前进<br>[23.买卖股票的最佳时机含手续费](file:///Users/yibeikongqiu/Desktop/ishot视频/贪心算法/23.买卖股票的最佳时机含手续费.mp4)</p><h1 id="1-参考资料"><a class="markdownIt-Anchor" href="#1-参考资料"></a> 1 参考资料</h1><p>自用跳转连接：<a href="">ob</a>， <a href="">blog</a></p>]]></content>
+        <content type="html"><![CDATA[<p>链表的指针移动用 while, 没法用 for 循环</p><p>while循环是if 和 for 循环的结合体，<br>只要在while循环中增加跳出语句就行</p><figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">while</span>(i){<br> i++<br>}<br><br>等于<br><br><span class="hljs-keyword">if</span>(){<br><span class="hljs-keyword">for</span>()<br>}<br></code></pre></td></tr></tbody></table></figure><h1 id="1-while-x"><a class="markdownIt-Anchor" href="#1-while-x"></a> 1 while (x)</h1><figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">while</span>(i){ <span class="hljs-comment">// i 不能是变量; 可以直接写成 while(i--)</span><br>i--<br>}<br><br><br><span class="hljs-keyword">while</span>(n) <span class="hljs-comment">//  n &lt; 1 即可为 0, eg: n = 0.1 就会跳出循环</span><br></code></pre></td></tr></tbody></table></figure>]]></content>
       
       
       <categories>
@@ -8746,6 +8840,29 @@
     
     
     <entry>
+      <title>static 关键字</title>
+      <link href="/posts/37185/"/>
+      <url>/posts/37185/</url>
+      
+        <content type="html"><![CDATA[<p>static 关键字有三种用法</p><ol><li>static 修饰局部变量 → 静态局部变量<ol><li>改变局部变量的生命周期，下次使用该局部变量是上次使用完后的值，而不是初始值</li></ol></li><li>static 修饰全局变量 →静态全局变量<ol><li>只能在本文件内使用，不能在其他文件中访问，extern外边声明也不行(无static时默认是可以被外部访问的)</li></ol></li><li>static 修饰函数 →静态函数<ol><li>只能在本文件中<strong>调用</strong>，同2</li></ol></li></ol><h1 id="1-对于面向过程"><a class="markdownIt-Anchor" href="#1-对于面向过程"></a> 1 对于面向过程：</h1><p>static对应的函数一般都是被放在全域区，他们在程序开始时候就获得，结束的时候销毁</p><h1 id="2-对于面向对象"><a class="markdownIt-Anchor" href="#2-对于面向对象"></a> 2 对于面向对象</h1><p>初始化<br>static 放入类中，如果不加 const 需要在类外面初始化<br><img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202211012236262.png" alt="|300"><br>加了const可以直接在类内赋值初始化</p><h1 id="3-对于对象"><a class="markdownIt-Anchor" href="#3-对于对象"></a> 3 对于对象</h1><p>static命名的变量属于是一次定义，全类共享，所有类共享一个公有的static。只是一个“包含关系”，所以他不能被构造函数构造。<br><strong>对于静态成员函数，类可以通过点运算符调用静态成员函数</strong>，但是成员函数本身只能直接调用类内的静态类型的变量或者是成员函数，<br><strong>对于非静态成员或函数是调用不了的</strong></p><ul><li>tip 静态可以不用对象调用，直接类名加点方法，不是静态需要创建对象然后调用, 不用 static 无法创建对象</li></ul><h1 id="4-静态类"><a class="markdownIt-Anchor" href="#4-静态类"></a> 4 静态类</h1><p>static 修饰的类, 不会随着大类一块加载进内存, 只有当调用的时候, 才会加载进内存[[单例模式的类别#^ougi2n]]</p><p>和变量一样，静态类的生命周期直到程序的结束。在 main 结束后才会调用静态类的析构函数。</p><hr><p><strong>其他资料</strong></p><!-- basicblock-start --> <p>📝static 关键字::<br>2022/11/1 : 第一次创建</p><!-- basicblock-end -->]]></content>
+      
+      
+      <categories>
+          
+          <category> 👨🏻‍💻code </category>
+          
+          <category> C++ </category>
+          
+          <category> C++ primer plus </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>sort 函数</title>
       <link href="/posts/4/"/>
       <url>/posts/4/</url>
@@ -8817,35 +8934,6 @@
         <tags>
             
             <tag> 贪心算法 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>static 关键字</title>
-      <link href="/posts/37179/"/>
-      <url>/posts/37179/</url>
-      
-        <content type="html"><![CDATA[<p>static 关键字有三种用法</p><ol><li>static 修饰局部变量 → 静态局部变量<ol><li>改变局部变量的生命周期，下次使用该局部变量是上次使用完后的值，而不是初始值</li></ol></li><li>static 修饰全局变量 →静态全局变量<ol><li>只能在本文件内使用，不能在其他文件中访问，extern外边声明也不行(无static时默认是可以被外部访问的)</li></ol></li><li>static 修饰函数 →静态函数<ol><li>只能在本文件中<strong>调用</strong>，同2<br>// 静态可以不用对象调用，直接类名加点方法，不是静态需要创建对象然后调用, 不用 static 无法创建对象</li></ol></li></ol><p>static 修饰的类, 不会随着大类一块加载进内存, 只有当调用的时候, 才会加载进内存[[单例模式的类别#^ougi2n]]</p>]]></content>
-      
-      
-      <categories>
-          
-          <category> 👨🏻‍💻code </category>
-          
-          <category> C++ </category>
-          
-          <category> C++ primer plus </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> C++ </tag>
             
         </tags>
       
