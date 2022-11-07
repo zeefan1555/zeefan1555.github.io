@@ -24,7 +24,7 @@
 <meta property="og:description" content="1 事务简介 事务是一组操作的集合, 它是一个不可分割的工作单位, 事务会把所有的操作作为一个整体一起向系统提交或撤销操作请求, 即这些操作要么同时成功, 要么同时失败。 就比如: 张三给李四转账 1000 块钱, 张三银行账户的钱减少 1000, 而李四银行账户的钱要增加 1000。这一组操作就必须在一个事务的范围内, 要么都成功, 要么都失败。 ![[6. 事务简介.excalidraw]]">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-01T07:53:00.000Z">
-<meta property="article:modified_time" content="2022-11-01T10:09:55.429Z">
+<meta property="article:modified_time" content="2022-11-03T07:12:46.742Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          839 字
+          870 字
         
       </span>
     
@@ -284,7 +284,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年11月1日 晚上
+                    本文最后更新于：2022年11月3日 下午
                   
                 
               </p>
@@ -292,12 +292,12 @@
             <div class="markdown-body">
               
               <h1 id="1-事务简介"><a class="markdownIt-Anchor" href="#1-事务简介"></a> 1 事务简介</h1>
-<p>事务是一组操作的集合, 它是一个不可分割的工作单位, 事务会把所有的操作作为一个整体一起向系统提交或撤销操作请求, 即这些操作要么同时成功, 要么同时失败。</p>
+<p>事务是一组操作的集合, 它是一个不可分割的工作单位, <strong>事务会把所有的操作作为一个整体一起向系统提交或撤销操作请求, 即这些操作要么同时成功, 要么同时失败。</strong></p>
 <p>就比如: 张三给李四转账 1000 块钱, 张三银行账户的钱减少 1000, 而李四银行账户的钱要增加 1000。这一组操作就必须在一个事务的范围内, 要么都成功, 要么都失败。</p>
 <p>![[6. 事务简介.excalidraw]]</p>
 <blockquote>
 <p>[!tip]<br>
-注意: 默认MySQL的事务是自动提交的,也就是说,当执行完一条DML语句时,MySQL会立即隐式的提交事务。</p>
+注意: 默认 MySQL 的事务是自动提交的, 也就是说, 当执行完一条 [[DML]] 语句时,MySQL 会立即隐式的提交事务。</p>
 </blockquote>
 <h1 id="2-事务操作"><a class="markdownIt-Anchor" href="#2-事务操作"></a> 2 事务操作</h1>
 <h2 id="21-未控制事务"><a class="markdownIt-Anchor" href="#21-未控制事务"></a> 2.1 未控制事务</h2>
@@ -314,18 +314,19 @@
 <p>[!example]<br>
 ![[6. 事务 2022-11-01 16.13.54.excalidraw]]</p>
 </blockquote>
-<h1 id="3-事务四大特性"><a class="markdownIt-Anchor" href="#3-事务四大特性"></a> 3 事务四大特性</h1>
+<h1 id="3-acidacid-事务的四大特性"><a class="markdownIt-Anchor" href="#3-acidacid-事务的四大特性"></a> 3 ACID%%ACID 事务的四大特性%%</h1>
+<p>^fc34dc</p>
 <ul>
 <li>原子性(Atomicity):事务是不可分割的最小操作单元,要么全部成功,要么全部失败。</li>
 <li>一致性(Consistency):事务完成时,必须使所有的数据都保持一致状态。</li>
 <li>隔离性(Isolation):数据库系统提供的隔离机制,保证事务在不受外部并发操作影响的独立环境下运行。</li>
 <li>持久性(Durability):事务一旦提交或回滚,它对数据库中的数据的改变就是永久的。</li>
 </ul>
-<p>上述就是事务的四大特性,简称ACID。</p>
+<p>上述就是事务的四大特性,简称ACID。 ^f3fe25</p>
 <h1 id="4-并发事务问题"><a class="markdownIt-Anchor" href="#4-并发事务问题"></a> 4 [[并发事务问题]]</h1>
 <hr>
 <p><strong>其他资料</strong></p>
- <!-- basicblock-start  --> 
+ <!-- basicblock-start oid="ObsXM5VG1PDEjHKZbzGasjw2"  --> 
 <p>📝6. 事务::<br>
 2022/11/1: 第一次创建</p>
 <!-- basicblock-end -->

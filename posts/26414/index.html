@@ -16,15 +16,15 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1 添加字段::  1234ALTER TABLE 表名 ADD 字段名 类型(长度) [COMMENT 注释] [约束];案例：为emp表增加一个新的字段 呢称 : 为nickname，类型为varchar(20)alter table emp ADD nickname varchar (20) COMMENT，呢称，；      2 修改数据类型::  12修改数据类型：ALTER TABL">
+    <meta name="description" content="1 添加字段:: 1234alter table 表名 add 字段名 类型(长度) [comment 注释] [约束];案例：为emp表增加一个新的字段 呢称 : 为nickname，类型为varchar(20)alter table emp add nickname varchar (20) comment，呢称，；  2 修改数据类型:: 12修改数据类型：alter table 表名 m">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DDL-表操作-修改&amp;删除">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/26414/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="1 添加字段::  1234ALTER TABLE 表名 ADD 字段名 类型(长度) [COMMENT 注释] [约束];案例：为emp表增加一个新的字段 呢称 : 为nickname，类型为varchar(20)alter table emp ADD nickname varchar (20) COMMENT，呢称，；      2 修改数据类型::  12修改数据类型：ALTER TABL">
+<meta property="og:description" content="1 添加字段:: 1234alter table 表名 add 字段名 类型(长度) [comment 注释] [约束];案例：为emp表增加一个新的字段 呢称 : 为nickname，类型为varchar(20)alter table emp add nickname varchar (20) comment，呢称，；  2 修改数据类型:: 12修改数据类型：alter table 表名 m">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-10-05T13:31:00.000Z">
-<meta property="article:modified_time" content="2022-10-08T08:07:28.940Z">
+<meta property="article:modified_time" content="2022-11-03T07:22:25.474Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          812 字
+          836 字
         
       </span>
     
@@ -284,7 +284,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年10月8日 下午
+                    本文最后更新于：2022年11月3日 下午
                   
                 
               </p>
@@ -292,35 +292,23 @@
             <div class="markdown-body">
               
               <h1 id="1-添加字段"><a class="markdownIt-Anchor" href="#1-添加字段"></a> 1 添加字段::</h1>
-<!-- basicblock-end -->
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs MySQL">ALTER TABLE 表名 ADD 字段名 类型(长度) [COMMENT 注释] [约束];<br>案例：<br>为emp表增加一个新的字段 呢称 : 为nickname，类型为varchar(20)<br>alter table emp ADD nickname varchar (20) COMMENT，呢称，；<br></code></pre></td></tr></tbody></table></figure>
-<!-- basicblock-start oid="ObsEPYP6en8so87Bb2o3YYnq" --> 
-<!-- basicblock-start oid="ObsEPYP6en8so87Bb2o3YYnq" --> 
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs MySQL">alter table 表名 add 字段名 类型(长度) [comment 注释] [约束];<br>案例：<br>为emp表增加一个新的字段 呢称 : 为nickname，类型为varchar(20)<br>alter table emp add nickname varchar (20) comment，呢称，；<br></code></pre></td></tr></tbody></table></figure>
 <h1 id="2-修改数据类型"><a class="markdownIt-Anchor" href="#2-修改数据类型"></a> 2 修改数据类型::</h1>
-<!-- basicblock-end -->
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql">修改数据类型：<br>ALTER TABLE 表名 MODIFY 字段名 新数据类型(长度);<br></code></pre></td></tr></tbody></table></figure>
-<!-- basicblock-start oid="Obs4Qhv8cRddg7YOgtRrXpXt" --> 
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql">修改数据类型：<br>alter table 表名 modify 字段名 新数据类型(长度);<br></code></pre></td></tr></tbody></table></figure>
 <h1 id="3-修改字段和字段类型"><a class="markdownIt-Anchor" href="#3-修改字段和字段类型"></a> 3 修改字段和字段类型::</h1>
-<!-- basicblock-end -->
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs MySQL"><br>修改字段名和字段类型：<br>ALTER TABLE 表名 CHANGE 旧字段名 新字段名 类型(长度) [COMMENT 注释] [约束];<br>#<br>例：将emp表的nickname字段修改为username，类型为varchar(30)<br>alter table emp change nickname username varchar(30) COMMENT '昵称';<br><br></code></pre></td></tr></tbody></table></figure>
-<!-- basicblock-start oid="ObsEx6mhl6Nih38kQhXu9QZW" --> 
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs MySQL"><br>修改字段名和字段类型：<br>alter table 表名 change 旧字段名 新字段名 类型(长度) [comment 注释] [约束];<br>#<br>例：将emp表的nickname字段修改为username，类型为varchar(30)<br>alter table emp change nickname username varchar(30) COMMENT '昵称';<br><br></code></pre></td></tr></tbody></table></figure>
 <h1 id="4-删除字段"><a class="markdownIt-Anchor" href="#4-删除字段"></a> 4 删除字段::</h1>
-<!-- basicblock-end -->
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs mysql">删除字段：<br>ALTER TABLE 表名 DROP 字段名;<br><br># eg: 将emp表的字段username删除<br>ALTER TABLE emp DROP username;<br><br></code></pre></td></tr></tbody></table></figure>
-<!-- basicblock-start oid="ObslYiVBRubh2Xu4AcKHHsWR" --> 
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs mysql">删除字段：<br>alter table 表名 drop 字段名;<br><br># eg: 将emp表的字段username删除<br>alter table emp drop username;<br><br></code></pre></td></tr></tbody></table></figure>
 <h1 id="5-修改表名"><a class="markdownIt-Anchor" href="#5-修改表名"></a> 5 修改表名::</h1>
-<!-- basicblock-end -->
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs mysql">修改表名:<br>ALTER TABLE 表名 RENAME TO 新表名<br><br>将emp表的表名修改为 employee<br>ALTER TABLE emp RENAME TO employee;<br></code></pre></td></tr></tbody></table></figure>
-<!-- basicblock-start oid="ObsdtkXxi394Beuu4GDjvoFZ" --> 
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs mysql">修改表名:<br>alter table 表名 rename to 新表名<br><br>将emp表的表名修改为 employee<br>alter table emp rename to employee;<br></code></pre></td></tr></tbody></table></figure>
 <h1 id="6-删除表"><a class="markdownIt-Anchor" href="#6-删除表"></a> 6 删除表::</h1>
-<!-- basicblock-end -->
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs mysql"><br>1️⃣删除表：<br>DROP TABLE [IF EXISTS] 表名;<br>可选项 IF EXISTS 代表，只有表名存在时才会删除该表，表名不存在，则不执行删除操作（如果不加该参数项，删除一张不存在的表，执行将会报错）。<br>案例：<br>如果tb_user表存在，则删除tb_user表<br><br>-- <br>2️⃣删除表，并重新创建该表：<br>TRUNCATE TABLE 表名;<br><br><br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs mysql"><br>1️⃣删除表：<br>drop table [if exists] 表名;<br>可选项 if exists 代表，只有表名存在时才会删除该表，表名不存在，则不执行删除操作（如果不加该参数项，删除一张不存在的表，执行将会报错）。<br>案例：<br>如果tb_user表存在，则删除tb_user表<br>drop table if exists tb_user<br><br>-- <br>2️⃣删除表，并重新创建该表：<br>truncate table 表名;<br><br></code></pre></td></tr></tbody></table></figure>
 <blockquote>
 <p>[!tip] 注意: 在删除表的时候,表中的全部数据也都会被删除。</p>
 </blockquote>
 <hr>
 <p><strong>其他资料</strong></p>
- <!-- basicblock-start oid="ObsRggLLZfhMOUfXK3sobeh5" deck = "👨🏻‍💻code::MySQL::基础篇::DDL-表操作-修改&删除.md" --> 
+ <!-- basicblock-start oid="ObsRggLLZfhMOUfXK3sobeh5" --> 
 <p>#历史记录::<br>
 2022/10/5🌵DDL-表操作-修改&amp;删除 : 第一次创建</p>
 <!-- basicblock-end -->

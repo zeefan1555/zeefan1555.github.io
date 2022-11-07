@@ -16,15 +16,15 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1 通过快慢指针给新数组赋值(快指针指向元素, 慢指针指向下标)  快指针找新数组的元素 (查找 n 次, 即 O(n)的时间复杂度) 快指针给慢指针对应的新数组的下标赋值  常规赋值: [[4. 有序数组的平方]] [[3. 移除元素]] 需要给新数组扩容的, 在赋值: [[3. 替换空格]]     2 通过双指针构建滑动窗口 - .  起始指针 i , 终止指针 j, 通过操作 i 与 j">
+    <meta name="description" content="1 通过快慢指针给新数组赋值(快指针指向元素, 慢指针指向下标)::  快指针找新数组的元素 (查找 n 次, 即 O(n)的时间复杂度) 快指针给慢指针对应的新数组的下标赋值  常规赋值: [[4. 有序数组的平方]] [[3. 移除元素]] 需要给新数组扩容的, 在赋值: [[3. 替换空格]]      2 通过双指针构建滑动窗口 - .  起始指针 i , 终止指针 j, 通过操作 i">
 <meta property="og:type" content="article">
-<meta property="og:title" content="双指针目录">
+<meta property="og:title" content="双指针">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/23871/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="1 通过快慢指针给新数组赋值(快指针指向元素, 慢指针指向下标)  快指针找新数组的元素 (查找 n 次, 即 O(n)的时间复杂度) 快指针给慢指针对应的新数组的下标赋值  常规赋值: [[4. 有序数组的平方]] [[3. 移除元素]] 需要给新数组扩容的, 在赋值: [[3. 替换空格]]     2 通过双指针构建滑动窗口 - .  起始指针 i , 终止指针 j, 通过操作 i 与 j">
+<meta property="og:description" content="1 通过快慢指针给新数组赋值(快指针指向元素, 慢指针指向下标)::  快指针找新数组的元素 (查找 n 次, 即 O(n)的时间复杂度) 快指针给慢指针对应的新数组的下标赋值  常规赋值: [[4. 有序数组的平方]] [[3. 移除元素]] 需要给新数组扩容的, 在赋值: [[3. 替换空格]]      2 通过双指针构建滑动窗口 - .  起始指针 i , 终止指针 j, 通过操作 i">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-08-17T12:36:00.000Z">
-<meta property="article:modified_time" content="2022-10-10T01:51:46.876Z">
+<meta property="article:modified_time" content="2022-11-04T10:58:47.350Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="双指针">
 <meta name="twitter:card" content="summary_large_image">
@@ -33,7 +33,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>双指针目录 - 一杯空气</title>
+  <title>双指针 - 一杯空气</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -200,7 +200,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="双指针目录"></span>
+            <span id="subtitle" data-typed-text="双指针"></span>
           
         </div>
 
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          605 字
+          601 字
         
       </span>
     
@@ -280,19 +280,19 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">双指针目录</h1>
+            <h1 style="display: none">双指针</h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年10月10日 上午
+                    本文最后更新于：2022年11月4日 晚上
                   
                 
               </p>
             
             <div class="markdown-body">
               
-              <h1 id="1-通过快慢指针给新数组赋值快指针指向元素-慢指针指向下标"><a class="markdownIt-Anchor" href="#1-通过快慢指针给新数组赋值快指针指向元素-慢指针指向下标"></a> 1 <strong>通过快慢指针给新数组赋值</strong>(快指针指向元素, 慢指针指向下标)</h1>
+              <h1 id="1-通过快慢指针给新数组赋值快指针指向元素-慢指针指向下标"><a class="markdownIt-Anchor" href="#1-通过快慢指针给新数组赋值快指针指向元素-慢指针指向下标"></a> 1 <strong>通过快慢指针给新数组赋值</strong>(快指针指向元素, 慢指针指向下标)::</h1>
 <ol>
 <li>快指针找新数组的元素 (查找 n 次, 即 O(n)的时间复杂度)</li>
 <li>快指针给<strong>慢指针对应的新数组的下标</strong>赋值
@@ -302,6 +302,7 @@
 </ol>
 </li>
 </ol>
+<!-- basicblock-end -->
 <h1 id="2-通过双指针构建滑动窗口"><a class="markdownIt-Anchor" href="#2-通过双指针构建滑动窗口"></a> 2 <strong>通过双指针构建滑动窗口</strong></h1>
 <pre><code class="hljs">- .  起始指针 i , 终止指针 j, 通过操作 i 与 j 之间值来达到所需目的. eg: 求窗口之间的元素和 [[5. 长度最小的子数组]]
 </code></pre>
@@ -329,9 +330,6 @@
 <li>[[9. 四数之和]]: 不会</li>
 </ol>
 <p>除了链表一些题目一定要使用双指针，其他题目都是使用双指针来提高效率，一般是将O(n^2)的时间复杂度，降为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span>。</p>
-<hr>
-<p><strong>参考资料</strong><br>
-<a href="obsidian://advanced-uri?vault=myblog&amp;uid=472c81a7-93e7-4242-a087-56c05baa6bf3">ob</a></p>
 
               
             </div>

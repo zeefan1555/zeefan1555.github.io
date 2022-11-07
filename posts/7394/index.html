@@ -27,7 +27,7 @@
 <meta property="og:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202210081623336.png">
 <meta property="og:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202210081759671.png">
 <meta property="article:published_time" content="2022-10-08T08:06:00.000Z">
-<meta property="article:modified_time" content="2022-11-01T07:25:41.224Z">
+<meta property="article:modified_time" content="2022-11-02T07:05:16.689Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202210081620473.png">
@@ -288,7 +288,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年11月1日 下午
+                    本文最后更新于：2022年11月2日 下午
                   
                 
               </p>
@@ -387,7 +387,7 @@
 <p>外键:用来让两张表的数据之间建立连接,从而保证数据的一致性和完整性。</p>
 <p><img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202210081623336.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>添加外键：</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs mysql">CREATE TABLE 表名(<br>	字段名 字段类型,<br>	...<br>	[CONSTRAINT] [外键名称] FOREIGN KEY(外键字段名) REFERENCES 主表(主表列名)<br>);<br><br>ALTER TABLE 表名 ADD CONSTRAINT 外键名称 FOREIGN KEY (外键字段名) REFERENCES 主表(主表列名);<br><br>-- 例子<br>create table student_course(<br>	constraint fk_studentid foreign key (studentid) references student (id) <br>	)comment '学生课程中间表';<br><br>alter table emp add constraint fk_emp_dept_id foreign key(dept_id) references dept(id);<br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs mysql">create table 表名(<br>	字段名 字段类型,<br>	...<br>	[constraint] [外键名称] foreign key(外键字段名) references 主表(主表列名)<br>);<br><br>alter table 表名 add constraint 外键名称 foreign key (外键字段名) references 主表(主表列名);<br><br>-- 例子<br>create table student_course(<br>	constraint fk_studentid foreign key (studentid) references student (id) <br>	)comment '学生课程中间表';<br><br>alter table emp add constraint fk_emp_dept_id foreign key(dept_id) references dept(id);<br></code></pre></td></tr></tbody></table></figure>
 <p>删除外键：</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs MySQL">ALTER TABLE 表名 DROP FOREIGN KEY 外键名;<br><br>-- 案例<br>alter table emp drop foreign key fk_emp_dept_id;<br><br></code></pre></td></tr></tbody></table></figure>
 <blockquote>

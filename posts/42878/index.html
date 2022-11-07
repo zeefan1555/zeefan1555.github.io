@@ -24,7 +24,7 @@
 <meta property="og:description" content="1 704二分查找 力扣题目链接 给定一个&amp;nbsp;n&amp;nbsp;个元素有序的（升序）整型数组&amp;nbsp;nums 和一个目标值&amp;nbsp;target &amp;nbsp;，写一个函数搜索&amp;nbsp;nums&amp;nbsp;中的 target，如果目标值存在返回下标，否则返回 -1。 示例 1: 123输入: nums &#x3D; [-1,0,3,5,9,12], target &#x3D; 9     输出: 4">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-08-08T02:52:00.000Z">
-<meta property="article:modified_time" content="2022-09-13T01:26:47.144Z">
+<meta property="article:modified_time" content="2022-11-07T01:30:01.650Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="数组">
 <meta name="twitter:card" content="summary_large_image">
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.3k 字
+          2.2k 字
         
       </span>
     
@@ -285,7 +285,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年9月13日 上午
+                    本文最后更新于：2022年11月7日 上午
                   
                 
               </p>
@@ -306,7 +306,6 @@
 <li>nums&nbsp;的每个元素都将在&nbsp;[-9999, 9999]之间。</li>
 </ul>
 <h1 id="2-思路"><a class="markdownIt-Anchor" href="#2-思路"></a> 2 思路</h1>
-<!-- basicblock-start oid="ObssiM911QvHWwBhMfNhzsy3" --> 
 <p>二分法使用的前提::</p>
 <ol>
 <li>有序数组
@@ -326,18 +325,13 @@
 <li>左闭右闭要一直保持左闭右闭</li>
 <li>左闭右开要一直保持左闭右开</li>
 </ul>
-<!-- basicblock-end -->
-<!-- basicblock-start oid="Obsf8CaPBZHUma8XPIymDnOP" --> 
 <h2 id="21-数组为左闭右闭区间-a-g"><a class="markdownIt-Anchor" href="#21-数组为左闭右闭区间-a-g"></a> 2.1 数组为左闭右闭区间: [a, … ,g] ::</h2>
-<p>定义int 类型的 left(头), right(尾)<br>
-也就是target 在一个[left, right]数组中,left 可能等于 right</p>
-<p>![[二分查找 2022-08-08 12.08.05.excalidraw|1500]]</p>
+<p>![[二分查找法.excalidraw|1500]]</p>
 <p><strong>定义target在[left, right]区间，所以有如下两点：</strong></p>
 <ul>
 <li>while (left &lt;= right) 要使用 &lt;= ，因为left == right是有意义的，所以使用 &lt;=</li>
 <li>if (target &lt; nums[middle] ) ,right 赋值middle - 1，因为当前这个nums[middle]一定不是target(已经大于了,当然不是) ，那么接下来要查找的左区间(小区间), 结束下标位置就是 middle - 1</li>
 </ul>
-<!-- basicblock-end -->
 <h2 id="22-数组为左闭右开"><a class="markdownIt-Anchor" href="#22-数组为左闭右开"></a> 2.2 数组为左闭右开</h2>
 <p>target 是在一个在左闭右开的区间里，也就是[left, right) ，那么二分法的边界处理方式则截然不同。</p>
 <p>有如下两点：</p>

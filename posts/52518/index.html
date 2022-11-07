@@ -16,19 +16,17 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1 多表查询的分类  连接查询  内连接:相当于查询A、B交集部分数据 外连接: 左外连接:查询左表所有数据,以及两张表交集部分数据 右外连接:查询右表所有数据,以及两张表交集部分数据 自连接:当前表与自身的连接查询,自连接必须使用表别名   子查询   1.1 内连接:: 内连接查询的是两张表交集部分的数据 内连接的语法分为两种: 隐式内连接、显式内连接 1234567891011121).">
+    <meta name="description" content="1 多表查询的分类  连接查询  内连接:相当于查询A、B交集部分数据 外连接:  左外连接:查询左表所有数据,以及两张表交集部分数据 右外连接:查询右表所有数据,以及两张表交集部分数据   自连接:当前表与自身的连接查询,自连接必须使用表别名   子查询   1.1 [[内连接]]  1.2 [[外连接]]  1.3 [[自连接]]  1.4 [[子查询]]  其他资料    📝多表查询的分">
 <meta property="og:type" content="article">
 <meta property="og:title" content="多表查询的分类">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/52518/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="1 多表查询的分类  连接查询  内连接:相当于查询A、B交集部分数据 外连接: 左外连接:查询左表所有数据,以及两张表交集部分数据 右外连接:查询右表所有数据,以及两张表交集部分数据 自连接:当前表与自身的连接查询,自连接必须使用表别名   子查询   1.1 内连接:: 内连接查询的是两张表交集部分的数据 内连接的语法分为两种: 隐式内连接、显式内连接 1234567891011121).">
+<meta property="og:description" content="1 多表查询的分类  连接查询  内连接:相当于查询A、B交集部分数据 外连接:  左外连接:查询左表所有数据,以及两张表交集部分数据 右外连接:查询右表所有数据,以及两张表交集部分数据   自连接:当前表与自身的连接查询,自连接必须使用表别名   子查询   1.1 [[内连接]]  1.2 [[外连接]]  1.3 [[自连接]]  1.4 [[子查询]]  其他资料    📝多表查询的分">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202210082212714.png">
 <meta property="article:published_time" content="2022-11-01T07:41:00.000Z">
-<meta property="article:modified_time" content="2022-11-01T07:42:37.520Z">
+<meta property="article:modified_time" content="2022-11-02T08:03:08.224Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202210082212714.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -224,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4k 字
+          183 字
         
       </span>
     
@@ -235,7 +233,7 @@
         
         
         
-          20 分钟
+          1 分钟
         
       </span>
     
@@ -286,7 +284,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年11月1日 下午
+                    本文最后更新于：2022年11月2日 下午
                   
                 
               </p>
@@ -298,145 +296,24 @@
 <li>连接查询
 <ul>
 <li>内连接:相当于查询A、B交集部分数据</li>
-<li>外连接:</li>
+<li>外连接:
+<ul>
 <li>左外连接:查询左表所有数据,以及两张表交集部分数据</li>
 <li>右外连接:查询右表所有数据,以及两张表交集部分数据</li>
+</ul>
+</li>
 <li>自连接:当前表与自身的连接查询,自连接必须使用表别名</li>
 </ul>
 </li>
 <li>子查询</li>
 </ul>
-<h2 id="11-内连接"><a class="markdownIt-Anchor" href="#11-内连接"></a> 1.1 内连接::</h2>
-<p>内连接查询的是两张表交集部分的数据</p>
-<p>内连接的语法分为两种: 隐式内连接、显式内连接</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs MySQL">1). 隐式内连接<br>SELECT  字段列表   FROM   表1 , 表2   WHERE   条件 ... ;<br><br><br>2). 显式内连接<br>SELECT  字段列表   FROM   表1  [ INNER ]  JOIN 表2  ON  连接条件 ... ; -- inner 可以省略<br><br>-- 说明<br>相当于多了几个关键字显示的说明他们连接了<br>隐式只是没有关键字, 也连接了<br><br>-- 💡统一用显式连接, 因为可以和外连接保持一致<br></code></pre></td></tr></tbody></table></figure>
-<blockquote>
-<p>[!example]-<br>
-![[5. 多表查询 2022-10-08 21.45.28.excalidraw]]</p>
-</blockquote>
-<p>多表查询和起别名联立使用<br>
-表的别名:</p>
-<ol>
-<li>tablea as 别名1 , tableb as 别名2 ;  /💡as 可以省略</li>
-<li>tablea 别名1 , tableb 别名2 ;</li>
-</ol>
-<blockquote>
-<p>[!tip] 一旦为表起了别名,就不能再使用表名来指定对应的字段了,此时只能够使用别名来指定字段。</p>
-</blockquote>
-<h2 id="12-外连接"><a class="markdownIt-Anchor" href="#12-外连接"></a> 1.2 外连接::</h2>
-<p><img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202210082212714.png" srcset="/img/loading.gif" lazyload alt="|500"></p>
-<p>外连接分为两种,分别是:左外连接 和 右外连接。<br>
-1). 左外连接</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs MySQL">SELECT  字段列表   FROM   表1  LEFT  [ OUTER ]  JOIN 表2  ON  条件 ... ;<br><br>-- 案例查询emp表的所有数据, 和对应的部门信息<br>select e.*, d.name from emp e left join dept d on e.dept_id = d.id;<br></code></pre></td></tr></tbody></table></figure>
-<p><strong>左外连接相当于查询表1(左表)的所有数据</strong>,当然也包含表1和表2交集部分的数据。</p>
-<p>2). 右外连接</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs MySQL">SELECT  字段列表   FROM   表1  RIGHT  [ OUTER ]  JOIN 表2  ON  条件 ... ;<br><br>-- 查询dept表的所有数据, 和对应的员工信息(右外连接)<br>select e.*, d.name from emp e right join dept d on e.dept_id = d.id;<br>select d.*, e.* from dept d left  join emp e on e.dept_id = d.id;<br><br><br></code></pre></td></tr></tbody></table></figure>
-<p><strong>右外连接相当于查询表2(右表)的所有数据</strong>,当然也包含表1和表2交集部分的数据。</p>
-<blockquote>
-<p>[!example]-<br>
-![[外连接.excalidraw]]</p>
-</blockquote>
-<blockquote>
-<p>[!tip]<br>
-注意事项:  左外连接和右外连接是可以相互替换的,只需要调整在连接查询时SQL中,表结构的先后顺序就可以了。<br>
-而我们在日常开发使用时,<strong>更偏向于左外连接</strong>。</p>
-</blockquote>
-<h2 id="13-自连接"><a class="markdownIt-Anchor" href="#13-自连接"></a> 1.3 自连接::</h2>
-<h3 id="131-自连接查询"><a class="markdownIt-Anchor" href="#131-自连接查询"></a> 1.3.1 自连接查询</h3>
-<p>自连接查询,顾名思义,就是自己连接自己,也就是把一张表连接查询多次。</p>
-<p>语法</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs MySQL">SELECT  字段列表   FROM   表A   别名A   JOIN  表A    别名B   ON  条件 ... ;<br></code></pre></td></tr></tbody></table></figure>
-<p>而对于自连接查询,可以是内连接查询,也可以是外连接查询。</p>
-<blockquote>
-<p>[!example]-<br>
-![[5. 多表查询 2022-10-09 20.23.21.excalidraw]]</p>
-</blockquote>
-<blockquote>
-<p>[!tip]  注意事项:<br>
-在自连接查询中,必须要为表起别名,要不然我们不清楚所指定的条件、返回的字段,到底是哪一张表的字段。</p>
-</blockquote>
-<h3 id="132-联合查询"><a class="markdownIt-Anchor" href="#132-联合查询"></a> 1.3.2 联合查询</h3>
-<p>对于union查询,就是把多次查询的结果合并起来,形成一个新的查询结果集。</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs MySQL">SELECT  字段列表   FROM   表A  ...  <br>UNION [ ALL ] <br>SELECT  字段列表  FROM   表B  ....;<br><br></code></pre></td></tr></tbody></table></figure>
-<blockquote>
-<p>[!tip]<br>
-对于联合查询的多张表的列数必须保持一致,字段类型也需要保持一致。<br>
-union all 会将全部的数据直接合并在一起,union 会对合并之后的数据去重。<br>
-如果多条查询语句查询出来的结果，字段数量不一致，在进行union/union al1联合查询时，将会报错。</p>
-</blockquote>
-<blockquote>
-<p>[!example]-<br>
-![[5. 多表查询 2022-10-09 20.42.15.excalidraw]]</p>
-</blockquote>
-<!-- basicblock-start oid="Obsur8Pwpz1zDWswxu0WuwcZ" --> 
-<h2 id="14-子查询"><a class="markdownIt-Anchor" href="#14-子查询"></a> 1.4 子查询::</h2>
-<!-- basicblock-end -->
-<p>SQL语句中嵌套SELECT语句,称为嵌套查询,又称子查询。</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs MySQL">SELECT  *  FROM   t1   WHERE  column1 =  ( SELECT  column1  FROM  t2 );<br></code></pre></td></tr></tbody></table></figure>
-<p>子查询外部的语句可以是INSERT / UPDATE / DELETE / SELECT 的任何一个</p>
-<blockquote>
-<p>[!summary] 分类<br>
-根据子查询结果不同,分为:<br>
-A. 标量子查询(子查询结果为单个值)<br>
-B. 列子查询(子查询结果为一列)<br>
-C. 行子查询(子查询结果为一行)<br>
-D. 表子查询(子查询结果为多行多列)</p>
-</blockquote>
-<p>根据子查询位置,分为:<br>
-A. WHERE之后<br>
-B. FROM之后<br>
-C. SELECT之后</p>
-<h3 id="141-标量子查询"><a class="markdownIt-Anchor" href="#141-标量子查询"></a> 1.4.1 标量子查询</h3>
-<p>子查询返回的结果是单个值(数字、字符串、日期等),最简单的形式,这种子查询称为标量子查询。<br>
-常用的操作符:=  &lt;&gt;  &gt;   &gt;=   &lt;  &lt;=</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs MySQL">-- A. 查询 "销售部" 的所有员工信息<br>完成这个需求时,我们可以将需求分解为两步: <br><br>1. 查询 "销售部" 部门ID<br>select id from dept where name = '销售部';<br><br>2. 根据 "销售部" 部门ID, 查询员工信息<br>select * from emp where dept_id = (select id from dept where name = '销售部');<br><br>-- B. 查询在 "方东白" 入职之后的员工信息<br>完成这个需求时,我们可以将需求分解为两步: <br><br>1. 查询 方东白 的入职日期<br>select entrydate from emp where name = '方东白'; <br><br>1. 查询指定入职日期之后入职的员工信息<br>select * from emp where entrydate &gt; (select entrydate from emp where name = '方东白');<br><br><br><br></code></pre></td></tr></tbody></table></figure>
-<h3 id="142-列子查询"><a class="markdownIt-Anchor" href="#142-列子查询"></a> 1.4.2 列子查询</h3>
-<p>子查询返回的结果是一列(可以是多行),这种子查询称为列子查询。<br>
-常用的操作符:IN 、NOT IN 、 ANY 、SOME 、 ALL</p>
-<table>
-<thead>
-<tr>
-<th>操作符</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>IN</td>
-<td>在指定的集合范围内，多选一</td>
-</tr>
-<tr>
-<td>NOT IN</td>
-<td>不在指定的集合范围内</td>
-</tr>
-<tr>
-<td>ANY</td>
-<td>子查询返回列表中，有任意一个满足即可</td>
-</tr>
-<tr>
-<td>SOME</td>
-<td>与ANY等同，使用SOME的地方都可以使用ANY</td>
-</tr>
-<tr>
-<td>ALL</td>
-<td>子查询返回列表的所有值都必须满足</td>
-</tr>
-</tbody>
-</table>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs mysql">-- 查询销售部和市场部的所有员工信息<br>1. 查询 "销售部" 和 "市场部" 的部门ID<br>2. 根据部门ID, 查询员工信息<br><br>select * from employee where dept in (select id from dept where name = '销售部' or name = '市场部');<br><br>-- 查询比财务部所有人工资都高的员工信息<br>select * from employee where salary &gt; all(select salary from employee where dept = (select id from dept where name = '财务部'));<br><br>-- 查询比研发部任意一人工资高的员工信息<br>select * from employee where salary &gt; any (select salary from employee where dept = (select id from dept where name = '研发部'));<br></code></pre></td></tr></tbody></table></figure>
-<h3 id="143-行子查询"><a class="markdownIt-Anchor" href="#143-行子查询"></a> 1.4.3 行子查询</h3>
-<p>返回的结果是一行（可以是多列）。<br>
-常用操作符：=, &lt;, &gt;, IN, NOT IN</p>
-<p>例子：</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs mysql">-- 查询与'张无忌'的薪资及直属领导 相同的员工信息<br>1. 查询 "张无忌" 的薪资及直属领导<br>2. 查询与 "张无忌" 的薪资及直属领导相同的员工信息 ;<br><br>select salary, managerid from emp where name = '张无忌';<br>select * from emp where (salary,managerid) = (select salary, managerid from emp where name = '张无忌');<br><br><br><br><br></code></pre></td></tr></tbody></table></figure>
-<h3 id="144-表子查询"><a class="markdownIt-Anchor" href="#144-表子查询"></a> 1.4.4 表子查询</h3>
-<p>返回的结果是多行多列<br>
-常用操作符：IN</p>
-<p>例子：</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs mysql">A. 查询与 "鹿杖客" , "宋远桥" 的职位和薪资相同的员工信息<br>1. 查询 "鹿杖客" , "宋远桥" 的职位和薪资<br>2. 查询与 "鹿杖客" , "宋远桥" 的职位和薪资相同的员工信息<br><br><br>select job, salary from emp where name = '鹿杖客' or name = '宋远桥';<br>select * from emp where (job,salary) in ( select job, salary from emp where name = '鹿杖客' or name = '宋远桥' );<br><br><br><br>B. 查询入职日期是 "2006-01-01" 之后的员工信息 , 及其部门信息<br>分解为两步执行: <br>1. 入职日期是 "2006-01-01" 之后的员工信息<br>2. 查询这部分员工, 对应的部门信息;<br>select * from emp where entrydate &gt; '2006-01-01';<br>select e.*, d.* from (select * from emp where entrydate &gt; '2006-01-01') e left join dept d on e.dept_id = d.id ;<br><br><br><br><br><br></code></pre></td></tr></tbody></table></figure>
+<h2 id="11-内连接"><a class="markdownIt-Anchor" href="#11-内连接"></a> 1.1 [[内连接]]</h2>
+<h2 id="12-外连接"><a class="markdownIt-Anchor" href="#12-外连接"></a> 1.2 [[外连接]]</h2>
+<h2 id="13-自连接"><a class="markdownIt-Anchor" href="#13-自连接"></a> 1.3 [[自连接]]</h2>
+<h2 id="14-子查询"><a class="markdownIt-Anchor" href="#14-子查询"></a> 1.4 [[子查询]]</h2>
 <hr>
 <p><strong>其他资料</strong></p>
- <!-- basicblock-start  --> 
+ <!-- basicblock-start oid="Obs7UnOFT70mUEXOCMQh2CbO"  --> 
 <p>📝多表查询的分类::<br>
 2022/11/1: 第一次创建</p>
 <!-- basicblock-end -->
@@ -502,7 +379,7 @@ C. SELECT之后</p>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/35663/" title="1. 慎重选择容器类型">
+                      <a href="/posts/35660/" title="1. 慎重选择容器类型">
                         <span class="hidden-mobile">1. 慎重选择容器类型</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>

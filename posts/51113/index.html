@@ -16,16 +16,17 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="剑指 Offer 03. 数组中重复的数字 - 力扣（LeetCode） [[set]]  1 暴力解法 先排个序 for 循环遍历, 如果前一个值和后一个值相同则返回 123456789101112class Solution {public:    int findRepeatNumber(vector&lt;int&gt;&amp; nums) {        sort(nums.begi">
+    <meta name="description" content="剑指 Offer 03. 数组中重复的数字 - 力扣（LeetCode）  1 暴力解法 先排个序 for 循环遍历, 如果前一个值和后一个值相同则返回 123456789101112class Solution {public:    int findRepeatNumber(vector&lt;int&gt;&amp; nums) {        sort(nums.begin(), num">
 <meta property="og:type" content="article">
 <meta property="og:title" content="剑指 Offer 03. 数组中重复的数字">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/51113/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="剑指 Offer 03. 数组中重复的数字 - 力扣（LeetCode） [[set]]  1 暴力解法 先排个序 for 循环遍历, 如果前一个值和后一个值相同则返回 123456789101112class Solution {public:    int findRepeatNumber(vector&lt;int&gt;&amp; nums) {        sort(nums.begi">
+<meta property="og:description" content="剑指 Offer 03. 数组中重复的数字 - 力扣（LeetCode）  1 暴力解法 先排个序 for 循环遍历, 如果前一个值和后一个值相同则返回 123456789101112class Solution {public:    int findRepeatNumber(vector&lt;int&gt;&amp; nums) {        sort(nums.begin(), num">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-10-27T02:30:00.000Z">
-<meta property="article:modified_time" content="2022-10-27T07:09:26.758Z">
+<meta property="article:modified_time" content="2022-11-07T01:01:56.270Z">
 <meta property="article:author" content="zeefan">
+<meta property="article:tag" content="数组">
 <meta name="twitter:card" content="summary_large_image">
   
   
@@ -284,21 +285,21 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年10月27日 下午
+                    本文最后更新于：2022年11月7日 上午
                   
                 
               </p>
             
             <div class="markdown-body">
               
-              <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof/">剑指 Offer 03. 数组中重复的数字 - 力扣（LeetCode）</a><br>
-[[set]]</p>
+              <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof/">剑指 Offer 03. 数组中重复的数字 - 力扣（LeetCode）</a></p>
 <h1 id="1-暴力解法"><a class="markdownIt-Anchor" href="#1-暴力解法"></a> 1 暴力解法</h1>
-<p>先排个序</p>
-<p>for 循环遍历, 如果前一个值和后一个值相同则返回</p>
+<p><strong>先排个序</strong><br>
+for 循环遍历, 如果前一个值和后一个值相同则返回</p>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">findRepeatNumber</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums)</span> </span>{<br>        <span class="hljs-built_in">sort</span>(nums.<span class="hljs-built_in">begin</span>(), nums.<span class="hljs-built_in">end</span>());<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; nums.<span class="hljs-built_in">size</span>(); i++){<br>        <span class="hljs-keyword">if</span>(nums[i] == nums[i+<span class="hljs-number">1</span>]) <span class="hljs-keyword">return</span> nums[i];<br>        }<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br><br>    }<br>};<br><br></code></pre></td></tr></tbody></table></figure>
 <h1 id="2-用哈希"><a class="markdownIt-Anchor" href="#2-用哈希"></a> 2 用哈希</h1>
 <p>![[剑指 Offer 03. 数组中重复的数字 2022-10-27 10.46.55.excalidraw]]</p>
+<p>[[set]]</p>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">findRepeatNumber</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums)</span> </span>{<br>        unordered_set&lt;<span class="hljs-type">int</span>&gt; set;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; nums.<span class="hljs-built_in">size</span>(); i++){<br>            <span class="hljs-keyword">if</span>(set.<span class="hljs-built_in">count</span>(nums[i])) <span class="hljs-keyword">return</span> nums[i];<br>            <span class="hljs-keyword">else</span> set.<span class="hljs-built_in">insert</span>(nums[i]);<br>        }<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br><br>    }<br>};<br><br></code></pre></td></tr></tbody></table></figure>
 <p>以上算法实现的复杂度分析：</p>
 <pre><code class="hljs">时间复杂度是 O(n)
@@ -356,6 +357,13 @@
     </div>
   
   
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%95%B0%E7%BB%84/">#数组</a>
+      
+    </div>
+  
 </div>
 
 
@@ -366,9 +374,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/3/" title="">
+                      <a href="/posts/31884/" title="05. 替换空格">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile"></span>
+                        <span class="hidden-mobile">05. 替换空格</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     

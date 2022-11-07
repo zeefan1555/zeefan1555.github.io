@@ -18,14 +18,14 @@
   
     <meta name="description" content="1 条款 7：如果容器中包含了通过 new 操作创建的指针，切记在容器对象析构前将指针 delete 掉  1.1 知识点 1：delete 指针 虽然说容器在销毁的时候会对每一个对象进行delete，但是指针不是所谓的“对象”没有析构函数，所以不会做任何事情。如果不对指针进行 delete 就会导致资源泄露   解决方法1：在销毁容器之前，使用for循环挨个delete指针   解决方法2：编">
 <meta property="og:type" content="article">
-<meta property="og:title" content="7-10">
+<meta property="og:title" content="7-11">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/63884/index.html">
 <meta property="og:site_name" content="一杯空气">
 <meta property="og:description" content="1 条款 7：如果容器中包含了通过 new 操作创建的指针，切记在容器对象析构前将指针 delete 掉  1.1 知识点 1：delete 指针 虽然说容器在销毁的时候会对每一个对象进行delete，但是指针不是所谓的“对象”没有析构函数，所以不会做任何事情。如果不对指针进行 delete 就会导致资源泄露   解决方法1：在销毁容器之前，使用for循环挨个delete指针   解决方法2：编">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202211012205070.png">
 <meta property="article:published_time" content="2022-11-01T14:03:00.000Z">
-<meta property="article:modified_time" content="2022-11-01T14:41:41.966Z">
+<meta property="article:modified_time" content="2022-11-04T12:31:11.289Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202211012205070.png">
@@ -34,7 +34,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>7-10 - 一杯空气</title>
+  <title>7-11 - 一杯空气</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -201,7 +201,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="7-10"></span>
+            <span id="subtitle" data-typed-text="7-11"></span>
           
         </div>
 
@@ -224,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          756 字
+          922 字
         
       </span>
     
@@ -235,7 +235,7 @@
         
         
         
-          4 分钟
+          5 分钟
         
       </span>
     
@@ -281,12 +281,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">7-10</h1>
+            <h1 style="display: none">7-11</h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年11月1日 晚上
+                    本文最后更新于：2022年11月4日 晚上
                   
                 
               </p>
@@ -314,7 +314,7 @@ delete 就会导致资源泄露</p>
 <h1 id="2-条款-8切勿创建包含-auto-ptr-的对象对于-c11-过时"><a class="markdownIt-Anchor" href="#2-条款-8切勿创建包含-auto-ptr-的对象对于-c11-过时"></a> 2 条款 8：切勿创建包含 auto-ptr 的对象（对于 C++11 过时）</h1>
 <h1 id="3-条款9慎重选择刪除元素的方法"><a class="markdownIt-Anchor" href="#3-条款9慎重选择刪除元素的方法"></a> 3 条款9：慎重选择刪除元素的方法</h1>
 <h2 id="31-知识点-1删除容器对象选择的方法"><a class="markdownIt-Anchor" href="#31-知识点-1删除容器对象选择的方法"></a> 3.1 知识点 1：删除容器对象选择的方法</h2>
-<!-- basicblock-start -->
+<!-- basicblock-start oid="ObsXkfHY4JDTzAkO7ODfN1Q6" -->
 <p>![[7-10 2022-11-01 22.07.08.excalidraw]]::  ❓ #疑问</p>
 <!-- basicblock-end -->
 <h1 id="4-条款10了解分配子allocator的约定和限制"><a class="markdownIt-Anchor" href="#4-条款10了解分配子allocator的约定和限制"></a> 4 条款10：了解分配子allocator的约定和限制</h1>
@@ -322,17 +322,42 @@ delete 就会导致资源泄露</p>
 <p>快下班了, 没仔细看, 晚上还要打电话: <a href="marginnote3app://note/74C153BA-1566-4B11-9E7F-EC58B9603992">margin: 条款10</a></p>
 </blockquote>
 <p>[[static 关键字|static 关键字]]</p>
+<blockquote>
+<p>[!question]</p>
+</blockquote>
+<h2 id="41-下边都不懂-疑问"><a class="markdownIt-Anchor" href="#41-下边都不懂-疑问"></a> 4.1 下边都不懂::   #疑问</h2>
 <ul>
-<li>确保你的分配子是一个模板，模板参 T代表你为他分配内存的对象的类型</li>
-<li>提供类型定义 pointer 和 reference，但是始终让 pointer 为 T*，reference 为 T&amp;，这是标准库所规定的</li>
-<li>千万不要让你的分配子拥有随对象而不同的状态，通常分配子不应该有非静态类型的数据成员，因为 STL 实现假定同一类型的分配子是等价的</li>
-<li>传给 allocator 成员西数的是那些要求内存对象的个数，而不是所需要的字节数，同时要记住，这些西数返回<code>T*</code>指针（(通过 pointer 类型定义，即使尚未有 T 对象被构造出来</li>
-<li>通过嵌套的rebind模板，因为标准容器依靠模板取得类的成员的类型来分配内存</li>
+<li>确保你的分配子是一个模板，模板参 T 代表你为他分配内存的对象的类型</li>
+</ul>
+<h2 id="42"><a class="markdownIt-Anchor" href="#42"></a> 4.2</h2>
+<ul>
+<li>
+<p>提供类型定义 pointer 和 reference，但是始终让 pointer 为 <code>T*</code>，reference 为 <code>T&amp;</code>，这是标准库所规定的</p>
+</li>
+<li>
+<p>千万不要让你的分配子拥有随对象而不同的状态，通常分配子不应该有非静态类型的数据成员，因为 STL 实现假定同一类型的分配子是等价的</p>
+</li>
+<li>
+<p>传给 allocator 成员函数的是那些要求内存对象的个数，而不是所需要的字节数，同时要记住，这些函数返回 <code>T*</code> 指针（(通过 pointer 类型定义，即使尚未有 T 对象被构造出来</p>
+</li>
+<li>
+<p>通过嵌套的rebind模板，因为标准容器依靠模板取得类的成员的类型来分配内存</p>
+</li>
+</ul>
+<h1 id="5-条款-11理解自定义分配子的合理用法"><a class="markdownIt-Anchor" href="#5-条款-11理解自定义分配子的合理用法"></a> 5 条款 11：理解自定义分配子的合理用法</h1>
+<p>知识点 1：自定义分配子的合适场景</p>
+<ul>
+<li>
+<p>在 <code>alloctor&lt;T&gt;</code> 是线程安全的，你想使用一个单线程的 alloctor，那么就可以考虑定制</p>
+</li>
+<li>
+<p>想建立一个与共享内存相对应的特殊的堆，然后在这块内存中放一个或者多个容器，让其他的进程可以共享这些容器</p>
+</li>
 </ul>
 <hr>
 <p><strong>其他资料</strong></p>
- <!-- basicblock-start  --> 
-<p>📝7-10::<br>
+ <!-- basicblock-start oid="ObsIYSf9LLVGK1CFWpN0xqFB"  --> 
+<p>📝7-11::<br>
 2022/11/1: 第一次创建</p>
 <!-- basicblock-end -->
               
