@@ -16,15 +16,15 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1 事务简介 事务是一组操作的集合, 它是一个不可分割的工作单位, 事务会把所有的操作作为一个整体一起向系统提交或撤销操作请求, 即这些操作要么同时成功, 要么同时失败。 就比如: 张三给李四转账 1000 块钱, 张三银行账户的钱减少 1000, 而李四银行账户的钱要增加 1000。这一组操作就必须在一个事务的范围内, 要么都成功, 要么都失败。 ![[6. 事务简介.excalidraw]]">
+    <meta name="description" content="1 事务简介  ⼀个最⼩的不可再分的⼯作单元 通常情况下，⼀个事务对应⼀个完整的业务  事务是一组操作的集合, 它是一个不可分割的工作单位, 事务会把所有的操作作为一个整体一起向系统提交或撤销操作请求, 即这些操作要么同时成功, 要么同时失败。 就比如: 张三给李四转账 1000 块钱, 张三银行账户的钱减少 1000, 而李四银行账户的钱要增加 1000。这一组操作就必须在一个事务的范围内,">
 <meta property="og:type" content="article">
 <meta property="og:title" content="6. 事务">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/912/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="1 事务简介 事务是一组操作的集合, 它是一个不可分割的工作单位, 事务会把所有的操作作为一个整体一起向系统提交或撤销操作请求, 即这些操作要么同时成功, 要么同时失败。 就比如: 张三给李四转账 1000 块钱, 张三银行账户的钱减少 1000, 而李四银行账户的钱要增加 1000。这一组操作就必须在一个事务的范围内, 要么都成功, 要么都失败。 ![[6. 事务简介.excalidraw]]">
+<meta property="og:description" content="1 事务简介  ⼀个最⼩的不可再分的⼯作单元 通常情况下，⼀个事务对应⼀个完整的业务  事务是一组操作的集合, 它是一个不可分割的工作单位, 事务会把所有的操作作为一个整体一起向系统提交或撤销操作请求, 即这些操作要么同时成功, 要么同时失败。 就比如: 张三给李四转账 1000 块钱, 张三银行账户的钱减少 1000, 而李四银行账户的钱要增加 1000。这一组操作就必须在一个事务的范围内,">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-01T07:53:00.000Z">
-<meta property="article:modified_time" content="2022-11-03T07:12:46.742Z">
+<meta property="article:modified_time" content="2022-11-08T08:42:04.882Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          870 字
+          719 字
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          5 分钟
+          4 分钟
         
       </span>
     
@@ -284,7 +284,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年11月3日 下午
+                    本文最后更新于：2022年11月8日 下午
                   
                 
               </p>
@@ -292,38 +292,37 @@
             <div class="markdown-body">
               
               <h1 id="1-事务简介"><a class="markdownIt-Anchor" href="#1-事务简介"></a> 1 事务简介</h1>
+<ol>
+<li>⼀个最⼩的不可再分的⼯作单元</li>
+<li>通常情况下，⼀个事务对应⼀个完整的业务</li>
+</ol>
 <p>事务是一组操作的集合, 它是一个不可分割的工作单位, <strong>事务会把所有的操作作为一个整体一起向系统提交或撤销操作请求, 即这些操作要么同时成功, 要么同时失败。</strong></p>
 <p>就比如: 张三给李四转账 1000 块钱, 张三银行账户的钱减少 1000, 而李四银行账户的钱要增加 1000。这一组操作就必须在一个事务的范围内, 要么都成功, 要么都失败。</p>
-<p>![[6. 事务简介.excalidraw]]</p>
+<blockquote>
+<p>[!example]-<br>
+![[6. 事务简介.excalidraw]]</p>
+</blockquote>
 <blockquote>
 <p>[!tip]<br>
 注意: 默认 MySQL 的事务是自动提交的, 也就是说, 当执行完一条 [[DML]] 语句时,MySQL 会立即隐式的提交事务。</p>
 </blockquote>
-<h1 id="2-事务操作"><a class="markdownIt-Anchor" href="#2-事务操作"></a> 2 事务操作</h1>
-<h2 id="21-未控制事务"><a class="markdownIt-Anchor" href="#21-未控制事务"></a> 2.1 未控制事务</h2>
+<h1 id="2-事务的四大特性-acid"><a class="markdownIt-Anchor" href="#2-事务的四大特性-acid"></a> 2 [[事务的四大特性  ACID]]</h1>
+<h1 id="3-事务操作"><a class="markdownIt-Anchor" href="#3-事务操作"></a> 3 事务操作</h1>
+<h2 id="31-未控制事务"><a class="markdownIt-Anchor" href="#31-未控制事务"></a> 3.1 未控制事务</h2>
 <p>![[6. 事务 2022-11-01 16.03.53.excalidraw]]</p>
-<h2 id="22-控制事务一"><a class="markdownIt-Anchor" href="#22-控制事务一"></a> 2.2 控制事务一</h2>
+<h2 id="32-控制事务一"><a class="markdownIt-Anchor" href="#32-控制事务一"></a> 3.2 控制事务一</h2>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs MySQL">1). 查看/设置事务提交方式<br>select  @@autocommit ; <br>set   @@autocommit = 0 ;<br><br>2). 提交事务<br>commit<br><br>3). 回滚事务 <br>rollback<br></code></pre></td></tr></tbody></table></figure>
 <blockquote>
 <p>[!tip]<br>
 注意:上述的这种方式,我们是修改了事务的自动提交行为, 把默认的自动提交修改为了手动提交, 此时我们执行的DML语句都不会提交, 需要手动的执行commit进行提交。</p>
 </blockquote>
-<h2 id="23-控制事务二"><a class="markdownIt-Anchor" href="#23-控制事务二"></a> 2.3 控制事务二</h2>
+<h2 id="33-控制事务二"><a class="markdownIt-Anchor" href="#33-控制事务二"></a> 3.3 控制事务二</h2>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs mysql">1). 开启事务<br>start transaction 或 begin<br><br>2). 提交事务<br>commit<br><br>3). 回滚事务<br>rollback<br><br></code></pre></td></tr></tbody></table></figure>
 <blockquote>
 <p>[!example]<br>
 ![[6. 事务 2022-11-01 16.13.54.excalidraw]]</p>
 </blockquote>
-<h1 id="3-acidacid-事务的四大特性"><a class="markdownIt-Anchor" href="#3-acidacid-事务的四大特性"></a> 3 ACID%%ACID 事务的四大特性%%</h1>
-<p>^fc34dc</p>
-<ul>
-<li>原子性(Atomicity):事务是不可分割的最小操作单元,要么全部成功,要么全部失败。</li>
-<li>一致性(Consistency):事务完成时,必须使所有的数据都保持一致状态。</li>
-<li>隔离性(Isolation):数据库系统提供的隔离机制,保证事务在不受外部并发操作影响的独立环境下运行。</li>
-<li>持久性(Durability):事务一旦提交或回滚,它对数据库中的数据的改变就是永久的。</li>
-</ul>
-<p>上述就是事务的四大特性,简称ACID。 ^f3fe25</p>
-<h1 id="4-并发事务问题"><a class="markdownIt-Anchor" href="#4-并发事务问题"></a> 4 [[并发事务问题]]</h1>
+<h1 id="4-并发事务问题-mysql-四大隔离级别"><a class="markdownIt-Anchor" href="#4-并发事务问题-mysql-四大隔离级别"></a> 4 [[并发事务问题 &amp;&amp; MySQL 四大隔离级别]]</h1>
 <hr>
 <p><strong>其他资料</strong></p>
  <!-- basicblock-start oid="ObsXM5VG1PDEjHKZbzGasjw2"  --> 

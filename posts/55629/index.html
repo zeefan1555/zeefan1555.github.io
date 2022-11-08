@@ -16,15 +16,15 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1 并发事务问题 ![[并发事务问题.excalidraw]]  1.1 事务隔离级别 (解决事务并发问题) 为了解决并发事务所引发的问题,在数据库中引入了事务隔离级别。主要有以下几种: 并发事务隔离级别：    隔离级别 脏读 不可重复读 幻读     read uncommitted √ √ √   read committed × √ √   repeatable read(默认) × ×">
+    <meta name="description" content="1 并发事务问题  [!summary] 术语说明： 脏读： ⼀个事务读取另⼀个事务还没有提交的数据 不可重复读： 同⼀个事务内，两个相同的查询返回了不同的结果  ![[并发事务问题.excalidraw]]  2 事务隔离级别 (解决事务并发问题) 为了解决并发事务所引发的问题,在数据库中引入了事务隔离级别。主要有以下几种:   并发事务隔离级别：::     隔离级别 脏读 不可重复读 幻读">
 <meta property="og:type" content="article">
 <meta property="og:title" content="并发事务问题">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/55629/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="1 并发事务问题 ![[并发事务问题.excalidraw]]  1.1 事务隔离级别 (解决事务并发问题) 为了解决并发事务所引发的问题,在数据库中引入了事务隔离级别。主要有以下几种: 并发事务隔离级别：    隔离级别 脏读 不可重复读 幻读     read uncommitted √ √ √   read committed × √ √   repeatable read(默认) × ×">
+<meta property="og:description" content="1 并发事务问题  [!summary] 术语说明： 脏读： ⼀个事务读取另⼀个事务还没有提交的数据 不可重复读： 同⼀个事务内，两个相同的查询返回了不同的结果  ![[并发事务问题.excalidraw]]  2 事务隔离级别 (解决事务并发问题) 为了解决并发事务所引发的问题,在数据库中引入了事务隔离级别。主要有以下几种:   并发事务隔离级别：::     隔离级别 脏读 不可重复读 幻读">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-01T09:23:00.000Z">
-<meta property="article:modified_time" content="2022-11-02T07:03:00.287Z">
+<meta property="article:modified_time" content="2022-11-08T12:36:00.189Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          593 字
+          931 字
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          3 分钟
+          5 分钟
         
       </span>
     
@@ -284,7 +284,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年11月2日 下午
+                    本文最后更新于：2022年11月8日 晚上
                   
                 
               </p>
@@ -292,10 +292,17 @@
             <div class="markdown-body">
               
               <h1 id="1-并发事务问题"><a class="markdownIt-Anchor" href="#1-并发事务问题"></a> 1 并发事务问题</h1>
+<blockquote>
+<p>[!summary] 术语说明：<br>
+脏读： ⼀个事务读取另⼀个事务还没有提交的数据<br>
+不可重复读： 同⼀个事务内，两个相同的查询返回了不同的结果</p>
+</blockquote>
 <p>![[并发事务问题.excalidraw]]</p>
-<h2 id="11-事务隔离级别-解决事务并发问题"><a class="markdownIt-Anchor" href="#11-事务隔离级别-解决事务并发问题"></a> 1.1 事务隔离级别 (解决事务并发问题)</h2>
+<h1 id="2-事务隔离级别-解决事务并发问题"><a class="markdownIt-Anchor" href="#2-事务隔离级别-解决事务并发问题"></a> 2 事务隔离级别 (解决事务并发问题)</h1>
 <p>为了解决并发事务所引发的问题,在数据库中引入了事务隔离级别。主要有以下几种:</p>
-<p>并发事务隔离级别：</p>
+<!-- basicblock-start oid="Obs4sgPPoxofAvm6rzLjmfS0" --> 
+<p>并发事务隔离级别：::</p>
+<!-- basicblock-end -->
 <table>
 <thead>
 <tr>
@@ -334,8 +341,20 @@
 </table>
 <ul>
 <li>√表示在当前隔离级别下该问题会出现</li>
-<li>Serializable 性能最低；Read uncommitted 性能最高，数据安全性最差</li>
+<li>Read uncommitted 性能最高，数据安全性最差</li>
+<li>Serializable 性能最低, 数据安全性最高</li>
 </ul>
+<blockquote>
+<p>[!summary]<br>
+1、RU 读不提交（Read Uncommited）<br>
+在该隔离级别下，事务之间完全不隔离，会产⽣脏读，⼀般情况不会使⽤<br>
+2、RC 读提交（Read Commited）<br>
+本事务读取到的是其它事务提交的最新数据，但有⼀个问题在同⼀个事务中，前后两相同的 select可能会读到不同的结果<br>
+3、RR 可重复读（Repeatable Read）<br>
+在同⼀个事务中，select的结果是事务开始时时间点的状态，因此，同⼀个事务同样的 select操作可以读到⼀致的结果<br>
+4、serializable串⾏化<br>
+读操作会隐式获取共享锁，保证不同事务之间的互斥</p>
+</blockquote>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs mysql">查看事务隔离级别：<br>select @@transaction_isolation;<br>设置事务隔离级别：<br>set [ session | global ] transaction isolation level {read uncommitted | read committed | repeatable read | serializable };<br></code></pre></td></tr></tbody></table></figure>
 <p>SESSION 是会话级别，表示只针对当前会话有效，GLOBAL 表示对所有会话有效</p>
 <blockquote>
@@ -346,7 +365,7 @@
 </blockquote>
 <blockquote>
 <p>[!example]<br>
-![[隔离级别解决并发事务.excalidraw|1800]]</p>
+![[脏读, 幻读, 不可重复读.excalidraw|1800]]</p>
 </blockquote>
 <hr>
 <p><strong>其他资料</strong></p>
