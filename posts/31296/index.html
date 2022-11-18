@@ -16,15 +16,15 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="📝1. 动态规划理论基础:: 代码随想录   [!summary] 动态规划，英文：Dynamic Programming，简称 DP 动态规划中每一个状态一定是由上一个状态推导出来的，贪心是局部最优推导全局最优  例如：有N件物品和一个最多能背重量为W 的背包。第i件物品的重量是weight[i]，得到的价值是value[i] 。每件物品只能用一次，求解将哪些物品装入背包里物品价值总和最大。">
+    <meta name="description" content="📝1. 动态规划理论基础:: 代码随想录   [!summary] 动态规划，英文：Dynamic Programming，简称 DP 动态规划中每一个状态一定是由上一个状态推导出来的，贪心是局部最优推导全局最优   1: 解决的问题  背包问题 正则字符串匹配  例如：有N件物品和一个最多能背重量为W 的背包。第i件物品的重量是weight[i]，得到的价值是value[i] 。每件物品只能用">
 <meta property="og:type" content="article">
 <meta property="og:title" content="1.动态规划理论基础">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/31296/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="📝1. 动态规划理论基础:: 代码随想录   [!summary] 动态规划，英文：Dynamic Programming，简称 DP 动态规划中每一个状态一定是由上一个状态推导出来的，贪心是局部最优推导全局最优  例如：有N件物品和一个最多能背重量为W 的背包。第i件物品的重量是weight[i]，得到的价值是value[i] 。每件物品只能用一次，求解将哪些物品装入背包里物品价值总和最大。">
+<meta property="og:description" content="📝1. 动态规划理论基础:: 代码随想录   [!summary] 动态规划，英文：Dynamic Programming，简称 DP 动态规划中每一个状态一定是由上一个状态推导出来的，贪心是局部最优推导全局最优   1: 解决的问题  背包问题 正则字符串匹配  例如：有N件物品和一个最多能背重量为W 的背包。第i件物品的重量是weight[i]，得到的价值是value[i] 。每件物品只能用">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-07-05T08:27:00.000Z">
-<meta property="article:modified_time" content="2022-11-08T12:29:10.635Z">
+<meta property="article:modified_time" content="2022-11-15T03:19:59.545Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          649 字
+          669 字
         
       </span>
     
@@ -284,7 +284,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年11月8日 晚上
+                    本文最后更新于：2022年11月15日 上午
                   
                 
               </p>
@@ -297,9 +297,14 @@
 <p>[!summary] 动态规划，英文：Dynamic Programming，简称 DP<br>
 <strong>动态规划中每一个状态一定是由上一个状态推导出来的</strong>，贪心是局部最优推导全局最优</p>
 </blockquote>
+<h1 id="1-解决的问题"><a class="markdownIt-Anchor" href="#1-解决的问题"></a> 1: 解决的问题</h1>
+<ul>
+<li>背包问题</li>
+<li>正则<strong>字符串匹配</strong></li>
+</ul>
 <p>例如：有N件物品和一个最多能背重量为W 的背包。第i件物品的重量是weight[i]，得到的价值是value[i] 。<strong>每件物品只能用一次</strong>，求解将哪些物品装入背包里物品价值总和最大。</p>
 <p>动态规划中dp[j]是由dp[j-weight[i]]推导出来的，然后取max(dp[j], dp[j - weight[i]] + value[i])。</p>
-<h1 id="1-动态规划解题步骤"><a class="markdownIt-Anchor" href="#1-动态规划解题步骤"></a> 1 动态规划解题步骤</h1>
+<h1 id="2-动态规划解题步骤"><a class="markdownIt-Anchor" href="#2-动态规划解题步骤"></a> 2: 动态规划解题步骤</h1>
 <ol>
 <li>确定dp数组（dp table）以及下标的含义</li>
 <li>确定递推公式</li>
@@ -313,7 +318,7 @@
 <p>如果打印出来和自己预先模拟推导是一样的，那么就是自己的递归公式、初始化或者遍历顺序有问题了。</p>
 <p>如果和自己预先模拟推导的不一样，那么就是代码实现细节有问题。<br>
 <strong>找问题的最好方式就是把dp数组打印出来，看看究竟是不是按照自己思路推导的！</strong></p>
-<h1 id="1-debug"><a class="markdownIt-Anchor" href="#1-debug"></a> 1 debug</h1>
+<h1 id="3-debug"><a class="markdownIt-Anchor" href="#3-debug"></a> 3: debug</h1>
 <p><strong>如果代码写出来了，一直AC不了，灵魂三问：</strong></p>
 <ol>
 <li>这道题目我举例推导状态转移公式了么？</li>

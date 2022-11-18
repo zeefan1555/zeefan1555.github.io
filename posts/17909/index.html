@@ -16,15 +16,15 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="📝索引分类:: 2022&#x2F;11&#x2F;2 : 第一次创建   1 总分类 在 MySQL 数据库, 将索引的具体类型主要分为以下几类: 主键索引、唯一索引、常规索引、全文索引。    分类 含义 特点 关键字     主键索引 针对于表中主键创建的索引 默认自动创建，只能有一个 PRIMARY   唯一索引 避免同一个表中某数据列中的值重复 可以有多个 UNIQUE   常规索引 快速定位特定数据 可">
+    <meta name="description" content="📝索引分类:: 2022&#x2F;11&#x2F;2 : 第一次创建   1: 总分类 在 MySQL 数据库, 将索引的具体类型主要分为以下几类: 主键索引、唯一索引、常规索引、全文索引。    分类 含义 特点 关键字     主键索引 针对于表中主键创建的索引 默认自动创建，只能有一个 PRIMARY   唯一索引 避免同一个表中某数据列中的值重复 可以有多个 UNIQUE   常规索引 快速定位特定数据">
 <meta property="og:type" content="article">
 <meta property="og:title" content="索引分类">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/17909/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="📝索引分类:: 2022&#x2F;11&#x2F;2 : 第一次创建   1 总分类 在 MySQL 数据库, 将索引的具体类型主要分为以下几类: 主键索引、唯一索引、常规索引、全文索引。    分类 含义 特点 关键字     主键索引 针对于表中主键创建的索引 默认自动创建，只能有一个 PRIMARY   唯一索引 避免同一个表中某数据列中的值重复 可以有多个 UNIQUE   常规索引 快速定位特定数据 可">
+<meta property="og:description" content="📝索引分类:: 2022&#x2F;11&#x2F;2 : 第一次创建   1: 总分类 在 MySQL 数据库, 将索引的具体类型主要分为以下几类: 主键索引、唯一索引、常规索引、全文索引。    分类 含义 特点 关键字     主键索引 针对于表中主键创建的索引 默认自动创建，只能有一个 PRIMARY   唯一索引 避免同一个表中某数据列中的值重复 可以有多个 UNIQUE   常规索引 快速定位特定数据">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-02T13:47:00.000Z">
-<meta property="article:modified_time" content="2022-11-07T09:02:54.647Z">
+<meta property="article:modified_time" content="2022-11-12T13:59:48.882Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          741 字
+          727 字
         
       </span>
     
@@ -284,7 +284,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年11月7日 下午
+                    本文最后更新于：2022年11月12日 晚上
                   
                 
               </p>
@@ -294,7 +294,7 @@
               <p>📝索引分类::<br>
 2022/11/2 : 第一次创建</p>
 <!-- basicblock-end -->
-<h1 id="1-总分类"><a class="markdownIt-Anchor" href="#1-总分类"></a> 1 总分类</h1>
+<h1 id="1-总分类"><a class="markdownIt-Anchor" href="#1-总分类"></a> 1: 总分类</h1>
 <p>在 MySQL 数据库, 将索引的具体类型主要分为以下几类:<br>
 主键索引、唯一索引、常规索引、全文索引。</p>
 <table>
@@ -333,7 +333,7 @@
 </tr>
 </tbody>
 </table>
-<h1 id="2-innodb-中的分类"><a class="markdownIt-Anchor" href="#2-innodb-中的分类"></a> 2 InnoDB 中的分类</h1>
+<h1 id="2-innodb-中的分类"><a class="markdownIt-Anchor" href="#2-innodb-中的分类"></a> 2: InnoDB 中的分类</h1>
 <p>存储引擎中，根据索引的存储形式，又可以分为以下两种：</p>
 <table>
 <thead>
@@ -363,15 +363,13 @@
 <li>如果表没有主键或没有合适的唯一索引，则 InnoDB 会自动生成一个 rowid 作为隐藏的聚集索引<br>
 ![[二级索引.excalidraw]]</li>
 </ul>
-<h1 id="3-思考题"><a class="markdownIt-Anchor" href="#3-思考题"></a> 3 思考题</h1>
+<h1 id="3-思考题"><a class="markdownIt-Anchor" href="#3-思考题"></a> 3: 思考题</h1>
 <p>1. 以下 SQL 语句，哪个执行效率高？为什么？</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select * from user where id = 10;<br>select * from user where name = 'Arm';<br>-- 备注：id为主键，name字段创建的有索引<br></code></pre></td></tr></tbody></table></figure>
 <p>答：第一条语句，因为第二条需要回表查询，相当于两个步骤。</p>
 <p>2. InnoDB 主键索引的 B+Tree 高度为多少？</p>
-<p>![[索引分类 2022-11-02 22.18.42.excalidraw]]</p>
+<p>![[一张表能存多少数据.excalidraw]]</p>
 <p>另外，如果有上亿的数据，那么就要考虑分表，涉及运维篇知识。title: 索引分类</p>
-<hr>
-<p><strong>其他资料</strong></p>
 
               
             </div>

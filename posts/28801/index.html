@@ -16,17 +16,17 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1 定义:: DQL英文全称是Data Query Language(数据查询语言),数据查询语言,用来查询数据库中表的记录。 查询关键字: SELECT 在一个正常的业务系统中,查询操作的频次是要远高于增删改的,当我们去访问企业官网、电商网站, 在这些网站中我们所看到的数据,实际都是需要从数据库中查询并展示的。而且在查询的过程中,可能还会涉及到条件、排序、分页等操作。  我们先来完成如下数据准">
+    <meta name="description" content="1: 定义:: DQL英文全称是Data Query Language(数据查询语言),数据查询语言,用来查询数据库中表的记录。 查询关键字: SELECT 在一个正常的业务系统中,查询操作的频次是要远高于增删改的,当我们去访问企业官网、电商网站, 在这些网站中我们所看到的数据,实际都是需要从数据库中查询并展示的。而且在查询的过程中,可能还会涉及到条件、排序、分页等操作。  我们先来完成如下数据">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DQL">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/28801/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="1 定义:: DQL英文全称是Data Query Language(数据查询语言),数据查询语言,用来查询数据库中表的记录。 查询关键字: SELECT 在一个正常的业务系统中,查询操作的频次是要远高于增删改的,当我们去访问企业官网、电商网站, 在这些网站中我们所看到的数据,实际都是需要从数据库中查询并展示的。而且在查询的过程中,可能还会涉及到条件、排序、分页等操作。  我们先来完成如下数据准">
+<meta property="og:description" content="1: 定义:: DQL英文全称是Data Query Language(数据查询语言),数据查询语言,用来查询数据库中表的记录。 查询关键字: SELECT 在一个正常的业务系统中,查询操作的频次是要远高于增删改的,当我们去访问企业官网、电商网站, 在这些网站中我们所看到的数据,实际都是需要从数据库中查询并展示的。而且在查询的过程中,可能还会涉及到条件、排序、分页等操作。  我们先来完成如下数据">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202210070122175.png">
 <meta property="og:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202210071508398.png">
 <meta property="article:published_time" content="2022-10-06T17:20:00.000Z">
-<meta property="article:modified_time" content="2022-11-03T07:38:18.156Z">
+<meta property="article:modified_time" content="2022-11-17T13:25:18.899Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202210070122175.png">
@@ -236,7 +236,7 @@
         
         
         
-          20 分钟
+          21 分钟
         
       </span>
     
@@ -287,14 +287,14 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年11月3日 下午
+                    本文最后更新于：2022年11月17日 晚上
                   
                 
               </p>
             
             <div class="markdown-body">
               
-              <h1 id="1-定义"><a class="markdownIt-Anchor" href="#1-定义"></a> 1 定义::</h1>
+              <h1 id="1-定义"><a class="markdownIt-Anchor" href="#1-定义"></a> 1: 定义::</h1>
 <p>DQL英文全称是Data Query Language(数据查询语言),数据查询语言,用来查询数据库中表的记录。</p>
 <p><strong>查询关键字: SELECT</strong></p>
 <p>在一个正常的业务系统中,查询操作的频次是要远高于增删改的,当我们去访问企业官网、电商网站, 在这些网站中我们所看到的数据,实际都是需要从数据库中查询并展示的。而且在查询的过程中,可能还会涉及到条件、排序、分页等操作。<br>
@@ -302,7 +302,7 @@
 <p>我们先来完成如下数据准备工作:<br>
 ![[DQL 2022-10-07 01.44.53.excalidraw]]</p>
 <!-- basicblock-start oid="ObsmTlFpONTSrFV2gxpEZK7b" --> 
-<h1 id="2-基本语法"><a class="markdownIt-Anchor" href="#2-基本语法"></a> 2 基本语法::</h1>
+<h1 id="2-基本语法"><a class="markdownIt-Anchor" href="#2-基本语法"></a> 2: 基本语法::</h1>
 <!-- basicblock-end -->
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs MySQL">SELECT<br>	字段列表<br>FROM<br>	表名列表<br>WHERE<br>	条件列表<br>GROUP BY<br>	分组字段列表<br>HAVING<br>	分组后条件列表<br>ORDER BY<br>	排序字段列表<br>LIMIT<br>	分页参数<br></code></pre></td></tr></tbody></table></figure>
 <p>我们在讲解这部分内容的时候，会将上面的完整语法进行拆分，分为以下几个部分：</p>
@@ -310,15 +310,15 @@
 <li>基本查询（不带任何条件）</li>
 <li>条件查询(where)</li>
 <li>聚合函数(count、 max、 min、 avg、 sum)</li>
-<li>分组查询 (group by)</li>
+<li>分组查询 (group by) ^246cb8</li>
 <li>排序查询 (order by)</li>
 <li>分页查询 (limit)</li>
 </ul>
-<h2 id="21-基础查询"><a class="markdownIt-Anchor" href="#21-基础查询"></a> 2.1 基础查询</h2>
+<h2 id="21-基础查询"><a class="markdownIt-Anchor" href="#21-基础查询"></a> 2.1: 基础查询</h2>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs MySQL">查询多个字段：<br>SELECT 字段1, 字段2, 字段3, ... FROM 表名;<br><br>SELECT * FROM 表名;<br>	这个命令也可以直接查看表. 相当于双击表名<br>	注意 : * 号代表查询所有字段,在实际开发中尽量少用(不直观、影响效率)<br><br><br>-- 案例<br>A. 查询指定字段 name, workno, age并返回<br>select name,workno,age from emp;<br><br>B. 查询返回所有字段<br>select * from emp;<br>select id ,workno,name,gender,age,idcard,workaddress,entrydate from emp; <br><br><br></code></pre></td></tr></tbody></table></figure>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs MySQL">设置别名：<br>SELECT 字段1 [ AS 别名1 ], 字段2 [ AS 别名2 ], 字段3 [ AS 别名3 ], ... FROM 表名;<br>SELECT 字段1 [ 别名1 ], 字段2 [ 别名2 ], 字段3 [ 别名3 ], ... FROM 表名; # as 可以省略<br><br>-- <br>C. 查询所有员工的工作地址,起别名<br>select workaddress as '工作地址' from emp; # 将 workaddress 表头改名为 工作地址 <br>-- as可以省略<br>select workaddress '工作地址' from emp;<br><br><br><br></code></pre></td></tr></tbody></table></figure>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs MySQL">去除重复记录：<br>SELECT DISTINCT 字段列表 FROM 表名;<br>-- <br>D. 查询公司员工的上班地址有哪些(不要重复)<br>select distinct workaddress '工作地址' from emp;<br><br></code></pre></td></tr></tbody></table></figure>
-<h2 id="22-条件查询"><a class="markdownIt-Anchor" href="#22-条件查询"></a> 2.2 条件查询</h2>
+<h2 id="22-条件查询"><a class="markdownIt-Anchor" href="#22-条件查询"></a> 2.2: 条件查询</h2>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs MySQL">语法：<br>SELECT 字段列表 FROM 表名 WHERE 条件列表;<br></code></pre></td></tr></tbody></table></figure>
 <p>条件列表</p>
 <table>
@@ -395,7 +395,7 @@
 </table>
 <p>例子：</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs mysql">-- 年龄等于30<br>select * from employee where age = 30;<br>-- 年龄小于30<br>select * from employee where age &lt; 30;<br>-- 小于等于<br>select * from employee where age &lt;= 30;<br>-- 💡没有身份证<br>select * from employee where idcard is null or idcard = '';<br>-- 有身份证<br>select * from employee where idcard;<br>select * from employee where idcard is not null;<br>-- 不等于<br>select * from employee where age != 30;<br>-- 💡年龄在20到30之间<br>select * from employee where age between 20 and 30;<br>select * from employee where age &gt;= 20 &amp;&amp; age &lt;= 30;<br>-- 下面语句不报错，但查不到任何信息<br>select * from employee where age between 30 and 20;<br>-- 性别为女且年龄小于30<br>select * from employee where age &lt; 30 and gender = '女';<br>-- 💡年龄等于25或30或35<br>select * from employee where age = 25 or age = 30 or age = 35;<br>select * from employee where age in (25, 30, 35);<br>-- 💡姓名为两个字<br>select * from employee where name like '__';<br>-- 💡身份证最后为X<br>select * from employee where idcard like '%X';<br></code></pre></td></tr></tbody></table></figure>
-<h2 id="23-聚合查询聚合函数"><a class="markdownIt-Anchor" href="#23-聚合查询聚合函数"></a> 2.3 聚合查询(聚合函数)</h2>
+<h2 id="23-聚合查询聚合函数"><a class="markdownIt-Anchor" href="#23-聚合查询聚合函数"></a> 2.3: 聚合查询(聚合函数)</h2>
 <p><strong>定义: 将一列数据作为一个整体,进行纵向计算 。</strong></p>
 <p>常见的聚合函数</p>
 <table>
@@ -429,9 +429,9 @@
 </tbody>
 </table>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs MySQL">语法：<br>SELECT 聚合函数(字段列表) FROM 表名;<br>-- 注意 : NULL值是不参与所有聚合函数运算的<br><br>-- count：<br><br>SELECT count(id) from emp where workaddress = '北京';-- 统计所有北京id的个数<br>select count(*) from emp; -- 统计的是总记录数<br>select count(idcard) from emp; -- 统计的是idcard字段不为null的记录数<br><br>对于count聚合函数,统计符合条件的总记录数,还可以通过 count(数字/字符串)的形式进行统计查询,比如: <br>select count(1) from emp;<br>对于count(*) 、count(字段)、 count(1) 的具体原理,我们在进阶篇中SQL优化部分会详细讲解,此处大家只需要知道如何使用即可。<br><br>-- max(min, avg同理)<br>统计该企业员工的最大年龄<br>select max(age) from emp;<br><br>-- sum:<br>统计西安地区员工的年龄之和<br>select sum(age) from emp where workaddress = '西安';<br><br></code></pre></td></tr></tbody></table></figure>
-<h2 id="24-分组查询"><a class="markdownIt-Anchor" href="#24-分组查询"></a> 2.4 分组查询</h2>
+<h2 id="24-分组查询"><a class="markdownIt-Anchor" href="#24-分组查询"></a> 2.4: 分组查询</h2>
 <p>分组通常和聚合一起使用</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs MySQL">语法：<br>SELECT 字段列表 FROM 表名 [ WHERE 条件 ] GROUP BY 分组字段名 [ HAVING 分组后的过滤条件 ];<br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs MySQL">语法：<br>select 字段列表 from 表名 [ where 条件 ] group by 分组字段名 [ having 分组后的过滤条件 ];<br></code></pre></td></tr></tbody></table></figure>
 <blockquote>
 <p>[!example]- 案例<br>
 ![[DQL 2022-10-07 02.43.47.excalidraw]]</p>
@@ -457,20 +457,20 @@
 ![[DQL 2022-10-07 02.59.44.excalidraw]]</p>
 </blockquote>
 <!-- basicblock-start oid="Obsx03wDUvDEnWDoItJOZ7Pe" --> 
-<h2 id="25-排序查询"><a class="markdownIt-Anchor" href="#25-排序查询"></a> 2.5 排序查询::</h2>
+<h2 id="25-排序查询"><a class="markdownIt-Anchor" href="#25-排序查询"></a> 2.5: 排序查询::</h2>
 <p>排序在日常开发中是非常常见的一个操作,有升序排序,也有降序排序。<br>
 eg: 淘宝价格排序</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs MySQL"># 语法<br>SELECT  字段列表  FROM   表名  ORDER  BY  字段1  排序方式1 , 字段2  排序方式2 ;<br># 排序方式<br>ASC : 升序(默认值) <br>DESC: 降序<br># 注意事项: <br>• 如果是升序, 可以不指定排序方式ASC ;  <br>• 如果是多字段排序,当第一个字段值相同时,才会根据第二个字段进行排序 ;<br><br><br>-- 案例<br>根据年龄对公司的员工进行升序排序<br>select * from emp order by age asc; <br>select * from emp order by age;<br><br><br>根据年龄对公司的员工进行升序排序 , 年龄相同 , 再按照入职时间进行降序排序<br>select * from emp order by age asc , entrydate desc;<br><br><br><br></code></pre></td></tr></tbody></table></figure>
-<h2 id="26-分页查询"><a class="markdownIt-Anchor" href="#26-分页查询"></a> 2.6 分页查询::</h2>
+<h2 id="26-分页查询"><a class="markdownIt-Anchor" href="#26-分页查询"></a> 2.6: 分页查询::</h2>
 <p>分页操作在业务系统开发时,也是非常常见的一个功能,我们在网站中看到的各种各样的分页条,后台都需要借助于数据库的分页操作。<br>
 <img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202210071508398.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs MySQL"># 语法: 💡能够限制查询数<br>SELECT  字段列表  FROM   表名  LIMIT  起始索引, 查询记录数 ;<br># 注意事项:  <br>• 起始索引从0开始,起始索引 = (查询页码 - 1)* 每页显示记录数。# 相当于按记录数来起始<br>• 分页查询是数据库的方言,不同的数据库有不同的实现,MySQL中是LIMIT。<br>• 如果查询的是第一页数据,起始索引可以省略,直接简写为 limit 10。<br><br>-- 案例<br>A. 查询第1页员工数据, 每页展示10条记录<br>select * from emp limit 0,10; <br>select * from emp limit 10;<br><br><br>B. 查询第2页员工数据, 每页展示10条记录 --------&gt; (页码-1)*页展示记录数 = 1 * 10 <br># 💡相当于按记录数来起始: 第一页有 10 条记录, 从第二页开始查, 就是从记录数 10 开始查<br>select * from emp limit 10,10;<br><br><br><br></code></pre></td></tr></tbody></table></figure>
-<h1 id="3-总案例"><a class="markdownIt-Anchor" href="#3-总案例"></a> 3 总案例::</h1>
+<h1 id="3-总案例"><a class="markdownIt-Anchor" href="#3-总案例"></a> 3: 总案例::</h1>
 <blockquote>
 <p>[!example]-<br>
 ![[DQL 2022-10-07 15.36.01.excalidraw]]</p>
 </blockquote>
-<h1 id="4-执行顺序"><a class="markdownIt-Anchor" href="#4-执行顺序"></a> 4 执行顺序::</h1>
+<h1 id="4-执行顺序"><a class="markdownIt-Anchor" href="#4-执行顺序"></a> 4: 执行顺序::</h1>
 <p>![[DQL 2022-10-07 15.48.57.excalidraw]]</p>
 <hr>
 <p><strong>其他资料</strong></p>

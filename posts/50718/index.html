@@ -16,19 +16,19 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1 分组 分组指将匹配的内容，使用 ( ) 划分成多个组块，分好的组可用于提取、反向引用以及替换操作。 你可能会有疑问，()不是用作子表达式么？子表达与分组是共存的，但侧重点不一样：子表达式针对正则的匹配逻辑，分组针对匹配的内容。   1.1 反向引用 反向引用指通过 \组号 引用之前的分组，可以把分组理解成一个变量，在通过变量名 (组号) 引用。它不能引用之后的内容，固作称作反向引用，  ti">
+    <meta name="description" content="1: 分组 分组指将匹配的内容，使用 ( ) 划分成多个组块，分好的组可用于提取、反向引用以及替换操作。 你可能会有疑问，()不是用作子表达式么？子表达与分组是共存的，但侧重点不一样：子表达式针对正则的匹配逻辑，分组针对匹配的内容。   1.1: 反向引用 反向引用指通过 \组号 引用之前的分组，可以把分组理解成一个变量，在通过变量名 (组号) 引用。它不能引用之后的内容，固作称作反向引用，">
 <meta property="og:type" content="article">
 <meta property="og:title" content="分组">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/50718/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="1 分组 分组指将匹配的内容，使用 ( ) 划分成多个组块，分好的组可用于提取、反向引用以及替换操作。 你可能会有疑问，()不是用作子表达式么？子表达与分组是共存的，但侧重点不一样：子表达式针对正则的匹配逻辑，分组针对匹配的内容。   1.1 反向引用 反向引用指通过 \组号 引用之前的分组，可以把分组理解成一个变量，在通过变量名 (组号) 引用。它不能引用之后的内容，固作称作反向引用，  ti">
+<meta property="og:description" content="1: 分组 分组指将匹配的内容，使用 ( ) 划分成多个组块，分好的组可用于提取、反向引用以及替换操作。 你可能会有疑问，()不是用作子表达式么？子表达与分组是共存的，但侧重点不一样：子表达式针对正则的匹配逻辑，分组针对匹配的内容。   1.1: 反向引用 反向引用指通过 \组号 引用之前的分组，可以把分组理解成一个变量，在通过变量名 (组号) 引用。它不能引用之后的内容，固作称作反向引用，">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202210281606545.png">
 <meta property="og:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202210281627267.png">
 <meta property="og:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202210281609276.png">
 <meta property="og:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202210281615739.png">
 <meta property="article:published_time" content="2022-10-28T08:17:00.000Z">
-<meta property="article:modified_time" content="2022-10-29T13:00:52.908Z">
+<meta property="article:modified_time" content="2022-11-15T03:43:00.432Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202210281606545.png">
@@ -289,31 +289,31 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年10月29日 晚上
+                    本文最后更新于：2022年11月15日 中午
                   
                 
               </p>
             
             <div class="markdown-body">
               
-              <h1 id="1-分组"><a class="markdownIt-Anchor" href="#1-分组"></a> 1 分组</h1>
+              <h1 id="1-分组"><a class="markdownIt-Anchor" href="#1-分组"></a> 1: 分组</h1>
 <p>分组指将匹配的内容，使用 <code>( )</code> 划分成多个组块，分好的组可用于<strong>提取</strong>、反向<strong>引用</strong>以及<strong>替换</strong>操作。<br>
 你可能会有疑问，<code>()</code>不是用作子表达式么？子表达与分组是共存的，但侧重点不一样：子表达式针对正则的<strong>匹配逻辑</strong>，分组针对<strong>匹配的内容</strong>。</p>
 <p><img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202210281606545.png" srcset="/img/loading.gif" lazyload alt="|600"></p>
-<h2 id="11-反向引用"><a class="markdownIt-Anchor" href="#11-反向引用"></a> 1.1 反向引用</h2>
+<h2 id="11-反向引用"><a class="markdownIt-Anchor" href="#11-反向引用"></a> 1.1: 反向引用</h2>
 <p>反向引用指通过 <code>\组号</code> 引用<strong>之前</strong>的分组，可以把分组理解成一个<strong>变量</strong>，在通过变量名 (组号) 引用。它不能引用之后的内容，固作称作反向引用，</p>
 <ul>
 <li>tip 只能从后往前引用<br>
 比如这样正则是<strong>错误</strong>的：<code>&lt;\1&gt;.*?&lt;\/(h[1-6])&gt;</code></li>
 </ul>
 <p>![[正则表达式字符 2022-10-28 15.57.23.excalidraw|700]]</p>
-<h2 id="12-引用替换"><a class="markdownIt-Anchor" href="#12-引用替换"></a> 1.2 引用替换</h2>
+<h2 id="12-引用替换"><a class="markdownIt-Anchor" href="#12-引用替换"></a> 1.2: 引用替换</h2>
 <p>替换操作指将正则匹配到的内容，替换成指定字符串，该字符串可通过 <code>$组号</code> 引用组进行拼装。通过 <code>$0</code> 可以引用整个匹配的内容。<br>
 比如：日期“1960/02/19”被匹配之后 <code>$0</code>表示整个日期，<code>$1、$2、$3</code> 分别表示年月日。请注意反向引用与替换引用的<strong>语法区别</strong>，前者是使用<code>\组号</code>，而替换使用<code>$组号</code>。<br>
 <img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202210281627267.png" srcset="/img/loading.gif" lazyload alt=""></p>
-<h3 id="121-大小写转换"><a class="markdownIt-Anchor" href="#121-大小写转换"></a> 1.2.1 大小写转换</h3>
+<h3 id="121-大小写转换"><a class="markdownIt-Anchor" href="#121-大小写转换"></a> 1.2.1: 大小写转换</h3>
 <p><img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202210281609276.png" srcset="/img/loading.gif" lazyload alt="|900"></p>
-<h2 id="13-分组的其他引用"><a class="markdownIt-Anchor" href="#13-分组的其他引用"></a> 1.3 分组的其他引用</h2>
+<h2 id="13-分组的其他引用"><a class="markdownIt-Anchor" href="#13-分组的其他引用"></a> 1.3: 分组的其他引用</h2>
 <p>关于分组还存在一些特殊情况，需要提前了解一下：</p>
 <ol>
 <li><code>(?&lt;名称&gt; )</code>命名分组</li>
@@ -321,20 +321,20 @@
 <li><code>( ( ) )</code>嵌套分组</li>
 <li><code>()+</code>分组使用量词</li>
 </ol>
-<h3 id="131-命名分组"><a class="markdownIt-Anchor" href="#131-命名分组"></a> 1.3.1 命名分组</h3>
+<h3 id="131-命名分组"><a class="markdownIt-Anchor" href="#131-命名分组"></a> 1.3.1: 命名分组</h3>
 <p>默认情况下通过<strong>组号</strong>来取值，此外也可以自定义命名组，语法是<code>(?&lt;名称&gt; )</code>，然后在程序中就可以通过<code>&lt;&gt;</code>中的<code>名称</code>来取值。如：<code>&lt;(?&lt;title&gt;h[1-6])&gt;.*?&lt;\/\1&gt;</code> 该表达式就命名了一个<strong>title</strong>的组，在js的结果中就可通过<strong>title</strong>属性取值。</p>
 <figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-string">"&lt;h1&gt;一级标题&lt;/h1&gt;"</span>.<span class="hljs-title function_">match</span>(<span class="hljs-regexp">/&lt;(?&lt;title&gt;h[1-6])&gt;.*?&lt;\/\1&gt;/</span>)<br><span class="hljs-comment">// 输出结果如下</span><br><span class="hljs-number">0</span>: <span class="hljs-string">"&lt;h1&gt;一级标题&lt;/h1&gt;"</span><br><span class="hljs-number">1</span>: <span class="hljs-string">"h1"</span><br><span class="hljs-attr">groups</span>:<br>  <span class="hljs-attr">title</span>: <span class="hljs-string">"h1"</span><br><span class="hljs-attr">input</span>: <span class="hljs-string">"&lt;h1&gt;一级标题&lt;/h1&gt;"</span><br><br></code></pre></td></tr></tbody></table></figure>
 <p>注意：这种命名组只能用于在程序中提取操作，不能进行反向引用，也不能用在替换操作中。上例在替换中如果使用 <code>$title</code> 或在反向引用中使用 <code>\title</code> 都是无效的。只能通过组号 <code>\1</code> 进行引用。这也说明命名组后，<strong>组号一样有效</strong>。也正因为这种局限性所以命名组使用的很少。</p>
-<h3 id="132-移除分组"><a class="markdownIt-Anchor" href="#132-移除分组"></a> 1.3.2 移除分组</h3>
+<h3 id="132-移除分组"><a class="markdownIt-Anchor" href="#132-移除分组"></a> 1.3.2: 移除分组</h3>
 <p><code>()</code>即用于子表达式，同时也是一个分组。如果只想用作子表达式，而不想用于分组就可以使用<code>(?: )</code>从分组列表中移除。比如<code>(?:\d{4})-(\d{2})-(\d{2})</code> 该表达式只存在两个组，月<code>$1</code>和日<code>$2</code>。</p>
 <p>你可能在想这么做的意义是什么呢？在一些复杂场景中这是有用的,用让组号变得更清晰。</p>
-<h3 id="133-嵌套分组"><a class="markdownIt-Anchor" href="#133-嵌套分组"></a> 1.3.3 嵌套分组</h3>
+<h3 id="133-嵌套分组"><a class="markdownIt-Anchor" href="#133-嵌套分组"></a> 1.3.3: 嵌套分组</h3>
 <p>在嵌套分组中组号是如何命名的呢？比如：<code>生日((\d{4})-(\d{2})(\d{2}))</code> 其组号的命名顺序是以<strong>开括号</strong>出现顺序为准。</p>
 <p><img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202210281615739.png" srcset="/img/loading.gif" lazyload alt="|400"></p>
 <figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-string">"生日2019-09-21"</span>.<span class="hljs-title function_">match</span>(<span class="hljs-regexp">/生日((\d{4})-(\d{2})-(\d{2}))/</span>)<br><span class="hljs-comment">// 得出结果如下:</span><br><span class="hljs-number">0</span>: <span class="hljs-string">"生日2019-09-21"</span><br><span class="hljs-number">1</span>: <span class="hljs-string">"2019-09-21"</span><br><span class="hljs-number">2</span>: <span class="hljs-string">"2019"</span><br><span class="hljs-number">3</span>: <span class="hljs-string">"09"</span><br><span class="hljs-number">4</span>: <span class="hljs-string">"21"</span><br></code></pre></td></tr></tbody></table></figure>
-<h3 id="134-分组使用量词"><a class="markdownIt-Anchor" href="#134-分组使用量词"></a> 1.3.4 分组使用量词</h3>
+<h3 id="134-分组使用量词"><a class="markdownIt-Anchor" href="#134-分组使用量词"></a> 1.3.4: 分组使用量词</h3>
 <p>同一个分组如果使用了量词，该分组会代表多个值，这时通过<code>$组号</code>去提取值的时候会得到该组最后匹配的值。如<code>(\d)+</code> 匹配12345，通过<code>$1</code>将得到5</p>
-<h2 id="14-练习"><a class="markdownIt-Anchor" href="#14-练习"></a> 1.4 练习</h2>
+<h2 id="14-练习"><a class="markdownIt-Anchor" href="#14-练习"></a> 1.4: 练习</h2>
 <p>![[分组 2022-10-28 16.20.39.excalidraw]]</p>
 <hr>
 <p><strong>其他资料</strong></p>

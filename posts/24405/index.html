@@ -16,16 +16,16 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="![[多态 与虚函数 .excalidraw]] 定义: 当基类希望派生类定义适合自己的版本，就将这些函数声明成虚函数(virtual) 123456class A{public:virtual void Vfunc(){};&#x2F;&#x2F; 当基类希望派生类定义适合自己的版本的 Vfunc};   1、虚函数是动态绑定的 也就是说，使用虚函数的指针和引用能够正确找到实际类的对应函数，而不是执行定义类的函数，">
+    <meta name="description" content="[[虚函数的实现原理]] ![[多态 与虚函数 .excalidraw]] ^eaca62 定义: 当基类希望派生类定义适合自己的版本，就将这些函数声明成虚函数(virtual) 123456class A{public:virtual void Vfunc(){};&#x2F;&#x2F; 当基类希望派生类定义适合自己的版本的 Vfunc};   1、虚函数是动态绑定的 也就是说，使用虚函数的指针和引用能够正确找到">
 <meta property="og:type" content="article">
 <meta property="og:title" content="虚函数">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/24405/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="![[多态 与虚函数 .excalidraw]] 定义: 当基类希望派生类定义适合自己的版本，就将这些函数声明成虚函数(virtual) 123456class A{public:virtual void Vfunc(){};&#x2F;&#x2F; 当基类希望派生类定义适合自己的版本的 Vfunc};   1、虚函数是动态绑定的 也就是说，使用虚函数的指针和引用能够正确找到实际类的对应函数，而不是执行定义类的函数，">
+<meta property="og:description" content="[[虚函数的实现原理]] ![[多态 与虚函数 .excalidraw]] ^eaca62 定义: 当基类希望派生类定义适合自己的版本，就将这些函数声明成虚函数(virtual) 123456class A{public:virtual void Vfunc(){};&#x2F;&#x2F; 当基类希望派生类定义适合自己的版本的 Vfunc};   1、虚函数是动态绑定的 也就是说，使用虚函数的指针和引用能够正确找到">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202209212227729.png">
 <meta property="article:published_time" content="2022-09-21T12:46:00.000Z">
-<meta property="article:modified_time" content="2022-09-25T07:07:11.822Z">
+<meta property="article:modified_time" content="2022-11-11T12:18:02.008Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202209212227729.png">
@@ -286,14 +286,15 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年9月25日 下午
+                    本文最后更新于：2022年11月11日 晚上
                   
                 
               </p>
             
             <div class="markdown-body">
               
-              <p>![[多态 与虚函数 .excalidraw]]</p>
+              <p>[[虚函数的实现原理]]</p>
+<p>![[多态 与虚函数 .excalidraw]] ^eaca62</p>
 <p>定义:</p>
 <p>当基类希望派生类定义适合自己的版本，就将这些函数声明成虚函数(virtual)</p>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span>{<br><span class="hljs-keyword">public</span>:<br><span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">void</span> <span class="hljs-title">Vfunc</span><span class="hljs-params">()</span></span>{};<span class="hljs-comment">// 当基类希望派生类定义适合自己的版本的 Vfunc</span><br><br>};<br><br></code></pre></td></tr></tbody></table></figure>
@@ -341,7 +342,7 @@ static成员没有this指针。virtual函数一定要通过对象来调用，有
 除了一个特例，如果父类中返回值是一个指针或引用，子类override时可以返回这个指针（或引用）的派生。</p>
 <hr>
 <p><strong>其他资料</strong></p>
-<!-- basicblock-start oid="Obsu7HQtjS477mDHwN0DQvXX" deck= "❓疑问::👨🏻‍💻code::C++::C++基础::虚函数.md"-->
+<!-- basicblock-start oid="Obsu7HQtjS477mDHwN0DQvXX" -->
 <p>#历史记录::<br>
 2022/9/21🌵虚函数 :</p>
 <!-- basicblock-end -->

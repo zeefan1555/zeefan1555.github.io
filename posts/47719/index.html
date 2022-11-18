@@ -16,15 +16,15 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1 分类 智能指针是为了解决动态分配内存导致内存泄露和多次释放同一内存所提出的，C11 标准中放在 &lt;memory&gt; 头文件。 包括：独占指针，共享指针，弱指针 c++中为什么要有智能指针: 解决不用的指针未释放的问题 ‌  1.1 unique_ptr‌![[unique_ptr.excalidraw]] 1、unique_ptr&quot;唯一&quot;拥有其所指对象 同一时刻只能有一个 uniq">
+    <meta name="description" content="1: 分类  [!summary] 智能指针就是类，类中有一个成员，管理着原始指针  智能指针是为了解决动态分配内存导致内存泄露和多次释放同一内存所提出的，C11 标准中放在 &lt;memory&gt; 头文件。 包括：  独占指针 共享指针 弱指针  c++中为什么要有智能指针: 解决不用的指针未释放的问题 智能指针是类模板，在栈上创建智能指针对象。 把普通指针交给智能指针对象。 智能指针对">
 <meta property="og:type" content="article">
 <meta property="og:title" content="智能指针">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/47719/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="1 分类 智能指针是为了解决动态分配内存导致内存泄露和多次释放同一内存所提出的，C11 标准中放在 &lt;memory&gt; 头文件。 包括：独占指针，共享指针，弱指针 c++中为什么要有智能指针: 解决不用的指针未释放的问题 ‌  1.1 unique_ptr‌![[unique_ptr.excalidraw]] 1、unique_ptr&quot;唯一&quot;拥有其所指对象 同一时刻只能有一个 uniq">
+<meta property="og:description" content="1: 分类  [!summary] 智能指针就是类，类中有一个成员，管理着原始指针  智能指针是为了解决动态分配内存导致内存泄露和多次释放同一内存所提出的，C11 标准中放在 &lt;memory&gt; 头文件。 包括：  独占指针 共享指针 弱指针  c++中为什么要有智能指针: 解决不用的指针未释放的问题 智能指针是类模板，在栈上创建智能指针对象。 把普通指针交给智能指针对象。 智能指针对">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-10-20T08:00:00.000Z">
-<meta property="article:modified_time" content="2022-10-26T13:17:15.860Z">
+<meta property="article:modified_time" content="2022-11-14T09:20:26.768Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.4k 字
+          609 字
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          8 分钟
+          4 分钟
         
       </span>
     
@@ -284,53 +284,41 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年10月26日 晚上
+                    本文最后更新于：2022年11月14日 下午
                   
                 
               </p>
             
             <div class="markdown-body">
               
-              <h1 id="1-分类"><a class="markdownIt-Anchor" href="#1-分类"></a> 1 分类</h1>
+              <h1 id="1-分类"><a class="markdownIt-Anchor" href="#1-分类"></a> 1: 分类</h1>
+<blockquote>
+<p>[!summary] 智能指针就是类，类中有一个成员，管理着原始指针</p>
+</blockquote>
 <p>智能指针是为了解决动态分配内存导致内存泄露和多次释放同一内存所提出的，C11 标准中放在 <code>&lt;memory&gt;</code> 头文件。<br>
-包括：独占指针，共享指针，弱指针</p>
-<p>c++中为什么要有智能指针: 解决不用的指针未释放的问题<br>
-‌</p>
-<h2 id="11-unique_ptrunique_ptrexcalidraw"><a class="markdownIt-Anchor" href="#11-unique_ptrunique_ptrexcalidraw"></a> 1.1 unique_ptr‌![[unique_ptr.excalidraw]]</h2>
-<p>1、unique_ptr"唯一"拥有其所指对象<br>
-同一时刻只能有一个 unique_ptr 指向给定对象，离开作用域时，若其指向对象，则将其所指对象销毁（默认 delete<br>
-)<br>
-2、定义 unique_ptr 时<br>
-需要将其绑定到一个 new /make_unique 返回的指针上</p>
-<p>3、unique_ptr 不支持普通的拷贝和赋值（因为拥有指向的对象）<br>
-但是可以拷贝和赋值一个将要被销毁的 unique_ptr; 可以通过 move /  (❓或者 release reset) 将指针所有权从一个（非 const) unique_ptr 转移到另一个 unique。</p>
-<!-- basicblock-start oid="ObsZ97PlOXcHxxw2mpsr48lI" deck= "❓疑问::👨🏻‍💻code::C++::C++基础::智能指针.md"-->
-<h2 id="12-shared_ptr"><a class="markdownIt-Anchor" href="#12-shared_ptr"></a> 1.2 shared_ptr::</h2>
-<!-- basicblock-end -->
-<p>顾名思义 共享指针可以被共享 不像唯一指针 共享指针可以被多个所有者共享这意味着你可以将一个原始指针分配给多个所有者</p>
-<p>![[shared_ptr.excalidraw]]</p>
-<p>1、shared_ptr的实现机制是在拷贝构造时使用同一份引用计数<br>
-(1)一个模板指针<code>T*ptr</code> 指向实际的对象<br>
-(2)<strong>❓一个引用次数必须 new 出来的</strong>，不然会多个 shared_ptr 里面会有不同的引用次数而导致多次 delete<br>
-上面用的是： make_shared<br>
-(3)重载<code>operator*</code>和operator-&gt; 使得能像指针一样使用shared_ptr<br>
-(4)重载copy constructor 使其引用次数加一（拷贝构造函数）<br>
-(5)重载operatora=(赋值运算符) 如果原来的shared ptri已经有对象，则让其引用次数减一并判断引用是否为零（是否调用delete),然后将新的对象引用次数加一<br>
-(6)重载析构函数使引用次数减一并判断引用是否为零；（是否调用delete)</p>
-<p>2、线程安全问题<br>
-(1)同一个shared_ptr被多个线程"读"是安全的；<br>
-(2)同一个shared_ptr被多个线程"写"是不安全的；<br>
-证明：在多个线程中同时对一个shared_ptr循环执行两遍swap。shared_ptr的swap函数的作用就是和另外一个shared_ptr交换引用对象和引用计数，是写操作。执行两遍swap之后，shared_ptr引用的对象的值应该不变<br>
-(3)共享引用计数的不同的shared_ptri被多个线程"写"是安全的。</p>
-<h2 id="13-weak_ptr"><a class="markdownIt-Anchor" href="#13-weak_ptr"></a> 1.3 weak_ptr</h2>
+包括：</p>
+<ul>
+<li>独占指针</li>
+<li>共享指针</li>
+<li>弱指针</li>
+</ul>
+<p>c++中为什么要有智能指针: 解决不用的指针未释放的问题</p>
+<p>智能指针是类模板，在栈上创建智能指针对象。<br>
+把普通指针交给智能指针对象。<br>
+智能指针对象过期时，系统会自动调用智能指针对象的柝构函数。释放普通指针的内存</p>
+<p>![[unique_ptr &amp; shared_ptr.excalidraw]]</p>
+<h2 id="11-unique_ptr"><a class="markdownIt-Anchor" href="#11-unique_ptr"></a> 1.1: [[unique_ptr]]</h2>
+<h2 id="12-shared_ptr"><a class="markdownIt-Anchor" href="#12-shared_ptr"></a> 1.2: [[shared_ptr]]</h2>
+<h2 id="13-weak_ptr"><a class="markdownIt-Anchor" href="#13-weak_ptr"></a> 1.3: weak_ptr</h2>
 <p>1、weak_ptr 是为了配合 shared_ptr 而引入的一种智能指针它的最大作用在于协助 shared_ptr 工作，像旁观者那样观测资源的使用情况，<br>
 但 weak_ptr 没有共享资源，它的构造不会引起指针引用计数的增加。</p>
 <p>2、和 shared_ptr 指向相同内存 shared_ptr 析构之后内存释放，<br>
 在使用之前使用函数 Iock () 检查 weak_ptr 是否为空指针。</p>
-<!-- basicblock-start oid="ObsrsNRG1IxVnVdh4RXwgrG1" deck= "❓疑问::👨🏻‍💻code::C++::C++基础::智能指针.md"-->
-<p>那个视频里没听懂::</p>
-<!-- basicblock-end -->
-<p>![[weak_ptr.excalidraw]]</p>
+<blockquote>
+<p>[!question]<br>
+那个视频里没听懂::   #疑问<br>
+![[weak_ptr.excalidraw]]</p>
+</blockquote>
 <hr>
 <p><strong>其他资料</strong></p>
  <!-- basicblock-start oid="ObsqttRZJHmd5hOUSyNURDzt"  --> 

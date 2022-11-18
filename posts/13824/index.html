@@ -16,15 +16,15 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="📝行锁::  行级锁，每次操作锁住对应的行数据。锁定粒度最小，发生锁冲突的概率最低，并发度最高。应用在 InnoDB 存储引擎中。 InnoDB 的数据是基于索引组织的，行锁是通过对索引上的索引项加锁来实现的，而不是对记录加的锁。对于行级锁，主要分为以下三类：  行锁（Record Lock）：锁定单个行记录的锁，防止其他事务对此行进行 update 和 delete。在 RC（read com">
+    <meta name="description" content="📝行锁::   1: 简介 特点：  每次操作锁住⼀⾏数据 开销⼤，加锁慢 发⽣锁冲突的概率是最低的，并发度是最⾼的  在 InnoDB 事务中，⾏锁是在需要的时候才加上的，但并不是不需要了就⽴刻释放，⽽是要 等到事务结束时才释放。这个就是两阶段锁协议。 知道了这个设定，对我们使⽤事务有什么帮助呢？那就是，如果你的事务中需要锁多个⾏，要把最可能造成锁冲突、最可能影响并发度的锁尽量往后放。 行级锁">
 <meta property="og:type" content="article">
 <meta property="og:title" content="行锁">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/13824/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="📝行锁::  行级锁，每次操作锁住对应的行数据。锁定粒度最小，发生锁冲突的概率最低，并发度最高。应用在 InnoDB 存储引擎中。 InnoDB 的数据是基于索引组织的，行锁是通过对索引上的索引项加锁来实现的，而不是对记录加的锁。对于行级锁，主要分为以下三类：  行锁（Record Lock）：锁定单个行记录的锁，防止其他事务对此行进行 update 和 delete。在 RC（read com">
+<meta property="og:description" content="📝行锁::   1: 简介 特点：  每次操作锁住⼀⾏数据 开销⼤，加锁慢 发⽣锁冲突的概率是最低的，并发度是最⾼的  在 InnoDB 事务中，⾏锁是在需要的时候才加上的，但并不是不需要了就⽴刻释放，⽽是要 等到事务结束时才释放。这个就是两阶段锁协议。 知道了这个设定，对我们使⽤事务有什么帮助呢？那就是，如果你的事务中需要锁多个⾏，要把最可能造成锁冲突、最可能影响并发度的锁尽量往后放。 行级锁">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-08T14:30:00.000Z">
-<meta property="article:modified_time" content="2022-11-08T14:31:09.721Z">
+<meta property="article:modified_time" content="2022-11-10T13:46:35.674Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.1k 字
+          669 字
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          6 分钟
+          4 分钟
         
       </span>
     
@@ -284,7 +284,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年11月8日 晚上
+                    本文最后更新于：2022年11月10日 晚上
                   
                 
               </p>
@@ -293,73 +293,29 @@
               
               <p>📝行锁::</p>
 <!-- basicblock-end -->
-<p>行级锁，每次操作锁住对应的行数据。锁定粒度最小，发生锁冲突的概率最低，并发度最高。应用在 InnoDB 存储引擎中。<br>
-InnoDB 的数据是基于索引组织的，行锁是通过对索引上的索引项加锁来实现的，而不是对记录加的锁。对于行级锁，主要分为以下三类：</p>
+<h1 id="1-简介"><a class="markdownIt-Anchor" href="#1-简介"></a> 1: 简介</h1>
+<p>特点：</p>
 <ol>
-<li>行锁（Record Lock）：锁定单个行记录的锁，防止其他事务对此行进行 update 和 delete。在 RC（read commit ）、RR（repeat read）隔离级别下都支持。</li>
-<li>间隙锁（GapLock）：锁定索引记录间隙（不含该记录），确保索引记录间隙不变，防止其他事务在这个间隙进行 insert，产生幻读。在 RR 隔离级别下都支持。比如说两个临近叶子节点为 15 23，那么间隙就是指 [15 , 23], 锁的是这个间隙。</li>
-<li>临键锁（Next-Key Lock）：行锁和间隙锁组合，同时锁住数据，并锁住数据前面的间隙 Gap。在 RR 隔离级别下支持。</li>
+<li>每次操作锁住⼀⾏数据</li>
+<li>开销⼤，加锁慢</li>
+<li>发⽣锁冲突的概率是最低的，并发度是最⾼的</li>
 </ol>
-<p>InnoDB 实现了以下两种类型的行锁：</p>
+<p>在 InnoDB 事务中，⾏锁是在需要的时候才加上的，但并不是不需要了就⽴刻释放，⽽是要 等到事务结束时才释放。这个就是两阶段锁协议。<br>
+知道了这个设定，对我们使⽤事务有什么帮助呢？那就是，如果你的事务中需要锁多个⾏，要把最可能造成锁冲突、最可能影响并发度的锁尽量往后放。</p>
+<p>行级锁，每次操作锁住对应的行数据。锁定粒度最小，发生锁冲突的概率最低，并发度最高。应用在 InnoDB 存储引擎中。</p>
+<p>InnoDB 的数据是基于索引组织的，行锁是通过对索引上的索引项加锁来实现的，而不是对记录加的锁。对于行级锁，主要分为以下三类：</p>
 <ol>
-<li>共享锁（S）：允许一个事务去读一行，阻止其他事务获得相同数据集的排它锁。</li>
-<li>排他锁（X）：允许获取排他锁的事务更新数据，阻止其他事务获得相同数据集的共享锁和排他锁。</li>
+<li><strong>行锁（Record Lock</strong>: 锁定单个行记录的锁，防止其他事务对此行进行 update 和 delete。在 RC（read commit ）、RR（repeat read）隔离级别下都支持。</li>
+<li><strong>间隙锁（GapLock</strong>）：锁定索引记录间隙（不含该记录），确保索引记录间隙不变，防止其他事务在这个间隙进行 insert，产生[[脏读, 幻读, 不可重复读.excalidraw|幻读]]。在 RR 隔离级别下都支持。比如说两个临近叶子节点为 15 23，那么间隙就是指 [15 , 23], 锁的是这个间隙。</li>
+<li><strong>临键锁（Next-Key Lock</strong>）：行锁和间隙锁组合，同时锁住数据，并锁住数据前面的间隙 Gap。在 RR 隔离级别下支持。</li>
 </ol>
-<table>
-<thead>
-<tr>
-<th>SQL</th>
-<th>行锁类型</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>insert</td>
-<td>排他锁</td>
-<td>自动加锁</td>
-</tr>
-<tr>
-<td>update</td>
-<td>排他锁</td>
-<td>自动加锁</td>
-</tr>
-<tr>
-<td>delete</td>
-<td>排他锁</td>
-<td>自动加锁</td>
-</tr>
-<tr>
-<td>select</td>
-<td>不加任何锁</td>
-<td></td>
-</tr>
-<tr>
-<td>select　lock　in　share mode</td>
-<td>排他锁</td>
-<td>需要手动在 SELECT 之后加 LOCK IN SHARE MODE</td>
-</tr>
-<tr>
-<td>select　for　update</td>
-<td>排他锁</td>
-<td>需要手动在 SELECT 之后加 FOR UPDATE</td>
-</tr>
-</tbody>
-</table>
-<p>行锁 - 演示</p>
-<p>默认情况下，InnoDB 在 REPEATABLE READ 事务隔离级别运行，InnoDB 使用 next-key 锁进行搜索和索引扫描，以防止幻读。</p>
-<ol>
-<li>针对唯一索引进行检索时，对已存在的记录进行等值匹配时，将会自动优化为行锁。</li>
-<li>InnoDB 的行锁是针对于索引加的锁，不通过索引条件检索数据，那么 InnoDB 将对表中的所有记录加锁，此时就会升级为表锁。</li>
-</ol>
-<p>间隙锁/临键锁-演示</p>
-<p>默认情况下，InnoDB 在 REPEATABLE READ 事务隔离级别运行，InnoDB 使用 next-key 锁进行搜索和索引扫描，以防止幻读。</p>
-<ol>
-<li>索引上的等值查询（唯一索引），给不存在的记录加锁时，优化为间隙锁。</li>
-<li>索引上的等值查询（普通索引），向右遍历时最后一个值不满足查询需求时，next-key lock 退化为间隙锁。</li>
-<li>索引上的范围查询（唯一索引）–会访问到不满足条件的第一个值为止。</li>
-</ol>
-<p>注意：间隙锁唯一目的是防止其他事务插入间隙。间隙锁可以共存，一个事务采用的间隙锁不会阻止另一个事务在同一间隙上采用间隙锁。</p>
+<blockquote>
+<p>[!summary]<br>
+![[行锁分类.excalidraw]]</p>
+</blockquote>
+<h2 id="11-行锁-共享锁-排他锁"><a class="markdownIt-Anchor" href="#11-行锁-共享锁-排他锁"></a> 1.1: [[行锁 (共享锁, 排他锁)]]</h2>
+<h2 id="12-间隙锁临键锁"><a class="markdownIt-Anchor" href="#12-间隙锁临键锁"></a> 1.2: [[间隙锁&amp;临键锁]]</h2>
+<h1 id="2-加锁规则"><a class="markdownIt-Anchor" href="#2-加锁规则"></a> 2: [[加锁规则]]</h1>
 
               
             </div>
@@ -412,6 +368,12 @@ InnoDB 的数据是基于索引组织的，行锁是通过对索引上的索引�
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/posts/23812/" title="12.矩阵中的路径">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">12.矩阵中的路径</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">

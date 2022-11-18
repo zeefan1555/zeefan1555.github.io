@@ -16,15 +16,15 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1 std::thread ![[并发 2022-10-29 21.08.58.excalidraw]] 注意: 可被 joinable 的 thread 对象必须在他们销毁之前被主线程 join 或者将其设置为 detached. std:: thread 在使用上容易出错, 即 std:: thread 对象在线程函数运行期问必须是有效的。什么意思呢? ![[并发 2022-10-29 21">
+    <meta name="description" content="1: std::thread ![[并发 2022-10-29 21.08.58.excalidraw]] 注意: 可被 joinable 的 thread 对象必须在他们销毁之前被主线程 join 或者将其设置为 detached.  [!note] std:: thread 在使用上容易出错, 即 std:: thread 对象在线程函数运行期问必须是有效的。什么意思呢? ![[并发 202">
 <meta property="og:type" content="article">
 <meta property="og:title" content="并发">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/52510/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="1 std::thread ![[并发 2022-10-29 21.08.58.excalidraw]] 注意: 可被 joinable 的 thread 对象必须在他们销毁之前被主线程 join 或者将其设置为 detached. std:: thread 在使用上容易出错, 即 std:: thread 对象在线程函数运行期问必须是有效的。什么意思呢? ![[并发 2022-10-29 21">
+<meta property="og:description" content="1: std::thread ![[并发 2022-10-29 21.08.58.excalidraw]] 注意: 可被 joinable 的 thread 对象必须在他们销毁之前被主线程 join 或者将其设置为 detached.  [!note] std:: thread 在使用上容易出错, 即 std:: thread 对象在线程函数运行期问必须是有效的。什么意思呢? ![[并发 202">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-10-29T13:06:00.000Z">
-<meta property="article:modified_time" content="2022-11-02T07:03:58.989Z">
+<meta property="article:modified_time" content="2022-11-11T14:16:31.294Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          759 字
+          882 字
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          4 分钟
+          5 分钟
         
       </span>
     
@@ -284,24 +284,29 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年11月2日 下午
+                    本文最后更新于：2022年11月11日 晚上
                   
                 
               </p>
             
             <div class="markdown-body">
               
-              <h1 id="1-stdthread"><a class="markdownIt-Anchor" href="#1-stdthread"></a> 1 std::thread</h1>
+              <h1 id="1-stdthread"><a class="markdownIt-Anchor" href="#1-stdthread"></a> 1: std::thread</h1>
 <p>![[并发 2022-10-29 21.08.58.excalidraw]]</p>
 <p>注意:<br>
 可被 joinable 的 thread 对象必须在他们销毁之前被主线程 join 或者将其设置为 detached.</p>
-<p>std:: thread 在使用上容易出错, 即 std:: thread 对象在线程函数运行期问必须是有效的。什么意思呢?</p>
-<p>![[并发 2022-10-29 21.15.23.excalidraw]]</p>
+<blockquote>
+<p>[!note] std:: thread 在使用上容易出错, 即 std:: thread 对象在线程函数运行期问必须是有效的。什么意思呢?<br>
+![[并发 2022-10-29 21.15.23.excalidraw]]</p>
+</blockquote>
 <!-- basicblock-start oid="ObsnytchIGEC10YfxZk04VcH" -->
-<h1 id="2-lock_guard-疑问-找找例子吧"><a class="markdownIt-Anchor" href="#2-lock_guard-疑问-找找例子吧"></a> 2 lock_guard::  ❓ #疑问  找找例子吧</h1>
+<h1 id="2-lock_guard"><a class="markdownIt-Anchor" href="#2-lock_guard"></a> 2: lock_guard::</h1>
 <!-- basicblock-end -->
-<p>lock guard 是一个互斥量包装程序,<br>
+<blockquote>
+<p>[!cite]<br>
+lock guard 是一个互斥量包装程序,<br>
 它提供了一种方便的 RAII (Resource acquisition is initialization ) 风格的机制来在作用域块的持续时间内拥有一个互斥量。</p>
+</blockquote>
 <p>创建 lockguard 对象时, 它将尝试获取提供给它的互斥锁的所有权。<br>
 当控制流离开lockguard对象的作用域时, lock_guard析构并释放互斥量。<br>
 它的特点如下:</p>
@@ -311,8 +316,9 @@
 <li>不能复制</li>
 </ol>
 <!-- basicblock-start oid="ObsAB7Yjv2ipvPHzEQG0BdWw" -->
-<h1 id="3-unique_lock-疑问"><a class="markdownIt-Anchor" href="#3-unique_lock-疑问"></a> 3 unique_lock::  ❓ #疑问</h1>
+<h1 id="3-unique_lock"><a class="markdownIt-Anchor" href="#3-unique_lock"></a> 3: unique_lock::</h1>
 <!-- basicblock-end -->
+<p>![[lock_guard &amp;  unique_lock.excalidraw]]</p>
 <p>unique lock 是一个通用的互斥量锁定包装器, 它允许延迟锁定, 限时深度锁定, 递归锁定, 锁定所有权的转移以及与条件变量一起使用。</p>
 <p><strong>简单地讲,uniquelock 是 lockguard 的升级加强版</strong>,它具有 lock guard 的所有功能,同时又具有其他很多方法, 使用起来更强灵活方便,能够应对更复杂的锁定需要。</p>
 <p>特点如下:</p>
@@ -321,12 +327,16 @@
 <li>可以随时加锁解锁</li>
 <li>作用域规则同 lock_ grard,析构时自动释放锁</li>
 <li>不可复制,可移动</li>
-<li>条件变量需要该类型的锁作为参数(此时必须使用unique_lock)</li>
+<li>条件变量需要该类型的锁作为参数 (此时必须使用 unique_lock)
+<ol>
+<li>因为这是函数调用, unique_lock 可以提供右值引用, 把参数传递过去</li>
+</ol>
+</li>
 </ol>
 <hr>
 <p><strong>其他资料</strong></p>
  <!-- basicblock-start oid="Obsyz7cuYkjWPL44y5SgWO20"  --> 
-<p>📝并发::<br>
+<p>📝并发:: <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1D5411m73k/?spm_id_from=333.337.search-card.all.click&amp;vd_source=f2340d96e99780a96b50d8096ffaaf1a">再谈lock_guard和unique_lock_ev_哔哩哔哩_bilibili</a><br>
 2022/10/29: 第一次创建</p>
 <!-- basicblock-end -->
               

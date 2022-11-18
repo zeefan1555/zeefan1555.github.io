@@ -16,17 +16,17 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1 226.翻转二叉树 力扣题目链接 翻转一棵二叉树。  这道题目背后有一个让程序员心酸的故事，听说 Homebrew的作者Max Howell，就是因为没在白板上写出翻转二叉树，最后被Google拒绝了。（真假不做判断，权当一个乐子哈）  2 思路    2.1 层序遍历(广度优先遍历):: [[5. 二叉树的层序遍历#2 思路]] 层序遍历的时候, 逐个弹出元素本层元素的同时, 在把弹出的元">
+    <meta name="description" content="1: 226.翻转二叉树 力扣题目链接 翻转一棵二叉树。  这道题目背后有一个让程序员心酸的故事，听说 Homebrew的作者Max Howell，就是因为没在白板上写出翻转二叉树，最后被Google拒绝了。（真假不做判断，权当一个乐子哈）  2: 思路    2.1: 层序遍历(广度优先遍历):: [[5. 二叉树的层序遍历#2 思路]] 层序遍历的时候, 逐个弹出元素本层元素的同时, 在把弹">
 <meta property="og:type" content="article">
 <meta property="og:title" content="6. 反转二叉树">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/42763/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="1 226.翻转二叉树 力扣题目链接 翻转一棵二叉树。  这道题目背后有一个让程序员心酸的故事，听说 Homebrew的作者Max Howell，就是因为没在白板上写出翻转二叉树，最后被Google拒绝了。（真假不做判断，权当一个乐子哈）  2 思路    2.1 层序遍历(广度优先遍历):: [[5. 二叉树的层序遍历#2 思路]] 层序遍历的时候, 逐个弹出元素本层元素的同时, 在把弹出的元">
+<meta property="og:description" content="1: 226.翻转二叉树 力扣题目链接 翻转一棵二叉树。  这道题目背后有一个让程序员心酸的故事，听说 Homebrew的作者Max Howell，就是因为没在白板上写出翻转二叉树，最后被Google拒绝了。（真假不做判断，权当一个乐子哈）  2: 思路    2.1: 层序遍历(广度优先遍历):: [[5. 二叉树的层序遍历#2 思路]] 层序遍历的时候, 逐个弹出元素本层元素的同时, 在把弹">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20210203192644329.png">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/008eGmZEly1gnakm26jtog30e409s4qp.gif">
 <meta property="article:published_time" content="2022-09-03T08:38:00.000Z">
-<meta property="article:modified_time" content="2022-09-19T03:31:10.738Z">
+<meta property="article:modified_time" content="2022-11-17T03:06:22.340Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="二叉树">
 <meta name="twitter:card" content="summary_large_image">
@@ -288,29 +288,29 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年9月19日 中午
+                    本文最后更新于：2022年11月17日 上午
                   
                 
               </p>
             
             <div class="markdown-body">
               
-              <h1 id="1-226翻转二叉树"><a class="markdownIt-Anchor" href="#1-226翻转二叉树"></a> 1 226.翻转二叉树</h1>
+              <h1 id="1-226翻转二叉树"><a class="markdownIt-Anchor" href="#1-226翻转二叉树"></a> 1: 226.翻转二叉树</h1>
 <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/invert-binary-tree/">力扣题目链接</a></p>
 <p>翻转一棵二叉树。</p>
 <p><img src="https://img-blog.csdnimg.cn/20210203192644329.png" srcset="/img/loading.gif" lazyload alt="226.翻转二叉树|500"></p>
 <p>这道题目背后有一个让程序员心酸的故事，听说 Homebrew的作者Max Howell，就是因为没在白板上写出翻转二叉树，最后被Google拒绝了。（真假不做判断，权当一个乐子哈）</p>
-<h1 id="2-思路"><a class="markdownIt-Anchor" href="#2-思路"></a> 2 思路</h1>
+<h1 id="2-思路"><a class="markdownIt-Anchor" href="#2-思路"></a> 2: 思路</h1>
 <!-- basicblock-start oid="ObshhkVMOq4kC0ciGlKLWXHb" --> 
-<h2 id="21-层序遍历广度优先遍历"><a class="markdownIt-Anchor" href="#21-层序遍历广度优先遍历"></a> 2.1 层序遍历(广度优先遍历)::</h2>
+<h2 id="21-层序遍历广度优先遍历"><a class="markdownIt-Anchor" href="#21-层序遍历广度优先遍历"></a> 2.1: 层序遍历(广度优先遍历)::</h2>
 <p>[[5. 二叉树的层序遍历#2 思路]]</p>
 <p>层序遍历的时候, 逐个弹出元素本层元素的同时, 在把弹出的元素左右孩子做一个交换<br>
 因为是从第一层开始的, 每一层的节点的左右孩子的都会被交换.</p>
-<h3 id="211-代码"><a class="markdownIt-Anchor" href="#211-代码"></a> 2.1.1 代码</h3>
+<h3 id="211-代码"><a class="markdownIt-Anchor" href="#211-代码"></a> 2.1.1: 代码</h3>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">TreeNode* <span class="hljs-title">invertTree</span><span class="hljs-params">(TreeNode* root)</span> </span>{<br>        queue&lt;TreeNode*&gt; que;<br>        <span class="hljs-keyword">if</span> (root != <span class="hljs-literal">NULL</span>) que.<span class="hljs-built_in">push</span>(root);<br>        <span class="hljs-keyword">while</span> (!que.<span class="hljs-built_in">empty</span>()) {<br>            <span class="hljs-type">int</span> size = que.<span class="hljs-built_in">size</span>();<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; size; i++) {<br>                TreeNode* node = que.<span class="hljs-built_in">front</span>();<br>                que.<span class="hljs-built_in">pop</span>();<br>                <span class="hljs-built_in">swap</span>(node-&gt;left, node-&gt;right); <span class="hljs-comment">// 弹出元素的同时, 在把该节点的左右孩子交换一下, 下边然后在加入</span><br>                <span class="hljs-keyword">if</span> (node-&gt;left) que.<span class="hljs-built_in">push</span>(node-&gt;left);<br>                <span class="hljs-keyword">if</span> (node-&gt;right) que.<span class="hljs-built_in">push</span>(node-&gt;right);<br>            }<br>        }<br>        <span class="hljs-keyword">return</span> root;<br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
 <!-- basicblock-end -->
 <!-- basicblock-start oid="Obs1K0yTTEWvKbJJunPhh7NM" --> 
-<h2 id="22-深度优先遍历"><a class="markdownIt-Anchor" href="#22-深度优先遍历"></a> 2.2 深度优先遍历::</h2>
+<h2 id="22-深度优先遍历"><a class="markdownIt-Anchor" href="#22-深度优先遍历"></a> 2.2: 深度优先遍历::</h2>
 <!-- basicblock-end -->
 <!-- basicblock-start oid="ObsYblbWEkEb1kEuJd6f8n6R" deck= "❓疑问::👨🏻‍💻code::数据结构与算法::代码随想录::二叉树::6. 反转二叉树.md"-->
 <ul>
@@ -321,9 +321,6 @@
 <p><strong>前序遍历过程</strong></p>
 <p>用前序或后序递归遍历, 到中间节点的时候, 把节点的左右孩子给交换一下. <mark>中</mark>左右: <mark>中</mark>其实是处理逻辑, 因为每个节点都会遍历到. 自然交换了所有节点的左右孩子.</p>
 <p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1gnakm26jtog30e409s4qp.gif" srcset="/img/loading.gif" lazyload alt="翻转二叉树"></p>
-<ul>
-<li>!</li>
-</ul>
 <p>我们来看一下递归三部曲：</p>
 <ol>
 <li>确定递归函数的参数和返回值</li>
@@ -342,7 +339,7 @@
 <p>因为是先前序遍历，所以先进行交换左右孩子节点，然后反转左子树，反转右子树。</p>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c">swap(root-&gt;left, root-&gt;right);<br>invertTree(root-&gt;left);<br>invertTree(root-&gt;right);<br></code></pre></td></tr></tbody></table></figure>
 <p>基于这递归三步法，代码基本写完，C++代码如下：</p>
-<h3 id="221-代码"><a class="markdownIt-Anchor" href="#221-代码"></a> 2.2.1 代码</h3>
+<h3 id="221-代码"><a class="markdownIt-Anchor" href="#221-代码"></a> 2.2.1: 代码</h3>
 <p>carl</p>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">TreeNode* <span class="hljs-title">invertTree</span><span class="hljs-params">(TreeNode* root)</span> </span>{<br>        <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">NULL</span>) <span class="hljs-keyword">return</span> root;<br>        <span class="hljs-built_in">swap</span>(root-&gt;left, root-&gt;right);  <span class="hljs-comment">// 中</span><br>        <span class="hljs-built_in">invertTree</span>(root-&gt;left);         <span class="hljs-comment">// 左</span><br>        <span class="hljs-built_in">invertTree</span>(root-&gt;right);        <span class="hljs-comment">// 右</span><br>        <span class="hljs-keyword">return</span> root;<br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
 <p>v2</p>
@@ -357,9 +354,8 @@
 <!-- basicblock-end -->
 <hr>
 <p><strong>参考资料</strong></p>
- <!-- basicblock-start oid="ObsqQ3qh1SYiiESPsf4ZuD01" deck = "👨🏻‍💻code::数据结构与算法::代码随想录::二叉树::6. 反转二叉树.md" --> 
-<p>#历史记录::<br>
-2022/09/03🌵6. 反转二叉树: ⏱1.45<br>
+ <!-- basicblock-start oid="ObsqQ3qh1SYiiESPsf4ZuD01"  --> 
+<p>2022/09/03🌵6. 反转二叉树:: ⏱1.45<br>
 1. 用前序或后序递归遍历, 到中间节点的时候, 把节点的左右孩子给交换一下. <mark>中</mark>左右: <mark>中</mark>其实是处理逻辑, 因为每个节点都会遍历到. 自然交换了所有节点的左右孩子.<br>
 - &amp; 不能用中序遍历, 会导致左右两个孩子交换两次<br>
 2.  用层序遍历模板, 就是弹出本层元素的同时, 在把该节点的左右孩子互换一下即可<br>

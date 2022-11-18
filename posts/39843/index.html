@@ -1,0 +1,739 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202206251952371.png">
+  <link rel="icon" href="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202206251952371.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="zeefan">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="📝unique_ptr::   [!example]- unique_ptr‌ 例子 ![[unique_ptr.excalidraw]]  12345678910111213141516171819&#x2F;&#x2F; 源码#include &lt;memory&gt;template &lt;typename T, typename D &#x3D; default_delete&lt;T&gt;&gt;class">
+<meta property="og:type" content="article">
+<meta property="og:title" content="unique_ptr">
+<meta property="og:url" content="https://zeefan1555.github.io/posts/39843/index.html">
+<meta property="og:site_name" content="一杯空气">
+<meta property="og:description" content="📝unique_ptr::   [!example]- unique_ptr‌ 例子 ![[unique_ptr.excalidraw]]  12345678910111213141516171819&#x2F;&#x2F; 源码#include &lt;memory&gt;template &lt;typename T, typename D &#x3D; default_delete&lt;T&gt;&gt;class">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-11-14T08:17:00.000Z">
+<meta property="article:modified_time" content="2022-11-14T12:44:33.198Z">
+<meta property="article:author" content="zeefan">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>unique_ptr - 一杯空气</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.15.6/katex.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"zeefan1555.github.io","root":"/","version":"1.9.1","typing":{"enable":true,"typeSpeed":150,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"Text"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":10},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>一杯空气</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="unique_ptr"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-11-14 16:17" pubdate>
+          2022年11月14日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          6.7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          34 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">unique_ptr</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2022年11月14日 晚上
+                  
+                
+              </p>
+            
+            <div class="markdown-body">
+              
+              <p>📝unique_ptr::</p>
+<!-- basicblock-end -->
+<blockquote>
+<p>[!example]- unique_ptr‌ 例子<br>
+![[unique_ptr.excalidraw]]</p>
+</blockquote>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">// 源码</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;memory&gt;</span></span><br><span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">typename</span> T, <span class="hljs-keyword">typename</span> D = default_delete&lt;T&gt;&gt;<br><span class="hljs-keyword">class</span> unique_ptr<br>{<br><span class="hljs-keyword">public</span>:<br>	<span class="hljs-keyword">explicit</span> <span class="hljs-built_in">unique_ptr</span>(pointer p) <span class="hljs-keyword">noexcept</span>;	<span class="hljs-comment">// 不可用于转换函数。</span><br>	~<span class="hljs-built_in">unique_ptr</span>() <span class="hljs-keyword">noexcept</span>;    <br>	T&amp; <span class="hljs-keyword">operator</span>*() <span class="hljs-type">const</span>;            <span class="hljs-comment">// 重载*操作符。</span><br>	T* <span class="hljs-keyword">operator</span>-&gt;() <span class="hljs-type">const</span> <span class="hljs-keyword">noexcept</span>;  <span class="hljs-comment">// 重载-&gt;操作符。</span><br>	<span class="hljs-built_in">unique_ptr</span>(<span class="hljs-type">const</span> unique_ptr &amp;) = <span class="hljs-keyword">delete</span>;   <span class="hljs-comment">// 禁用拷贝构造函数。</span><br>	unique_ptr&amp; <span class="hljs-keyword">operator</span>=(<span class="hljs-type">const</span> unique_ptr &amp;) = <span class="hljs-keyword">delete</span>;  <span class="hljs-comment">// 禁用赋值函数。</span><br>	<span class="hljs-built_in">unique_ptr</span>(unique_ptr &amp;&amp;) <span class="hljs-keyword">noexcept</span>;	  <span class="hljs-comment">// 右值引用。</span><br>	unique_ptr&amp; <span class="hljs-keyword">operator</span>=(unique_ptr &amp;&amp;) <span class="hljs-keyword">noexcept</span>;  <span class="hljs-comment">// 右值引用。</span><br>	<span class="hljs-comment">// ...</span><br><span class="hljs-keyword">private</span>:<br>	pointer ptr;  <span class="hljs-comment">// 内置的指针。</span><br>};<br><br></code></pre></td></tr></tbody></table></figure>
+<p>智能指针就是类，类中有一个成员，管理着原始指针<br>
+❓因为内置的类型中没有析构函数, 所以自己创建一个类</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c++">测试类AA的定义：<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">AA</span><br>{<br><span class="hljs-keyword">public</span>:<br>	string m_name;<br>	<span class="hljs-built_in">AA</span>() { cout &lt;&lt; m_name &lt;&lt; <span class="hljs-string">"调用构造函数AA()。\n"</span>; }<br>	<span class="hljs-built_in">AA</span>(<span class="hljs-type">const</span> string &amp; name) : <span class="hljs-built_in">m_name</span>(name) { cout &lt;&lt; <span class="hljs-string">"调用构造函数AA("</span>&lt;&lt; m_name &lt;&lt; <span class="hljs-string">")。\n"</span>; }<br>	~<span class="hljs-built_in">AA</span>() { cout &lt;&lt; m_name &lt;&lt; <span class="hljs-string">"调用了析构函数~AA("</span> &lt;&lt; m_name &lt;&lt; <span class="hljs-string">")。\n"</span>; }<br>};<br><br></code></pre></td></tr></tbody></table></figure>
+<h1 id="1-用法"><a class="markdownIt-Anchor" href="#1-用法"></a> 1: 用法</h1>
+<h2 id="11-初始化"><a class="markdownIt-Anchor" href="#11-初始化"></a> 1.1: 初始化</h2>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs c++"><br>方法一：(推荐)<br><span class="hljs-comment">// 分配内存并初始化。💡把西施对象交给智能指针 P0 来管理</span><br><span class="hljs-function">unique_ptr&lt;AA&gt; <span class="hljs-title">p0</span><span class="hljs-params">(<span class="hljs-keyword">new</span> AA(<span class="hljs-string">"西施"</span>))</span></span>;     <br><br>方法二:(不推荐, 暂时没落地)<br>unique_ptr&lt;AA&gt; p0 = <span class="hljs-built_in">make_unique</span>&lt;AA&gt;(<span class="hljs-string">"西施"</span>);   <span class="hljs-comment">// C++14标准, 💡现在落地的是 C++</span><br><span class="hljs-number">11</span><br>unique_ptr&lt;<span class="hljs-type">int</span>&gt; pp1=<span class="hljs-built_in">make_unique</span>&lt;<span class="hljs-type">int</span>&gt;();         <span class="hljs-comment">// 数据类型为int。</span><br>unique_ptr&lt;AA&gt; pp2 = <span class="hljs-built_in">make_unique</span>&lt;AA&gt;();       <span class="hljs-comment">// 数据类型为AA，默认构造函数。</span><br>unique_ptr&lt;AA&gt; pp3 = <span class="hljs-built_in">make_unique</span>&lt;AA&gt;(<span class="hljs-string">"西施"</span>);  <span class="hljs-comment">// 数据类型为AA，一个参数的构造函数。</span><br>unique_ptr&lt;AA&gt; pp4 = <span class="hljs-built_in">make_unique</span>&lt;AA&gt;(<span class="hljs-string">"西施"</span>,<span class="hljs-number">8</span>); <span class="hljs-comment">// 数据类型为AA，两个参数的构造函数。</span><br>方法三（不推荐）：<br>AA* p = <span class="hljs-keyword">new</span> <span class="hljs-built_in">AA</span>(<span class="hljs-string">"西施"</span>);<br><span class="hljs-function">unique_ptr&lt;AA&gt; <span class="hljs-title">p0</span><span class="hljs-params">(p)</span></span>;                  <span class="hljs-comment">// 用已存在的地址初始化。</span><br><br><br></code></pre></td></tr></tbody></table></figure>
+<h2 id="12-使用方法"><a class="markdownIt-Anchor" href="#12-使用方法"></a> 1.2: 使用方法</h2>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c++">智能指针重载了*和-&gt;操作符，可以像使用指针一样使用unique_ptr。<br>不支持普通的拷贝和赋值。<br>	AA* p = <span class="hljs-keyword">new</span> <span class="hljs-built_in">AA</span>(<span class="hljs-string">"西施"</span>);<br>	unique_ptr&lt;AA&gt; pu2 = p;              <span class="hljs-comment">// 错误，不能把普通指针直接赋给智能指针。</span><br>	unique_ptr&lt;AA&gt; pu3 = <span class="hljs-keyword">new</span> <span class="hljs-built_in">AA</span>(<span class="hljs-string">"西施"</span>); <span class="hljs-comment">// 错误，不能把普通指针直接赋给智能指针。</span><br>	unique_ptr&lt;AA&gt; pu2 = pu1;           <span class="hljs-comment">// 错误，不能用其它unique_ptr拷贝构造。</span><br>	unique_ptr&lt;AA&gt; pu3;<br>	pu3 = pu1;                            <span class="hljs-comment">// 错误，不能用=对unique_ptr进行赋值。</span><br><br><span class="hljs-comment">// 💡因为 unique_ptr 的设计思想是独享, 如果多一个 unique_ptr 指向同一块内存, 那么其中一个 unique_ptr 释放了资源, 其他的指针再释放内存就造成了操作野指针. 所以禁用掉拷贝构造和拷贝赋值函数</span><br></code></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>[!note]</p>
+<ul>
+<li>不要用同一个裸指针初始化多个 unique_ptr 对象。
+<ul>
+<li><code>裸指针: 是普通指针，也叫原始指针</code></li>
+</ul>
+</li>
+<li>get () 方法返回裸指针。</li>
+<li>不要用 unique_ptr 管理不是 new 分配的内存。</li>
+<li>[[unique_ptr 2022-11-14 16.49.57.excalidraw]]</li>
+</ul>
+</blockquote>
+<h2 id="13-用于函数的参数"><a class="markdownIt-Anchor" href="#13-用于函数的参数"></a> 1.3: 用于函数的参数</h2>
+<p>引用（不能传值，因为 unique_ptr 没有拷贝构造函数）。<br>
+裸指针。<br>
+‌‌‌![[unique_ptr 2022-11-14 17.07.04.excalidraw]]</p>
+<h2 id="14-不支持指针的运算-"><a class="markdownIt-Anchor" href="#14-不支持指针的运算-"></a> 1.4: 不支持指针的运算（+、-、++、–）</h2>
+<h1 id="2-更多技巧"><a class="markdownIt-Anchor" href="#2-更多技巧"></a> 2: 更多技巧</h1>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1gV4y1G7fH/?p=2&amp;spm_id_from=pageDriver&amp;vd_source=f2340d96e99780a96b50d8096ffaaf1a">独占智能指针unique_ptr使用技巧_哔哩哔哩_bilibili</a><br>
+1）将一个 unique_ptr 赋给另一个时，如果源 unique_ptr 是一个临时右值，编译器允许这样做；<br>
+如果源 unique_ptr 将存在一段时间，编译器禁止这样做。<br>
+一般用于函数的返回值。</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++">unique_ptr&lt;AA&gt; p0;<br>p0 = <span class="hljs-built_in">unique_ptr</span>&lt;AA&gt;(<span class="hljs-keyword">new</span> <span class="hljs-built_in">AA</span> (<span class="hljs-string">"西瓜"</span>));<br></code></pre></td></tr></tbody></table></figure>
+<p>2）用 nullptr 给 unique_ptr 赋值将释放对象，空的 unique_ptr == nullptr</p>
+<p>3）release()释放对原始指针的控制权，将unique_ptr置为空，返回裸指针。（可用于把unique_ptr传递给子函数，子函数将负责释放对象）</p>
+<p>4）std::move () 可以转移对原始指针的控制权。（可用于把 unique_ptr 传递给子函数，子函数形参也是 unique_ptr）<br>
+5）reset()释放对象。</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">reset</span><span class="hljs-params">(T * _ptr= (T *) <span class="hljs-literal">nullptr</span>)</span></span>;<br>pp.<span class="hljs-built_in">reset</span>();        <span class="hljs-comment">// 释放pp对象指向的资源对象。</span><br>pp.<span class="hljs-built_in">reset</span>(<span class="hljs-literal">nullptr</span>);  <span class="hljs-comment">// 释放pp对象指向的资源对象</span><br>pp.<span class="hljs-built_in">reset</span>(<span class="hljs-keyword">new</span> <span class="hljs-built_in">AA</span>(<span class="hljs-string">"bbb"</span>));  <span class="hljs-comment">// 释放pp指向的资源对象，同时指向新的对象。</span><br><span class="hljs-number">6</span>）<span class="hljs-built_in">swap</span>()交换两个unique_ptr的控制权。<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">swap</span><span class="hljs-params">(unique_ptr&lt;T&gt; &amp;_Right)</span></span>;<br></code></pre></td></tr></tbody></table></figure>
+<p>7）unique_ptr也可象普通指针那样，当指向一个类继承体系的基类对象时，也具有多态性质，如同使用裸指针管理基类对象和派生类对象那样。<br>
+8）unique_ptr不是绝对安全，如果程序中调用exit()退出，全局的unique_ptr可以自动释放，但局部的unique_ptr无法释放。<br>
+9）unique_ptr提供了支持数组的具体化版本。<br>
+数组版本的unique_ptr，重载了操作符[]，操作符[]返回的是引用，可以作为左值使用。</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function">unique_ptr&lt;<span class="hljs-type">int</span>[]&gt; <span class="hljs-title">parr1</span><span class="hljs-params">(<span class="hljs-keyword">new</span> <span class="hljs-type">int</span>[<span class="hljs-number">3</span>])</span></span>;          <span class="hljs-comment">// 不指定初始值。</span><br><span class="hljs-function">unique_ptr&lt;<span class="hljs-type">int</span>[]&gt; <span class="hljs-title">parr1</span><span class="hljs-params">(<span class="hljs-keyword">new</span> <span class="hljs-type">int</span>[<span class="hljs-number">3</span>]{ <span class="hljs-number">33</span>,<span class="hljs-number">22</span>,<span class="hljs-number">11</span> })</span></span>;  <span class="hljs-comment">// 指定初始值。</span><br>cout &lt;&lt; <span class="hljs-string">"parr1[0]="</span> &lt;&lt; parr1[<span class="hljs-number">0</span>] &lt;&lt; endl;<br>cout &lt;&lt; <span class="hljs-string">"parr1[1]="</span> &lt;&lt; parr1[<span class="hljs-number">1</span>] &lt;&lt; endl;<br>cout &lt;&lt; <span class="hljs-string">"parr1[2]="</span> &lt;&lt; parr1[<span class="hljs-number">2</span>] &lt;&lt; endl;<br><span class="hljs-function">unique_ptr&lt;AA[]&gt; <span class="hljs-title">parr2</span><span class="hljs-params">(<span class="hljs-keyword">new</span> AA[<span class="hljs-number">3</span>]{string(<span class="hljs-string">"西施"</span>), string(<span class="hljs-string">"冰冰"</span>), string(<span class="hljs-string">"幂幂"</span>)})</span></span>;<br>cout &lt;&lt; <span class="hljs-string">"parr2[0].m_name="</span> &lt;&lt; parr2[<span class="hljs-number">0</span>].m_name &lt;&lt; endl;<br>cout &lt;&lt; <span class="hljs-string">"parr2[1].m_name="</span> &lt;&lt; parr2[<span class="hljs-number">1</span>].m_name &lt;&lt; endl;<br>cout &lt;&lt; <span class="hljs-string">"parr2[2].m_name="</span> &lt;&lt; parr2[<span class="hljs-number">2</span>].m_name &lt;&lt; endl;<br><br></code></pre></td></tr></tbody></table></figure>
+<h2 id="21-实例"><a class="markdownIt-Anchor" href="#21-实例"></a> 2.1: 实例</h2>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><code class="hljs c++">示例<span class="hljs-number">1</span>：<br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;memory&gt;</span></span><br><span class="hljs-keyword">using</span>  <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">AA</span><br>{<br><span class="hljs-keyword">public</span>:<br>	string m_name;<br>	<span class="hljs-built_in">AA</span>() { cout &lt;&lt; m_name &lt;&lt; <span class="hljs-string">"调用构造函数AA()。\n"</span>; }<br>	<span class="hljs-built_in">AA</span>(<span class="hljs-type">const</span> string &amp; name) : <span class="hljs-built_in">m_name</span>(name) { cout &lt;&lt; <span class="hljs-string">"调用构造函数AA("</span>&lt;&lt; m_name &lt;&lt; <span class="hljs-string">")。\n"</span>; }<br>	~<span class="hljs-built_in">AA</span>() { cout &lt;&lt; <span class="hljs-string">"调用了析构函数~AA("</span> &lt;&lt; m_name &lt;&lt; <span class="hljs-string">")。\n"</span>; }<br>};<br><br><span class="hljs-comment">// 函数func1()需要一个指针，但不对这个指针负责。</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">func1</span><span class="hljs-params">(<span class="hljs-type">const</span> AA* a)</span> </span>{<br>	cout &lt;&lt; a-&gt;m_name &lt;&lt; endl;<br>}<br><br><span class="hljs-comment">// 函数func2()需要一个指针，并且会对这个指针负责。</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">func2</span><span class="hljs-params">(AA* a)</span> </span>{<br>	cout &lt;&lt; a-&gt;m_name &lt;&lt; endl;<br>	<span class="hljs-keyword">delete</span> a;<br>}<br><br><span class="hljs-comment">// 函数func3()需要一个unique_ptr，不会对这个unique_ptr负责。</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">func3</span><span class="hljs-params">(<span class="hljs-type">const</span> unique_ptr&lt;AA&gt; &amp;a)</span> </span>{<br>	cout &lt;&lt; a-&gt;m_name &lt;&lt; endl;<br>}<br><br><span class="hljs-comment">// 函数func4()需要一个unique_ptr，并且会对这个unique_ptr负责。</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">func4</span><span class="hljs-params">(unique_ptr&lt;AA&gt; a)</span> </span>{<br>	cout &lt;&lt; a-&gt;m_name &lt;&lt; endl;<br>}<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>{<br>	<span class="hljs-function">unique_ptr&lt;AA&gt; <span class="hljs-title">pu</span><span class="hljs-params">(<span class="hljs-keyword">new</span> AA(<span class="hljs-string">"西施"</span>))</span></span>;<br><br>	cout &lt;&lt; <span class="hljs-string">"开始调用函数。\n"</span>;<br>	<span class="hljs-comment">//func1(pu.get());        // 函数func1()需要一个指针，但不对这个指针负责。</span><br>	<span class="hljs-comment">//func2(pu.release());  // 函数func2()需要一个指针，并且会对这个指针负责。</span><br>	<span class="hljs-comment">//func3(pu);                // 函数func3()需要一个unique_ptr，不会对这个unique_ptr负责。</span><br>	<span class="hljs-built_in">func4</span>(<span class="hljs-built_in">move</span>(pu));     <span class="hljs-comment">// 函数func4()需要一个unique_ptr，并且会对这个unique_ptr负责。</span><br>	cout &lt;&lt; <span class="hljs-string">"调用函数完成。\n"</span>;<br><br>	<span class="hljs-keyword">if</span> (pu == <span class="hljs-literal">nullptr</span>) cout &lt;&lt; <span class="hljs-string">"pu是空指针。\n"</span>;<br>}<br>示例<span class="hljs-number">2</span>：<br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;memory&gt;</span></span><br><span class="hljs-keyword">using</span>  <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">AA</span><br>{<br><span class="hljs-keyword">public</span>:<br>	string m_name;<br>	<span class="hljs-built_in">AA</span>() { cout &lt;&lt; m_name &lt;&lt; <span class="hljs-string">"调用构造函数AA()。\n"</span>; }<br>	<span class="hljs-built_in">AA</span>(<span class="hljs-type">const</span> string &amp; name) : <span class="hljs-built_in">m_name</span>(name) { cout &lt;&lt; <span class="hljs-string">"调用构造函数AA("</span>&lt;&lt; m_name &lt;&lt; <span class="hljs-string">")。\n"</span>; }<br>	~<span class="hljs-built_in">AA</span>() { cout &lt;&lt; <span class="hljs-string">"调用了析构函数~AA("</span> &lt;&lt; m_name &lt;&lt; <span class="hljs-string">")。\n"</span>; }<br>};<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>{<br>	<span class="hljs-comment">//AA* parr1 = new AA[2];   // 普通指针数组。</span><br>	<span class="hljs-comment">////AA* parr1 = new AA[2]{ string("西施"), string("冰冰") };</span><br>	<span class="hljs-comment">//parr1[0].m_name = "西施1";</span><br>	<span class="hljs-comment">//cout &lt;&lt; "parr1[0].m_name=" &lt;&lt; parr1[0].m_name &lt;&lt; endl;</span><br>	<span class="hljs-comment">//parr1[1].m_name = "西施2";</span><br>	<span class="hljs-comment">//cout &lt;&lt; "parr1[1].m_name=" &lt;&lt; parr1[1].m_name &lt;&lt; endl;</span><br>	<span class="hljs-comment">//delete [] parr1;</span><br>	<br>	<span class="hljs-function">unique_ptr&lt;AA[]&gt; <span class="hljs-title">parr2</span><span class="hljs-params">(<span class="hljs-keyword">new</span> AA[<span class="hljs-number">2</span>])</span></span>;   <span class="hljs-comment">// unique_ptr数组。</span><br>	<span class="hljs-comment">//unique_ptr&lt;AA[]&gt; parr2(new AA[2]{ string("西施"), string("冰冰") });</span><br>	parr2[<span class="hljs-number">0</span>].m_name = <span class="hljs-string">"西施1"</span>;<br>	cout &lt;&lt; <span class="hljs-string">"parr2[0].m_name="</span> &lt;&lt; parr2[<span class="hljs-number">0</span>].m_name &lt;&lt; endl;<br>	parr2[<span class="hljs-number">1</span>].m_name = <span class="hljs-string">"西施2"</span>;<br>	cout &lt;&lt; <span class="hljs-string">"parr2[1].m_name="</span> &lt;&lt; parr2[<span class="hljs-number">1</span>].m_name &lt;&lt; endl;<br>}<br><br></code></pre></td></tr></tbody></table></figure>
+<h1 id="3-八股"><a class="markdownIt-Anchor" href="#3-八股"></a> 3: 八股</h1>
+<p>unique_ptr 独享它指向的对象，也就是说，同时只有一个 unique_ptr 指向同一个对象，当这个 unique_ptr 被销毁时，指向的对象也随即被销毁。</p>
+<p>1、unique_ptr"唯一"拥有其所指对象<br>
+同一时刻只能有一个 unique_ptr 指向给定对象，离开作用域时，若其指向对象，则将其所指对象销毁（默认 delete)</p>
+<p>2、定义 unique_ptr 时<br>
+需要将其绑定到一个 new /make_unique 返回的指针上</p>
+<p>3、unique_ptr 不支持普通的拷贝和赋值（因为拥有指向的对象）<br>
+但是可以拷贝和赋值一个将要被销毁的 unique_ptr; 可以通过 move /  (❓或者 release reset) 将指针所有权从一个（非 const) unique_ptr 转移到另一个 unique。</p>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/" class="category-chain-item">👨🏻‍💻code</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/C/" class="category-chain-item">C++</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/C/C-%E5%9F%BA%E7%A1%80/" class="category-chain-item">C++基础</a>
+  
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/53861/" title="shared_ptr">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">shared_ptr</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/11317/" title="13：以对象管理资源">
+                        <span class="hidden-mobile">13：以对象管理资源</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

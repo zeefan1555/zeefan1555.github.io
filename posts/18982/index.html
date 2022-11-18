@@ -16,15 +16,15 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1 auto: auto 可以让编译器在编译期就推导出变量的类型  auto 的使用必须马上初始化, 否则无法推导出类型 auto 在一行定义多个变量时, 各个变量的推导不能产生二义性, 否则编译失败  ❓什么是二义性: ✅应该是: 不能是两种类型   auto 不能用作函数参数 在类中 auto 不能用作非静态成员变量 auto 不能定义数组, 可以定义指针 auto 无法推导出模板参数 在不">
+    <meta name="description" content="📝类型推导:: 2022&#x2F;10&#x2F;27: 第一次创建   1: auto: auto 可以让编译器在编译期就推导出变量的类型  auto 的使用必须马上初始化, 否则无法推导出类型 auto 在一行定义多个变量时, 各个变量的推导不能产生二义性, 否则编译失败  ❓什么是二义性: ✅应该是: 不能是两种类型   auto 不能用作函数参数 在类中 auto 不能用作非静态成员变量 auto 不能定">
 <meta property="og:type" content="article">
 <meta property="og:title" content="类型推导">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/18982/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="1 auto: auto 可以让编译器在编译期就推导出变量的类型  auto 的使用必须马上初始化, 否则无法推导出类型 auto 在一行定义多个变量时, 各个变量的推导不能产生二义性, 否则编译失败  ❓什么是二义性: ✅应该是: 不能是两种类型   auto 不能用作函数参数 在类中 auto 不能用作非静态成员变量 auto 不能定义数组, 可以定义指针 auto 无法推导出模板参数 在不">
+<meta property="og:description" content="📝类型推导:: 2022&#x2F;10&#x2F;27: 第一次创建   1: auto: auto 可以让编译器在编译期就推导出变量的类型  auto 的使用必须马上初始化, 否则无法推导出类型 auto 在一行定义多个变量时, 各个变量的推导不能产生二义性, 否则编译失败  ❓什么是二义性: ✅应该是: 不能是两种类型   auto 不能用作函数参数 在类中 auto 不能用作非静态成员变量 auto 不能定">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-10-27T13:06:00.000Z">
-<meta property="article:modified_time" content="2022-10-29T13:04:10.108Z">
+<meta property="article:modified_time" content="2022-11-14T13:03:32.741Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          609 字
+          608 字
         
       </span>
     
@@ -284,14 +284,17 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年10月29日 晚上
+                    本文最后更新于：2022年11月14日 晚上
                   
                 
               </p>
             
             <div class="markdown-body">
               
-              <h1 id="1-auto"><a class="markdownIt-Anchor" href="#1-auto"></a> 1 auto:</h1>
+              <p>📝类型推导::<br>
+2022/10/27: 第一次创建</p>
+<!-- basicblock-end -->
+<h1 id="1-auto"><a class="markdownIt-Anchor" href="#1-auto"></a> 1: auto:</h1>
 <p>auto 可以让编译器在编译期就推导出变量的类型</p>
 <ul>
 <li>auto 的使用必须马上初始化, 否则无法推导出类型</li>
@@ -307,7 +310,7 @@
 <li>在不声明为引用或指针时,auto 会忽略等号右边的引用类型和 cv 限定</li>
 <li>在声明为引用或者指针时,auto 会保留等号右边的引用和 cv 属性</li>
 </ul>
-<h1 id="2-decltype"><a class="markdownIt-Anchor" href="#2-decltype"></a> 2 decltype</h1>
+<h1 id="2-decltype"><a class="markdownIt-Anchor" href="#2-decltype"></a> 2: decltype</h1>
 <p>decltype 则用于推导表达式类型, 这里只用于编译器分析表达式的类型, 表达式实际不会进行运算<br>
 decltype 不会像 auto 一样忽略引用和 cv 属性,decltype 会保留表达式的引用和 cv 属性</p>
 <p>对于 decltype (exp) 有:</p>
@@ -320,15 +323,10 @@ decltype 不会像 auto 一样忽略引用和 cv 属性,decltype 会保留表达
 <p>[[左右值引用]]</p>
 </blockquote>
 <!-- basicblock-start oid="Obsde6bUem6qaFiPGkPqXcud" -->
-<h1 id="3-auto和decltype的配合使用-疑问"><a class="markdownIt-Anchor" href="#3-auto和decltype的配合使用-疑问"></a> 3 auto和decltype的配合使用::  ❓ #疑问</h1>
+<h1 id="3-auto和decltype的配合使用-疑问"><a class="markdownIt-Anchor" href="#3-auto和decltype的配合使用-疑问"></a> 3: auto和decltype的配合使用::  ❓ #疑问</h1>
 <!-- basicblock-end -->
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">typename</span> I, <span class="hljs-keyword">typename</span> U&gt; </span><br><span class="hljs-function"><span class="hljs-keyword">auto</span> <span class="hljs-title">add</span><span class="hljs-params">(I t,U u)</span> -&gt;<span class="hljs-title">decltype</span><span class="hljs-params">(t + u)</span></span>{ <br>    <span class="hljs-keyword">return</span> t +a; <br>}<br><br></code></pre></td></tr></tbody></table></figure>
-<hr>
-<p><strong>其他资料</strong></p>
- <!-- basicblock-start oid="ObsJ6kQ9rqczjTk4tvnbU1iB"  --> 
-<p>📝类型推导::<br>
-2022/10/27: 第一次创建</p>
-<!-- basicblock-end -->
+
               
             </div>
             <hr/>

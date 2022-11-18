@@ -16,15 +16,15 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="📝表级锁::  表级锁，每次操作锁住整张表。锁定粒度大，发生锁冲突的概率最高，并发度最低。应用在 MyISAM、InnoDB、BDB 等存储引擎中。  [!summary] 对于表级锁，主要分为以下三类： 表锁 元数据锁（meta data lock，MDL） 意向锁   1 表锁：  [!summary] 对于表锁，分为两类：   表共享读锁（read lock）  所有的事物都只能读（当前加">
+    <meta name="description" content="📝表级锁::  表级锁，每次操作锁住整张表。锁定粒度大，发生锁冲突的概率最高，并发度最低。 应用在 MyISAM、InnoDB、BDB 等存储引擎中。  [!summary] 对于表级锁，主要分为以下三类： 表锁 元数据锁（meta data lock，MDL） 意向锁   [!tip] 使⽤表锁的情况 （1）表⽐较⼤，事务需要更新全部或者⼤部分数据 （2）事务涉及到多个表，⽐较复杂，可能引起死">
 <meta property="og:type" content="article">
 <meta property="og:title" content="表级锁">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/22239/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="📝表级锁::  表级锁，每次操作锁住整张表。锁定粒度大，发生锁冲突的概率最高，并发度最低。应用在 MyISAM、InnoDB、BDB 等存储引擎中。  [!summary] 对于表级锁，主要分为以下三类： 表锁 元数据锁（meta data lock，MDL） 意向锁   1 表锁：  [!summary] 对于表锁，分为两类：   表共享读锁（read lock）  所有的事物都只能读（当前加">
+<meta property="og:description" content="📝表级锁::  表级锁，每次操作锁住整张表。锁定粒度大，发生锁冲突的概率最高，并发度最低。 应用在 MyISAM、InnoDB、BDB 等存储引擎中。  [!summary] 对于表级锁，主要分为以下三类： 表锁 元数据锁（meta data lock，MDL） 意向锁   [!tip] 使⽤表锁的情况 （1）表⽐较⼤，事务需要更新全部或者⼤部分数据 （2）事务涉及到多个表，⽐较复杂，可能引起死">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-08T14:01:00.000Z">
-<meta property="article:modified_time" content="2022-11-08T14:30:39.639Z">
+<meta property="article:modified_time" content="2022-11-09T12:40:39.308Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -284,7 +284,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年11月8日 晚上
+                    本文最后更新于：2022年11月9日 晚上
                   
                 
               </p>
@@ -293,14 +293,20 @@
               
               <p>📝表级锁::</p>
 <!-- basicblock-end -->
-<p>表级锁，每次操作锁住整张表。锁定粒度大，发生锁冲突的概率最高，并发度最低。应用在 MyISAM、InnoDB、BDB 等存储引擎中。</p>
+<p>表级锁，每次操作锁住整张表。锁定粒度大，发生锁冲突的概率最高，并发度最低。<br>
+应用在 MyISAM、InnoDB、BDB 等存储引擎中。</p>
 <blockquote>
 <p>[!summary] 对于表级锁，主要分为以下三类：<br>
 表锁<br>
 元数据锁（meta data lock，MDL）<br>
 意向锁</p>
 </blockquote>
-<h1 id="1-表锁"><a class="markdownIt-Anchor" href="#1-表锁"></a> 1 表锁：</h1>
+<blockquote>
+<p>[!tip] 使⽤表锁的情况<br>
+（1）表⽐较⼤，事务需要更新全部或者⼤部分数据<br>
+（2）事务涉及到多个表，⽐较复杂，可能引起死锁，造成⼤量的事务回滚</p>
+</blockquote>
+<h1 id="1-表锁"><a class="markdownIt-Anchor" href="#1-表锁"></a> 1 表锁</h1>
 <blockquote>
 <p>[!summary] 对于表锁，分为两类：</p>
 <ol>
@@ -325,6 +331,15 @@
 <p>[!example]-<br>
 ![[表级锁.excalidraw]]</p>
 </blockquote>
+<p>特点：</p>
+<ol>
+<li>每次操作锁住整张表</li>
+<li>开销⼩，加锁快</li>
+<li>并发度最低</li>
+</ol>
+<p>表锁的语法是 lock tables … read/write。<br>
+与 FTWRL 类似，可以⽤ unlock tables 主动释放锁，也可以在客户端断开的时候⾃动释 放。<br>
+需要注意： lock tables 语法除了会限制别的线程的读写外，也限定了本线程接下来的操作对象。</p>
 <h1 id="2-元数据锁meta-data-lockmdl"><a class="markdownIt-Anchor" href="#2-元数据锁meta-data-lockmdl"></a> 2 元数据锁（meta data lock，MDL）</h1>
 <p>MDL 加锁过程是系统<strong>自动控制</strong>，无需显式使用，在访问一张表的时候会<strong>自动加上</strong>。<br>
 <strong>MDL 锁主要作用是维护表元数据的数据一致性</strong>，在表上有活动事务的时候，不可以对元数据进行写入操作。<br>
@@ -337,27 +352,15 @@
 当对一张表进行增删改查的时候，加 MDL 读锁（共享）<br>
 当对表结构进行变更操作的时候，加 MDL 写锁（排他）。</p>
 </blockquote>
+<p>读锁之间不互斥，因此你可以有多个线程同时对⼀张表增删改查。读写锁之间、写锁之间是互斥的，⽤来保证变更表结构操作的安全性。因此，如果有两个线程要同时给⼀个表加字段，其中⼀个要等另⼀个执⾏完才能开始执⾏。</p>
+<blockquote>
+<p>[!attention] 事务中的 MDL 锁，在语句执⾏开始时申请，但是语句结束后并不会马上释放，⽽会等到整个事务提交后再释放。（这可能会产⽣死锁的问题）</p>
+</blockquote>
 <blockquote>
 <p>[!example]<br>
 ‌‌‌　　‌‌‌　　‌‌‌　　‌‌‌　　‌‌‌　　![[元数据锁.excalidraw]]</p>
 </blockquote>
-<h1 id="3-意向锁"><a class="markdownIt-Anchor" href="#3-意向锁"></a> 3 意向锁</h1>
-<p>为了避免 DML 在执行时，加的行锁与表锁的冲突，在 InnoDB 中引入了意向锁，使得表锁不用检查每行数据是否加锁，<strong>使用意向锁来减少表锁的检查</strong>。</p>
-<p>‌‌‌　　‌‌‌　　![[意向锁.excalidraw]]</p>
-<h2 id="31-分类"><a class="markdownIt-Anchor" href="#31-分类"></a> 3.1 分类</h2>
-<p>意向共享锁 (IS): 由语句 select … lock in share mode 添加。<br>
-兼容性: 与表锁共享锁 (read) 兼容，与表锁排他锁 (write) 互斥.</p>
-<p>意向排他锁 (IX): 由 insert、update、delete、select…for update 添加。<br>
-兼容性: 与表锁共享锁 (read) 及排他锁 (write) 都互斥，</p>
-<p><strong>意向锁之间不会互斥。</strong></p>
-<blockquote>
-<p>[!tip] 一旦事务提交了，意向共享锁、意向排他锁，都会自动释放。</p>
-</blockquote>
-<p>一个客户端对某一行加上了行锁，那么系统也会对其加上一个意向锁，当别的客户端来想要对其加上表锁时，便会检查意向锁是否兼容，若是不兼容，便会阻塞直到意向锁释放。</p>
-<blockquote>
-<p>[!example]<br>
-‌‌‌　　‌‌![[意向共享锁与表读锁.excalidraw]]</p>
-</blockquote>
+<h1 id="3-意向锁-intent-lock"><a class="markdownIt-Anchor" href="#3-意向锁-intent-lock"></a> 3 [[意向锁 (Intent lock)]]</h1>
 
               
             </div>

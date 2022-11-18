@@ -16,15 +16,15 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="📝InnoDB收集统计数据::  [[InnoDB]]  [!summary] 表的统计数据: show table status; 索引的统计数据: show index;   统计数据的存储:  1 永久性存储 存储于磁盘上, 服务器重启后数据仍然存在 实际存储在磁盘内的两个表中  innodb_index_stats innodb_table_stats   2 非永久性存储 存储于内存中">
+    <meta name="description" content="📝InnoDB收集统计数据::  [[InnoDB]]  [!summary] 表的统计数据: show table status; 索引的统计数据: show index;   1 统计数据的存储:  1.1 永久性存储 存储于磁盘上, 服务器重启后数据仍然存在 实际存储在磁盘内的两个表中  innodb_index_stats innodb_table_stats   1.2 非永久性存储">
 <meta property="og:type" content="article">
 <meta property="og:title" content="InnoDB收集统计数据">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/39477/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="📝InnoDB收集统计数据::  [[InnoDB]]  [!summary] 表的统计数据: show table status; 索引的统计数据: show index;   统计数据的存储:  1 永久性存储 存储于磁盘上, 服务器重启后数据仍然存在 实际存储在磁盘内的两个表中  innodb_index_stats innodb_table_stats   2 非永久性存储 存储于内存中">
+<meta property="og:description" content="📝InnoDB收集统计数据::  [[InnoDB]]  [!summary] 表的统计数据: show table status; 索引的统计数据: show index;   1 统计数据的存储:  1.1 永久性存储 存储于磁盘上, 服务器重启后数据仍然存在 实际存储在磁盘内的两个表中  innodb_index_stats innodb_table_stats   1.2 非永久性存储">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-08T06:51:00.000Z">
-<meta property="article:modified_time" content="2022-11-08T12:30:01.712Z">
+<meta property="article:modified_time" content="2022-11-09T07:18:05.137Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="InnoDB">
 <meta name="twitter:card" content="summary_large_image">
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          188 字
+          193 字
         
       </span>
     
@@ -285,7 +285,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年11月8日 晚上
+                    本文最后更新于：2022年11月9日 下午
                   
                 
               </p>
@@ -300,15 +300,15 @@
 表的统计数据: show table status;<br>
 索引的统计数据: show index;</p>
 </blockquote>
-<h1 id="统计数据的存储"><a class="markdownIt-Anchor" href="#统计数据的存储"></a> 统计数据的存储:</h1>
-<h2 id="1-永久性存储"><a class="markdownIt-Anchor" href="#1-永久性存储"></a> 1 永久性存储</h2>
+<h1 id="1-统计数据的存储"><a class="markdownIt-Anchor" href="#1-统计数据的存储"></a> 1 统计数据的存储:</h1>
+<h2 id="11-永久性存储"><a class="markdownIt-Anchor" href="#11-永久性存储"></a> 1.1 永久性存储</h2>
 <p>存储于磁盘上, 服务器重启后数据仍然存在<br>
 实际存储在磁盘内的两个表中</p>
 <ol>
 <li>innodb_index_stats</li>
 <li>innodb_table_stats</li>
 </ol>
-<h2 id="2-非永久性存储"><a class="markdownIt-Anchor" href="#2-非永久性存储"></a> 2 非永久性存储</h2>
+<h2 id="12-非永久性存储"><a class="markdownIt-Anchor" href="#12-非永久性存储"></a> 1.2 非永久性存储</h2>
 <p>存储于内存中,服务器重启时,重新收集统计数据</p>
 
               

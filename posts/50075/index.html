@@ -16,15 +16,15 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="📝完美转发::C++11完美转发_哔哩哔哩_bilibili   [!tip] 实现写一个接受任意实参的函数模板, 并转发到其它函数, 目标函数会收到与转发函数完全相同的实参, 通过 std:: forward () 实现  在函数模板中，可以将参数“完美”的转发给其它函数。所谓完美，即不仅能准确的转发参数的值，还能保证被转发参数的左、右值属性不变。 C++11 标准引入了右值引用和移动语义，所">
+    <meta name="description" content="📝完美转发::C++11完美转发_哔哩哔哩_bilibili   [!summary] 实现写一个接受任意实参的函数模板, 并转发到其它函数, 目标函数会收到与转发函数完全相同的实参, 通过 std:: forward () 实现 在函数模板中，可以将参数“完美”的转发给其它函数。所谓完美，即不仅能准确的转发参数的值，还能保证被转发参数的左、右值属性不变。  C++11 标准引入了右值引用和移动">
 <meta property="og:type" content="article">
 <meta property="og:title" content="完美转发">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/50075/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="📝完美转发::C++11完美转发_哔哩哔哩_bilibili   [!tip] 实现写一个接受任意实参的函数模板, 并转发到其它函数, 目标函数会收到与转发函数完全相同的实参, 通过 std:: forward () 实现  在函数模板中，可以将参数“完美”的转发给其它函数。所谓完美，即不仅能准确的转发参数的值，还能保证被转发参数的左、右值属性不变。 C++11 标准引入了右值引用和移动语义，所">
+<meta property="og:description" content="📝完美转发::C++11完美转发_哔哩哔哩_bilibili   [!summary] 实现写一个接受任意实参的函数模板, 并转发到其它函数, 目标函数会收到与转发函数完全相同的实参, 通过 std:: forward () 实现 在函数模板中，可以将参数“完美”的转发给其它函数。所谓完美，即不仅能准确的转发参数的值，还能保证被转发参数的左、右值属性不变。  C++11 标准引入了右值引用和移动">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-07T05:45:00.000Z">
-<meta property="article:modified_time" content="2022-11-08T00:57:17.260Z">
+<meta property="article:modified_time" content="2022-11-11T13:26:00.801Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          979 字
+          1k 字
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          5 分钟
+          6 分钟
         
       </span>
     
@@ -284,7 +284,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年11月8日 早上
+                    本文最后更新于：2022年11月11日 晚上
                   
                 
               </p>
@@ -294,27 +294,22 @@
               <p>📝完美转发::<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1D84y1z7kT?p=3&amp;vd_source=f2340d96e99780a96b50d8096ffaaf1a">C++11完美转发_哔哩哔哩_bilibili</a></p>
 <!-- basicblock-end -->
 <blockquote>
-<p>[!tip]<br>
-实现写一个接受任意实参的函数模板, 并转发到其它函数, 目标函数会收到与转发函数完全相同的实参, 通过 std:: forward () 实现</p>
+<p>[!summary]<br>
+实现写一个接受任意实参的函数模板, 并转发到其它函数, 目标函数会收到与转发函数完全相同的实参, 通过 std:: forward () 实现<br>
+在函数模板中，可以将参数“完美”的转发给其它函数。所谓完美，即不仅能准确的转发参数的值，还能<strong>保证被转发参数的左、右值属性不变</strong>。</p>
 </blockquote>
-<p>在函数模板中，可以将参数“完美”的转发给其它函数。所谓完美，即不仅能准确的转发参数的值，还能<strong>保证被转发参数的左、右值属性不变</strong>。</p>
 <p>C++11 标准引入了右值引用和移动语义，所以，能否实现完美转发，决定了该参数在传递过程使用的是拷贝语义还是移动语义。</p>
 <ul>
 <li>tip 如果能实现完美转发, 那么 , 参数在传递的过程中就可以使用移动语义</li>
 </ul>
 <p>为了支持完美转发，C++11 提供了以下方案：</p>
-<h1 id="1"><a class="markdownIt-Anchor" href="#1"></a> 1</h1>
 <p>1）如果模板中（包括类模板和函数模板）函数形参的书写成为 <code>T&amp;&amp;</code> 参数名，<br>
 那么，函数既可以接受左值引用，又可以接受右值引用。</p>
-<p>格式<br>
-<code>template&lt;typename TT&gt;</code><br>
-<code>void func(TT&amp;&amp; num)// 1️⃣</code></p>
-<p>注意必须是 TT, 用 <code>int &amp;&amp; num</code> 则不行</p>
-<h1 id="2"><a class="markdownIt-Anchor" href="#2"></a> 2</h1>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c++">格式<br><span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">typename</span> TT&gt;<span class="hljs-comment">// 1️⃣创建一个模板函数</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">func</span><span class="hljs-params">(TT&amp;&amp; num)</span><span class="hljs-comment">// 2️⃣用两个&amp;&amp;</span></span><br><span class="hljs-function"></span><br><span class="hljs-function">注意必须是 TT,用 <span class="hljs-type">int</span> &amp;&amp; num 则不行</span><br><span class="hljs-function"></span><br></code></pre></td></tr></tbody></table></figure>
 <p>2）提供了模板函数 <code>std::forward&lt;T&gt;</code> (参数) ，用于转发参数，<br>
 如果参数是一个右值，转发之后仍是右值引用；<br>
 如果参数是一个左值，转发之后仍是左值引用。</p>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">func1</span><span class="hljs-params">(<span class="hljs-type">int</span>&amp; num)</span> </span>{        <span class="hljs-comment">// 如果参数是左值，调用此函数。</span><br>    cout &lt;&lt; <span class="hljs-string">"参数是左值="</span> &lt;&lt; num &lt;&lt; endl;<br>}<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">func1</span><span class="hljs-params">(<span class="hljs-type">int</span>&amp;&amp; num)</span> </span>{     <span class="hljs-comment">// 如果参数是右值，调用此函数。</span><br>    cout &lt;&lt; <span class="hljs-string">"参数是右值="</span> &lt;&lt; num &lt;&lt; endl;<br>}<br><br><span class="hljs-function"><span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">typename</span> TT&gt;</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">func</span><span class="hljs-params">(TT&amp;&amp; num)</span><span class="hljs-comment">// 1️⃣</span></span><br><span class="hljs-function"></span>{<br>    <span class="hljs-built_in">func1</span>(forward&lt;TT&gt;(num));<span class="hljs-comment">// 2️⃣</span><br>}<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>{<br>    <span class="hljs-type">int</span> num = <span class="hljs-number">3</span>;<br>    <span class="hljs-built_in">func</span>(num);       <span class="hljs-comment">// 实参是左值。</span><br>    <span class="hljs-built_in">func</span>(<span class="hljs-number">8</span>);       <span class="hljs-comment">// 实参是右值。</span><br>}<br><br><br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">func1</span><span class="hljs-params">(<span class="hljs-type">int</span>&amp; num)</span> </span>{        <span class="hljs-comment">// 如果参数是左值，调用此函数。</span><br>    cout &lt;&lt; <span class="hljs-string">"参数是左值="</span> &lt;&lt; num &lt;&lt; endl;<br>}<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">func1</span><span class="hljs-params">(<span class="hljs-type">int</span>&amp;&amp; num)</span> </span>{     <span class="hljs-comment">// 如果参数是右值，调用此函数。</span><br>    cout &lt;&lt; <span class="hljs-string">"参数是右值="</span> &lt;&lt; num &lt;&lt; endl;<br>}<br><br><span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">typename</span> TT&gt;<span class="hljs-number">1</span>️⃣<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">func</span><span class="hljs-params">(TT&amp;&amp; num)</span><span class="hljs-comment">// 2️⃣</span></span><br><span class="hljs-function"></span>{<br>    <span class="hljs-built_in">func1</span>(forward&lt;TT&gt;(num));<span class="hljs-comment">// 3️⃣</span><br>}<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>{<br>    <span class="hljs-type">int</span> num = <span class="hljs-number">3</span>;<br>    <span class="hljs-built_in">func</span>(num);       <span class="hljs-comment">// 参数是左值。</span><br>    <span class="hljs-built_in">func</span>(<span class="hljs-number">8</span>);       <span class="hljs-comment">// 参数是右值。</span><br>}<br><br><br></code></pre></td></tr></tbody></table></figure>
               
             </div>
             <hr/>
