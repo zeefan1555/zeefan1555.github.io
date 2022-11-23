@@ -16,15 +16,15 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="📝表文件::   1: 表的数据信息存在哪⾥？ 表数据信息可能较⼩也可能巨⼤⽆⽐，可以存储在共享表空间⾥，也可以单独存储在⼀个以.ibd 为后缀的⽂件⾥，由参数 innodb_file_per_table 来控制， 建议总是作为⼀个单独的⽂ 件来存储，这样⾮常容易管理， 并且在不需要的时候，使⽤ drop table 命令也能直接把对应的⽂件删除， 如果存储在共享空间之中即使表删除了空间也不会释">
+    <meta name="description" content="📝表文件::  [[InnoDB磁盘结构]]  1: 表的数据信息存在哪⾥？ 表数据信息可能较⼩也可能巨⼤⽆⽐，可以存储在共享表空间⾥，也可以单独存储在⼀个以.ibd 为后缀的⽂件⾥，由参数 innodb_file_per_table (默认开启)来控制， 建议总是作为⼀个单独的⽂ 件来存储，这样⾮常容易管理， 并且在不需要的时候，使⽤ drop table 命令也能直接把对应的⽂件删除， 如果">
 <meta property="og:type" content="article">
 <meta property="og:title" content="表文件">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/42122/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="📝表文件::   1: 表的数据信息存在哪⾥？ 表数据信息可能较⼩也可能巨⼤⽆⽐，可以存储在共享表空间⾥，也可以单独存储在⼀个以.ibd 为后缀的⽂件⾥，由参数 innodb_file_per_table 来控制， 建议总是作为⼀个单独的⽂ 件来存储，这样⾮常容易管理， 并且在不需要的时候，使⽤ drop table 命令也能直接把对应的⽂件删除， 如果存储在共享空间之中即使表删除了空间也不会释">
+<meta property="og:description" content="📝表文件::  [[InnoDB磁盘结构]]  1: 表的数据信息存在哪⾥？ 表数据信息可能较⼩也可能巨⼤⽆⽐，可以存储在共享表空间⾥，也可以单独存储在⼀个以.ibd 为后缀的⽂件⾥，由参数 innodb_file_per_table (默认开启)来控制， 建议总是作为⼀个单独的⽂ 件来存储，这样⾮常容易管理， 并且在不需要的时候，使⽤ drop table 命令也能直接把对应的⽂件删除， 如果">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-12T11:55:00.000Z">
-<meta property="article:modified_time" content="2022-11-12T14:46:16.762Z">
+<meta property="article:modified_time" content="2022-11-18T14:39:41.788Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          732 字
+          776 字
         
       </span>
     
@@ -284,7 +284,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年11月12日 晚上
+                    本文最后更新于：2022年11月18日 晚上
                   
                 
               </p>
@@ -293,29 +293,33 @@
               
               <p>📝表文件::</p>
 <!-- basicblock-end -->
+<p>[[InnoDB磁盘结构]]</p>
 <h1 id="1-表的数据信息存在哪里"><a class="markdownIt-Anchor" href="#1-表的数据信息存在哪里"></a> 1: 表的数据信息存在哪⾥？</h1>
-<p>表数据信息可能较⼩也可能巨⼤⽆⽐，可以存储在共享表空间⾥，也可以单独存储在⼀个以.ibd 为后缀的⽂件⾥，由参数 innodb_file_per_table 来控制，<br>
-建议总是作为⼀个单独的⽂ 件来存储，这样⾮常容易管理，<br>
+<p>表数据信息可能较⼩也可能巨⼤⽆⽐，可以存储在共享表空间⾥，也可以单独存储在⼀个以.ibd 为后缀的⽂件⾥，由参数 innodb_file_per_table (默认开启)来控制，</p>
+<p>建议总是作为⼀个单独的⽂ 件来存储，这样⾮常容易管理，<br>
 并且在不需要的时候，使⽤ drop table 命令也能直接把对应的⽂件删除，<br>
-如果存储在共享空间之中即使表删除了空间也不会释放。</p>
+如果存储在<strong>共享空间</strong>之中即使表删除了空间也不会释放。</p>
 <h1 id="2-表的结构信息存在哪里"><a class="markdownIt-Anchor" href="#2-表的结构信息存在哪里"></a> 2: 表的结构信息存在哪⾥？</h1>
-<p>⾸先，表结构定义占有的存储空间⽐较⼩<br>
-MySQL8.0 之前：表结构的定义信息存在以.frm 为后缀的⽂件⾥<br>
-MySQL8.0 之后：则允许把表结构的定义信息存在系统数据表之中<br>
+<p>⾸先，表结构定义占有的存储空间⽐较⼩</p>
+<p>MySQL8.0 之前：表结构的定义信息存在以.frm 为后缀的⽂件⾥</p>
+<p>MySQL8.0 之后：则允许把表结构的定义信息存在系统数据表之中<br>
 系统数据表，主要⽤于存储 MySQL 的系统数据，⽐如：数据字典、undo_log (默认) 等⽂件</p>
 <h1 id="3-为啥删除了表的一半数据表文文件大小没变化"><a class="markdownIt-Anchor" href="#3-为啥删除了表的一半数据表文文件大小没变化"></a> 3: 为啥删除了表的⼀半数据，表⽂⽂件⼤⼩没变化？</h1>
 <p>因为 delete 命令其实只是把记录的位置，或者数据页标记为了“可复⽤”，但磁盘⽂件的⼤⼩ 是不会变的。<br>
 也可以认为是⼀种逻辑删除，所以物理空间没有实际释放，只是标记为可复⽤，表⽂件的⼤⼩当然是不变的啦！</p>
 <blockquote>
-<p>[!note]  什么是可复用啊 : 就是可以再次利用</p>
+<p>[!success] 什么是可复用啊 : 就是可以再次利用</p>
 </blockquote>
 <h2 id="31-如何才能删除表数据后表文件大小就变小"><a class="markdownIt-Anchor" href="#31-如何才能删除表数据后表文件大小就变小"></a> 3.1: 如何才能删除表数据后，表⽂件⼤⼩就变⼩？</h2>
-<p>重建表，消除表因为进⾏⼤量的增删改操作⽽产⽣的空洞，使⽤如下命令：</p>
+<p><strong>重建表</strong>，消除表因为进⾏⼤量的增删改操作⽽产⽣的空洞，使⽤如下命令：</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs MySQL">alter table t engine=InnoDB <br>optimize table t ( 等于 recreate+analyze)<br>truntace table t (等于drop+create)<br></code></pre></td></tr></tbody></table></figure>
 <h2 id="32-空洞是啥咋产生的"><a class="markdownIt-Anchor" href="#32-空洞是啥咋产生的"></a> 3.2: 空洞是啥？咋产⽣的？</h2>
 <p>空洞就是那些被标记可复⽤但是还没被使⽤的存储空间。<br>
 使⽤delete 命令删除数据会产⽣空洞，标记为可复⽤ 插⼊新的数据可能引起页分裂，也可能产⽣空洞<br>
 修改操作，有时是⼀种先删后插的动作也可能产⽣空洞</p>
+<blockquote>
+<p>[!todo] - [ ] 下次找一下页段区的概念</p>
+</blockquote>
 
               
             </div>

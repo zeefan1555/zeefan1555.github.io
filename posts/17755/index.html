@@ -16,16 +16,16 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="📝21. 调整数组顺序使奇数位于偶数前面:: 剑指 Offer 21. 调整数组顺序使奇数位于偶数前面 - 力扣（LeetCode）  定义头指针 left，尾指针 right. left一直往右移，直到它指向的值为偶数 right 一直往左移，直到它指向的值为奇数 交换  nums[left] 和 nums[right] 重复上述操作，直到 left&#x3D;&#x3D; right.  12345678910">
+    <meta name="description" content="📝21. 调整数组顺序使奇数位于偶数前面:: 剑指 Offer 21. 调整数组顺序使奇数位于偶数前面 - 力扣（LeetCode）   定义头指针 left，尾指针 right. left一直往右移，直到它指向的值为偶数, right 一直往左移，直到它指向的值为奇数  交换  nums[left] 和 nums[right]   重复上述操作，直到 left&#x3D;&#x3D; right.   12345">
 <meta property="og:type" content="article">
 <meta property="og:title" content="21.调整数组顺序使奇数位于偶数前面">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/17755/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="📝21. 调整数组顺序使奇数位于偶数前面:: 剑指 Offer 21. 调整数组顺序使奇数位于偶数前面 - 力扣（LeetCode）  定义头指针 left，尾指针 right. left一直往右移，直到它指向的值为偶数 right 一直往左移，直到它指向的值为奇数 交换  nums[left] 和 nums[right] 重复上述操作，直到 left&#x3D;&#x3D; right.  12345678910">
+<meta property="og:description" content="📝21. 调整数组顺序使奇数位于偶数前面:: 剑指 Offer 21. 调整数组顺序使奇数位于偶数前面 - 力扣（LeetCode）   定义头指针 left，尾指针 right. left一直往右移，直到它指向的值为偶数, right 一直往左移，直到它指向的值为奇数  交换  nums[left] 和 nums[right]   重复上述操作，直到 left&#x3D;&#x3D; right.   12345">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://pic.leetcode-cn.com/f25bd8d3c3fd5d30969be2954685a21f67e254a6487c6d9d27edf6589a0fca55.gif">
 <meta property="article:published_time" content="2022-11-15T13:10:00.000Z">
-<meta property="article:modified_time" content="2022-11-16T06:24:31.522Z">
+<meta property="article:modified_time" content="2022-11-21T02:32:24.128Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://pic.leetcode-cn.com/f25bd8d3c3fd5d30969be2954685a21f67e254a6487c6d9d27edf6589a0fca55.gif">
@@ -224,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          482 字
+          512 字
         
       </span>
     
@@ -286,7 +286,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年11月16日 下午
+                    本文最后更新于：2022年11月21日 上午
                   
                 
               </p>
@@ -296,13 +296,18 @@
               <p>📝21. 调整数组顺序使奇数位于偶数前面::<br>
 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/diao-zheng-shu-zu-shun-xu-shi-qi-shu-wei-yu-ou-shu-qian-mian-lcof/">剑指 Offer 21. 调整数组顺序使奇数位于偶数前面 - 力扣（LeetCode）</a></p>
 <!-- basicblock-end -->
-<p>定义头指针 left，尾指针 right.<br>
-left一直往右移，直到它指向的值为偶数<br>
-right 一直往左移，直到它指向的值为奇数<br>
-交换  nums[left] 和 nums[right]<br>
-重复上述操作，直到 left== right.<br>
-<img src="https://pic.leetcode-cn.com/f25bd8d3c3fd5d30969be2954685a21f67e254a6487c6d9d27edf6589a0fca55.gif" srcset="/img/loading.gif" lazyload alt=""></p>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">exchange</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums)</span> </span>{<br>        <span class="hljs-type">int</span> l = <span class="hljs-number">0</span>; <span class="hljs-type">int</span> r = nums.<span class="hljs-built_in">size</span>() - <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">while</span> (l &lt; r){<br>            <span class="hljs-keyword">while</span>(l &lt; r &amp;&amp; nums[l]%<span class="hljs-number">2</span> == <span class="hljs-number">1</span>) l++; <span class="hljs-comment">// 遇到偶数停</span><br>            <span class="hljs-keyword">while</span>(l &lt; r &amp;&amp; nums[r]%<span class="hljs-number">2</span> == <span class="hljs-number">0</span>)  r--;<span class="hljs-comment">// 遇到奇数停</span><br>            <span class="hljs-keyword">if</span>(l &lt; r) <span class="hljs-built_in">swap</span>(nums[l++], nums[r--]); <span class="hljs-comment">// ❗️不要忘了++ -- </span><br>        }<br>        <span class="hljs-keyword">return</span> nums;<br><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
+<ul>
+<li>定义头指针 left，尾指针 right.</li>
+<li>left一直往右移，直到它指向的值为偶数, right 一直往左移，直到它指向的值为奇数</li>
+<li>
+<pre><code class="hljs">交换  nums[left] 和 nums[right]
+</code></pre>
+</li>
+<li>重复上述操作，直到 left== right.<br>
+<img src="https://pic.leetcode-cn.com/f25bd8d3c3fd5d30969be2954685a21f67e254a6487c6d9d27edf6589a0fca55.gif" srcset="/img/loading.gif" lazyload alt=""></li>
+</ul>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">exchange</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums)</span> </span>{<br>        <span class="hljs-type">int</span> l = <span class="hljs-number">0</span>; <span class="hljs-type">int</span> r = nums.<span class="hljs-built_in">size</span>() - <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">while</span> (l &lt; r){<br>            <span class="hljs-keyword">while</span>(l &lt; r &amp;&amp; nums[l]%<span class="hljs-number">2</span> == <span class="hljs-number">1</span>) l++; <span class="hljs-comment">// ❗️要重申条件l&lt;r, 是奇数就往前走</span><br>            <span class="hljs-keyword">while</span>(l &lt; r &amp;&amp; nums[r]%<span class="hljs-number">2</span> == <span class="hljs-number">0</span>)  r--;<span class="hljs-comment">// 是偶数就往后走</span><br>            <span class="hljs-keyword">if</span>(l &lt; r) <span class="hljs-built_in">swap</span>(nums[l++], nums[r--]); <span class="hljs-comment">// ❗️不要忘了++ -- </span><br>        }<br>        <span class="hljs-keyword">return</span> nums;<br><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
+<p>[[while 循环]]</p>
 
               
             </div>

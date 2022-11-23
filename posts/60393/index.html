@@ -16,20 +16,19 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1 不同语言的内存管理 不同的编程语言各自的内存管理方式。 -   C&#x2F;C++这种内存堆空间的申请和释放完全靠自己管理  Java 依赖JVM来做内存管理，不了解jvm内存管理的机制，很可能会因一些错误的代码写法而导致内存泄漏或内存溢出 Python内存管理是由私有堆空间管理的，所有的python对象和数据结构都存储在私有堆空间中。程序员没有访问堆的权限，只有解释器才能操作。  例如Python">
+    <meta name="description" content="1: 不同语言的内存管理 不同的编程语言各自的内存管理方式。 -   C&#x2F;C++这种内存堆空间的申请和释放完全靠自己管理  Java 依赖JVM来做内存管理，不了解jvm内存管理的机制，很可能会因一些错误的代码写法而导致内存泄漏或内存溢出 Python内存管理是由私有堆空间管理的，所有的python对象和数据结构都存储在私有堆空间中。程序员没有访问堆的权限，只有解释器才能操作。  例如Pytho">
 <meta property="og:type" content="article">
 <meta property="og:title" content="代码内存消耗">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/60393/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="1 不同语言的内存管理 不同的编程语言各自的内存管理方式。 -   C&#x2F;C++这种内存堆空间的申请和释放完全靠自己管理  Java 依赖JVM来做内存管理，不了解jvm内存管理的机制，很可能会因一些错误的代码写法而导致内存泄漏或内存溢出 Python内存管理是由私有堆空间管理的，所有的python对象和数据结构都存储在私有堆空间中。程序员没有访问堆的权限，只有解释器才能操作。  例如Python">
+<meta property="og:description" content="1: 不同语言的内存管理 不同的编程语言各自的内存管理方式。 -   C&#x2F;C++这种内存堆空间的申请和释放完全靠自己管理  Java 依赖JVM来做内存管理，不了解jvm内存管理的机制，很可能会因一些错误的代码写法而导致内存泄漏或内存溢出 Python内存管理是由私有堆空间管理的，所有的python对象和数据结构都存储在私有堆空间中。程序员没有访问堆的权限，只有解释器才能操作。  例如Pytho">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20210309165950660.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20200804193045440.png">
 <meta property="article:published_time" content="2022-08-07T09:32:00.000Z">
-<meta property="article:modified_time" content="2022-09-29T01:16:49.145Z">
+<meta property="article:modified_time" content="2022-11-22T08:31:50.039Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20210309165950660.png">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20200804193045440.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -225,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.9k 字
+          738 字
         
       </span>
     
@@ -236,7 +235,7 @@
         
         
         
-          10 分钟
+          4 分钟
         
       </span>
     
@@ -287,14 +286,14 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年9月29日 上午
+                    本文最后更新于：2022年11月22日 下午
                   
                 
               </p>
             
             <div class="markdown-body">
               
-              <h1 id="1-不同语言的内存管理"><a class="markdownIt-Anchor" href="#1-不同语言的内存管理"></a> 1 不同语言的内存管理</h1>
+              <h1 id="1-不同语言的内存管理"><a class="markdownIt-Anchor" href="#1-不同语言的内存管理"></a> 1: 不同语言的内存管理</h1>
 <p>不同的编程语言各自的内存管理方式。</p>
 <p><strong>-   C/C++这种内存堆空间的申请和释放完全靠自己管理</strong></p>
 <ul>
@@ -302,23 +301,8 @@
 <li>Python内存管理是由私有堆空间管理的，所有的python对象和数据结构都存储在私有堆空间中。程序员没有访问堆的权限，只有解释器才能操作。</li>
 </ul>
 <p>例如Python万物皆对象，并且将内存操作封装的很好，<strong>所以python的基本数据类型所用的内存会要远大于存放纯数据类型所占的内存</strong>，例如，我们都知道存储int型数据需要四个字节，但是使用Python 申请一个对象来存放数据的话，所用空间要远大于四个字节。</p>
-<h1 id="2-c的内存管理"><a class="markdownIt-Anchor" href="#2-c的内存管理"></a> 2 C++的内存管理</h1>
-<p>以C++为例来介绍一下编程语言的内存管理。</p>
-<p>如果我们写C++的程序，就要知道栈和堆的概念，程序运行时所需的内存空间分为 固定部分，和可变部分，如下：</p>
-<p><img src="https://img-blog.csdnimg.cn/20210309165950660.png" srcset="/img/loading.gif" lazyload alt="C++内存空间"></p>
-<p>固定部分的内存消耗 是不会随着代码运行产生变化的， 可变部分则是会产生变化的</p>
-<p>更具体一些，一个由C/C++编译的程序占用的内存分为以下几个部分：</p>
-<ul>
-<li>栈区(Stack) ：由编译器自动分配释放，存放函数的参数值，局部变量的值等，其操作方式类似于数据结构中的栈。</li>
-<li>堆区(Heap) ：一般由程序员分配释放，若程序员不释放，程序结束时可能由OS收回</li>
-<li>未初始化数据区(Uninitialized Data)： 存放未初始化的全局变量和静态变量</li>
-<li>初始化数据区(Initialized Data)：存放已经初始化的全局变量和静态变量</li>
-<li>程序代码区(Text)：存放函数体的二进制代码</li>
-</ul>
-<p>代码区和数据区所占空间都是固定的，而且占用的空间非常小，那么看运行时消耗的内存主要看可变部分。</p>
-<p>在可变部分中，栈区间的数据在代码块执行结束之后，系统会自动回收，<strong>而堆区间数据是需要程序员自己回收，所以也就是造成内存泄漏的发源地。</strong></p>
-<p><strong>而Java、Python的话则不需要程序员去考虑内存泄漏的问题，虚拟机都做了这些事情</strong>。</p>
-<h1 id="3-如何计算程序占用多大内存"><a class="markdownIt-Anchor" href="#3-如何计算程序占用多大内存"></a> 3 如何计算程序占用多大内存</h1>
+<h1 id="2-c的内存管理"><a class="markdownIt-Anchor" href="#2-c的内存管理"></a> 2: [[C++的内存管理]]</h1>
+<h1 id="3-如何计算程序占用多大内存"><a class="markdownIt-Anchor" href="#3-如何计算程序占用多大内存"></a> 3: 如何计算程序占用多大内存</h1>
 <p>想要算出自己程序会占用多少内存就一定要了解自己定义的数据类型的大小，如下：</p>
 <p><img src="https://img-blog.csdnimg.cn/20200804193045440.png" srcset="/img/loading.gif" lazyload alt="C++数据类型的大小"><br>
 <strong>Byte :字节</strong></p>
@@ -326,36 +310,11 @@
 <p><strong>1个字节占8个比特</strong>，那么4个字节就是32个比特，可存放数据的大小为2^32，也就是4G空间的大小，即：<strong>4个Byte可以寻找4G空间大小的内存地址。</strong></p>
 <p>大家现在使用的计算机一般都是64位了，所以编译器也都是64位的。</p>
 <p>注意2^64是一个非常巨大的数，对于寻找地址来说已经足够用了。</p>
-<h2 id="31-总结"><a class="markdownIt-Anchor" href="#31-总结"></a> 3.1 总结</h2>
+<h2 id="31-总结"><a class="markdownIt-Anchor" href="#31-总结"></a> 3.1: 总结</h2>
 <p>1 字节 = 8 比特</p>
-<p>1 字节 = 8 比特(1 Byte = 8 bit), 4字节 = 32比特, 能够存放 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mn>2</mn><mn>32</mn></msup></mrow><annotation encoding="application/x-tex">2^{32}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">3</span><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span>个数据即4G内存, 就能够当寻址内存存放指针 #card<br>
+<p>1 字节 = 8 比特(1 Byte = 8 bit), 4字节 = 32比特, 能够存放 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mn>2</mn><mn>32</mn></msup></mrow><annotation encoding="application/x-tex">2^{32}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">3</span><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span>个数据即4G内存, 就能够当寻址内存存放指针<br>
 安装64位的操作系统的计算机内存都已经超过了4G，也就是指针大小如果还是4个字节的话，<strong>就已经不能寻址全部的内存地址</strong>，所以64位编译器使用8个字节的指针才能寻找所有的内存地址。</p>
-<!-- basicblock-start oid="ObsabGgePTB5wOAqIAICO3JP" --> 
-<h1 id="4-内存对齐"><a class="markdownIt-Anchor" href="#4-内存对齐"></a> 4 内存对齐 ::</h1>
-<!-- basicblock-end -->
-<p>![[代码内存消耗 2022-08-07 18.01.47.excalidraw]]</p>
-<ul>
-<li>
-<p>内存对齐:  <strong>一次寻址</strong><br>
-一字节的char占用了四个字节，空了三个字节的内存地址，int数据从地址4开始。<br>
-此时，直接将地址4，5，6，7处的四个字节数据读取到即可</p>
-</li>
-<li>
-<p>非内存对齐 : <strong>两次寻址，一次合并</strong><br>
-char型的数据和int型的数据挨在一起，该int数据从地址1开始，那么CPU想要读这个数据的话来看看需要几步操作：</p>
-<ol>
-<li>因为CPU是四个字节四个字节来寻址，首先CPU读取0，1，2，3处的四个字节数据</li>
-<li>CPU读取4，5，6，7处的四个字节数据</li>
-</ol>
-</li>
-</ul>
-<p><strong>总结:</strong><br>
-虽然浪费内存,但是内存资源一般都是充足的,我们更希望提升运行速度<br>
-<strong>编译器一般都会做内存对齐的优化操作，也就是说当考虑程序真正占用的内存大小的时候，也需要认识到内存对齐的影响</strong>。</p>
-<p>例子 #card</p>
-<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// char 一字节, int 四字节</span><br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">node</span>{</span><br>   <span class="hljs-type">int</span> num;<br>   <span class="hljs-type">char</span> cha;<br>}st;<br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> {<br>    <span class="hljs-type">int</span> a[<span class="hljs-number">100</span>];<br>    <span class="hljs-type">char</span> b[<span class="hljs-number">100</span>];<br>    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-keyword">sizeof</span>(<span class="hljs-type">int</span>) &lt;&lt; <span class="hljs-built_in">endl</span>;  <span class="hljs-comment">// 4</span><br>    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-keyword">sizeof</span>(<span class="hljs-type">char</span>) &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-comment">// 1</span><br>    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-keyword">sizeof</span>(a) &lt;&lt; <span class="hljs-built_in">endl</span>;    <span class="hljs-comment">// 400</span><br>    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-keyword">sizeof</span>(b) &lt;&lt; <span class="hljs-built_in">endl</span>;    <span class="hljs-comment">// 100</span><br>    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-keyword">sizeof</span>(st) &lt;&lt; <span class="hljs-built_in">endl</span>;   <span class="hljs-comment">// 因为内存对齐,整个类的内存占用为 8 字节</span><br>}<br></code></pre></td></tr></tbody></table></figure>
-<hr>
-<p><strong>参考资料</strong></p>
+<h1 id="4-内存对齐目录"><a class="markdownIt-Anchor" href="#4-内存对齐目录"></a> 4: [[内存对齐目录]]</h1>
 
               
             </div>

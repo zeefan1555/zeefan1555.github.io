@@ -16,24 +16,23 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="链表的指针移动用 while, 没法用 for 循环 while循环是if 和 for 循环的结合体， 只要在while循环中增加跳出语句就行 123456789while(i){ i++}等于if(){for()}  1 while (x) 123456while(i){ &#x2F;&#x2F; i 不能是变量; 可以直接写成 while(i--)i--}while(n) &#x2F;&#x2F;  n &lt; 1 即可为 0,">
+    <meta name="description" content="1 子集 力扣题目链接 给定一组不含重复元素的整数数组&amp;nbsp;nums，返回该数组所有可能的子集（幂集）。 说明：解集不能包含重复的子集。 1示例: 输入: nums &#x3D; [1,2,3] 输出: [ [3], &amp;nbsp; [1], &amp;nbsp; [2], &amp;nbsp; [1,2,3], &amp;nbsp; [1,3], &amp;nbsp; [2,3], &amp;nbsp; [1,2], &amp;nbsp; []">
 <meta property="og:type" content="article">
-<meta property="og:title" content="while 循环">
+<meta property="og:title" content="11. 子集问题">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/36387/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="链表的指针移动用 while, 没法用 for 循环 while循环是if 和 for 循环的结合体， 只要在while循环中增加跳出语句就行 123456789while(i){ i++}等于if(){for()}  1 while (x) 123456while(i){ &#x2F;&#x2F; i 不能是变量; 可以直接写成 while(i--)i--}while(n) &#x2F;&#x2F;  n &lt; 1 即可为 0,">
+<meta property="og:description" content="1 子集 力扣题目链接 给定一组不含重复元素的整数数组&amp;nbsp;nums，返回该数组所有可能的子集（幂集）。 说明：解集不能包含重复的子集。 1示例: 输入: nums &#x3D; [1,2,3] 输出: [ [3], &amp;nbsp; [1], &amp;nbsp; [2], &amp;nbsp; [1,2,3], &amp;nbsp; [1,3], &amp;nbsp; [2,3], &amp;nbsp; [1,2], &amp;nbsp; []">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-06-15T03:10:00.000Z">
-<meta property="article:modified_time" content="2022-08-18T07:38:38.815Z">
+<meta property="article:published_time" content="2022-10-20T02:32:00.000Z">
+<meta property="article:modified_time" content="2022-10-20T07:19:11.693Z">
 <meta property="article:author" content="zeefan">
-<meta property="article:tag" content="函数">
 <meta name="twitter:card" content="summary_large_image">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>while 循环 - 一杯空气</title>
+  <title>11. 子集问题 - 一杯空气</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -200,7 +199,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="while 循环"></span>
+            <span id="subtitle" data-typed-text="11. 子集问题"></span>
           
         </div>
 
@@ -211,8 +210,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-06-15 11:10" pubdate>
-          2022年6月15日 上午
+        <time datetime="2022-10-20 10:32" pubdate>
+          2022年10月20日 上午
         </time>
       </span>
     
@@ -223,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          215 字
+          1.2k 字
         
       </span>
     
@@ -234,7 +233,7 @@
         
         
         
-          2 分钟
+          7 分钟
         
       </span>
     
@@ -280,25 +279,47 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">while 循环</h1>
+            <h1 style="display: none">11. 子集问题</h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年8月18日 下午
+                    本文最后更新于：2022年10月20日 下午
                   
                 
               </p>
             
             <div class="markdown-body">
               
-              <p>链表的指针移动用 while, 没法用 for 循环</p>
-<p>while循环是if 和 for 循环的结合体，<br>
-只要在while循环中增加跳出语句就行</p>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">while</span>(i){<br> i++<br>}<br><br>等于<br><br><span class="hljs-keyword">if</span>(){<br><span class="hljs-keyword">for</span>()<br>}<br></code></pre></td></tr></tbody></table></figure>
-<h1 id="1-while-x"><a class="markdownIt-Anchor" href="#1-while-x"></a> 1 while (x)</h1>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">while</span>(i){ <span class="hljs-comment">// i 不能是变量; 可以直接写成 while(i--)</span><br>i--<br>}<br><br><br><span class="hljs-keyword">while</span>(n) <span class="hljs-comment">//  n &lt; 1 即可为 0, eg: n = 0.1 就会跳出循环</span><br></code></pre></td></tr></tbody></table></figure>
-
+              <h1 id="1-子集"><a class="markdownIt-Anchor" href="#1-子集"></a> 1 子集</h1>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/subsets/">力扣题目链接</a></p>
+<p>给定一组不含重复元素的整数数组&nbsp;nums，返回该数组所有可能的子集（幂集）。</p>
+<p>说明：解集不能包含重复的子集。</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c">示例: 输入: nums = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>] 输出: [ [<span class="hljs-number">3</span>], &nbsp; [<span class="hljs-number">1</span>], &nbsp; [<span class="hljs-number">2</span>], &nbsp; [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>], &nbsp; [<span class="hljs-number">1</span>,<span class="hljs-number">3</span>], &nbsp; [<span class="hljs-number">2</span>,<span class="hljs-number">3</span>], &nbsp; [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>], &nbsp; [] ]<br></code></pre></td></tr></tbody></table></figure>
+<h1 id="2-思路"><a class="markdownIt-Anchor" href="#2-思路"></a> 2 思路</h1>
+<p>求子集问题和<a target="_blank" rel="noopener" href="https://programmercarl.com/0077.%E7%BB%84%E5%90%88.html">77.组合</a>和<a target="_blank" rel="noopener" href="https://programmercarl.com/0131.%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2.html">131.分割回文串</a>又不一样了。</p>
+<p>如果把 子集问题、组合问题、分割问题都抽象为一棵树的话，<strong>那么组合问题和分割问题都是收集树的叶子节点，而子集问题是找树的所有节点！</strong></p>
+<p>其实子集也是一种组合问题，因为它的集合是无序的，子集{1,2} 和 子集{2,1}是一样的。</p>
+<p><strong>那么既然是无序，取过的元素不会重复取，写回溯算法的时候，for就要从startIndex开始，而不是从0开始！</strong><br>
+有同学问了，什么时候for可以从0开始呢？<br>
+求排列问题的时候，就要从0开始，因为集合是有序的，{1, 2} 和{2, 1}是两个集合，排列问题我们后续的文章就会讲到的。 ^isql7c</p>
+<p>以示例中<code>nums = [1,2,3]</code>为例把求子集抽象为树型结构，如下：</p>
+<p>![[11. 子集问题 2022-10-20 10.37.58.excalidraw]]</p>
+<h1 id="3-代码"><a class="markdownIt-Anchor" href="#3-代码"></a> 3 代码</h1>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">private</span>:<br>    vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; result;<br>    vector&lt;<span class="hljs-type">int</span>&gt; path;<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">backtracking</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums, <span class="hljs-type">int</span> startIndex)</span> </span>{<br>        result.<span class="hljs-built_in">push_back</span>(path); <span class="hljs-comment">// 收集子集，要放在终止添加的上面，否则会漏掉自己</span><br>        <span class="hljs-keyword">if</span> (startIndex &gt;= nums.<span class="hljs-built_in">size</span>()) { <span class="hljs-comment">// 终止条件可以不加</span><br>            <span class="hljs-keyword">return</span>;<br>        }<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = startIndex; i &lt; nums.<span class="hljs-built_in">size</span>(); i++) {<br>            path.<span class="hljs-built_in">push_back</span>(nums[i]);<br>            <span class="hljs-built_in">backtracking</span>(nums, i + <span class="hljs-number">1</span>);<br>            path.<span class="hljs-built_in">pop_back</span>();<br>        }<br>    }<br><span class="hljs-keyword">public</span>:<br>    vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">subsets</span>(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums) {<br>        result.<span class="hljs-built_in">clear</span>();<br>        path.<span class="hljs-built_in">clear</span>();<br>        <span class="hljs-built_in">backtracking</span>(nums, <span class="hljs-number">0</span>);<br>        <span class="hljs-keyword">return</span> result;<br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
+<p>在注释中，可以发现可以不写终止条件，因为本来我们就要遍历整棵树。</p>
+<p>有的同学可能担心不写终止条件会不会无限递归？</p>
+<p>并不会，因为每次递归的下一层就是从i+1开始的。</p>
+<blockquote>
+<p>[!bug]<br>
+![[11. 子集问题 2022-10-20 11.05.19.excalidraw]]</p>
+</blockquote>
+<hr>
+<p><strong>其他资料</strong></p>
+ <!-- basicblock-start oid="Obs8NGIsFeeXukAZDZMDW95r"  --> 
+<p>#历史记录::<br>
+2022/10/20🌵11. 子集问题 : 第一次创建</p>
+<!-- basicblock-end -->
               
             </div>
             <hr/>
@@ -320,13 +341,20 @@
   
     <span>></span>
     
-  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/C/" class="category-chain-item">C++</a>
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" class="category-chain-item">数据结构与算法</a>
   
   
     <span>></span>
     
-  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/C/C-primer-plus/" class="category-chain-item">C++ primer plus</a>
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95/" class="category-chain-item">代码随想录</a>
   
+  
+    <span>></span>
+    
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95/%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95/" class="category-chain-item">回溯算法</a>
+  
+  
+
   
 
   
@@ -341,13 +369,6 @@
     </div>
   
   
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/%E5%87%BD%E6%95%B0/">#函数</a>
-      
-    </div>
-  
 </div>
 
 
@@ -358,9 +379,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/12294/" title="c++中 - ‘0’ 以及 -&#39;a&#39; 的相减操作解释">
+                      <a href="/posts/15381/" title="13.子集II">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">c++中 - ‘0’ 以及 -&#39;a&#39; 的相减操作解释</span>
+                        <span class="hidden-mobile">13.子集II</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -368,8 +389,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/22082/" title="19.划分字母区间">
-                        <span class="hidden-mobile">19.划分字母区间</span>
+                      <a href="/posts/62558/" title="final">
+                        <span class="hidden-mobile">final</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

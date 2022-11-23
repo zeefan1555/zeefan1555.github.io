@@ -16,15 +16,15 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="📝选择普通索引还是唯⼀索引？::   1: 对于查询过程来说 （1）普通索引查到满⾜条件的第⼀个记录后，继续查找下⼀个记录，直到第⼀个不满⾜条件的记录 （2）唯⼀索引由于索引唯⼀性，查到第⼀个满⾜条件的记录后，停⽌检索但是， 两者的性能差距微乎其微。因为 InnoDB 根据数据页来读写的。  2: 对于更新过程来说  2.1: 概念：change buffer  当需要更新⼀个数据页：  如果数">
+    <meta name="description" content="📝选择普通索引还是唯⼀索引？::   1: 对于查询过程来说 （1）普通索引查到满⾜条件的第⼀个记录后，继续查找下⼀个记录，直到第⼀个不满⾜条件的记录 （2）唯⼀索引由于索引唯⼀性，查到第⼀个满⾜条件的记录后，停⽌检索 两者的性能差距微乎其微。因为 InnoDB 根据数据页来读写的。  2: 对于更新过程来说 唯⼀索引的更新不能使⽤ [[change buffer]]  3: 索引的选择和实践">
 <meta property="og:type" content="article">
 <meta property="og:title" content="选择普通索引还是唯⼀索引？">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/57548/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="📝选择普通索引还是唯⼀索引？::   1: 对于查询过程来说 （1）普通索引查到满⾜条件的第⼀个记录后，继续查找下⼀个记录，直到第⼀个不满⾜条件的记录 （2）唯⼀索引由于索引唯⼀性，查到第⼀个满⾜条件的记录后，停⽌检索但是， 两者的性能差距微乎其微。因为 InnoDB 根据数据页来读写的。  2: 对于更新过程来说  2.1: 概念：change buffer  当需要更新⼀个数据页：  如果数">
+<meta property="og:description" content="📝选择普通索引还是唯⼀索引？::   1: 对于查询过程来说 （1）普通索引查到满⾜条件的第⼀个记录后，继续查找下⼀个记录，直到第⼀个不满⾜条件的记录 （2）唯⼀索引由于索引唯⼀性，查到第⼀个满⾜条件的记录后，停⽌检索 两者的性能差距微乎其微。因为 InnoDB 根据数据页来读写的。  2: 对于更新过程来说 唯⼀索引的更新不能使⽤ [[change buffer]]  3: 索引的选择和实践">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-12T11:31:00.000Z">
-<meta property="article:modified_time" content="2022-11-12T14:46:16.437Z">
+<meta property="article:modified_time" content="2022-11-18T13:54:01.022Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.1k 字
+          253 字
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          6 分钟
+          2 分钟
         
       </span>
     
@@ -284,7 +284,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年11月12日 晚上
+                    本文最后更新于：2022年11月18日 晚上
                   
                 
               </p>
@@ -295,33 +295,11 @@
 <!-- basicblock-end -->
 <h1 id="1-对于查询过程来说"><a class="markdownIt-Anchor" href="#1-对于查询过程来说"></a> 1: 对于查询过程来说</h1>
 <p>（1）普通索引查到满⾜条件的第⼀个记录后，继续查找下⼀个记录，直到第⼀个不满⾜条件的记录<br>
-（2）唯⼀索引由于索引唯⼀性，查到第⼀个满⾜条件的记录后，停⽌检索但是，</p>
+（2）唯⼀索引由于索引唯⼀性，查到第⼀个满⾜条件的记录后，停⽌检索</p>
 <p>两者的性能差距微乎其微。因为 InnoDB 根据数据页来读写的。</p>
 <h1 id="2-对于更新过程来说"><a class="markdownIt-Anchor" href="#2-对于更新过程来说"></a> 2: 对于更新过程来说</h1>
-<h2 id="21-概念change-buffer"><a class="markdownIt-Anchor" href="#21-概念change-buffer"></a> 2.1: 概念：change buffer</h2>
-<ul>
-<li>当需要更新⼀个数据页：
-<ul>
-<li>如果数据页在内存中就直接更新</li>
-</ul>
-</li>
-<li>如果不在内存中，在不影响数据⼀致性的前提下，InnoDB 会将这些更新操作缓存在 change buffer 中。</li>
-</ul>
-<p>下次查询需要访问这个数据页的时候，将数据页读⼊内存，然后执⾏ change buffer 中的与这个页有关的操作。<br>
-change buffer 是可以持久化的数据。在内存中有拷贝，也会被写⼊到磁盘上</p>
-<p>purge：将 change buffer 中的操作应⽤到原数据页上，得到最新结果的过程，成为 purge<br>
-访问这个数据页会触发 purge，系统有后台线程定期 purge，在数据库正常关闭的过程中，也会执⾏ purge</p>
-<p><strong>唯⼀索引的更新不能使⽤ change buffer</strong></p>
-<p>change buffer ⽤的是 buffer pool ⾥的内存，change buffer 的⼤⼩，可以通过参数 innodb_change_buffer_max_size 来动态设置。<br>
-这个参数设置为 50 的时候，表⽰ change buffer 的⼤⼩最多只能占⽤ buffer pool 的 50%。<br>
-将数据从磁盘读⼊内存涉及随机 IO 的访问，是数据库⾥⾯成本最⾼的操作之⼀。<br>
-change buffer 因为减少了随机磁盘访问，所以对更新性能的提升很明显。</p>
-<h2 id="22-change-buffer-使用场景"><a class="markdownIt-Anchor" href="#22-change-buffer-使用场景"></a> 2.2: change buffer 使⽤场景：</h2>
-<p>在⼀个数据页做 purge 之前，change buffer 记录的变更越多，收益就越⼤。<br>
-对于写多读少的业务来说，页⾯在写完以后马上被访问到的概率⽐较⼩，此时 change buffer 的使⽤效果最好。这种业务模型常见的就是账单类、⽇志类的系统。<br>
-反过来，假设⼀个业务的更新模式是写⼊之后马上会做查询，那么即使满⾜了条件，将更新先记录在 change buffer, 但之后由于马上要访问这个数据页，会⽴即触发 purge 过程。<br>
-这样随机访问 IO 的次数不会减少，反⽽增加了 change buffer 的维护代价。所以，对于这种业务模式来说，change buffer 反⽽起到了副作⽤。</p>
-<h2 id="23-索引的选择和实践"><a class="markdownIt-Anchor" href="#23-索引的选择和实践"></a> 2.3: 索引的选择和实践</h2>
+<p><strong>唯⼀索引的更新不能使⽤ [[change buffer]]</strong></p>
+<h1 id="3-索引的选择和实践"><a class="markdownIt-Anchor" href="#3-索引的选择和实践"></a> 3: 索引的选择和实践</h1>
 <p>尽可能使⽤普通索引。<br>
 redo log 主要节省的是<strong>随机写</strong>磁盘的 IO 消耗 (转成顺序写)，⽽change buffer 主要节省的则是<strong>随机读</strong>磁盘的 IO 消耗。</p>
 

@@ -16,15 +16,15 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="📝加锁规则::  加锁规则⾥⾯，包含了两个“原则”、两个“优化”和⼀个“bug”  0.1: 两个原则   加锁的基本单位是 next-key lock。(next-key lock 是前开后闭区间)。   查找过程中访问到的对象才会加锁。    0.2: 两个优化   索引上的等值查询，给唯⼀索引加锁的时候，next-key lock 退化为⾏锁。如果不存在这个索引，退化为间隙锁。   索引上">
+    <meta name="description" content="📝加锁规则::  加锁规则⾥⾯，包含了两个“原则”、两个“优化”和⼀个“bug”  1: 两个原则   加锁的基本单位是 next-key lock。(next-key lock 是前开后闭区间)。   查找过程中访问到的对象才会加锁。    2: 两个优化   索引上的等值查询，给唯⼀索引加锁的时候，next-key lock 退化为⾏锁。如果不存在这个索引，退化为间隙锁。   索引上的等值查">
 <meta property="og:type" content="article">
 <meta property="og:title" content="加锁规则">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/62856/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="📝加锁规则::  加锁规则⾥⾯，包含了两个“原则”、两个“优化”和⼀个“bug”  0.1: 两个原则   加锁的基本单位是 next-key lock。(next-key lock 是前开后闭区间)。   查找过程中访问到的对象才会加锁。    0.2: 两个优化   索引上的等值查询，给唯⼀索引加锁的时候，next-key lock 退化为⾏锁。如果不存在这个索引，退化为间隙锁。   索引上">
+<meta property="og:description" content="📝加锁规则::  加锁规则⾥⾯，包含了两个“原则”、两个“优化”和⼀个“bug”  1: 两个原则   加锁的基本单位是 next-key lock。(next-key lock 是前开后闭区间)。   查找过程中访问到的对象才会加锁。    2: 两个优化   索引上的等值查询，给唯⼀索引加锁的时候，next-key lock 退化为⾏锁。如果不存在这个索引，退化为间隙锁。   索引上的等值查">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-10T13:46:00.000Z">
-<meta property="article:modified_time" content="2022-11-11T01:32:23.626Z">
+<meta property="article:modified_time" content="2022-11-18T12:14:51.004Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          562 字
+          556 字
         
       </span>
     
@@ -284,7 +284,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年11月11日 上午
+                    本文最后更新于：2022年11月18日 晚上
                   
                 
               </p>
@@ -294,7 +294,7 @@
               <p>📝加锁规则::</p>
 <!-- basicblock-end -->
 <p>加锁规则⾥⾯，包含了两个“原则”、两个“优化”和⼀个“bug”</p>
-<h1 id="01-两个原则"><a class="markdownIt-Anchor" href="#01-两个原则"></a> 0.1: 两个原则</h1>
+<h1 id="1-两个原则"><a class="markdownIt-Anchor" href="#1-两个原则"></a> 1: 两个原则</h1>
 <ol>
 <li>
 <p>加锁的基本单位是 next-key lock。(next-key lock 是前开后闭区间)。</p>
@@ -303,7 +303,7 @@
 <p>查找过程中访问到的对象才会加锁。</p>
 </li>
 </ol>
-<h1 id="02-两个优化"><a class="markdownIt-Anchor" href="#02-两个优化"></a> 0.2: 两个优化</h1>
+<h1 id="2-两个优化"><a class="markdownIt-Anchor" href="#2-两个优化"></a> 2: 两个优化</h1>
 <ol>
 <li>
 <p>索引上的等值查询，给唯⼀索引加锁的时候，next-key lock 退化为⾏锁。如果不存在这个索引，退化为间隙锁。</p>
@@ -312,7 +312,7 @@
 <p>索引上的等值查询，向右遍历时且最后⼀个值不满⾜等值条件的时候，next-key lock 退化为间隙锁。</p>
 </li>
 </ol>
-<h1 id="03-一个bug"><a class="markdownIt-Anchor" href="#03-一个bug"></a> 0.3: ⼀个"bug"</h1>
+<h1 id="3-一个bug"><a class="markdownIt-Anchor" href="#3-一个bug"></a> 3: ⼀个"bug"</h1>
 <ol>
 <li>唯⼀索引上的范围查询会访问到不满⾜</li>
 <li>条件的第⼀个值为⽌。（MySQL8.0之后的 版本已经修复）</li>

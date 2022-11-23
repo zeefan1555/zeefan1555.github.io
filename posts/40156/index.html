@@ -24,7 +24,7 @@
 <meta property="og:description" content="📝子查询简介::   [!summary] 子查询是嵌套查询 在⼀个查询语句中的某个位置可以出现另⼀个查询语句，这另⼀个查询就叫⼦查询  SQL语句中嵌套SELECT语句,称为嵌套查询,又称子查询。 1select  *  from   t1   where  column1 &#x3D;  ( select  column1  from  t2 ); 子查询外部的语句可以是insert &#x2F; update">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-02T08:01:00.000Z">
-<meta property="article:modified_time" content="2022-11-09T13:33:58.569Z">
+<meta property="article:modified_time" content="2022-11-22T11:47:08.818Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -284,7 +284,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年11月9日 晚上
+                    本文最后更新于：2022年11月22日 晚上
                   
                 
               </p>
@@ -315,10 +315,10 @@ D. 表子查询 (子查询结果为多行多列)</p>
 <blockquote>
 <p>下边黑马的例子可以不看了, 只看总结版</p>
 </blockquote>
-<h1 id="1-根据子查询位置"><a class="markdownIt-Anchor" href="#1-根据子查询位置"></a> 1 根据子查询位置</h1>
+<h1 id="1-根据子查询位置"><a class="markdownIt-Anchor" href="#1-根据子查询位置"></a> 1: 根据子查询位置</h1>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs MySQL">-- 在 select⼦句中<br><br>select (select m1 from t1 limit 1);<br><br>-- 在from⼦句中<br>select m, n from (select ...);<br>将这种⼦查询的结果当做⼀个表，在 from⼦句中的⼦查询称为派⽣表<br><br><br>-- 在 where 或 on⼦句中<br>select * from t1 where m1 in (select ...);<br><br></code></pre></td></tr></tbody></table></figure>
-<h1 id="2-根据子查询结果不同"><a class="markdownIt-Anchor" href="#2-根据子查询结果不同"></a> 2 根据子查询结果不同</h1>
-<h2 id="21-标量子查询"><a class="markdownIt-Anchor" href="#21-标量子查询"></a> 2.1 标量子查询</h2>
+<h1 id="2-根据子查询结果不同"><a class="markdownIt-Anchor" href="#2-根据子查询结果不同"></a> 2: 根据子查询结果不同</h1>
+<h2 id="21-标量子查询"><a class="markdownIt-Anchor" href="#21-标量子查询"></a> 2.1: 标量子查询</h2>
 <blockquote>
 <p>[!summary] 只返回⼀个单⼀值<br>
 子查询返回的结果是<strong>单个值</strong>(数字、字符串、日期等),最简单的形式,这种子查询称为标量子查询。<br>
@@ -329,7 +329,7 @@ D. 表子查询 (子查询结果为多行多列)</p>
 <p>[!example]- 简单了解</p>
 </blockquote>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs MySQL">-- A. 查询 "销售部" 的所有员工信息<br>完成这个需求时,我们可以将需求分解为两步: <br><br>1. 查询 "销售部" 部门ID<br>select id from dept where name = '销售部';<br><br>2. 根据 "销售部" 部门ID, 查询员工信息<br>select * from emp where dept_id = (select id from dept where name = '销售部');<br><br>-- B. 查询在 "方东白" 入职之后的员工信息<br>完成这个需求时,我们可以将需求分解为两步: <br><br>1. 查询 方东白 的入职日期<br>select entrydate from emp where name = '方东白'; <br><br>1. 查询指定入职日期之后入职的员工信息<br>select * from emp where entrydate &gt; (select entrydate from emp where name = '方东白');<br><br><br></code></pre></td></tr></tbody></table></figure>
-<h2 id="22-列子查询"><a class="markdownIt-Anchor" href="#22-列子查询"></a> 2.2 列子查询</h2>
+<h2 id="22-列子查询"><a class="markdownIt-Anchor" href="#22-列子查询"></a> 2.2: 列子查询</h2>
 <blockquote>
 <p>[!summary]- 返回⼀个列的数据，可能包含多条纪录<br>
 子查询返回的结果是一列(可以是多行),这种子查询称为列子查询。<br>
@@ -367,7 +367,7 @@ D. 表子查询 (子查询结果为多行多列)</p>
 </tbody>
 </table>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs mysql">-- 查询销售部和市场部的所有员工信息<br>1. 查询 "销售部" 和 "市场部" 的部门ID<br>2. 根据部门ID, 查询员工信息<br><br>select * from employee where dept in (select id from dept where name = '销售部' or name = '市场部');<br><br>-- 查询比财务部所有人工资都高的员工信息<br>select * from employee where salary &gt; all(select salary from employee where dept = (select id from dept where name = '财务部'));<br><br>-- 查询比研发部任意一人工资高的员工信息<br>select * from employee where salary &gt; any (select salary from employee where dept = (select id from dept where name = '研发部'));<br></code></pre></td></tr></tbody></table></figure>
-<h2 id="23-行子查询"><a class="markdownIt-Anchor" href="#23-行子查询"></a> 2.3 行子查询</h2>
+<h2 id="23-行子查询"><a class="markdownIt-Anchor" href="#23-行子查询"></a> 2.3: 行子查询</h2>
 <blockquote>
 <p>[!question] 返回⼀条记录，需要包含多个列<br>
 返回的结果是一行（可以是多列）。<br>
@@ -376,19 +376,19 @@ D. 表子查询 (子查询结果为多行多列)</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs MySQL">select * from t1 where (m1, n1) = (select m2, n2 from t2 limit 1);<br>使⽤limit 1 保证⼦查询的结果只有⼀条记录<br><br></code></pre></td></tr></tbody></table></figure>
 <p>例子：</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs mysql">-- 查询与'张无忌'的薪资及直属领导 相同的员工信息<br>1. 查询 "张无忌" 的薪资及直属领导<br>2. 查询与 "张无忌" 的薪资及直属领导相同的员工信息 ;<br><br>select salary, managerid from emp where name = '张无忌';<br>select * from emp where (salary,managerid) = (select salary, managerid from emp where name = '张无忌');<br><br><br><br><br></code></pre></td></tr></tbody></table></figure>
-<h2 id="24-表子查询"><a class="markdownIt-Anchor" href="#24-表子查询"></a> 2.4 表子查询</h2>
+<h2 id="24-表子查询"><a class="markdownIt-Anchor" href="#24-表子查询"></a> 2.4: 表子查询</h2>
 <p>返回的结果是多行多列<br>
 常用操作符：IN</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs MySQL">select * from t1 where (m1, n1) = (select m2, n2 from t2);<br></code></pre></td></tr></tbody></table></figure>
 <p>例子：</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs mysql">A. 查询与 "鹿杖客" , "宋远桥" 的职位和薪资相同的员工信息<br>1. 查询 "鹿杖客" , "宋远桥" 的职位和薪资<br>2. 查询与 "鹿杖客" , "宋远桥" 的职位和薪资相同的员工信息<br><br><br>select job, salary from emp where name = '鹿杖客' or name = '宋远桥';<br>select * from emp where (job,salary) in ( select job, salary from emp where name = '鹿杖客' or name = '宋远桥' );<br><br><br><br>B. 查询入职日期是 "2006-01-01" 之后的员工信息 , 及其部门信息<br>分解为两步执行: <br>1. 入职日期是 "2006-01-01" 之后的员工信息<br>2. 查询这部分员工, 对应的部门信息;<br>select * from emp where entrydate &gt; '2006-01-01';<br>select e.*, d.* from (select * from emp where entrydate &gt; '2006-01-01') e left join dept d on e.dept_id = d.id ;<br><br><br><br><br><br></code></pre></td></tr></tbody></table></figure>
-<h1 id="3-按外层查询关系分类"><a class="markdownIt-Anchor" href="#3-按外层查询关系分类"></a> 3 按外层查询关系分类</h1>
-<h2 id="31-不相关子查询"><a class="markdownIt-Anchor" href="#31-不相关子查询"></a> 3.1 不相关⼦查询</h2>
+<h1 id="3-按外层查询关系分类"><a class="markdownIt-Anchor" href="#3-按外层查询关系分类"></a> 3: 按外层查询关系分类</h1>
+<h2 id="31-不相关子查询"><a class="markdownIt-Anchor" href="#31-不相关子查询"></a> 3.1: 不相关⼦查询</h2>
 <p>⼦查询可以单独运⾏出结果，不依赖于外层查询的值上⾯都是例⼦</p>
-<h2 id="32-相关子查询"><a class="markdownIt-Anchor" href="#32-相关子查询"></a> 3.2 相关⼦查询</h2>
+<h2 id="32-相关子查询"><a class="markdownIt-Anchor" href="#32-相关子查询"></a> 3.2: 相关⼦查询</h2>
 <p>⼦查询的执⾏需要依赖于外层 (💡外表) 查询的值</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs MySQL">select * from t1 where m1 in (select m2 from t2 where n1 = n2);<br></code></pre></td></tr></tbody></table></figure>
-<h1 id="4-子查询的注意事项"><a class="markdownIt-Anchor" href="#4-子查询的注意事项"></a> 4 ⼦查询的注意事项：</h1>
+<h1 id="4-子查询的注意事项"><a class="markdownIt-Anchor" href="#4-子查询的注意事项"></a> 4: ⼦查询的注意事项：</h1>
 <ol>
 <li>
 <p>必须⽤⼩括号括起来</p>

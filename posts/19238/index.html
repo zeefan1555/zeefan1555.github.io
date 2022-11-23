@@ -16,15 +16,15 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="📝18 删除链表的节点::Loading Question… - 力扣（LeetCode）  [[虚拟头结点]] [[2. 移除链表元素]] ![[移除链表元素.excalidraw]] 不知道为啥没有通过 1234567891011121314151617181920class Solution {public:    ListNode* deleteNode(ListNode* head,">
+    <meta name="description" content="📝18 删除链表的节点::Loading Question… - 力扣（LeetCode）  [[虚拟头结点]] [[2. 移除链表元素]] ![[移除链表元素.excalidraw]] v2通过 1234567891011121314151617class Solution {public:    ListNode* deleteNode(ListNode* head, int val) {">
 <meta property="og:type" content="article">
 <meta property="og:title" content="18 删除链表的节点">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/19238/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="📝18 删除链表的节点::Loading Question… - 力扣（LeetCode）  [[虚拟头结点]] [[2. 移除链表元素]] ![[移除链表元素.excalidraw]] 不知道为啥没有通过 1234567891011121314151617181920class Solution {public:    ListNode* deleteNode(ListNode* head,">
+<meta property="og:description" content="📝18 删除链表的节点::Loading Question… - 力扣（LeetCode）  [[虚拟头结点]] [[2. 移除链表元素]] ![[移除链表元素.excalidraw]] v2通过 1234567891011121314151617class Solution {public:    ListNode* deleteNode(ListNode* head, int val) {">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-15T02:36:00.000Z">
-<meta property="article:modified_time" content="2022-11-15T12:45:47.992Z">
+<meta property="article:modified_time" content="2022-11-21T02:21:11.169Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          549 字
+          948 字
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          3 分钟
+          5 分钟
         
       </span>
     
@@ -284,7 +284,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年11月15日 晚上
+                    本文最后更新于：2022年11月21日 上午
                   
                 
               </p>
@@ -296,7 +296,11 @@
 <p>[[虚拟头结点]]<br>
 [[2. 移除链表元素]]<br>
 ![[移除链表元素.excalidraw]]</p>
-<p>不知道为啥没有通过</p>
+<p>v2通过</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">ListNode* <span class="hljs-title">deleteNode</span><span class="hljs-params">(ListNode* head, <span class="hljs-type">int</span> val)</span> </span>{<br>        ListNode* dummyHead = <span class="hljs-keyword">new</span> <span class="hljs-built_in">ListNode</span>(<span class="hljs-number">0</span>);<br>        dummyHead-&gt;next = head;<br>        ListNode* cur = dummyHead;<br>        <span class="hljs-keyword">while</span>(cur != <span class="hljs-literal">NULL</span> &amp;&amp; cur-&gt;next-&gt;val != val){<br>            cur = cur-&gt;next;<br>        }<br>        ListNode* temp = cur-&gt;next;<br>        cur-&gt;next = temp-&gt;next;<br>        head = dummyHead-&gt;next;<br>        <span class="hljs-keyword">return</span> head;<br><br>    }<br>};<br><br></code></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>[!question] 不知道为啥没有通过: 因为 delete 了 temp 没有通过, 为什么呢</p>
+</blockquote>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">ListNode* <span class="hljs-title">deleteNode</span><span class="hljs-params">(ListNode* head, <span class="hljs-type">int</span> val)</span> </span>{<br>        ListNode* dummyHead = <span class="hljs-keyword">new</span> <span class="hljs-built_in">ListNode</span>(<span class="hljs-number">0</span>);<br>        dummyHead-&gt;next = head; <span class="hljs-comment">// ❗️不要忘了-&gt;next</span><br>        ListNode* cur = dummyHead;<br><br>        <span class="hljs-keyword">while</span>(cur-&gt;next != <span class="hljs-literal">NULL</span>){ <span class="hljs-comment">// 💡想极端情况再反推</span><br>            <span class="hljs-keyword">if</span>(cur-&gt;next-&gt;val == val){<br>                ListNode* temp = cur-&gt;next;<br>                cur-&gt;next = temp-&gt;next;<br>                <span class="hljs-keyword">delete</span> temp;<br>            }<br>            <span class="hljs-keyword">else</span> cur = cur-&gt;next;<br>        }<br>        head = dummyHead-&gt;next;<br>        <span class="hljs-keyword">return</span> head; <span class="hljs-comment">// ❗️直接返回 dummyhead-&gt;next 没通过</span><br>    }<br>};<br><br></code></pre></td></tr></tbody></table></figure>
 
               

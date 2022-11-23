@@ -16,15 +16,15 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="![[网络编程 2022-10-29 15.05.40.excalidraw]] ![[网络编程 2022-10-29 15.16.16.excalidraw]]  1 TCP&#x2F;P 网络编程重点知识的小结 形象的记住一些重要的名词 socket 函数 (安装电话机): 生成套接字 bind 函数 (分配电话号码): 给创建好的套接字分配地址信息 (分配 IP 地址和端口号) listen 函数 (">
+    <meta name="description" content="![[网络编程 2022-10-29 15.05.40.excalidraw]] ![[网络编程 2022-10-29 15.16.16.excalidraw]]  1: TCP&#x2F;P 网络编程重点知识的小结 形象的记住一些重要的名词 socket 函数 (安装电话机): 生成套接字 bind 函数 (分配电话号码): 给创建好的套接字分配地址信息 (分配 IP 地址和端口号) listen 函数">
 <meta property="og:type" content="article">
 <meta property="og:title" content="网络编程">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/52561/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="![[网络编程 2022-10-29 15.05.40.excalidraw]] ![[网络编程 2022-10-29 15.16.16.excalidraw]]  1 TCP&#x2F;P 网络编程重点知识的小结 形象的记住一些重要的名词 socket 函数 (安装电话机): 生成套接字 bind 函数 (分配电话号码): 给创建好的套接字分配地址信息 (分配 IP 地址和端口号) listen 函数 (">
+<meta property="og:description" content="![[网络编程 2022-10-29 15.05.40.excalidraw]] ![[网络编程 2022-10-29 15.16.16.excalidraw]]  1: TCP&#x2F;P 网络编程重点知识的小结 形象的记住一些重要的名词 socket 函数 (安装电话机): 生成套接字 bind 函数 (分配电话号码): 给创建好的套接字分配地址信息 (分配 IP 地址和端口号) listen 函数">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-10-29T07:05:00.000Z">
-<meta property="article:modified_time" content="2022-10-29T13:01:51.302Z">
+<meta property="article:modified_time" content="2022-11-22T08:48:48.525Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2k 字
+          2.1k 字
         
       </span>
     
@@ -284,7 +284,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年10月29日 晚上
+                    本文最后更新于：2022年11月22日 下午
                   
                 
               </p>
@@ -293,18 +293,18 @@
               
               <p>![[网络编程 2022-10-29 15.05.40.excalidraw]]</p>
 <p>![[网络编程 2022-10-29 15.16.16.excalidraw]]</p>
-<h1 id="1-tcpp-网络编程重点知识的小结"><a class="markdownIt-Anchor" href="#1-tcpp-网络编程重点知识的小结"></a> 1 TCP/P 网络编程重点知识的小结</h1>
+<h1 id="1-tcpp-网络编程重点知识的小结"><a class="markdownIt-Anchor" href="#1-tcpp-网络编程重点知识的小结"></a> 1: TCP/P 网络编程重点知识的小结</h1>
 <p>形象的记住一些重要的名词</p>
 <p>socket 函数 (安装电话机): 生成套接字<br>
 bind 函数 (分配电话号码): 给创建好的套接字分配地址信息 (分配 IP 地址和端口号)<br>
 listen 函数 (连接电话): 把套接字转化为可接收请求连接的状态<br>
 accept 函数: 受理连接请求</p>
-<h1 id="2-套接字在网络编程中的作用是什么为何称它为套接字"><a class="markdownIt-Anchor" href="#2-套接字在网络编程中的作用是什么为何称它为套接字"></a> 2 套接字在网络编程中的作用是什么?为何称它为套接字?</h1>
+<h1 id="2-套接字在网络编程中的作用是什么为何称它为套接字"><a class="markdownIt-Anchor" href="#2-套接字在网络编程中的作用是什么为何称它为套接字"></a> 2: 套接字在网络编程中的作用是什么?为何称它为套接字?</h1>
 <p>答: 操作系统会提供 「套接字」(socket) 的部件, 套接字是网络数据传输用的软件设备。因此,「网络编程」也叫「套接字编程」。<br>
 「套接宇」就是用来连接网络的工具。</p>
 <p><strong>句柄与描述符:</strong><br>
 文件描述符: 方便称呼操作系统创建的文件或套接字而赋予的数。有时也被成为文件句柄 (句柄-- Windows 中的术语)</p>
-<h2 id="21-面向连接的套接字-sock-stream"><a class="markdownIt-Anchor" href="#21-面向连接的套接字-sock-stream"></a> 2.1 面向连接的套接字 (SOCK STREAM):</h2>
+<h2 id="21-面向连接的套接字-sock-stream"><a class="markdownIt-Anchor" href="#21-面向连接的套接字-sock-stream"></a> 2.1: 面向连接的套接字 (SOCK STREAM):</h2>
 <p>例子: 流水线的糖果加工<br>
 传输特征:</p>
 <ul>
@@ -312,7 +312,7 @@ accept 函数: 受理连接请求</p>
 <li>按序传输数据</li>
 <li>传输的数据不存在数据边界(read、write函数调用次数并无挨打意义)</li>
 </ul>
-<h2 id="22-面向消息的套接字-sock-dgram"><a class="markdownIt-Anchor" href="#22-面向消息的套接字-sock-dgram"></a> 2.2 面向消息的套接字 (SOCK DGRAM)</h2>
+<h2 id="22-面向消息的套接字-sock-dgram"><a class="markdownIt-Anchor" href="#22-面向消息的套接字-sock-dgram"></a> 2.2: 面向消息的套接字 (SOCK DGRAM)</h2>
 <p>摩托车快递传送包裏</p>
 <ol>
 <li>强调快速而非传输顺序</li>
@@ -321,17 +321,17 @@ accept 函数: 受理连接请求</p>
 <li>传输的数据有数据边界具体参考以下思维导图:<br>
 <a href="marginnote3app://note/440619B0-E26B-4222-A7D5-C1C9FB7A1B94">margin: 具体参考以下思维导图:</a></li>
 </ol>
-<h2 id="23-套接字个数问题"><a class="markdownIt-Anchor" href="#23-套接字个数问题"></a> 2.3 套接字个数问题:</h2>
+<h2 id="23-套接字个数问题"><a class="markdownIt-Anchor" href="#23-套接字个数问题"></a> 2.3: 套接字个数问题:</h2>
 <p>与 TCP 服务器不同,UDP 服务器端和客户端均只需要一个套接字</p>
-<h1 id="3-为何要半关闭"><a class="markdownIt-Anchor" href="#3-为何要半关闭"></a> 3 为何要半关闭?</h1>
+<h1 id="3-为何要半关闭"><a class="markdownIt-Anchor" href="#3-为何要半关闭"></a> 3: 为何要半关闭?</h1>
 <p>优雅地断开套接字连接: 半关闭: shutdown 函数</p>
 <p>存在以下集中情况<br>
 一旦客户端连接到服务器,服务器将约定的文件传输给客户端,客户端收到后发送字符串 「Thank you」 给服务器端。<br>
 此处「Thank you」的传递是多余的,这只是用来模拟客户端断开连接前还有数据要传输的情况。<br>
 <strong>此时程序的实现难度并不小</strong>, 因为传输文件的服务器端只需连续传输文件数据即可, 而客户端无法知道需要接收数据到何时。客户端也没办法无休止的调用输入函数, 因为这有可能导致程序阻塞。</p>
-<h2 id="31-是否可以让服务器和客户端约定一个代表文件尾的字符"><a class="markdownIt-Anchor" href="#31-是否可以让服务器和客户端约定一个代表文件尾的字符"></a> 3.1 是否可以让服务器和客户端约定一个代表文件尾的字符?</h2>
+<h2 id="31-是否可以让服务器和客户端约定一个代表文件尾的字符"><a class="markdownIt-Anchor" href="#31-是否可以让服务器和客户端约定一个代表文件尾的字符"></a> 3.1: 是否可以让服务器和客户端约定一个代表文件尾的字符?</h2>
 <p>这种方式也有问题, 因为这意味这文件中不能有与约定字符相同的内容。为了解决该问题, 服务端应最后向客户端传递 EOF 表示文件传输结束。客户端通过函数返回值接受 EOF, 这样可以避免与文件内容冲突。那么问题来了, 服务端如何传递 EOF?</p>
-<h2 id="32-断开输出流时向主机传输-eof"><a class="markdownIt-Anchor" href="#32-断开输出流时向主机传输-eof"></a> 3.2 断开输出流时向主机传输 EOF。</h2>
+<h2 id="32-断开输出流时向主机传输-eof"><a class="markdownIt-Anchor" href="#32-断开输出流时向主机传输-eof"></a> 3.2: 断开输出流时向主机传输 EOF。</h2>
 <p>当然,调用close 函数的同时关闭 I/O 流,这样也会向对方发送EOF。但此时无法再接受对方传输的数据。<strong>换言之,若调用 close 函数关闭流,就无法接受客户端最后发送的字符串 「Thank you」。</strong><br>
 这时需要调用 shutdown 函数, 只关闭服务器的输出流。这样既可以发送 EOF, 同时又保留了输入流。下面实现收发文件的服务器端/客户端。</p>
 <p>Time Wait<br>
@@ -341,16 +341,16 @@ accept 函数: 受理连接请求</p>
 多进程服务器: 通过创建多个进程提供服务 (不适用)<br>
 多路复用服务器: 通过捆绑同意管理 I/O 对象提供服务 (常用)<br>
 多线程服务器: 通过生成与客户端等量的线程提供服务 (常用)</p>
-<h1 id="4-多进程服务器端"><a class="markdownIt-Anchor" href="#4-多进程服务器端"></a> 4 多进程服务器端:</h1>
+<h1 id="4-多进程服务器端"><a class="markdownIt-Anchor" href="#4-多进程服务器端"></a> 4: 多进程服务器端:</h1>
 <p>相对于孤儿进程, 僵尸进程对系统带来的影响更大</p>
-<h2 id="41-僵尸进程产生的原因"><a class="markdownIt-Anchor" href="#41-僵尸进程产生的原因"></a> 4.1 僵尸进程产生的原因:</h2>
+<h2 id="41-僵尸进程产生的原因"><a class="markdownIt-Anchor" href="#41-僵尸进程产生的原因"></a> 4.1: 僵尸进程产生的原因:</h2>
 <p>利用如下两个示例展示调用 fork 函数产生子进程的终止方式</p>
 <ol>
 <li>传递参数并调用 exito</li>
 <li>main 函数中执行 return 并返回值</li>
 </ol>
 <p>子进程通过 exit ()传递参数值或者 main 函数返回了值, 但是操作系统没有主动把这些值返回给父进, 导致子进程长时间保持僵尸进程状态。</p>
-<h3 id="411-解决办法"><a class="markdownIt-Anchor" href="#411-解决办法"></a> 4.1.1 解决办法</h3>
+<h3 id="411-解决办法"><a class="markdownIt-Anchor" href="#411-解决办法"></a> 4.1.1: 解决办法</h3>
 <p><strong>自行解决:</strong><br>
 wait ()<br>
 waitpid ():</p>
@@ -370,7 +370,7 @@ signal 函数在 Unix 系列的不同操作系统可能存在区别, 但 sigacti
 <li>操作系统: 好的, 如果你的子进程終止, 我就帮你调用 zombie handler 函数, 但是你先把要函数要执行的语句写好。</li>
 </ul>
 </blockquote>
-<h2 id="42-多进程服务器存在的缺点"><a class="markdownIt-Anchor" href="#42-多进程服务器存在的缺点"></a> 4.2 多进程服务器存在的缺点</h2>
+<h2 id="42-多进程服务器存在的缺点"><a class="markdownIt-Anchor" href="#42-多进程服务器存在的缺点"></a> 4.2: 多进程服务器存在的缺点</h2>
 <p><strong>进程的缺点可概括为:</strong></p>
 <ol>
 <li>创建进程的过程会带来一定的开销
@@ -385,7 +385,7 @@ signal 函数在 Unix 系列的不同操作系统可能存在区别, 但 sigacti
 <li>线程的创建和上下文切换比进程的创建和上下文切换更快</li>
 <li>线程间交换数据无需特殊技术</li>
 </ol>
-<h1 id="5-值得思考的问题"><a class="markdownIt-Anchor" href="#5-值得思考的问题"></a> 5 值得思考的问题:</h1>
+<h1 id="5-值得思考的问题"><a class="markdownIt-Anchor" href="#5-值得思考的问题"></a> 5: 值得思考的问题:</h1>
 <ol>
 <li>I/O 复用技术 select、epoll、poll 的区别, 各自的应用场景</li>
 <li>多线程服务器与 I/O 复用技术服务器两者是否可以结合</li>

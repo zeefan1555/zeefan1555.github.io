@@ -16,20 +16,18 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="📝时间复杂度分析::   1: 概念  1.1: 定义&lt;span class&#x3D;“hint–top hint–rounded” aria-label&#x3D;&quot;关于时间复杂度，你不知道的都在这里！ | 代码随想录 &quot;&gt;[1] 时间复杂度是一个函数，它定性描述该算法的运行时间。 估计程序运行时间：通常会估算算法的操作单元数量来代表程序消耗的时间  这里默认CPU的每个单元运行消耗的时间都是相同的">
+    <meta name="description" content="📝时间复杂度分析::   1: 概念  1.1: 定义[^1] 时间复杂度是一个函数，它定性描述该算法的运行时间。 估计程序运行时间：通常会估算算法的操作单元数量来代表程序消耗的时间  这里默认CPU的每个单元运行消耗的时间都是相同的。  假设算法的问题规模为n，那么操作单元数量便用函数f(n)来表示，随着数据规模n的增大，算法执行时间的增长率和f(n)的增长率相同，这称作为算法的渐近时间复杂度">
 <meta property="og:type" content="article">
 <meta property="og:title" content="时间复杂度分析">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/30259/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="📝时间复杂度分析::   1: 概念  1.1: 定义&lt;span class&#x3D;“hint–top hint–rounded” aria-label&#x3D;&quot;关于时间复杂度，你不知道的都在这里！ | 代码随想录 &quot;&gt;[1] 时间复杂度是一个函数，它定性描述该算法的运行时间。 估计程序运行时间：通常会估算算法的操作单元数量来代表程序消耗的时间  这里默认CPU的每个单元运行消耗的时间都是相同的">
+<meta property="og:description" content="📝时间复杂度分析::   1: 概念  1.1: 定义[^1] 时间复杂度是一个函数，它定性描述该算法的运行时间。 估计程序运行时间：通常会估算算法的操作单元数量来代表程序消耗的时间  这里默认CPU的每个单元运行消耗的时间都是相同的。  假设算法的问题规模为n，那么操作单元数量便用函数f(n)来表示，随着数据规模n的增大，算法执行时间的增长率和f(n)的增长率相同，这称作为算法的渐近时间复杂度">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20200728191447384.png">
 <meta property="og:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202208051803308.png">
 <meta property="og:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202207121533152.png">
-<meta property="og:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202207121507462.png">
-<meta property="og:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202208051803308.png">
 <meta property="article:published_time" content="2022-07-12T06:58:00.000Z">
-<meta property="article:modified_time" content="2022-11-12T14:45:48.089Z">
+<meta property="article:modified_time" content="2022-11-19T08:26:23.797Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://img-blog.csdnimg.cn/20200728191447384.png">
@@ -228,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2k 字
+          1.4k 字
         
       </span>
     
@@ -239,7 +237,7 @@
         
         
         
-          10 分钟
+          7 分钟
         
       </span>
     
@@ -290,7 +288,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年11月12日 晚上
+                    本文最后更新于：2022年11月19日 下午
                   
                 
               </p>
@@ -300,16 +298,14 @@
               <p>📝时间复杂度分析::</p>
 <!-- basicblock-end -->
 <h1 id="1-概念"><a class="markdownIt-Anchor" href="#1-概念"></a> 1: 概念</h1>
-<h2 id="11-定义sup-idfnref1-classfootnote-refa-hreffn1-relfootnotespan-classhinttop-hintrounded-aria-label关于时间复杂度你不知道的都在这里-代码随想录"><a class="markdownIt-Anchor" href="#11-定义sup-idfnref1-classfootnote-refa-hreffn1-relfootnotespan-classhinttop-hintrounded-aria-label关于时间复杂度你不知道的都在这里-代码随想录"></a> 1.1: 定义<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote">&lt;span class=“hint–top hint–rounded” aria-label="关于时间复杂度，你不知道的都在这里！ | 代码随想录</a></sup></h2><a href="#fn:1" rel="footnote">
-</a><p><a href="#fn:1" rel="footnote">"&gt;[1]</a></p>
+<h2 id="11-定义1"><a class="markdownIt-Anchor" href="#11-定义1"></a> 1.1: 定义[^1]</h2>
 <p><strong>时间复杂度是一个函数，它定性描述该算法的运行时间</strong>。<br>
 估计程序运行时间：通常会估算算法的<strong>操作单元数量</strong>来代表程序消耗的时间</p>
 <blockquote>
 <p>这里默认CPU的每个单元运行消耗的时间都是相同的。</p>
 </blockquote>
 <p>假设算法的问题规模为n，那么操作单元数量便用函数f(n)来表示，随着数据规模n的增大，算法执行时间的增长率和f(n)的增长率相同，这称作为算法的渐近时间复杂度，简称时间复杂度，记为 O(f(n))。</p>
-<p>时间复杂度对应的是物理上的加速度<sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span class="hint--top hint--rounded" aria-label="1-4 初识时间复杂度_哔哩哔哩_bilibili
-">[2]</span></a></sup><br>
+<p>时间复杂度对应的是物理上的加速度[^2]<br>
 ![[时间复杂度分析 2022-08-05 17.27.42.excalidraw]]</p>
 <h2 id="12-复杂度分析"><a class="markdownIt-Anchor" href="#12-复杂度分析"></a> 1.2: 复杂度分析</h2>
 <p>复杂度分析只考虑最坏的情况<br>
@@ -328,41 +324,17 @@
 <code>以2为底n的对数 = 以2为底10的对数 * 以10为底n的对数</code>。<br>
 而以2为底10的对数是一个常数，在上文已经讲述了我们计算时间复杂度是忽略常数项系数的。<br>
 <img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202207121533152.png" srcset="/img/loading.gif" lazyload alt="|500"></p>
-<h1 id="2-常见的时间复杂度"><a class="markdownIt-Anchor" href="#2-常见的时间复杂度"></a> 2: 常见的时间复杂度</h1>
-<p><img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202207121507462.png" srcset="/img/loading.gif" lazyload alt="|600"><br>
-快速排序：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mi>l</mi><mi>o</mi><mi>g</mi><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(nlogn)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span> : sort 函数[[sort函数]]<br>
-<img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202208051803308.png" srcset="/img/loading.gif" lazyload alt=""></p>
-<h1 id="3-计算时间复杂度"><a class="markdownIt-Anchor" href="#3-计算时间复杂度"></a> 3: 计算时间复杂度</h1>
-<p>时间复杂的是看<strong>次数</strong><sup id="fnref:3" class="footnote-ref"><a href="#fn:3" rel="footnote"><span class="hint--top hint--rounded" aria-label="">[3]</span></a></sup><br>
-![[时间复杂度分析 2022-08-05 18.11.16.excalidraw]]</p>
-<h2 id="31-普通类型"><a class="markdownIt-Anchor" href="#31-普通类型"></a> 3.1: 普通类型</h2>
-<p><s>乘法：乘法操作的时间复杂度 = O(1) ：O(n) 就是乘n次</s><br>
-<s>加法：一般忽略，但从0加到n的为O(n)的复杂度</s></p>
-<h2 id="32-函数类型"><a class="markdownIt-Anchor" href="#32-函数类型"></a> 3.2: 函数类型</h2>
-<ol>
-<li>for循环嵌套：循环</li>
-<li>if else：选择分支内最大的复杂度</li>
-<li>[[递归算法的复杂度]]：递归次数 * 每次递归的操作次数</li>
-</ol>
-<h2 id="33-其他类型"><a class="markdownIt-Anchor" href="#33-其他类型"></a> 3.3: 其他类型</h2>
-<ol>
-<li>两端算法相加时，取两者最大值：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>T</mi><mn>1</mn></msub><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo>+</mo><msub><mi>T</mi><mn>2</mn></msub><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo>=</mo><mi>m</mi><mi>a</mi><mi>x</mi><mo stretchy="false">(</mo><mi>O</mi><msub><mi>f</mi><mn>1</mn></msub><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><mi>O</mi><msub><mi>f</mi><mn>2</mn></msub><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">T_1(n)+T_2(n)=max(Of_1(n),Of_2(n))</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">a</span><span class="mord mathdefault">x</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.10764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.10764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span><span class="mclose">)</span></span></span></span>，eg：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>n</mi><mn>5</mn></msup><mo>+</mo><mi>n</mi><mo>=</mo><msup><mi>n</mi><mn>5</mn></msup></mrow><annotation encoding="application/x-tex">n^5+n=n^5</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.897438em;vertical-align:-0.08333em;"></span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">5</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">5</span></span></span></span></span></span></span></span></span></span></span></li>
-<li>两段算法嵌套时：为两者相乘：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>T</mi><mn>1</mn></msub><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo>∗</mo><msub><mi>T</mi><mn>2</mn></msub><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo>=</mo><mi>O</mi><mo stretchy="false">(</mo><msub><mi>f</mi><mn>1</mn></msub><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo>∗</mo><msub><mi>f</mi><mn>2</mn></msub><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">T_1(n)*T_2(n)=O(f_1(n)*f_2(n))</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.10764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.10764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span><span class="mclose">)</span></span></span></span>，eg：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>n</mi><mn>2</mn></msup><mo>∗</mo><msup><mi>n</mi><mn>2</mn></msup><mo>=</mo><msup><mi>n</mi><mn>4</mn></msup></mrow><annotation encoding="application/x-tex">n^{2}*n^{2}=n^{4}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">4</span></span></span></span></span></span></span></span></span></span></span></span></li>
-<li>有两算法时,本质是时间复杂度为两个函数相加, 但最终结果还是取的大头<sup id="fnref:4" class="footnote-ref"><a href="#fn:4" rel="footnote"><span class="hint--top hint--rounded" aria-label="[[4. 有序数组的平方]]
-">[4]</span></a></sup></li>
-</ol>
-<h1 id="4-例子"><a class="markdownIt-Anchor" href="#4-例子"></a> 4: 例子</h1>
-<h2 id="41-找出n个字符串中相同的两个字符串假设这里只有两个相同的字符串"><a class="markdownIt-Anchor" href="#41-找出n个字符串中相同的两个字符串假设这里只有两个相同的字符串"></a> 4.1: 找出n个字符串中相同的两个字符串（假设这里只有两个相同的字符串）。</h2>
+<h1 id="计算时间复杂度"><a class="markdownIt-Anchor" href="#计算时间复杂度"></a> [[计算时间复杂度]]</h1>
+<h1 id="2-例子"><a class="markdownIt-Anchor" href="#2-例子"></a> 2: 例子</h1>
+<h2 id="21-找出n个字符串中相同的两个字符串假设这里只有两个相同的字符串"><a class="markdownIt-Anchor" href="#21-找出n个字符串中相同的两个字符串假设这里只有两个相同的字符串"></a> 2.1: 找出n个字符串中相同的两个字符串（假设这里只有两个相同的字符串）。</h2>
 <p>先排对n个字符串按字典序来排序，排序后n个字符串就是有序的，意味着两个相同的字符串就是挨在一起，然后在遍历一遍n个字符串，这样就找到两个相同的字符串了。</p>
 <p>那看看这种算法的时间复杂度，快速排序时间复杂度为O(nlogn)，依然要考虑字符串的长度是m，那么快速排序每次的比较都要有m次的字符比较的操作，就是O(m × n × log n) 。</p>
-<h2 id="42-01背包"><a class="markdownIt-Anchor" href="#42-01背包"></a> 4.2: 01背包</h2>
+<h2 id="22-01背包"><a class="markdownIt-Anchor" href="#22-01背包"></a> 2.2: 01背包</h2>
 <p>暴力解法<br>
 每一件物品其实只有两个状态，取或者不取，所以可以使用回溯法搜索出所有的情况，那么时间复杂度就是<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>o</mi><mo stretchy="false">(</mo><msup><mn>2</mn><mi>n</mi></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">o(2^n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">o</span><span class="mopen">(</span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span>，这里的n表示物品数量。</p>
-<h1 id="5-参考资料"><a class="markdownIt-Anchor" href="#5-参考资料"></a> 5: 参考资料</h1>
-<section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://www.programmercarl.com/%E5%89%8D%E5%BA%8F/%E5%85%B3%E4%BA%8E%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%EF%BC%8C%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84%E9%83%BD%E5%9C%A8%E8%BF%99%E9%87%8C%EF%BC%81.html#%E7%A9%B6%E7%AB%9F%E4%BB%80%E4%B9%88%E6%98%AF%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6">关于时间复杂度，你不知道的都在这里！ | 代码随想录</a>
-<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:2" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV11h411h7nT?p=4&amp;vd_source=f2340d96e99780a96b50d8096ffaaf1a">1-4 初识时间复杂度_哔哩哔哩_bilibili</a>
-<a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:3" class="footnote-text"><span><a href="#fnref:3" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:4" class="footnote-text"><span>[[4. 有序数组的平方]]
-<a href="#fnref:4" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
+<h1 id="3-参考资料"><a class="markdownIt-Anchor" href="#3-参考资料"></a> 3: 参考资料</h1>
+<p>初识时间复杂度_哔哩哔哩_bilibili](<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV11h411h7nT?p=4&amp;vd_source=f2340d96e99780a96b50d8096ffaaf1a">https://www.bilibili.com/video/BV11h411h7nT?p=4&amp;vd_source=f2340d96e99780a96b50d8096ffaaf1a</a>)</p>
+
               
             </div>
             <hr/>

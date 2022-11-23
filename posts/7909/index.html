@@ -24,7 +24,7 @@
 <meta property="og:description" content="Callout呼出框使用指南 注：请将本文稿粘贴到Obsidian后阅读 在Obsidian的0.14版本更新中，官方更新了一个叫“Callout Blocks”的功能。善用这个功能可以让我们把内容编写地更美观，也能在需要的地方给我们提供足够显眼的强调。 Callout Blocks的基本语法如下： 123456789&gt; [!类型] 标题&gt; Hello world!&gt; 正文&amp;gt">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-08-22T00:49:00.000Z">
-<meta property="article:modified_time" content="2022-10-10T13:51:07.023Z">
+<meta property="article:modified_time" content="2022-11-18T14:38:01.084Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="obsidian">
 <meta name="twitter:card" content="summary_large_image">
@@ -285,7 +285,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年10月10日 晚上
+                    本文最后更新于：2022年11月18日 晚上
                   
                 
               </p>
@@ -304,7 +304,7 @@ Hello world!<br>
 正文<strong>依然支持Markdown语法和双链功能</strong></p>
 </blockquote>
 <p>不难发现“Callout Blocks”本质上只是一个<code>&gt; 引用块</code>，并且由三部分组成——类型、标题和正文。</p>
-<h1 id="1-callout-blocks的类型"><a class="markdownIt-Anchor" href="#1-callout-blocks的类型"></a> 1 Callout Blocks的类型</h1>
+<h1 id="1-callout-blocks的类型"><a class="markdownIt-Anchor" href="#1-callout-blocks的类型"></a> 1: Callout Blocks的类型</h1>
 <p>Callout Blocks原生支持以下类型——</p>
 <blockquote>
 <p>[!note]</p>
@@ -358,7 +358,7 @@ Hello world!<br>
 <p>[!Tip]<br>
 你的大脑更擅长思考，而不是记忆。</p>
 </blockquote>
-<h1 id="2-callout-blocks的标题"><a class="markdownIt-Anchor" href="#2-callout-blocks的标题"></a> 2 Callout Blocks的标题</h1>
+<h1 id="2-callout-blocks的标题"><a class="markdownIt-Anchor" href="#2-callout-blocks的标题"></a> 2: Callout Blocks的标题</h1>
 <p>在指定Callout Block的类型后，再敲击一个空格，然后输入该Callout Block的标题。</p>
 <figure class="highlight markdown"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs Markdown"><br><span class="hljs-quote">&gt; [!Tip] 阅读《搞定》的启示</span><br><br><span class="hljs-quote">&gt; 你的大脑更擅长思考，而不是记忆。</span><br><br></code></pre></td></tr></tbody></table></figure>
 <blockquote>
@@ -368,7 +368,7 @@ Hello world!<br>
 <p>除此之外，在<code>&gt; [!类型]</code>和<code>内容</code>之间插入“+”和“-”可以将这个Callout Block变成折叠方块。其中——</p>
 <figure class="highlight markdown"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs Markdown">// 中间无括号<br><span class="hljs-quote">&gt; [!类型]- 标题 %%代表该方块默认折叠</span><br><br><span class="hljs-quote">&gt; [!类型]+ 标题 %%代表该方块默认展开</span><br><br></code></pre></td></tr></tbody></table></figure>
 <p>具体的效果还请各位读者到Obsidian当中自行实践。</p>
-<h1 id="3-callout-blocks的正文"><a class="markdownIt-Anchor" href="#3-callout-blocks的正文"></a> 3 Callout Blocks的正文</h1>
+<h1 id="3-callout-blocks的正文"><a class="markdownIt-Anchor" href="#3-callout-blocks的正文"></a> 3: Callout Blocks的正文</h1>
 <p>Callout Blocks内部的正文依然支持Markdown语法和双链功能，各位读者可以在方块内部肆意挥发自己的创意。</p>
 <p>这里需要提醒的一点是，在<code>&gt; 引用块</code>的编辑状态下，如果你想要在下一个段落前额外添加一个空行，那么你很有可能会连续按下两次回车键，但这将退出<code>&gt; 引用块</code>的编辑——在引用块、有序列表、无序列表的空行上再次敲击回车会消除该行的格式。因此正确的做法是“Shift+回车”——这将继续向下创造新的空行，原有的空行将保持原有的格式。</p>
 <figure class="highlight markdown"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs Markdown"><br><span class="hljs-quote">&gt; [!Tip] 阅读《搞定》的启示</span><br><br><span class="hljs-quote">&gt; 你的大脑更擅长思考，而不是记忆。</span><br><br><span class="hljs-quote">&gt; %% 这里按“Shift+回车”</span><br><br><span class="hljs-quote">&gt; 2分钟之内能搞定的事就不要拖延，马上去做！</span><br><br></code></pre></td></tr></tbody></table></figure>
@@ -377,7 +377,7 @@ Hello world!<br>
 <strong>你的大脑更擅长思考，而不是记忆。</strong></p>
 <p>2分钟之内能搞定的事就不要拖延，马上去做！</p>
 </blockquote>
-<h1 id="4-应用"><a class="markdownIt-Anchor" href="#4-应用"></a> 4 应用</h1>
+<h1 id="4-应用"><a class="markdownIt-Anchor" href="#4-应用"></a> 4: 应用</h1>
 <p>Callout Blocks的基本用法就是这么简单，而关于工具的应用，则完全取决于你的思想、方法和创意。</p>
 <p>你可以像这样做笔记的例题——</p>
 <figure class="highlight markdown"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs Markdown"><br><span class="hljs-quote">&gt; [!Example]- 例1: 计算行列式 $$\begin{vmatrix}</span><br><br><span class="hljs-quote">&gt; 	a &amp; b \\</span><br><br><span class="hljs-quote">&gt; 	c &amp; d \\</span><br><br><span class="hljs-quote">&gt; 	\end{vmatrix}$$</span><br><br><span class="hljs-quote">&gt; 	</span><br><span class="hljs-quote"></span><br><span class="hljs-quote">&gt; 	<span class="hljs-strong">**解:**</span> $$</span><br><br><span class="hljs-quote">&gt; \begin{vmatrix}</span><br><br><span class="hljs-quote">&gt; 	a &amp; b \\</span><br><br><span class="hljs-quote">&gt; 	c &amp; d \\</span><br><br><span class="hljs-quote">&gt; 	\end{vmatrix}</span><br><br><span class="hljs-quote">&gt; =ad-bc</span><br><br><span class="hljs-quote">&gt; $$</span><br><br></code></pre></td></tr></tbody></table></figure>

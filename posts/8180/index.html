@@ -16,18 +16,18 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="递归的实现就是：每一次递归调用都会把函数的局部变量、参数值和返回地址等压入调用栈中，然后递归返回的时候，从栈顶弹出上一次递归的各项参数，所以这就是递归为什么可以返回上一层位置的原因。 此时大家应该知道我们用栈也可以是实现二叉树的前后中序遍历了。 144.二叉树的前序遍历 94.二叉树的中序遍历 145.二叉树的后序遍历    1 前序遍历(迭代法):: 先将根节点放入栈中后弹出，然后先加入右孩子入">
+    <meta name="description" content="递归的实现就是：每一次递归调用都会把函数的局部变量、参数值和返回地址等压入调用栈中，然后递归返回的时候，从栈顶弹出上一次递归的各项参数，所以这就是递归为什么可以返回上一层位置的原因。 此时大家应该知道我们用栈也可以是实现二叉树的前后中序遍历了。 144.二叉树的前序遍历 94.二叉树的中序遍历 145.二叉树的后序遍历  1: 前序遍历(迭代法):: 先将根节点放入栈中后弹出，然后先加入右孩子入栈">
 <meta property="og:type" content="article">
 <meta property="og:title" content="3. 二叉树的迭代遍历">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/8180/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="递归的实现就是：每一次递归调用都会把函数的局部变量、参数值和返回地址等压入调用栈中，然后递归返回的时候，从栈顶弹出上一次递归的各项参数，所以这就是递归为什么可以返回上一层位置的原因。 此时大家应该知道我们用栈也可以是实现二叉树的前后中序遍历了。 144.二叉树的前序遍历 94.二叉树的中序遍历 145.二叉树的后序遍历    1 前序遍历(迭代法):: 先将根节点放入栈中后弹出，然后先加入右孩子入">
+<meta property="og:description" content="递归的实现就是：每一次递归调用都会把函数的局部变量、参数值和返回地址等压入调用栈中，然后递归返回的时候，从栈顶弹出上一次递归的各项参数，所以这就是递归为什么可以返回上一层位置的原因。 此时大家应该知道我们用栈也可以是实现二叉树的前后中序遍历了。 144.二叉树的前序遍历 94.二叉树的中序遍历 145.二叉树的后序遍历  1: 前序遍历(迭代法):: 先将根节点放入栈中后弹出，然后先加入右孩子入栈">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/008eGmZEly1gnbmss7603g30eq0d4b2a.gif">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/008eGmZEly1gnbmuj244bg30eq0d4kjm.gif">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20200808200338924.png">
 <meta property="article:published_time" content="2022-09-02T01:29:00.000Z">
-<meta property="article:modified_time" content="2022-09-11T01:39:58.826Z">
+<meta property="article:modified_time" content="2022-11-18T08:47:48.991Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="二叉树">
 <meta name="twitter:card" content="summary_large_image">
@@ -289,7 +289,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年9月11日 上午
+                    本文最后更新于：2022年11月18日 下午
                   
                 
               </p>
@@ -301,32 +301,30 @@
 <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-tree-preorder-traversal/">144.二叉树的前序遍历</a><br>
 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-tree-inorder-traversal/">94.二叉树的中序遍历</a><br>
 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-tree-postorder-traversal/">145.二叉树的后序遍历</a></p>
-<!-- basicblock-start oid="ObsnXiRU0AMeO0AokNDOO4DN" --> 
-<h1 id="1-前序遍历迭代法"><a class="markdownIt-Anchor" href="#1-前序遍历迭代法"></a> 1 前序遍历(迭代法)::</h1>
+<h1 id="1-前序遍历迭代法"><a class="markdownIt-Anchor" href="#1-前序遍历迭代法"></a> 1: 前序遍历(迭代法)::</h1>
 <p>先将根节点放入栈中<strong>后弹出</strong>，然后<strong>先加入右孩子</strong>入栈<strong>后弹出</strong>，<strong>后加入左孩子后弹出</strong>。</p>
 <p>为什么要先加入 右孩子，再加入左孩子呢？ 因为这样出栈的时候才是中左右的顺序。</p>
 <p>动画如下：<br>
 <img src="https://tva1.sinaimg.cn/large/008eGmZEly1gnbmss7603g30eq0d4b2a.gif" srcset="/img/loading.gif" lazyload alt="二叉树前序遍历（迭代法）"></p>
-<h2 id="11-代码"><a class="markdownIt-Anchor" href="#11-代码"></a> 1.1 代码</h2>
+<h2 id="11-代码"><a class="markdownIt-Anchor" href="#11-代码"></a> 1.1: 代码</h2>
 <p>carl: 这其实就是层序遍历嘛</p>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">preorderTraversal</span><span class="hljs-params">(TreeNode* root)</span> </span>{<br>        stack&lt;TreeNode*&gt; st;<br>        vector&lt;<span class="hljs-type">int</span>&gt; result;<br>        <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">NULL</span>) <span class="hljs-keyword">return</span> result;<br>        st.<span class="hljs-built_in">push</span>(root);<br>        <span class="hljs-keyword">while</span> (!st.<span class="hljs-built_in">empty</span>()) {<br>            TreeNode* node = st.<span class="hljs-built_in">top</span>();                       <span class="hljs-comment">// 中</span><br>            st.<span class="hljs-built_in">pop</span>();<br>            result.<span class="hljs-built_in">push_back</span>(node-&gt;val);<br>            <span class="hljs-keyword">if</span> (node-&gt;right) st.<span class="hljs-built_in">push</span>(node-&gt;right);           <span class="hljs-comment">// 右（空节点不入栈）</span><br>            <span class="hljs-keyword">if</span> (node-&gt;left) st.<span class="hljs-built_in">push</span>(node-&gt;left);             <span class="hljs-comment">// 左（空节点不入栈）</span><br>        }<br>        <span class="hljs-keyword">return</span> result;<br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
 <p>v2, 通过</p>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">preorderTraversal</span><span class="hljs-params">(TreeNode* root)</span> </span>{<br>        stack&lt;TreeNode*&gt; st;<br>        <span class="hljs-keyword">if</span>(root != <span class="hljs-literal">NULL</span>) st.<span class="hljs-built_in">push</span>(root);<br>        vector&lt;<span class="hljs-type">int</span>&gt; result;<br>        <span class="hljs-keyword">while</span>(!st.<span class="hljs-built_in">empty</span>()){ <span class="hljs-comment">// 💡用层序遍历但不需要记录每层的个数,即不需要把每层的数据弹出</span><br>            TreeNode* node = st.<span class="hljs-built_in">top</span>(); <span class="hljs-comment">// 💡que是 front();</span><br>            result.<span class="hljs-built_in">push_back</span>(node-&gt;val);<br>            st.<span class="hljs-built_in">pop</span>();<br>            <span class="hljs-keyword">if</span>(node-&gt;right) st.<span class="hljs-built_in">push</span>(node-&gt;right); <span class="hljs-comment">// 先加右孩子</span><br>            <span class="hljs-keyword">if</span>(node-&gt;left) st.<span class="hljs-built_in">push</span>(node-&gt;left);   <span class="hljs-comment">// 在加左孩子</span><br>        }<br>        <span class="hljs-keyword">return</span> result;<br><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
 <p>等等</p>
-<!-- basicblock-end -->
-<h1 id="2-中序遍历"><a class="markdownIt-Anchor" href="#2-中序遍历"></a> 2 中序遍历</h1>
+<h1 id="2-中序遍历"><a class="markdownIt-Anchor" href="#2-中序遍历"></a> 2: 中序遍历</h1>
 <p>无法与上面的前序遍历通用</p>
 <p>因为前序遍历的顺序是中左右，先访问的元素是中间节点，要处理的元素也是中间节点，所以刚刚才能写出相对简洁的代码，<strong>因为要访问的元素和要处理的元素顺序是一致的，都是中间节点。</strong></p>
 <p>那么再看看中序遍历，中序遍历是左中右，先访问的是二叉树顶部的节点，然后一层一层向下访问，直到到达树左面的最底部，再开始处理节点（也就是在把节点的数值放进result数组中），这就造成了<strong>处理顺序和访问顺序是不一致的。</strong></p>
 <p>那么<strong>在使用迭代法写中序遍历，就需要借用指针的遍历来帮助访问节点，栈则用来处理节点上的元素</strong></p>
 <p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1gnbmuj244bg30eq0d4kjm.gif" srcset="/img/loading.gif" lazyload alt="二叉树中序遍历（迭代法）"></p>
-<h1 id="3-后序遍历"><a class="markdownIt-Anchor" href="#3-后序遍历"></a> 3 后序遍历</h1>
+<h1 id="3-后序遍历"><a class="markdownIt-Anchor" href="#3-后序遍历"></a> 3: 后序遍历</h1>
 <p>再来看后序遍历，先序遍历是中左右，后续遍历是左右中，那么我们只需要调整一下先序遍历的代码顺序，就变成中右左的遍历顺序，然后在反转result数组，输出的结果顺序就是左右中了，如下图：</p>
 <p><img src="https://img-blog.csdnimg.cn/20200808200338924.png" srcset="/img/loading.gif" lazyload alt="前序到后序"></p>
 <p><strong>所以后序遍历只需要前序遍历的代码稍作修改就可以了，代码如下：</strong></p>
 <hr>
 <p><strong>其他资料</strong></p>
- <!-- basicblock-start oid="Obsn0AKlkxnVHJ8jU2mSk6rW" deck = "👨🏻‍💻code::数据结构与算法::代码随想录::二叉树::3. 二叉树的迭代遍历.md" --> 
+ <!-- basicblock-start oid="Obsn0AKlkxnVHJ8jU2mSk6rW" --> 
 <p>#历史记录::<br>
 2022/09/02: 第一次创建. 感觉不重要, 没有太注重, 重点学习递归法⏱1.28<br>
 2022/09/05:&nbsp;层序遍历但不需要记录每层的个数, 也不用只把一层的数据弹出. 先只做了前序遍历⏱0-22</p>

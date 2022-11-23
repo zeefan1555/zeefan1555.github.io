@@ -16,15 +16,15 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="![[基础正则表达式速查表 2022-10-28 11.31.39.excalidraw]]  0.1.1 混合字符 更多正则匹配场景中，是确定与不确定的字符混合在一起。如要匹配下文中年龄就得这么写\d\d岁： 11  曾小红，男, 举重运动员，28 岁，体重 56KG，身高 175cm。最好成绩：挺举 98KG 如果要匹配体重得这么写体重\d\dKG，体重与KG是确定的，中间\d\d是不确定的。">
+    <meta name="description" content="![[基础正则表达式速查表 2022-10-28 11.31.39.excalidraw]]  0.1.1: 混合字符 更多正则匹配场景中，是确定与不确定的字符混合在一起。如要匹配下文中年龄就得这么写\d\d岁： 11  曾小红，男, 举重运动员，28 岁，体重 56KG，身高 175cm。最好成绩：挺举 98KG 如果要匹配体重得这么写体重\d\dKG，体重与KG是确定的，中间\d\d是不确定的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基础正则表达式速查表">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/44461/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="![[基础正则表达式速查表 2022-10-28 11.31.39.excalidraw]]  0.1.1 混合字符 更多正则匹配场景中，是确定与不确定的字符混合在一起。如要匹配下文中年龄就得这么写\d\d岁： 11  曾小红，男, 举重运动员，28 岁，体重 56KG，身高 175cm。最好成绩：挺举 98KG 如果要匹配体重得这么写体重\d\dKG，体重与KG是确定的，中间\d\d是不确定的。">
+<meta property="og:description" content="![[基础正则表达式速查表 2022-10-28 11.31.39.excalidraw]]  0.1.1: 混合字符 更多正则匹配场景中，是确定与不确定的字符混合在一起。如要匹配下文中年龄就得这么写\d\d岁： 11  曾小红，男, 举重运动员，28 岁，体重 56KG，身高 175cm。最好成绩：挺举 98KG 如果要匹配体重得这么写体重\d\dKG，体重与KG是确定的，中间\d\d是不确定的">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-10-28T03:30:00.000Z">
-<meta property="article:modified_time" content="2022-10-29T13:00:52.601Z">
+<meta property="article:modified_time" content="2022-11-18T10:01:21.524Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          400 字
+          404 字
         
       </span>
     
@@ -284,7 +284,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年10月29日 晚上
+                    本文最后更新于：2022年11月18日 晚上
                   
                 
               </p>
@@ -292,19 +292,19 @@
             <div class="markdown-body">
               
               <p>![[基础正则表达式速查表 2022-10-28 11.31.39.excalidraw]]</p>
-<h3 id="011-混合字符"><a class="markdownIt-Anchor" href="#011-混合字符"></a> 0.1.1 混合字符</h3>
+<h3 id="011-混合字符"><a class="markdownIt-Anchor" href="#011-混合字符"></a> 0.1.1: 混合字符</h3>
 <p>更多正则匹配场景中，是<strong>确定</strong>与<strong>不确定</strong>的字符混合在一起。如要匹配下文中年龄就得这么写<code>\d\d岁</code>：</p>
 <figure class="highlight basic"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs basic"><span class="hljs-symbol">1 </span> 曾小红，男, 举重运动员，<span class="hljs-number">28</span> 岁，体重 <span class="hljs-number">56</span>KG，身高 <span class="hljs-number">175</span>cm。最好成绩：挺举 <span class="hljs-number">98</span>KG<br></code></pre></td></tr></tbody></table></figure>
 <p>如果要匹配体重得这么写<code>体重\d\dKG</code>，体重与KG是确定的，中间<code>\d\d</code>是不确定的。</p>
 <blockquote>
 <p>小技巧：在编写正则时可以先编写确定部分，然后加入不确定部分，思路一下就清晰了。试试看</p>
 </blockquote>
-<h2 id="02-0-自定义范围字符"><a class="markdownIt-Anchor" href="#02-0-自定义范围字符"></a> 0.2 0.、自定义范围字符</h2>
+<h2 id="02-0-自定义范围字符"><a class="markdownIt-Anchor" href="#02-0-自定义范围字符"></a> 0.2: 0.、自定义范围字符</h2>
 <p>定定义范围指由多个字符，多个范围字符组成的集合，取其中<strong>任意</strong>一个。</p>
 <p>![[正则表达式字符 2022-10-28 11.47.48.excalidraw]]</p>
-<h1 id="1-数量控制"><a class="markdownIt-Anchor" href="#1-数量控制"></a> 1 数量控制</h1>
+<h1 id="1-数量控制"><a class="markdownIt-Anchor" href="#1-数量控制"></a> 1: 数量控制</h1>
 <p>![[正则表达式字符 2022-10-28 15.20.12.excalidraw]]</p>
-<h1 id="2-分组"><a class="markdownIt-Anchor" href="#2-分组"></a> 2 [[分组]]</h1>
+<h1 id="2-分组"><a class="markdownIt-Anchor" href="#2-分组"></a> 2: [[分组]]</h1>
 <hr>
 <p><strong>其他资料</strong></p>
  <!-- basicblock-start oid="ObsoR8BEqjg7I8KKZh0ZyB2s"  --> 

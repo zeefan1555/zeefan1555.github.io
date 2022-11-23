@@ -16,15 +16,15 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="📝幻读::   1: 什么是幻读？  [!example]- 幻读：一个事务按照条件查询数据时，没有对应的数据行，但是在插入数据时，又发现这行数据已经存在，好像出现了&quot;幻影&quot;。 ![[幻读 .excalidraw]]  注意，幻读出现的场景：   事务的隔离级别为可重复读，且是当前读   幻读仅专指新插⼊的⾏    2: 为啥会出现幻读？ ⾏锁只能锁定存在的⾏，针对新插⼊的操作没有限定  3:">
+    <meta name="description" content="📝幻读::   1: 什么是幻读？  [!summary] A查询不到这个数据，不代表这个数据不存在。 查询得到了某条数据，不代表它真的存在。 这样是是而非的查询，就像是幻觉一样，似真似假，故为幻读 产生幻读的原因归根到底是由于查询得到的结果与真实的结果不匹配。   [!example] 幻读：一个事务按照条件查询数据时，没有对应的数据行，但是在插入数据时，又发现这行数据已经存在，好像出现了&quot;幻">
 <meta property="og:type" content="article">
 <meta property="og:title" content="幻读">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/48403/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="📝幻读::   1: 什么是幻读？  [!example]- 幻读：一个事务按照条件查询数据时，没有对应的数据行，但是在插入数据时，又发现这行数据已经存在，好像出现了&quot;幻影&quot;。 ![[幻读 .excalidraw]]  注意，幻读出现的场景：   事务的隔离级别为可重复读，且是当前读   幻读仅专指新插⼊的⾏    2: 为啥会出现幻读？ ⾏锁只能锁定存在的⾏，针对新插⼊的操作没有限定  3:">
+<meta property="og:description" content="📝幻读::   1: 什么是幻读？  [!summary] A查询不到这个数据，不代表这个数据不存在。 查询得到了某条数据，不代表它真的存在。 这样是是而非的查询，就像是幻觉一样，似真似假，故为幻读 产生幻读的原因归根到底是由于查询得到的结果与真实的结果不匹配。   [!example] 幻读：一个事务按照条件查询数据时，没有对应的数据行，但是在插入数据时，又发现这行数据已经存在，好像出现了&quot;幻">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-10T13:04:00.000Z">
-<meta property="article:modified_time" content="2022-11-11T01:32:44.406Z">
+<meta property="article:modified_time" content="2022-11-18T12:26:47.010Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          318 字
+          776 字
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          2 分钟
+          4 分钟
         
       </span>
     
@@ -284,7 +284,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年11月11日 上午
+                    本文最后更新于：2022年11月18日 晚上
                   
                 
               </p>
@@ -295,30 +295,45 @@
 <!-- basicblock-end -->
 <h1 id="1-什么是幻读"><a class="markdownIt-Anchor" href="#1-什么是幻读"></a> 1: 什么是幻读？</h1>
 <blockquote>
-<p>[!example]- 幻读：一个事务按照条件查询数据时，没有对应的数据行，但是在插入数据时，又发现这行数据已经存在，好像出现了"幻影"。<br>
+<p>[!summary]<br>
+<code>A查询不到这个数据，不代表这个数据不存在</code>。<br>
+<code>查询得到了某条数据，不代表它真的存在</code>。<br>
+这样是是而非的查询，就像是幻觉一样，似真似假，故为幻读<br>
+产生幻读的原因归根到底是由于查询得到的结果与真实的结果不匹配。</p>
+</blockquote>
+<blockquote>
+<p>[!example] 幻读：一个事务按照条件查询数据时，没有对应的数据行，但是在插入数据时，又发现这行数据已经存在，好像出现了"幻影"。<br>
 ![[幻读 .excalidraw]]</p>
 </blockquote>
+<p>MySQL使用的InnoDB引擎默认的隔离级别是<code>可重复读</code>，也就是说在同一个事务中，两次执行同样的查询，得到的效果应该是一样的。因此，尽管B事务在A事务还未结束的时候，增加了表中的数据，但是为了维护可重复读，A事务中不管怎么查询，是查询不了新增的数据的。但是对于真实的表而言，表中的数据是的的确确增加了。</p>
+<h1 id="2-为啥会出现幻读"><a class="markdownIt-Anchor" href="#2-为啥会出现幻读"></a> 2: 为啥会出现幻读？</h1>
 <p>注意，幻读出现的场景：</p>
 <ol>
-<li>
-<p>事务的隔离级别为可重复读，且是当前读</p>
-</li>
-<li>
-<p>幻读仅专指新插⼊的⾏</p>
-</li>
+<li>事务的隔离级别为<strong>可重复读</strong>，且是<strong>当前读</strong></li>
+<li>幻读仅指新插⼊的⾏</li>
 </ol>
-<h1 id="2-为啥会出现幻读"><a class="markdownIt-Anchor" href="#2-为啥会出现幻读"></a> 2: 为啥会出现幻读？</h1>
-<p>⾏锁只能锁定存在的⾏，针对新插⼊的操作没有限定</p>
+<blockquote>
+<p>[!question]<br>
+⾏锁只能锁定存在的⾏，针对新插⼊的操作没有限定</p>
+</blockquote>
+<p>在可重复读隔离级别下，普通的查询是快照读，是不会看到别的事务插入的数据的。<br>
+幻读每次查找都是最新的版本, 所以才会出现原本没有的数据有了, 即幻读在[[快照读 &amp; 当前读|当前读]] 下才会出现。</p>
+<p>![[为什么会出现幻读.excalidraw]]</p>
 <h1 id="3-幻读带来的问题"><a class="markdownIt-Anchor" href="#3-幻读带来的问题"></a> 3: 幻读带来的问题？</h1>
 <ol>
 <li>对⾏锁语义的破坏</li>
 <li>破坏了数据⼀致性</li>
 </ol>
 <h1 id="4-怎么避免幻读"><a class="markdownIt-Anchor" href="#4-怎么避免幻读"></a> 4: 怎么避免幻读？</h1>
-<p>存储引擎采⽤加间隙锁的⽅式来避免出现幻读<br>
-隔离级别设置最高可以解决这个问题 (这个会引起性能很低, 但数据安全性很高)</p>
-<h1 id="5-间隙锁是啥它怎么避免出现幻读的它引入了什么新的问题"><a class="markdownIt-Anchor" href="#5-间隙锁是啥它怎么避免出现幻读的它引入了什么新的问题"></a> 5: 间隙锁是啥？它怎么避免出现幻读的？它引⼊了什么新的问题？</h1>
+<ul>
+<li>存储引擎采⽤加间隙锁的⽅式来避免出现幻读</li>
+<li>隔离级别设置最高可以解决这个问题 (这个会引起性能很低, 但数据安全性很高)</li>
+</ul>
+<h2 id="41-间隙锁是啥它怎么避免出现幻读的它引入了什么新的问题"><a class="markdownIt-Anchor" href="#41-间隙锁是啥它怎么避免出现幻读的它引入了什么新的问题"></a> 4.1: 间隙锁是啥？它怎么避免出现幻读的？它引⼊了什么新的问题？</h2>
 <p>[[间隙锁&amp;临键锁]]</p>
+<h1 id="5-幻读-vs-不可重复读"><a class="markdownIt-Anchor" href="#5-幻读-vs-不可重复读"></a> 5: 幻读 VS 不可重复读</h1>
+<p><strong>幻读</strong>是说数据是否存在，原本不存在的数据存在了<br>
+<strong>不可重复读</strong>是说数据的内容是否发生了变化，原本存在的数据的内容发生了改变</p>
 
               
             </div>

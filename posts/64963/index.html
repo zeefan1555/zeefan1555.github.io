@@ -24,7 +24,7 @@
 <meta property="og:description" content="📝group-by 使⽤原则::  如果对 group by 语句的结果没有排序要求，要在语句后⾯加 order by null； 尽量让 group by 过程⽤上表的索引，确认⽅法是 explain 结果⾥没有 Using temporary 和 Using filesort； 如果 group by 需要统计的数据量不⼤，尽量只使⽤内存临时表；也可以通过适当调⼤ tmp_table_siz">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-12T13:38:00.000Z">
-<meta property="article:modified_time" content="2022-11-17T13:25:49.811Z">
+<meta property="article:modified_time" content="2022-11-19T12:26:08.465Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -284,7 +284,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年11月17日 晚上
+                    本文最后更新于：2022年11月19日 晚上
                   
                 
               </p>
@@ -295,7 +295,7 @@
 <!-- basicblock-end -->
 <p>如果对 group by 语句的结果没有排序要求，要在语句后⾯加 order by null；</p>
 <p>尽量让 group by 过程⽤上表的索引，确认⽅法是 explain 结果⾥没有 Using temporary 和 Using filesort；</p>
-<p>如果 group by 需要统计的数据量不⼤，尽量只使⽤内存临时表；也可以通过适当调⼤ tmp_table_size 参数，来避免⽤到磁盘临时表；</p>
+<p>如果 group by 需要统计的数据量不⼤，尽量只使⽤<strong>内存临时表</strong>；也可以通过适当调⼤ tmp_table_size 参数，来避免⽤到磁盘临时表；</p>
 <p>如果数据量实在太⼤，使⽤ SQL_BIG_RESULT 这个提⽰，来告诉优化器直接使⽤排序算法 得到 group by 的结果，不要使⽤内存临时表。</p>
 <p>[[DQL#^246cb8]]</p>
 

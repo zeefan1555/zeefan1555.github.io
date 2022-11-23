@@ -23,10 +23,12 @@
 <meta property="og:site_name" content="一杯空气">
 <meta property="og:description" content="📝间隙锁&amp;临键锁::  InnoDB 在 repeatable read (可重复读级别) 事务隔离级别运行间隙锁与临键锁， InnoDB 使用 next-key 锁进行搜索和索引扫描，以防止幻读。  索引上的等值查询 (唯一索引)，给不存在的记录加锁时, 优化为间隙锁。 索引上的等值查询 (非唯一普通索引)，向右遍历时最后一个值不满足查询需求时，next-key lock 退化为间隙锁">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201210160046264.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNzk5NjE1,size_16,color_FFFFFF,t_70#pic_center">
 <meta property="article:published_time" content="2022-11-10T13:38:00.000Z">
-<meta property="article:modified_time" content="2022-11-11T01:32:19.835Z">
+<meta property="article:modified_time" content="2022-11-18T12:24:11.228Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20201210160046264.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNzk5NjE1,size_16,color_FFFFFF,t_70#pic_center">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -222,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          588 字
+          735 字
         
       </span>
     
@@ -233,7 +235,7 @@
         
         
         
-          3 分钟
+          4 分钟
         
       </span>
     
@@ -284,7 +286,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年11月11日 上午
+                    本文最后更新于：2022年11月18日 晚上
                   
                 
               </p>
@@ -310,9 +312,19 @@
 间隙锁可以共存，一个事务采用的间隙锁不会阻止另一个事务在同一间隙上采用间隙锁。</p>
 </blockquote>
 <h1 id="1-间隙锁"><a class="markdownIt-Anchor" href="#1-间隙锁"></a> 1: 间隙锁</h1>
-<p>是专门⽤于解决幻读这种问题的锁，它锁的了⾏与⾏之间的间隙，能够阻塞新插⼊的操作<br>
+<p>它锁的了⾏与⾏之间的间隙，能够阻塞新插⼊的操作 -&gt;即解决了幻读</p>
+<p>怎么加间隙锁呢？使用写锁（又叫[[行锁 (共享锁, 排他锁)#^d2fd98 | 排它锁]]，X锁）时自动生效，也就是说我们执行 <code>SELECT * FEOM t FOR UPDATE</code>时便会自动触发间隙锁。</p>
+<blockquote>
+<p>[!tip]<br>
+读锁: 允许读, 允许写<br>
+写锁: 不允许读, 不允许写: 就是完全不想让其它事务操作该数据<br>
+<img src="https://img-blog.csdnimg.cn/20201210160046264.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNzk5NjE1,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"><br>
+间隙锁之间是不冲突的 : eg: A事务对(5, 10]加了间隙锁以后，B事务也可以对这个区间加间隙锁。</p>
+</blockquote>
+<blockquote>
+<p>[!note] 带来的问题<br>
 间隙锁的引⼊也带来了⼀些新的问题，⽐如：降低并发度，可能导致[[MySQL 死锁|死锁]]。</p>
-<p>注意，读读不互斥，读写/写读/写写是互斥的，但是间隙锁之间是不冲突的，间隙锁会阻塞 插⼊操作</p>
+</blockquote>
 <h1 id="2-next-key-lock"><a class="markdownIt-Anchor" href="#2-next-key-lock"></a> 2: next-key lock</h1>
 <p>⾏锁和间隙锁合称 next-key lock，这个锁是左开右闭的区间。<br>
 MySQL 为了解决幻读问题，在线程更新数据并 next-key lock 的过程中，⾸先必须在可重复读的隔离级别下，<br>

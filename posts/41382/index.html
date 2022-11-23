@@ -16,15 +16,15 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="📝递归解题方法::   1: 三部曲   确定递归函数的参数和返回值：  确定哪些参数是递归的过程中需要处理的，那么就在递归函数里加上这个参数， 并且还要明确每次递归的返回值是什么, 进而确定递归函数的返回类型。 二叉树: 一般是传入一个根节点, 传入一个数组(用来放我们的结果) 一般是 void, 因为我们把想要的结果都放到参数了    确定终止条件： 写完了递归算法, 运行的时候，经常会遇到">
+    <meta name="description" content="📝递归解题方法::【递归1】递归中的逆向思维_哔哩哔哩_bilibili  ‌‌‌![[递归解题方法 2022-11-20 15.03.16.excalidraw]] [[汉诺塔问题]]  1: 递归函数定义 明确函数的使命 明确原问题与子问题 兼顾原问题与子问题 递归函数的定义需要兼容”超级操作”。  确定递归函数的参数和返回值：  确定哪些参数是递归的过程中需要处理的，那么就在递归函数里加上">
 <meta property="og:type" content="article">
 <meta property="og:title" content="递归解题方法">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/41382/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="📝递归解题方法::   1: 三部曲   确定递归函数的参数和返回值：  确定哪些参数是递归的过程中需要处理的，那么就在递归函数里加上这个参数， 并且还要明确每次递归的返回值是什么, 进而确定递归函数的返回类型。 二叉树: 一般是传入一个根节点, 传入一个数组(用来放我们的结果) 一般是 void, 因为我们把想要的结果都放到参数了    确定终止条件： 写完了递归算法, 运行的时候，经常会遇到">
+<meta property="og:description" content="📝递归解题方法::【递归1】递归中的逆向思维_哔哩哔哩_bilibili  ‌‌‌![[递归解题方法 2022-11-20 15.03.16.excalidraw]] [[汉诺塔问题]]  1: 递归函数定义 明确函数的使命 明确原问题与子问题 兼顾原问题与子问题 递归函数的定义需要兼容”超级操作”。  确定递归函数的参数和返回值：  确定哪些参数是递归的过程中需要处理的，那么就在递归函数里加上">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-17T01:45:00.000Z">
-<meta property="article:modified_time" content="2022-11-17T14:37:24.182Z">
+<meta property="article:modified_time" content="2022-11-22T03:13:32.053Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="递归">
 <meta name="twitter:card" content="summary_large_image">
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          309 字
+          697 字
         
       </span>
     
@@ -234,7 +234,7 @@
         
         
         
-          2 分钟
+          4 分钟
         
       </span>
     
@@ -285,34 +285,53 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年11月17日 晚上
+                    本文最后更新于：2022年11月22日 上午
                   
                 
               </p>
             
             <div class="markdown-body">
               
-              <p>📝递归解题方法::</p>
+              <p>📝递归解题方法::<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1214y157HG/?spm_id_from=333.788.recommend_more_video.0&amp;vd_source=f2340d96e99780a96b50d8096ffaaf1a">【递归1】递归中的逆向思维_哔哩哔哩_bilibili</a></p>
 <!-- basicblock-end -->
-<h1 id="1-三部曲"><a class="markdownIt-Anchor" href="#1-三部曲"></a> 1: 三部曲</h1>
+<p>‌‌‌![[递归解题方法 2022-11-20 15.03.16.excalidraw]]<br>
+[[汉诺塔问题]]</p>
+<h1 id="1-递归函数定义"><a class="markdownIt-Anchor" href="#1-递归函数定义"></a> 1: 递归函数定义</h1>
+<p>明确函数的使命<br>
+明确原问题与子问题<br>
+兼顾原问题与子问题<br>
+递归函数的定义需要兼容”超级操作”。</p>
 <ol>
-<li>
-<p><strong>确定递归函数的参数和返回值：</strong></p>
+<li><strong>确定递归函数的参数和返回值：</strong>
 <ol>
 <li>确定哪些参数是递归的过程中需要处理的，那么就在递归函数里加上这个参数，</li>
-<li>并且还要明确每次递归的返回值是什么, 进而确定递归函数的返回类型。<br>
-<strong>二叉树: 一般是传入一个根节点, 传入一个数组(用来放我们的结果)</strong><br>
-一般是 void, 因为我们把想要的结果都放到参数了</li>
+<li>并且还要明确每次递归的返回值是什么, 进而确定递归函数的返回类型。</li>
 </ol>
 </li>
-<li>
-<p><strong>确定终止条件：</strong> 写完了递归算法, 运行的时候，经常会遇到栈溢出的错误，就是没写终止条件或者终止条件写的不对，操作系统也是用一个栈的结构来保存每一层递归的信息，如果递归没有终止，操作系统的内存栈必然就会溢出。</p>
-</li>
-<li>
-<p><strong>确定单层递归的逻辑：</strong> 确定每一层递归需要处理的信息。在这里也就会重复调用自己来实现递归的过程。</p>
-</li>
 </ol>
-<h1 id="2-对称性递归"><a class="markdownIt-Anchor" href="#2-对称性递归"></a> 2: [[对称性递归]]</h1>
+<h2 id="11-void"><a class="markdownIt-Anchor" href="#11-void"></a> 1.1: void</h2>
+<p><strong>二叉树: 一般是传入一个根节点, 传入一个数组(用来放我们的结果)</strong><br>
+也可以在外边全局定义数组, 在递归中修改数组, 最后在返回<br>
+一般是 void, 因为我们把想要的结果都放到参数了</p>
+<h3 id="111-遍历整棵树"><a class="markdownIt-Anchor" href="#111-遍历整棵树"></a> 1.1.1: 遍历整棵树</h3>
+<p>eg: 遍历整棵树[[18. 路径总和]]</p>
+<h1 id="2-基础情况处理"><a class="markdownIt-Anchor" href="#2-基础情况处理"></a> 2: 基础情况处理</h1>
+<p>数据规模较小时直接返回答案<br>
+2.  <strong>确定终止条件：</strong> 写完了递归算法, 运行的时候，经常会遇到栈溢出的错误，就是没写终止条件或者终止条件写的不对，操作系统也是用一个栈的结构来保存每一层递归的信息，如果递归没有终止，操作系统的内存栈必然就会溢出。<br>
+递归出口：<br>
+对于传入下标的有序数组递归，end &lt; start 是一种比较标准的递归出口<br>
+<code>if (left &gt; right) return nullptr;// eg：-10大于-3了，当然要退出循环</code>  [[33.将有序数组转换为二叉搜索树]]<br>
+if(root == NULL) return</p>
+<h1 id="3-递归调用"><a class="markdownIt-Anchor" href="#3-递归调用"></a> 3: 递归调用</h1>
+<p>超级操作<br>
+看成整体，忽略细节<br>
+相信它一定能完成使命</p>
+<ol start="3">
+<li><strong>确定单层递归的逻辑：</strong> 确定每一层递归需要处理的信息。在这里也就会重复调用自己来实现递归的过程。</li>
+</ol>
+<h1 id="4-递推到当前层"><a class="markdownIt-Anchor" href="#4-递推到当前层"></a> 4: 递推到当前层</h1>
+<p>微操作</p>
+<h1 id="5-对称性递归"><a class="markdownIt-Anchor" href="#5-对称性递归"></a> 5: [[对称性递归]]</h1>
 
               
             </div>

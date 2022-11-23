@@ -16,15 +16,15 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="📝order by 是怎样⼯作的？::   1: sort_buffer 1select city,name,age from t where city&#x3D;&#39;杭州&#39; order by name limit 1000; 涉及到⽤户语句的排序，mysql 会给每个线程分配⼀块内存⽤于排序，也就是 sort_buffer。这条语句的执⾏逻辑是： 1、先初始化 sort_bufer 2、然后放⼊ city">
+    <meta name="description" content="📝order by 是怎样⼯作的？::   1: [[sort buffer]]">
 <meta property="og:type" content="article">
 <meta property="og:title" content="order by 是怎样⼯作的？">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/58678/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="📝order by 是怎样⼯作的？::   1: sort_buffer 1select city,name,age from t where city&#x3D;&#39;杭州&#39; order by name limit 1000; 涉及到⽤户语句的排序，mysql 会给每个线程分配⼀块内存⽤于排序，也就是 sort_buffer。这条语句的执⾏逻辑是： 1、先初始化 sort_bufer 2、然后放⼊ city">
+<meta property="og:description" content="📝order by 是怎样⼯作的？::   1: [[sort buffer]]">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-12T12:54:00.000Z">
-<meta property="article:modified_time" content="2022-11-12T14:46:15.795Z">
+<meta property="article:modified_time" content="2022-11-19T12:17:26.974Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          779 字
+          34 字
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          4 分钟
+          1 分钟
         
       </span>
     
@@ -284,7 +284,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年11月12日 晚上
+                    本文最后更新于：2022年11月19日 晚上
                   
                 
               </p>
@@ -293,27 +293,7 @@
               
               <p>📝order by 是怎样⼯作的？::</p>
 <!-- basicblock-end -->
-<h1 id="1-sort_buffer"><a class="markdownIt-Anchor" href="#1-sort_buffer"></a> 1: sort_buffer</h1>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs MySQL">select city,name,age from t where city='杭州' order by name limit 1000;<br></code></pre></td></tr></tbody></table></figure>
-<p>涉及到⽤户语句的排序，mysql 会给每个线程分配⼀块内存⽤于排序，也就是 sort_buffer。这条语句的执⾏逻辑是：</p>
-<p>1、先初始化 sort_bufer</p>
-<p>2、然后放⼊ city,name,age 字段，不断地由主键 id 索引到整⾏再到三个字段的值，匹配查找的值存⼊ sort_buff</p>
-<p>3、然后按 name 排序，返回前 1000 个值</p>
-<blockquote>
-<p>[!note] 如果 sort_buffer_size 设置的太⼩，⽆法存放所有匹配的字段，排序就⽆法在内存中完成<br>
-则要借鉴磁盘临时⽂件辅助排序，可以通过 number_of_tmp_files 这个标识来判断是否使 ⽤，<br>
-其实这个原理和对超⼤数据的排序相同。<br>
-如果要记录的字段太长，这样内存⾥能够同时放下的⾏数很少，要分成很多个临时⽂件，排序的性能会很差。</p>
-</blockquote>
-<blockquote>
-<p>[!question]<br>
-这时会换⼀个算法，叫做 rowid 排序，顾名思义，就是对主键 id 以及排序字段进⾏存放，这样就节省了空间，但是最后需要通过主键 id 去找到之前未取出的字段。对⽐全字段排序， rowid 排序多访问了⼀次表 t 的主键索引。</p>
-</blockquote>
-<h1 id="2-结论"><a class="markdownIt-Anchor" href="#2-结论"></a> 2: 结论：</h1>
-<p>如果 MySQL 实在是担⼼排序内存太⼩，会影响排序效率，才会采⽤ rowid 排序算法，这样 排序过程中⼀次可以排序更多⾏，但是需要再回到原表去取数据。</p>
-<p>如果 MySQL 认为内存⾜够⼤，会优先选择全字段排序，把需要的字段都放到 sort_buffer 中，这样排序后就会直接从内存⾥⾯返回查询结果了，不⽤再回到原表去取数据。</p>
-<p>如果想要避免排序，可以建⽴对应字段的索引。</p>
-<p>如果想要进⼀步避免主键 id 的回表查询，可以使⽤覆盖索引，这种情况的索引建⽴成本会 ⽐较⼤，需要你去⾃⼰权衡是否使⽤</p>
+<h1 id="1-sort-buffer"><a class="markdownIt-Anchor" href="#1-sort-buffer"></a> 1: [[sort buffer]]</h1>
 
               
             </div>

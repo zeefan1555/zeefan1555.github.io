@@ -16,17 +16,17 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="📝InnoDB 内存结构::  InnoDB 内存结构 主要分为这么四大块儿： Buffer Pool、Change Buffer、Adaptive Hash Index、Log Buffer。接下来介绍一下这四个部分。 ![[InnoDB 内存结构.excalidraw]]  1: Buffer Pool InnoDB 存储引擎基于磁盘文件存储，访问物理硬盘和在内存中进行访问，速度相差很大，为">
+    <meta name="description" content="📝InnoDB 内存结构::  InnoDB 内存结构 主要分为这么四大块儿： Buffer Pool、Change Buffer、Adaptive Hash Index、Log Buffer。接下来介绍一下这四个部分。 ![[InnoDB 内存结构.excalidraw|500]]  1: Buffer Pool InnoDB 存储引擎基于磁盘文件存储，访问物理硬盘和在内存中进行访问，速度相差">
 <meta property="og:type" content="article">
 <meta property="og:title" content="InnoDB 内存结构">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/38836/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="📝InnoDB 内存结构::  InnoDB 内存结构 主要分为这么四大块儿： Buffer Pool、Change Buffer、Adaptive Hash Index、Log Buffer。接下来介绍一下这四个部分。 ![[InnoDB 内存结构.excalidraw]]  1: Buffer Pool InnoDB 存储引擎基于磁盘文件存储，访问物理硬盘和在内存中进行访问，速度相差很大，为">
+<meta property="og:description" content="📝InnoDB 内存结构::  InnoDB 内存结构 主要分为这么四大块儿： Buffer Pool、Change Buffer、Adaptive Hash Index、Log Buffer。接下来介绍一下这四个部分。 ![[InnoDB 内存结构.excalidraw|500]]  1: Buffer Pool InnoDB 存储引擎基于磁盘文件存储，访问物理硬盘和在内存中进行访问，速度相差">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202211142204148.png">
 <meta property="og:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202211142213193.png">
 <meta property="article:published_time" content="2022-11-14T14:07:00.000Z">
-<meta property="article:modified_time" content="2022-11-15T09:25:40.863Z">
+<meta property="article:modified_time" content="2022-11-18T13:55:54.211Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202211142204148.png">
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.4k 字
+          1.2k 字
         
       </span>
     
@@ -236,7 +236,7 @@
         
         
         
-          7 分钟
+          6 分钟
         
       </span>
     
@@ -287,7 +287,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年11月15日 下午
+                    本文最后更新于：2022年11月18日 晚上
                   
                 
               </p>
@@ -298,7 +298,7 @@
 <!-- basicblock-end -->
 <p>InnoDB 内存结构<br>
 主要分为这么四大块儿： Buffer Pool、Change Buffer、Adaptive Hash Index、Log Buffer。接下来介绍一下这四个部分。</p>
-<p>![[InnoDB 内存结构.excalidraw]]</p>
+<p>![[InnoDB 内存结构.excalidraw|500]]</p>
 <h1 id="1-buffer-pool"><a class="markdownIt-Anchor" href="#1-buffer-pool"></a> 1: Buffer Pool</h1>
 <p>InnoDB 存储引擎基于磁盘文件存储，访问物理硬盘和在内存中进行访问，速度相差很大，为了尽可能弥补这两者之间的 I/O 效率的差值，就需要把经常使用的数据加载到缓冲池中，避免每次访问都进行磁盘随机 I/O, 💡找个时间来顺序 I/O</p>
 <p>在InnoDB的缓冲池中不仅缓存了索引页和数据页，还包含了undo页、插入缓存、自适应哈希索引以及 InnoDB的锁信息等等。</p>
@@ -310,9 +310,7 @@
 <p><strong>在专用服务器上，通常将多达 80％的物理内存分配给缓冲池, 通过缓冲区就可以提高并发</strong><br>
 参数设置： show variables like ‘innodb_buffer_pool_size’;<br>
 <img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202211142204148.png" srcset="/img/loading.gif" lazyload alt=""></p>
-<h1 id="2-change-buffer"><a class="markdownIt-Anchor" href="#2-change-buffer"></a> 2: Change Buffer</h1>
-<p>Change Buffer，更改缓冲区（针对于非唯一二级索引页），在执行 DML 语句时，如果这些数据 Page 没有在 Buffer Pool 中，不会直接操作磁盘，而会将数据变更存在更改缓冲区 Change Buffer 中，<strong>在未来数据被读取时</strong>，再将数据合并恢复到 Buffer Pool 中，再将合并后的数据刷新到磁盘中。</p>
-<p>![[Change Buffer的意义是什么?.excalidraw]]</p>
+<h1 id="2-change-buffer"><a class="markdownIt-Anchor" href="#2-change-buffer"></a> 2: [[change buffer]]</h1>
 <h1 id="3-adaptive-hash-index"><a class="markdownIt-Anchor" href="#3-adaptive-hash-index"></a> 3: Adaptive Hash Index</h1>
 <p>自适应 hash 索引，用于优化对 Buffer Pool 数据的查询。<br>
 InnoDB 存储引擎会监控对表上各索引页的查询，如果观察到在特定的条件下 hash 索引可以提升速度，则建立 hash 索引，称之为自适应 hash 索引。<br>

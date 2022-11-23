@@ -16,15 +16,15 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="📝15 二进制中1的个数::剑指 Offer 15. 二进制中1的个数 - 力扣（LeetCode）  [[运算符]] 目标 学会逻辑运算&amp; 学会右移操作 方法一：逐位判断 根据 与运算 定义，设二进制数字 n ，则有： 若 n&amp;1&#x3D;0，则 n 二进制最右一位 为 0 ； 若 n&amp;1&#x3D;1 ，则 n 二进制最右一位为 1。 根据以上特点，考虑以下 循环判断 ： 判断 n最右">
+    <meta name="description" content="📝15 二进制中1的个数::剑指 Offer 15. 二进制中1的个数 - 力扣（LeetCode）  [[运算符]] 目标 学会逻辑运算&amp; 学会右移操作  1: 方法一：逐位判断 根据 与运算 定义，设二进制数字 n ，则有： 若 n&amp;1&#x3D;0，则 n 二进制最右一位 为 0 ； 若 n&amp;1&#x3D;1 ，则 n 二进制最右一位为 1。 这是为什么呢 根据以上特点，考虑以下 循环">
 <meta property="og:type" content="article">
 <meta property="og:title" content="15 二进制中1的个数">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/19969/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="📝15 二进制中1的个数::剑指 Offer 15. 二进制中1的个数 - 力扣（LeetCode）  [[运算符]] 目标 学会逻辑运算&amp; 学会右移操作 方法一：逐位判断 根据 与运算 定义，设二进制数字 n ，则有： 若 n&amp;1&#x3D;0，则 n 二进制最右一位 为 0 ； 若 n&amp;1&#x3D;1 ，则 n 二进制最右一位为 1。 根据以上特点，考虑以下 循环判断 ： 判断 n最右">
+<meta property="og:description" content="📝15 二进制中1的个数::剑指 Offer 15. 二进制中1的个数 - 力扣（LeetCode）  [[运算符]] 目标 学会逻辑运算&amp; 学会右移操作  1: 方法一：逐位判断 根据 与运算 定义，设二进制数字 n ，则有： 若 n&amp;1&#x3D;0，则 n 二进制最右一位 为 0 ； 若 n&amp;1&#x3D;1 ，则 n 二进制最右一位为 1。 这是为什么呢 根据以上特点，考虑以下 循环">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-15T01:16:00.000Z">
-<meta property="article:modified_time" content="2022-11-15T12:45:48.891Z">
+<meta property="article:modified_time" content="2022-11-19T08:26:23.805Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          500 字
+          1.1k 字
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          3 分钟
+          6 分钟
         
       </span>
     
@@ -284,7 +284,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年11月15日 晚上
+                    本文最后更新于：2022年11月19日 下午
                   
                 
               </p>
@@ -297,25 +297,39 @@
 目标<br>
 学会逻辑运算&amp;<br>
 学会右移操作</p>
-<p>方法一：逐位判断<br>
-根据 <code>与运算</code> 定义，设二进制数字 n ，则有：<br>
+<h1 id="1-方法一逐位判断"><a class="markdownIt-Anchor" href="#1-方法一逐位判断"></a> 1: 方法一：逐位判断</h1>
+<p>根据 <code>与运算</code> 定义，设二进制数字 n ，则有：<br>
 若 n&amp;1=0，则 n 二进制<strong>最右一位</strong> 为 0 ；<br>
-若 n&amp;1=1 ，则 n 二进制最右一位为 1。</p>
+若 n&amp;1=1 ，则 n 二进制最右一位为 1。<br>
+这是为什么呢</p>
 <p>根据以上特点，考虑以下 循环判断 ：<br>
 判断 n最右一位是否为 1 ，根据结果计数。<br>
 将 n 右移一位, 💡继续看前一位的最右位是否为 1</p>
+<p>v2</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">hammingWeight</span><span class="hljs-params">(<span class="hljs-type">uint32_t</span> n)</span> </span>{<br>        <span class="hljs-type">int</span> count = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span>(n != <span class="hljs-number">0</span>){<br>           (n&amp;<span class="hljs-number">1</span>) == <span class="hljs-number">1</span> ? count++, n/=<span class="hljs-number">2</span> : n/=<span class="hljs-number">2</span>; <br>        }<br>        <span class="hljs-keyword">return</span> count;<br>        <br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
 <p>v1</p>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">hammingWeight</span><span class="hljs-params">(<span class="hljs-type">uint32_t</span> n)</span> </span>{<br>        <span class="hljs-type">int</span> count = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span>(n != <span class="hljs-number">0</span>){ <br>        <span class="hljs-comment">// ❗️必须得有&amp;操作, 不然不通过</span><br>            <span class="hljs-keyword">if</span>(n &amp; <span class="hljs-number">1</span>) count++; <span class="hljs-comment">// ❗️n 的最右位不为 1</span><br>            n = n &gt;&gt;= <span class="hljs-number">1</span>; <span class="hljs-comment">// 💡相当于/2</span><br>        }<br>        <span class="hljs-keyword">return</span> count;<br><br>        <br>    }<br>};<br><br></code></pre></td></tr></tbody></table></figure>
-<p>[[逻辑运算符]]</p>
-<hr>
-<p>categories:</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">hammingWeight</span><span class="hljs-params">(<span class="hljs-type">uint32_t</span> n)</span> </span>{<br>        <span class="hljs-type">int</span> count = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span>(n != <span class="hljs-number">0</span>){ <br>        <span class="hljs-comment">// ❗️必须得有&amp;操作, 不然不通过</span><br>            <span class="hljs-keyword">if</span>(n &amp; <span class="hljs-number">1</span>) count++; <span class="hljs-comment">// ❗️n 的最右位不为 1</span><br>            n &gt;&gt;= <span class="hljs-number">1</span>; <span class="hljs-comment">// 💡相当于/2, n &gt;&gt;= 1 是右移之后再赋值，相当于 n = n &gt;&gt; 1 是一种简便的写 [[逻辑运算符]]</span><br>        }<br>        <span class="hljs-keyword">return</span> count;<br><br>        <br>    }<br>};<br><br></code></pre></td></tr></tbody></table></figure>
+<p>[[计算时间复杂度]]</p>
 <ul>
-<li>“\U0001F468\U0001F3FB‍\U0001F4BBcode”</li>
-<li>数据结构与算法</li>
-<li>剑指 offer<br>
-abbrlink: 98</li>
+<li><strong>时间复杂度 O(log2n) ：</strong>
+<ul>
+<li>此算法循环内部仅有 <strong>移位、与、加</strong> 等基本运算，占用 O(1) ；</li>
+<li>question 逐位判断需循环 log2n 次，其中 log2n 代表数字 n 最高位 1 的所在位数（例如 log24=2, log216=4）。</li>
 </ul>
-<hr>
+</li>
+<li><strong>空间复杂度 O(1) ：</strong> 变量 res 使用常数大小额外空间。</li>
+</ul>
+<h1 id="2"><a class="markdownIt-Anchor" href="#2"></a> 2:</h1>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// 巧用n&amp;(n - 1) （将n最右边的1置0，在n=0之前 该操作的次数即为1的个数）</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">hammingWeight</span><span class="hljs-params">(<span class="hljs-type">uint32_t</span> n)</span> </span>{<br>        <span class="hljs-type">int</span> counts = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (n) {      <span class="hljs-comment">// 每次循环都将n最右边的1置0，累加次数。直到所有1都置为0时，循环终止</span><br>            n &amp;= n - <span class="hljs-number">1</span>;   <br>            ++counts;<br>        }<br><br>        <span class="hljs-keyword">return</span> counts;<br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
+<ul>
+<li><strong>时间复杂度 O(M) ：</strong>
+<ul>
+<li>n&amp;(n−1) 操作仅有减法和与运算，占用 O(1) ；</li>
+<li>设 M 为二进制数字 n 中 1 的个数，则需循环 M 次（每轮消去一个 1 ），占用 O(M)</li>
+</ul>
+</li>
+<li><strong>空间复杂度 O(1) ：</strong> 变量 res 使用常数大小额外空间。</li>
+</ul>
 
               
             </div>

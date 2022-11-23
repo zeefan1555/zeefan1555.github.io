@@ -16,15 +16,15 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="📝⼀张表可以存储多少条信息::   [!summary] 主键 bigint 类型:  8 个字节 ➕ 指针 6 个字节 -&gt; 能存 2200w 左右 主键 int 类型: 4 个字节 ➕ 指针 6 个字节 -&gt; 4300w 左右  假设采⽤的是InnoDB引擎 那么数据结构的⾓度来看，本着索引即数据的思路，就是求⼀个 B+树 能够存储多少数据， 根据 B+树 定义也就转变成了 2">
+    <meta name="description" content="📝⼀张表可以存储多少条信息::  根据 B+树的形式，确定了该 B+树为1️⃣⼏阶的 B+树，以及2️⃣树的⾼度，就能确定叶⼦节点有最多有多少个。 假设: 树高为 3, 一个叶子节点可以存储 16 条记录  [!summary] 主键 bigint 类型:  8 个字节 ➕ 指针 6 个字节 -&gt; 能存 2200w 左右 主键 int 类型: 4 个字节 ➕ 指针 6 个字节 -&gt;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="⼀张表可以存储多少条信息">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/37902/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="📝⼀张表可以存储多少条信息::   [!summary] 主键 bigint 类型:  8 个字节 ➕ 指针 6 个字节 -&gt; 能存 2200w 左右 主键 int 类型: 4 个字节 ➕ 指针 6 个字节 -&gt; 4300w 左右  假设采⽤的是InnoDB引擎 那么数据结构的⾓度来看，本着索引即数据的思路，就是求⼀个 B+树 能够存储多少数据， 根据 B+树 定义也就转变成了 2">
+<meta property="og:description" content="📝⼀张表可以存储多少条信息::  根据 B+树的形式，确定了该 B+树为1️⃣⼏阶的 B+树，以及2️⃣树的⾼度，就能确定叶⼦节点有最多有多少个。 假设: 树高为 3, 一个叶子节点可以存储 16 条记录  [!summary] 主键 bigint 类型:  8 个字节 ➕ 指针 6 个字节 -&gt; 能存 2200w 左右 主键 int 类型: 4 个字节 ➕ 指针 6 个字节 -&gt;">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-12T13:39:00.000Z">
-<meta property="article:modified_time" content="2022-11-12T14:46:14.157Z">
+<meta property="article:modified_time" content="2022-11-19T12:41:52.621Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          545 字
+          504 字
         
       </span>
     
@@ -284,7 +284,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年11月12日 晚上
+                    本文最后更新于：2022年11月19日 晚上
                   
                 
               </p>
@@ -293,6 +293,8 @@
               
               <p>📝⼀张表可以存储多少条信息::</p>
 <!-- basicblock-end -->
+<p>根据 B+树的形式，确定了该 B+树为1️⃣⼏阶的 B+树，以及2️⃣树的⾼度，就能确定叶⼦节点有最多有多少个。</p>
+<p>假设: 树高为 3, 一个叶子节点可以存储 16 条记录</p>
 <blockquote>
 <p>[!summary]<br>
 主键 bigint 类型:  8 个字节 ➕ 指针 6 个字节 -&gt; 能存 2200w 左右<br>
@@ -304,18 +306,17 @@
 <li>每个叶⼦结点存储能存储多少条记录</li>
 <li>⼀共有多少个叶⼦结点</li>
 </ol>
-<p><strong>每个叶⼦结点能存储多少条记录</strong></p>
-<p>假设⼀条记录的⼤⼩为1kb，InnoDB中默认每页为16kb，则⼀个叶⼦节点可存储16条数据</p>
-<p><strong>⼀共有多少个叶⼦结点</strong></p>
+<p><strong>每个叶⼦结点能存储多少条记录</strong><br>
+假设⼀条记录的⼤⼩为1kb, 树高 3, InnoDB中默认每页为16kb，则⼀个叶⼦节点可存储16条数据</p>
+<p><strong>⼀共有多少个叶⼦结点</strong><br>
+假设主键 bigint 类型:  8 个字节 ➕ 指针 6 个字节 : 一个单位为 14 个字节<br>
+一个叶子节点可以存储: (1024 * 16)/14 = 1170 个节点</p>
+<p>树高为 2<br>
+有 1170 个叶子-&gt; 总存储记录: 1170 * 16</p>
+<p>树高为 3<br>
+有 1170 * 1170 个叶子 -&gt; 总存储: 1170 * 1170 * 16</p>
 <p>‌‌‌　　<br>
 ![[一张表能存多少数据.excalidraw]]</p>
-<p>根据 B+树的形式，确定了该 B+树为1️⃣⼏阶的 B+树，以及2️⃣树的⾼度，就能确定叶⼦节点有最多有多少个。</p>
-<p>⾮叶⼦节点存储的数据为主键+指针。<br>
-主键，如果为 int 类型则 4 字节，指针⼤⼩也假设为 4 字节。</p>
-<p>以主键+指针为基本单位，那么⼀个⾮叶⼦节点最多能够存储 (16 * 1024) / 8 = 2048 个，<br>
-2048 个指针能够引出 2048 个⼦节点，<br>
-如果该 B+树的⾼度为 2，则存储的记录数量为 2048 * 16 = 32768 条记录，<br>
-如果⾼度为 3 则有 2048 * 2048 * 16 = 67108864 条记录。（也能反向得出，⼀般索引⾼度都在 3 左右吧）</p>
 
               
             </div>

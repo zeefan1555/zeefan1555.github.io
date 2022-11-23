@@ -16,15 +16,15 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="📝分库分表的问题::  分库分表解决了问题，同时也带来了问题。 如跨库查询、分布式事务、分库之后的排序（翻页，函数的计算问题）、全局主键问题、容量规划（⼆次扩容问题）、技术选型问题 以下是⼀些常见的问题  1: 跨节点数据库 Join 关联查询 数据库切分前： 多表关联查询，可以通过 sql join 进⾏实现 分库分表后：数据可能分布在不同的节点上，sql join 带来的问题就⽐较⿇烦  2">
+    <meta name="description" content="📝分库分表的问题::  分库分表解决了问题，同时也带来了问题。 如  跨库查询 分布式事务 分库之后的排序（翻页，函数的计算问题） 全局主键问题 容量规划（⼆次扩容问题） 技术选型问题   1: 跨节点数据库 Join 关联查询 数据库切分前： 多表关联查询，可以通过 sql join 进⾏实现 分库分表后：数据可能分布在不同的节点上，sql join 带来的问题就⽐较⿇烦  2: 分库操作带来">
 <meta property="og:type" content="article">
 <meta property="og:title" content="分库分表的问题">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/30550/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="📝分库分表的问题::  分库分表解决了问题，同时也带来了问题。 如跨库查询、分布式事务、分库之后的排序（翻页，函数的计算问题）、全局主键问题、容量规划（⼆次扩容问题）、技术选型问题 以下是⼀些常见的问题  1: 跨节点数据库 Join 关联查询 数据库切分前： 多表关联查询，可以通过 sql join 进⾏实现 分库分表后：数据可能分布在不同的节点上，sql join 带来的问题就⽐较⿇烦  2">
+<meta property="og:description" content="📝分库分表的问题::  分库分表解决了问题，同时也带来了问题。 如  跨库查询 分布式事务 分库之后的排序（翻页，函数的计算问题） 全局主键问题 容量规划（⼆次扩容问题） 技术选型问题   1: 跨节点数据库 Join 关联查询 数据库切分前： 多表关联查询，可以通过 sql join 进⾏实现 分库分表后：数据可能分布在不同的节点上，sql join 带来的问题就⽐较⿇烦  2: 分库操作带来">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-14T12:24:00.000Z">
-<meta property="article:modified_time" content="2022-11-14T12:43:47.218Z">
+<meta property="article:modified_time" content="2022-11-19T13:15:24.472Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          545 字
+          549 字
         
       </span>
     
@@ -284,7 +284,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年11月14日 晚上
+                    本文最后更新于：2022年11月19日 晚上
                   
                 
               </p>
@@ -294,19 +294,37 @@
               <p>📝分库分表的问题::</p>
 <!-- basicblock-end -->
 <p>分库分表解决了问题，同时也带来了问题。<br>
-如跨库查询、分布式事务、分库之后的排序（翻页，函数的计算问题）、全局主键问题、容量规划（⼆次扩容问题）、技术选型问题</p>
-<p>以下是⼀些常见的问题</p>
+如</p>
+<ul>
+<li>跨库查询</li>
+<li>分布式事务</li>
+<li>分库之后的排序（翻页，函数的计算问题）</li>
+<li>全局主键问题</li>
+<li>容量规划（⼆次扩容问题）</li>
+<li>技术选型问题</li>
+</ul>
 <h1 id="1-跨节点数据库-join-关联查询"><a class="markdownIt-Anchor" href="#1-跨节点数据库-join-关联查询"></a> 1: 跨节点数据库 Join 关联查询</h1>
 <p>数据库切分前： 多表关联查询，可以通过 sql join 进⾏实现</p>
 <p>分库分表后：数据可能分布在不同的节点上，sql join 带来的问题就⽐较⿇烦</p>
 <h1 id="2-分库操作带来的分布式事务问题"><a class="markdownIt-Anchor" href="#2-分库操作带来的分布式事务问题"></a> 2: 分库操作带来的分布式事务问题</h1>
-<p>操作内容同时分布在不同库中，不可避免会带来跨库事务问题，即分布式事务</p>
+<blockquote>
+<p>[!question]<br>
+操作内容同时分布在不同库中，不可避免会带来跨库事务问题，即分布式事务::   #疑问<br>
+[[分布式]]</p>
+</blockquote>
 <h1 id="3-执行的sql排序-翻页-函数计算问题"><a class="markdownIt-Anchor" href="#3-执行的sql排序-翻页-函数计算问题"></a> 3: 执⾏的SQL排序、翻页、函数计算问题</h1>
 <p>分库后：</p>
-<p>数据分布再不同的节点上， 跨节点多库进⾏查询时，会出现limit分页、order by排序等问 题</p>
-<p>⽽且当排序字段⾮分⽚字段时，更加复杂了，要在不同的分⽚节点中将数据进⾏排序并返 回，然后将不同分⽚返回的结果集进⾏汇总和再次排序（也会带来更多的CPU/IO资源损 耗）</p>
+<p>数据分布再不同的节点上，跨节点多库进⾏查询时，会出现limit分页、order by排序等问题</p>
+<blockquote>
+<p>[!note] 也会带来更多的CPU/IO资源损耗<br>
+当排序字段⾮分⽚字段时<br>
+要在不同的分⽚节点中将数据进⾏排序并返回，<br>
+然后将不同分⽚返回的结果集进⾏汇总和再次排序</p>
+</blockquote>
 <h1 id="4-数据库全局主键重复问题"><a class="markdownIt-Anchor" href="#4-数据库全局主键重复问题"></a> 4: 数据库全局主键重复问题</h1>
-<p>常规表的id是使⽤⾃增id进⾏实现，分库分表后，由于表中数据同时存在不同数据库中，如 果⽤⾃增id，则会出现冲突问题</p>
+<p>常规表的id是使⽤⾃增id进⾏实现，</p>
+<p>分库分表后，<br>
+由于表中数据同时存在不同数据库中，如 果⽤⾃增id，则会出现冲突问题</p>
 <h1 id="5-容量规划分库分表后二次扩容问题"><a class="markdownIt-Anchor" href="#5-容量规划分库分表后二次扩容问题"></a> 5: 容量规划,分库分表后⼆次扩容问题</h1>
 <p>业务发展快，初次分库分表后，满⾜不了数据存储，导致需要多次扩容</p>
 <h1 id="6-分库分表技术选型问题"><a class="markdownIt-Anchor" href="#6-分库分表技术选型问题"></a> 6: 分库分表技术选型问题</h1>
@@ -381,8 +399,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/53057/" title="分库和分表">
-                        <span class="hidden-mobile">分库和分表</span>
+                      <a href="/posts/18486/" title="MySQL架构升级之路">
+                        <span class="hidden-mobile">MySQL架构升级之路</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

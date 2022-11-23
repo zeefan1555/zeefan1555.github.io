@@ -16,16 +16,16 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="[!note]- MySQL 为什么不选二叉树. 大数据量情况下, 层级较深, 检索速度慢。 孩子太少了, 效率不高 ![[MySQL 为什么不选二叉树.excalidraw]]   1: B-Tree 为了解决上述问题，可以使用 B-Tree 结构。 B-Tree (多路平衡查找树) 以一棵最大度数（max-degree，指一个节点的子节点个数）为5（5阶）的 b-tree 为例（每个节点最多">
+    <meta name="description" content="📝B-Tree:: 2022&#x2F;11&#x2F;2 : 第一次创建   [!note]- MySQL 为什么不选二叉树. 大数据量情况下, 层级较深, 检索速度慢。 孩子太少了, 效率不高 ![[MySQL 为什么不选二叉树.excalidraw]]   1: B-Tree 为了解决上述问题，可以使用 B-Tree 结构。 B-Tree (多路平衡查找树) 以一棵最大度数（max-degree，指一个节点的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="B-Tree">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/29945/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="[!note]- MySQL 为什么不选二叉树. 大数据量情况下, 层级较深, 检索速度慢。 孩子太少了, 效率不高 ![[MySQL 为什么不选二叉树.excalidraw]]   1: B-Tree 为了解决上述问题，可以使用 B-Tree 结构。 B-Tree (多路平衡查找树) 以一棵最大度数（max-degree，指一个节点的子节点个数）为5（5阶）的 b-tree 为例（每个节点最多">
+<meta property="og:description" content="📝B-Tree:: 2022&#x2F;11&#x2F;2 : 第一次创建   [!note]- MySQL 为什么不选二叉树. 大数据量情况下, 层级较深, 检索速度慢。 孩子太少了, 效率不高 ![[MySQL 为什么不选二叉树.excalidraw]]   1: B-Tree 为了解决上述问题，可以使用 B-Tree 结构。 B-Tree (多路平衡查找树) 以一棵最大度数（max-degree，指一个节点的">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202211022126176.gif">
 <meta property="article:published_time" content="2022-11-02T12:40:00.000Z">
-<meta property="article:modified_time" content="2022-11-12T13:48:31.971Z">
+<meta property="article:modified_time" content="2022-11-22T13:29:45.033Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202211022126176.gif">
@@ -224,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          967 字
+          793 字
         
       </span>
     
@@ -235,7 +235,7 @@
         
         
         
-          5 分钟
+          4 分钟
         
       </span>
     
@@ -286,14 +286,17 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年11月12日 晚上
+                    本文最后更新于：2022年11月22日 晚上
                   
                 
               </p>
             
             <div class="markdown-body">
               
-              <blockquote>
+              <p>📝B-Tree::<br>
+2022/11/2 : 第一次创建</p>
+<!-- basicblock-end -->
+<blockquote>
 <p>[!note]- MySQL 为什么不选二叉树.<br>
 大数据量情况下, 层级较深, 检索速度慢。<br>
 孩子太少了, 效率不高<br>
@@ -324,23 +327,9 @@ gif<br>
 <li></li>
 </ul>
 <h2 id="对于-b-tree无论是叶子节点还是非叶子节点都会保存数据这样导致一页中存储的键值减少指针也跟着减少要同样保存大量数据只能增加树的高度导致性能降低"><a class="markdownIt-Anchor" href="#对于-b-tree无论是叶子节点还是非叶子节点都会保存数据这样导致一页中存储的键值减少指针也跟着减少要同样保存大量数据只能增加树的高度导致性能降低"></a> 对于 B-Tree，无论是叶子节点还是非叶子节点，都会保存数据，这样导致一页中存储的键值减少，指针也跟着减少，要同样保存大量数据，只能增加树的高度，导致性能降低</h2>
-<p>MySQL 索引数据结构对经典的 B+Tree 进行了优化。在原 B+Tree 的基础上，增加一个指向相邻叶子节点的链表指针，就形成了带有顺序指针的 B+Tree，提高区间访问的性能。</p>
+<p>MySQL 索引数据结构对经典的 B+Tree 进行了优化。在原 B+Tree 的基础上，增加一个指向相邻叶子节点的链表指针，就形成了带<strong>有顺序指针的 B+Tree，提高区间访问的性能。</strong></p>
 <p>![[MySQL B+Tree .excalidraw]]</p>
-<blockquote>
-<p>[!summary]<br>
-为什么 InnoDB 存储引擎选择使用 B+Tree 索引结构？</p>
-<ul>
-<li>相对于二叉树，<strong>层级更少</strong>，搜索效率高 (因为 B 树孩子多)</li>
-<li>对于 B-Tree，无论是叶子节点还是非叶子节点，都会保存数据，这样导致一页中存储的键值减少，指针也跟着减少，要同样保存大量数据，只能增加树的高度，导致性能降低</li>
-<li>相对于 Hash 索引，B+Tree 支持范围匹配及排序操作</li>
-</ul>
-</blockquote>
-<hr>
-<p><strong>其他资料</strong></p>
-<!-- basicblock-start oid="ObsDsXskUP2m4Fa9BJuhysdE" --> 
-<p>📝B-Tree::<br>
-2022/11/2 : 第一次创建</p>
-<!-- basicblock-end -->
+
               
             </div>
             <hr/>

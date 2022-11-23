@@ -16,15 +16,15 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1 体系结构 ![[MySQL体系结构.excalidraw]]  1.1 存储引擎层 ![[储存引擎简介.excalidraw]]  1.1.1 [[InnoDB]]  1.1.2 [[MyISAM]]  1.1.3 [[Memory]]  1.2 存储引擎特点    特点 InnoDB MyISAM Memory     存储限制 64TB 有 有   事务安全 支持 - -   锁机制 行">
+    <meta name="description" content="📝1. 储存引擎层:: 2022&#x2F;11&#x2F;2 : 第一次创建   1: 存储引擎层 ^f297bb ![[储存引擎简介.excalidraw]]  1.1: [[InnoDB]]  1.2: [[MyISAM]]  1.3: [[Memory]]  2: 存储引擎特点    特点 InnoDB MyISAM Memory     存储限制 64TB 有 有   事务安全 支持 - -   锁机制">
 <meta property="og:type" content="article">
 <meta property="og:title" content="1. 储存引擎层">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/8283/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="1 体系结构 ![[MySQL体系结构.excalidraw]]  1.1 存储引擎层 ![[储存引擎简介.excalidraw]]  1.1.1 [[InnoDB]]  1.1.2 [[MyISAM]]  1.1.3 [[Memory]]  1.2 存储引擎特点    特点 InnoDB MyISAM Memory     存储限制 64TB 有 有   事务安全 支持 - -   锁机制 行">
+<meta property="og:description" content="📝1. 储存引擎层:: 2022&#x2F;11&#x2F;2 : 第一次创建   1: 存储引擎层 ^f297bb ![[储存引擎简介.excalidraw]]  1.1: [[InnoDB]]  1.2: [[MyISAM]]  1.3: [[Memory]]  2: 存储引擎特点    特点 InnoDB MyISAM Memory     存储限制 64TB 有 有   事务安全 支持 - -   锁机制">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-02T06:57:00.000Z">
-<meta property="article:modified_time" content="2022-11-03T11:44:44.811Z">
+<meta property="article:modified_time" content="2022-11-22T14:21:58.658Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          916 字
+          605 字
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          5 分钟
+          4 分钟
         
       </span>
     
@@ -284,21 +284,23 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年11月3日 晚上
+                    本文最后更新于：2022年11月22日 晚上
                   
                 
               </p>
             
             <div class="markdown-body">
               
-              <h1 id="1-体系结构"><a class="markdownIt-Anchor" href="#1-体系结构"></a> 1 体系结构</h1>
-<p>![[MySQL体系结构.excalidraw]]</p>
-<h2 id="11-存储引擎层"><a class="markdownIt-Anchor" href="#11-存储引擎层"></a> 1.1 存储引擎层</h2>
+              <p>📝1. 储存引擎层::<br>
+2022/11/2 : 第一次创建</p>
+<!-- basicblock-end -->
+<h1 id="1-存储引擎层"><a class="markdownIt-Anchor" href="#1-存储引擎层"></a> 1: 存储引擎层</h1>
+<p>^f297bb</p>
 <p>![[储存引擎简介.excalidraw]]</p>
-<h3 id="111-innodb"><a class="markdownIt-Anchor" href="#111-innodb"></a> 1.1.1 [[InnoDB]]</h3>
-<h3 id="112-myisam"><a class="markdownIt-Anchor" href="#112-myisam"></a> 1.1.2 [[MyISAM]]</h3>
-<h3 id="113-memory"><a class="markdownIt-Anchor" href="#113-memory"></a> 1.1.3 [[Memory]]</h3>
-<h2 id="12-存储引擎特点"><a class="markdownIt-Anchor" href="#12-存储引擎特点"></a> 1.2 存储引擎特点</h2>
+<h2 id="11-innodb"><a class="markdownIt-Anchor" href="#11-innodb"></a> 1.1: [[InnoDB]]</h2>
+<h2 id="12-myisam"><a class="markdownIt-Anchor" href="#12-myisam"></a> 1.2: [[MyISAM]]</h2>
+<h2 id="13-memory"><a class="markdownIt-Anchor" href="#13-memory"></a> 1.3: [[Memory]]</h2>
+<h1 id="2-存储引擎特点"><a class="markdownIt-Anchor" href="#2-存储引擎特点"></a> 2: 存储引擎特点</h1>
 <table>
 <thead>
 <tr>
@@ -371,16 +373,8 @@
 </tr>
 </tbody>
 </table>
-<blockquote>
-<p>[!summary] 面试题： InnoDB 引擎与 MyISAM 引擎的区别 ？<br>
-①.InnoDB引擎，支持事务，而MyISAM不支持。<br>
-②. InnoDB引擎，支持行锁和表锁，而MyISAM仅支持表锁，不支持行锁。<br>
-③. InnoDB引擎，支持外键，而MyISAM是不支持的。<br>
-主要是上述三点区别，当然也可以从索引结构、存储限制等方面，更加深入的回答，具体参考如下官方文档：<br>
-<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/innodb-introduction.html">https://dev.mysql.com/doc/refman/8.0/en/innodb-introduction.html</a><br>
-<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/myisam-storage-engine.html">https://dev.mysql.com/doc/refman/8.0/en/myisam-storage-engine.html</a></p>
-</blockquote>
-<h2 id="13-存储引擎的选择"><a class="markdownIt-Anchor" href="#13-存储引擎的选择"></a> 1.3 存储引擎的选择</h2>
+<h2 id="21-数据库引擎innodb与myisam的区别"><a class="markdownIt-Anchor" href="#21-数据库引擎innodb与myisam的区别"></a> 2.1: [[数据库引擎InnoDB与MyISAM的区别]]</h2>
+<h1 id="3-存储引擎的选择"><a class="markdownIt-Anchor" href="#3-存储引擎的选择"></a> 3: 存储引擎的选择</h1>
 <p>在选择存储引擎时，应该根据应用系统的特点选择合适的存储引擎。对于复杂的应用系统，还<strong>可以根据实际情况选择多种存储引擎进行组合</strong>。</p>
 <ul>
 <li>InnoDB: 如果应用对事物的完整性有比较高的要求，在并发条件下要求数据的一致性，数据操作除了插入和查询之外，还包含很多的更新、删除操作，则 InnoDB 是比较合适的选择</li>
@@ -388,12 +382,7 @@
 <li>Memory: 将所有数据保存在内存中，访问速度快，通常用于临时表及缓存。Memory 的缺陷是对表的大小有限制，太大的表无法缓存在内存中，而且无法保障数据的安全性</li>
 </ul>
 <p>电商中的足迹和评论适合使用 MyISAM 引擎，缓存适合使用 Memory 引擎。</p>
-<hr>
-<p><strong>其他资料</strong></p>
-<!-- basicblock-start oid="Obsy9hBxjumKcs9zzqADQFGY" --> 
-<p>📝1. 储存引擎层::<br>
-2022/11/2 : 第一次创建</p>
-<!-- basicblock-end -->
+
               
             </div>
             <hr/>

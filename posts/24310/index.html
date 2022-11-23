@@ -16,15 +16,15 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="📝16.数值的整数次方::Loading Question… - 力扣（LeetCode）  利用快速幂可以将 O (n) 的复杂度, 降到 O (logn) 快逑行 12y^15 &#x3D; y^1 * y*2 * y*4*y^8y^5  &#x3D; y^1 * y*4 这里要注意两点 1 边界条件 32位 负次幂 ![[16.数值的整数次方 2022-11-15 10.12.47.excalidraw]]">
+    <meta name="description" content="📝16.数值的整数次方::Loading Question… - 力扣（LeetCode）  利用快速幂可以将 O (n) 的复杂度, 降到 O (logn) 12y^15 &#x3D; y^1 * y*2 * y*4*y^8y^5  &#x3D; y^1 * y*4 这里要注意两点 1 边界条件 32位 负次幂 ![[16.数值的整数次方 2022-11-15 10.12.47.excalidraw]] [[计算">
 <meta property="og:type" content="article">
 <meta property="og:title" content="16.数值的整数次方">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/24310/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="📝16.数值的整数次方::Loading Question… - 力扣（LeetCode）  利用快速幂可以将 O (n) 的复杂度, 降到 O (logn) 快逑行 12y^15 &#x3D; y^1 * y*2 * y*4*y^8y^5  &#x3D; y^1 * y*4 这里要注意两点 1 边界条件 32位 负次幂 ![[16.数值的整数次方 2022-11-15 10.12.47.excalidraw]]">
+<meta property="og:description" content="📝16.数值的整数次方::Loading Question… - 力扣（LeetCode）  利用快速幂可以将 O (n) 的复杂度, 降到 O (logn) 12y^15 &#x3D; y^1 * y*2 * y*4*y^8y^5  &#x3D; y^1 * y*4 这里要注意两点 1 边界条件 32位 负次幂 ![[16.数值的整数次方 2022-11-15 10.12.47.excalidraw]] [[计算">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-15T01:43:00.000Z">
-<meta property="article:modified_time" content="2022-11-15T12:45:48.595Z">
+<meta property="article:modified_time" content="2022-11-19T08:26:23.811Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          428 字
+          748 字
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          3 分钟
+          4 分钟
         
       </span>
     
@@ -284,7 +284,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年11月15日 晚上
+                    本文最后更新于：2022年11月19日 下午
                   
                 
               </p>
@@ -294,12 +294,18 @@
               <p>📝16.数值的整数次方::<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/shu-zhi-de-zheng-shu-ci-fang-lcof/">Loading Question… - 力扣（LeetCode）</a></p>
 <!-- basicblock-end -->
 <p>利用快速幂可以将 O (n) 的复杂度, 降到 O (logn)</p>
-<p>快逑行</p>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++">y^<span class="hljs-number">15</span> = y^<span class="hljs-number">1</span> * y*<span class="hljs-number">2</span> * y*<span class="hljs-number">4</span>*y^<span class="hljs-number">8</span><br>y^<span class="hljs-number">5</span>  = y^<span class="hljs-number">1</span> * y*<span class="hljs-number">4</span><br></code></pre></td></tr></tbody></table></figure>
 <p>这里要注意两点<br>
 1 边界条件 32位<br>
 负次幂</p>
-<p>![[16.数值的整数次方 2022-11-15 10.12.47.excalidraw]]</p>
+<p>![[16.数值的整数次方 2022-11-15 10.12.47.excalidraw]]<br>
+[[计算时间复杂度]]</p>
+<ul>
+<li>时间复杂度：O(log⁡n)，即为对 n 进行二进制拆分的时间复杂度。</li>
+<li>空间复杂度：O(1)。</li>
+</ul>
+<p>v2</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">double</span> <span class="hljs-title">myPow</span><span class="hljs-params">(<span class="hljs-type">double</span> x, <span class="hljs-type">int</span> n)</span> </span>{<br>        <span class="hljs-keyword">if</span>(n == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">if</span>(x == <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>        <span class="hljs-type">double</span> res = <span class="hljs-number">1</span>;<br>        <span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> absn = <span class="hljs-built_in">abs</span>(n);<span class="hljs-comment">// ❗️经测试 abs 没有用撒</span><br>        <span class="hljs-keyword">while</span>(absn){<br>            <span class="hljs-keyword">if</span>(absn&amp;<span class="hljs-number">1</span> == <span class="hljs-number">1</span>) res *= x;<br>            x *= x;<br>            absn &gt;&gt;= <span class="hljs-number">1</span>;<br>        }<br>        <br>        <span class="hljs-keyword">return</span> n &gt; <span class="hljs-number">0</span>? res : <span class="hljs-number">1</span>/res;<br>    }<br>};<br><br></code></pre></td></tr></tbody></table></figure>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">double</span> <span class="hljs-title">myPow</span><span class="hljs-params">(<span class="hljs-type">double</span> x, <span class="hljs-type">int</span> n)</span> </span>{<br>        <span class="hljs-type">long</span> <span class="hljs-type">long</span> ln = <span class="hljs-built_in">abs</span>(n);<br>        <span class="hljs-type">double</span> res = <span class="hljs-number">1.0</span>;<br>        <span class="hljs-keyword">while</span>(ln){<br>            <span class="hljs-keyword">if</span>(ln &amp; <span class="hljs-number">1</span>){<br>                res = res * x;<span class="hljs-comment">// 对应的二进制 1, 乘上 x 的幂</span><br>            }<br>            <br>            ln &gt;&gt;= <span class="hljs-number">1</span>;<br>            x = x*x; <span class="hljs-comment">// 取到对应的x幂</span><br>        }<br>        <span class="hljs-keyword">if</span>(n &lt; <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span>  <span class="hljs-number">1</span>/res;<br>        <span class="hljs-keyword">return</span> res;<br><br>    }<br>};<br><br></code></pre></td></tr></tbody></table></figure>
 
               

@@ -24,7 +24,7 @@
 <meta property="og:description" content="📝10.斐波那契数列::剑指 Offer 10- I. 斐波那契数列 - 力扣（LeetCode）   1: 题目  1.1: 10-1 斐波那契 写一个函数，输入 n ，求斐波那契（Fibonacci）数列的第 n 项（即 F (N)）。斐波那契数列的定义如下： F (0) &#x3D; 0,   F (1) &#x3D; 1 F (N) &#x3D; F (N - 1) + F (N - 2), 其中 N &gt; 1.">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-08T01:40:00.000Z">
-<meta property="article:modified_time" content="2022-11-11T01:49:32.749Z">
+<meta property="article:modified_time" content="2022-11-20T07:47:43.252Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="动态规划">
 <meta name="twitter:card" content="summary_large_image">
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.2k 字
+          1.5k 字
         
       </span>
     
@@ -234,7 +234,7 @@
         
         
         
-          7 分钟
+          8 分钟
         
       </span>
     
@@ -285,7 +285,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年11月11日 上午
+                    本文最后更新于：2022年11月20日 下午
                   
                 
               </p>
@@ -323,8 +323,9 @@ F (N) = F (N - 1) + F (N - 2), 其中 N &gt; 1.</p>
 <p><strong>f (n) 为以上两种情况之和，即 f (n)=f (n−1)+f (n−2)</strong>，以上递推性质为斐波那契数列。本题可转化为求斐波那契数列第 nn 项的值，与面试题 10- I. 斐波那契数列等价，<strong>唯一的不同在于起始数字不同。</strong></p>
 <h1 id="2-思路"><a class="markdownIt-Anchor" href="#2-思路"></a> 2: 思路</h1>
 <h2 id="21-递归"><a class="markdownIt-Anchor" href="#21-递归"></a> 2.1: 递归</h2>
+<p>![[10.斐波那契数列 2022-11-20 15.39.52.excalidraw]]</p>
 <p>用递归每次都要重新计算之前的值, 最后超出时间限制</p>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">fib</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> </span>{<br>        <span class="hljs-keyword">if</span>(n == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<span class="hljs-comment">// ❗️fib(0) = 0; 怎么能直接写函数值呢</span><br>        <span class="hljs-keyword">if</span>(n == <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<span class="hljs-comment">// ❗️fib(1) = 1;</span><br>        <span class="hljs-keyword">return</span> (<span class="hljs-built_in">fib</span>(n<span class="hljs-number">-2</span>) + <span class="hljs-built_in">fib</span>(n<span class="hljs-number">-1</span>))%<span class="hljs-number">1000000007</span>;<br><br>    }<br>};<br><br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">fib</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> </span>{<br>        <span class="hljs-keyword">if</span>(n == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<span class="hljs-comment">// ❗️fib(0) = 0; 怎么能直接写函数值呢</span><br>        <span class="hljs-keyword">if</span>(n == <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<span class="hljs-comment">// ❗️fib(1) = 1;</span><br>        <span class="hljs-keyword">return</span> (<span class="hljs-built_in">fib</span>(n<span class="hljs-number">-2</span>) + <span class="hljs-built_in">fib</span>(n<span class="hljs-number">-1</span>))%<span class="hljs-number">1000000007</span>;<br><br>    }<br>};<br><br><span class="hljs-comment">// v2</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">fib</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> </span>{<br>    	<span class="hljs-comment">// 一</span><br>        <span class="hljs-keyword">if</span>(n == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">if</span>(n == <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>		<span class="hljs-comment">// 二</span><br>        <span class="hljs-type">int</span> temp1 = <span class="hljs-built_in">fib</span>(n<span class="hljs-number">-1</span>);<br>        <span class="hljs-type">int</span> temp2 = <span class="hljs-built_in">fib</span>(n<span class="hljs-number">-2</span>);<br>        <span class="hljs-comment">// 三</span><br>        <span class="hljs-keyword">return</span> temp1+temp2;<br><br><br><br>    }<br>};<br><br><br><br></code></pre></td></tr></tbody></table></figure>
 <h2 id="22-动态规划"><a class="markdownIt-Anchor" href="#22-动态规划"></a> 2.2: 动态规划</h2>
 <p>[[1.动态规划理论基础]]<br>
 用一个数组保存之前用的值效率会大大提升<br>

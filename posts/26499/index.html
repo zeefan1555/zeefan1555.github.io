@@ -16,16 +16,16 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1: 19.删除链表的倒数第N个节点 力扣题目链接 给你一个链表，删除链表的倒数第 n 个结点，并且返回链表的头结点。 进阶：你能尝试使用一趟扫描实现吗？ 示例 1：  输入：head &#x3D; [1,2,3,4,5], n &#x3D; 2 输出：[1,2,3,5] 示例 2： 输入：head &#x3D; [1], n &#x3D; 1 输出：[] 示例 3： 输入：head &#x3D; [1,2], n &#x3D; 1 输出：[1]">
+    <meta name="description" content="6.删除链表的倒数第N个节点:: 2022&#x2F;9&#x2F;13🌵 :v3通过: 进一步理解了⏱0-49   1: 19.删除链表的倒数第N个节点 力扣题目链接 给你一个链表，删除链表的倒数第 n 个结点，并且返回链表的头结点。 进阶：你能尝试使用一趟扫描实现吗？ 示例 1：  输入：head &#x3D; [1,2,3,4,5], n &#x3D; 2 输出：[1,2,3,5] 示例 2： 输入：head &#x3D; [1], n">
 <meta property="og:type" content="article">
 <meta property="og:title" content="6.删除链表的倒数第N个节点">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/26499/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="1: 19.删除链表的倒数第N个节点 力扣题目链接 给你一个链表，删除链表的倒数第 n 个结点，并且返回链表的头结点。 进阶：你能尝试使用一趟扫描实现吗？ 示例 1：  输入：head &#x3D; [1,2,3,4,5], n &#x3D; 2 输出：[1,2,3,5] 示例 2： 输入：head &#x3D; [1], n &#x3D; 1 输出：[] 示例 3： 输入：head &#x3D; [1,2], n &#x3D; 1 输出：[1]">
+<meta property="og:description" content="6.删除链表的倒数第N个节点:: 2022&#x2F;9&#x2F;13🌵 :v3通过: 进一步理解了⏱0-49   1: 19.删除链表的倒数第N个节点 力扣题目链接 给你一个链表，删除链表的倒数第 n 个结点，并且返回链表的头结点。 进阶：你能尝试使用一趟扫描实现吗？ 示例 1：  输入：head &#x3D; [1,2,3,4,5], n &#x3D; 2 输出：[1,2,3,5] 示例 2： 输入：head &#x3D; [1], n">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20210510085957392.png">
 <meta property="article:published_time" content="2022-08-12T01:09:00.000Z">
-<meta property="article:modified_time" content="2022-11-15T13:32:20.094Z">
+<meta property="article:modified_time" content="2022-11-21T02:37:20.198Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="链表">
 <meta name="twitter:card" content="summary_large_image">
@@ -287,14 +287,17 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年11月15日 晚上
+                    本文最后更新于：2022年11月21日 上午
                   
                 
               </p>
             
             <div class="markdown-body">
               
-              <h1 id="1-19删除链表的倒数第n个节点"><a class="markdownIt-Anchor" href="#1-19删除链表的倒数第n个节点"></a> 1: 19.删除链表的倒数第N个节点</h1>
+              <p>6.删除链表的倒数第N个节点::<br>
+2022/9/13🌵 :v3通过: 进一步理解了⏱0-49</p>
+<!-- basicblock-end -->
+<h1 id="1-19删除链表的倒数第n个节点"><a class="markdownIt-Anchor" href="#1-19删除链表的倒数第n个节点"></a> 1: 19.删除链表的倒数第N个节点</h1>
 <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-nth-node-from-end-of-list/">力扣题目链接</a></p>
 <p>给你一个链表，删除链表的倒数第 n 个结点，并且返回链表的头结点。</p>
 <p>进阶：你能尝试使用一趟扫描实现吗？</p>
@@ -323,10 +326,7 @@
 <p>![[6.删除链表的倒数第N个节点 2022-08-12 09.22.22.excalidraw|1500]]</p>
 <h1 id="3-代码"><a class="markdownIt-Anchor" href="#3-代码"></a> 3: 代码</h1>
 <p>一刷:编译已通过</p>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">ListNode* <span class="hljs-title">removeNthFromEnd</span><span class="hljs-params">(ListNode* head, <span class="hljs-type">int</span> n)</span> </span>{<br>        ListNode* dummyHead = <span class="hljs-keyword">new</span> <span class="hljs-built_in">ListNode</span>(<span class="hljs-number">0</span>);<span class="hljs-comment">// <sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label=":
- 
-构造虚拟头结点::
-">[1]</span></a></sup></span><br>        dummyHead-&gt;next = head;<br>        ListNode* fast = dummyHead;<span class="hljs-comment">// <sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span class="hint--top hint--rounded" aria-label=":
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">ListNode* <span class="hljs-title">removeNthFromEnd</span><span class="hljs-params">(ListNode* head, <span class="hljs-type">int</span> n)</span> </span>{<br>        ListNode* dummyHead = <span class="hljs-keyword">new</span> <span class="hljs-built_in">ListNode</span>(<span class="hljs-number">0</span>);<span class="hljs-comment">// [^1]</span><br>        dummyHead-&gt;next = head;<br>        ListNode* fast = dummyHead;<span class="hljs-comment">// <sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span class="hint--top hint--rounded" aria-label=":
  
 创建链表指针::
 ">[2]</span></a></sup></span><br>        ListNode* slow = dummyHead; <br>        n++;<br>        <span class="hljs-keyword">while</span> (n-- &amp;&amp; fast != <span class="hljs-literal">nullptr</span>){<br>            fast = fast-&gt;next;<br>        }<br>        <span class="hljs-comment">// 如果在上面不用 n++, 在这里多写一个fast-&gt;next ,让 fast 多走一步</span><br>        <span class="hljs-comment">// 结果: n 若为 1000, 上面的 fast 就已经是空了, 而上一行让他多走一步就是操作空指针了</span><br>	        <span class="hljs-comment">// 所以安全起见先 n++. 💡另外一个思路: 用空间换时间, 提前都把变量定义好</span><br>        <br>        <span class="hljs-keyword">while</span>(fast!=<span class="hljs-literal">nullptr</span>){<br>            fast = fast-&gt;next;<br>            slow = slow-&gt;next;<br>        }<br>        ListNode* temp = slow-&gt;next;<br>        slow-&gt;next = slow-&gt;next-&gt;next;<br>        <span class="hljs-keyword">delete</span> temp;<br>        <br>        <span class="hljs-keyword">return</span> dummyHead-&gt;next;<br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
@@ -337,24 +337,14 @@ v4, 通过, 较熟练</p>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">ListNode* <span class="hljs-title">removeNthFromEnd</span><span class="hljs-params">(ListNode* head, <span class="hljs-type">int</span> n)</span> </span>{<br>        ListNode* dummyHead = <span class="hljs-keyword">new</span> <span class="hljs-built_in">ListNode</span>(<span class="hljs-number">0</span>); <br>        dummyHead-&gt;next = head;<br>        ListNode* fast = dummyHead;<span class="hljs-comment">// ❗️不要 fast = head, 统一用虚拟头节点</span><br>        ListNode* slow = dummyHead;<br>        n += <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">while</span>(n-- &amp;&amp; fast != <span class="hljs-literal">NULL</span>){ <span class="hljs-comment">// ❗️v4没有写 fast != NULL 条件, 💡这样也通过了</span><br>            fast = fast-&gt;next;<br>        }<br>        <span class="hljs-keyword">while</span>(fast){ <span class="hljs-comment">// 💡此时跳出循环的 fast 已经在 NULL 指针上了</span><br>            slow = slow-&gt;next;<br>            fast = fast-&gt;next;<br>        }<br>        ListNode* temp = slow-&gt;next;<br>        slow-&gt;next = slow-&gt;next-&gt;next;<br>        <br>        <span class="hljs-built_in">delete</span>(temp); <span class="hljs-comment">// 💡可用括号, 可不用</span><br>        <span class="hljs-keyword">return</span> dummyHead-&gt;next; <span class="hljs-comment">// ❗️不要返回 head, 要返回 dummyHead-&gt;next</span><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
 <hr>
 <p><strong>参考资料</strong></p>
-<p><code>ListNode* dummyHead = new ListNode(0);</code><br>
-<code>dummyHead-&gt;next = head;</code></p>
-<!-- basicblock-end -->
 <p>ListNode* Index<br>
 创建二叉树也是一样的<br>
 TreeNode* node</p>
 <!-- basicblock-end -->
-<!-- basicblock-start oid="Obsli0iVIAJ1RLcnP8KGNujl" deck = "👨🏻‍💻code::数据结构与算法::代码随想录::链表::6.删除链表的倒数第N个节点.md" --> 
-<p>#历史记录::<br>
-2022/9/13🌵6.删除链表的倒数第N个节点 :v3通过: 进一步理解了⏱0-49</p>
-<!-- basicblock-end --><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span>:
-<!-- basicblock-start oid="ObsHPy8Rb5i91VNQZ5Jv20Wv" --> 
-<p>构造虚拟头结点::<br>
-<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></p></span></span></li><li><span id="fn:2" class="footnote-text"><span>:<p></p>
+<section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:2" class="footnote-text"><span>:
 <!-- basicblock-start oid="Obsnv2tHjP49t8ASdRAMsF5a" --> 
-<p>创建链表指针::<br>
-<a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></p></span></span></li></ol></div></section><p></p>
-
+创建链表指针::
+<a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
               
             </div>
             <hr/>

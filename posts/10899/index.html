@@ -16,15 +16,15 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="📝vector API::   1 初始化 一维数组的初始化 vector的长度不能是变量,必须是常量  vector&lt;int&gt; a(10); 默认是0 vector&lt;int&gt; a(10,1);(10个变量每个为1) vector&lt;int&gt; a(b); &#x2F;&#x2F;用b向量来创建a向量，整体复制性赋值 vector&lt;int&gt; a(b.begin(),b.b">
+    <meta name="description" content="📝vector API::   1: 初始化 一维数组的初始化 vector的长度不能是变量,必须是常量  vector&lt;int&gt; a(10); 默认是0 vector&lt;int&gt; a(10,1);(10个变量每个为1) vector&lt;int&gt; a(b); &#x2F;&#x2F;用b向量来创建a向量，整体复制性赋值 vector&lt;int&gt; a(b.begin(),b.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vector API">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/10899/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="📝vector API::   1 初始化 一维数组的初始化 vector的长度不能是变量,必须是常量  vector&lt;int&gt; a(10); 默认是0 vector&lt;int&gt; a(10,1);(10个变量每个为1) vector&lt;int&gt; a(b); &#x2F;&#x2F;用b向量来创建a向量，整体复制性赋值 vector&lt;int&gt; a(b.begin(),b.b">
+<meta property="og:description" content="📝vector API::   1: 初始化 一维数组的初始化 vector的长度不能是变量,必须是常量  vector&lt;int&gt; a(10); 默认是0 vector&lt;int&gt; a(10,1);(10个变量每个为1) vector&lt;int&gt; a(b); &#x2F;&#x2F;用b向量来创建a向量，整体复制性赋值 vector&lt;int&gt; a(b.begin(),b.">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-04T03:44:00.000Z">
-<meta property="article:modified_time" content="2022-11-04T12:55:33.242Z">
+<meta property="article:modified_time" content="2022-11-20T08:17:24.276Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.4k 字
+          2k 字
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          7 分钟
+          11 分钟
         
       </span>
     
@@ -284,7 +284,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年11月4日 晚上
+                    本文最后更新于：2022年11月20日 下午
                   
                 
               </p>
@@ -293,7 +293,7 @@
               
               <p>📝vector API::</p>
 <!-- basicblock-end -->
-<h1 id="1-初始化"><a class="markdownIt-Anchor" href="#1-初始化"></a> 1 初始化</h1>
+<h1 id="1-初始化"><a class="markdownIt-Anchor" href="#1-初始化"></a> 1: 初始化</h1>
 <p><strong>一维数组的初始化</strong><br>
 vector的长度不能是变量,必须是常量</p>
 <ol>
@@ -309,13 +309,13 @@ vector的长度不能是变量,必须是常量</p>
 <p><code>{{1, 2, 3}, {3, 4, 5}......}</code> : 这种类型的也是二维数组 ^1wjjr0</p>
 <p>返回值和使用时：必须用 dp[ i ]，不能用dp(i)</p>
 <p><strong>强转 vector 类型</strong><code>return vector&lt;int&gt;(result_set.begin(), result_set.end());</code>[^2]</p>
-<h1 id="2-push_back"><a class="markdownIt-Anchor" href="#2-push_back"></a> 2 push_back</h1>
+<h1 id="2-push_back"><a class="markdownIt-Anchor" href="#2-push_back"></a> 2: push_back</h1>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++">result.<span class="hljs-built_in">push_back</span>(vector&lt;<span class="hljs-type">int</span>&gt;{<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>}); = {{<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>}, 还可以往里再加}`<br><br></code></pre></td></tr></tbody></table></figure>
-<h1 id="3-size-resize"><a class="markdownIt-Anchor" href="#3-size-resize"></a> 3 size () &amp;&amp; resize ()</h1>
-<h2 id="31-size"><a class="markdownIt-Anchor" href="#31-size"></a> 3.1 size（）：</h2>
+<h1 id="3-size-resize"><a class="markdownIt-Anchor" href="#3-size-resize"></a> 3: size () &amp;&amp; resize ()</h1>
+<h2 id="31-size"><a class="markdownIt-Anchor" href="#31-size"></a> 3.1: size（）：</h2>
 <p>告诉你容器中有多少个元素<br>
 但是不会告诉你为了包含这些数据所分配的内存</p>
-<h2 id="32-resize"><a class="markdownIt-Anchor" href="#32-resize"></a> 3.2 resize（）</h2>
+<h2 id="32-resize"><a class="markdownIt-Anchor" href="#32-resize"></a> 3.2: resize（）</h2>
 <blockquote>
 <p>[!summary]  <code>&gt;</code>容量就扩容在赋值,  <code>&lt;</code> 容量就直接赋值<br>
 <strong>改变当前容器内含有元素的数量 size (), 而不是容器的容量</strong></p>
@@ -347,7 +347,7 @@ vector的长度不能是变量,必须是常量</p>
 <li>当 resize (len) 中 len&gt;v.capacity(), 则数组中的 size 和 capacity 均设置为 len</li>
 <li>当 resize (len) 中 len&lt;=v.capacity(), 则数组中的 size 设置为 len, 而 capacity 不变；</li>
 </ol>
-<h1 id="4-reserve"><a class="markdownIt-Anchor" href="#4-reserve"></a> 4 reserve ():</h1>
+<h1 id="4-reserve"><a class="markdownIt-Anchor" href="#4-reserve"></a> 4: reserve ():</h1>
 <p>强迫容器把他的<strong>容量</strong>变到至少是n，n不小于当前的大小，这通常会导致重新分配</p>
 <ol>
 <li>如果 reserve (len) 的值&gt;当前的 capacity (), 那么会重新分配一块能存 len 个对象的空间，然后把之前的对象通过 copy construtor 复制过来，销毁之前的内存；
@@ -357,11 +357,33 @@ vector的长度不能是变量,必须是常量</p>
 </li>
 <li>当 reservel (len) 中 len&lt;=当前的 capacity(), 则数组中的 capacity 不变，size 不变，即不对容器做任何改变。</li>
 </ol>
-<h1 id="5-reverse-vecbegin-vec-end"><a class="markdownIt-Anchor" href="#5-reverse-vecbegin-vec-end"></a> 5 reverse (vec.begin (), vec. end () )</h1>
+<h1 id="5-reverse-vecbegin-vec-end"><a class="markdownIt-Anchor" href="#5-reverse-vecbegin-vec-end"></a> 5: reverse (vec.begin (), vec. end () )</h1>
 <p>反转 vec</p>
 <p>capacity(）：告诉你容器中利用己经分配的内存可以容纳多少个元素这个是容器能容纳的容器元素总数要知道<br>
 用capacity-size</p>
-<p>reserve():强迫容器把他的容量变到至少是nn不小于当前的大小这通常会导致重新分配</p>
+<p>reserve():强迫容器把他的容量变到至少是n不小于当前的大小这通常会导致重新分配</p>
+<h1 id="6-begin-end-front-back的区别"><a class="markdownIt-Anchor" href="#6-begin-end-front-back的区别"></a> 6: begin()、end()、front()、back()的区别</h1>
+<h2 id="61-front-back-的使用"><a class="markdownIt-Anchor" href="#61-front-back-的使用"></a> 6.1: front( )，back( )的使用</h2>
+<p><code>arr.front();</code>返回的是第一个元素的引用。<br>
+<code>arr.back();</code>返回的的是最后一个元素的引用。</p>
+<p>如果定义<code>int c = a.back()</code>，c并不是一个引用，操作b不会对a中的最后一个元素造成影响。<br>
+若定义<code>int &amp;b=a.front();</code>，则对b的操作会影响a中第一个元素。</p>
+<h2 id="62-begin-end-的使用"><a class="markdownIt-Anchor" href="#62-begin-end-的使用"></a> 6.2: begin( )，end( )的使用</h2>
+<p>返回的是迭代器, 而不是元素</p>
+<h3 id="621-begin函数原型"><a class="markdownIt-Anchor" href="#621-begin函数原型"></a> 6.2.1: begin函数原型:</h3>
+<p><code>iterator begin();</code><br>
+<code>const_iterator begin();</code></p>
+<p>功能：<br>
+返回一个当前vector容器中起始元素的<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E8%BF%AD%E4%BB%A3%E5%99%A8&amp;spm=1001.2101.3001.7020">迭代器</a>。<br>
+<strong>从后向前遍历</strong></p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;::iterator itr2 = arr.end()<span class="hljs-number">-1</span>;<span class="hljs-comment">//arr.end()是指向末尾的指针，arr.end()-1才指向最后一个元素</span><br><span class="hljs-type">int</span> len2 = <span class="hljs-number">0</span>;<br><span class="hljs-keyword">while</span> (itr2 != arr.begin())<br>{<br>	<span class="hljs-comment">//do something</span><br>}<br></code></pre></td></tr></tbody></table></figure>
+<h3 id="622-end函数原型"><a class="markdownIt-Anchor" href="#622-end函数原型"></a> 6.2.2: end函数原型：</h3>
+<p><code>iterator end();</code><br>
+<code>const_iterator end();</code><br>
+功能：<br>
+返回一个当前vector容器中末尾元素的迭代器。</p>
+<p><strong>从前向后遍历</strong></p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;::iterator itr1 = arr.begin();<br><span class="hljs-keyword">while</span> (itr1 != arr.end())<br>{<br>	<span class="hljs-comment">//do something</span><br>}<br></code></pre></td></tr></tbody></table></figure>
 
               
             </div>

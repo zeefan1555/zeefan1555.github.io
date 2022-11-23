@@ -24,7 +24,7 @@
 <meta property="og:description" content="📝MySQL架构升级之路::  数据库的演变升级  1: 单机 （1）请求量⼤查询慢 （ 2）单机故障导致业务不可⽤  2: 主从 （1）数据库主从同步，从库可以⽔平扩展，满⾜更⼤读需求 （2）但单服务器 TPS，内存，IO 都是有限的 （3）可以考虑⽤主节点负责业务，从节点负责统计  3: 双主 （1）⽤户量级上来后，写请求越来越多 （2）⼀个 Master 是不能解决问题的，添加多了个主节点">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-14T12:16:00.000Z">
-<meta property="article:modified_time" content="2022-11-14T12:43:47.892Z">
+<meta property="article:modified_time" content="2022-11-19T13:02:46.973Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          254 字
+          255 字
         
       </span>
     
@@ -284,7 +284,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年11月14日 晚上
+                    本文最后更新于：2022年11月19日 晚上
                   
                 
               </p>
@@ -305,7 +305,7 @@
 <p>（1）⽤户量级上来后，写请求越来越多<br>
 （2）⼀个 Master 是不能解决问题的，添加多了个主节点进⾏写⼊<br>
 （3）多个主节点数据要保存⼀致性，写操作需要2个master之间同步更加复杂</p>
-<h1 id="4-分库和分表"><a class="markdownIt-Anchor" href="#4-分库和分表"></a> 4: [[分库和分表]]</h1>
+<h1 id="4-分库分表目录"><a class="markdownIt-Anchor" href="#4-分库分表目录"></a> 4: [[分库分表目录]]</h1>
 <h1 id="5-mysql-数据库分库分表后带来的优点"><a class="markdownIt-Anchor" href="#5-mysql-数据库分库分表后带来的优点"></a> 5: [[MySQL 数据库分库分表后带来的优点]]</h1>
 
               
@@ -367,9 +367,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/53057/" title="分库和分表">
+                      <a href="/posts/30550/" title="分库分表的问题">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">分库和分表</span>
+                        <span class="hidden-mobile">分库分表的问题</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     

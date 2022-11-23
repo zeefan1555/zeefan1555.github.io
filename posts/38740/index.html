@@ -16,19 +16,17 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="相信很多同学都会疑惑，递归函数什么时候要有返回值，什么时候没有返回值，特别是有的时候递归函数返回类型为bool类型。 那么接下来我通过详细讲解如下两道题，来回答这个问题：  112.路径总和 113.路径总和ii   4 112路径总和 力扣题目链接 给定一个二叉树和一个目标和，判断该树中是否存在根节点到叶子节点的路径，这条路径上所有节点值相加等于目标和。 说明:&amp;nbsp;叶子节点是指没有子节点">
+    <meta name="description" content="112.路径总和:: 2022&#x2F;09&#x2F;10🌵112. 路径总和: 递归法看懂了, 理解了回溯的过程(断点调试), 但是没对着打一遍, 迭代法不用看. ⏱1-04 2022&#x2F;09&#x2F;11🌵113. 路径总和ii, 递归的时候就多了一个回溯操作而已, 看懂了, 但是没对着写一遍代码⏱0-12 2022&#x2F;09&#x2F;12🌵112. 路径总和:  看v2简短代码, 理解其过程了⏱0-50 2022&#x2F;09&#x2F;1">
 <meta property="og:type" content="article">
 <meta property="og:title" content="18. 路径总和">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/38740/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="相信很多同学都会疑惑，递归函数什么时候要有返回值，什么时候没有返回值，特别是有的时候递归函数返回类型为bool类型。 那么接下来我通过详细讲解如下两道题，来回答这个问题：  112.路径总和 113.路径总和ii   4 112路径总和 力扣题目链接 给定一个二叉树和一个目标和，判断该树中是否存在根节点到叶子节点的路径，这条路径上所有节点值相加等于目标和。 说明:&amp;nbsp;叶子节点是指没有子节点">
+<meta property="og:description" content="112.路径总和:: 2022&#x2F;09&#x2F;10🌵112. 路径总和: 递归法看懂了, 理解了回溯的过程(断点调试), 但是没对着打一遍, 迭代法不用看. ⏱1-04 2022&#x2F;09&#x2F;11🌵113. 路径总和ii, 递归的时候就多了一个回溯操作而已, 看懂了, 但是没对着写一遍代码⏱0-12 2022&#x2F;09&#x2F;12🌵112. 路径总和:  看v2简短代码, 理解其过程了⏱0-50 2022&#x2F;09&#x2F;1">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20210203160355234.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/2021020316051216.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20210203160854654.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20210203160922745.png">
 <meta property="article:published_time" content="2022-09-10T09:20:00.000Z">
-<meta property="article:modified_time" content="2022-09-23T02:54:23.713Z">
+<meta property="article:modified_time" content="2022-11-22T02:26:48.507Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="二叉树">
 <meta name="twitter:card" content="summary_large_image">
@@ -228,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5.2k 字
+          3k 字
         
       </span>
     
@@ -239,7 +237,7 @@
         
         
         
-          26 分钟
+          16 分钟
         
       </span>
     
@@ -290,29 +288,33 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年9月23日 上午
+                    本文最后更新于：2022年11月22日 上午
                   
                 
               </p>
             
             <div class="markdown-body">
               
-              <p>相信很多同学都会疑惑，递归函数什么时候要有返回值，什么时候没有返回值，特别是有的时候递归函数返回类型为bool类型。</p>
+              <p>112.路径总和::<br>
+2022/09/10🌵112. 路径总和: 递归法看懂了, 理解了回溯的过程(断点调试), 但是没对着打一遍, 迭代法不用看. ⏱1-04<br>
+2022/09/11🌵113. 路径总和ii, 递归的时候就多了一个回溯操作而已, 看懂了, 但是没对着写一遍代码⏱0-12<br>
+2022/09/12🌵112. 路径总和:  看v2简短代码, 理解其过程了⏱0-50<br>
+2022/09/13🌵113. 路径总和ii, v2: 未通过, 错误在❗️处, 不懂怎么解决⏱0-30</p>
+<!-- basicblock-end -->
+<p>相信很多同学都会疑惑，递归函数什么时候要有返回值，什么时候没有返回值，特别是有的时候递归函数返回类型为bool类型。</p>
 <p>那么接下来我通过详细讲解如下两道题，来回答这个问题：</p>
 <ul>
 <li>112.路径总和</li>
 <li>113.路径总和ii</li>
 </ul>
-<h1 id="4-112路径总和"><a class="markdownIt-Anchor" href="#4-112路径总和"></a> 4 112路径总和</h1>
+<h1 id="1-112路径总和"><a class="markdownIt-Anchor" href="#1-112路径总和"></a> 1: 112路径总和</h1>
 <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/path-sum/">力扣题目链接</a></p>
 <p>给定一个二叉树和一个目标和，判断该树中是否存在根节点到叶子节点的路径，这条路径上所有节点值相加等于目标和。</p>
 <p>说明:&nbsp;叶子节点是指没有子节点的节点。</p>
 <p>示例:&nbsp; 给定如下二叉树，以及目标和 sum = 22，</p>
 <p><img src="https://img-blog.csdnimg.cn/20210203160355234.png" srcset="/img/loading.gif" lazyload alt="112.路径总和1"></p>
 <p>返回 true, 因为存在目标和为 22 的根节点到叶子节点的路径 5-&gt;4-&gt;11-&gt;2。</p>
-<!-- basicblock-start oid="ObsJ38kAGz6rCfdGobYiJblf" --> 
-<h2 id="41-思路"><a class="markdownIt-Anchor" href="#41-思路"></a> 4.1 思路::</h2>
-<!-- basicblock-end -->
+<h2 id="11-思路"><a class="markdownIt-Anchor" href="#11-思路"></a> 1.1: 思路::</h2>
 <p><img src="https://img-blog.csdnimg.cn/2021020316051216.png" srcset="/img/loading.gif" lazyload alt="112.路径总和|600"></p>
 <p>可以使用深度优先遍历的方式（本题前中后序都可以，无所谓，因为中节点也没有处理逻辑）来遍历二叉树</p>
 <ol>
@@ -338,7 +340,7 @@
 <p>递归函数是有返回值的，如果递归函数返回true，说明找到了合适的路径，应该立刻返回。</p>
 <figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">if</span> (cur-&gt;left) { <span class="hljs-comment">// 左 ,💡终止条件是判断叶子节点::递归的过程中就不要让空节点进入递归了。</span><br>    count -= cur-&gt;left-&gt;val; <span class="hljs-comment">// 递归，处理节点;</span><br>    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">traversal</span>(cur-&gt;left, count)) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    count += cur-&gt;left-&gt;val; <span class="hljs-comment">// 回溯，撤销处理结果</span><br>}<br><span class="hljs-keyword">if</span> (cur-&gt;right) { <span class="hljs-comment">// 右</span><br>    count -= cur-&gt;right-&gt;val;<br>    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">traversal</span>(cur-&gt;right, count)) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    count += cur-&gt;right-&gt;val;<br>}<br><span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br></code></pre></td></tr></tbody></table></figure>
 <!-- basicblock-end -->
-<h2 id="42-代码"><a class="markdownIt-Anchor" href="#42-代码"></a> 4.2 代码</h2>
+<h2 id="12-代码"><a class="markdownIt-Anchor" href="#12-代码"></a> 1.2: 代码</h2>
 <p>carl &amp; v1:</p>
 <!-- basicblock-start oid="ObsvtEcJKanSyKW74de5qkZA" --> 
 <p>回溯的过程::<br>
@@ -352,31 +354,8 @@
 <p><strong>是不是发现精简之后的代码，已经完全看不出分析的过程了，所以我们要把题目分析清楚之后，在追求代码精简。</strong> 这一点我已经强调很多次了！</p>
 <p>v2: 通过, v1 版不精简版无法通过, 看这个就行</p>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">hasPathSum</span><span class="hljs-params">(TreeNode* root, <span class="hljs-type">int</span> sum)</span> </span>{<br>        <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">NULL</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        <span class="hljs-keyword">if</span> (!root-&gt;left &amp;&amp; !root-&gt;right &amp;&amp; sum == root-&gt;val) {<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; <span class="hljs-comment">// ❓为什么返回 true 会直接退出, 返回 false 却不会</span><br>        }<br>        <span class="hljs-comment">// ❗️没办法把两个返回值拆开</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">hasPathSum</span>(root-&gt;left, sum - root-&gt;val) || <span class="hljs-built_in">hasPathSum</span>(root-&gt;right, sum - root-&gt;val);<br>        <br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
-<h1 id="5-路径总和ii"><a class="markdownIt-Anchor" href="#5-路径总和ii"></a> 5 路径总和ii</h1>
-<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/path-sum-ii/">力扣题目链接</a></p>
-<p>给定一个二叉树和一个目标和，找到所有从根节点到叶子节点路径总和等于给定目标和的路径。</p>
-<p>说明:&nbsp;叶子节点是指没有子节点的节点。</p>
-<p>示例: 给定如下二叉树，以及目标和&nbsp;sum = 22，</p>
-<p><img src="https://img-blog.csdnimg.cn/20210203160854654.png" srcset="/img/loading.gif" lazyload alt="113.路径总和ii1.png"></p>
-<h2 id="51-思路"><a class="markdownIt-Anchor" href="#51-思路"></a> 5.1 思路</h2>
-<p>113.路径总和ii要遍历整个树，找到所有路径，<strong>所以递归函数不要返回值！</strong></p>
-<p>如图：</p>
-<p><img src="https://img-blog.csdnimg.cn/20210203160922745.png" srcset="/img/loading.gif" lazyload alt="113.路径总和ii"></p>
-<p>为了尽可能的把细节体现出来，我写出如下代码（<strong>这份代码并不简洁，但是逻辑非常清晰</strong>）</p>
-<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">solution</span> {<br><span class="hljs-keyword">private</span>:<br>    vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; result;<br>    vector&lt;<span class="hljs-type">int</span>&gt; path;<br>    <span class="hljs-comment">// 递归函数不需要返回值，因为我们要遍历整个树</span><br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">traversal</span><span class="hljs-params">(treenode* cur, <span class="hljs-type">int</span> count)</span> </span>{<br>        <span class="hljs-keyword">if</span> (!cur-&gt;left &amp;&amp; !cur-&gt;right &amp;&amp; count == <span class="hljs-number">0</span>) { <span class="hljs-comment">// 遇到了叶子节点且找到了和为sum的路径</span><br>            result.<span class="hljs-built_in">push_back</span>(path);<br>            <span class="hljs-keyword">return</span>;<br>        }<br><br>        <span class="hljs-keyword">if</span> (!cur-&gt;left &amp;&amp; !cur-&gt;right) <span class="hljs-keyword">return</span> ; <span class="hljs-comment">// 遇到叶子节点而没有找到合适的边，直接返回</span><br>		<span class="hljs-comment">// 💡回溯的操作有两个: path 路径的 pop, count 值的加回来</span><br>        <span class="hljs-keyword">if</span> (cur-&gt;left) { <span class="hljs-comment">// 左 （空节点不遍历）</span><br>            path.<span class="hljs-built_in">push_back</span>(cur-&gt;left-&gt;val);<br>            count -= cur-&gt;left-&gt;val;        <span class="hljs-comment">// 💡递归操作多了一个</span><br>            <span class="hljs-built_in">traversal</span>(cur-&gt;left, count);    <span class="hljs-comment">// 递归</span><br>            count += cur-&gt;left-&gt;val;        <span class="hljs-comment">// 回溯</span><br>            path.<span class="hljs-built_in">pop_back</span>();                <span class="hljs-comment">// 回溯, 💡就多了这个</span><br>        }<br>        <span class="hljs-keyword">if</span> (cur-&gt;right) { <span class="hljs-comment">// 右 （空节点不遍历）</span><br>            path.<span class="hljs-built_in">push_back</span>(cur-&gt;right-&gt;val);<br>            count -= cur-&gt;right-&gt;val;<br>            <span class="hljs-built_in">traversal</span>(cur-&gt;right, count);   <span class="hljs-comment">// 递归</span><br>            count += cur-&gt;right-&gt;val;       <span class="hljs-comment">// 回溯</span><br>            path.<span class="hljs-built_in">pop_back</span>();                <span class="hljs-comment">// 回溯</span><br>        }<br>        <span class="hljs-keyword">return</span> ;<br>    }<br><br><span class="hljs-keyword">public</span>:<br>    vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">pathsum</span>(treenode* root, <span class="hljs-type">int</span> sum) {<br>        result.<span class="hljs-built_in">clear</span>();<br>        path.<span class="hljs-built_in">clear</span>();<br>        <span class="hljs-keyword">if</span> (root == null) <span class="hljs-keyword">return</span> result;<br>        path.<span class="hljs-built_in">push_back</span>(root-&gt;val); <span class="hljs-comment">// 把根节点放进路径</span><br>        <span class="hljs-built_in">traversal</span>(root, sum - root-&gt;val);<br>        <span class="hljs-keyword">return</span> result;<br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
-<p>至于113. 路径总和ii 的迭代法我并没有写，用迭代方式记录所有路径比较麻烦，也没有必要，如果大家感兴趣的话，可以再深入研究研究。<br>
-[[15. 二叉树中递归带着回溯]]</p>
-<p>v2: 未通过, 错误在❗️处, 不懂怎么解决</p>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">private</span>:<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">getPath</span><span class="hljs-params">(TreeNode* node, <span class="hljs-type">int</span> count,  vector&lt;<span class="hljs-type">int</span>&gt;&amp; path, vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt;&amp; result)</span></span>{<br>        path.<span class="hljs-built_in">push_back</span>(node-&gt;val); <span class="hljs-comment">// ❗️不懂, 调试显示操作空指针了, 但是下面明明让空指针不进入循环了</span><br>        <span class="hljs-keyword">if</span>(!node-&gt;left &amp;&amp; !node-&gt;right &amp;&amp; count == node-&gt;val){<br>            result.<span class="hljs-built_in">push_back</span>(path);<br>        }<br><br>        <span class="hljs-keyword">if</span>(node-&gt;left){<br>            <span class="hljs-built_in">getPath</span>(node-&gt;left, count - node-&gt;val, path, result);<br>            path.<span class="hljs-built_in">pop_back</span>();<br>        }<br>        <span class="hljs-keyword">if</span>(node-&gt;right){<br>            <span class="hljs-built_in">getPath</span>(node-&gt;right, count - node-&gt;val, path, result);<br>            path.<span class="hljs-built_in">pop_back</span>();<br>        }<br><br>    }<br><br><br><span class="hljs-keyword">public</span>:<br>    vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">pathSum</span>(TreeNode* root, <span class="hljs-type">int</span> targetSum) {<br>        vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; result;<br>        vector&lt;<span class="hljs-type">int</span>&gt; path;<br>        <span class="hljs-built_in">getPath</span>(root, targetSum, path, result);<br>        <span class="hljs-keyword">return</span> result;<br><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
-<hr>
-<p><strong>其他资料</strong></p>
- <!-- basicblock-start oid="Obs4GemwCeCImGHKqF6utBFo" deck = "👨🏻‍💻code::数据结构与算法::代码随想录::二叉树::18. 路径总和.md" --> 
-<p>#历史记录::<br>
-2022/09/10🌵112. 路径总和: 递归法看懂了, 理解了回溯的过程(断点调试), 但是没对着打一遍, 迭代法不用看. ⏱1-04<br>
-2022/09/11🌵113. 路径总和ii, 递归的时候就多了一个回溯操作而已, 看懂了, 但是没对着写一遍代码⏱0-12<br>
-2022/09/12🌵112. 路径总和:  看v2简短代码, 理解其过程了⏱0-50<br>
-2022/09/13🌵113. 路径总和ii, v2: 未通过, 错误在❗️处, 不懂怎么解决⏱0-30</p>
-<!-- basicblock-end -->
+<h1 id="2-路径总和ii"><a class="markdownIt-Anchor" href="#2-路径总和ii"></a> 2: [[路径总和ii]]</h1>
+
               
             </div>
             <hr/>

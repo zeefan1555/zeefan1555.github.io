@@ -16,15 +16,15 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="📝MySQL 数据库分库分表后带来的优点::  MySQL 数据库分库分表后带来的优点 分库分表解决的现状问题： 可以解决数据库本⾝的瓶颈以及系统本⾝的瓶颈解决数据库本⾝瓶颈： 连接数： 连接数过多时，就会出现‘too many connections’的错误，访问量太⼤或者数据库设置的最 ⼤连接数太⼩的原因 Mysql 默认的最⼤连接数为 100 可以修改，⽽mysql 服务允许的最⼤连接数为">
+    <meta name="description" content="📝MySQL 数据库分库分表后带来的优点::  分库分表解决的现状问题： 可以解决数据库本⾝的瓶颈以及系统本⾝的瓶颈 连接数： 连接数过多时，就会出现‘too many connections’的错误，访问量太⼤或者数据库设置的最 ⼤连接数太⼩的原因 Mysql 默认的最⼤连接数为 100 可以修改，⽽mysql 服务允许的最⼤连接数为 16384。  1: 具体问题  数据库分表可以解决单表海">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL 数据库分库分表后带来的优点">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/703/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="📝MySQL 数据库分库分表后带来的优点::  MySQL 数据库分库分表后带来的优点 分库分表解决的现状问题： 可以解决数据库本⾝的瓶颈以及系统本⾝的瓶颈解决数据库本⾝瓶颈： 连接数： 连接数过多时，就会出现‘too many connections’的错误，访问量太⼤或者数据库设置的最 ⼤连接数太⼩的原因 Mysql 默认的最⼤连接数为 100 可以修改，⽽mysql 服务允许的最⼤连接数为">
+<meta property="og:description" content="📝MySQL 数据库分库分表后带来的优点::  分库分表解决的现状问题： 可以解决数据库本⾝的瓶颈以及系统本⾝的瓶颈 连接数： 连接数过多时，就会出现‘too many connections’的错误，访问量太⼤或者数据库设置的最 ⼤连接数太⼩的原因 Mysql 默认的最⼤连接数为 100 可以修改，⽽mysql 服务允许的最⼤连接数为 16384。  1: 具体问题  数据库分表可以解决单表海">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-14T12:24:00.000Z">
-<meta property="article:modified_time" content="2022-11-14T12:43:47.372Z">
+<meta property="article:modified_time" content="2022-11-19T12:59:10.482Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          641 字
+          623 字
         
       </span>
     
@@ -284,7 +284,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年11月14日 晚上
+                    本文最后更新于：2022年11月19日 晚上
                   
                 
               </p>
@@ -293,14 +293,25 @@
               
               <p>📝MySQL 数据库分库分表后带来的优点::</p>
 <!-- basicblock-end -->
-<p>MySQL 数据库分库分表后带来的优点</p>
 <p>分库分表解决的现状问题：</p>
-<p>可以解决数据库本⾝的瓶颈以及系统本⾝的瓶颈解决数据库本⾝瓶颈： 连接数： 连接数过多时，就会出现‘too many connections’的错误，访问量太⼤或者数据库设置的最 ⼤连接数太⼩的原因 Mysql 默认的最⼤连接数为 100 可以修改，⽽mysql 服务允许的最⼤连接数为 16384。</p>
-<p>数据库分表可以解决单表海量数据的查询性能问题<br>
-数据库分库可以解决单台数据库的并发访问压⼒问题<br>
-解决系统本⾝IO、CPU 瓶颈</p>
-<p>磁盘读写 IO 瓶颈，热点数据太多，尽管使⽤了数据库本⾝缓存，但是依旧有⼤量 IO, 导致 sql 执⾏速度慢</p>
-<p>⽹络 IO 瓶颈，请求的数据太多，数据传输⼤，⽹络带宽不够，链路响应时间变长 CPU 瓶颈，尤其在基础数据量⼤单机复杂 SQL 计算，SQL 语句执⾏占⽤CPU 使⽤率⾼，也有扫描⾏数⼤、锁冲突、锁等待等原因</p>
+<p>可以解决<strong>数据库本⾝的瓶颈</strong>以及<strong>系统本⾝的瓶颈</strong><br>
+连接数： 连接数过多时，就会出现‘too many connections’的错误，访问量太⼤或者数据库设置的最 ⼤连接数太⼩的原因<br>
+Mysql 默认的最⼤连接数为 100 可以修改，⽽mysql 服务允许的最⼤连接数为 16384。</p>
+<h1 id="1-具体问题"><a class="markdownIt-Anchor" href="#1-具体问题"></a> 1: 具体问题</h1>
+<ul>
+<li>数据库分表可以解决单表海量数据的查询性能问题</li>
+<li>数据库分库可以解决单台数据库的并发访问压⼒问题
+<ul>
+<li>⽹络 IO 瓶颈，请求的数据太多，数据传输⼤，⽹络带宽不够，链路响应时间变长 CPU 瓶颈，尤其在基础数据量⼤单机复杂 SQL 计算，SQL 语句执⾏占⽤CPU 使⽤率⾼，也有扫描⾏数⼤、锁冲突、锁等待等原因</li>
+</ul>
+</li>
+<li>解决系统本⾝IO、CPU 瓶颈
+<ul>
+<li>磁盘读写 IO 瓶颈，热点数据太多，尽管使⽤了数据库本⾝缓存，但是依旧有⼤量 IO, 导致 sql 执⾏速度慢</li>
+</ul>
+</li>
+</ul>
+<h1 id="2-查询"><a class="markdownIt-Anchor" href="#2-查询"></a> 2: 查询</h1>
 <p>可以通过 show processlist; 、show full processlist，发现 CPU 使⽤率⽐较⾼的 SQL</p>
 <p>常见的对于查询时间长，State 列值是 Sending data，Copying to tmp table，Copying to tmp table on disk，Sorting result，Using filesort 等都是可能有性能问题 SQL，清楚相关影响问题的情况可以 kill 掉</p>
 <p>也存在执⾏时间短，但是 CPU 占⽤率⾼的 SQL，通过上⾯命令查询不到，这个时候最好通过执⾏计划分析 explain 进⾏分析</p>
@@ -364,9 +375,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/46938/" title="MySQL 常见的分库分表">
+                      <a href="/posts/7733/" title="事务操作">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">MySQL 常见的分库分表</span>
+                        <span class="hidden-mobile">事务操作</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
