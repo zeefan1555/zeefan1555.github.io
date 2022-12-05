@@ -16,15 +16,15 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="const关键字 ::  const的作用： 被它修饰的值不能改变，是只读变量。必须在定义的时候就给它赋初值。 若要修改const修饰的变量的值，需要加上关键字[[volatile]]; 若想要修改const成员函数中某些与类状态无关的数据成员，可以使用mutable关键字来修饰这个数据成员；  1: 总结  [!tip] 左定向 (无法改变指向对象), 右定值 (无法改变指向对象的值)， 左右:">
+    <meta name="description" content="const关键字 ::  const的作用： 被它修饰的值不能改变，是只读变量。必须在定义的时候就给它赋初值。 若要修改const修饰的变量的值，需要加上关键字 [[volatile]]; 若想要修改const成员函数中某些与类状态无关的数据成员，可以使用mutable关键字来修饰这个数据成员；  1: [[顶层 const 和底层 const 的用法]]  2: 区分作用  执行对象拷贝时有限制">
 <meta property="og:type" content="article">
 <meta property="og:title" content="const关键字">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/58873/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="const关键字 ::  const的作用： 被它修饰的值不能改变，是只读变量。必须在定义的时候就给它赋初值。 若要修改const修饰的变量的值，需要加上关键字[[volatile]]; 若想要修改const成员函数中某些与类状态无关的数据成员，可以使用mutable关键字来修饰这个数据成员；  1: 总结  [!tip] 左定向 (无法改变指向对象), 右定值 (无法改变指向对象的值)， 左右:">
+<meta property="og:description" content="const关键字 ::  const的作用： 被它修饰的值不能改变，是只读变量。必须在定义的时候就给它赋初值。 若要修改const修饰的变量的值，需要加上关键字 [[volatile]]; 若想要修改const成员函数中某些与类状态无关的数据成员，可以使用mutable关键字来修饰这个数据成员；  1: [[顶层 const 和底层 const 的用法]]  2: 区分作用  执行对象拷贝时有限制">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-09-19T12:43:00.000Z">
-<meta property="article:modified_time" content="2022-11-22T07:56:02.036Z">
+<meta property="article:modified_time" content="2022-11-27T12:11:39.937Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="C++目录">
 <meta name="twitter:card" content="summary_large_image">
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.1k 字
+          471 字
         
       </span>
     
@@ -234,7 +234,7 @@
         
         
         
-          6 分钟
+          3 分钟
         
       </span>
     
@@ -285,7 +285,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年11月22日 下午
+                    本文最后更新于：2022年11月27日 晚上
                   
                 
               </p>
@@ -295,48 +295,21 @@
               <p>const关键字 ::</p>
 <!-- basicblock-end -->
 <p><strong>const的作用： 被它修饰的值不能改变，是只读变量。必须在定义的时候就给它赋初值。</strong></p>
-<p>若要修改const修饰的变量的值，需要加上关键字[[volatile]]; 若想要修改const成员函数中某些与类状态无关的数据成员，可以使用mutable关键字来修饰这个数据成员；</p>
-<h1 id="1-总结"><a class="markdownIt-Anchor" href="#1-总结"></a> 1: 总结</h1>
-<blockquote>
-<p>[!tip]<br>
-左定向 (无法改变指向对象), 右定值 (无法改变指向对象的值)，<br>
-左右: 指的是 const 在 <code>*</code> 的左还是右边<br>
-顶层和底层也很好理解: 顶层说的是指针, 底层说的是数据</p>
-</blockquote>
+<p>若要修改const修饰的变量的值，需要加上关键字 [[volatile]];<br>
+若想要修改const成员函数中某些与类状态无关的数据成员，可以使用mutable关键字来修饰这个数据成员；</p>
+<h1 id="1-顶层-const-和底层-const-的用法"><a class="markdownIt-Anchor" href="#1-顶层-const-和底层-const-的用法"></a> 1: [[顶层 const 和底层 const 的用法]]</h1>
+<h1 id="2-区分作用"><a class="markdownIt-Anchor" href="#2-区分作用"></a> 2: <strong>区分作用</strong></h1>
 <ul>
-<li>
-<p>常量指针是一个不能给改变指向的指针。顶层const</p>
-</li>
-<li>
-<p>指针是个常量，必须初始化.</p>
+<li>执行对象拷贝时有限制，常量的底层const不能赋值给非常量的底层const</li>
+<li>使用命名的强制类型转换函数const_cast时，只能改变运算对象的底层const</li>
+</ul>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-type">const</span> <span class="hljs-type">int</span> a;<span class="hljs-type">int</span> <span class="hljs-type">const</span> a;<span class="hljs-type">const</span> <span class="hljs-type">int</span> *a;<span class="hljs-type">int</span> *<span class="hljs-type">const</span> a;<br></code></pre></td></tr></tbody></table></figure>
 <ul>
-<li>一旦初始化完成，它的值（也就是存放在指针中的地址）就不能在改变了，即不能中途改变指向，如int <code>*const p</code>。<br>
-eg:<br>
-<code>const int* d=new int(2);</code>, const 在 <code>*</code> 的左边,</li>
+<li>int const a和const int a均表示定义常量类型a。</li>
+<li>const int *a，其中a为指向int型变量的指针，const在 * 左侧，表示a指向不可变常量。(看成const (*a)，对引用加const)</li>
+<li>int *const a，依旧是指针类型，表示a为指向整型数据的常指针。(看成const(a)，对指针const)</li>
 </ul>
-</li>
-<li>
-<p>指针常量是一个指针，底层const</p>
-</li>
-<li>
-<p>读成常量的指针，指向一个只读变量，即底层数据无法通过指针改变</p>
-<ul>
-<li>也就是后面所指明的int const 和 const int，都是一个常量，可以写作<code>int const *p</code>或<code>const int *p</code>。</li>
-</ul>
-</li>
-</ul>
-<p>eg:<br>
-<code>int *const e=new int(2);</code>, const 在 <code>*</code> 的右边</p>
-<h2 id="11-指针常量-顶层const-指针指向的对象无法改变"><a class="markdownIt-Anchor" href="#11-指针常量-顶层const-指针指向的对象无法改变"></a> 1.1: 指针常量 (顶层const): 指针指向的对象无法改变</h2>
-<p>指针常量： 指针常量是指定义了一个指针，这个指针的值只能在定义时初始化，其他地方不能改变。<br>
-指针常量强调的是==<strong>指针==的不可改变性</strong>。💡不可以指向新的对象<br>
-特点： 靠近变量类型。</p>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c++">形式： 数据类型* <span class="hljs-type">const</span> 指针变量 = &amp;变量名<br><br><span class="hljs-comment">//2.指针常量, 💡指针在前边</span><br><span class="hljs-type">int</span> tmp3 = <span class="hljs-number">12</span>;<br><span class="hljs-type">int</span> tmp4 = <span class="hljs-number">13</span>;<br><span class="hljs-type">int</span>* <span class="hljs-type">const</span> p = &amp;tmp3；<span class="hljs-comment">// 常量指针</span><br>*p = <span class="hljs-number">9</span>; <span class="hljs-comment">//正确：可以更改指向对象的值</span><br> p = &amp;tmp4；<span class="hljs-comment">//错误：不可以指向新的对象, 💡指针不可以修改</span><br></code></pre></td></tr></tbody></table></figure>
-<h2 id="12-常量指针底层const-底层数据无法通过指针改变"><a class="markdownIt-Anchor" href="#12-常量指针底层const-底层数据无法通过指针改变"></a> 1.2: 常量指针（底层const) : 底层数据无法通过指针改变</h2>
-<p><mark>常量指针</mark>： 是指定义了一个指针，这个指针指向一个只读的对象，<strong>不能通过常量指针来改变这个对象的值。</strong><br>
-常量指针强调的是<strong>指针对<mark>其所指对象</mark>的不可改变性</strong>。💡不可以通过指针来改变对象<br>
-特点： 靠近变量名。</p>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">// 1 常量指针, 💡指针在后边</span><br><span class="hljs-type">int</span> temp = <span class="hljs-number">10</span>;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> *p = &amp;temp;<span class="hljs-comment">// (1) const 数据类型 *指针变量 = &amp;变量名</span><br><span class="hljs-type">int</span> <span class="hljs-type">const</span> *p = &amp;temp;<span class="hljs-comment">// (2)数据类型 const *指针变量 = &amp;变量名</span><br><br>*p = <span class="hljs-number">9</span>; <span class="hljs-comment">// 错误,不能通过常量指针来改变这个对象的值。</span><br>temp = <span class="hljs-number">9</span>; <span class="hljs-comment">// 💡正确, 直接改变原来对象可以</span><br><br></code></pre></td></tr></tbody></table></figure>
+<h1 id="3-48-const关键字的作用有哪些"><a class="markdownIt-Anchor" href="#3-48-const关键字的作用有哪些"></a> 3: [[48、const关键字的作用有哪些]]</h1>
 
               
             </div>

@@ -24,8 +24,9 @@
 <meta property="og:description" content="📝char 和 varchar 的区别？::   1: 区别一，定长和变长 char 表示定长，长度固定， char 如果插入的长度小于定义长度时，则用空格填充； varchar 表示变长，即长度可变。 varchar 小于定义长度时，还是按实际长度存储，插入多长就存多长。 因为其长度固定，char 的存取速度还是要比 varchar 要快得多，方便程序的存储与查找； 但是 char 也为此付出">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-12T11:38:00.000Z">
-<meta property="article:modified_time" content="2022-11-17T12:22:18.101Z">
+<meta property="article:modified_time" content="2022-11-28T14:04:52.866Z">
 <meta property="article:author" content="zeefan">
+<meta property="article:tag" content="📗">
 <meta name="twitter:card" content="summary_large_image">
   
   
@@ -222,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          603 字
+          693 字
         
       </span>
     
@@ -284,7 +285,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年11月17日 晚上
+                    本文最后更新于：2022年11月28日 晚上
                   
                 
               </p>
@@ -295,16 +296,22 @@
 <!-- basicblock-end -->
 <h1 id="1-区别一定长和变长"><a class="markdownIt-Anchor" href="#1-区别一定长和变长"></a> 1: 区别一，定长和变长</h1>
 <p>char 表示定长，长度固定，<br>
-char 如果插入的长度小于定义长度时，则用空格填充；</p>
+char 如果插入的长度小于定义长度时，则用<strong>空格填充</strong>；</p>
 <p>varchar 表示变长，即长度可变。<br>
 varchar 小于定义长度时，还是按实际长度存储，插入多长就存多长。</p>
-<p>因为其长度固定，char 的存取速度还是要比 varchar 要快得多，方便程序的存储与查找；<br>
-但是 char 也为此付出的是空间的代价，因为其长度固定，所以会占据多余的空间，可谓是以空间换取时间效率。</p>
-<p>varchar则刚好相反，以时间换空间。</p>
+<p>因为其长度固定，<strong>char 的存取速度还是要比 varchar 要快得多</strong>，方便程序的存储与查找；<br>
+但是 char 也为此付出的是空间的代价，因为其长度固定，所以会占据多余的空间，可谓是以空间换取时间效率。<br>
+varchar则刚好相反，以时间换空间。</p>
 <h1 id="2-区别之二存储的容量不同"><a class="markdownIt-Anchor" href="#2-区别之二存储的容量不同"></a> 2: 区别之二，存储的容量不同</h1>
 <p>对 char 来说，最多能存放的字符个数 255，和编码无关。</p>
 <p>而 varchar 呢，最多能存放 65532 个字符。<br>
 varchar 的最大有效长度由最大行大小和使用的字符集确定。整体最大长度是 65, 532 字节。</p>
+<h1 id="3-存储方式"><a class="markdownIt-Anchor" href="#3-存储方式"></a> 3: 存储方式</h1>
+<ul>
+<li>char的存储方式是：对英文字符（ASCII）占用1个字节，对一个汉字占用两个字节。</li>
+<li>varchar的存储方式是：对每个英文字符占用2个字节，汉字也占用2个字节。</li>
+</ul>
+<h1 id="4-其他"><a class="markdownIt-Anchor" href="#4-其他"></a> 4: 其他</h1>
 <blockquote>
 <p>[!question] 存储情况不同<br>
 下面的暂时不学了, 不明白还, 背住上边的</p>
@@ -374,6 +381,13 @@ varchar 的最大有效长度由最大行大小和使用的字符集确定。整
 
     </div>
   
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%F0%9F%93%97/">#📗</a>
+      
+    </div>
   
 </div>
 

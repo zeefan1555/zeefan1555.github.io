@@ -16,16 +16,16 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="📝事务的四大特性  ACID::   MVCC➕锁实现隔离性 redo log ➕ undo log 实现一致性  1: [[原子性 (Atomicity)]]  2: 一致性 (Consistency):  [!question] 事务完成时, 必须使所有的数据都保持一致状态。 即在事务开始之前以及事务结束之后，数据库的完整性不能被破坏   3: 隔离性 (Isolation)  [!summ">
+    <meta name="description" content="📝事务的四大特性  ACID::   MVCC➕锁实现隔离性 redo log ➕ undo log 实现一致性  1: [[原子性 (Atomicity)]]  2: [[一致性 (Consistency)]]  3: [[隔离性 (Isolation)]]  4: [[持久性 (Durability)]] 上述就是事务的四大特性, 简称 ACID。 ^f3fe25">
 <meta property="og:type" content="article">
 <meta property="og:title" content="事务的四大特性  ACID">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/49301/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="📝事务的四大特性  ACID::   MVCC➕锁实现隔离性 redo log ➕ undo log 实现一致性  1: [[原子性 (Atomicity)]]  2: 一致性 (Consistency):  [!question] 事务完成时, 必须使所有的数据都保持一致状态。 即在事务开始之前以及事务结束之后，数据库的完整性不能被破坏   3: 隔离性 (Isolation)  [!summ">
+<meta property="og:description" content="📝事务的四大特性  ACID::   MVCC➕锁实现隔离性 redo log ➕ undo log 实现一致性  1: [[原子性 (Atomicity)]]  2: [[一致性 (Consistency)]]  3: [[隔离性 (Isolation)]]  4: [[持久性 (Durability)]] 上述就是事务的四大特性, 简称 ACID。 ^f3fe25">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202211151720853.png">
 <meta property="article:published_time" content="2022-11-08T08:37:00.000Z">
-<meta property="article:modified_time" content="2022-11-15T09:22:36.628Z">
+<meta property="article:modified_time" content="2022-11-28T13:27:19.842Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202211151720853.png">
@@ -224,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          404 字
+          155 字
         
       </span>
     
@@ -235,7 +235,7 @@
         
         
         
-          3 分钟
+          1 分钟
         
       </span>
     
@@ -286,7 +286,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年11月15日 下午
+                    本文最后更新于：2022年11月28日 晚上
                   
                 
               </p>
@@ -299,21 +299,8 @@
 MVCC➕锁实现隔离性<br>
 redo log ➕ undo log 实现一致性</p>
 <h1 id="1-原子性-atomicity"><a class="markdownIt-Anchor" href="#1-原子性-atomicity"></a> 1: [[原子性 (Atomicity)]]</h1>
-<h1 id="2-一致性-consistency"><a class="markdownIt-Anchor" href="#2-一致性-consistency"></a> 2: 一致性 (<strong>C</strong>onsistency):</h1>
-<blockquote>
-<p>[!question] 事务完成时, 必须使所有的数据都保持一致状态。<br>
-即在事务开始之前以及事务结束之后，数据库的完整性不能被破坏</p>
-</blockquote>
-<h1 id="3-隔离性-isolation"><a class="markdownIt-Anchor" href="#3-隔离性-isolation"></a> 3: 隔离性 (Isolation)</h1>
-<blockquote>
-<p>[!summary] ⼀个事务执⾏时不能受其他事务的⼲扰。</p>
-</blockquote>
-<p>数据库系统提供的隔离机制,保证事务在<strong>不受外部并发操作影响</strong>的独立环境下运行。</p>
-<blockquote></blockquote>
-<p>允许多个并发事务同时对数据进⾏修改和读写的能⼒，它可以防⽌由于多个事务并发执⾏时由于交叉执⾏⽽导致的数据不⼀致</p>
-<p>redis 的隔离性<br>
-redis 的事务中的隔离性并没有保证原⼦性，已经做过的操作是不会 rollback 的。<br>
-它的隔离性是指其他事务不会⼲扰到它⾃⼰的事务。</p>
+<h1 id="2-一致性-consistency"><a class="markdownIt-Anchor" href="#2-一致性-consistency"></a> 2: [[一致性 (Consistency)]]</h1>
+<h1 id="3-隔离性-isolation"><a class="markdownIt-Anchor" href="#3-隔离性-isolation"></a> 3: [[隔离性 (Isolation)]]</h1>
 <h1 id="4-持久性-durability"><a class="markdownIt-Anchor" href="#4-持久性-durability"></a> 4: [[持久性 (Durability)]]</h1>
 <p>上述就是事务的四大特性, 简称 ACID。</p>
 <p>^f3fe25</p>

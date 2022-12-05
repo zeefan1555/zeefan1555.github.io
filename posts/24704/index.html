@@ -16,16 +16,17 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="📝数据库引擎InnoDB与MyISAM的区别::   [!summary] 面试题： InnoDB 引擎与 MyISAM 引擎的区别 ？ ①.InnoDB引擎，支持事务，而MyISAM不支持。 ②. InnoDB引擎，支持行锁和表锁，而MyISAM仅支持表锁，不支持行锁。 ③. InnoDB引擎，支持外键，而MyISAM是不支持的。 主要是上述三点区别，当然也可以从索引结构、存储限制等方面，更加">
+    <meta name="description" content="📝数据库引擎InnoDB与MyISAM的区别:: 下边的具体特性不想总结了   [!summary] 面试题： InnoDB 引擎与 MyISAM 引擎的区别 ？ ①.InnoDB引擎，支持事务，而MyISAM不支持。 ②. InnoDB引擎，支持行锁和表锁，而MyISAM仅支持表锁，不支持行锁。 ③. InnoDB引擎，支持外键，而MyISAM是不支持的。  1）事务：MyISAM不支持，In">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据库引擎InnoDB与MyISAM的区别">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/24704/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="📝数据库引擎InnoDB与MyISAM的区别::   [!summary] 面试题： InnoDB 引擎与 MyISAM 引擎的区别 ？ ①.InnoDB引擎，支持事务，而MyISAM不支持。 ②. InnoDB引擎，支持行锁和表锁，而MyISAM仅支持表锁，不支持行锁。 ③. InnoDB引擎，支持外键，而MyISAM是不支持的。 主要是上述三点区别，当然也可以从索引结构、存储限制等方面，更加">
+<meta property="og:description" content="📝数据库引擎InnoDB与MyISAM的区别:: 下边的具体特性不想总结了   [!summary] 面试题： InnoDB 引擎与 MyISAM 引擎的区别 ？ ①.InnoDB引擎，支持事务，而MyISAM不支持。 ②. InnoDB引擎，支持行锁和表锁，而MyISAM仅支持表锁，不支持行锁。 ③. InnoDB引擎，支持外键，而MyISAM是不支持的。  1）事务：MyISAM不支持，In">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-22T14:20:00.000Z">
-<meta property="article:modified_time" content="2022-11-23T02:19:34.217Z">
+<meta property="article:modified_time" content="2022-11-28T13:10:38.736Z">
 <meta property="article:author" content="zeefan">
+<meta property="article:tag" content="📙">
 <meta name="twitter:card" content="summary_large_image">
   
   
@@ -222,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          872 字
+          1.1k 字
         
       </span>
     
@@ -233,7 +234,7 @@
         
         
         
-          5 分钟
+          6 分钟
         
       </span>
     
@@ -284,23 +285,32 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年11月23日 上午
+                    本文最后更新于：2022年11月28日 晚上
                   
                 
               </p>
             
             <div class="markdown-body">
               
-              <p>📝数据库引擎InnoDB与MyISAM的区别::</p>
+              <p>📝数据库引擎InnoDB与MyISAM的区别:: 下边的具体特性不想总结了</p>
 <!-- basicblock-end -->
 <blockquote>
 <p>[!summary] 面试题： InnoDB 引擎与 MyISAM 引擎的区别 ？<br>
 ①.InnoDB引擎，支持事务，而MyISAM不支持。<br>
 ②. InnoDB引擎，支持行锁和表锁，而MyISAM仅支持表锁，不支持行锁。<br>
-③. InnoDB引擎，支持外键，而MyISAM是不支持的。<br>
-主要是上述三点区别，当然也可以从索引结构、存储限制等方面，更加深入的回答，具体参考如下官方文档：</p>
+③. InnoDB引擎，支持外键，而MyISAM是不支持的。</p>
 </blockquote>
-<h1 id="1-innodb"><a class="markdownIt-Anchor" href="#1-innodb"></a> 1: <strong>InnoDB</strong></h1>
+<p>1）事务：MyISAM不支持，InnoDB支持<br>
+2）锁级别： MyISAM 表级锁，InnoDB 行级锁及外键约束<br>
+3）MyISAM存储表的总行数；InnoDB不存储总行数；<br>
+4）MyISAM采用非聚集索引，B+树叶子存储指向数据文件的指针。<br>
+InnoDB主键索引采用聚集索引，B+树叶子存储数据</p>
+<h1 id="1-使用场景"><a class="markdownIt-Anchor" href="#1-使用场景"></a> 1: 使用场景</h1>
+<p>MyISAM适合： 插入不频繁，查询非常频繁，<br>
+如果执行大量的SELECT，MyISAM是更好的选择，没有事务。</p>
+<p>InnoDB适合： 可靠性要求比较高，或者要求事务；<br>
+表更新和查询都相当的频繁，大量的INSERT或UPDATE</p>
+<h1 id="2-innodb"><a class="markdownIt-Anchor" href="#2-innodb"></a> 2: <strong>InnoDB</strong></h1>
 <ul>
 <li>是 MySQL 默认的事务型存储引擎，只有在需要它不支持的特性时，才考虑使用其它存储引擎。</li>
 <li>实现了四个标准的隔离级别，默认级别是可重复读(REPEATABLE READ)。在可重复读隔离级别下，通过多版本并发控制(MVCC)+ 间隙锁(Next-Key Locking)防止幻影读。</li>
@@ -308,14 +318,14 @@
 <li>内部做了很多优化，包括从磁盘读取数据时采用的可预测性读能够加快读操作并且自动创建的自适应哈希索引能够加速插入操作的插入缓冲区等。</li>
 <li>支持真正的在线热备份。其它存储引擎不支持在线热备份，要获取一致性视图需要停止对所有表的写入，而在读写混合场景中，停止写入可能也意味着停止读取。</li>
 </ul>
-<h1 id="2-myisam"><a class="markdownIt-Anchor" href="#2-myisam"></a> 2: <strong>MyISAM</strong></h1>
+<h1 id="3-myisam"><a class="markdownIt-Anchor" href="#3-myisam"></a> 3: <strong>MyISAM</strong></h1>
 <ul>
 <li>设计简单，数据以紧密格式存储。对于只读数据，或者表比较小可以容忍修复操作，则依然可以使用它。</li>
 <li>提供了大量的特性，包括压缩表空间数据索引等。</li>
 <li>不支持事务。</li>
 <li>不支持行级锁，只能对整张表加锁，读取时会对需要读到的所有表加共享锁，写入时则对表加排它锁。但在表有读取操作的同时，也可以往表中插入新的记录，这被称为并发插入(CONCURRENT INSERT)。</li>
 </ul>
-<h1 id="3-总结"><a class="markdownIt-Anchor" href="#3-总结"></a> 3: <strong>总结</strong></h1>
+<h1 id="4-总结"><a class="markdownIt-Anchor" href="#4-总结"></a> 4: <strong>总结</strong></h1>
 <ul>
 <li>事务: InnoDB 是事务型的，可以使用 <code>Commit</code> 和 <code>Rollback</code> 语句。</li>
 <li>并发: MyISAM 只支持表级锁，而 InnoDB 还支持行级锁。</li>
@@ -366,6 +376,13 @@
 
     </div>
   
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%F0%9F%93%99/">#📙</a>
+      
+    </div>
   
 </div>
 

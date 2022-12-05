@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://cdn.xiaolincoding.com/gh/xiaolincoder/mysql/%E7%B4%A2%E5%BC%95/%E7%B4%A2%E5%BC%95%E5%88%86%E7%B1%BB.drawio.png">
 <meta property="og:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202211071640526.png">
 <meta property="article:published_time" content="2022-11-07T08:29:00.000Z">
-<meta property="article:modified_time" content="2022-11-22T09:53:38.758Z">
+<meta property="article:modified_time" content="2022-11-28T13:48:17.999Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="MySQL目录">
 <meta name="twitter:card" content="summary_large_image">
@@ -226,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.6k 字
+          1.9k 字
         
       </span>
     
@@ -237,7 +237,7 @@
         
         
         
-          9 分钟
+          10 分钟
         
       </span>
     
@@ -288,7 +288,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年11月22日 下午
+                    本文最后更新于：2022年11月28日 晚上
                   
                 
               </p>
@@ -380,6 +380,7 @@
 <li>按「物理存储」分类：<strong>聚簇索引（主键索引）、二级索引（辅助索引）</strong>。</li>
 <li>按「字段特性」分类：<strong>主键索引、唯一索引、普通索引、前缀索引</strong>。</li>
 <li>按「字段个数」分类：<strong>单列索引、联合索引</strong>。</li>
+<li>其他索引: [[聚集索引(目录)]], [[非聚集(合)索引]]</li>
 </ul>
 <ol>
 <li>普通索引：最基本的索引，没有任何限制</li>
@@ -399,9 +400,19 @@
 </ul>
 <p>其它索引都属于辅助索引（Secondary Index），也被称为二级索引或非聚簇索引。<br>
 <strong>创建的主键索引和二级索引默认使用的是 B+Tree 索引</strong>。</p>
-<h1 id="2-btree-索引"><a class="markdownIt-Anchor" href="#2-btree-索引"></a> 2: [[B+Tree 索引]]</h1>
-<h2 id="21-hash-索引"><a class="markdownIt-Anchor" href="#21-hash-索引"></a> 2.1: [[Hash 索引]]</h2>
-<h1 id="3-有序数组"><a class="markdownIt-Anchor" href="#3-有序数组"></a> 3: 有序数组</h1>
+<h1 id="2-主键索引与非主键索引"><a class="markdownIt-Anchor" href="#2-主键索引与非主键索引"></a> 2: 主键索引与非主键索引</h1>
+<p>根据叶子节点的内容，索引类型<strong>分为主键索引和非主键索引</strong>：<br>
+主键索引的叶子节点<strong>存的是整行数据</strong><br>
+在 InnoDB 里，主键索引也被称为聚簇索引 (clustered index)</p>
+<p>非主键索引的叶子节点<strong>存的是主键的值</strong><br>
+在 InnoDB 里，非主键索引也被称为二级索引 (secondary index)</p>
+<blockquote>
+<p>[!example]- 主键索引与二级索引的查找过程<br>
+![[二级索引.excalidraw]]</p>
+</blockquote>
+<h1 id="3-mysql索引主要使用的两种数据结构是什么"><a class="markdownIt-Anchor" href="#3-mysql索引主要使用的两种数据结构是什么"></a> 3: [[MySQL索引主要使用的两种数据结构是什么？]]</h1>
+<h1 id="4-21-mysql中有四种索引类型可以简单说说吗"><a class="markdownIt-Anchor" href="#4-21-mysql中有四种索引类型可以简单说说吗"></a> 4: [[21、MySQL中有四种索引类型，可以简单说说吗？]]</h1>
+<h1 id="5-有序数组"><a class="markdownIt-Anchor" href="#5-有序数组"></a> 5: 有序数组</h1>
 <p>优点：<br>
 等值查询 和区间查询 性能都挺6（<strong>有序数组 适合 查询</strong>）</p>
 <p>缺点：<br>
@@ -410,13 +421,13 @@
 <p>[!summary] Note：<br>
 有序数组只适用于<strong>静态存储引擎</strong>，在等值查询和范围（区间）查询场景中的性能非常优秀</p>
 </blockquote>
-<h1 id="4-二叉搜索树"><a class="markdownIt-Anchor" href="#4-二叉搜索树"></a> 4: 二叉搜索树</h1>
+<h1 id="6-二叉搜索树"><a class="markdownIt-Anchor" href="#6-二叉搜索树"></a> 6: 二叉搜索树</h1>
 <p>BST 是为了保留了“有序数组”查询（二分，O (logN)）性能好的优点，同时解决“有序数组”不适合增/删的缺点</p>
 <p>BST 查询的时间复杂度：O(log N)<br>
 但是，为了维持 O (log (N)）的查询复杂度，就需要保持这棵树是平衡二叉树。（维护 BST 是 AVL 的时间复杂度也是 O (log (N))）</p>
 <p>二叉树是搜索效率最高的，但是实际上大多数的数据库存储却并不使用二叉树。<br>
 其原因是:  索引不止存在内存中，还要写到磁盘上</p>
-<h1 id="5-n-叉树"><a class="markdownIt-Anchor" href="#5-n-叉树"></a> 5: N 叉树</h1>
+<h1 id="7-n-叉树"><a class="markdownIt-Anchor" href="#7-n-叉树"></a> 7: N 叉树</h1>
 <p>为了让一个查询尽量少地读磁盘，就必须让查询过程访问尽量少的数据块<br>
 那么，我们就不应该使用二叉树，而是要使用“N 叉”树（N 取决于数据块的大小）<br>
 即，通过使用N叉树 来降低树的高度，即 减少读取磁盘的次数（IO是很慢的），提高查<br>

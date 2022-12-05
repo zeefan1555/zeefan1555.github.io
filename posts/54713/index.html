@@ -16,17 +16,16 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1 底层结构 普通数组 int a [10]，一旦定义了就不能改变了，这个数组最多只能放10个元素了 动态数组vector，不用关心初始的大小，可以随意的添加数据 vector的底层实现也是普通数组。  vector的底层实现是array，严格来讲vector是容器，不是数组  ![[vector 容器实现与扩充 2022-10-21 17.00.06.excalidraw|700]] [[v">
+    <meta name="description" content="📝vector:: 2022&#x2F;10&#x2F;21 : 第一次创建    1: 底层结构 普通数组 int a [10]，一旦定义了就不能改变了，这个数组最多只能放10个元素了 动态数组vector，不用关心初始的大小，可以随意的添加数据 vector的底层实现也是普通数组。  vector的底层实现是array，严格来讲vector是容器，不是数组  ![[vector 容器实现与扩充 2022-10-">
 <meta property="og:type" content="article">
-<meta property="og:title" content="vector">
+<meta property="og:title" content="vector (目录)">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/54713/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="1 底层结构 普通数组 int a [10]，一旦定义了就不能改变了，这个数组最多只能放10个元素了 动态数组vector，不用关心初始的大小，可以随意的添加数据 vector的底层实现也是普通数组。  vector的底层实现是array，严格来讲vector是容器，不是数组  ![[vector 容器实现与扩充 2022-10-21 17.00.06.excalidraw|700]] [[v">
+<meta property="og:description" content="📝vector:: 2022&#x2F;10&#x2F;21 : 第一次创建    1: 底层结构 普通数组 int a [10]，一旦定义了就不能改变了，这个数组最多只能放10个元素了 动态数组vector，不用关心初始的大小，可以随意的添加数据 vector的底层实现也是普通数组。  vector的底层实现是array，严格来讲vector是容器，不是数组  ![[vector 容器实现与扩充 2022-10-">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190804120900612.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpa2VfdGhhdA==,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201218185902217.png">
 <meta property="article:published_time" content="2022-10-21T08:55:00.000Z">
-<meta property="article:modified_time" content="2022-11-19T08:43:41.165Z">
+<meta property="article:modified_time" content="2022-12-02T07:14:09.434Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="疑问">
 <meta name="twitter:card" content="summary_large_image">
@@ -36,7 +35,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>vector - 一杯空气</title>
+  <title>vector (目录) - 一杯空气</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -203,7 +202,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="vector"></span>
+            <span id="subtitle" data-typed-text="vector (目录)"></span>
           
         </div>
 
@@ -226,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.9k 字
+          339 字
         
       </span>
     
@@ -237,7 +236,7 @@
         
         
         
-          10 分钟
+          2 分钟
         
       </span>
     
@@ -283,20 +282,23 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">vector</h1>
+            <h1 style="display: none">vector (目录)</h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年11月19日 下午
+                    本文最后更新于：2022年12月2日 下午
                   
                 
               </p>
             
             <div class="markdown-body">
               
-              <p><img src="https://img-blog.csdnimg.cn/20190804120900612.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpa2VfdGhhdA==,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" lazyload alt=""></p>
-<h1 id="1-底层结构"><a class="markdownIt-Anchor" href="#1-底层结构"></a> 1 底层结构</h1>
+              <p>📝vector::<br>
+2022/10/21 : 第一次创建</p>
+<!-- basicblock-end -->
+<p><img src="https://img-blog.csdnimg.cn/20190804120900612.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpa2VfdGhhdA==,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" lazyload alt=""></p>
+<h1 id="1-底层结构"><a class="markdownIt-Anchor" href="#1-底层结构"></a> 1: 底层结构</h1>
 <p>普通数组 int a [10]，一旦定义了就不能改变了，这个数组最多只能放10个元素了<br>
 动态数组vector，不用关心初始的大小，可以随意的添加数据</p>
 <p><strong>vector的底层实现也是普通数组</strong>。</p>
@@ -304,82 +306,15 @@
 <p>vector的底层实现是array，严格来讲vector是容器，不是数组</p>
 </blockquote>
 <p>![[vector 容器实现与扩充 2022-10-21 17.00.06.excalidraw|700]]</p>
-<p>[[vector#2 原理]]</p>
-<h1 id="2-原理-扩容过程"><a class="markdownIt-Anchor" href="#2-原理-扩容过程"></a> 2 原理 (扩容过程)</h1>
-<h2 id=""><a class="markdownIt-Anchor" href="#"></a> </h2>
-<p>C++中 vector（可以理解是一个动态数组，底层是普通数组实现的）<br>
-如果插入元素大于预先普通数组大小，vector 底部会有一个扩容的操作，</p>
-<ol>
-<li>先申请两倍于原先普通数组的大小，</li>
-<li>然后把数据拷贝到新数组上，</li>
-<li>最后: 析构掉旧内存中的对象, 在<strong>释放原数组内存</strong>。</li>
-</ol>
-<p>string 原理同理</p>
+<h1 id="2-vector-原理-扩容过程"><a class="markdownIt-Anchor" href="#2-vector-原理-扩容过程"></a> 2: [[vector 原理 (扩容过程)]]</h1>
+<h1 id="3-vector-api"><a class="markdownIt-Anchor" href="#3-vector-api"></a> 3: [[vector API]]</h1>
+<h1 id="4-vector-源码"><a class="markdownIt-Anchor" href="#4-vector-源码"></a> 4: vector 源码</h1>
 <blockquote>
-<p>[!example]-<br>
-原vector中的size和capicity相同都是3，初始化为1 2 3，此时要push_back一个元素4。<br>
-那么底层其实就要申请一个大小为6的普通数组，并且把原元素拷贝过去，释放原数组内存，<br>
-<strong>注意图中底层数组的内存起始地址已经变了</strong>。<br>
-<img src="https://img-blog.csdnimg.cn/20201218185902217.png" srcset="/img/loading.gif" lazyload alt="vector原理|800"></p>
+<p>源码暂时没看<br>
+<a href="marginnote3app://note/C7CA8DCF-BF03-4A4E-B23A-88ADF2ED37B5">margin: 3. vector源码</a></p>
 </blockquote>
-<h2 id="影响"><a class="markdownIt-Anchor" href="#影响"></a> 影响</h2>
-<p>增大内存的操作会使迭代器引用指针失效<br>
-一旦引起空间重新配置，指向原 vector 的所有迭代器就都失效了</p>
-<p>可能影响的操作就是: 插入操作 push 类 insert 类等</p>
-<p>所以使用vector（动态数组）来insert，是费时的，插入再拷贝的话，单纯一个插入的操作就是O(n<sup>2)了，甚至可能拷贝好几次，就不止O(n</sup>2)了。</p>
-<p>解决办法：可以采用链表来进行插入操作<br>
-eg：<code>vector&lt;vector&lt;int&gt;&gt; que：[[7,0],[7,1]]</code> →<code>list&lt;vector&lt;int&gt;&gt; que：[7,0]→[7,1]</code></p>
-<h2 id="21-size-和-capacity"><a class="markdownIt-Anchor" href="#21-size-和-capacity"></a> 2.1 size()  和 capacity()</h2>
-<p>vector的大小有两个维度一个是size一个是capicity，<br>
-size就是我们平时用来遍历vector时候用的，例如：<code>for (int i = 0; i &lt; vec.size(); i++)</code><br>
-而capicity是vector底层数组（就是普通数组）的大小，capicity可不一定就是size</p>
-<p>(1) 堆中分配内存，元素连续存放，内存空间只会增长不会减少<br>
-vector 有两个函数，一个是</p>
-<ul>
-<li>capacity (), 底层真正可以保存的元素个数，</li>
-<li>size(), 返回当前已经存储数据的个数</li>
-</ul>
-<p>(2) 对于 vector 来说，capacity 是永远大于等于 size<br>
-capacity 和 size 相等时，vector 就会扩容，capacity: 变大（翻倍）<br>
-当 insert 数据的时候，如果已经大于 capicity，capicity 会成倍扩容，但对外暴露的 size 其实仅仅是+1 而已，剩下的位置还是空闲的</p>
-<h2 id="22-扩容方式"><a class="markdownIt-Anchor" href="#22-扩容方式"></a> 2.2 扩容方式</h2>
-<h3 id="221-固定扩容"><a class="markdownIt-Anchor" href="#221-固定扩容"></a> 2.2.1 固定扩容</h3>
-<p>机制： 每次扩容的时候在原 capacity 的基础上加上固定的容量，</p>
-<ul>
-<li>example 比如初始 capacity 为 100，扩容一次为 capacity+20, 再扩容仍然为 capacity+20;</li>
-</ul>
-<p>缺点：<br>
-考虑一种极端的情况，vector 每次添加的元素数量刚好等于每次扩容固定增加的容量+1，就会造成一种情况，每添加一次元素就需要扩容一次，而扩容的时间花费十分高昂。<strong>所以固定扩容可能会面临多次扩容的情况</strong>，时间复杂度较高：</p>
-<p>优点： 固定扩容方式空间利用率比较高。</p>
-<h3 id="222-加倍扩容机制-每次扩容的时候原-capacity-翻倍"><a class="markdownIt-Anchor" href="#222-加倍扩容机制-每次扩容的时候原-capacity-翻倍"></a> 2.2.2 加倍扩容机制： 每次扩容的时候原 capacity 翻倍，</h3>
-<ul>
-<li>example 比如初始 capcity=100, 扩容一次变为 200，再扩容变为 400；</li>
-</ul>
-<p>优点： 一次扩容 capacity 翻倍的方式使得正常情况下添加元素需要<strong>扩容的次数大大减少（预留空间较多）</strong>，时间复杂度较低：</p>
-<p>缺点： 因为每次扩容空间翻倍，而很多空间没有利用上，空间利用率不如固定扩容。</p>
-<p>在实际应用中，一般采用空间换时间的策略。</p>
-<h3 id="223-细节"><a class="markdownIt-Anchor" href="#223-细节"></a> 2.2.3 细节</h3>
-<!-- basicblock-start oid="ObsFIRxCjwjr7HvHL8yR89Bg" deck= "❓疑问::👨🏻‍💻code::C++:: C++ STL::vector.md"-->
-<ul>
-<li>[ ]  1、为什么要成倍的扩容而不是一次增加一个固定大小的容量呢？</li>
-<li>采用成倍方式扩容，❓可以保证常数的时间复杂度，而增加指定大小的容量达到 O (n) 的时间复杂度。::  #疑问</li>
-</ul>
-<!-- basicblock-end -->
-<p>2、为什么是以两倍的方式扩容而不是三倍四倍，或者其他方式呢考虑可能产生的堆空间浪费，所以增长倍数不能太大，一般是 1.5 或 2；GCC 是 2；VS 是 1.5，k=2 每次扩展的新尺寸必然刚好大于之前分配的总和，之前分配的内存空间不可能被使用，这样对于缓存并不友好，<strong>采用 1.5 倍的增长方式可以更好的实现对内存的重复利用。</strong></p>
-<p>C++并没有规定扩容因子 K, 这是由标准库的实现者决定的。</p>
-<h1 id="3-vector-api"><a class="markdownIt-Anchor" href="#3-vector-api"></a> 3 [[vector API]]</h1>
-<h1 id="4-vector-源码"><a class="markdownIt-Anchor" href="#4-vector-源码"></a> 4 vector 源码</h1>
-<blockquote>
-<p>源码暂时没看</p>
-</blockquote>
-<p><a href="marginnote3app://note/C7CA8DCF-BF03-4A4E-B23A-88ADF2ED37B5">margin: 3. vector源码</a></p>
-<hr>
-<p><strong>其他资料</strong></p>
-<!-- basicblock-start oid="ObshhSwruEtcbbORcg6YbQRE" --> 
-<p>📝vector::<br>
-2022/10/21 : 第一次创建</p>
-<!-- basicblock-end -->
-<section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:2" class="footnote-text"><span><h2 id="3-两个数组的交集"><a class="markdownIt-Anchor" href="#3-两个数组的交集"></a> [[3. 两个数组的交集]]</h2>
+<h1 id="5-9-vector与list的区别与应用怎么找某vector或者list的倒数第二个元素"><a class="markdownIt-Anchor" href="#5-9-vector与list的区别与应用怎么找某vector或者list的倒数第二个元素"></a> 5: [[9、 vector与list的区别与应用？怎么找某vector或者list的倒数第二个元素]]</h1>
+<section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:2" class="footnote-text"><span>[[3. 两个数组的交集]]
 <a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
               
             </div>

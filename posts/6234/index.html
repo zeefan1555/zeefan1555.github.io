@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://myblog-tuchuang.oss-cn-shanghai.aliyuncs.com/1623727651911_20170928110355446.png">
 <meta property="article:published_time" content="2022-11-07T08:09:00.000Z">
-<meta property="article:modified_time" content="2022-11-22T11:15:28.853Z">
+<meta property="article:modified_time" content="2022-11-28T14:02:10.903Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="疑问">
 <meta property="article:tag" content="MySQL目录">
@@ -226,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.9k 字
+          1.1k 字
         
       </span>
     
@@ -237,7 +237,7 @@
         
         
         
-          10 分钟
+          6 分钟
         
       </span>
     
@@ -288,7 +288,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年11月22日 晚上
+                    本文最后更新于：2022年11月28日 晚上
                   
                 
               </p>
@@ -341,15 +341,10 @@
 <li>在 mysql 当中，一个字段上如果有 unique 约束的话，也会自动创建索引对象</li>
 </ol>
 </blockquote>
-<h1 id="4-建立索引注意事项"><a class="markdownIt-Anchor" href="#4-建立索引注意事项"></a> 4: 建立索引注意事项</h1>
-<ol>
-<li>索引不是越多越好，虽然索引会提高 select 效率，但是也降低了insert以及update<br>
-的效率</li>
-<li>数据量小的表不需要建立索引，会增加额外的索引开销</li>
-<li>不经常使用的列不要建立索引</li>
-<li>频繁更新的列不要建立索引，会影响更新的效率</li>
-</ol>
-<h1 id="5-索引优化"><a class="markdownIt-Anchor" href="#5-索引优化"></a> 5: 索引优化</h1>
+<h1 id="4"><a class="markdownIt-Anchor" href="#4"></a> 4:</h1>
+<h2 id="41-25-什么时候需要建立数据库索引呢"><a class="markdownIt-Anchor" href="#41-25-什么时候需要建立数据库索引呢"></a> 4.1: [[25、什么时候需要建立数据库索引呢？]]</h2>
+<h1 id="5-建立索引注意事项"><a class="markdownIt-Anchor" href="#5-建立索引注意事项"></a> 5: [[建立索引注意事项]]</h1>
+<h1 id="6-索引优化"><a class="markdownIt-Anchor" href="#6-索引优化"></a> 6: 索引优化</h1>
 <ol>
 <li>尽量避免在where字句中对字段进行空值判断，这会导致引擎放弃使用索引，进行全表扫描</li>
 <li>字段值分布很稀少的字段，不适合建立索引</li>
@@ -358,24 +353,14 @@
 <li>不要用外键和UNIQUE</li>
 <li>使用多列索引时，注意顺序和查询条件保持一致，同时删除不必要的单列索引</li>
 </ol>
-<h1 id="6-索引分类目录"><a class="markdownIt-Anchor" href="#6-索引分类目录"></a> 6: [[索引分类(目录)]]</h1>
-<h1 id="7-innodb-的索引模型"><a class="markdownIt-Anchor" href="#7-innodb-的索引模型"></a> 7: InnoDB 的索引模型：</h1>
+<h1 id="7-索引分类目录"><a class="markdownIt-Anchor" href="#7-索引分类目录"></a> 7: [[索引分类(目录)]]</h1>
+<h1 id="8-innodb-的索引模型"><a class="markdownIt-Anchor" href="#8-innodb-的索引模型"></a> 8: InnoDB 的索引模型：</h1>
 <p>InnoDB 使用了 B+树索引模型，每一个索引在 InnoDB 里面对应一棵 B+树</p>
 <p>![[InnoDB 的索引模型.excalidraw]]</p>
-<h2 id="71-索引分类"><a class="markdownIt-Anchor" href="#71-索引分类"></a> 7.1: 索引分类</h2>
-<p>根据叶子节点的内容，索引类型<strong>分为主键索引和非主键索引</strong>：<br>
-主键索引的叶子节点<strong>存的是整行数据</strong><br>
-在 InnoDB 里，主键索引也被称为聚簇索引 (clustered index)</p>
-<p>非主键索引的叶子节点<strong>存的是主键的值</strong><br>
-在 InnoDB 里，非主键索引也被称为二级索引 (secondary index)</p>
-<blockquote>
-<p>[!example]- 主键索引与二级索引的查找过程<br>
-![[二级索引.excalidraw]]</p>
-</blockquote>
-<h2 id="72-主键查询-vs-普通索引查询"><a class="markdownIt-Anchor" href="#72-主键查询-vs-普通索引查询"></a> 7.2: 主键查询 vs 普通索引查询</h2>
-<h3 id="721-主键查询"><a class="markdownIt-Anchor" href="#721-主键查询"></a> 7.2.1: 主键查询：</h3>
+<h2 id="81-主键查询-vs-普通索引查询"><a class="markdownIt-Anchor" href="#81-主键查询-vs-普通索引查询"></a> 8.1: 主键查询 vs 普通索引查询</h2>
+<h3 id="811-主键查询"><a class="markdownIt-Anchor" href="#811-主键查询"></a> 8.1.1: 主键查询：</h3>
 <p>直接在主键索引所在的 B+ 树中查询，然后直接返回查询到的叶子节点（此时，叶子节点里面就是整行记录）</p>
-<h3 id="722-普通索引查询"><a class="markdownIt-Anchor" href="#722-普通索引查询"></a> 7.2.2: 普通索引查询：</h3>
+<h3 id="812-普通索引查询"><a class="markdownIt-Anchor" href="#812-普通索引查询"></a> 8.1.2: 普通索引查询：</h3>
 <p>首先，在普通索引所在的B+树中，查询到待查询记录的主键；<br>
 然后，再根据这些查到的主键，执行“主键查询”（即，回表）</p>
 <blockquote>
@@ -383,29 +368,10 @@
 基于非主键索引的查询需要多扫描一棵索引树。<br>
 因此，我们在应用中应该尽量使用主键查询。</p>
 </blockquote>
-<h1 id="8-索引维护"><a class="markdownIt-Anchor" href="#8-索引维护"></a> 8: [[索引维护]]</h1>
-<h1 id="9-覆盖索引"><a class="markdownIt-Anchor" href="#9-覆盖索引"></a> 9: 覆盖索引</h1>
-<p>在普通索引树中，就可以直接查到待查结果，而不需要回表<br>
-由于覆盖素引可以减少树的搜素次数，显著提升查询性能，所以使用覆盖索引是一个常用的性能优化手段。</p>
-<blockquote>
-<p>[!question]<br>
-当执行如下语句时，这时只需要查 ID 的值，而 ID 的值已经在 k 索引树上了，因此可以直接提供查询结果，不需要回表::   #疑问</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs MySQL">select ID from T where k between 3 and 5<br></code></pre></td></tr></tbody></table></figure>
-<h1 id="10-最左前缀法则"><a class="markdownIt-Anchor" href="#10-最左前缀法则"></a> 10: [[最左前缀法则]]</h1>
-<h1 id="11-索引的优缺点"><a class="markdownIt-Anchor" href="#11-索引的优缺点"></a> 11: 索引的优缺点</h1>
-<h2 id="111-优点"><a class="markdownIt-Anchor" href="#111-优点"></a> 11.1: 优点</h2>
-<p>使用素引可以大大加快数据的检索速度（大大减少检索的数据量），这也是创建素引的最主要的原因。</p>
-<p>但是注意使用素引不一定能够提高查询性能，因为如果数据库的数据量不大，那么使用索引也不一定能够带来很大提升。其余大多数情况下，索引查询比全表扫描要快。</p>
-<p>通过创建唯一性索引，可以保证数据库表中每一行数据的唯一性。</p>
-<h2 id="112-缺点"><a class="markdownIt-Anchor" href="#112-缺点"></a> 11.2: 缺点</h2>
-<p>空间消耗，一个素引对应的就是一棵 b+树，每一个节点都是一个 16KB大小的页。占用的空间较大。<br>
-创建索引和维护素引需要耗费许多时间，当对表中的数据进行增删改的时候，如果数据有索引，那么索引也需要动态的修改，会降低 SQL 执行效率。</p>
-<blockquote>
-<p>[!example]<br>
-举例子：向数据库中增加一条记录，如果记录应该存储的页恰好满了，此时就要进行对应的 [[索引维护|页分裂]] 操作。<br>
-![[MySQL B+Tree .excalidraw]]</p>
-</blockquote>
+<h1 id="9-索引维护"><a class="markdownIt-Anchor" href="#9-索引维护"></a> 9: [[索引维护]]</h1>
+<h1 id="10-覆盖索引"><a class="markdownIt-Anchor" href="#10-覆盖索引"></a> 10: [[覆盖索引]]</h1>
+<h1 id="11-最左前缀法则"><a class="markdownIt-Anchor" href="#11-最左前缀法则"></a> 11: [[最左前缀法则]]</h1>
+<h1 id="12-索引的优缺点"><a class="markdownIt-Anchor" href="#12-索引的优缺点"></a> 12: [[索引的优缺点]]</h1>
 
               
             </div>

@@ -16,15 +16,15 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="new delete &amp; malloc free 目录 ::   1: [[new delete 概念]]  2: [[malloc free 概念]]  3: [[8、new  delete 与 malloc  free的异同|四者的异同]]  4: 既然有了malloc&#x2F;free，C++中为什么还需要new&#x2F;delete呢？直接用malloc&#x2F;free不好吗？  malloc&#x2F;free">
+    <meta name="description" content="new delete &amp; malloc free 目录 ::   1: [[new delete 原理]]  2: [[malloc free 原理]]  3: [[8、new  delete 与 malloc  free的异同|四者的异同]]  4: 既然有了malloc&#x2F;free，C++中为什么还需要new&#x2F;delete呢？直接用malloc&#x2F;free不好吗？  malloc&#x2F;free">
 <meta property="og:type" content="article">
 <meta property="og:title" content="new delete &amp; malloc free">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/1799/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="new delete &amp; malloc free 目录 ::   1: [[new delete 概念]]  2: [[malloc free 概念]]  3: [[8、new  delete 与 malloc  free的异同|四者的异同]]  4: 既然有了malloc&#x2F;free，C++中为什么还需要new&#x2F;delete呢？直接用malloc&#x2F;free不好吗？  malloc&#x2F;free">
+<meta property="og:description" content="new delete &amp; malloc free 目录 ::   1: [[new delete 原理]]  2: [[malloc free 原理]]  3: [[8、new  delete 与 malloc  free的异同|四者的异同]]  4: 既然有了malloc&#x2F;free，C++中为什么还需要new&#x2F;delete呢？直接用malloc&#x2F;free不好吗？  malloc&#x2F;free">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-09-19T13:49:00.000Z">
-<meta property="article:modified_time" content="2022-11-22T09:19:59.346Z">
+<meta property="article:modified_time" content="2022-11-29T02:01:33.148Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="C++目录">
 <meta name="twitter:card" content="summary_large_image">
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          320 字
+          353 字
         
       </span>
     
@@ -285,7 +285,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年11月22日 下午
+                    本文最后更新于：2022年11月29日 上午
                   
                 
               </p>
@@ -294,8 +294,8 @@
               
               <p>new delete &amp; malloc free 目录 ::</p>
 <!-- basicblock-end -->
-<h1 id="1-new-delete-概念"><a class="markdownIt-Anchor" href="#1-new-delete-概念"></a> 1: [[new delete 概念]]</h1>
-<h1 id="2-malloc-free-概念"><a class="markdownIt-Anchor" href="#2-malloc-free-概念"></a> 2: [[malloc free 概念]]</h1>
+<h1 id="1-new-delete-原理"><a class="markdownIt-Anchor" href="#1-new-delete-原理"></a> 1: [[new delete 原理]]</h1>
+<h1 id="2-malloc-free-原理"><a class="markdownIt-Anchor" href="#2-malloc-free-原理"></a> 2: [[malloc free 原理]]</h1>
 <h1 id="3-8-new-delete-与-malloc-free的异同四者的异同"><a class="markdownIt-Anchor" href="#3-8-new-delete-与-malloc-free的异同四者的异同"></a> 3: [[8、new  delete 与 malloc  free的异同|四者的异同]]</h1>
 <h1 id="4-既然有了mallocfreec中为什么还需要newdelete呢直接用mallocfree不好吗"><a class="markdownIt-Anchor" href="#4-既然有了mallocfreec中为什么还需要newdelete呢直接用mallocfree不好吗"></a> 4: 既然有了malloc/free，C++中为什么还需要new/delete呢？直接用malloc/free不好吗？</h1>
 <ul>
@@ -307,6 +307,7 @@
 </ul>
 </li>
 </ul>
+<h1 id="5-55-malloc申请的存储空间能用delete释放吗"><a class="markdownIt-Anchor" href="#5-55-malloc申请的存储空间能用delete释放吗"></a> 5: [[55、malloc申请的存储空间能用delete释放吗]]</h1>
 
               
             </div>
@@ -377,8 +378,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/30853/" title="override和overload">
-                        <span class="hidden-mobile">override和overload</span>
+                      <a href="/posts/58722/" title="define和inline的区别">
+                        <span class="hidden-mobile">define和inline的区别</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

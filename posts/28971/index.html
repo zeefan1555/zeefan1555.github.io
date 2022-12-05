@@ -16,19 +16,19 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="自+1, 必须使用在变量  1 后置++ 参与运算时: 先使用之前的的值, 在 eg: 123456789101112&#x2F;&#x2F; 版本 1 &#x3D; 版本 2&#x2F;&#x2F; 版本 1while(size--){}&#x2F;&#x2F; 版本 2while(size){size--} 后置为了返回旧值创建了一个临时对象，在函数结束的时候这个对象就会被销毁  1.1 a++ 是否是线程安全的:: margin a++：从C&#x2F;C++语法的级别">
+    <meta name="description" content="前置与后置 ::  margin   1: 前置++ 前置返回一个引用，后置返回一个对象 1234567891011&#x2F;&#x2F;++i实现代码为：int&amp; operator++(){  *this +&#x3D; 1;  return *this;}  参与运算时: 使用++后的值, 最好使用前置++，因为他不会创建临时对象，进而不会带来构造和析构而造成的格外开销。  2: 后置++ 前置不会产生临时对象，">
 <meta property="og:type" content="article">
 <meta property="og:title" content="前置++与后置++">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/28971/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="自+1, 必须使用在变量  1 后置++ 参与运算时: 先使用之前的的值, 在 eg: 123456789101112&#x2F;&#x2F; 版本 1 &#x3D; 版本 2&#x2F;&#x2F; 版本 1while(size--){}&#x2F;&#x2F; 版本 2while(size){size--} 后置为了返回旧值创建了一个临时对象，在函数结束的时候这个对象就会被销毁  1.1 a++ 是否是线程安全的:: margin a++：从C&#x2F;C++语法的级别">
+<meta property="og:description" content="前置与后置 ::  margin   1: 前置++ 前置返回一个引用，后置返回一个对象 1234567891011&#x2F;&#x2F;++i实现代码为：int&amp; operator++(){  *this +&#x3D; 1;  return *this;}  参与运算时: 使用++后的值, 最好使用前置++，因为他不会创建临时对象，进而不会带来构造和析构而造成的格外开销。  2: 后置++ 前置不会产生临时对象，">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202209272001228.png">
 <meta property="og:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202209202225411.png">
-<meta property="og:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202209202214087.png">
 <meta property="article:published_time" content="2022-09-20T13:50:00.000Z">
-<meta property="article:modified_time" content="2022-10-26T13:18:02.576Z">
+<meta property="article:modified_time" content="2022-11-29T13:40:30.743Z">
 <meta property="article:author" content="zeefan">
+<meta property="article:tag" content="📗">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202209272001228.png">
   
@@ -226,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          611 字
+          1.1k 字
         
       </span>
     
@@ -237,7 +237,7 @@
         
         
         
-          4 分钟
+          6 分钟
         
       </span>
     
@@ -288,51 +288,55 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年10月26日 晚上
+                    本文最后更新于：2022年11月29日 晚上
                   
                 
               </p>
             
             <div class="markdown-body">
               
-              <p>自+1, 必须使用在变量</p>
-<h1 id="1-后置"><a class="markdownIt-Anchor" href="#1-后置"></a> 1 后置++</h1>
-<p>参与运算时: 先使用<ins>之前的的值, 在</ins><br>
-eg:</p>
-<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// 版本 1 = 版本 2</span><br><br><span class="hljs-comment">// 版本 1</span><br><span class="hljs-keyword">while</span>(size--){<br><br>}<br><br><span class="hljs-comment">// 版本 2</span><br><span class="hljs-keyword">while</span>(size){<br>size--<br>}<br><br></code></pre></td></tr></tbody></table></figure>
+              <p>前置<ins>与后置</ins> ::  <a href="marginnote3app://note/F2C85E29-1092-4D10-89F0-9FA8884AA5E0">margin</a></p>
+<!-- basicblock-end -->
+<h1 id="1-前置"><a class="markdownIt-Anchor" href="#1-前置"></a> 1: 前置++</h1>
+<p>前置返回一个引用，后置返回一个对象</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-comment">//++i实现代码为：</span><br><span class="hljs-type">int</span>&amp; <span class="hljs-keyword">operator</span>++()<br>{<br><br>  *<span class="hljs-keyword">this</span> += <span class="hljs-number">1</span>;<br>  <span class="hljs-keyword">return</span> *<span class="hljs-keyword">this</span>;<br><br>} <br><br><br><br></code></pre></td></tr></tbody></table></figure>
+<p>参与运算时: 使用++后的值,</p>
+<p><strong>最好使用前置++，因为他不会创建临时对象，进而不会带来构造和析构而造成的格外开销。</strong></p>
+<h1 id="2-后置"><a class="markdownIt-Anchor" href="#2-后置"></a> 2: 后置++</h1>
+<p>前置不会产生临时对象，后置必须产生临时对象，<strong>临时对象会导致效率降低</strong></p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-comment">//i++实现代码为：               </span><br><span class="hljs-type">const</span> <span class="hljs-type">int</span> <span class="hljs-keyword">operator</span>++(<span class="hljs-type">int</span>) <br>{<br><span class="hljs-type">int</span> temp = *<span class="hljs-keyword">this</span>;                 <br>   ++*<span class="hljs-keyword">this</span>;                     <br>   <span class="hljs-keyword">return</span> temp;                <br>} <br><br><br></code></pre></td></tr></tbody></table></figure>
+<p>参与运算时: 先使用<ins>之前的的值, 在</ins></p>
+<blockquote>
+<p>[!example]-</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c">&gt;<span class="hljs-comment">// 版本 1 = 版本 2</span><br>&gt;<span class="hljs-comment">// 版本 1</span><br>&gt;<span class="hljs-keyword">while</span>(size--){<br>&gt;}<br>&gt;<span class="hljs-comment">// 版本 2</span><br>&gt;<span class="hljs-keyword">while</span>(size){<br>&gt;size--<br>&gt;}<br></code></pre></td></tr></tbody></table></figure>
+</blockquote>
 <p>后置为了返回旧值创建了一个临时对象，在函数结束的时候这个对象就会被销毁</p>
-<h2 id="11-a-是否是线程安全的"><a class="markdownIt-Anchor" href="#11-a-是否是线程安全的"></a> 1.1 a++ 是否是线程安全的::</h2>
+<h2 id="21-为什么后置返回对象而不是引用"><a class="markdownIt-Anchor" href="#21-为什么后置返回对象而不是引用"></a> 2.1: 为什么后置返回对象，而不是引用</h2>
+<p>因为后置为了返回旧值创建了一个临时对象，在函数结束的时候这个对象就会被销段，如果返回引用，那么我请问你？你的对象对象都被销毁了，你引用啥呢？</p>
+<h2 id="22-2-为什么后置前面也要加const"><a class="markdownIt-Anchor" href="#22-2-为什么后置前面也要加const"></a> 2.2: 2、为什么后置前面也要加const</h2>
+<p><strong>其实也可以不加</strong>，但是为了防止你使用i++++,连续两次的调用后置++重载符，为什么呢？</p>
+<blockquote>
+<p>[!question] 原因：<br>
+它与内置类型行为不一致；你无法活得你所期望的结果，因为第一次返回的是旧值，而不是原对象，你调用两次后置++，结果只累加了一次，所以我们必须手动禁止其合法化，就要在前面加上const。</p>
+</blockquote>
+<h2 id="23-a-是否是线程安全的"><a class="markdownIt-Anchor" href="#23-a-是否是线程安全的"></a> 2.3: a++ 是否是线程安全的::</h2>
 <p><a href="marginnote3app://note/40E6DB02-A325-4677-B64E-D9A609FE8681">margin</a></p>
-<p>a++：从C/C++语法的级别来看，这是一条语句，应该是原子的；但从编译器得到的汇编指令来看，其实不是原子的。<br>
+<p>a++：从C/C++语法的级别来看，这是一条语句，应该是原子的；<br>
+但从编译器得到的汇编指令来看，其实不是原子的。<br>
 其一般对应三条指令，首先将变量对应的内存值搬运到某个寄存器（如eax)中，然后将该寄存器中的值自增1， 再将该寄存器中的值搬运回a代表的内存中</p>
 <ul>
-<li>$ 系统中没法直接对变量操作, 计算, 赋值…, 需要寄存器里操作, 在搬回本来的内存</li>
+<li>cite 系统中没法直接对变量操作, 计算, 赋值…, 需要寄存器里操作, 在搬回本来的内存</li>
 </ul>
 <p><img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202209272001228.png" srcset="/img/loading.gif" lazyload alt="|400"></p>
-<!-- basicblock-start oid="ObsvqKfKSKrTbtmMsIIdqhIE" deck= "❓疑问::👨🏻‍💻code::C++::C++基础::前置++与后置++.md"-->
-<p>现在假设 i 的值是0，有两个线程，每个线程对变量 i 的值都递增1，预想一下，其结果应该是2，可实际运行结构可能是1,是不是很奇怪？</p>
+<blockquote>
+<p>[!question]<br>
+现在假设 i 的值是0，有两个线程，每个线程对变量 i 的值都递增1，预想一下，其结果应该是2，可实际运行结构可能是1,是不是很奇怪？</p>
+</blockquote>
 <p><img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202209202225411.png" srcset="/img/loading.gif" lazyload alt="|1000"></p>
 <ul>
-<li>? 没找到指令 456  ✅算了不找了, 没找到</li>
-<li>$ 主要想说: <strong>操作系统线程调度的不确定性</strong>, 线程不是顺序执行的</li>
+<li>question 没找到指令 456  ✅算了不找了, 没找到</li>
+<li>summary 主要想说: <strong>操作系统线程调度的不确定性</strong>, 线程不是顺序执行的</li>
 </ul>
-<!-- basicblock-end -->
-<h1 id="2-前置"><a class="markdownIt-Anchor" href="#2-前置"></a> 2 前置++</h1>
-<p>参与运算时: 使用++后的值,</p>
-<p>最好使用前置++，因为他不会创建临时对象，进而不会带来构造和析构而造成的格外开销。</p>
-<!-- basicblock-start oid="ObsfcjJZr9imcDOst3eYjLmk" --> 
-<p>运算符::<br>
-[ ] : 下标运算       eg:  arr[5]<br>
-{}  :  数组初始化  eg: int a[3] 二 {1,2,3}</p>
-<!-- basicblock-end -->
-<h1 id="3-区别"><a class="markdownIt-Anchor" href="#3-区别"></a> 3 区别::</h1>
-<p><img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202209202214087.png" srcset="/img/loading.gif" lazyload alt=""></p>
-<hr>
-<p><strong>其他资料</strong></p>
- <!-- basicblock-start oid="ObsaW0B5sy4l7hZ0imFaIkhg"  --> 
-<p>#历史记录::<br>
-2022/9/20🌵前置<ins>与后置</ins> : margin 里边的不懂<a href="marginnote3app://note/F2C85E29-1092-4D10-89F0-9FA8884AA5E0">margin</a></p>
-<!-- basicblock-end -->
 
               
             </div>
@@ -375,6 +379,13 @@ eg:</p>
 
     </div>
   
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%F0%9F%93%97/">#📗</a>
+      
+    </div>
   
 </div>
 

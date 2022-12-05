@@ -24,7 +24,7 @@
 <meta property="og:description" content="📝文件索引和数据库索引为什么使用B+树::  文件与数据库都是需要较大的存储，也就是说，它们都不可能全部存储在内存中，故需要存储到磁盘上。 而所谓索引，则为了数据的快速定位与查找，那么索引的结构组织要尽量减少查找过程中磁盘I&#x2F;O的存取次数，因此B+树相比B树更为合适。 数据库系统巧妙利用了局部性原理与磁盘预读原理，将一个节点的大小设为等于一个页，这样每个节点只需要一次I&#x2F;O就可以完全载入，而红黑">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-22T13:13:00.000Z">
-<meta property="article:modified_time" content="2022-11-23T02:19:29.659Z">
+<meta property="article:modified_time" content="2022-11-28T12:16:22.850Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          897 字
+          1k 字
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          5 分钟
+          6 分钟
         
       </span>
     
@@ -284,7 +284,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年11月23日 上午
+                    本文最后更新于：2022年11月28日 晚上
                   
                 
               </p>
@@ -296,9 +296,15 @@
 <p>文件与数据库都是需要较大的存储，也就是说，它们都不可能全部存储在内存中，故需要存储到磁盘上。<br>
 而所谓索引，则为了数据的快速定位与查找，那么索引的结构组织要尽量减少查找过程中磁盘I/O的存取次数，因此B+树相比B树更为合适。</p>
 <p>数据库系统巧妙利用了局部性原理与磁盘预读原理，将一个节点的大小设为等于一个页，这样每个节点只需要一次I/O就可以完全载入，而红黑树这种结构，高度明显要深的多，并且由于逻辑上很近的节点(父子)物理上可能很远，无法利用局部性。</p>
+<p><strong>B+树的特点</strong></p>
+<ul>
+<li>所有关键字都出现在叶子结点的链表中(稠密索引)，且链表中的关键字恰好是有序的;</li>
+<li>不可能在非叶子结点命中;</li>
+<li>非叶子结点相当于是叶子结点的索引(稀疏索引)，叶子结点相当于是存储(关键字)数据的数据层;</li>
+</ul>
 <h1 id="1-b树-方便扫库"><a class="markdownIt-Anchor" href="#1-b树-方便扫库"></a> 1: B+树 方便扫库</h1>
 <blockquote>
-<p>[!summary]</p>
+<p>[!summary] B+tree的磁盘读写代价更低，B+tree的查询效率更加稳定</p>
 <ul>
 <li><strong>最重要</strong>的是，B+树还有一个最大的好处：方便扫库。
 <ul>
@@ -306,8 +312,10 @@
 <li>B树必须用中序遍历的方法按序扫库，</li>
 </ul>
 </li>
-<li>B+树支持range-query非常方便，而B树不支持，这是数据库选用B+树的最主要原因。
+<li>数据库选用B+树的<strong>最主要原因</strong>
 <ul>
+<li>B+树支持<strong>range-query</strong>非常方便，</li>
+<li>而B树不支持，</li>
 <li>而且在数据库中基于范围的查询是非常频繁的，而B树只能中序遍历所有节点，效率太低</li>
 </ul>
 </li>

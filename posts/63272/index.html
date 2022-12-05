@@ -16,15 +16,15 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1 const :: [[const关键字]]  2 constexpr 复杂系统中很难分辨一个初始值是不是常量表达式，可以将变量声明为constexpr类型，由编译器来验证变量的值是否是一个常量表达式。 123constexpr int n &#x3D; 20; constexpr int m &#x3D; n +1; static constexpr int MOD &#x3D; 1000000007; 必须使用常量初始">
+    <meta name="description" content="1 const :: [[const 关键字]]  2 constexpr 复杂系统中很难分辨一个初始值是不是常量表达式，可以将变量声明为constexpr类型，由编译器来验证变量的值是否是一个常量表达式。 123constexpr int n &#x3D; 20; constexpr int m &#x3D; n +1; static constexpr int MOD &#x3D; 1000000007; 必须使用常量初">
 <meta property="og:type" content="article">
 <meta property="og:title" content="constexpr和const  (C++新特性)">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/63272/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="1 const :: [[const关键字]]  2 constexpr 复杂系统中很难分辨一个初始值是不是常量表达式，可以将变量声明为constexpr类型，由编译器来验证变量的值是否是一个常量表达式。 123constexpr int n &#x3D; 20; constexpr int m &#x3D; n +1; static constexpr int MOD &#x3D; 1000000007; 必须使用常量初始">
+<meta property="og:description" content="1 const :: [[const 关键字]]  2 constexpr 复杂系统中很难分辨一个初始值是不是常量表达式，可以将变量声明为constexpr类型，由编译器来验证变量的值是否是一个常量表达式。 123constexpr int n &#x3D; 20; constexpr int m &#x3D; n +1; static constexpr int MOD &#x3D; 1000000007; 必须使用常量初">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-09-19T13:38:00.000Z">
-<meta property="article:modified_time" content="2022-09-20T03:41:36.137Z">
+<meta property="article:modified_time" content="2022-11-27T09:42:55.682Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -284,14 +284,14 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年9月20日 中午
+                    本文最后更新于：2022年11月27日 下午
                   
                 
               </p>
             
             <div class="markdown-body">
               
-              <h1 id="1-const-const关键字"><a class="markdownIt-Anchor" href="#1-const-const关键字"></a> 1 const :: [[const关键字]]</h1>
+              <h1 id="1-const-const-关键字"><a class="markdownIt-Anchor" href="#1-const-const-关键字"></a> 1 const :: [[const 关键字]]</h1>
 <h1 id="2-constexpr"><a class="markdownIt-Anchor" href="#2-constexpr"></a> 2 constexpr</h1>
 <p>复杂系统中很难分辨一个初始值是不是常量表达式，可以将变量声明为constexpr类型，由编译器来验证变量的值是否是一个常量表达式。</p>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c">constexpr <span class="hljs-type">int</span> n = <span class="hljs-number">20</span>; <br>constexpr <span class="hljs-type">int</span> m = n +<span class="hljs-number">1</span>; <br><span class="hljs-type">static</span> constexpr <span class="hljs-type">int</span> MOD = <span class="hljs-number">1000000007</span>;<br></code></pre></td></tr></tbody></table></figure>

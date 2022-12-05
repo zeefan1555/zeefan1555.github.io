@@ -16,16 +16,17 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="📝锁的划分::   1 数据库角度  1.1 [[行锁 (共享锁, 排他锁)#1 共享锁（共享锁也叫读锁或 S 锁 ）|共享锁]]  1.2 [[行锁 (共享锁, 排他锁)#2 排他锁（排它锁也叫独占锁、写锁或 X 锁）|排他锁]]  1.3 [[行锁 (共享锁, 排他锁)#3 共享锁和排他锁|共享锁和排他锁]]  1.4 [[意向锁 (Intent lock)]]  2 程序员角度  2.1">
+    <meta name="description" content="📝锁的划分::   1: 数据库角度  1.1: [[行锁 (共享锁, 排他锁)#1 共享锁（共享锁也叫读锁或 S 锁 ）|共享锁]]  1.2: [[行锁 (共享锁, 排他锁)#2 排他锁（排它锁也叫独占锁、写锁或 X 锁）|排他锁]]  1.3: [[行锁 (共享锁, 排他锁)#3 共享锁和排他锁|共享锁和排他锁]]  1.4: [[意向锁 (Intent lock)]]  2: 程序员角度">
 <meta property="og:type" content="article">
 <meta property="og:title" content="锁的划分">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/54703/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="📝锁的划分::   1 数据库角度  1.1 [[行锁 (共享锁, 排他锁)#1 共享锁（共享锁也叫读锁或 S 锁 ）|共享锁]]  1.2 [[行锁 (共享锁, 排他锁)#2 排他锁（排它锁也叫独占锁、写锁或 X 锁）|排他锁]]  1.3 [[行锁 (共享锁, 排他锁)#3 共享锁和排他锁|共享锁和排他锁]]  1.4 [[意向锁 (Intent lock)]]  2 程序员角度  2.1">
+<meta property="og:description" content="📝锁的划分::   1: 数据库角度  1.1: [[行锁 (共享锁, 排他锁)#1 共享锁（共享锁也叫读锁或 S 锁 ）|共享锁]]  1.2: [[行锁 (共享锁, 排他锁)#2 排他锁（排它锁也叫独占锁、写锁或 X 锁）|排他锁]]  1.3: [[行锁 (共享锁, 排他锁)#3 共享锁和排他锁|共享锁和排他锁]]  1.4: [[意向锁 (Intent lock)]]  2: 程序员角度">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-09T12:43:00.000Z">
-<meta property="article:modified_time" content="2022-11-09T12:49:23.792Z">
+<meta property="article:modified_time" content="2022-11-27T13:40:33.970Z">
 <meta property="article:author" content="zeefan">
+<meta property="article:tag" content="MySQL目录">
 <meta name="twitter:card" content="summary_large_image">
   
   
@@ -222,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          563 字
+          184 字
         
       </span>
     
@@ -233,7 +234,7 @@
         
         
         
-          3 分钟
+          1 分钟
         
       </span>
     
@@ -284,7 +285,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年11月9日 晚上
+                    本文最后更新于：2022年11月27日 晚上
                   
                 
               </p>
@@ -293,21 +294,13 @@
               
               <p>📝锁的划分::</p>
 <!-- basicblock-end -->
-<h1 id="1-数据库角度"><a class="markdownIt-Anchor" href="#1-数据库角度"></a> 1 数据库角度</h1>
-<h2 id="11-行锁-共享锁-排他锁1-共享锁共享锁也叫读锁或-s-锁-共享锁"><a class="markdownIt-Anchor" href="#11-行锁-共享锁-排他锁1-共享锁共享锁也叫读锁或-s-锁-共享锁"></a> 1.1 [[行锁 (共享锁, 排他锁)#1 共享锁（共享锁也叫读锁或 S 锁 ）|共享锁]]</h2>
-<h2 id="12-行锁-共享锁-排他锁2-排他锁排它锁也叫独占锁-写锁或-x-锁排他锁"><a class="markdownIt-Anchor" href="#12-行锁-共享锁-排他锁2-排他锁排它锁也叫独占锁-写锁或-x-锁排他锁"></a> 1.2 [[行锁 (共享锁, 排他锁)#2 排他锁（排它锁也叫独占锁、写锁或 X 锁）|排他锁]]</h2>
-<h2 id="13-行锁-共享锁-排他锁3-共享锁和排他锁共享锁和排他锁"><a class="markdownIt-Anchor" href="#13-行锁-共享锁-排他锁3-共享锁和排他锁共享锁和排他锁"></a> 1.3 [[行锁 (共享锁, 排他锁)#3 共享锁和排他锁|共享锁和排他锁]]</h2>
-<h2 id="14-意向锁-intent-lock"><a class="markdownIt-Anchor" href="#14-意向锁-intent-lock"></a> 1.4 [[意向锁 (Intent lock)]]</h2>
-<h1 id="2-程序员角度"><a class="markdownIt-Anchor" href="#2-程序员角度"></a> 2 程序员角度</h1>
-<h2 id="21-乐观锁optimistic-locking"><a class="markdownIt-Anchor" href="#21-乐观锁optimistic-locking"></a> 2.1 乐观锁（Optimistic Locking）</h2>
-<p>认为对同⼀数据的并发操作不会总发⽣，属于⼩概率事件，不⽤每次都对数据上锁，也就是不采⽤数据库⾃⾝的锁机制，⽽是通过程序来实现。在程序上，我们可以采⽤版本号机制或者时间戳机制实现。</p>
-<h2 id="22-悲观锁pessimistic-locking"><a class="markdownIt-Anchor" href="#22-悲观锁pessimistic-locking"></a> 2.2 悲观锁（Pessimistic Locking）</h2>
-<p>也是⼀种思想，对数据被其他事务的修改持保守态度，会通过数据库⾃⾝的锁机制来实现，从⽽保证数据操作的排它性。</p>
-<h2 id="23-乐观锁和悲观锁的适用场景"><a class="markdownIt-Anchor" href="#23-乐观锁和悲观锁的适用场景"></a> 2.3 乐观锁和悲观锁的适⽤场景</h2>
-<p>（1）乐观锁<br>
-适合读操作多的场景，相对来说写的操作⽐较少。它的优点在于程序实现，不存在死锁问题，不过适⽤场景也会相对乐观，因为它阻⽌不了除了程序以外的数据库操作。</p>
-<p>（2）悲观锁</p>
-<p>适合写操作多的场景，因为写的操作具有排它性。采⽤悲观锁的⽅式，可以在数据库层⾯阻 ⽌其他事务对该数据的操作权限，防⽌读 - 写和写 - 写的冲突。但是加锁的时间会⽐较长， 可能会长时间限制其他⽤户的访问，也就是说他的并发访问性不好。</p>
+<h1 id="1-数据库角度"><a class="markdownIt-Anchor" href="#1-数据库角度"></a> 1: 数据库角度</h1>
+<h2 id="11-行锁-共享锁-排他锁1-共享锁共享锁也叫读锁或-s-锁-共享锁"><a class="markdownIt-Anchor" href="#11-行锁-共享锁-排他锁1-共享锁共享锁也叫读锁或-s-锁-共享锁"></a> 1.1: [[行锁 (共享锁, 排他锁)#1 共享锁（共享锁也叫读锁或 S 锁 ）|共享锁]]</h2>
+<h2 id="12-行锁-共享锁-排他锁2-排他锁排它锁也叫独占锁-写锁或-x-锁排他锁"><a class="markdownIt-Anchor" href="#12-行锁-共享锁-排他锁2-排他锁排它锁也叫独占锁-写锁或-x-锁排他锁"></a> 1.2: [[行锁 (共享锁, 排他锁)#2 排他锁（排它锁也叫独占锁、写锁或 X 锁）|排他锁]]</h2>
+<h2 id="13-行锁-共享锁-排他锁3-共享锁和排他锁共享锁和排他锁"><a class="markdownIt-Anchor" href="#13-行锁-共享锁-排他锁3-共享锁和排他锁共享锁和排他锁"></a> 1.3: [[行锁 (共享锁, 排他锁)#3 共享锁和排他锁|共享锁和排他锁]]</h2>
+<h2 id="14-意向锁-intent-lock"><a class="markdownIt-Anchor" href="#14-意向锁-intent-lock"></a> 1.4: [[意向锁 (Intent lock)]]</h2>
+<h1 id="2-程序员角度"><a class="markdownIt-Anchor" href="#2-程序员角度"></a> 2: 程序员角度</h1>
+<h2 id="21-乐观锁悲观锁"><a class="markdownIt-Anchor" href="#21-乐观锁悲观锁"></a> 2.1: [[乐观锁&amp;悲观锁]]</h2>
 
               
             </div>
@@ -335,15 +328,8 @@
   
     <span>></span>
     
-  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/MySQL/carl/" class="category-chain-item">carl</a>
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/MySQL/%E7%9B%AE%E5%BD%95/" class="category-chain-item">目录</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/MySQL/carl/MySQL-%E8%A1%A8%E8%BF%9E%E6%8E%A5-%E4%B8%8E-%E9%94%81/" class="category-chain-item">MySQL 表连接 与 锁</a>
-  
-  
-
   
 
   
@@ -357,6 +343,13 @@
 
     </div>
   
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/MySQL%E7%9B%AE%E5%BD%95/">#MySQL目录</a>
+      
+    </div>
   
 </div>
 
