@@ -16,15 +16,15 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="📝unordered_map::  不需要 key 有序的时候效率最高 std::map或者std::multimap可以对key排序，但不能对value排序。  1: 操作   创建元素: unordered_map&lt;key, value&gt; map;   插入元素:  map.insert(pair&lt;int, int&gt;(a, b)); tip  map[key]++">
+    <meta name="description" content="📝unordered_map::   1: key排序 不需要 key 有序的时候效率最高 std::map或者std::multimap可以对key排序，但不能对value排序。 error: type ‘multimap&lt;char, int&gt;’ does not provide a subscript operator map[i]++;  2: 操作   创建元素: unord">
 <meta property="og:type" content="article">
 <meta property="og:title" content="unordered_map">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/50283/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="📝unordered_map::  不需要 key 有序的时候效率最高 std::map或者std::multimap可以对key排序，但不能对value排序。  1: 操作   创建元素: unordered_map&lt;key, value&gt; map;   插入元素:  map.insert(pair&lt;int, int&gt;(a, b)); tip  map[key]++">
+<meta property="og:description" content="📝unordered_map::   1: key排序 不需要 key 有序的时候效率最高 std::map或者std::multimap可以对key排序，但不能对value排序。 error: type ‘multimap&lt;char, int&gt;’ does not provide a subscript operator map[i]++;  2: 操作   创建元素: unord">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-12-02T07:46:00.000Z">
-<meta property="article:modified_time" content="2022-12-02T08:02:54.738Z">
+<meta property="article:modified_time" content="2022-12-13T08:43:57.669Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          541 字
+          872 字
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          3 分钟
+          5 分钟
         
       </span>
     
@@ -284,7 +284,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年12月2日 下午
+                    本文最后更新于：2022年12月13日 下午
                   
                 
               </p>
@@ -293,9 +293,12 @@
               
               <p>📝unordered_map::</p>
 <!-- basicblock-end -->
+<h1 id="1-key排序"><a class="markdownIt-Anchor" href="#1-key排序"></a> 1: key排序</h1>
 <p>不需要 key 有序的时候效率最高<br>
-std::map或者std::multimap可以对key排序，但不能对value排序。</p>
-<h1 id="1-操作"><a class="markdownIt-Anchor" href="#1-操作"></a> 1: 操作</h1>
+std::map或者std::multimap可以对key排序，但不能对value排序。<br>
+error: type ‘multimap&lt;char, int&gt;’ does not provide a subscript operator<br>
+<code>map[i]++;</code></p>
+<h1 id="2-操作"><a class="markdownIt-Anchor" href="#2-操作"></a> 2: 操作</h1>
 <ul>
 <li>
 <p>创建元素: unordered_map&lt;key, value&gt; map;</p>
@@ -304,7 +307,10 @@ std::map或者std::multimap可以对key排序，但不能对value排序。</p>
 <p>插入元素:</p>
 <ul>
 <li>map.insert(<strong>pair&lt;int, int&gt;</strong>(a, b));</li>
-<li>tip  <code>map[key]++</code>  //  存在key则 value 值++, 没有 key 则自动创造 key 在 value 值++[^1]</li>
+<li>tip  <code>map[key]++</code>  //  存在key则 value 值++, 没有 key 则自动创造 key 在 value 值++<br>
+map的下标运算符[]的作用是：<br>
+将key作为下标去执行查找，并返回相应的值；<br>
+如果不存在这个key，就将一个具有该key和value的某人值插入这个map。</li>
 </ul>
 </li>
 <li>
@@ -325,6 +331,8 @@ std::map或者std::multimap可以对key排序，但不能对value排序。</p>
 <p>for 循环中映射 , it 是指针, 指向 map 的一个完整的元素包括key 和 value ,不是单一个元素<br>
 <code>for(unordered_map&lt;int, int&gt; :: iterator it = map.begin(); it != map.end(); it++){}</code><br>
 ^drp7wt</p>
+<h1 id="3-遍历-key-值"><a class="markdownIt-Anchor" href="#3-遍历-key-值"></a> 3: 遍历 key 值</h1>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs c++">unordered_map&lt;string, <span class="hljs-type">int</span>&gt; myMap;<br><br><span class="hljs-comment">// 省略代码，假设已经向 myMap 中插入了一些键值对</span><br><br><span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span> &amp;kv : myMap) {<br>    string key = kv.first;<br>    <span class="hljs-type">int</span> value = kv.second;<br><br>    <span class="hljs-comment">// 操作 key 和 value</span><br>}<br><br></code></pre></td></tr></tbody></table></figure>
 
               
             </div>

@@ -24,7 +24,7 @@
 <meta property="og:description" content="📝39. 数组中出现次数超过一半的数字::剑指 Offer 39. 数组中出现次数超过一半的数字 - 力扣（LeetCode）  解题思路：  本文将 “数组中出现次数超过一半的数字” 简称为 “众数” 。 需要注意的是，数学中众数的定义为 “数组中出现次数最多的数字” ，与本文定义不同。  本题常见的三种解法：  哈希表统计法： 遍历数组 nums ，用 HashMap 统计各数字的数量，即可">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-12-02T07:17:00.000Z">
-<meta property="article:modified_time" content="2022-12-02T07:43:43.160Z">
+<meta property="article:modified_time" content="2022-12-13T08:02:53.772Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -284,7 +284,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年12月2日 下午
+                    本文最后更新于：2022年12月13日 下午
                   
                 
               </p>
@@ -305,7 +305,7 @@
 <li><strong>摩尔投票法：</strong> 核心理念为 <strong>票数正负抵消</strong> 。此方法时间和空间复杂度分别为 O(N) 和 O(1) ，为本题的最佳解法。</li>
 </ol>
 <h1 id="1-哈希表"><a class="markdownIt-Anchor" href="#1-哈希表"></a> 1: 哈希表</h1>
-<p>[[map(目录)]]</p>
+<p>[[map(🗃)]]</p>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs c++"><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">majorityElement</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums)</span> </span>{<br>        unordered_map&lt;<span class="hljs-type">int</span>, <span class="hljs-type">int</span>&gt; map;<br><br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> n : nums){<br>            map[n]++;<br>        }<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">auto</span> m : map){<br>            <span class="hljs-keyword">if</span>(m.second &gt; nums.<span class="hljs-built_in">size</span>()/<span class="hljs-number">2</span>) <span class="hljs-keyword">return</span> m.first;<br>        }<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br><br>    }<br>};<br><br><br></code></pre></td></tr></tbody></table></figure>
 <h1 id="2-数学法"><a class="markdownIt-Anchor" href="#2-数学法"></a> 2: 数学法</h1>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">majorityElement</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums)</span> </span>{<br>        <span class="hljs-built_in">sort</span>(nums.<span class="hljs-built_in">begin</span>(), nums.<span class="hljs-built_in">end</span>());<br>        <span class="hljs-keyword">return</span> nums[nums.<span class="hljs-built_in">size</span>()/<span class="hljs-number">2</span>];<br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>

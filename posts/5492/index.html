@@ -16,16 +16,16 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="[[map(目录)]]  map 中元素是一些 key-value 对，关键字起索引作用，值表示和索引相关的数据。 底层实现： map底层是基于红黑树实现的，因此map内部元素排列是有序的。 而 unordered_map 底层则是基于哈希表实现的，因此其元素的排列顺序是杂乱无序的。  1 map: 优点： 有序性，这是 map 结构最大的优点，其元素的有序性在很多应用中都会简化很多的操作。map">
+    <meta name="description" content="[[map(🗃)]]  map 中元素是一些 key-value 对，关键字起索引作用，值表示和索引相关的数据。 底层实现： map底层是基于红黑树实现的，因此map内部元素排列是有序的。 而 unordered_map 底层则是基于哈希表实现的，因此其元素的排列顺序是杂乱无序的。  1: map: 优点： 有序性，这是 map 结构最大的优点，其元素的有序性在很多应用中都会简化很多的操作。ma">
 <meta property="og:type" content="article">
 <meta property="og:title" content="map &amp;&amp; unordered_map">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/5492/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="[[map(目录)]]  map 中元素是一些 key-value 对，关键字起索引作用，值表示和索引相关的数据。 底层实现： map底层是基于红黑树实现的，因此map内部元素排列是有序的。 而 unordered_map 底层则是基于哈希表实现的，因此其元素的排列顺序是杂乱无序的。  1 map: 优点： 有序性，这是 map 结构最大的优点，其元素的有序性在很多应用中都会简化很多的操作。map">
+<meta property="og:description" content="[[map(🗃)]]  map 中元素是一些 key-value 对，关键字起索引作用，值表示和索引相关的数据。 底层实现： map底层是基于红黑树实现的，因此map内部元素排列是有序的。 而 unordered_map 底层则是基于哈希表实现的，因此其元素的排列顺序是杂乱无序的。  1: map: 优点： 有序性，这是 map 结构最大的优点，其元素的有序性在很多应用中都会简化很多的操作。ma">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202210241703194.png">
 <meta property="article:published_time" content="2022-10-24T09:01:00.000Z">
-<meta property="article:modified_time" content="2022-12-02T07:43:42.344Z">
+<meta property="article:modified_time" content="2022-12-13T08:02:49.958Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202210241703194.png">
@@ -224,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          694 字
+          699 字
         
       </span>
     
@@ -286,33 +286,33 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年12月2日 下午
+                    本文最后更新于：2022年12月13日 下午
                   
                 
               </p>
             
             <div class="markdown-body">
               
-              <p>[[map(目录)]]</p>
+              <p>[[map(🗃)]]</p>
 <p><img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202210241703194.png" srcset="/img/loading.gif" lazyload alt=""><br>
 map 中元素是一些 key-value 对，关键字起索引作用，值表示和索引相关的数据。</p>
 <p>底层实现：<br>
 map底层是基于红黑树实现的，因此map内部元素排列是有序的。<br>
 而 unordered_map 底层则是基于哈希表实现的，因此其元素的排列顺序是杂乱无序的。</p>
-<h1 id="1-map"><a class="markdownIt-Anchor" href="#1-map"></a> 1 map:</h1>
+<h1 id="1-map"><a class="markdownIt-Anchor" href="#1-map"></a> 1: map:</h1>
 <p>优点：<br>
 有序性，这是 map 结构最大的优点，其元素的有序性在很多应用中都会简化很多的操作。map 的查找、删除、增加等一系列操作时间复杂度稳定，都为 O (logn)。</p>
 <p>缺点：<br>
 查找、删除、增加等操作平均时间复杂度较慢，与 n 相关。</p>
-<h1 id="2-unordered_map"><a class="markdownIt-Anchor" href="#2-unordered_map"></a> 2 unordered_map:</h1>
+<h1 id="2-unordered_map"><a class="markdownIt-Anchor" href="#2-unordered_map"></a> 2: unordered_map:</h1>
 <p>优点：<br>
 查找、删除、添加的速度快，时间复杂度为常数级 O (1)。</p>
 <p>缺点： 因为unordered_map内部基于哈希表，以(key,value)对的形式存储，因此空间占用率高。<br>
 unordered_map 的查找、删除、添加的时间复杂度不稳定，平均为 O (1), 取决于哈希函数。极端情况下可能为 O (n)。</p>
-<h1 id="3-问题"><a class="markdownIt-Anchor" href="#3-问题"></a> 3 问题：</h1>
-<h2 id="31-为什么-insert-之后以前保存的-literator-不会失效"><a class="markdownIt-Anchor" href="#31-为什么-insert-之后以前保存的-literator-不会失效"></a> 3.1 为什么 insert 之后，以前保存的 literator 不会失效？</h2>
+<h1 id="3-问题"><a class="markdownIt-Anchor" href="#3-问题"></a> 3: 问题：</h1>
+<h2 id="31-为什么-insert-之后以前保存的-literator-不会失效"><a class="markdownIt-Anchor" href="#31-为什么-insert-之后以前保存的-literator-不会失效"></a> 3.1: 为什么 insert 之后，以前保存的 literator 不会失效？</h2>
 <p>因为 map 和 set 存储的是结点，不需要内存拷贝和内存移动。但是像 vector 在插入数据时如果内存不够会重新开辟一块内存。map 和 set 的 iterator 指向的是节点的指针，vector 指向的是内存的某个位置</p>
-<h2 id="32-为何-map-和-set-的插入删除效率比其他序列容器高"><a class="markdownIt-Anchor" href="#32-为何-map-和-set-的插入删除效率比其他序列容器高"></a> 3.2 为何 map 和 set 的插入删除效率比其他序列容器高？</h2>
+<h2 id="32-为何-map-和-set-的插入删除效率比其他序列容器高"><a class="markdownIt-Anchor" href="#32-为何-map-和-set-的插入删除效率比其他序列容器高"></a> 3.2: 为何 map 和 set 的插入删除效率比其他序列容器高？</h2>
 <p>因为map和set底部使用红黑树实现，插入和删除的时间复杂度是O(logn),而向vector这样的序列容器插入和删除的时间复杂度是O(N)</p>
 <hr>
 <p><strong>其他资料</strong></p>

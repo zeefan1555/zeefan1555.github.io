@@ -16,15 +16,15 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="12345678int bind(int sockfd, const struct sockaddr *addr, socklen_t addrlen); &#x2F;&#x2F; socket命名    - 功能:绑定,将fd 和本地的IP + 端口进行绑定    - 参数:                 - - sockfd : 通过socket函数得到的文件描述符                - - add">
+    <meta name="description" content="1: API 12345678int bind(int sockfd, const struct sockaddr *addr, socklen_t addrlen); &#x2F;&#x2F; socket命名    - 功能:绑定,将fd 和本地的IP + 端口进行绑定    - 参数:                 - - sockfd : 通过socket函数得到的文件描述符">
 <meta property="og:type" content="article">
 <meta property="og:title" content="bind">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/12261/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="12345678int bind(int sockfd, const struct sockaddr *addr, socklen_t addrlen); &#x2F;&#x2F; socket命名    - 功能:绑定,将fd 和本地的IP + 端口进行绑定    - 参数:                 - - sockfd : 通过socket函数得到的文件描述符                - - add">
+<meta property="og:description" content="1: API 12345678int bind(int sockfd, const struct sockaddr *addr, socklen_t addrlen); &#x2F;&#x2F; socket命名    - 功能:绑定,将fd 和本地的IP + 端口进行绑定    - 参数:                 - - sockfd : 通过socket函数得到的文件描述符">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-10-19T09:09:00.000Z">
-<meta property="article:modified_time" content="2022-10-20T07:17:40.015Z">
+<meta property="article:modified_time" content="2022-12-12T09:04:11.267Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="API">
 <meta name="twitter:card" content="summary_large_image">
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          229 字
+          539 字
         
       </span>
     
@@ -234,7 +234,7 @@
         
         
         
-          2 分钟
+          3 分钟
         
       </span>
     
@@ -285,14 +285,31 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年10月20日 下午
+                    本文最后更新于：2022年12月12日 下午
                   
                 
               </p>
             
             <div class="markdown-body">
               
-              <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">bind</span><span class="hljs-params">(<span class="hljs-type">int</span> sockfd, <span class="hljs-type">const</span> <span class="hljs-keyword">struct</span> sockaddr *addr, <span class="hljs-type">socklen_t</span> addrlen)</span></span>; <span class="hljs-comment">// socket命名    </span><br>- 功能:绑定,将fd 和本地的IP + 端口进行绑定    <br>- 参数:             <br>    - - sockfd : 通过socket函数得到的文件描述符            <br>    - - addr : 需要绑定的socket地址,这个地址封装了ip和端口号的信息            <br>    - - addrlen : 第二个参数结构体占的内存大小<br>    测试<br><br></code></pre></td></tr></tbody></table></figure>
+              <h1 id="1-api"><a class="markdownIt-Anchor" href="#1-api"></a> 1: API</h1>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">bind</span><span class="hljs-params">(<span class="hljs-type">int</span> sockfd, <span class="hljs-type">const</span> <span class="hljs-keyword">struct</span> sockaddr *addr, <span class="hljs-type">socklen_t</span> addrlen)</span></span>; <span class="hljs-comment">// socket命名    </span><br>- 功能:绑定,将fd 和本地的IP + 端口进行绑定    <br>- 参数:             <br>    - - sockfd : 通过socket函数得到的文件描述符            <br>    - - addr : 需要绑定的socket地址,这个地址封装了ip和端口号的信息            <br>    - - addrlen : 第二个参数结构体占的内存大小<br>    测试<br><br></code></pre></td></tr></tbody></table></figure>
+<h1 id="2-bind函数什么时候调用失败"><a class="markdownIt-Anchor" href="#2-bind函数什么时候调用失败"></a> 2: bind函数什么时候调用失败？</h1>
+<p>在 web 服务器中，<code>bind()</code> 方法调用失败的主要原因有两种：</p>
+<ol>
+<li>
+<p>尝试绑定一个已被占用的端口。如果一个端口已被其他程序占用，那么 <code>bind()</code> 方法会调用失败。</p>
+</li>
+<li>
+<p>权限问题。如果当前用户没有权限绑定到该端口，那么 <code>bind()</code> 方法也会调用失败。</p>
+<ol>
+<li>[[端口等级权限]]</li>
+</ol>
+</li>
+</ol>
+<p>一般没有设置 [[source/_posts/👨🏻‍💻code/项目/webserver/API/端口复用|端口复用]] 的话就比较容易调用失败。</p>
+<p>比如服务器遇到某些情况进程崩了，然后它就会进行四次挥手进入TIME_WAIT状态。这个状态回持续2MSL的时间，<br>
+如果没有设置端口复用，那么在这个时间内重启服务器，bind就会失败。</p>
 <hr>
 <p><strong>其他资料</strong></p>
  <!-- basicblock-start oid="ObsklyxDVPfPLqv2GiUKGZn0"  --> 
@@ -365,9 +382,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/24218/" title="套接字函数">
+                      <a href="/posts/24218/" title="套接字函数(目录)">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">套接字函数</span>
+                        <span class="hidden-mobile">套接字函数(目录)</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     

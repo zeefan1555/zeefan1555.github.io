@@ -24,7 +24,7 @@
 <meta property="og:description" content="📝35. 复杂链表的复制::剑指 Offer 35. 复杂链表的复制 - 力扣（LeetCode）  算法流程  若头节点 head 为空节点，直接返回 null ； 初始化： 哈希表 dic ， 节点 cur 指向头节点； 复制链表： 建立新节点，并向 dic 添加键值对 (原 cur 节点, 新 cur 节点） ； cur 遍历至原链表下一节点； 构建新链表的引用指向： 构建新节点的 nex">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-29T07:16:00.000Z">
-<meta property="article:modified_time" content="2022-12-02T07:43:43.148Z">
+<meta property="article:modified_time" content="2022-12-13T08:02:53.229Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="📙">
 <meta name="twitter:card" content="summary_large_image">
@@ -285,7 +285,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年12月2日 下午
+                    本文最后更新于：2022年12月13日 下午
                   
                 
               </p>
@@ -311,7 +311,7 @@
 <li><strong>时间复杂度 O(N) ：</strong> 两轮遍历链表，使用 O(N) 时间。</li>
 <li><strong>空间复杂度 O(N) ：</strong> 哈希表 <code>dic</code> 使用线性大小的额外空间。</li>
 </ul>
-<p>[[map(目录)]]</p>
+<p>[[map(🗃)]]</p>
 <p>K 神</p>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">Node* <span class="hljs-title">copyRandomList</span><span class="hljs-params">(Node* head)</span> </span>{<br>        <span class="hljs-keyword">if</span>(head == <span class="hljs-literal">nullptr</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">nullptr</span>;<br>        Node* cur = head;<br>        unordered_map&lt;Node*, Node*&gt; map;<br>        <span class="hljs-comment">// 复制链表</span><br>        <span class="hljs-keyword">while</span>(cur != <span class="hljs-literal">nullptr</span>) {<br>            map[cur] = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Node</span>(cur-&gt;val);<br>            cur = cur-&gt;next;<br>        }<br>        cur = head;<br>        <span class="hljs-comment">// 构建新链表的引用指向：</span><br>        <span class="hljs-keyword">while</span>(cur != <span class="hljs-literal">nullptr</span>){<br>            map[cur]-&gt;next = map[cur-&gt;next];<br>            map[cur]-&gt;random = map[cur-&gt;random];<br>            cur = cur-&gt;next;<br>        }<br>        <span class="hljs-keyword">return</span> map[head];<br>        <br>    }<br>};<br><br></code></pre></td></tr></tbody></table></figure>
 

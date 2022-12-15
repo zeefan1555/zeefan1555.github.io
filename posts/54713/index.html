@@ -16,18 +16,17 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="📝vector:: 2022&#x2F;10&#x2F;21 : 第一次创建    1: 底层结构 普通数组 int a [10]，一旦定义了就不能改变了，这个数组最多只能放10个元素了 动态数组vector，不用关心初始的大小，可以随意的添加数据 vector的底层实现也是普通数组。  vector的底层实现是array，严格来讲vector是容器，不是数组  ![[vector 容器实现与扩充 2022-10-">
+    <meta name="description" content="📝vector:: 2022&#x2F;10&#x2F;21 : 第一次创建    1: [[底层结构]]  2: [[vector 原理 (扩容过程)]]  3: [[vector API]]  4: vector 源码  源码暂时没看 margin: 3. vector源码   5: [[9、 vector与list的区别与应用？怎么找某vector或者list的倒数第二个元素]]  6: [[11、Vecto">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vector (目录)">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/54713/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="📝vector:: 2022&#x2F;10&#x2F;21 : 第一次创建    1: 底层结构 普通数组 int a [10]，一旦定义了就不能改变了，这个数组最多只能放10个元素了 动态数组vector，不用关心初始的大小，可以随意的添加数据 vector的底层实现也是普通数组。  vector的底层实现是array，严格来讲vector是容器，不是数组  ![[vector 容器实现与扩充 2022-10-">
+<meta property="og:description" content="📝vector:: 2022&#x2F;10&#x2F;21 : 第一次创建    1: [[底层结构]]  2: [[vector 原理 (扩容过程)]]  3: [[vector API]]  4: vector 源码  源码暂时没看 margin: 3. vector源码   5: [[9、 vector与list的区别与应用？怎么找某vector或者list的倒数第二个元素]]  6: [[11、Vecto">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190804120900612.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpa2VfdGhhdA==,size_16,color_FFFFFF,t_70">
 <meta property="article:published_time" content="2022-10-21T08:55:00.000Z">
-<meta property="article:modified_time" content="2022-12-02T07:14:09.434Z">
+<meta property="article:modified_time" content="2022-12-13T09:53:02.484Z">
 <meta property="article:author" content="zeefan">
-<meta property="article:tag" content="疑问">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190804120900612.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpa2VfdGhhdA==,size_16,color_FFFFFF,t_70">
   
@@ -225,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          339 字
+          175 字
         
       </span>
     
@@ -236,7 +235,7 @@
         
         
         
-          2 分钟
+          1 分钟
         
       </span>
     
@@ -287,7 +286,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年12月2日 下午
+                    本文最后更新于：2022年12月13日 下午
                   
                 
               </p>
@@ -298,14 +297,7 @@
 2022/10/21 : 第一次创建</p>
 <!-- basicblock-end -->
 <p><img src="https://img-blog.csdnimg.cn/20190804120900612.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpa2VfdGhhdA==,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" lazyload alt=""></p>
-<h1 id="1-底层结构"><a class="markdownIt-Anchor" href="#1-底层结构"></a> 1: 底层结构</h1>
-<p>普通数组 int a [10]，一旦定义了就不能改变了，这个数组最多只能放10个元素了<br>
-动态数组vector，不用关心初始的大小，可以随意的添加数据</p>
-<p><strong>vector的底层实现也是普通数组</strong>。</p>
-<blockquote>
-<p>vector的底层实现是array，严格来讲vector是容器，不是数组</p>
-</blockquote>
-<p>![[vector 容器实现与扩充 2022-10-21 17.00.06.excalidraw|700]]</p>
+<h1 id="1-底层结构"><a class="markdownIt-Anchor" href="#1-底层结构"></a> 1: [[底层结构]]</h1>
 <h1 id="2-vector-原理-扩容过程"><a class="markdownIt-Anchor" href="#2-vector-原理-扩容过程"></a> 2: [[vector 原理 (扩容过程)]]</h1>
 <h1 id="3-vector-api"><a class="markdownIt-Anchor" href="#3-vector-api"></a> 3: [[vector API]]</h1>
 <h1 id="4-vector-源码"><a class="markdownIt-Anchor" href="#4-vector-源码"></a> 4: vector 源码</h1>
@@ -314,8 +306,8 @@
 <a href="marginnote3app://note/C7CA8DCF-BF03-4A4E-B23A-88ADF2ED37B5">margin: 3. vector源码</a></p>
 </blockquote>
 <h1 id="5-9-vector与list的区别与应用怎么找某vector或者list的倒数第二个元素"><a class="markdownIt-Anchor" href="#5-9-vector与list的区别与应用怎么找某vector或者list的倒数第二个元素"></a> 5: [[9、 vector与list的区别与应用？怎么找某vector或者list的倒数第二个元素]]</h1>
-<section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:2" class="footnote-text"><span>[[3. 两个数组的交集]]
-<a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
+<h1 id="6-11-vector如何释放空间"><a class="markdownIt-Anchor" href="#6-11-vector如何释放空间"></a> 6: [[11、Vector如何释放空间]]</h1>
+
               
             </div>
             <hr/>
@@ -357,13 +349,6 @@
 
     </div>
   
-  
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/%E7%96%91%E9%97%AE/">#疑问</a>
-      
-    </div>
   
 </div>
 

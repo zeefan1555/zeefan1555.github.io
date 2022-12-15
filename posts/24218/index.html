@@ -16,15 +16,15 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1 套接字函数  1.1 socket ![[socket API]]  1.2 [[bind]]  1.3 listen 1234567int listen(int sockfd, int backlog);    &#x2F;&#x2F; &#x2F;proc&#x2F;sys&#x2F;net&#x2F;core&#x2F;somaxconn(能够连接的最大数所在的文档目录)     - 功能:监听这个socket上的连接    - 参数:">
+    <meta name="description" content="1: 套接字函数  1.1: socket ![[socket API]]  1.2: [[bind]]  1.3: listen 1234567int listen(int sockfd, int backlog);    &#x2F;&#x2F; &#x2F;proc&#x2F;sys&#x2F;net&#x2F;core&#x2F;somaxconn(能够连接的最大数所在的文档目录)     - 功能:监听这个socket上的连接    - 参数:">
 <meta property="og:type" content="article">
-<meta property="og:title" content="套接字函数">
+<meta property="og:title" content="套接字函数(目录)">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/24218/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="1 套接字函数  1.1 socket ![[socket API]]  1.2 [[bind]]  1.3 listen 1234567int listen(int sockfd, int backlog);    &#x2F;&#x2F; &#x2F;proc&#x2F;sys&#x2F;net&#x2F;core&#x2F;somaxconn(能够连接的最大数所在的文档目录)     - 功能:监听这个socket上的连接    - 参数:">
+<meta property="og:description" content="1: 套接字函数  1.1: socket ![[socket API]]  1.2: [[bind]]  1.3: listen 1234567int listen(int sockfd, int backlog);    &#x2F;&#x2F; &#x2F;proc&#x2F;sys&#x2F;net&#x2F;core&#x2F;somaxconn(能够连接的最大数所在的文档目录)     - 功能:监听这个socket上的连接    - 参数:">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-10-19T09:17:00.000Z">
-<meta property="article:modified_time" content="2022-10-20T07:17:49.228Z">
+<meta property="article:modified_time" content="2022-12-12T09:08:24.643Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -32,7 +32,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>套接字函数 - 一杯空气</title>
+  <title>套接字函数(目录) - 一杯空气</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -199,7 +199,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="套接字函数"></span>
+            <span id="subtitle" data-typed-text="套接字函数(目录)"></span>
           
         </div>
 
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          765 字
+          771 字
         
       </span>
     
@@ -279,28 +279,28 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">套接字函数</h1>
+            <h1 style="display: none">套接字函数(目录)</h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年10月20日 下午
+                    本文最后更新于：2022年12月12日 下午
                   
                 
               </p>
             
             <div class="markdown-body">
               
-              <h1 id="1-套接字函数"><a class="markdownIt-Anchor" href="#1-套接字函数"></a> 1 套接字函数</h1>
-<h2 id="11-socket"><a class="markdownIt-Anchor" href="#11-socket"></a> 1.1 socket</h2>
+              <h1 id="1-套接字函数"><a class="markdownIt-Anchor" href="#1-套接字函数"></a> 1: 套接字函数</h1>
+<h2 id="11-socket"><a class="markdownIt-Anchor" href="#11-socket"></a> 1.1: socket</h2>
 <p>![[socket API]]</p>
-<h2 id="12-bind"><a class="markdownIt-Anchor" href="#12-bind"></a> 1.2 [[bind]]</h2>
-<h2 id="13-listen"><a class="markdownIt-Anchor" href="#13-listen"></a> 1.3 listen</h2>
+<h2 id="12-bind"><a class="markdownIt-Anchor" href="#12-bind"></a> 1.2: [[bind]]</h2>
+<h2 id="13-listen"><a class="markdownIt-Anchor" href="#13-listen"></a> 1.3: listen</h2>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> <span class="hljs-title function_">listen</span><span class="hljs-params">(<span class="hljs-type">int</span> sockfd, <span class="hljs-type">int</span> backlog)</span>;    <span class="hljs-comment">// /proc/sys/net/core/somaxconn(能够连接的最大数所在的文档目录)     </span><br>- 功能:监听这个socket上的连接    <br>- 参数:        <br>    - - sockfd : 通过socket()函数得到的文件描述符        <br>    - - backlog : 未连接的和已经连接的和的最大值, <span class="hljs-number">5</span><br><br><br></code></pre></td></tr></tbody></table></figure>
-<h2 id="14-accpet"><a class="markdownIt-Anchor" href="#14-accpet"></a> 1.4 accpet</h2>
+<h2 id="14-accpet"><a class="markdownIt-Anchor" href="#14-accpet"></a> 1.4: accpet</h2>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> <span class="hljs-title function_">accept</span><span class="hljs-params">(<span class="hljs-type">int</span> sockfd, <span class="hljs-keyword">struct</span> sockaddr *addr, <span class="hljs-type">socklen_t</span> *addrlen)</span>;     <br>- 功能:接收客户端连接,默认是一个阻塞的函数,阻塞等待客户端连接     <br>- 参数:             <br>    - - sockfd : 用于监听的文件描述符            <br>    - - addr : 传出参数,记录了连接成功后客户端的地址信息(ip,port)             <br>    - - addrlen : 指定第二个参数的对应的内存大小    <br>- 返回值:            <br>    -  成功 :用于通信的文件描述符            <br>    -  失败 : <span class="hljs-number">-1</span><br><br></code></pre></td></tr></tbody></table></figure>
 <p>socklen_t：就是整数类型，跟int类型</p>
-<h2 id="15-connect"><a class="markdownIt-Anchor" href="#15-connect"></a> 1.5 connect</h2>
+<h2 id="15-connect"><a class="markdownIt-Anchor" href="#15-connect"></a> 1.5: connect</h2>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> <span class="hljs-title function_">connect</span><span class="hljs-params">(<span class="hljs-type">int</span> sockfd, <span class="hljs-type">const</span> <span class="hljs-keyword">struct</span> sockaddr *addr, <span class="hljs-type">socklen_t</span> addrlen)</span>; <br>    - 功能: 客户端连接服务器    <br>    - 参数:             <br>        - sockfd : 用于通信的文件描述符            <br>        - addr : 客户端要连接的服务器的地址信息            <br>        - addrlen : 第二个参数的内存大小    <br>    - 返回值:成功 <span class="hljs-number">0</span>, 失败 <span class="hljs-number">-1</span> <br><br><span class="hljs-type">ssize_t</span> <span class="hljs-title function_">write</span><span class="hljs-params">(<span class="hljs-type">int</span> fd, <span class="hljs-type">const</span> <span class="hljs-type">void</span> *buf, <span class="hljs-type">size_t</span> count)</span>;   <span class="hljs-comment">// 写数据</span><br><span class="hljs-type">ssize_t</span> <span class="hljs-title function_">read</span><span class="hljs-params">(<span class="hljs-type">int</span> fd, <span class="hljs-type">void</span> *buf, <span class="hljs-type">size_t</span> count)</span>;          <span class="hljs-comment">// 读数据</span><br><br><br><br></code></pre></td></tr></tbody></table></figure>
 <hr>
 <p><strong>其他资料</strong></p>

@@ -24,7 +24,7 @@
 <meta property="og:description" content="📝06. 从尾到头打印链表::剑指 Offer 06. 从尾到头打印链表 - 力扣（LeetCode）   遍历链表, 向 vector 中添加链表元素 反转 vector , reverse (res.begin(), res. end())  123456789101112131415class Solution {public:    vector&lt;int&gt; reversePr">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-04T03:36:00.000Z">
-<meta property="article:modified_time" content="2022-12-02T07:10:59.255Z">
+<meta property="article:modified_time" content="2022-12-13T04:30:24.233Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="链表">
 <meta name="twitter:card" content="summary_large_image">
@@ -285,7 +285,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年12月2日 下午
+                    本文最后更新于：2022年12月13日 下午
                   
                 
               </p>
@@ -300,7 +300,7 @@
 </ul>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">reversePrint</span><span class="hljs-params">(ListNode* head)</span> </span>{<br>        vector&lt;<span class="hljs-type">int</span>&gt; result;<br>        ListNode* cur = head;<br>        <span class="hljs-keyword">while</span>(cur != <span class="hljs-literal">NULL</span>){<br>            result.<span class="hljs-built_in">push_back</span>(cur-&gt;val);<br>            cur = cur-&gt;next;<br>        }<br>        <span class="hljs-built_in">reverse</span>(result.<span class="hljs-built_in">begin</span>(), result.<span class="hljs-built_in">end</span>());<br>        <span class="hljs-keyword">return</span> result;<br><br>    }<br>};<br><br></code></pre></td></tr></tbody></table></figure>
 <p>[[遍历链表]]</p>
-<p>[[vector (目录)]]</p>
+<p>[[vector (🗃)]]</p>
 <p>[[4. 反转链表]]</p>
 
               

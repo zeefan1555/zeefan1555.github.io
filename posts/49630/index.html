@@ -16,17 +16,19 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="📝vector 原理 (扩容过程)::   1: C++中 vector（可以理解是一个动态数组，底层是普通数组实现的） 如果插入元素大于预先普通数组大小，vector 底部会有一个扩容的操作，  先申请两倍于原先普通数组的大小， 然后把数据拷贝到新数组上， 最后: 析构掉旧内存中的对象, 在释放原数组内存。  string 原理同理  [!example]- 原vector中的size和cap">
+    <meta name="description" content="📝vector 原理 (扩容过程)::   1: 为什么要要扩容  2: [[size()和 capacity() &amp;&amp; resize 和 reserve]]  3: 扩容方式 C++中 vector（可以理解是一个动态数组，底层是普通数组实现的） 如果插入元素大于预先普通数组大小，vector 底部会有一个扩容的操作，  先申请两倍于原先普通数组的大小， 然后把数据拷贝到新数组">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vector 原理 (扩容过程)">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/49630/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="📝vector 原理 (扩容过程)::   1: C++中 vector（可以理解是一个动态数组，底层是普通数组实现的） 如果插入元素大于预先普通数组大小，vector 底部会有一个扩容的操作，  先申请两倍于原先普通数组的大小， 然后把数据拷贝到新数组上， 最后: 析构掉旧内存中的对象, 在释放原数组内存。  string 原理同理  [!example]- 原vector中的size和cap">
+<meta property="og:description" content="📝vector 原理 (扩容过程)::   1: 为什么要要扩容  2: [[size()和 capacity() &amp;&amp; resize 和 reserve]]  3: 扩容方式 C++中 vector（可以理解是一个动态数组，底层是普通数组实现的） 如果插入元素大于预先普通数组大小，vector 底部会有一个扩容的操作，  先申请两倍于原先普通数组的大小， 然后把数据拷贝到新数组">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20201218185902217.png">
 <meta property="article:published_time" content="2022-12-02T07:04:00.000Z">
-<meta property="article:modified_time" content="2022-12-02T07:05:35.470Z">
+<meta property="article:modified_time" content="2022-12-15T07:20:30.043Z">
 <meta property="article:author" content="zeefan">
+<meta property="article:tag" content="📕">
+<meta property="article:tag" content="✅">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://img-blog.csdnimg.cn/20201218185902217.png">
   
@@ -224,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.6k 字
+          1.3k 字
         
       </span>
     
@@ -235,7 +237,7 @@
         
         
         
-          9 分钟
+          7 分钟
         
       </span>
     
@@ -286,7 +288,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年12月2日 下午
+                    本文最后更新于：2022年12月15日 下午
                   
                 
               </p>
@@ -295,15 +297,20 @@
               
               <p>📝vector 原理 (扩容过程)::</p>
 <!-- basicblock-end -->
-<h1 id="1"><a class="markdownIt-Anchor" href="#1"></a> 1:</h1>
+<h1 id="1-为什么要要扩容"><a class="markdownIt-Anchor" href="#1-为什么要要扩容"></a> 1: 为什么要要扩容</h1>
+<h1 id="2-size和-capacity-resize-和-reserve"><a class="markdownIt-Anchor" href="#2-size和-capacity-resize-和-reserve"></a> 2: [[size()和 capacity() &amp;&amp; resize 和 reserve]]</h1>
+<h1 id="3-扩容方式"><a class="markdownIt-Anchor" href="#3-扩容方式"></a> 3: 扩容方式</h1>
 <p>C++中 vector（可以理解是一个动态数组，底层是普通数组实现的）<br>
 如果插入元素大于预先普通数组大小，vector 底部会有一个扩容的操作，</p>
 <ol>
 <li>先申请两倍于原先普通数组的大小，</li>
 <li>然后把数据拷贝到新数组上，</li>
-<li>最后: 析构掉旧内存中的对象, 在<strong>释放原数组内存</strong>。</li>
+<li>最后: <strong>析构掉旧内存中的对象</strong>, 在<strong>释放原数组内存</strong>。</li>
 </ol>
-<p>string 原理同理</p>
+<p>vector则使用灵活的动态空间配置，维护一块<strong>连续的线性空间</strong>，在空间不足时，可以自动扩展空间容纳新元素，做到按需供给。其在扩充空间的过程中仍然需要经历：<strong>重新配置空间，移动数据，释放原空间</strong>等操作。<br>
+这里需要说明一下动态扩容的规则：以原大小的两倍配置另外一块较大的空间（或者旧长度+新增元素的个数），源码：</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-type">const</span> size_type len  = old_size + <span class="hljs-built_in">max</span>(old_size, n);<br></code></pre></td></tr></tbody></table></figure>
+<p>string 同理</p>
 <blockquote>
 <p>[!example]-<br>
 原vector中的size和capicity相同都是3，初始化为1 2 3，此时要push_back一个元素4。<br>
@@ -311,28 +318,7 @@
 <strong>注意图中底层数组的内存起始地址已经变了</strong>。<br>
 <img src="https://img-blog.csdnimg.cn/20201218185902217.png" srcset="/img/loading.gif" lazyload alt="vector原理|800"></p>
 </blockquote>
-<h1 id="2-影响"><a class="markdownIt-Anchor" href="#2-影响"></a> 2: 影响</h1>
-<p>增大内存的操作会使迭代器引用指针失效<br>
-一旦引起空间重新配置，指向原 vector 的所有迭代器就都失效了</p>
-<p>可能影响的操作就是: 插入操作 push 类 insert 类等</p>
-<p>所以使用vector（动态数组）来insert，是费时的，插入再拷贝的话，单纯一个插入的操作就是O(n<sup>2)了，甚至可能拷贝好几次，就不止O(n</sup>2)了。</p>
-<p>解决办法：可以采用链表来进行插入操作<br>
-eg：<code>vector&lt;vector&lt;int&gt;&gt; que：[[7,0],[7,1]]</code> →<code>list&lt;vector&lt;int&gt;&gt; que：[7,0]→[7,1]</code></p>
-<h1 id="3-size-和-capacity"><a class="markdownIt-Anchor" href="#3-size-和-capacity"></a> 3: size()  和 capacity()</h1>
-<p>vector的大小有两个维度一个是size一个是capicity，<br>
-size就是我们平时用来遍历vector时候用的，例如：<code>for (int i = 0; i &lt; vec.size(); i++)</code><br>
-而capicity是vector底层数组（就是普通数组）的大小，capicity可不一定就是size</p>
-<p>(1) 堆中分配内存，元素连续存放，内存空间只会增长不会减少<br>
-vector 有两个函数，一个是</p>
-<ul>
-<li>capacity (), 底层真正可以保存的元素个数，</li>
-<li>size(), 返回当前已经存储数据的个数</li>
-</ul>
-<p>(2) 对于 vector 来说，capacity 是永远大于等于 size<br>
-capacity 和 size 相等时，vector 就会扩容，capacity: 变大（翻倍）<br>
-当 insert 数据的时候，如果已经大于 capicity，capicity 会成倍扩容，但对外暴露的 size 其实仅仅是+1 而已，剩下的位置还是空闲的</p>
-<h1 id="4-扩容方式"><a class="markdownIt-Anchor" href="#4-扩容方式"></a> 4: 扩容方式</h1>
-<h2 id="41-固定扩容"><a class="markdownIt-Anchor" href="#41-固定扩容"></a> 4.1: 固定扩容</h2>
+<h2 id="31-固定扩容"><a class="markdownIt-Anchor" href="#31-固定扩容"></a> 3.1: 固定扩容</h2>
 <p>机制： 每次扩容的时候在原 capacity 的基础上加上固定的容量，</p>
 <ul>
 <li>example 比如初始 capacity 为 100，扩容一次为 capacity+20, 再扩容仍然为 capacity+20;</li>
@@ -340,22 +326,28 @@ capacity 和 size 相等时，vector 就会扩容，capacity: 变大（翻倍）
 <p>缺点：<br>
 考虑一种极端的情况，vector 每次添加的元素数量刚好等于每次扩容固定增加的容量+1，就会造成一种情况，每添加一次元素就需要扩容一次，而扩容的时间花费十分高昂。<strong>所以固定扩容可能会面临多次扩容的情况</strong>，时间复杂度较高：</p>
 <p>优点： 固定扩容方式空间利用率比较高。</p>
-<h2 id="42-加倍扩容机制-每次扩容的时候原-capacity-翻倍"><a class="markdownIt-Anchor" href="#42-加倍扩容机制-每次扩容的时候原-capacity-翻倍"></a> 4.2: 加倍扩容机制： 每次扩容的时候原 capacity 翻倍，</h2>
+<h2 id="32-加倍扩容机制-每次扩容的时候原-capacity-翻倍"><a class="markdownIt-Anchor" href="#32-加倍扩容机制-每次扩容的时候原-capacity-翻倍"></a> 3.2: 加倍扩容机制： 每次扩容的时候原 capacity 翻倍，</h2>
 <ul>
 <li>example 比如初始 capcity=100, 扩容一次变为 200，再扩容变为 400；</li>
 </ul>
 <p>优点： 一次扩容 capacity 翻倍的方式使得正常情况下添加元素需要<strong>扩容的次数大大减少（预留空间较多）</strong>，时间复杂度较低：</p>
 <p>缺点： 因为每次扩容空间翻倍，而很多空间没有利用上，空间利用率不如固定扩容。</p>
-<p>在实际应用中，一般采用空间换时间的策略。</p>
-<h2 id="43-细节"><a class="markdownIt-Anchor" href="#43-细节"></a> 4.3: 细节</h2>
-<!-- basicblock-start oid="ObsFIRxCjwjr7HvHL8yR89Bg" deck= "❓疑问::👨🏻‍💻code::C++:: C++ STL::vector.md"-->
-<ul>
-<li>[ ]  1、为什么要成倍的扩容而不是一次增加一个固定大小的容量呢？</li>
-<li>采用成倍方式扩容，❓可以保证常数的时间复杂度，而增加指定大小的容量达到 O (n) 的时间复杂度。::  #疑问</li>
-</ul>
-<!-- basicblock-end -->
-<p>2、为什么是以两倍的方式扩容而不是三倍四倍，或者其他方式呢考虑可能产生的堆空间浪费，所以增长倍数不能太大，一般是 1.5 或 2；GCC 是 2；VS 是 1.5，k=2 每次扩展的新尺寸必然刚好大于之前分配的总和，之前分配的内存空间不可能被使用，这样对于缓存并不友好，<strong>采用 1.5 倍的增长方式可以更好的实现对内存的重复利用。</strong></p>
-<p>C++并没有规定扩容因子 K, 这是由标准库的实现者决定的。</p>
+<p><strong>在实际应用中，一般采用空间换时间的策略</strong>。</p>
+<h2 id="33-问题"><a class="markdownIt-Anchor" href="#33-问题"></a> 3.3: 问题</h2>
+<blockquote>
+<p>[!success] #✅</p>
+</blockquote>
+<p>1、[[为什么要成倍的扩容而不是一次增加一个固定大小的容量呢？]]</p>
+<p>2、[[为什么是以两倍的方式扩容而不是三倍四倍，或者其他方式呢]]</p>
+<h1 id="4-影响"><a class="markdownIt-Anchor" href="#4-影响"></a> 4: 影响</h1>
+<h2 id="41"><a class="markdownIt-Anchor" href="#41"></a> 4.1:</h2>
+<p>对vector的任何操作，一旦引起空间重新配置，指向原vector的所有迭代器就都失效了；<br>
+增大内存的操作会使迭代器引用指针失效</p>
+<p>可能影响的操作就是: 插入操作 push 类 insert 类等</p>
+<p>所以使用vector（动态数组）来insert，是费时的，插入再拷贝的话，单纯一个插入的操作就是O(n<sup>2)了，甚至可能拷贝好几次，就不止O(n</sup>2)了。</p>
+<p>解决办法：可以采用链表来进行插入操作<br>
+eg：<code>vector&lt;vector&lt;int&gt;&gt; que：[[7,0],[7,1]]</code> →<code>list&lt;vector&lt;int&gt;&gt; que：[7,0]→[7,1]</code></p>
+<h2 id="42"><a class="markdownIt-Anchor" href="#42"></a> 4.2:</h2>
 
               
             </div>
@@ -398,6 +390,15 @@ capacity 和 size 相等时，vector 就会扩容，capacity: 变大（翻倍）
 
     </div>
   
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%F0%9F%93%95/">#📕</a>
+      
+        <a href="/tags/%E2%9C%85/">#✅</a>
+      
+    </div>
   
 </div>
 
