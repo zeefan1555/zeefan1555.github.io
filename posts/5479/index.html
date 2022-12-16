@@ -23,12 +23,10 @@
 <meta property="og:site_name" content="一杯空气">
 <meta property="og:description" content="📝STL模板库-21-40 目录::   1: [[21、STL中的allocator、deallocator]]  2: [[22、STL中hash table扩容发生什么？]]  3: [[23、常见容器性质总结？]]  4: [[vector 原理 (扩容过程)]], [[vector删除操作]]  5: [[迭代器的分类(🗃)]]  6: [[26、STL中迭代器失效的情况有哪些？]]">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://axiu-image-bed.oss-cn-shanghai.aliyuncs.com/img/202205220022980.png">
 <meta property="article:published_time" content="2022-12-13T09:06:00.000Z">
-<meta property="article:modified_time" content="2022-12-15T13:38:00.233Z">
+<meta property="article:modified_time" content="2022-12-16T02:34:02.433Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://axiu-image-bed.oss-cn-shanghai.aliyuncs.com/img/202205220022980.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -224,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.5k 字
+          494 字
         
       </span>
     
@@ -235,7 +233,7 @@
         
         
         
-          18 分钟
+          3 分钟
         
       </span>
     
@@ -286,7 +284,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年12月15日 晚上
+                    本文最后更新于：2022年12月16日 上午
                   
                 
               </p>
@@ -309,69 +307,11 @@
 <h1 id="12-heapstl"><a class="markdownIt-Anchor" href="#12-heapstl"></a> 12: [[heap(STL)(🗃)]]</h1>
 <h1 id="13-priority_queue"><a class="markdownIt-Anchor" href="#13-priority_queue"></a> 13: [[priority_queue]]</h1>
 <h1 id="14-set的实现"><a class="markdownIt-Anchor" href="#14-set的实现"></a> 14: [[set的实现]]</h1>
-<p>[[map(🗃)]]</p>
-<h1 id="15-map"><a class="markdownIt-Anchor" href="#15-map"></a> 15: [[map]]</h1>
-<p>map的特性是所有元素会根据键值进行自动排序。map中所有的元素都是pair，拥有键值(key)和实值(value)两个部分，并且不允许元素有相同的key</p>
-<p>一旦map的key确定了，那么是无法修改的，但是可以修改这个key对应的value，因此map的迭代器既不是constant iterator，也不是mutable iterator</p>
-<p>标准STL map的底层机制是RB-tree（红黑树），另一种以hash table为底层机制实现的称为hash_map。map的架构如下图所示</p>
-<p><img src="https://axiu-image-bed.oss-cn-shanghai.aliyuncs.com/img/202205220022980.png" srcset="/img/loading.gif" lazyload alt=""></p>
-<p>map的在构造时缺省采用递增排序key，也使用alloc配置器配置空间大小，需要注意的是在插入元素时，调用的是红黑树中的insert_unique()方法，而非insert_euqal()（multimap使用）</p>
-<p>举个例子：</p>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;map&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>{<br>map&lt;string, <span class="hljs-type">int</span>&gt; maps;<br>    <span class="hljs-comment">//插入若干元素</span><br>maps[<span class="hljs-string">"jack"</span>] = <span class="hljs-number">1</span>;<br>maps[<span class="hljs-string">"jane"</span>] = <span class="hljs-number">2</span>;<br>maps[<span class="hljs-string">"july"</span>] = <span class="hljs-number">3</span>;<br><span class="hljs-comment">//以pair形式插入</span><br><span class="hljs-function">pair&lt;string, <span class="hljs-type">int</span>&gt; <span class="hljs-title">p</span><span class="hljs-params">(<span class="hljs-string">"david"</span>, <span class="hljs-number">4</span>)</span></span>;<br>maps.<span class="hljs-built_in">insert</span>(p);<br><span class="hljs-comment">//迭代输出元素</span><br>map&lt;string, <span class="hljs-type">int</span>&gt;::iterator iter = maps.<span class="hljs-built_in">begin</span>();<br><span class="hljs-keyword">for</span> (; iter != maps.<span class="hljs-built_in">end</span>(); ++iter)<br>{<br>cout &lt;&lt; iter-&gt;first &lt;&lt; <span class="hljs-string">" "</span>;<br>cout &lt;&lt; iter-&gt;second &lt;&lt; <span class="hljs-string">"--"</span>; <span class="hljs-comment">//david 4--jack 1--jane 2--july 3--</span><br>}<br>cout &lt;&lt; endl;<br><span class="hljs-comment">//使用subscipt操作取实值</span><br><span class="hljs-type">int</span> num = maps[<span class="hljs-string">"july"</span>];<br>cout &lt;&lt; num &lt;&lt; endl; <span class="hljs-comment">// 3</span><br><span class="hljs-comment">//查找某key</span><br>iter = maps.<span class="hljs-built_in">find</span>(<span class="hljs-string">"jane"</span>);<br><span class="hljs-keyword">if</span>(iter != maps.<span class="hljs-built_in">end</span>())<br>cout &lt;&lt; iter-&gt;second &lt;&lt; endl; <span class="hljs-comment">// 2</span><br>    <span class="hljs-comment">//修改实值</span><br>iter-&gt;second = <span class="hljs-number">100</span>;<br><span class="hljs-type">int</span> num2 = maps[<span class="hljs-string">"jane"</span>]; <span class="hljs-comment">// 100</span><br>cout &lt;&lt; num2 &lt;&lt; endl;<br><br><span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>}<br></code></pre></td></tr></tbody></table></figure>
-<p>需要注意的是subscript（下标）操作既可以作为左值运用（修改内容）也可以作为右值运用（获取实值）。例如：</p>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs C++">maps[<span class="hljs-string">"abc"</span>] = <span class="hljs-number">1</span>; <span class="hljs-comment">//左值运用int num = masp["abd"]; //右值运用</span><br></code></pre></td></tr></tbody></table></figure>
-<p>无论如何，subscript操作符都会先根据键值找出实值，源码如下：</p>
-<figure class="highlight arcade"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs arcade">...T&amp; operator[](const key_type&amp; k){<br>    <span class="hljs-keyword">return</span> (*((<span class="hljs-built_in">insert</span>(value_type(k, T()))).<span class="hljs-built_in">first</span>)).<span class="hljs-built_in">second</span>;<br>}...<br></code></pre></td></tr></tbody></table></figure>
-<p>代码运行过程是：首先根据键值和实值做出一个元素，这个元素的实值未知，因此产生一个与实值型别相同的临时对象替代：</p>
-<p>再将这个对象插入到map中，并返回一个pair：</p>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-function">pair&lt;iterator,<span class="hljs-type">bool</span>&gt; <span class="hljs-title">insert</span><span class="hljs-params">(value_type(k, T()))</span></span>;<br></code></pre></td></tr></tbody></table></figure>
-<p>pair第一个元素是迭代器，指向当前插入的新元素，如果插入成功返回true，此时对应左值运用，根据键值插入实值。插入失败（重复插入）返回false，此时返回的是已经存在的元素，则可以取到它的实值</p>
-<figure class="highlight elm"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs elm">(insert(value_<span class="hljs-keyword">type</span>(k, <span class="hljs-type">T</span>()))).first; //迭代器<br>*((insert(value_<span class="hljs-keyword">type</span>(k, <span class="hljs-type">T</span>()))).first); //解引用<br>(*((insert(value_<span class="hljs-keyword">type</span>(k, <span class="hljs-type">T</span>()))).first)).second; //取出实值<br></code></pre></td></tr></tbody></table></figure>
-<p>由于这个实值是以引用方式传递，因此作为左值或者右值都可以</p>
-<h1 id="16-36-set和map的区别multimap和multiset的区别"><a class="markdownIt-Anchor" href="#16-36-set和map的区别multimap和multiset的区别"></a> 16: 36、set和map的区别，multimap和multiset的区别</h1>
-<p>set只提供一种数据类型的接口，但是会将这一个元素分配到key和value上，而且它的compare_function用的是 identity()函数，这个函数是输入什么输出什么，这样就实现了set机制，set的key和value其实是一样的了。其实他保存的是两份元素，而不是只保存一份元素</p>
-<p>map则提供两种数据类型的接口，分别放在key和value的位置上，他的比较function采用的是红黑树的comparefunction（），保存的确实是两份元素。</p>
-<p>他们两个的insert都是采用红黑树的insert_unique() 独一无二的插入。</p>
-<p>multimap和map的唯一区别就是：multimap调用的是红黑树的insert_equal(),可以重复插入而map调用的则是独一无二的插入insert_unique()，multiset和set也一样，底层实现都是一样的，只是在插入的时候调用的方法不一样。</p>
-<p><strong>红黑树概念</strong></p>
-<p>面试时候现场写红黑树代码的概率几乎为0，但是红黑树一些基本概念还是需要掌握的。</p>
-<p>1、它是二叉排序树（继承二叉排序树特显）：</p>
-<ul>
-<li>若左子树不空，则左子树上所有结点的值均小于或等于它的根结点的值。
-<ul>
-<li>若右子树不空，则右子树上所有结点的值均大于或等于它的根结点的值。
-<ul>
-<li>左、右子树也分别为二叉排序树。<br>
-2、它满足如下几点要求：</li>
-<li>树中所有节点非红即黑。
-<ul>
-<li>根节点必为黑节点。</li>
-<li>红节点的子节点必为黑（黑节点子节点可为黑）。</li>
-<li>从根到NULL的任何路径上黑结点数相同。<br>
-3、查找时间一定可以控制在O(logn)。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h1 id="17-37-stl中unordered_map和map的区别和应用场景"><a class="markdownIt-Anchor" href="#17-37-stl中unordered_map和map的区别和应用场景"></a> 17: 37、STL中unordered_map和map的区别和应用场景</h1>
-<p>map支持键值的自动排序，底层机制是红黑树，红黑树的查询和维护时间复杂度均为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>l</mi><mi>o</mi><mi>g</mi><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(logn)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span>，但是空间占用比较大，因为每个节点要保持父节点、孩子节点及颜色的信息</p>
-<p>unordered_map是C++ 11新添加的容器，底层机制是哈希表，通过hash函数计算元素位置，其查询时间复杂度为O(1)，维护时间与bucket桶所维护的list长度有关，但是建立hash表耗时较大</p>
-<p>从两者的底层机制和特点可以看出：map适用于有序数据的应用场景，unordered_map适用于高效查询的应用场景</p>
-<h1 id="18-38-hashtable中解决冲突有哪些方法"><a class="markdownIt-Anchor" href="#18-38-hashtable中解决冲突有哪些方法"></a> 18: 38、hashtable中解决冲突有哪些方法？</h1>
-<p><strong>记住前三个：</strong></p>
-<p>线性探测</p>
-<p>使用hash函数计算出的位置如果已经有元素占用了，则向后依次寻找，找到表尾则回到表头，直到找到一个空位</p>
-<p><strong>开链</strong></p>
-<p>每个表格维护一个list，如果hash函数计算出的格子相同，则按顺序存在这个list中</p>
-<p><strong>再散列</strong></p>
-<p>发生冲突时使用另一种hash函数再计算一个地址，直到不冲突</p>
-<p><strong>二次探测</strong></p>
-<p>使用hash函数计算出的位置如果已经有元素占用了，按照<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mn>1</mn><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">1^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord">1</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span>、<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mn>2</mn><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">2^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span>、<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mn>3</mn><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">3^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord">3</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span>…的步长依次寻找，如果步长是随机数序列，则称之为伪随机探测</p>
-<p><strong>公共溢出区</strong></p>
-<p>一旦hash函数计算的结果相同，就放入公共溢出区</p>
+<h1 id="15-map-的实现"><a class="markdownIt-Anchor" href="#15-map-的实现"></a> 15: [[map 的实现]]</h1>
+<h1 id="16-36-set和map的区别multimap和multiset的区别"><a class="markdownIt-Anchor" href="#16-36-set和map的区别multimap和multiset的区别"></a> 16: 36、[[set和map的区别，multimap和multiset的区别]]</h1>
+<p>[[红黑树]]</p>
+<h1 id="17-37-stl中unordered_map和map的区别和应用场景"><a class="markdownIt-Anchor" href="#17-37-stl中unordered_map和map的区别和应用场景"></a> 17: 37、[[STL中unordered_map和map的区别和应用场景]]</h1>
+<h1 id="18-38-hashtable中解决冲突有哪些方法"><a class="markdownIt-Anchor" href="#18-38-hashtable中解决冲突有哪些方法"></a> 18: 38、[[hashtable中解决冲突有哪些方法？]]</h1>
 
               
             </div>

@@ -16,17 +16,18 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="📝O(logn)::   [!question] #📕  时间复杂度是用来衡量算法执行时间的一种度量方法。对于一个算法，它的时间复杂度表示为 O(f(n))，其中 f(n) 是算法执行次数和输入数据量 n 的关系。 如果时间复杂度表示为 O(logn)，这意味着随着输入数据量 n 的增加，算法执行次数的增长率为 log(n)。也就是说，如果输入数据量增加一倍，算法执行次数只会增加一个对数量级。">
+    <meta name="description" content="📝O(logn)::   [!success] #✅  可以想象成在O(n)和 O(1)间的复杂度是 O(logn)吗 O(logn)是一种中等复杂度，它通常比O(n)更优，但比O(1)略差。 O(1)复杂度表示算法的执行时间是固定的，无论输入的数据有多大，执行时间都不会改变。 O(n)复杂度表示算法的执行时间与输入的数据的大小成正比，即随着输入数据的增大，执行时间也会增加。 O(logn)复杂">
 <meta property="og:type" content="article">
 <meta property="og:title" content="O(logn)">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/36970/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="📝O(logn)::   [!question] #📕  时间复杂度是用来衡量算法执行时间的一种度量方法。对于一个算法，它的时间复杂度表示为 O(f(n))，其中 f(n) 是算法执行次数和输入数据量 n 的关系。 如果时间复杂度表示为 O(logn)，这意味着随着输入数据量 n 的增加，算法执行次数的增长率为 log(n)。也就是说，如果输入数据量增加一倍，算法执行次数只会增加一个对数量级。">
+<meta property="og:description" content="📝O(logn)::   [!success] #✅  可以想象成在O(n)和 O(1)间的复杂度是 O(logn)吗 O(logn)是一种中等复杂度，它通常比O(n)更优，但比O(1)略差。 O(1)复杂度表示算法的执行时间是固定的，无论输入的数据有多大，执行时间都不会改变。 O(n)复杂度表示算法的执行时间与输入的数据的大小成正比，即随着输入数据的增大，执行时间也会增加。 O(logn)复杂">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-12-13T07:55:00.000Z">
-<meta property="article:modified_time" content="2022-12-14T13:29:01.067Z">
+<meta property="article:modified_time" content="2022-12-16T03:54:30.609Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="📕">
+<meta property="article:tag" content="✅">
 <meta name="twitter:card" content="summary_large_image">
   
   
@@ -223,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          184 字
+          533 字
         
       </span>
     
@@ -234,7 +235,7 @@
         
         
         
-          1 分钟
+          3 分钟
         
       </span>
     
@@ -285,7 +286,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年12月14日 晚上
+                    本文最后更新于：2022年12月16日 中午
                   
                 
               </p>
@@ -295,10 +296,20 @@
               <p>📝O(logn)::</p>
 <!-- basicblock-end -->
 <blockquote>
-<p>[!question] #📕</p>
+<p>[!success] #✅  可以想象成在O(n)和 O(1)间的复杂度是 O(logn)吗<br>
+O(logn)是一种中等复杂度，它通常比O(n)更优，但比O(1)略差。<br>
+O(1)复杂度表示算法的执行时间是固定的，无论输入的数据有多大，执行时间都不会改变。<br>
+O(n)复杂度表示算法的执行时间与输入的数据的大小成正比，即随着输入数据的增大，执行时间也会增加。<br>
+O(logn)复杂度表示算法的执行时间与输入数据的大小成对数关系，随着输入数据的增大，执行时间增长的速度较慢。</p>
 </blockquote>
-<p>时间复杂度是用来衡量算法执行时间的一种度量方法。对于一个算法，它的时间复杂度表示为 O(f(n))，其中 f(n) 是算法执行次数和输入数据量 n 的关系。</p>
-<p>如果时间复杂度表示为 O(logn)，这意味着随着输入数据量 n 的增加，算法执行次数的增长率为 log(n)。也就是说，如果输入数据量增加一倍，算法执行次数只会增加一个对数量级。</p>
+<blockquote></blockquote>
+<p>![[O(logn) 2022-12-16 11.37.13.excalidraw]]</p>
+<p>O(logn) 复杂度的算法指的是，随着输入数据规模 n 的增大，算法的执行次数或者所需的资源（例如空间或者时间）的增长率为对数级别。</p>
+<p>对于 O(logn) 复杂度的算法，随着输入数据规模 n 的增大，算法的执行次数或者所需的资源也会逐渐增大，但是增长率较慢。</p>
+<p>例如，二分查找是一个典型的 O(logn) 复杂度的算法。<br>
+在二分查找中，每次查找都可以将查找的范围减半，因此时间复杂度为 O(logn)。<br>
+不然的话每次都要查找, 这个时间复杂度是线性级别.</p>
+<p>此外，还有许多其他的算法也具有 O(logn) 的时间复杂度，例如快速排序、归并排序、堆排序等。</p>
 
               
             </div>
@@ -353,6 +364,8 @@
       <i class="iconfont icon-tags"></i>
       
         <a href="/tags/%F0%9F%93%95/">#📕</a>
+      
+        <a href="/tags/%E2%9C%85/">#✅</a>
       
     </div>
   

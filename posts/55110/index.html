@@ -16,15 +16,15 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="📝25、说一下STL每种容器对应的迭代器::     容器 迭代器     vector、deque 随机访问迭代器   stack、queue、priority_queue 无   list、(multi)set&#x2F;map 双向迭代器   unordered_(multi)set&#x2F;map、forward_list, hash table 前向迭代器     1: [[constance iter">
+    <meta name="description" content="📝25、说一下STL每种容器对应的迭代器::     容器 迭代器     vector、deque 随机访问迭代器   stack、queue、priority_queue 无   list、(multi)set&#x2F;map 双向迭代器   unordered_(multi)set&#x2F;map、forward_list 前向迭代器    在 C++ 中，迭代器分为两类：可变迭代器和常量迭代器。 可变迭">
 <meta property="og:type" content="article">
 <meta property="og:title" content="迭代器的分类(🗃)3G">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/55110/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="📝25、说一下STL每种容器对应的迭代器::     容器 迭代器     vector、deque 随机访问迭代器   stack、queue、priority_queue 无   list、(multi)set&#x2F;map 双向迭代器   unordered_(multi)set&#x2F;map、forward_list, hash table 前向迭代器     1: [[constance iter">
+<meta property="og:description" content="📝25、说一下STL每种容器对应的迭代器::     容器 迭代器     vector、deque 随机访问迭代器   stack、queue、priority_queue 无   list、(multi)set&#x2F;map 双向迭代器   unordered_(multi)set&#x2F;map、forward_list 前向迭代器    在 C++ 中，迭代器分为两类：可变迭代器和常量迭代器。 可变迭">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-12-13T12:21:00.000Z">
-<meta property="article:modified_time" content="2022-12-15T10:28:34.391Z">
+<meta property="article:modified_time" content="2022-12-15T13:57:02.575Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="🗃️">
 <meta name="twitter:card" content="summary_large_image">
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          174 字
+          389 字
         
       </span>
     
@@ -234,7 +234,7 @@
         
         
         
-          1 分钟
+          2 分钟
         
       </span>
     
@@ -315,12 +315,16 @@
 <td>双向迭代器</td>
 </tr>
 <tr>
-<td>unordered_(multi)set/map、forward_list, hash table</td>
+<td>unordered_(multi)set/map、forward_list</td>
 <td>前向迭代器</td>
 </tr>
 </tbody>
 </table>
-<h1 id="1-constance-iterators"><a class="markdownIt-Anchor" href="#1-constance-iterators"></a> 1: [[constance iterators]]</h1>
+<p>在 C++ 中，迭代器分为两类：可变迭代器和常量迭代器。</p>
+<p>可变迭代器允许通过迭代器更改被迭代的容器中的元素。这种迭代器通常用于修改容器中的元素，比如排序、查找并删除等操作。一般来说，如果要在某个容器上执行修改操作，则需要使用可变迭代器。</p>
+<p>常量迭代器则不允许通过迭代器修改被迭代的容器中的元素。它主要用于读取容器中的元素，比如遍历容器中的所有元素并输出。如果只想读取容器中的元素，而不想修改它们，则可以使用常量迭代器。</p>
+<h1 id="1-mutable-iterator"><a class="markdownIt-Anchor" href="#1-mutable-iterator"></a> 1: [[mutable iterator]]</h1>
+<h1 id="2-constance-iterators"><a class="markdownIt-Anchor" href="#2-constance-iterators"></a> 2: [[constance iterators]]</h1>
 
               
             </div>

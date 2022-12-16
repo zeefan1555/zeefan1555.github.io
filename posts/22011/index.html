@@ -16,23 +16,25 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="没看完  重载运算符函数可以对运算符作出新的解释，但原有基本语义不变： 不改变运算符的优先级 不改变运算符的结合性 不改变运算符所需要的操作数 不能创建新的运算符   [ ]  重载运算符函数，本质还是函数调用，所以重载后：::  #疑问   (1) 可以是和调用运算符的方式调用，data1+data2 (2)也可以是调用函数的方式，operator+(data1,data2), 这就要注意运算">
+    <meta name="description" content="运算符重载:: 2022&#x2F;10&#x2F;21🌵第一次创建   1: 语法 运算符重载的基本语法如下： 1234return_type operator op (parameters) {   &#x2F;&#x2F; 运算符的重载实现} 其中，return_type 是运算符的返回类型，operator 是运算符重载的关键字，op 是要重载的运算符，parameters 是运算符的参数列表 1234567891011121">
 <meta property="og:type" content="article">
-<meta property="og:title" content="运算符重载">
+<meta property="og:title" content="运算符重载(🗃)">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/22011/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="没看完  重载运算符函数可以对运算符作出新的解释，但原有基本语义不变： 不改变运算符的优先级 不改变运算符的结合性 不改变运算符所需要的操作数 不能创建新的运算符   [ ]  重载运算符函数，本质还是函数调用，所以重载后：::  #疑问   (1) 可以是和调用运算符的方式调用，data1+data2 (2)也可以是调用函数的方式，operator+(data1,data2), 这就要注意运算">
+<meta property="og:description" content="运算符重载:: 2022&#x2F;10&#x2F;21🌵第一次创建   1: 语法 运算符重载的基本语法如下： 1234return_type operator op (parameters) {   &#x2F;&#x2F; 运算符的重载实现} 其中，return_type 是运算符的返回类型，operator 是运算符重载的关键字，op 是要重载的运算符，parameters 是运算符的参数列表 1234567891011121">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-10-21T07:13:00.000Z">
-<meta property="article:modified_time" content="2022-10-25T15:02:08.423Z">
+<meta property="article:modified_time" content="2022-12-16T02:21:27.532Z">
 <meta property="article:author" content="zeefan">
+<meta property="article:tag" content="📕">
+<meta property="article:tag" content="🗃️">
 <meta name="twitter:card" content="summary_large_image">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>运算符重载 - 一杯空气</title>
+  <title>运算符重载(🗃) - 一杯空气</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -199,7 +201,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="运算符重载"></span>
+            <span id="subtitle" data-typed-text="运算符重载(🗃)"></span>
           
         </div>
 
@@ -222,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          373 字
+          1.1k 字
         
       </span>
     
@@ -233,7 +235,7 @@
         
         
         
-          2 分钟
+          6 分钟
         
       </span>
     
@@ -279,42 +281,51 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">运算符重载</h1>
+            <h1 style="display: none">运算符重载(🗃)</h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年10月25日 晚上
+                    本文最后更新于：2022年12月16日 上午
                   
                 
               </p>
             
             <div class="markdown-body">
               
-              <blockquote>
-<p>没看完</p>
-</blockquote>
+              <p>运算符重载::<br>
+2022/10/21🌵第一次创建</p>
+<!-- basicblock-end -->
+<h1 id="1-语法"><a class="markdownIt-Anchor" href="#1-语法"></a> 1: 语法</h1>
+<p>运算符重载的基本语法如下：</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function">return_type <span class="hljs-keyword">operator</span> <span class="hljs-title">op</span> <span class="hljs-params">(parameters)</span> </span>{<br>   <span class="hljs-comment">// 运算符的重载实现</span><br>}<br><br></code></pre></td></tr></tbody></table></figure>
+<p>其中，<code>return_type</code> 是运算符的返回类型，<code>operator</code> 是运算符重载的关键字，<code>op</code> 是要重载的运算符，<code>parameters</code> 是运算符的参数列表</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Complex</span> {<br><span class="hljs-keyword">private</span>:<br>   <span class="hljs-type">double</span> real;<br>   <span class="hljs-type">double</span> imag;<br><span class="hljs-keyword">public</span>:<br>   <span class="hljs-built_in">Complex</span>(<span class="hljs-type">double</span> r = <span class="hljs-number">0</span>, <span class="hljs-type">double</span> i = <span class="hljs-number">0</span>) : <span class="hljs-built_in">real</span>(r), <span class="hljs-built_in">imag</span>(i) {}<br><br>   <span class="hljs-comment">// 重载加法运算符</span><br>   Complex <span class="hljs-keyword">operator</span> + (<span class="hljs-type">const</span> Complex&amp; c) {<br>      <span class="hljs-keyword">return</span> <span class="hljs-built_in">Complex</span>(real + c.real, imag + c.imag);<br>   }<br>};<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{<br>   <span class="hljs-function">Complex <span class="hljs-title">c1</span><span class="hljs-params">(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)</span>, <span class="hljs-title">c2</span><span class="hljs-params">(<span class="hljs-number">2</span>, <span class="hljs-number">3</span>)</span>, c3</span>;<br>   c3 = c1 + c2;  <span class="hljs-comment">// 调用重载的加法运算符</span><br>   <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>}<br><br><br></code></pre></td></tr></tbody></table></figure>
+<p>在上面的代码中，<code>Complex</code> 是一个自定义的类类型。它有两个私有数据成员 <code>real</code> 和 <code>imag</code>，表示复数的实部和虚部。这个类还有一个公有的构造函数，可以用来初始化复数的实部和虚部。</p>
+<p>此外，这个类还定义了一个公有的函数，用来重载加法运算符（<code>+</code>）。这个函数接受一个常量复数类型的引用作为参数，并返回一个新的复数类型的对象，表示两个复数的和。</p>
+<p>例如，在下面的代码中，复数 <code>c1</code> 和 <code>c2</code> 分别表示 (1 + 2i) 和 (2 + 3i)，复数 <code>c3</code> 的值为 (3 + 5i)，因为它是 <code>c1</code> 和 <code>c2</code> 的和：</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function">Complex <span class="hljs-title">c1</span><span class="hljs-params">(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)</span>, <span class="hljs-title">c2</span><span class="hljs-params">(<span class="hljs-number">2</span>, <span class="hljs-number">3</span>)</span>, c3</span>;<br>c3 = c1 + c2;  <span class="hljs-comment">// 调用重载的加法运算符</span><br></code></pre></td></tr></tbody></table></figure>
+<p>`</p>
+<p>希望这个回答对您有所帮助。</p>
+<h1 id="2"><a class="markdownIt-Anchor" href="#2"></a> 2:</h1>
 <p>重载运算符函数可以对运算符作出新的解释，但原有基本语义不变：<br>
 不改变运算符的优先级<br>
 不改变运算符的结合性<br>
 不改变运算符所需要的操作数<br>
 不能创建新的运算符</p>
-<!-- basicblock-start oid="ObsNP5s1pLfJnKBxLfXvkaPN" deck= "❓疑问::👨🏻‍💻code::C++::C++基础::运算符重载.md"-->
+<blockquote>
+<p>[!question] #📕</p>
+</blockquote>
 <ul>
-<li>[ ]  重载运算符函数，本质还是函数调用，所以重载后：::  #疑问</li>
+<li>[ ]  重载运算符函数，本质还是函数调用，所以重载</li>
 </ul>
-<!-- basicblock-end -->
 <p>(1) 可以是和调用运算符的方式调用，data1+data2</p>
 <p>(2)也可以是调用函数的方式，operator+(data1,data2), 这就要注意运算符函数的名字是“operator运算符’ 在可以重载的运算符里有逗号、取地址、逻辑与、逻辑或</p>
 <p>不建议重载:<br>
 逗号、取地址，本身就对类类型有特殊定义；逻辑与、逻辑或，有短路求值属性；逗号、逻辑与、或，定义了求值顺序。<br>
 运算符重载应该是作为类的成员函数 or 非成员函数（具体后面各小节会涉及）。有个对应知识点，</p>
-<hr>
-<p><strong>其他资料</strong></p>
- <!-- basicblock-start oid="ObswLX9debqpUJkxZ5pWSNi4"  --> 
-<p>#历史记录:: <a href="marginnote3app://note/23F5AC69-4A7F-4B31-85FC-19D4ADF45155">margin: 运算符重载</a><br>
-2022/10/21🌵运算符重载 : 第一次创建</p>
-<!-- basicblock-end -->
+<h1 id="3-重载下标运算符"><a class="markdownIt-Anchor" href="#3-重载下标运算符"></a> 3: [[重载下标运算符]]</h1>
+
               
             </div>
             <hr/>
@@ -356,6 +367,15 @@
 
     </div>
   
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%F0%9F%93%95/">#📕</a>
+      
+        <a href="/tags/%F0%9F%97%83%EF%B8%8F/">#🗃️</a>
+      
+    </div>
   
 </div>
 

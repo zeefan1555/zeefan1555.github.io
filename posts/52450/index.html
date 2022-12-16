@@ -16,17 +16,20 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="📝map 的实现::">
+    <meta name="description" content="📝map 的实现::  map的特性是所有元素会根据键值进行自动排序。map中所有的元素都是pair，拥有键值(key)和实值(value)两个部分，并且不允许元素有相同的key 一旦map的key确定了，那么是无法修改的，但是可以修改这个key对应的value，因此map的迭代器既不是constant iterator，也不是[[mutable iterator]] 标准STL map的底层机">
 <meta property="og:type" content="article">
 <meta property="og:title" content="map 的实现">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/52450/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="📝map 的实现::">
+<meta property="og:description" content="📝map 的实现::  map的特性是所有元素会根据键值进行自动排序。map中所有的元素都是pair，拥有键值(key)和实值(value)两个部分，并且不允许元素有相同的key 一旦map的key确定了，那么是无法修改的，但是可以修改这个key对应的value，因此map的迭代器既不是constant iterator，也不是[[mutable iterator]] 标准STL map的底层机">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://axiu-image-bed.oss-cn-shanghai.aliyuncs.com/img/202205220022980.png">
 <meta property="article:published_time" content="2022-12-15T13:38:00.000Z">
-<meta property="article:modified_time" content="2022-12-15T13:39:07.222Z">
+<meta property="article:modified_time" content="2022-12-16T02:22:22.117Z">
 <meta property="article:author" content="zeefan">
+<meta property="article:tag" content="📙">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://axiu-image-bed.oss-cn-shanghai.aliyuncs.com/img/202205220022980.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -222,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          10 字
+          2.3k 字
         
       </span>
     
@@ -233,7 +236,7 @@
         
         
         
-          1 分钟
+          12 分钟
         
       </span>
     
@@ -284,7 +287,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年12月15日 晚上
+                    本文最后更新于：2022年12月16日 上午
                   
                 
               </p>
@@ -293,6 +296,31 @@
               
               <p>📝map 的实现::</p>
 <!-- basicblock-end -->
+<p>map的特性是所有元素会根据键值进行自动排序。map中所有的元素都是pair，拥有键值(key)和实值(value)两个部分，<strong>并且不允许元素有相同的key</strong></p>
+<p>一旦map的key确定了，那么是无法修改的，但是可以修改这个key对应的value，因此map的迭代器既不是constant iterator，也不是[[mutable iterator]]</p>
+<p>标准STL map的底层机制是RB-tree（红黑树），另一种以hash table为底层机制实现的称为hash_map。map的架构如下图所示</p>
+<p><img src="https://axiu-image-bed.oss-cn-shanghai.aliyuncs.com/img/202205220022980.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>map的在构造时缺省采用递增排序key，也使用alloc配置器配置空间大小，需要注意的是在插入元素时，调用的是红黑树中的insert_unique()方法，而非insert_euqal()（multimap使用）</p>
+<p>举个例子：</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;map&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>{<br>map&lt;string, <span class="hljs-type">int</span>&gt; maps;<br>    <span class="hljs-comment">//插入若干元素</span><br>maps[<span class="hljs-string">"jack"</span>] = <span class="hljs-number">1</span>;<br>maps[<span class="hljs-string">"jane"</span>] = <span class="hljs-number">2</span>;<br>maps[<span class="hljs-string">"july"</span>] = <span class="hljs-number">3</span>;<br><span class="hljs-comment">//以pair形式插入</span><br><span class="hljs-function">pair&lt;string, <span class="hljs-type">int</span>&gt; <span class="hljs-title">p</span><span class="hljs-params">(<span class="hljs-string">"david"</span>, <span class="hljs-number">4</span>)</span></span>;<br>maps.<span class="hljs-built_in">insert</span>(p);<br><span class="hljs-comment">//迭代输出元素</span><br>map&lt;string, <span class="hljs-type">int</span>&gt;::iterator iter = maps.<span class="hljs-built_in">begin</span>();<br><span class="hljs-keyword">for</span> (; iter != maps.<span class="hljs-built_in">end</span>(); ++iter)<br>{<br>cout &lt;&lt; iter-&gt;first &lt;&lt; <span class="hljs-string">" "</span>;<br>cout &lt;&lt; iter-&gt;second &lt;&lt; <span class="hljs-string">"--"</span>; <span class="hljs-comment">//david 4--jack 1--jane 2--july 3--</span><br>}<br>cout &lt;&lt; endl;<br><span class="hljs-comment">//使用subscipt操作取实值</span><br><span class="hljs-type">int</span> num = maps[<span class="hljs-string">"july"</span>];<br>cout &lt;&lt; num &lt;&lt; endl; <span class="hljs-comment">// 3</span><br><span class="hljs-comment">//查找某key</span><br>iter = maps.<span class="hljs-built_in">find</span>(<span class="hljs-string">"jane"</span>);<br><span class="hljs-keyword">if</span>(iter != maps.<span class="hljs-built_in">end</span>())<br>cout &lt;&lt; iter-&gt;second &lt;&lt; endl; <span class="hljs-comment">// 2</span><br>    <span class="hljs-comment">//修改实值</span><br>iter-&gt;second = <span class="hljs-number">100</span>;<br><span class="hljs-type">int</span> num2 = maps[<span class="hljs-string">"jane"</span>]; <span class="hljs-comment">// 100</span><br>cout &lt;&lt; num2 &lt;&lt; endl;<br><br><span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>}<br></code></pre></td></tr></tbody></table></figure>
+<h1 id="1-map-源码"><a class="markdownIt-Anchor" href="#1-map-源码"></a> 1: map 源码</h1>
+<p>需要注意的是subscript（下标）操作既可以作为左值运用（修改内容）也可以作为右值运用（获取实值）。例如：</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs C++">maps[<span class="hljs-string">"abc"</span>] = <span class="hljs-number">1</span>; <span class="hljs-comment">//左值运用int num = masp["abd"]; //右值运用</span><br></code></pre></td></tr></tbody></table></figure>
+<p>无论如何，subscript操作符都会先根据键值找出实值，源码如下：</p>
+<blockquote>
+<p>[!question] #📙</p>
+</blockquote>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c++">T&amp; <span class="hljs-keyword">operator</span>[](<span class="hljs-type">const</span> key_type&amp; k){<br>    <span class="hljs-keyword">return</span> (*((<span class="hljs-built_in">insert</span>(<span class="hljs-built_in">value_type</span>(k, <span class="hljs-built_in">T</span>()))).first)).second;<br>}<br></code></pre></td></tr></tbody></table></figure>
+<p>首先，这段代码的第一行定义了一个[[重载下标运算符]]，它的参数是一个 <code>key_type</code> 类型的常量引用，这个 <code>key_type</code> 是一个模板类型参数，代表容器中用于存储键的类型。这个函数的返回值是 <code>T&amp;</code>，也就是容器中存储的值的类型。</p>
+<p>它调用了容器的 <code>insert</code> 方法，并传入了一个新的键值对。这个键值对的类型是 <code>value_type</code>，它代表容器中用于存储键值对的类型，例如 <code>std::pair&lt;const std::string, int&gt;</code>、<code>std::pair&lt;const int, std::string&gt;</code> 等。</p>
+<p>然后，<code>insert</code> 方法返回一个迭代器，指向新插入的键值对。我们可以使用 <code>first</code> 成员来访问这个迭代器指向的键值对。</p>
+<p>最后，我们使用 <code>second</code> 成员来访问这个键值对中的值，然后返回这个值的引用。</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c++">(<span class="hljs-built_in">insert</span>(<span class="hljs-built_in">value_type</span>(k, <span class="hljs-built_in">T</span>()))).first; <span class="hljs-comment">//迭代器</span><br>*((<span class="hljs-built_in">insert</span>(<span class="hljs-built_in">value_type</span>(k, <span class="hljs-built_in">T</span>()))).first); <span class="hljs-comment">//解引用</span><br>(*((<span class="hljs-built_in">insert</span>(<span class="hljs-built_in">value_type</span>(k, <span class="hljs-built_in">T</span>()))).first)).second; <span class="hljs-comment">//取出实值</span><br></code></pre></td></tr></tbody></table></figure>
+<p>由于这个实值是以引用方式传递，因此作为左值或者右值都可以</p>
+<p>代码运行过程是：首先根据键值和实值做出一个元素，这个元素的实值未知，因此产生一个与实值型别相同的临时对象替代：</p>
+<p>再将这个对象插入到map中，并返回一个pair：</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-function">pair&lt;iterator,<span class="hljs-type">bool</span>&gt; <span class="hljs-title">insert</span><span class="hljs-params">(value_type(k, T()))</span></span>;<br></code></pre></td></tr></tbody></table></figure>
+<p>pair第一个元素是迭代器，指向当前插入的新元素，如果插入成功返回true，此时对应左值运用，根据键值插入实值。插入失败（重复插入）返回false，此时返回的是已经存在的元素，则可以取到它的实值</p>
 
               
             </div>
@@ -300,6 +328,48 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/" class="category-chain-item">👨🏻‍💻code</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/C/" class="category-chain-item">C++</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/C/C-STL/" class="category-chain-item">C++ STL</a>
+  
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%F0%9F%93%99/">#📙</a>
+      
+    </div>
   
 </div>
 
@@ -310,6 +380,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/posts/1/" title="mutable iterator">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">mutable iterator</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">

@@ -16,16 +16,16 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1 定义::   左子树比根节点小，右子树比根节点大，(左小右大) 左右子树也分别是二叉搜索树    &amp; 左子树中最大的元素也比根节点小, 右子树中最小的元素也比根节点大  $ 这是二叉搜索树的性质决定的       1.1 平衡二叉搜索树::    平衡二叉搜索数是不是二叉搜索树和平衡二叉树的结合？ 是的，是二叉搜索树和平衡二叉树的结合。   平衡二叉树与完全二叉树的区别在于底层节点的">
+    <meta name="description" content="二叉搜索树 :   1: 定义  左子树比根节点小，右子树比根节点大，(左小右大) 左右子树也分别是二叉搜索树    &amp; 左子树中最大的元素也比根节点小, 右子树中最小的元素也比根节点大  $ 这是二叉搜索树的性质决定的     1.1: 平衡二叉搜索树::   平衡二叉搜索数是不是二叉搜索树和平衡二叉树的结合？ 是的，是二叉搜索树和平衡二叉树的结合。   平衡二叉树与完全二叉树的区别在于">
 <meta property="og:type" content="article">
 <meta property="og:title" content="二叉搜索树">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/61467/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="1 定义::   左子树比根节点小，右子树比根节点大，(左小右大) 左右子树也分别是二叉搜索树    &amp; 左子树中最大的元素也比根节点小, 右子树中最小的元素也比根节点大  $ 这是二叉搜索树的性质决定的       1.1 平衡二叉搜索树::    平衡二叉搜索数是不是二叉搜索树和平衡二叉树的结合？ 是的，是二叉搜索树和平衡二叉树的结合。   平衡二叉树与完全二叉树的区别在于底层节点的">
+<meta property="og:description" content="二叉搜索树 :   1: 定义  左子树比根节点小，右子树比根节点大，(左小右大) 左右子树也分别是二叉搜索树    &amp; 左子树中最大的元素也比根节点小, 右子树中最小的元素也比根节点大  $ 这是二叉搜索树的性质决定的     1.1: 平衡二叉搜索树::   平衡二叉搜索数是不是二叉搜索树和平衡二叉树的结合？ 是的，是二叉搜索树和平衡二叉树的结合。   平衡二叉树与完全二叉树的区别在于">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20200806190304693.png">
 <meta property="article:published_time" content="2022-05-12T03:50:00.000Z">
-<meta property="article:modified_time" content="2022-09-30T01:29:09.295Z">
+<meta property="article:modified_time" content="2022-12-15T14:13:45.314Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="二叉树">
 <meta name="twitter:card" content="summary_large_image">
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          593 字
+          572 字
         
       </span>
     
@@ -287,15 +287,16 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年9月30日 上午
+                    本文最后更新于：2022年12月15日 晚上
                   
                 
               </p>
             
             <div class="markdown-body">
               
-              <h1 id="1-定义"><a class="markdownIt-Anchor" href="#1-定义"></a> 1 定义::</h1>
+              <p>二叉搜索树 :</p>
 <!-- basicblock-end -->
+<h1 id="1-定义"><a class="markdownIt-Anchor" href="#1-定义"></a> 1: 定义</h1>
 <ol>
 <li>左子树比根节点小，右子树比根节点大，(左小右大)</li>
 <li>左右子树也分别是二叉搜索树</li>
@@ -308,9 +309,7 @@
 </ul>
 </li>
 </ul>
-<!-- basicblock-start oid="Obs65oCz6Nl7gX7dcHpKPINZ" --> 
-<h2 id="11-平衡二叉搜索树"><a class="markdownIt-Anchor" href="#11-平衡二叉搜索树"></a> 1.1 平衡二叉搜索树::</h2>
-<!-- basicblock-end -->
+<h2 id="11-平衡二叉搜索树"><a class="markdownIt-Anchor" href="#11-平衡二叉搜索树"></a> 1.1: 平衡二叉搜索树::</h2>
 <ol>
 <li>
 <p>平衡二叉搜索数是不是二叉搜索树和平衡二叉树的结合？<br>
@@ -325,20 +324,13 @@
 是的, 堆是一棵完全二叉树，同时保证父子节点的顺序关系（有序）。 <strong>但<mark>完全二叉树一定是平衡二叉树</mark>，堆的排序是父节点大于子节点，而搜索树是父节点大于左孩子，小于右孩子，所以堆不是平衡二叉搜索树</strong>。</p>
 </li>
 </ol>
-<!-- basicblock-start oid="Obs2EjX4XYMRZCX0rBMJtzm6" -->
-<h1 id="2-性质"><a class="markdownIt-Anchor" href="#2-性质"></a> 2 性质::</h1>
+<h1 id="2-性质"><a class="markdownIt-Anchor" href="#2-性质"></a> 2: 性质::</h1>
 <p>中序遍历变为顺序数组：<br>
 <strong>左中右：递增数组(由小变大)</strong>&nbsp;<br>
 右中左：递减数组(由大变小)</p>
 <p>中序遍历二叉搜树代码</p>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">searchBST</span><span class="hljs-params">(TreeNode* cur)</span> </span>{<br>    <span class="hljs-keyword">if</span> (cur == <span class="hljs-literal">NULL</span>) <span class="hljs-keyword">return</span> ; <span class="hljs-comment">// ❗️void不需要返回 NULL</span><br>    <span class="hljs-built_in">searchBST</span>(cur-&gt;left);       <span class="hljs-comment">// 左</span><br>    （处理节点）                  <span class="hljs-comment">// 中 💡result.push_back(cur-&gt;val) 转化成递增数组</span><br>    <span class="hljs-built_in">searchBST</span>(cur-&gt;right);      <span class="hljs-comment">// 右</span><br>    <span class="hljs-keyword">return</span> ;<br>}<br></code></pre></td></tr></tbody></table></figure>
-<!-- basicblock-end -->
-<hr>
-<p><strong>其他资料</strong></p>
- <!-- basicblock-start oid="Obstwgv0yLKU0BVSy4zCeGoI" deck = "👨🏻‍💻code::数据结构与算法::代码随想录::二叉树::二叉搜索树.md" --> 
-<p>#历史记录::<br>
-2022/9/23🌵二叉搜索树 :</p>
-<!-- basicblock-end -->
+
               
             </div>
             <hr/>
