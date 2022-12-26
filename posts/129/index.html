@@ -1,0 +1,912 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202206251952371.png">
+  <link rel="icon" href="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202206251952371.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="zeefan">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="📝Redis6篇 （五）Redis事务操作 + Redis事务-秒杀案例::   1: 事务的概述  [!summary] Redis事务是一个单独的隔离操作：事务中的所有命令都会序列化、按顺序地执行。 事务在执行的过程中，不会被其他客户端发送来的命令请求所打断。 Redis事务的主要作用就是串联多个命令防止别的命令插队。   2: Multi、Exec、discard  从输入Multi命令开">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis6篇 （五）Redis事务操作 + Redis事务-秒杀案例">
+<meta property="og:url" content="https://zeefan1555.github.io/posts/129/index.html">
+<meta property="og:site_name" content="一杯空气">
+<meta property="og:description" content="📝Redis6篇 （五）Redis事务操作 + Redis事务-秒杀案例::   1: 事务的概述  [!summary] Redis事务是一个单独的隔离操作：事务中的所有命令都会序列化、按顺序地执行。 事务在执行的过程中，不会被其他客户端发送来的命令请求所打断。 Redis事务的主要作用就是串联多个命令防止别的命令插队。   2: Multi、Exec、discard  从输入Multi命令开">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/7af10e13b126438f8333e90c11e3e56b.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/75fdefdcfc9843e09f974c1954d9fbe2.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/61e3b6e1248d4351810ca941d8b20443.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/f14942b669c8451793c111733dae26aa.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/6e47f72e783b434cbb1dd43096e4e17a.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/eaee21b45f8a4066ac429fe0501e4d91.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/178a125a4a11408a9cf43ed1f63dee14.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/148464141b62431ab1b5f3d1d98acd69.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/5358bb00c39e4c538d5bc4a668695375.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/c833f8b923cd4c798083e0ae250cf2d2.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/971749812ad544b09b54e8d3ead55a9b.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/028e43f72ff3451cae26d8a9f8f6e1b5.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/91b15f8bee3e4a18b4fa5dfa0eae12d5.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/61ef2ac21ed84425aee4bbd9b870ae8f.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/6a757d0016624e53b4684752f1907cc9.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/33442efb0a8a44039ad1fa554cc6fd4a.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/cf220500133e45e693abf61825f22c16.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/edcba00da67947918a01ee298d6bb39f.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/a0ad2173bb3d4d778e0cf195099c66df.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2f57c63879cb433b9f0dc4bd79c00967.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/ad49570e88294de1a4bfaa645784dfdb.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/9677f6731b154c439363faa11672fd58.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/240eee1f384e4c64b5aa5505549b09d9.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/917c3c147e324d958b5405c9e401527b.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/241de27a51d840bdae96cd81f9a407e2.png#pic_center">
+<meta property="article:published_time" content="2022-12-19T12:59:00.000Z">
+<meta property="article:modified_time" content="2022-12-22T01:21:08.774Z">
+<meta property="article:author" content="zeefan">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/7af10e13b126438f8333e90c11e3e56b.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70#pic_center">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Redis6篇 （五）Redis事务操作 + Redis事务-秒杀案例 - 一杯空气</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.15.6/katex.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"zeefan1555.github.io","root":"/","version":"1.9.1","typing":{"enable":true,"typeSpeed":150,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"Text"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":10},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>一杯空气</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Redis6篇 （五）Redis事务操作 + Redis事务-秒杀案例"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-12-19 20:59" pubdate>
+          2022年12月19日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          11k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          57 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Redis6篇 （五）Redis事务操作 + Redis事务-秒杀案例</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2022年12月22日 上午
+                  
+                
+              </p>
+            
+            <div class="markdown-body">
+              
+              <p>📝Redis6篇 （五）Redis事务操作 + Redis事务-秒杀案例::</p>
+<!-- basicblock-end -->
+<h1 id="1-事务的概述"><a class="markdownIt-Anchor" href="#1-事务的概述"></a> 1: 事务的概述</h1>
+<blockquote>
+<p>[!summary]<br>
+Redis事务是一个单独的隔离操作：事务中的所有命令都会<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E5%BA%8F%E5%88%97%E5%8C%96&amp;spm=1001.2101.3001.7020">序列化</a>、按顺序地执行。<br>
+事务在执行的过程中，不会被其他客户端发送来的命令请求所打断。</p>
+<p>Redis事务的主要作用就是<strong>串联多个命令防止别的命令插队</strong>。</p>
+</blockquote>
+<h1 id="2-multi-exec-discard"><a class="markdownIt-Anchor" href="#2-multi-exec-discard"></a> 2: Multi、Exec、discard</h1>
+<blockquote>
+<p>从输入Multi命令开始，输入的命令都会依次进入命令<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E9%98%9F%E5%88%97&amp;spm=1001.2101.3001.7020">队列</a>中，但不会执行，直到输入Exec后，Redis会将之前的命令队列中的命令依次执行。</p>
+<p>组队的过程中可以通过discard。</p>
+<p><img src="https://img-blog.csdnimg.cn/7af10e13b126438f8333e90c11e3e56b.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+</blockquote>
+<p><strong>实例</strong></p>
+<p><img src="https://img-blog.csdnimg.cn/75fdefdcfc9843e09f974c1954d9fbe2.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"><br>
+组队成功，提交成功</p>
+<p><img src="https://img-blog.csdnimg.cn/61e3b6e1248d4351810ca941d8b20443.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"><br>
+组队阶段报错，提交失败</p>
+<p><img src="https://img-blog.csdnimg.cn/f14942b669c8451793c111733dae26aa.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"><br>
+组队成功，提交有成功有失败情况</p>
+<h1 id="3-事务的错误处理"><a class="markdownIt-Anchor" href="#3-事务的错误处理"></a> 3: 事务的错误处理</h1>
+<ul>
+<li>组队中某个命令出现了报告错误，执行时整个的所有队列都会被取消</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/6e47f72e783b434cbb1dd43096e4e17a.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<ul>
+<li>如果执行阶段某个命令报出了错误，则只有报错的命令不会被执行，而其他的命令都会执行，不会回滚。</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/eaee21b45f8a4066ac429fe0501e4d91.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<h1 id="4-事务冲突问题"><a class="markdownIt-Anchor" href="#4-事务冲突问题"></a> 4: 事务冲突问题</h1>
+<h2 id="41-实例"><a class="markdownIt-Anchor" href="#41-实例"></a> 4.1: 实例</h2>
+<p>一个请求想给金额减8000</p>
+<p>一个请求想给金额减5000</p>
+<p>一个请求想给金额减1000</p>
+<p><img src="https://img-blog.csdnimg.cn/178a125a4a11408a9cf43ed1f63dee14.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<h2 id="42-悲观锁"><a class="markdownIt-Anchor" href="#42-悲观锁"></a> 4.2: 悲观锁</h2>
+<p><img src="https://img-blog.csdnimg.cn/148464141b62431ab1b5f3d1d98acd69.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<blockquote>
+<p>[!summary] <strong>悲观锁(Pessimistic Lock)</strong>,<br>
+顾名思义，就是很悲观，每次去拿数据的时候都认为别人会修改，所以每次在拿数据的时候都会上锁，这样别人想拿这个数据就会block直到它拿到锁。<br>
+<strong>传统的关系型数据库里边就用到了很多这种锁机制</strong>，比如<strong>行锁</strong>，<strong>表锁</strong>等，<strong>读锁</strong>，<strong>写锁</strong>等，都是在做操作之前先上锁。</p>
+</blockquote>
+<h2 id="43-乐观锁"><a class="markdownIt-Anchor" href="#43-乐观锁"></a> 4.3: 乐观锁</h2>
+<p><img src="https://img-blog.csdnimg.cn/5358bb00c39e4c538d5bc4a668695375.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<blockquote>
+<p>[!summary] <strong>乐观锁(Optimistic Lock),</strong><br>
+顾名思义，就是很乐观，每次去拿数据的时候都认为别人不会修改，所以不会上锁，<br>
+每次操作完, 更新一下版本号, 版本号不同不允许操作<br>
+但是在更新的时候会判断一下在此期间别人有没有去更新这个数据，可以使用版本号等机制。<br>
+<strong>乐观锁适用于多读的应用类型，这样可以提高吞吐量</strong>。Redis就是利用这种check-and-set机制实现事务的。</p>
+</blockquote>
+<p>场景: 抢票</p>
+<h2 id="44-watch-key-key"><a class="markdownIt-Anchor" href="#44-watch-key-key"></a> 4.4: WATCH <strong>key</strong> <strong>[key …]</strong></h2>
+<blockquote>
+<p>在执行multi之前，先执行watch key1 [key2],可以监视一个(或多个) key ，<br>
+如果在事务<strong>执行之前这个(或这些) key 被其他命令所改动，那么事务将被打断。</strong></p>
+</blockquote>
+<p><strong>演示</strong></p>
+<p><img src="https://img-blog.csdnimg.cn/c833f8b923cd4c798083e0ae250cf2d2.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<blockquote>
+<p>[!note] 乐观锁<br>
+在开启事务的时候，在执行前先修改一下信息，就会执行失败，这是watch key的作用</p>
+</blockquote>
+<h2 id="45-unwatch"><a class="markdownIt-Anchor" href="#45-unwatch"></a> 4.5: unwatch</h2>
+<p>取消 WATCH 命令对所有 key 的监视。</p>
+<p>如果在执行 WATCH 命令之后，EXEC 命令或DISCARD 命令先被执行了的话，那么就不需要再执行UNWATCH了.</p>
+<h1 id="5-redis-事务三特性"><a class="markdownIt-Anchor" href="#5-redis-事务三特性"></a> 5: Redis 事务三特性</h1>
+<ul>
+<li>
+<p>单独的隔离操作 ：事务中的所有命令都会序列化、按顺序地执行。事务在执行的过程中，不会被其他客户端发送来的命令请求所打断。</p>
+</li>
+<li>
+<p>没有隔离级别的概念 ：队列中的命令没有提交之前都不会实际被执行，因为事务提交前任何指令都不会被实际执行。</p>
+</li>
+<li>
+<p>不保证原子性 ：事务中如果有一条命令执行失败，其后的命令仍然会被执行，没有回滚。</p>
+</li>
+</ul>
+<h1 id="6-九-redis事务-秒杀案例案例都先不看了"><a class="markdownIt-Anchor" href="#6-九-redis事务-秒杀案例案例都先不看了"></a> 6: 九、Redis事务-秒杀案例(案例都先不看了)</h1>
+<blockquote>
+<p>案例简介：在redis存入商品数，设定秒杀时间，提供用户秒杀窗口，用户秒杀成功，redis中商品数-1，用户信息也存入redis中(为了相同用户只能秒杀一次)。</p>
+<p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-f780B9Wg-1629090717754)(Redis6.assets/1627607827733.png)]</p>
+</blockquote>
+<h2 id="61-简单版环境搭建"><a class="markdownIt-Anchor" href="#61-简单版环境搭建"></a> 6.1: 简单版(环境搭建)</h2>
+<ul>
+<li>
+<p>创建普通web项目</p>
+</li>
+<li>
+<p>导入jar包和jquey<br>
+<img src="https://img-blog.csdnimg.cn/971749812ad544b09b54e8d3ead55a9b.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+</li>
+<li>
+<p>创建index.jsp</p>
+</li>
+</ul>
+<figure class="highlight erb"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs erb"><span class="language-xml">&lt;%</span><span class="language-ruby">@ page language=<span class="hljs-string">"java"</span> contentType=<span class="hljs-string">"text/html; charset=UTF-8"</span></span><br><span class="language-ruby">    pageEncoding=<span class="hljs-string">"UTF-8"</span></span><span class="language-xml">%&gt;</span><br><span class="language-xml"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">html</span> <span class="hljs-keyword">PUBLIC</span> <span class="hljs-string">"-//W3C//DTD HTML 4.01 Transitional//EN"</span> <span class="hljs-string">"http://www.w3.org/TR/html4/loose.dtd"</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span></span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">http-equiv</span>=<span class="hljs-string">"Content-Type"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"text/html; charset=UTF-8"</span>&gt;</span></span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Insert title here<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span></span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>iPhone 13 Pro !!!  1元秒杀！！！</span><br><span class="language-xml">        <span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></span><br><span class="language-xml"></span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>${pageContext.request.contextPath}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"msform"</span> <span class="hljs-attr">action</span>=<span class="hljs-string">"${pageContext.request.contextPath}/doseckill"</span> <span class="hljs-attr">enctype</span>=<span class="hljs-string">"application/x-www-form-urlencoded"</span>&gt;</span></span><br><span class="language-xml">            <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"hidden"</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"prodid"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"prodid"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"0101"</span>&gt;</span></span><br><span class="language-xml">            <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span>  <span class="hljs-attr">id</span>=<span class="hljs-string">"miaosha_btn"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"seckill_btn"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"秒杀点我"</span>/&gt;</span></span><br><span class="language-xml">        <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span></span><br><span class="language-xml"></span><br><span class="language-xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;<span class="hljs-name">script</span>  <span class="hljs-attr">type</span>=<span class="hljs-string">"text/javascript"</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"${pageContext.request.contextPath}/script/jquery/jquery-3.1.0.js"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;<span class="hljs-name">script</span>  <span class="hljs-attr">type</span>=<span class="hljs-string">"text/javascript"</span>&gt;</span><span class="language-javascript"></span></span><br><span class="language-javascript"><span class="language-xml">        $(<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>){</span></span><br><span class="language-javascript"><span class="language-xml">            $(<span class="hljs-string">"#miaosha_btn"</span>).<span class="hljs-title function_">click</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>){ </span></span><br><span class="language-javascript"><span class="language-xml">                <span class="hljs-keyword">var</span> url=$(<span class="hljs-string">"#msform"</span>).<span class="hljs-title function_">attr</span>(<span class="hljs-string">"action"</span>);</span></span><br><span class="language-javascript"><span class="language-xml">                $.<span class="hljs-title function_">post</span>(url,$(<span class="hljs-string">"#msform"</span>).<span class="hljs-title function_">serialize</span>(),<span class="hljs-keyword">function</span>(<span class="hljs-params">data</span>){</span></span><br><span class="language-javascript"><span class="language-xml">                    <span class="hljs-keyword">if</span>(data==<span class="hljs-string">"false"</span>){</span></span><br><span class="language-javascript"><span class="language-xml">                        <span class="hljs-title function_">alert</span>(<span class="hljs-string">"抢光了"</span> );</span></span><br><span class="language-javascript"><span class="language-xml">                        $(<span class="hljs-string">"#miaosha_btn"</span>).<span class="hljs-title function_">attr</span>(<span class="hljs-string">"disabled"</span>,<span class="hljs-literal">true</span>);</span></span><br><span class="language-javascript"><span class="language-xml">                    }</span></span><br><span class="language-javascript"><span class="language-xml">                } );    </span></span><br><span class="language-javascript"><span class="language-xml">            })</span></span><br><span class="language-javascript"><span class="language-xml">        })</span></span><br><span class="language-javascript"><span class="language-xml">    </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></span><br></code></pre></td></tr></tbody></table></figure>
+<ul>
+<li>web.xml</li>
+</ul>
+<figure class="highlight xml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">web-app</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://xmlns.jcp.org/xml/ns/javaee"</span></span><br><span class="hljs-tag">         <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">"http://www.w3.org/2001/XMLSchema-instance"</span></span><br><span class="hljs-tag">         <span class="hljs-attr">xsi:schemaLocation</span>=<span class="hljs-string">"http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"</span></span><br><span class="hljs-tag">         <span class="hljs-attr">version</span>=<span class="hljs-string">"4.0"</span>&gt;</span><br><br><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">description</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">description</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">display-name</span>&gt;</span>doseckill<span class="hljs-tag">&lt;/<span class="hljs-name">display-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>doseckill<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-class</span>&gt;</span>cn.cvzhanshi.SecKillServlet<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-class</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet-mapping</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>doseckill<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">url-pattern</span>&gt;</span>/doseckill<span class="hljs-tag">&lt;/<span class="hljs-name">url-pattern</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet-mapping</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">web-app</span>&gt;</span><br></code></pre></td></tr></tbody></table></figure>
+<ul>
+<li>SecKillServlet.java</li>
+</ul>
+<figure class="highlight scala"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs scala"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 秒杀案例</span><br><span class="hljs-comment"> */</span><br>public <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SecKillServlet</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">HttpServlet</span> </span>{<br>    <span class="hljs-keyword">private</span> static <span class="hljs-keyword">final</span> long serialVersionUID = <span class="hljs-number">1</span>L;<br><br>    public <span class="hljs-type">SecKillServlet</span>() {<br>        <span class="hljs-keyword">super</span>();<br>    }<br><br>    <span class="hljs-keyword">protected</span> void doPost(<span class="hljs-type">HttpServletRequest</span> request, <span class="hljs-type">HttpServletResponse</span> response) <span class="hljs-keyword">throws</span> <span class="hljs-type">ServletException</span>, <span class="hljs-type">IOException</span> {<br><br>        <span class="hljs-type">String</span> userid = <span class="hljs-keyword">new</span> <span class="hljs-type">Random</span>().nextInt(<span class="hljs-number">50000</span>) +<span class="hljs-string">""</span> ;<br>        <span class="hljs-type">String</span> prodid =request.getParameter(<span class="hljs-string">"prodid"</span>);<br><br>        boolean isSuccess= <span class="hljs-type">SecKill_redis</span>.doSecKill(userid,prodid);<br>        response.getWriter().print(isSuccess);<br>    }<br><br>}<br></code></pre></td></tr></tbody></table></figure>
+<ul>
+<li>SecKill_redis.java</li>
+</ul>
+<figure class="highlight typescript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SecKill_redis</span> {<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">void</span> <span class="hljs-title function_">main</span>(<span class="hljs-params"><span class="hljs-built_in">String</span>[] args</span>) {<br>        <span class="hljs-title class_">Jedis</span> jedis =<span class="hljs-keyword">new</span> <span class="hljs-title class_">Jedis</span>(<span class="hljs-string">"192.168.242.110"</span>,<span class="hljs-number">6379</span>);<br>        <span class="hljs-title class_">System</span>.<span class="hljs-property">out</span>.<span class="hljs-title function_">println</span>(jedis.<span class="hljs-title function_">ping</span>());<br>        jedis.<span class="hljs-title function_">close</span>();<br>    }<br><br>    <span class="hljs-comment">//秒杀过程</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">boolean</span> <span class="hljs-title function_">doSecKill</span>(<span class="hljs-title class_">String</span> uid,<span class="hljs-title class_">String</span> prodid) throws <span class="hljs-title class_">IOException</span> {<br>        <span class="hljs-comment">//1 uid和prodid非空判断</span><br>        <span class="hljs-keyword">if</span>(uid == <span class="hljs-literal">null</span> || prodid == <span class="hljs-literal">null</span>){<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        }<br><br>        <span class="hljs-comment">//2 连接redis</span><br>        <span class="hljs-title class_">Jedis</span> jedis =<span class="hljs-keyword">new</span> <span class="hljs-title class_">Jedis</span>(<span class="hljs-string">"192.168.242.110"</span>,<span class="hljs-number">6379</span>);<br><br>        <span class="hljs-comment">//3 拼接key</span><br>        <span class="hljs-comment">// 3.1 库存key</span><br>        <span class="hljs-title class_">String</span> kcKey = <span class="hljs-string">"sk:"</span>+prodid+<span class="hljs-string">":qt"</span>;<br>        <span class="hljs-comment">// 3.2 秒杀成功用户key</span><br>        <span class="hljs-title class_">String</span> userKey = <span class="hljs-string">"sk:"</span>+prodid+<span class="hljs-string">":user"</span>;<br><br><br><br>        <span class="hljs-comment">//4 获取库存，如果库存null，秒杀还没有开始</span><br>        <span class="hljs-title class_">String</span> kc = jedis.<span class="hljs-title function_">get</span>(kcKey);<br>        <span class="hljs-keyword">if</span>(kc == <span class="hljs-literal">null</span>){<br>            <span class="hljs-title class_">System</span>.<span class="hljs-property">out</span>.<span class="hljs-title function_">println</span>(<span class="hljs-string">"秒杀还没开始，请稍等"</span>);<br>            jedis.<span class="hljs-title function_">close</span>();<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        }<br><br>        <span class="hljs-comment">// 5 判断用户是否重复秒杀操作</span><br><br>        <span class="hljs-keyword">if</span>(jedis.<span class="hljs-title function_">sismember</span>(userKey, uid)){<br>            <span class="hljs-title class_">System</span>.<span class="hljs-property">out</span>.<span class="hljs-title function_">println</span>(<span class="hljs-string">"每个用户只能秒杀成功一次，请下次再来"</span>);<br>            jedis.<span class="hljs-title function_">close</span>();<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        }<br><br>        <span class="hljs-comment">//6 判断如果商品数量，库存数量小于1，秒杀结束</span><br>        <span class="hljs-keyword">if</span>(<span class="hljs-title class_">Integer</span>.<span class="hljs-built_in">parseInt</span>(kc) &lt; <span class="hljs-number">1</span>){<br>            <span class="hljs-title class_">System</span>.<span class="hljs-property">out</span>.<span class="hljs-title function_">println</span>(<span class="hljs-string">"秒杀结束，请下次参与"</span>);<br>            jedis.<span class="hljs-title function_">close</span>();<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        }<br><br>        <span class="hljs-comment">//7 秒杀过程</span><br>        <span class="hljs-comment">//7.1库存-1</span><br>        jedis.<span class="hljs-title function_">decr</span>(kcKey);<br>        <span class="hljs-comment">//7.2 把秒杀成功的用户添加到清单里面</span><br>        jedis.<span class="hljs-title function_">sadd</span>(userKey,uid);<br>        <span class="hljs-title class_">System</span>.<span class="hljs-property">out</span>.<span class="hljs-title function_">println</span>(<span class="hljs-string">"用户"</span> + uid + <span class="hljs-string">"秒杀成功"</span>);<br>        jedis.<span class="hljs-title function_">close</span>();<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+<ul>
+<li>测试</li>
+</ul>
+<blockquote>
+<p>先在redis中设置库存数10，启动项目，进项秒杀</p>
+</blockquote>
+<p>1、设置库存</p>
+<p><img src="https://img-blog.csdnimg.cn/028e43f72ff3451cae26d8a9f8f6e1b5.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p>2、启动项目</p>
+<p><img src="https://img-blog.csdnimg.cn/91b15f8bee3e4a18b4fa5dfa0eae12d5.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p>3、开始秒杀</p>
+<p><img src="https://img-blog.csdnimg.cn/61ef2ac21ed84425aee4bbd9b870ae8f.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p>4、数量减少、用户入库</p>
+<p><img src="https://img-blog.csdnimg.cn/6a757d0016624e53b4684752f1907cc9.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p>5、商品数量秒杀完了</p>
+<p><img src="https://img-blog.csdnimg.cn/33442efb0a8a44039ad1fa554cc6fd4a.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<hr>
+<p><img src="https://img-blog.csdnimg.cn/cf220500133e45e693abf61825f22c16.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<h1 id="7-ab工具模拟并发暴露出来的问题"><a class="markdownIt-Anchor" href="#7-ab工具模拟并发暴露出来的问题"></a> 7: ab工具模拟并发暴露出来的问题</h1>
+<blockquote>
+<p>使用工具ab模拟测试</p>
+<p>CentOS6 默认安装</p>
+<p>CentOS7需要手动安装</p>
+</blockquote>
+<ul>
+<li>使用命令安装ab</li>
+</ul>
+<figure class="highlight cmake"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">yum -y <span class="hljs-keyword">install</span> httpd-tools<br></code></pre></td></tr></tbody></table></figure>
+<ul>
+<li>编写参数文件</li>
+</ul>
+<figure class="highlight 1c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs 1c">vim postfile 模拟表单提交参数,以<span class="hljs-meta">&amp;符号结尾;存放当前目录。</span><br>内容：prodid=<span class="hljs-number">0101</span><span class="hljs-meta">&amp;</span><br></code></pre></td></tr></tbody></table></figure>
+<ul>
+<li>启动项目，通过ab命令并发秒杀</li>
+</ul>
+<figure class="highlight awk"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">ab -n <span class="hljs-number">2000</span> -c <span class="hljs-number">200</span> -k -p ~<span class="hljs-regexp">/postfile -T application/</span>x-www-form-urlencoded http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">0.43</span>:<span class="hljs-number">8080</span><span class="hljs-regexp">/Seckill/</span>doseckill<br></code></pre></td></tr></tbody></table></figure>
+<ul>
+<li>并发暴露出来的问题</li>
+</ul>
+<p>1、会出现超卖问题，卖光了还能秒杀成功，库存为负数</p>
+<p><img src="https://img-blog.csdnimg.cn/edcba00da67947918a01ee298d6bb39f.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p>超卖产生的原因</p>
+<p><img src="https://img-blog.csdnimg.cn/a0ad2173bb3d4d778e0cf195099c66df.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p>2、连接超时问题</p>
+<p>3、商品遗留问题</p>
+<blockquote>
+<p>秒杀结束了，还有商品库存</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/2f57c63879cb433b9f0dc4bd79c00967.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<h1 id="8-问题的解决"><a class="markdownIt-Anchor" href="#8-问题的解决"></a> 8: 问题的解决</h1>
+<ul>
+<li><strong>连接超时问题</strong></li>
+</ul>
+<blockquote>
+<p>[!note]<br>
+连接超时问题使用连接池解决</p>
+<ul>
+<li>创建工具类</li>
+</ul>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs Java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">JedisPoolUtil</span> {<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">volatile</span> <span class="hljs-type">JedisPool</span> <span class="hljs-variable">jedisPool</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-title function_">JedisPoolUtil</span><span class="hljs-params">()</span> {<br>    }<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> JedisPool <span class="hljs-title function_">getJedisPoolInstance</span><span class="hljs-params">()</span> {<br>        <span class="hljs-keyword">if</span> (<span class="hljs-literal">null</span> == jedisPool) {<br>            <span class="hljs-keyword">synchronized</span> (JedisPoolUtil.class) {<br>                <span class="hljs-keyword">if</span> (<span class="hljs-literal">null</span> == jedisPool) {<br>                    <span class="hljs-type">JedisPoolConfig</span> <span class="hljs-variable">poolConfig</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JedisPoolConfig</span>();<br>                    poolConfig.setMaxTotal(<span class="hljs-number">200</span>);<br>                    poolConfig.setMaxIdle(<span class="hljs-number">32</span>);<br>                    poolConfig.setMaxWaitMillis(<span class="hljs-number">100</span>*<span class="hljs-number">1000</span>);<br>                    poolConfig.setBlockWhenExhausted(<span class="hljs-literal">true</span>);<br>                    poolConfig.setTestOnBorrow(<span class="hljs-literal">true</span>);  <span class="hljs-comment">// ping  PONG</span><br><br>                    jedisPool = <span class="hljs-keyword">new</span> <span class="hljs-title class_">JedisPool</span>(poolConfig, <span class="hljs-string">"192.168.242.110"</span>, <span class="hljs-number">6379</span>, <span class="hljs-number">60000</span> );<br>                }<br>            }<br>        }<br>        <span class="hljs-keyword">return</span> jedisPool;<br>    }<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">release</span><span class="hljs-params">(JedisPool jedisPool, Jedis jedis)</span> {<br>        <span class="hljs-keyword">if</span> (<span class="hljs-literal">null</span> != jedis) {<br>            jedisPool.returnResource(jedis);<br>        }<br>    }<br><br>}<br></code></pre></td></tr></tbody></table></figure>
+<ul>
+<li>修改代码</li>
+</ul>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//2 连接redis</span><br><span class="hljs-comment">//Jedis jedis =new Jedis("192.168.242.110",6379);</span><br><br><span class="hljs-comment">//通过连接池获取连接redis的对象</span><br><span class="hljs-type">JedisPool</span> <span class="hljs-variable">jedisPoolInstance</span> <span class="hljs-operator">=</span> JedisPoolUtil.getJedisPoolInstance();<br><span class="hljs-type">Jedis</span> <span class="hljs-variable">jedis</span> <span class="hljs-operator">=</span> jedisPoolInstance.getResource();<br></code></pre></td></tr></tbody></table></figure>
+</blockquote>
+<ul>
+<li><strong>利用乐观锁淘汰用户，解决超卖问题</strong></li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/ad49570e88294de1a4bfaa645784dfdb.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p>修改代码</p>
+<figure class="highlight kotlin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-comment">//秒杀过程</span><br><span class="hljs-keyword">public</span> static boolean doSecKill(String uid,String prodid) throws IOException {<br>    <span class="hljs-comment">//1 uid和prodid非空判断</span><br>    <span class="hljs-keyword">if</span>(uid == <span class="hljs-literal">null</span> || prodid == <span class="hljs-literal">null</span>){<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    }<br><br>    <span class="hljs-comment">//2 连接redis</span><br>    <span class="hljs-comment">//Jedis jedis =new Jedis("192.168.242.110",6379);</span><br><br>    <span class="hljs-comment">//通过连接池获取连接redis的对象</span><br>    JedisPool jedisPoolInstance = JedisPoolUtil.getJedisPoolInstance();<br>    Jedis jedis = jedisPoolInstance.getResource();<br><br><br>    <span class="hljs-comment">//3 拼接key</span><br>    <span class="hljs-comment">// 3.1 库存key</span><br>    String kcKey = <span class="hljs-string">"sk:"</span>+prodid+<span class="hljs-string">":qt"</span>;<br>    <span class="hljs-comment">// 3.2 秒杀成功用户key</span><br>    String userKey = <span class="hljs-string">"sk:"</span>+prodid+<span class="hljs-string">":user"</span>;<br><br><br><br>    <span class="hljs-comment">//监视库存</span><br>    jedis.watch(kcKey);<br><br><br>    <span class="hljs-comment">//4 获取库存，如果库存null，秒杀还没有开始</span><br>    String kc = jedis.<span class="hljs-keyword">get</span>(kcKey);<br>    <span class="hljs-keyword">if</span>(kc == <span class="hljs-literal">null</span>){<br>        System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">"秒杀还没开始，请稍等"</span>);<br>        jedis.close();<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    }<br><br>    <span class="hljs-comment">// 5 判断用户是否重复秒杀操作</span><br><br>    <span class="hljs-keyword">if</span>(jedis.sismember(userKey, uid)){<br>        System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">"每个用户只能秒杀成功一次，请下次再来"</span>);<br>        jedis.close();<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    }<br><br>    <span class="hljs-comment">//6 判断如果商品数量，库存数量小于1，秒杀结束</span><br>    <span class="hljs-keyword">if</span>(Integer.parseInt(kc) &lt; <span class="hljs-number">1</span>){<br>        System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">"秒杀结束，请下次参与"</span>);<br>        jedis.close();<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    }<br><br>    <span class="hljs-comment">//7 秒杀过程</span><br><br>    <span class="hljs-comment">//使用事务</span><br>    Transaction multi = jedis.multi();<br><br>    <span class="hljs-comment">//组队操作</span><br>    multi.decr(kcKey);<br>    multi.sadd(userKey,uid);<br><br>    <span class="hljs-comment">//执行</span><br>    List&lt;Object&gt; results = multi.exec();<br><br>    <span class="hljs-keyword">if</span>(results == <span class="hljs-literal">null</span> || results.size()==<span class="hljs-number">0</span>) {<br>        System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">"秒杀失败了...."</span>);<br>        jedis.close();<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    }<br><br>    <span class="hljs-comment">////7.1库存-1</span><br>    <span class="hljs-comment">//jedis.decr(kcKey);</span><br>    <span class="hljs-comment">//        //7.2 把秒杀成功的用户添加到清单里面</span><br>    <span class="hljs-comment">//        jedis.sadd(userKey,uid);</span><br>    System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">"用户"</span> + uid + <span class="hljs-string">"秒杀成功"</span>);<br>    jedis.close();<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>}<br></code></pre></td></tr></tbody></table></figure>
+<p><strong>测试</strong></p>
+<p><img src="https://img-blog.csdnimg.cn/9677f6731b154c439363faa11672fd58.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<hr>
+<p><img src="https://img-blog.csdnimg.cn/240eee1f384e4c64b5aa5505549b09d9.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<ul>
+<li><strong>商品遗留问题</strong></li>
+</ul>
+<blockquote>
+<p>用Lua脚本解决商品遗留问题</p>
+<p><strong>Lua</strong> 是一个小巧的<a target="_blank" rel="noopener" href="http://baike.baidu.com/item/%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80">脚本语言</a>，Lua脚本可以很容易的被C/C++ 代码调用，也可以反过来调用C/C++的函数，Lua并没有提供强大的库，一个完整的Lua解释器不过200k，所以Lua不适合作为开发独立应用程序的语言，而是作为嵌入式脚本语言。很多应用程序、游戏使用LUA作为自己的嵌入式脚本语言，以此来实现可配置性、可扩展性。</p>
+<hr>
+<p>将复杂的或者多步的redis操作，写为一个脚本，一次提交给redis执行，减少反复连接redis的次数。提升性能。</p>
+<p>LUA脚本是类似redis事务，有一定的原子性，不会被其他命令插队，可以完成一些redis事务性的操作。</p>
+<p>但是注意redis的lua脚本功能，只有在Redis 2.6以上的版本才可以使用。</p>
+<p>利用lua脚本淘汰用户，解决超卖问题。</p>
+<p>redis 2.6版本以后，通过lua脚本解决<strong>争抢问题</strong>，实际上是<strong>redis</strong> <strong>利用其单线程的特性，用任务队列的方式解决多任务并发问题</strong>。</p>
+<p><img src="https://img-blog.csdnimg.cn/917c3c147e324d958b5405c9e401527b.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+</blockquote>
+<p>代码编写</p>
+<figure class="highlight wren"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><code class="hljs wren"><span class="hljs-variable">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SecKill_redisByScript</span> {<br><br>    <span class="hljs-variable">private</span> <span class="hljs-keyword">static</span> <span class="hljs-variable">final</span>  <span class="hljs-variable">org</span>.<span class="hljs-property">slf4j</span>.<span class="hljs-property">Logger</span> <span class="hljs-variable">logger</span> <span class="hljs-operator">=</span><span class="hljs-title class_">LoggerFactory</span>.<span class="hljs-property">getLogger</span>(<span class="hljs-title class_">SecKill</span>_redisByScript.<span class="hljs-property">class</span>) ;<br><br>    <span class="hljs-variable">public</span> <span class="hljs-keyword">static</span> <span class="hljs-variable">void</span> <span class="hljs-title function_">main</span>(<span class="hljs-params">String</span>[] <span class="hljs-params">args</span>) {<br>        <span class="hljs-title class_">JedisPool</span> <span class="hljs-variable">jedispool</span> <span class="hljs-operator">=</span>  <span class="hljs-title class_">JedisPoolUtil</span>.<span class="hljs-property">getJedisPoolInstance</span>();<br><br>        <span class="hljs-title class_">Jedis</span> <span class="hljs-variable">jedis</span><span class="hljs-operator">=</span><span class="hljs-variable">jedispool</span>.<span class="hljs-property">getResource</span>();<br>        <span class="hljs-title class_">System</span>.<span class="hljs-property">out</span>.<span class="hljs-property">println</span>(<span class="hljs-variable">jedis</span>.<span class="hljs-property">ping</span>());<br><br>        <span class="hljs-title class_">Set</span><span class="hljs-operator">&lt;</span><span class="hljs-title class_">HostAndPort</span><span class="hljs-operator">&gt;</span> <span class="hljs-variable">set</span><span class="hljs-operator">=</span><span class="hljs-variable">new</span> <span class="hljs-title class_">HashSet</span><span class="hljs-operator">&lt;</span><span class="hljs-title class_">HostAndPort</span><span class="hljs-operator">&gt;</span>();<br><br>        <span class="hljs-comment">//doSecKill("201","sk:0101");</span><br>    }<br><br>    <span class="hljs-keyword">static</span> <span class="hljs-title class_">String</span> <span class="hljs-variable">secKillScript</span> <span class="hljs-operator">=</span><span class="hljs-string">"local userid=KEYS[1];<span class="hljs-char escape_">\r</span><span class="hljs-char escape_">\n</span>"</span> <span class="hljs-operator">+</span> <br>        <span class="hljs-string">"local prodid=KEYS[2];<span class="hljs-char escape_">\r</span><span class="hljs-char escape_">\n</span>"</span> <span class="hljs-operator">+</span> <br>        <span class="hljs-string">"local qtkey='sk:'..prodid..<span class="hljs-char escape_">\"</span>:qt<span class="hljs-char escape_">\"</span>;<span class="hljs-char escape_">\r</span><span class="hljs-char escape_">\n</span>"</span> <span class="hljs-operator">+</span> <br>        <span class="hljs-string">"local usersKey='sk:'..prodid..<span class="hljs-char escape_">\"</span>:usr<span class="hljs-char escape_">\"</span>;<span class="hljs-char escape_">\r</span><span class="hljs-char escape_">\n</span>"</span> <span class="hljs-operator">+</span> <br>        <span class="hljs-string">"local userExists=redis.call(<span class="hljs-char escape_">\"</span>sismember<span class="hljs-char escape_">\"</span>,usersKey,userid);<span class="hljs-char escape_">\r</span><span class="hljs-char escape_">\n</span>"</span> <span class="hljs-operator">+</span> <br>        <span class="hljs-string">"if tonumber(userExists)==1 then <span class="hljs-char escape_">\r</span><span class="hljs-char escape_">\n</span>"</span> <span class="hljs-operator">+</span> <br>        <span class="hljs-string">"   return 2;<span class="hljs-char escape_">\r</span><span class="hljs-char escape_">\n</span>"</span> <span class="hljs-operator">+</span> <br>        <span class="hljs-string">"end<span class="hljs-char escape_">\r</span><span class="hljs-char escape_">\n</span>"</span> <span class="hljs-operator">+</span> <br>        <span class="hljs-string">"local num= redis.call(<span class="hljs-char escape_">\"</span>get<span class="hljs-char escape_">\"</span> ,qtkey);<span class="hljs-char escape_">\r</span><span class="hljs-char escape_">\n</span>"</span> <span class="hljs-operator">+</span> <br>        <span class="hljs-string">"if tonumber(num)&lt;=0 then <span class="hljs-char escape_">\r</span><span class="hljs-char escape_">\n</span>"</span> <span class="hljs-operator">+</span> <br>        <span class="hljs-string">"   return 0;<span class="hljs-char escape_">\r</span><span class="hljs-char escape_">\n</span>"</span> <span class="hljs-operator">+</span> <br>        <span class="hljs-string">"else <span class="hljs-char escape_">\r</span><span class="hljs-char escape_">\n</span>"</span> <span class="hljs-operator">+</span> <br>        <span class="hljs-string">"   redis.call(<span class="hljs-char escape_">\"</span>decr<span class="hljs-char escape_">\"</span>,qtkey);<span class="hljs-char escape_">\r</span><span class="hljs-char escape_">\n</span>"</span> <span class="hljs-operator">+</span> <br>        <span class="hljs-string">"   redis.call(<span class="hljs-char escape_">\"</span>sadd<span class="hljs-char escape_">\"</span>,usersKey,userid);<span class="hljs-char escape_">\r</span><span class="hljs-char escape_">\n</span>"</span> <span class="hljs-operator">+</span> <br>        <span class="hljs-string">"end<span class="hljs-char escape_">\r</span><span class="hljs-char escape_">\n</span>"</span> <span class="hljs-operator">+</span> <br>        <span class="hljs-string">"return 1"</span> ;<br><br>    <span class="hljs-keyword">static</span> <span class="hljs-title class_">String</span> <span class="hljs-variable">secKillScript2</span> <span class="hljs-operator">=</span> <br>        <span class="hljs-string">"local userExists=redis.call(<span class="hljs-char escape_">\"</span>sismember<span class="hljs-char escape_">\"</span>,<span class="hljs-char escape_">\"</span>{sk}:0101:usr<span class="hljs-char escape_">\"</span>,userid);<span class="hljs-char escape_">\r</span><span class="hljs-char escape_">\n</span>"</span> <span class="hljs-operator">+</span><br>        <span class="hljs-string">" return 1"</span>;<br><br>    <span class="hljs-variable">public</span> <span class="hljs-keyword">static</span> <span class="hljs-variable">boolean</span> <span class="hljs-title function_">doSecKill</span>(<span class="hljs-title class_">String</span> <span class="hljs-variable">uid</span>,<span class="hljs-title class_">String</span> <span class="hljs-variable">prodid</span>) <span class="hljs-variable">throws</span> <span class="hljs-title class_">IOException</span> {<br><br>        <span class="hljs-title class_">JedisPool</span> <span class="hljs-variable">jedispool</span> <span class="hljs-operator">=</span>  <span class="hljs-title class_">JedisPoolUtil</span>.<span class="hljs-property">getJedisPoolInstance</span>();<br>        <span class="hljs-title class_">Jedis</span> <span class="hljs-variable">jedis</span><span class="hljs-operator">=</span><span class="hljs-variable">jedispool</span>.<span class="hljs-property">getResource</span>();<br><br>        <span class="hljs-comment">//String sha1=  .secKillScript;</span><br>        <span class="hljs-title class_">String</span> <span class="hljs-variable">sha1</span><span class="hljs-operator">=</span>  <span class="hljs-variable">jedis</span>.<span class="hljs-property">scriptLoad</span>(<span class="hljs-variable">secKillScript</span>);<br>        <span class="hljs-title class_">Object</span> <span class="hljs-variable">result</span><span class="hljs-operator">=</span> <span class="hljs-variable">jedis</span>.<span class="hljs-property">evalsha</span>(<span class="hljs-variable">sha1</span>, <span class="hljs-number">2</span>, <span class="hljs-variable">uid</span>,<span class="hljs-variable">prodid</span>);<br><br>        <span class="hljs-title class_">String</span> <span class="hljs-variable">reString</span><span class="hljs-operator">=</span><span class="hljs-title class_">String</span>.<span class="hljs-property">valueOf</span>(<span class="hljs-variable">result</span>);<br>        <span class="hljs-keyword">if</span> (<span class="hljs-string">"0"</span>.<span class="hljs-property">equals</span>( <span class="hljs-variable">reString</span> )  ) {<br>            <span class="hljs-title class_">System</span>.<span class="hljs-property">err</span>.<span class="hljs-property">println</span>(<span class="hljs-string">"已抢空！！"</span>);<br>        }<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(<span class="hljs-string">"1"</span>.<span class="hljs-property">equals</span>( <span class="hljs-variable">reString</span> )  )  {<br>            <span class="hljs-title class_">System</span>.<span class="hljs-property">out</span>.<span class="hljs-property">println</span>(<span class="hljs-string">"抢购成功！！！！"</span>);<br>        }<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(<span class="hljs-string">"2"</span>.<span class="hljs-property">equals</span>( <span class="hljs-variable">reString</span> )  )  {<br>            <span class="hljs-title class_">System</span>.<span class="hljs-property">err</span>.<span class="hljs-property">println</span>(<span class="hljs-string">"该用户已抢过！！"</span>);<br>        }<span class="hljs-keyword">else</span>{<br>            <span class="hljs-title class_">System</span>.<span class="hljs-property">err</span>.<span class="hljs-property">println</span>(<span class="hljs-string">"抢购异常！！"</span>);<br>        }<br>        <span class="hljs-variable">jedis</span>.<span class="hljs-property">close</span>();<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+<p>修改servlet</p>
+<figure class="highlight reasonml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">protected void <span class="hljs-keyword">do</span><span class="hljs-constructor">Post(HttpServletRequest <span class="hljs-params">request</span>, HttpServletResponse <span class="hljs-params">response</span>)</span> throws ServletException, IOException {<br><br>    String userid = <span class="hljs-keyword">new</span> <span class="hljs-constructor">Random()</span>.next<span class="hljs-constructor">Int(50000)</span> +<span class="hljs-string">""</span> ;<br>    String prodid =request.get<span class="hljs-constructor">Parameter(<span class="hljs-string">"prodid"</span>)</span>;<br><br>    <span class="hljs-comment">//boolean isSuccess= SecKill_redis.doSecKill(userid,prodid);</span><br>    boolean isSuccess = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">SecKill_redisByScript</span>.</span></span><span class="hljs-keyword">do</span><span class="hljs-constructor">SecKill(<span class="hljs-params">userid</span>, <span class="hljs-params">prodid</span>)</span>;<br>    response.get<span class="hljs-constructor">Writer()</span>.print(isSuccess);<br>}<br></code></pre></td></tr></tbody></table></figure>
+<p>结果</p>
+<p><img src="https://img-blog.csdnimg.cn/241de27a51d840bdae96cd81f9a407e2.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/" class="category-chain-item">👨🏻‍💻code</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/redis/" class="category-chain-item">redis</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/redis/%E5%B0%9A%E7%A1%85%E8%B0%B7/" class="category-chain-item">尚硅谷</a>
+  
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/139/" title="滚动数组背包为什么必须得倒序遍历">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">滚动数组背包为什么必须得倒序遍历</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/127/" title="Redis6篇 （四）Jedsi操作Redis + Spring Boot 整合Redis">
+                        <span class="hidden-mobile">Redis6篇 （四）Jedsi操作Redis + Spring Boot 整合Redis</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

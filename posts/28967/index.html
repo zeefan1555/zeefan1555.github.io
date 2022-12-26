@@ -16,15 +16,15 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1 基本概念 for(变量i; 判断条件; 变化变量i) for循环中第二条件是判断条件，破坏了该条件则会退出for循环  2 遍历函数  2.1 基本形式 123456789&#x2F;&#x2F; 版本 1 	for (int i &#x3D; 0; i &lt; nums.size(); i++){  &#x2F;&#x2F; 从前往后遍历   &#x2F;&#x2F; 操作到最后一个元素时不会取到最后一个下标的后一位(也就是长度)        }	for">
+    <meta name="description" content="1: 基本概念 for(变量i; 判断条件; 变化变量i) for循环中第二条件是判断条件，破坏了该条件则会退出for循环  2: 遍历函数  2.1: 基本形式 123456789&#x2F;&#x2F; 版本 1 	for (int i &#x3D; 0; i &lt; nums.size(); i++){  &#x2F;&#x2F; 从前往后遍历   &#x2F;&#x2F; 操作到最后一个元素时不会取到最后一个下标的后一位(也就是长度)        }">
 <meta property="og:type" content="article">
 <meta property="og:title" content="for 循环">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/28967/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="1 基本概念 for(变量i; 判断条件; 变化变量i) for循环中第二条件是判断条件，破坏了该条件则会退出for循环  2 遍历函数  2.1 基本形式 123456789&#x2F;&#x2F; 版本 1 	for (int i &#x3D; 0; i &lt; nums.size(); i++){  &#x2F;&#x2F; 从前往后遍历   &#x2F;&#x2F; 操作到最后一个元素时不会取到最后一个下标的后一位(也就是长度)        }	for">
+<meta property="og:description" content="1: 基本概念 for(变量i; 判断条件; 变化变量i) for循环中第二条件是判断条件，破坏了该条件则会退出for循环  2: 遍历函数  2.1: 基本形式 123456789&#x2F;&#x2F; 版本 1 	for (int i &#x3D; 0; i &lt; nums.size(); i++){  &#x2F;&#x2F; 从前往后遍历   &#x2F;&#x2F; 操作到最后一个元素时不会取到最后一个下标的后一位(也就是长度)        }">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-06-06T06:08:12.000Z">
-<meta property="article:modified_time" content="2022-12-13T08:02:50.509Z">
+<meta property="article:modified_time" content="2022-12-19T06:46:59.709Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="函数">
 <meta name="twitter:card" content="summary_large_image">
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          786 字
+          1k 字
         
       </span>
     
@@ -234,7 +234,7 @@
         
         
         
-          4 分钟
+          6 分钟
         
       </span>
     
@@ -285,41 +285,47 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年12月13日 下午
+                    本文最后更新于：2022年12月19日 下午
                   
                 
               </p>
             
             <div class="markdown-body">
               
-              <h1 id="1-基本概念"><a class="markdownIt-Anchor" href="#1-基本概念"></a> 1 基本概念</h1>
+              <h1 id="1-基本概念"><a class="markdownIt-Anchor" href="#1-基本概念"></a> 1: 基本概念</h1>
 <p>for(变量i; 判断条件; 变化变量i)<br>
 for循环中第二条件是判断条件，破坏了该条件则会退出for循环</p>
-<h1 id="2-遍历函数"><a class="markdownIt-Anchor" href="#2-遍历函数"></a> 2 遍历函数</h1>
-<h2 id="21-基本形式"><a class="markdownIt-Anchor" href="#21-基本形式"></a> 2.1 基本形式</h2>
+<h1 id="2-遍历函数"><a class="markdownIt-Anchor" href="#2-遍历函数"></a> 2: 遍历函数</h1>
+<h2 id="21-基本形式"><a class="markdownIt-Anchor" href="#21-基本形式"></a> 2.1: 基本形式</h2>
 <figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// 版本 1 </span><br><br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; nums.<span class="hljs-built_in">size</span>(); i++){  <span class="hljs-comment">// 从前往后遍历</span><br>   <span class="hljs-comment">// 操作到最后一个元素时不会取到最后一个下标的后一位(也就是长度)</span><br>        }<br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = num.<span class="hljs-built_in">size</span> () - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--){ <span class="hljs-comment">// 从后往前遍历, 记得有=0</span><br>	<br>	}<br>	<br></code></pre></td></tr></tbody></table></figure>
 <p>i++是每次移动一个格子, 也可以根据题目的不同每次多移动距离<br>
 ![[2. 反转字符串II#^6aghnj]]</p>
-<h2 id="22-范围-for-循环"><a class="markdownIt-Anchor" href="#22-范围-for-循环"></a> 2.2 [[范围 for 循环]]</h2>
-<h2 id="23-指针形式"><a class="markdownIt-Anchor" href="#23-指针形式"></a> 2.3 指针形式</h2>
+<h2 id="22-范围-for-循环"><a class="markdownIt-Anchor" href="#22-范围-for-循环"></a> 2.2: [[范围 for 循环]]</h2>
+<h2 id="23-指针形式"><a class="markdownIt-Anchor" href="#23-指针形式"></a> 2.3: 指针形式</h2>
 <p>有关 map 结构的遍历: 通过指针来指向元素<br>
 ![[map(🗃)#^drp7wt]]</p>
-<h1 id="3-数组求和"><a class="markdownIt-Anchor" href="#3-数组求和"></a> 3 数组求和</h1>
-<h2 id="31-第一种写法"><a class="markdownIt-Anchor" href="#31-第一种写法"></a> 3.1 第一种写法</h2>
+<h1 id="3-数组求和"><a class="markdownIt-Anchor" href="#3-数组求和"></a> 3: 数组求和</h1>
+<h2 id="31-第一种写法"><a class="markdownIt-Anchor" href="#31-第一种写法"></a> 3.1: 第一种写法</h2>
 <p>for (循环变量类型 循环变量名称 : 要被遍历的对象) 循环体<br>
 应用：对数组求和，a会从第一个元素开始遍历到最后一个元素</p>
 <figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">//A是数组，for循环对数组求和</span><br><span class="hljs-type">int</span> result = <span class="hljs-number">0</span>;<br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> a : A)  result += a; <span class="hljs-comment">// int a 类似于int i:后只需数组名即可</span><br></code></pre></td></tr></tbody></table></figure>
-<h2 id="32-第二种写法"><a class="markdownIt-Anchor" href="#32-第二种写法"></a> 3.2 第二种写法</h2>
+<h2 id="32-第二种写法"><a class="markdownIt-Anchor" href="#32-第二种写法"></a> 3.2: 第二种写法</h2>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> sum = <span class="hljs-number">0</span><br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; nums.size(); i++) sum += nums[i];<br></code></pre></td></tr></tbody></table></figure>
 <p>n%2 == 1什么意思 #card<br>
 n%2就是对n求：n除以2后的余数，这里余数只有两种情况就是0或者是1<br>
 eg：5%2=1</p>
-<h1 id="4-其他"><a class="markdownIt-Anchor" href="#4-其他"></a> 4 其他</h1>
-<!-- basicblock-start oid="ObsF4xGaGV2tjW18kQsFj492" --> 
+<h1 id="4-其他"><a class="markdownIt-Anchor" href="#4-其他"></a> 4: 其他</h1>
 <p>for 循环比较两个元素值的时候用 i = 1 ::</p>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; vec.<span class="hljs-built_in">size</span>(); i++){ <span class="hljs-comment">// ❗️不能i=0, vec[i] &gt;= vec[i+1], 因为 i+1 已经超过了范围</span><br>    <span class="hljs-keyword">if</span>(vec[i<span class="hljs-number">-1</span>] &gt;= vec[i]) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;  <span class="hljs-comment">// ❗️要有'='号</span><br></code></pre></td></tr></tbody></table></figure>
 <p>[[23. 验证二叉搜索树#^44p3md]]</p>
-<!-- basicblock-end -->
+<h1 id="5-常见的错误"><a class="markdownIt-Anchor" href="#5-常见的错误"></a> 5: 常见的错误</h1>
+<h2 id="51-地址越界"><a class="markdownIt-Anchor" href="#51-地址越界"></a> 5.1: 地址越界</h2>
+<p>for(int i = 3; i &lt;n; i++,) 但是没有 i=3, 最多只有 i=2<br>
+解决办法: 在 for 循环前+if 判断语句<br>
+[[9.不同的二叉搜索树]]</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">int</span> n = <span class="hljs-number">2</span>;<br><span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">3</span>; i &lt; n; i++) {<br>   <span class="hljs-comment">// do something</span><br>}<br></code></pre></td></tr></tbody></table></figure>
+<p>那么这个循环不会执行任何操作。当 <code>i</code> 的值为 <code>3</code> 时，条件 <code>i &lt; n</code> 为假，因此循环将会立即退出。</p>
+<p>因此，循环体中的代码不会被执行。</p>
 
               
             </div>

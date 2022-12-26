@@ -1,0 +1,932 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202206251952371.png">
+  <link rel="icon" href="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202206251952371.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="zeefan">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="📝目录 2::  **问题一：**分布式服务器session对象不一致，共享问题。 1.session存储到客户端cookie（不安全） 2.session复制到各个分布式服务器（数据冗余） 3.存储到NoSQL数据库（完全在内存中，速度快） 问题二：NoSQL数据库可以解决IO压力 将查询频繁的数据缓存到NoSQL数据库  0.1.1: NoSQL 适用场景 对数据高并发的读写。 海量数据的读">
+<meta property="og:type" content="article">
+<meta property="og:title" content="目录 2">
+<meta property="og:url" content="https://zeefan1555.github.io/posts/17/index.html">
+<meta property="og:site_name" content="一杯空气">
+<meta property="og:description" content="📝目录 2::  **问题一：**分布式服务器session对象不一致，共享问题。 1.session存储到客户端cookie（不安全） 2.session复制到各个分布式服务器（数据冗余） 3.存储到NoSQL数据库（完全在内存中，速度快） 问题二：NoSQL数据库可以解决IO压力 将查询频繁的数据缓存到NoSQL数据库  0.1.1: NoSQL 适用场景 对数据高并发的读写。 海量数据的读">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/zwhddup/mysql-learning/raw/master/%E5%B0%9A%E7%A1%85%E8%B0%B7redis%E5%AD%A6%E4%B9%A0/images/images_20221015180325.png">
+<meta property="article:published_time" content="2022-12-16T12:11:00.000Z">
+<meta property="article:modified_time" content="2022-12-17T06:42:07.500Z">
+<meta property="article:author" content="zeefan">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gitee.com/zwhddup/mysql-learning/raw/master/%E5%B0%9A%E7%A1%85%E8%B0%B7redis%E5%AD%A6%E4%B9%A0/images/images_20221015180325.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>目录 2 - 一杯空气</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.15.6/katex.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"zeefan1555.github.io","root":"/","version":"1.9.1","typing":{"enable":true,"typeSpeed":150,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"Text"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":10},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>一杯空气</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="目录 2"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-12-16 20:11" pubdate>
+          2022年12月16日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          8.6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          43 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">目录 2</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2022年12月17日 下午
+                  
+                
+              </p>
+            
+            <div class="markdown-body">
+              
+              <p>📝目录 2::</p>
+<!-- basicblock-end -->
+<p>**问题一：**分布式服务器session对象不一致，共享问题。</p>
+<p>1.session存储到客户端cookie（不安全）</p>
+<p>2.session复制到各个分布式服务器（数据冗余）</p>
+<p>3.存储到NoSQL数据库（完全在内存中，速度快）</p>
+<p><strong>问题二</strong>：NoSQL数据库可以解决IO压力</p>
+<p>将查询频繁的数据缓存到NoSQL数据库</p>
+<h3 id="011-nosql"><a class="markdownIt-Anchor" href="#011-nosql"></a> 0.1.1: <a target="_blank" rel="noopener" href="https://gitee.com/zwhddup/mysql-learning/blob/master/%E5%B0%9A%E7%A1%85%E8%B0%B7redis%E5%AD%A6%E4%B9%A0/redis.md#nosql"></a>NoSQL</h3>
+<p><strong>适用场景</strong></p>
+<p>对数据高并发的读写。</p>
+<p>海量数据的读写。</p>
+<p>对数据高可扩展性的。</p>
+<h3 id="012-redis"><a class="markdownIt-Anchor" href="#012-redis"></a> 0.1.2: <a target="_blank" rel="noopener" href="https://gitee.com/zwhddup/mysql-learning/blob/master/%E5%B0%9A%E7%A1%85%E8%B0%B7redis%E5%AD%A6%E4%B9%A0/redis.md#redis"></a>Redis</h3>
+<p>几乎覆盖了Memcached的绝大部分功能数据都在内存中，支持持久化，主要用作备份恢复除了支持简单的key-value模式，还支持多种数据结构的存储，比如list、set、 hash、 zset等。一般是作为缓存数据库辅助持久化的数据库。</p>
+<p><img src="https://gitee.com/zwhddup/mysql-learning/raw/master/%E5%B0%9A%E7%A1%85%E8%B0%B7redis%E5%AD%A6%E4%B9%A0/images/images_20221015180325.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<figure class="highlight stata"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs stata">redis.server 前台启动<br>redis-server /etc/redis.<span class="hljs-keyword">conf</span> 后台启动<br><br>redis-<span class="hljs-keyword">cli</span> 连接服务端<br><br>redis-<span class="hljs-keyword">cli</span> shutdown 关闭<br></code></pre></td></tr></tbody></table></figure>
+<p>redis默认提供16个数据库，默认用0数据库</p>
+<p>select 8 切换到8数据库</p>
+<h4 id="0121-redis特点"><a class="markdownIt-Anchor" href="#0121-redis特点"></a> 0.1.2.1: <a target="_blank" rel="noopener" href="https://gitee.com/zwhddup/mysql-learning/blob/master/%E5%B0%9A%E7%A1%85%E8%B0%B7redis%E5%AD%A6%E4%B9%A0/redis.md#redis%E7%89%B9%E7%82%B9"></a>redis特点</h4>
+<ol>
+<li>
+<p>单线程+多路IO复用</p>
+</li>
+<li>
+<p>支持多种数据类型</p>
+</li>
+<li>
+<p>支持持久化</p>
+</li>
+</ol>
+<h4 id="0122-常用数据结构"><a class="markdownIt-Anchor" href="#0122-常用数据结构"></a> 0.1.2.2: <a target="_blank" rel="noopener" href="https://gitee.com/zwhddup/mysql-learning/blob/master/%E5%B0%9A%E7%A1%85%E8%B0%B7redis%E5%AD%A6%E4%B9%A0/redis.md#%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"></a>常用数据结构</h4>
+<p><strong>value类型</strong></p>
+<p><strong>String字符串</strong></p>
+<p>String是Redis最基本的类型，你可以理解成与Memcached 一模一样的类型，一个key 对应一个value。</p>
+<p>String类型是二进制安全的。意味着Redis的string 可以包含任何数据。比如jpg图片或者序列化的对象。</p>
+<p>底层数据结构为<strong>动态字符串</strong></p>
+<p>String类型是Redis最基本的数据类型，一个Redis中字符串value最多可以是512M</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><code class="hljs MySQL">set key value 设置key value<br>get key 取值<br>append key value 追加value<br>strlen(key) 获取值长度<br><br>setnx k1 v1 值存在设置不成功<br><br>mset k1 v1 k2 v2 设置多个key value<br>mget k1 k2 k3 获取多个值<br>msetnx k11 v11 k12 v12 k1 v11 任意一个存在全设置不成功<br><br>getrange name 0 3 范围查询<br>setrange key 3 abc 在第三位置设置abc<br><br>setex key 过期时间 value <br><br>getset key value 取到旧值，被新值替换<br><br>incrby key 存的数值加1 原子操作（不会被线程调度机制打断）<br>decrby key 存的数值减1 原子操作<br><br>keys * 查看key<br><br>exists key 查看key存在<br><br>type key 查看key类型<br><br>del key 删除key（直接删除）<br><br>unlink key 删除key（选择非阻塞删除，异步删除）<br><br>expire key 10 设置key的过期时间<br><br>ttl key 查看key多少秒过期 -1表示永不过期，-2表示已经过期<br><br>select 1 切换数据库<br><br>dbsize 查看当前数据库key的数量<br><br>flushdb 清空当前库<br><br>flushall 清空所有数据库<br></code></pre></td></tr></tbody></table></figure>
+<p><strong>List链表</strong></p>
+<p>Redis列表是简单的字符串列表，按照插入顺序排序。你可以添加一个元素到列表的头部(左边)或者尾部(右边)。它的底层实际是个<strong>双向链表</strong>，对两端的操作性能很高，通过索引下标的操作中间的节点性能会较差。</p>
+<p>Redis将链表和ziplist结合起来组成了quicklist。也就是将多个ziplist使用双向指针串起来使用。这样既满足了快速的插入删除性能，又不会出现太大的空间冗余。</p>
+<figure class="highlight tcl"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs tcl">lpush k1 value1 value2 设置值 value被头插法放入<br><span class="hljs-keyword">lrange</span> k1 <span class="hljs-number">0</span> <span class="hljs-number">-1</span> 取所有值<br>rpush k1 v1 v2 v3 设置值尾插法<br>lpop k1<br>rpop k2 取完值，键也没有<br>rpoplpush k1 k2 右边取放到左边<br><span class="hljs-keyword">lindex</span> k2 <span class="hljs-number">0</span> 获取索引位置<br>llen k2 获取长度<br><span class="hljs-keyword">linsert</span> k2 before[<span class="hljs-keyword">after</span>] v11 v22 在链表v11前面或后面加入值v22<br>lrem k2 <span class="hljs-number">2</span> v2 从左边删除n个value<br><span class="hljs-keyword">lset</span> k2 <span class="hljs-number">0</span> v3 将第<span class="hljs-number">0</span>个位置替换为v3<br></code></pre></td></tr></tbody></table></figure>
+<p><strong>Set集合</strong></p>
+<p>Redis的Set是string类型的无序无重复元素集合。它底层其实是一个value为null的hash表，所以添加，删除，查找的复杂度都是O(1)。</p>
+<figure class="highlight x86asm"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs x86asm">sadd <span class="hljs-built_in">k1</span> v1 v2 v3<br>smembers <span class="hljs-built_in">k1</span><br>sismember <span class="hljs-built_in">k1</span> v1 判断<span class="hljs-built_in">k1</span>集合是否有v1<br>scard <span class="hljs-built_in">k1</span> 返回集合元素个数<br>srem <span class="hljs-built_in">k1</span> v1 v2 删除元素<br>spop <span class="hljs-built_in">k1</span> 随机取出值<br>srandmember <span class="hljs-built_in">k1</span> n 随机取n个值，不会从集合中删除<br>smove <span class="hljs-built_in">k1</span> <span class="hljs-built_in">k2</span> v3 将<span class="hljs-built_in">k1</span>的v3移动到<span class="hljs-built_in">k2</span><br>sinter <span class="hljs-built_in">k2</span> <span class="hljs-built_in">k3</span> 返回交集数据<br>sunion <span class="hljs-built_in">k2</span> <span class="hljs-built_in">k3</span> 返回并集<br>sdiff <span class="hljs-built_in">k2</span> <span class="hljs-built_in">k3</span> 返回差集<br></code></pre></td></tr></tbody></table></figure>
+<p><strong>Hash哈希</strong></p>
+<p>Redis hash是一个键值对集合。 Redis hash是一个string 类型的field 和value的映射表，hash特别适合用于存储对象。类似Java里面的Map&lt;String，Object&gt;。</p>
+<p>Hash类型对应的数据结构是两种: ziplist (压缩列表)，hashtable (哈希表)。当field-value长度较短且个数较少时，使用ziplist, 否则使用hashtable。</p>
+<figure class="highlight xquery"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs xquery">hset k1<span class="hljs-built_in"> id</span> <span class="hljs-number">1</span><br>hget k1<span class="hljs-built_in"> name</span><br>hmset k1<span class="hljs-built_in"> id</span> <span class="hljs-number">1</span><span class="hljs-built_in"> name</span> zhangsan<br>hexists k1<span class="hljs-built_in"> id</span> 查<span class="hljs-built_in">看id</span>是否存在<br>hkeys k1<br>hvals k1<br>hincrby k1<span class="hljs-built_in"> id</span> <span class="hljs-number">3</span><br>hsetnx k1<span class="hljs-built_in"> id</span> <span class="hljs-number">1</span> 存在不能加<br></code></pre></td></tr></tbody></table></figure>
+<p><strong>Zset 有序集合</strong></p>
+<p>Redis有序集合zset与普通集合set非常相似，是一个没有重复元素的字符串集合。</p>
+<p>不同之处是有序集合的每个成员都关联了一个评分( score) ，这个评分( score )被用来按照从最低分到最高分的方式排序集合中的成员。集合的成员是唯一的，但是评分可以是重复了。因为元素是有序的，所以你也可以很快的根据评分( score )或者次序( position )来获取一个范围的元素。访问有序集合的中间元素也是非常快的，因此你能够使用有序集合作为一个没有重复成员的智能列表。</p>
+<p>底层结构：hash结构（key为值，value为scores） 或者跳表</p>
+<figure class="highlight apache"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">zadd</span> k1 <span class="hljs-number">200</span> java <span class="hljs-number">300</span> c++ <span class="hljs-number">400</span> mysql <span class="hljs-number">500</span> redis<br><span class="hljs-attribute">zrange</span> topn <span class="hljs-number">0</span> -<span class="hljs-number">1</span><br><span class="hljs-attribute">zrange</span> topn <span class="hljs-number">0</span> -<span class="hljs-number">1</span> withscores<br><span class="hljs-attribute">zrangebyscore</span> topn <span class="hljs-number">300</span> <span class="hljs-number">500</span> withscores 从小到大<br><span class="hljs-attribute">zrevrangebyscore</span> topn <span class="hljs-number">500</span> <span class="hljs-number">200</span> withscores 从大到小<br><span class="hljs-attribute">zincrby</span> topn <span class="hljs-number">50</span> java 增加scores<br><span class="hljs-attribute">zrem</span> topn java 删除指定<br><span class="hljs-attribute">zcount</span> topn <span class="hljs-number">200</span> <span class="hljs-number">300</span> 统计<br><span class="hljs-attribute">zrank</span> topn java 查询排名<br></code></pre></td></tr></tbody></table></figure>
+<h4 id="0123-配置文件"><a class="markdownIt-Anchor" href="#0123-配置文件"></a> 0.1.2.3: <a target="_blank" rel="noopener" href="https://gitee.com/zwhddup/mysql-learning/blob/master/%E5%B0%9A%E7%A1%85%E8%B0%B7redis%E5%AD%A6%E4%B9%A0/redis.md#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"></a>配置文件</h4>
+<figure class="highlight tap"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs tap"><span class="hljs-comment">#支持远程访问</span><br><span class="hljs-comment"># bind 127.0.0.1 -::1</span><br>protected-mode no <br><br>tcp-backlog<span class="hljs-number"> 511 </span><span class="hljs-comment">#连接队列大小</span><br>timeout<span class="hljs-number"> 0 </span><span class="hljs-comment">#永不超时</span><br>tcp-keepalive<span class="hljs-number"> 300 </span><span class="hljs-comment">#检查心跳时间</span><br><br>databases 16<br><br><span class="hljs-comment">#设置密码</span><br></code></pre></td></tr></tbody></table></figure>
+<h4 id="0124-发布和订阅"><a class="markdownIt-Anchor" href="#0124-发布和订阅"></a> 0.1.2.4: <a target="_blank" rel="noopener" href="https://gitee.com/zwhddup/mysql-learning/blob/master/%E5%B0%9A%E7%A1%85%E8%B0%B7redis%E5%AD%A6%E4%B9%A0/redis.md#%E5%8F%91%E5%B8%83%E5%92%8C%E8%AE%A2%E9%98%85"></a>发布和订阅</h4>
+<figure class="highlight mipsasm"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm"><span class="hljs-keyword">subscribe </span>channel1 <span class="hljs-comment">#订阅频道</span><br>publish channel1 hello <span class="hljs-comment">#发布消息</span><br></code></pre></td></tr></tbody></table></figure>
+<h4 id="0125-新数据类型"><a class="markdownIt-Anchor" href="#0125-新数据类型"></a> 0.1.2.5: <a target="_blank" rel="noopener" href="https://gitee.com/zwhddup/mysql-learning/blob/master/%E5%B0%9A%E7%A1%85%E8%B0%B7redis%E5%AD%A6%E4%B9%A0/redis.md#%E6%96%B0%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"></a>新数据类型</h4>
+<p><strong>Bitmaps（实际就是字符串）</strong></p>
+<figure class="highlight mipsasm"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">setbit <span class="hljs-built_in">k1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span><br>setbit <span class="hljs-built_in">k1</span> <span class="hljs-number">10</span> <span class="hljs-number">1</span><br>getbit <span class="hljs-built_in">k1</span> <span class="hljs-number">1</span> <span class="hljs-comment">#偏移量</span><br><span class="hljs-keyword">bitcount </span><span class="hljs-built_in">k1</span><br><span class="hljs-keyword">bitcount </span><span class="hljs-built_in">k1</span> <span class="hljs-number">1</span> <span class="hljs-number">2</span><br><span class="hljs-keyword">bitop </span><span class="hljs-keyword">and </span>newname <span class="hljs-built_in">k1</span> k2<br></code></pre></td></tr></tbody></table></figure>
+<p><strong>HyperLogLog</strong></p>
+<p>基数问题</p>
+<figure class="highlight x86asm"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs x86asm"><span class="hljs-keyword">pfadd</span> <span class="hljs-built_in">k1</span> value<br>pfcount <span class="hljs-built_in">k1</span><br>pfmerge <span class="hljs-built_in">k1</span> <span class="hljs-built_in">k2</span><br></code></pre></td></tr></tbody></table></figure>
+<p><strong>Geospatial</strong></p>
+<p>地理位置，经纬度的操作</p>
+<figure class="highlight apache"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">geoadd</span> k1 <span class="hljs-number">106</span>.<span class="hljs-number">50</span> <span class="hljs-number">29</span>.<span class="hljs-number">53</span> chongqing<br><span class="hljs-attribute">geopos</span> k1 shanghai<br><span class="hljs-attribute">geodist</span> k1 shanghai chongqing km 两个位置的直线距离<br><span class="hljs-attribute">georadius</span> k1 <span class="hljs-number">110</span> <span class="hljs-number">30</span> <span class="hljs-number">1000</span> km 一个范围内的地点<br></code></pre></td></tr></tbody></table></figure>
+<h4 id="0126-jedis"><a class="markdownIt-Anchor" href="#0126-jedis"></a> 0.1.2.6: <a target="_blank" rel="noopener" href="https://gitee.com/zwhddup/mysql-learning/blob/master/%E5%B0%9A%E7%A1%85%E8%B0%B7redis%E5%AD%A6%E4%B9%A0/redis.md#jedis"></a>Jedis</h4>
+<figure class="highlight xml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs xml">//依赖<br><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>redis.clients<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>jedis<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>3.6.3<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br><br><span class="hljs-comment">&lt;!-- redis--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-starter-data-redis<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>2.4.5<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br><span class="hljs-comment">&lt;!-- spring2.X 集成redis 所需common-pool2 --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.apache.commons<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>commons-pool2<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.fasterxml.jackson.core<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>jackson-databind<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>2.9.6<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight ini"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-comment">#Redis服务器地址</span><br><span class="hljs-attr">spring.redis.host</span>=<span class="hljs-number">192</span> .<span class="hljs-number">168.140</span>.<span class="hljs-number">136</span><br><span class="hljs-comment">#Redis服务器连接端口;</span><br><span class="hljs-attr">spring.redis.port</span>=<span class="hljs-number">6379</span><br><span class="hljs-comment">#Redis数据库索引(默认为0)</span><br><span class="hljs-attr">srping.redis.database</span>=<span class="hljs-number">0</span><br><span class="hljs-comment">#连接超时时间(毫秒)</span><br><span class="hljs-attr">spring.redis.timeout</span>=<span class="hljs-number">1800000</span><br><span class="hljs-comment">#连接池最大连接数(使用负值表示没有限制)</span><br><span class="hljs-attr">spring.redis.lettuce.pool.max-active</span>=<span class="hljs-number">20</span><br><span class="hljs-comment">#最大阻塞等待时间(负数表示没限制)</span><br><span class="hljs-attr">spring.redis.lettuce.pool.max-wait</span>=-<span class="hljs-number">1</span><br><span class="hljs-comment">#连接池中的最大空闲连接↓</span><br><span class="hljs-attr">spring.redis.lettuce.pool.max-idle</span>=<span class="hljs-number">5</span><br><span class="hljs-comment">#连接池中的最小空闲连接</span><br><span class="hljs-attr">spring.redis.lettuce.pool.min-idle</span>=<span class="hljs-number">0</span><br></code></pre></td></tr></tbody></table></figure>
+<h4 id="0127-事务"><a class="markdownIt-Anchor" href="#0127-事务"></a> 0.1.2.7: <a target="_blank" rel="noopener" href="https://gitee.com/zwhddup/mysql-learning/blob/master/%E5%B0%9A%E7%A1%85%E8%B0%B7redis%E5%AD%A6%E4%B9%A0/redis.md#%E4%BA%8B%E5%8A%A1"></a>事务</h4>
+<p><strong>Multi</strong> 开启事务组队</p>
+<p><strong>Exec</strong> 提交事务提交队列</p>
+<p><strong>Discard</strong> 取消组队</p>
+<p>组队阶段出错，整个队列取消</p>
+<p>提交队列出错，出错的那个成员取消</p>
+<p><strong>事务冲突</strong></p>
+<ul>
+<li>
+<p>悲观锁</p>
+<p>只要操作就加锁，操作完才释放锁</p>
+</li>
+<li>
+<p>乐观锁</p>
+<p>不会上锁，通过给数据加版本号进行操作</p>
+</li>
+</ul>
+<p><strong>watch</strong></p>
+<p>在执行multi之前，先执行watch key1 [key2]，可以监视一个(或多个) key ，如果在事务执行之前这个(或这些) key被其他命令所改动，那么事务将被打断。（乐观锁使用）</p>
+<p>unwatch取消监视</p>
+<p><strong>Redis事务三特性</strong></p>
+<ul>
+<li>单独的隔离操作事务中的所有命令都会序列化、按顺序地执行。事务在执行的过程中，不会被其他客户端发送来的命令请求所打断。</li>
+<li>没有隔离级别的概念队列中的命令没有提交之前都不会实际被执行，因为事务提交前任何指令都不会被实际执行。</li>
+<li>不保证原子性事务中如果有一条命令执行失败，其后的命令仍然会被执行，没有回滚。</li>
+</ul>
+<p>连接池复用连接，解决连接超时问题。</p>
+<p><strong>秒杀超卖问题解决：</strong></p>
+<p>1.watch</p>
+<p>2.开启事务</p>
+<p>3.提交事务</p>
+<p>但是这种情况会出现<strong>库存遗留问题</strong>，商品没卖掉</p>
+<p>库存遗留问题解决方法：</p>
+<p><strong>Lua脚本语言</strong></p>
+<p>将复杂的或者多步的redis操作，写为一个脚本，一次提交给redis执行，减少反复连接redis的次数。提升性能。 LUA脚本是类似redis事务，有一定的原子性，不会被其他命令插队，可以完成一些redis事务性的操作。但是注意redis的lua脚本功能，只有在Redis 2.6 以上的版本才可以使用。利用lua脚本淘汰用户，解决超卖问题。 redis 2.6版本以后，通过lua脚本解决争抢问题，实际上是redis利用其单线程的特性，用任务队列的方式解决多任务并发问题。</p>
+<h4 id="0128-持久化操作"><a class="markdownIt-Anchor" href="#0128-持久化操作"></a> 0.1.2.8: <a target="_blank" rel="noopener" href="https://gitee.com/zwhddup/mysql-learning/blob/master/%E5%B0%9A%E7%A1%85%E8%B0%B7redis%E5%AD%A6%E4%B9%A0/redis.md#%E6%8C%81%E4%B9%85%E5%8C%96%E6%93%8D%E4%BD%9C"></a>持久化操作</h4>
+<p><strong>RDB（Redis DataBase）</strong></p>
+<p>在指定时间间隔内将内存中的数据集快照写入磁盘。</p>
+<p>Redis会单独创建( fork)一个子进程来进行持久化，会先将数据写入到一个临时文件中，待持久化过程都结束了，再用这个临文件替换上次持久化好的文件。整个过程中，主进程是不进行任何IO操作的，这就确保了极高的性能如果需要进行大规模数据的恢复，且对于数据恢复的完整性不是非常敏感，那RDB方式要比AOF方式更加的高效。RDB的<strong>缺点</strong>是最后一次持久化后的数据可能丢失。</p>
+<p><strong>写时复制技术</strong>：需要两倍空间</p>
+<p><strong>AOF（Append Only File）</strong></p>
+<p>以日志的形式来记录每个写操作(增量保存)，将 Redis执行过的所有写指令记录下来(读操作不记录)，只许追加文件但不可以改写文件，redis 启动之初会读取该文件重新构建数据，换言之，redis重启的话就根据日志文件的内容将写指令从前到后执行一次以完成数据的恢复工作。</p>
+<p>RDB和AOF同时开启，系统默认取AOF数据</p>
+<p><strong>异常恢复</strong>：可以利用自带命令对损坏的aof文件，进行恢复</p>
+<p>AOF可以设置同步频率</p>
+<h4 id="0129-主从复制"><a class="markdownIt-Anchor" href="#0129-主从复制"></a> 0.1.2.9: <a target="_blank" rel="noopener" href="https://gitee.com/zwhddup/mysql-learning/blob/master/%E5%B0%9A%E7%A1%85%E8%B0%B7redis%E5%AD%A6%E4%B9%A0/redis.md#%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6"></a>主从复制</h4>
+<p>主机数据更新后根据配置和策略，自动同步到备机的master/slaver机制，Master以写为主, Slave以读为主。</p>
+<ul>
+<li>读写分离，性能扩展</li>
+<li>容灾快速恢复，一台从服务器宕机，可以切换到其他服务器</li>
+</ul>
+<p>info replication 命令打印信息</p>
+<p>slaveof ip port 配置从服务器</p>
+<p><strong>一主二从</strong></p>
+<p>主挂了，从还是主服务器的从服务器</p>
+<p>主从复制步骤：</p>
+<p>1、当从连接上主服务器之后，从服务器向主服务发送进行数据同步消息 2、主服务器接到从服务器发送过来同步消息，把主服务器数据进行持久化到rdb文件，把rdb文件发送从服务器，从服务器拿到rdb进行读取 3、每次主服务器进行写操作之后，和从服务器进行数据同步</p>
+<p><strong>薪火相传</strong></p>
+<p><strong>反客为主</strong></p>
+<p>slaveof no one 把从机变成主机</p>
+<p><strong>哨兵模式（sentinel）</strong></p>
+<p>反客为主的自动版，能够后台监控主机是否故障，如果故障了根据投票数自动将从库转换为主库</p>
+<p>sentinel.conf</p>
+<p>sentinel montior masterName ip port</p>
+<p>启动：redis-sentinel sentinel.conf</p>
+<p><strong>主节点选举规则：</strong></p>
+<p>根据slave-priority=12 值越少优先级越高</p>
+<p>偏移量是指获得原主机数据最全的</p>
+<p>每个redis实例启动后都会随机生成一个40位的runid</p>
+<ul>
+<li>选择优先级靠前的</li>
+<li>选择偏移量最大的</li>
+<li>选择runid最小的</li>
+</ul>
+<p>旧主机变为新主机的从节点</p>
+<h4 id="01210-集群"><a class="markdownIt-Anchor" href="#01210-集群"></a> 0.1.2.10: <a target="_blank" rel="noopener" href="https://gitee.com/zwhddup/mysql-learning/blob/master/%E5%B0%9A%E7%A1%85%E8%B0%B7redis%E5%AD%A6%E4%B9%A0/redis.md#%E9%9B%86%E7%BE%A4"></a>集群</h4>
+<p>Redis集群实现了对Redis的水平扩容，即启动N个redis节点，将整个数据库分布存储在这N个节点中，每个节点存储总数据的1/N。 Redis集群通过分区( partition )来提供一定程度的可用性 ( availability )：即使集群中有一部分节点失效或者无法进行通讯，集群也可以继续处理命令请求。</p>
+<p>集群无中心化，连接任意一台，都能操纵整个集群，即集群中任意一台机器都能作为集群入口。</p>
+<p>vim全局替换：%s/6379/6380</p>
+<figure class="highlight avrasm"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs avrasm"><span class="hljs-meta">#创建集群</span><br>redis-<span class="hljs-keyword">cli</span> --cluster create --cluster-replicas <span class="hljs-number">1</span> ip:port ip2:port2...<br><span class="hljs-meta">#以集群方式连接</span><br>redis-<span class="hljs-keyword">cli</span> -c -p port<br></code></pre></td></tr></tbody></table></figure>
+<p>一个集群至少要有三个主节点。选项 --cluster-replicasI 1 表示我们希望为集群中的每个主节点创建一个从节点。分配原则尽量保证每个主数据库运行在不同的IP地址，每个从库和主库不在一个IP地址上。</p>
+<p><strong>slots</strong></p>
+<p>根据key值，计算出对应的插槽值，进而分配到相应的机器上。</p>
+<figure class="highlight tap"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs tap">cluster nodes<span class="hljs-comment">#查询集群节点</span><br>mset name{user} lucy age{user}<span class="hljs-number"> 20 </span><span class="hljs-comment">#计算插槽按组名计算</span><br>cluster keyslot k1 <span class="hljs-comment">#查询key对应的插槽值</span><br>cluster countkeysinslot<span class="hljs-number"> 23123 </span><span class="hljs-comment">#查询插槽23123内的key数</span><br>cluster getkeysinslot<span class="hljs-number"> 449 </span>1 <span class="hljs-comment">#返回1个插槽中的键</span><br></code></pre></td></tr></tbody></table></figure>
+<p><strong>故障恢复</strong></p>
+<p>主节点宕机，从节点成为主节点</p>
+<p>宕机的主节点恢复后，作为原从节点的从节点</p>
+<p><strong>优势</strong></p>
+<ul>
+<li>实现扩容</li>
+<li>分摊压力</li>
+<li>无中心配置相对简单</li>
+</ul>
+<p><strong>缺点</strong></p>
+<ul>
+<li>多键操作是不被支持，要分组</li>
+<li>多键的Redis事务不被支持的，lua脚本不被支持</li>
+</ul>
+<h4 id="01211-应用问题解决"><a class="markdownIt-Anchor" href="#01211-应用问题解决"></a> 0.1.2.11: <a target="_blank" rel="noopener" href="https://gitee.com/zwhddup/mysql-learning/blob/master/%E5%B0%9A%E7%A1%85%E8%B0%B7redis%E5%AD%A6%E4%B9%A0/redis.md#%E5%BA%94%E7%94%A8%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3"></a>应用问题解决</h4>
+<h5 id="012111-缓存穿透"><a class="markdownIt-Anchor" href="#012111-缓存穿透"></a> 0.1.2.11.1: <a target="_blank" rel="noopener" href="https://gitee.com/zwhddup/mysql-learning/blob/master/%E5%B0%9A%E7%A1%85%E8%B0%B7redis%E5%AD%A6%E4%B9%A0/redis.md#%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F"></a>缓存穿透</h5>
+<p>产生条件：</p>
+<ul>
+<li>应用服务器压力变大了</li>
+<li>redis命中率降低</li>
+<li>一直查询数据库</li>
+</ul>
+<p>现象：</p>
+<ul>
+<li>redis查询不到数据库</li>
+<li>出现非正常URL访问</li>
+</ul>
+<p>解决方案：</p>
+<ul>
+<li><strong>对空值缓存</strong>：如果一个查询返回的数据为空(不管是数据是否不存在)，我们仍然把这个空结果( null )进行缓存，设置空结果的过期时间会很短，最长不超过五分钟。</li>
+<li><strong>设置可访问的名单(白名单)</strong> : 使用bitmaps类型定义一个可以访问的名单，名单id作为bitmaps的偏移量，每次访问和bitmap里面的id进行比较，如果访问id不在bitmaps里面，进行拦截，不允许访问。</li>
+<li><strong>采用布隆过滤器</strong>： (布隆过滤器(Bloom Filter)是1970年由布隆提出的。它实际上是一个很长的二进制向量(位图)和一系列随机映射函数(哈希函数)。布隆过滤器可以用于检索一个元素是否在一个集合中。它的优点是空间效率和查询时间都远远超过一般的算法，缺点是有一定的误识别率和删除困难。将所有可能存在的数据哈希到一个足够大的bitmaps 中，一个一定不存在的数据会被这个bitmaps拦截掉，从而避免了对底层存储系统的查询压力。</li>
+<li><strong>进行实时监控</strong>：当发现Redis的命中率开始急速降低，需要排查访问对象和访问的数据，和运维人员配合，可以设置黑名单限制服务。</li>
+</ul>
+<h5 id="012112-缓存击穿"><a class="markdownIt-Anchor" href="#012112-缓存击穿"></a> 0.1.2.11.2: <a target="_blank" rel="noopener" href="https://gitee.com/zwhddup/mysql-learning/blob/master/%E5%B0%9A%E7%A1%85%E8%B0%B7redis%E5%AD%A6%E4%B9%A0/redis.md#%E7%BC%93%E5%AD%98%E5%87%BB%E7%A9%BF"></a>缓存击穿</h5>
+<p>产生条件：</p>
+<ul>
+<li>redis某个key过期了，大量访问使用这个key</li>
+</ul>
+<p>现象：</p>
+<ul>
+<li>数据库访问压力瞬时增加</li>
+<li>redis里面没有出现大量key过期</li>
+<li>redis正常运行</li>
+</ul>
+<p>解决方案;</p>
+<ul>
+<li><strong>预先设置热门数据</strong>：在redis高峰访问之前，把一些热门数据提前存入到redis里面，加大这些热门数据key的时长。</li>
+<li><strong>实时调整</strong>：现场监控哪些数据热门，实时调整key的过期时长。</li>
+<li><strong>使用锁</strong>：
+<ul>
+<li>就是在缓存失效的时候(判断拿出来的值为空) ，不是立即去load db。</li>
+<li>先使用缓存工具的某些带成功操作返回值的操作(比如Redis的SETNX )去set一个mutex key</li>
+<li>当操作返回成功时，再进行load db的操作，并回设缓存，最后删除mutex key 当操作返回失败，证明有线程在load db，当前线程睡眠一段时间再重试整个get缓存的方法。</li>
+</ul>
+</li>
+</ul>
+<h5 id="012113-缓存雪崩"><a class="markdownIt-Anchor" href="#012113-缓存雪崩"></a> 0.1.2.11.3: <a target="_blank" rel="noopener" href="https://gitee.com/zwhddup/mysql-learning/blob/master/%E5%B0%9A%E7%A1%85%E8%B0%B7redis%E5%AD%A6%E4%B9%A0/redis.md#%E7%BC%93%E5%AD%98%E9%9B%AA%E5%B4%A9"></a>缓存雪崩</h5>
+<p>产生条件：</p>
+<ul>
+<li>在极少时间段，查询大量key的集合过期情况</li>
+</ul>
+<p>现象：</p>
+<ul>
+<li>数据库压力变大造成服务器崩溃</li>
+</ul>
+<p>解决方案：</p>
+<ul>
+<li><strong>构建多级缓存架构</strong>：nginx缓存+ redis缓存+其他缓存( ehcache等)。</li>
+<li><strong>使用锁或队列</strong>： 用加锁或者队列的方式来保证不会有大量的线程对数据库一次性进行读写，从而避免失效时大量的并发请求落到底层存储系统上。不适用高并发情况</li>
+<li><strong>设置过期标志更新缓存</strong>： 记录缓存数据是否过期(设置提前量)，如果过期会触发通知另外的线程在后台去更新实际key的缓存。</li>
+<li><strong>将缓存失效时间分散开</strong>： 比如我们可以在原有的失效时间基础上增加一个随机值，比如1-5 分钟随机，这样每一个缓存的过期时间的重复率就会降低，就很难引发集体失效的事件。</li>
+</ul>
+<h4 id="01212-分布式锁"><a class="markdownIt-Anchor" href="#01212-分布式锁"></a> 0.1.2.12: <a target="_blank" rel="noopener" href="https://gitee.com/zwhddup/mysql-learning/blob/master/%E5%B0%9A%E7%A1%85%E8%B0%B7redis%E5%AD%A6%E4%B9%A0/redis.md#%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81"></a>分布式锁</h4>
+<p>随着业务发展的需要，原单体单机部署的系统被演化成分布式集群系统后，由于分布式系统多线程、多进程并且分布在不同机器上，这将使原单机部署情况下的并发控制锁策略失效，单纯的Java API并不能提供分布式锁的能力。为了解决这个问题就需要一种跨JVM的互斥机制来控制共享资源的访问，这就是分布式锁要解决的问题。</p>
+<p><strong>使用redis实现分布式锁</strong></p>
+<ul>
+<li>setnx上锁，del释放锁</li>
+<li>锁一直没释放，设置过期时间，自动释放</li>
+<li>上锁之后突然出现异常，无法设置过期时间了。</li>
+</ul>
+<p><strong>锁可能会被别人释放，卡顿造成key过期自动释放。</strong></p>
+<p>怎么避免：</p>
+<ul>
+<li>第一步set lock uuid nx ex 10</li>
+<li>第二步释放锁的时候，首先判断当前uuid和要释放锁uuid是否一样</li>
+</ul>
+<p><strong>lua脚本保证删除原子性</strong></p>
+<p>为了确保分布式锁可用，我们至少要确保锁的实现同时满足以下四个条件:</p>
+<ul>
+<li>互斥性。在任意时刻，只有一个客户端能持有锁。</li>
+<li>不会发生死锁。即使有一个客户端在持有锁的期间崩溃而没有主动解锁，也能保证后续其他客户端能加锁。</li>
+<li>解铃还须系铃人。加锁和解锁必须是同一个客户端，客户端自己不能把别人加的锁给解了。</li>
+<li>加锁和解锁必须具有原子性。</li>
+</ul>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/" class="category-chain-item">👨🏻‍💻code</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/redis/" class="category-chain-item">redis</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/redis/%E5%B0%9A%E7%A1%85%E8%B0%B7/" class="category-chain-item">尚硅谷</a>
+  
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/19/" title="Redis6篇（一）概述与安装 + 五大常用的数据类型">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Redis6篇（一）概述与安装 + 五大常用的数据类型</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/15/" title="目录">
+                        <span class="hidden-mobile">目录</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

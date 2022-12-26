@@ -16,20 +16,23 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1: 使用最小花费爬楼梯 力扣题目链接 数组的每个下标作为一个阶梯，第 i 个阶梯对应着一个非负数的体力花费值&amp;nbsp;cost[i]（下标从 0 开始）。 每当你爬上一个阶梯你都要花费对应的体力值，一旦支付了相应的体力值，你就可以选择向上爬一个阶梯或者爬两个阶梯。 请你找出达到楼层顶部的最低花费。在开始时，你可以选择从下标为 0 或 1 的元素作为初始阶梯。 示例&amp;nbsp;1： 输入：co">
+    <meta name="description" content="📝4.使用最小花费爬楼梯:: 2022&#x2F;12&#x2F;20: 下次可以在优化一下空间复杂度: 746. 使用最小花费爬楼梯 题解 - 力扣（LeetCode）  [!参考资料]- 代码随想录 Leetcode-746.使用最小花费爬楼梯_哔哩哔哩_bilibili    1: 使用最小花费爬楼梯 力扣题目链接 数组的每个下标作为一个阶梯，第 i 个阶梯对应着一个非负数的体力花费值&amp;nbsp;cost[i">
 <meta property="og:type" content="article">
 <meta property="og:title" content="4.使用最小花费爬楼梯">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/27967/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="1: 使用最小花费爬楼梯 力扣题目链接 数组的每个下标作为一个阶梯，第 i 个阶梯对应着一个非负数的体力花费值&amp;nbsp;cost[i]（下标从 0 开始）。 每当你爬上一个阶梯你都要花费对应的体力值，一旦支付了相应的体力值，你就可以选择向上爬一个阶梯或者爬两个阶梯。 请你找出达到楼层顶部的最低花费。在开始时，你可以选择从下标为 0 或 1 的元素作为初始阶梯。 示例&amp;nbsp;1： 输入：co">
+<meta property="og:description" content="📝4.使用最小花费爬楼梯:: 2022&#x2F;12&#x2F;20: 下次可以在优化一下空间复杂度: 746. 使用最小花费爬楼梯 题解 - 力扣（LeetCode）  [!参考资料]- 代码随想录 Leetcode-746.使用最小花费爬楼梯_哔哩哔哩_bilibili    1: 使用最小花费爬楼梯 力扣题目链接 数组的每个下标作为一个阶梯，第 i 个阶梯对应着一个非负数的体力花费值&amp;nbsp;cost[i">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202207051328142.jpg">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2021010621363669.png">
 <meta property="article:published_time" content="2022-07-05T13:03:00.000Z">
-<meta property="article:modified_time" content="2022-12-12T03:02:04.328Z">
+<meta property="article:modified_time" content="2022-12-20T01:43:55.996Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="动态规划">
+<meta property="article:tag" content="📙">
+<meta property="article:tag" content="📗✅">
+<meta property="article:tag" content="📙✅">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202207051328142.jpg">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/2021010621363669.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -196,7 +199,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202207051328142.jpg') no-repeat center center; background-size: cover;">
+     style="background: url('/img/default.jpg') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -225,7 +228,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.5k 字
+          1.7k 字
         
       </span>
     
@@ -236,7 +239,7 @@
         
         
         
-          8 分钟
+          9 分钟
         
       </span>
     
@@ -287,22 +290,33 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年12月12日 上午
+                    本文最后更新于：2022年12月20日 上午
                   
                 
               </p>
             
             <div class="markdown-body">
               
-              <h1 id="1-使用最小花费爬楼梯"><a class="markdownIt-Anchor" href="#1-使用最小花费爬楼梯"></a> 1: 使用最小花费爬楼梯</h1>
+              <p>📝4.使用最小花费爬楼梯::<br>
+2022/12/20: 下次可以在优化一下空间复杂度: <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/min-cost-climbing-stairs/solution/yi-bu-yi-bu-tui-dao-dong-tai-gui-hua-de-duo-chong-/">746. 使用最小花费爬楼梯 题解 - 力扣（LeetCode）</a></p>
+<blockquote>
+<p>[!参考资料]-<br>
+<a target="_blank" rel="noopener" href="https://www.programmercarl.com/0746.%E4%BD%BF%E7%94%A8%E6%9C%80%E5%B0%8F%E8%8A%B1%E8%B4%B9%E7%88%AC%E6%A5%BC%E6%A2%AF.html#%E6%80%9D%E8%B7%AF">代码随想录</a><br>
+<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1fq4y1T7Uo?spm_id_from=333.337.search-card.all.click&amp;vd_source=f2340d96e99780a96b50d8096ffaaf1a">Leetcode-746.使用最小花费爬楼梯_哔哩哔哩_bilibili</a></p>
+</blockquote>
+<!-- basicblock-end -->
+<h1 id="1-使用最小花费爬楼梯"><a class="markdownIt-Anchor" href="#1-使用最小花费爬楼梯"></a> 1: 使用最小花费爬楼梯</h1>
 <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/min-cost-climbing-stairs/">力扣题目链接</a></p>
 <p>数组的每个下标作为一个阶梯，第 i 个阶梯对应着一个非负数的体力花费值&nbsp;cost[i]（下标从 0 开始）。</p>
 <p><strong>每当你爬上一个阶梯你都要花费对应的体力值，一旦支付了相应的体力值，你就可以选择向上爬一个阶梯或者爬两个阶梯。</strong></p>
-<p>请你找出达到楼层顶部的最低花费。在开始时，你可以选择从下标为 0 或 1 的元素作为初始阶梯。</p>
+<p><strong>请你找出达到楼层顶部的最低花费</strong>。在开始时，你可以选择从下标为 0 或 1 的元素作为初始阶梯。</p>
 <p>示例&nbsp;1：</p>
-<p>输入：cost = [10, 15, 20] 输出：15 解释：最低花费是从 cost[1] 开始，然后走两步即可到阶梯顶，一共花费 15 。 &nbsp;示例 2：</p>
+<p>输入：cost = [10, 15, 20]<br>
+输出：15 解释：最低花费是从 cost[1] 开始，然后走两步即可到阶梯顶，一共花费 15 。 &nbsp;示例 2：</p>
 <blockquote>
-<p>第一次不要钱，爬上了15，支付15后可以爬一层到楼顶，那我从10开始支付10爬两层不是更好吗</p>
+<p>[!success] #📗✅     第一次不要钱，爬上了15，支付15后可以爬一层到楼顶，那我从10开始支付10爬两层不是更好吗<br>
+从 15 爬两层是到了 20 的上面一层. 顶层是最后一个数的下一层<br>
+如果在 10 的地方爬两层到了 20</p>
 </blockquote>
 <p>输入：cost = [1, 100, 1, 1, 1, 100, 1, 1, 100, 1] 输出：6 解释：最低花费方式是从 cost[0] 开始，逐个经过那些 1 ，跳过 cost[3] ，一共花费 6 。</p>
 <p>提示：</p>
@@ -313,10 +327,11 @@
 <h1 id="2-思路"><a class="markdownIt-Anchor" href="#2-思路"></a> 2: 思路</h1>
 <p><strong>注意题目描述：每当你爬上一个阶梯你都要花费对应的体力值，一旦支付了相应的体力值，你就可以选择向上爬一个阶梯或者爬两个阶梯</strong></p>
 <p>动归五部曲</p>
-<p><font color="#F36208">1.  确定dp数组以及下标的含义</font><br>
-<strong>dp[i]的定义：到达第i个台阶所花费的最<br>
-少体力为dp[i]</strong>。<br>
-注意这里认为是第一步一定是要花费：<br>
+<p><font color="#F36208">1.  确定dp数组以及下标的含义</font></p>
+<blockquote>
+<p>[!note] <strong>dp[i]的定义：到达第i个台阶所花费的最少体力为dp[i]</strong>。</p>
+</blockquote>
+<p>注意这里认为是第一步一定是要花费：<br>
 dp[0] = cost[0];<br>
 dp[1] = cost[1];<br>
 <strong>dp[2] = min(dp[0], dp[1]) + cost[2];</strong><br>
@@ -327,9 +342,13 @@ dp[1] = cost[1];<br>
 </blockquote>
 <p><strong>dp[i] = min(dp[i - 1], dp[i - 2]) + cost[i];</strong><br>
 爬上台阶i，可能是从 i - 1 层，i-2层爬上来的，然后在离开台阶i 又在需要花费cost[i]<br>
-<font color="#F36208">3. dp数组初始化</font><br>
+<font color="#F36208">3. dp数组初始化</font></p>
+<blockquote>
+<p>[!success] #📙✅<br>
 题目说：可以选择从下标为 0 或 1 的元素作为初始阶梯。<br>
-从下标0处离开需要cost[0]，下标1同理</p>
+从下标0处离开需要cost[0]，下标1同理<br>
+<strong>dp[0] = cost[0]; // 相当于上第一层楼梯顶部</strong>, 需要支付 cost[0]</p>
+</blockquote>
 <figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">dp</span><span class="hljs-params">(cost.size())</span></span>;<br>dp[<span class="hljs-number">0</span>] = cost[<span class="hljs-number">0</span>];<br>dp[<span class="hljs-number">1</span>] = cost[<span class="hljs-number">1</span>];<br></code></pre></td></tr></tbody></table></figure>
 <p><font color="#F36208">4. 遍历顺序</font><br>
 因为是模拟台阶，而且dp[i]又dp[i-1]dp[i-2]推出，所以是从前到后遍历cost数组就可以了。<br>
@@ -359,17 +378,16 @@ dp[1] = cost[1];<br>
 </tr>
 </tbody>
 </table>
-<p><img src="https://img-blog.csdnimg.cn/2021010621363669.png" srcset="/img/loading.gif" lazyload alt="746.使用最小花费爬楼梯"><br>
-为什么选择最后两位的最小值呢<br>
-?<br>
-最后两位支付该值都可以到下一层，假设所求是第N层的最小开销，只需要计算min(谁能到N层)，到了N层后又不到下一层，所以相当于最后一步不用花费，就停止到那了，不用+cost[i]</p>
+<p><img src="https://img-blog.csdnimg.cn/2021010621363669.png" srcset="/img/loading.gif" lazyload alt="746.使用最小花费爬楼梯"></p>
+<blockquote>
+<p>[!question] #📙    我觉得是数组 dp 数组的值已经涵盖了到达下一层的花销<br>
+最后两位支付该值都可以到下一层，<br>
+所求是<strong>到达</strong>第N层的最小开销，只需要计算min(谁能到N层)，到了N层后又不到下一层，<br>
+所以<strong>相当于最后一步不用花费，就停止到那了，不用+cost[i]</strong></p>
+</blockquote>
 <h1 id="3-代码"><a class="markdownIt-Anchor" href="#3-代码"></a> 3: 代码</h1>
 <p>编译已通过</p>
 <figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">minCostClimbingStairs</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; cost)</span> </span>{<br>        <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">dp</span><span class="hljs-params">(cost.size())</span></span>;<br>        dp[<span class="hljs-number">0</span>] = cost[<span class="hljs-number">0</span>];<br>        dp[<span class="hljs-number">1</span>] = cost[<span class="hljs-number">1</span>];<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">2</span>; i &lt; cost.<span class="hljs-built_in">size</span>(); i++){<span class="hljs-comment">// 这里不用&lt;=，因为下标从0开始，取不到cost.size()||从第三个元素开始，下标是2</span><br>            dp[i] = <span class="hljs-built_in">min</span>(dp[i - <span class="hljs-number">1</span>], dp[i - <span class="hljs-number">2</span>]) + cost[i];<br>        }<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">min</span>(dp[cost.<span class="hljs-built_in">size</span>()<span class="hljs-number">-1</span>], dp[cost.<span class="hljs-built_in">size</span>() - <span class="hljs-number">2</span>]);<br><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
-<h1 id="4-参考资料"><a class="markdownIt-Anchor" href="#4-参考资料"></a> 4: 参考资料</h1>
-<p><a target="_blank" rel="noopener" href="https://www.programmercarl.com/0746.%E4%BD%BF%E7%94%A8%E6%9C%80%E5%B0%8F%E8%8A%B1%E8%B4%B9%E7%88%AC%E6%A5%BC%E6%A2%AF.html#%E6%80%9D%E8%B7%AF">代码随想录</a><br>
-<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1fq4y1T7Uo?spm_id_from=333.337.search-card.all.click&amp;vd_source=f2340d96e99780a96b50d8096ffaaf1a">Leetcode-746.使用最小花费爬楼梯_哔哩哔哩_bilibili</a><br>
-自用跳转链接：🈚</p>
 
               
             </div>
@@ -425,6 +443,12 @@ dp[1] = cost[1];<br>
       
         <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">#动态规划</a>
       
+        <a href="/tags/%F0%9F%93%99/">#📙</a>
+      
+        <a href="/tags/%F0%9F%93%97%E2%9C%85/">#📗✅</a>
+      
+        <a href="/tags/%F0%9F%93%99%E2%9C%85/">#📙✅</a>
+      
     </div>
   
 </div>
@@ -437,9 +461,9 @@ dp[1] = cost[1];<br>
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/31702/" title="6.不同路径">
+                      <a href="/posts/31702/" title="6.不同路径 2">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">6.不同路径</span>
+                        <span class="hidden-mobile">6.不同路径 2</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     

@@ -16,15 +16,15 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="📝16、strlen和sizeof区别？::    sizeof是运算符，并不是函数，结果在编译时得到而非运行中获得  因为sizeof值在编译时确定，所以不能用来得到动态分配（运行时分配）存储空间的大小    strlen是字符处理的库函数。   sizeof参数可以是任何数据的类型或者数据（sizeof参数不退化）；   strlen的参数只能是字符指针且结尾是’ \0 &#39;的字符串。   1">
+    <meta name="description" content="📝16、strlen和sizeof区别？::   1: 本质不同  sizeof是运算符，并不是函数，结果在编译时得到而非运行中获得  因为sizeof值在编译时确定，所以不能用来得到动态分配（运行时分配）存储空间的大小   strlen是字符处理的库函数。   2: 处理对象不同  sizeof参数可以是任何数据的类型或者数据（sizeof参数不退化）； strlen的参数只能是字符指针且结尾">
 <meta property="og:type" content="article">
 <meta property="og:title" content="16、strlen和sizeof区别？">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/63970/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="📝16、strlen和sizeof区别？::    sizeof是运算符，并不是函数，结果在编译时得到而非运行中获得  因为sizeof值在编译时确定，所以不能用来得到动态分配（运行时分配）存储空间的大小    strlen是字符处理的库函数。   sizeof参数可以是任何数据的类型或者数据（sizeof参数不退化）；   strlen的参数只能是字符指针且结尾是’ \0 &#39;的字符串。   1">
+<meta property="og:description" content="📝16、strlen和sizeof区别？::   1: 本质不同  sizeof是运算符，并不是函数，结果在编译时得到而非运行中获得  因为sizeof值在编译时确定，所以不能用来得到动态分配（运行时分配）存储空间的大小   strlen是字符处理的库函数。   2: 处理对象不同  sizeof参数可以是任何数据的类型或者数据（sizeof参数不退化）； strlen的参数只能是字符指针且结尾">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-22T07:26:00.000Z">
-<meta property="article:modified_time" content="2022-12-14T13:32:38.801Z">
+<meta property="article:modified_time" content="2022-12-19T07:16:23.327Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          484 字
+          498 字
         
       </span>
     
@@ -284,7 +284,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年12月14日 晚上
+                    本文最后更新于：2022年12月19日 下午
                   
                 
               </p>
@@ -293,22 +293,19 @@
               
               <p>📝16、strlen和sizeof区别？::</p>
 <!-- basicblock-end -->
+<h1 id="1-本质不同"><a class="markdownIt-Anchor" href="#1-本质不同"></a> 1: 本质不同</h1>
 <ul>
-<li>
-<p>sizeof是运算符，并不是函数，结果在<strong>编译</strong>时得到而非运行中获得</p>
+<li>sizeof是运算符，并不是函数，结果在<strong>编译</strong>时得到而非运行中获得
 <ul>
 <li>因为sizeof值在编译时确定，所以不能用来得到动态分配（运行时分配）存储空间的大小</li>
 </ul>
 </li>
-<li>
-<p>strlen是字符处理的库函数。</p>
-</li>
-<li>
-<p>sizeof参数可以是任何数据的类型或者数据（sizeof参数不退化）；</p>
-</li>
-<li>
-<p>strlen的参数只能是字符指针且结尾是’ <code>\0</code> '的<strong>字符串</strong>。</p>
-</li>
+<li>strlen是字符处理的库函数。</li>
+</ul>
+<h1 id="2-处理对象不同"><a class="markdownIt-Anchor" href="#2-处理对象不同"></a> 2: 处理对象不同</h1>
+<ul>
+<li>sizeof参数可以是<strong>任何数据</strong>的类型或者数据（sizeof参数不退化）；</li>
+<li>strlen的参数只能是字符指针且结尾是’ <code>\0</code> '的<strong>字符串</strong>。</li>
 </ul>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span> <span class="hljs-type">const</span> *argv[])</span></span>{<br>    <br>    <span class="hljs-type">const</span> <span class="hljs-type">char</span>* str = <span class="hljs-string">"name"</span>;<br><br>    <span class="hljs-built_in">sizeof</span>(str); <span class="hljs-comment">// ❓ 取的是指针str的长度，是8</span><br>    <span class="hljs-built_in">strlen</span>(str); <span class="hljs-comment">// 取的是这个字符串的长度，不包含结尾的 \0。大小是4</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>}<br></code></pre></td></tr></tbody></table></figure>
 <blockquote>

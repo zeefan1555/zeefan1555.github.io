@@ -1,0 +1,807 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202206251952371.png">
+  <link rel="icon" href="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202206251952371.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="zeefan">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="📝经典动态规划：子集背包问题:: 416. 分割等和子集 - 力扣（LeetCode）     LeetCode 力扣 难度     416. Partition Equal Subset Sum 416. 分割等和子集 🟠   - 剑指 Offer II 101. 分割等和子集 🟢    上篇文章 经典动态规划：0-1 背包问题 详解了通用的 0-1 背包问题，今天来看看背包问题的思想能够">
+<meta property="og:type" content="article">
+<meta property="og:title" content="经典动态规划：子集背包问题">
+<meta property="og:url" content="https://zeefan1555.github.io/posts/27/index.html">
+<meta property="og:site_name" content="一杯空气">
+<meta property="og:description" content="📝经典动态规划：子集背包问题:: 416. 分割等和子集 - 力扣（LeetCode）     LeetCode 力扣 难度     416. Partition Equal Subset Sum 416. 分割等和子集 🟠   - 剑指 Offer II 101. 分割等和子集 🟢    上篇文章 经典动态规划：0-1 背包问题 详解了通用的 0-1 背包问题，今天来看看背包问题的思想能够">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-12-17T06:27:00.000Z">
+<meta property="article:modified_time" content="2022-12-20T03:15:42.093Z">
+<meta property="article:author" content="zeefan">
+<meta property="article:tag" content="📕">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>经典动态规划：子集背包问题 - 一杯空气</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.15.6/katex.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"zeefan1555.github.io","root":"/","version":"1.9.1","typing":{"enable":true,"typeSpeed":150,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"Text"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":10},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>一杯空气</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="经典动态规划：子集背包问题"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-12-17 14:27" pubdate>
+          2022年12月17日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          21 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">经典动态规划：子集背包问题</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2022年12月20日 上午
+                  
+                
+              </p>
+            
+            <div class="markdown-body">
+              
+              <p>📝经典动态规划：子集背包问题::<br>
+<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/partition-equal-subset-sum/">416. 分割等和子集 - 力扣（LeetCode）</a></p>
+<!-- basicblock-end -->
+<table>
+<thead>
+<tr>
+<th>LeetCode</th>
+<th>力扣</th>
+<th>难度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.com/problems/partition-equal-subset-sum/">416. Partition Equal Subset Sum</a></td>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/partition-equal-subset-sum/">416. 分割等和子集</a></td>
+<td>🟠</td>
+</tr>
+<tr>
+<td>-</td>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/NUPfPr/">剑指 Offer II 101. 分割等和子集</a></td>
+<td>🟢</td>
+</tr>
+</tbody>
+</table>
+<p>上篇文章 <a target="_blank" rel="noopener" href="https://labuladong.gitee.io/algo/3/27/81/">经典动态规划：0-1 背包问题</a> 详解了通用的 0-1 背包问题，今天来看看背包问题的思想能够如何运用到其他算法题目。</p>
+<p>而且，不是经常有读者问，怎么将二维动态规划压缩成一维动态规划吗？这就是空间压缩，很容易的，本文也会提及这种技巧。</p>
+<p><strong>读者在阅读本文之前务必读懂前文 <a target="_blank" rel="noopener" href="https://labuladong.gitee.io/algo/3/27/81/">经典动态规划：0-1 背包问题</a> 中讲的套路，因为本文就是按照背包问题的解题模板来讲解的</strong>。</p>
+<h1 id="1-一-问题分析"><a class="markdownIt-Anchor" href="#1-一-问题分析"></a> 1: 一、问题分析</h1>
+<p>看一下力扣第 416 题「 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/partition-equal-subset-sum/">分割等和子集</a> 」：</p>
+<p>输入一个只包含正整数的非空数组 <code>nums</code>，请你写一个算法，判断这个数组是否可以被分割成两个子集，使得两个子集的元素和相等。</p>
+<p>算法的函数签名如下：</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-comment">// 输入一个集合，返回是否能够分割成和相等的两个子集</span><br><span class="hljs-function">boolean <span class="hljs-title">canPartition</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span></span>;<br></code></pre></td></tr></tbody></table></figure>
+<p>比如说输入 <code>nums = [1,5,11,5]</code>，算法返回 true，因为 <code>nums</code> 可以分割成 <code>[1,5,5]</code> 和 <code>[11]</code> 这两个子集。</p>
+<p>如果说输入 <code>nums = [1,3,2,5]</code>，算法返回 false，因为 <code>nums</code> 无论如何都不能分割成两个和相等的子集。</p>
+<p>对于这个问题，看起来和背包没有任何关系，为什么说它是背包问题呢？</p>
+<p>首先回忆一下背包问题大致的描述是什么：</p>
+<p>给你一个可装载重量为 <code>W</code> 的背包和 <code>N</code> 个物品，每个物品有重量和价值两个属性。其中第 <code>i</code> 个物品的重量为 <code>wt[i]</code>，价值为 <code>val[i]</code>，现在让你用这个背包装物品，最多能装的价值是多少？</p>
+<p>那么对于这个问题，我们可以先对集合求和，得出 <code>sum</code>，把问题转化为背包问题：</p>
+<blockquote>
+<p>[!note]<br>
+<strong>给一个可装载重量为 <code>sum / 2</code> 的背包和 <code>N</code> 个物品，每个物品的重量为 <code>nums[i]</code>。<br>
+现在让你装物品，是否存在一种装法，能够恰好将背包装满</strong>？</p>
+</blockquote>
+<p>你看，这就是背包问题的模型，甚至比我们之前的经典背包问题还要简单一些，<strong>下面我们就直接转换成背包问题</strong>，开始套前文讲过的背包问题框架即可。</p>
+<h1 id="2-二-解法分析"><a class="markdownIt-Anchor" href="#2-二-解法分析"></a> 2: 二、解法分析</h1>
+<h2 id="21-第一步要明确两点状态和选择"><a class="markdownIt-Anchor" href="#21-第一步要明确两点状态和选择"></a> 2.1: <strong>第一步要明确两点，「状态」和「选择」</strong>。</h2>
+<p>这个前文 <a target="_blank" rel="noopener" href="https://labuladong.gitee.io/algo/3/27/81/">经典动态规划：背包问题</a> 已经详细解释过了，</p>
+<ul>
+<li>状态就是「背包的容量」和「可选择的物品」，</li>
+<li>选择就是「装进背包」或者「不装进背包」。</li>
+</ul>
+<h2 id="22-第二步要明确-dp-数组的定义"><a class="markdownIt-Anchor" href="#22-第二步要明确-dp-数组的定义"></a> 2.2: <strong>第二步要明确 <code>dp</code> 数组的定义</strong>。</h2>
+<p>按照背包问题的套路，可以给出如下定义：</p>
+<blockquote>
+<p>[!note]<br>
+<strong><code>dp[i][j] = x</code> 表示，对于前 <code>i</code> 个物品（<code>i</code> 从 1 开始计数），当前背包的容量为 <code>j</code> 时，若 <code>x</code> 为 <code>true</code>，则说明可以恰好将背包装满，若 <code>x</code> 为 <code>false</code>，则说明不能恰好将背包装满</strong>。</p>
+<blockquote>
+<p>[!example]<br>
+比如说，如果 <code>dp[4][9] = true</code>，其含义为：对于容量为 9 的背包，若只是用前 4 个物品，可以有一种方法把背包恰好装满。<br>
+或者说对于本题，含义是对于给定的集合中，若只对前 4 个数字进行选择，存在一个子集的和可以恰好凑出 9。</p>
+</blockquote>
+</blockquote>
+<ul>
+<li>根据这个定义，我们想求的最终答案就是 <code>dp[N][sum/2]</code>，
+<ul>
+<li>base case 就是 <code>dp[..][0] = true</code> 和 <code>dp[0][..] = false</code>，
+<ul>
+<li>因为背包没有空间的时候，就相当于装满了，</li>
+<li>而当没有物品可选择的时候，肯定没办法装满背包。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="23-第三步根据选择思考状态转移的逻辑"><a class="markdownIt-Anchor" href="#23-第三步根据选择思考状态转移的逻辑"></a> 2.3: <strong>第三步，根据「选择」，思考状态转移的逻辑</strong>。</h2>
+<ul>
+<li>回想刚才的 <code>dp</code> 数组含义，可以根据「选择」对 <code>dp[i][j]</code> 得到以下状态转移：
+<ul>
+<li>如果不把 <code>nums[i]</code> 算入子集，<strong>或者说你不把这第 <code>i</code> 个物品装入背包</strong>，那么是否能够恰好装满背包，取决于上一个状态 <code>dp[i-1][j]</code>，继承之前的结果。</li>
+<li>如果把 <code>nums[i]</code> 算入子集，<strong>或者说你把这第 <code>i</code> 个物品装入了背包</strong>，那么是否能够恰好装满背包，取决于状态 <code>dp[i-1][j-nums[i-1]]</code>。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>PS：由于 <code>dp</code> 数组定义中的 <code>i</code> 是从 1 开始计数，而数组索引是从 0 开始的，所以第 <code>i</code> 个物品的重量应该是 <code>nums[i-1]</code>，这一点不要搞混。</p>
+</blockquote>
+<p><code>dp[i - 1][j-nums[i-1]]</code> 也很好理解：你如果装了第 <code>i</code> 个物品，就要看背包的剩余重量 <code>j - nums[i-1]</code> 限制下是否能够被恰好装满。</p>
+<p>换句话说，如果 <code>j - nums[i-1]</code> 的重量可以被恰好装满，那么只要把第 <code>i</code> 个物品装进去，也可恰好装满 <code>j</code> 的重量；否则的话，重量 <code>j</code> 肯定是装不满的。</p>
+<h2 id="24-最后一步把伪码翻译成代码处理一些边界情况"><a class="markdownIt-Anchor" href="#24-最后一步把伪码翻译成代码处理一些边界情况"></a> 2.4: <strong>最后一步，把伪码翻译成代码，处理一些边界情况</strong>。</h2>
+<p>以下是我的 Java 代码，完全翻译了之前的思路，并处理了一些边界情况：</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-function">boolean <span class="hljs-title">canPartition</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> </span>{<br>    <span class="hljs-type">int</span> sum = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> num : nums) sum += num;<br>    <span class="hljs-comment">// 和为奇数时，不可能划分成两个和相等的集合</span><br>    <span class="hljs-keyword">if</span> (sum % <span class="hljs-number">2</span> != <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    <span class="hljs-type">int</span> n = nums.length;<br>    sum = sum / <span class="hljs-number">2</span>;<br>    boolean[][] dp = <span class="hljs-keyword">new</span> boolean[n + <span class="hljs-number">1</span>][sum + <span class="hljs-number">1</span>];<br>    <span class="hljs-comment">// base case</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt;= n; i++)<br>        dp[i][<span class="hljs-number">0</span>] = <span class="hljs-literal">true</span>;<br><br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++) {<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt;= sum; j++) {<br>            <span class="hljs-keyword">if</span> (j - nums[i - <span class="hljs-number">1</span>] &lt; <span class="hljs-number">0</span>) {<br>                <span class="hljs-comment">// 背包容量不足，不能装入第 i 个物品</span><br>                dp[i][j] = dp[i - <span class="hljs-number">1</span>][j];<br>            } <span class="hljs-keyword">else</span> {<br>                <span class="hljs-comment">// 装入或不装入背包</span><br>                dp[i][j] = dp[i - <span class="hljs-number">1</span>][j] || dp[i - <span class="hljs-number">1</span>][j - nums[i - <span class="hljs-number">1</span>]];<br>            }<br>        }<br>    }<br>    <span class="hljs-keyword">return</span> dp[n][sum];<br>}<br></code></pre></td></tr></tbody></table></figure>
+<h2 id="25-三-进一步优化"><a class="markdownIt-Anchor" href="#25-三-进一步优化"></a> 2.5: 三、进一步优化</h2>
+<p>再进一步，是否可以优化这个代码呢？<strong>注意到 <code>dp[i][j]</code> 都是通过上一行 <code>dp[i-1][..]</code> 转移过来的</strong>，之前的数据都不会再使用了。</p>
+<p>所以，我们可以 <a target="_blank" rel="noopener" href="https://labuladong.gitee.io/algo/3/25/73/">对动态规划进行降维打击</a>，将二维 <code>dp</code> 数组压缩为一维，节约空间复杂度：</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">boolean</span> <span class="hljs-title function_">canPartition</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> {<br>    <span class="hljs-type">int</span> <span class="hljs-variable">sum</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> num : nums) sum += num;<br>    <span class="hljs-comment">// 和为奇数时，不可能划分成两个和相等的集合</span><br>    <span class="hljs-keyword">if</span> (sum % <span class="hljs-number">2</span> != <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> nums.length;<br>    sum = sum / <span class="hljs-number">2</span>;<br>    <span class="hljs-type">boolean</span>[] dp = <span class="hljs-keyword">new</span> <span class="hljs-title class_">boolean</span>[sum + <span class="hljs-number">1</span>];<br>    <br>    <span class="hljs-comment">// base case</span><br>    dp[<span class="hljs-number">0</span>] = <span class="hljs-literal">true</span>;<br><br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) {<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> sum; j &gt;= <span class="hljs-number">0</span>; j--) {<br>            <span class="hljs-keyword">if</span> (j - nums[i] &gt;= <span class="hljs-number">0</span>) {<br>                dp[j] = dp[j] || dp[j - nums[i]];<br>            }<br>        }<br>    }<br>    <span class="hljs-keyword">return</span> dp[sum];<br>}<br></code></pre></td></tr></tbody></table></figure>
+<p>其实这段代码和之前的解法思路完全相同，只在一行 <code>dp</code> 数组上操作，<code>i</code> 每进行一轮迭代，<code>dp[j]</code> 其实就相当于 <code>dp[i-1][j]</code>，所以只需要一维数组就够用了。</p>
+<p><strong>唯一需要注意的是 <code>j</code> 应该从后往前反向遍历，因为每个物品（或者说数字）只能用一次，以免之前的结果影响其他的结果</strong>。</p>
+<p>至此，子集切割的问题就完全解决了，时间复杂度 <code>O(n\*sum)</code>，空间复杂度 <code>O(sum)</code>。</p>
+<h1 id="3-自己写的代码"><a class="markdownIt-Anchor" href="#3-自己写的代码"></a> 3: 自己写的代码</h1>
+<blockquote>
+<p>[!question] #📕</p>
+</blockquote>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">canPartition</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums)</span> </span>{<br>        <span class="hljs-type">int</span> sum = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i : nums) sum += i;<br>        <span class="hljs-comment">//边界处理: 和为奇数时，不可能划分成两个和相等的集合</span><br>        <span class="hljs-keyword">if</span>(sum % <span class="hljs-number">2</span> != <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br><br>        <span class="hljs-comment">// 定义 dp 数组</span><br>        <span class="hljs-type">int</span> n = nums.<span class="hljs-built_in">size</span>();<br>        sum /= <span class="hljs-number">2</span>;<br>        vector&lt;vector&lt;<span class="hljs-type">bool</span>&gt;&gt; <span class="hljs-built_in">dp</span> (n+<span class="hljs-number">1</span>, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">bool</span>&gt;(sum+<span class="hljs-number">1</span>));<br><br>        <span class="hljs-comment">// base case</span><br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n ; i++){<br>            dp[i][<span class="hljs-number">0</span>]=<span class="hljs-literal">true</span>;<br>        }<br>		<span class="hljs-comment">// ❓不懂怎么处理的</span><br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++){<br>            <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt;= sum; j++){<br>                <span class="hljs-comment">// 边界处理</span><br>                <span class="hljs-keyword">if</span>(j - nums[i<span class="hljs-number">-1</span>] &lt; <span class="hljs-number">0</span>){<br>                    dp[i][j] = dp[i<span class="hljs-number">-1</span>][j];<br>                }<br>                <span class="hljs-keyword">else</span>{<br>                    dp[i][j] = dp[i<span class="hljs-number">-1</span>][j] || dp[i<span class="hljs-number">-1</span>][j-nums[i<span class="hljs-number">-1</span>]]; <span class="hljs-comment">// ❓</span><br>                }<br>            }<br>        }<br>        <span class="hljs-keyword">return</span> dp[n][sum];<br><br><br><br>    }<br>};<br><br></code></pre></td></tr></tbody></table></figure>
+<p>![[经典动态规划：子集背包问题 2022-12-18 15.56.10.excalidraw]]</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">canPartition</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums)</span> </span>{<br>        <span class="hljs-type">int</span> sum = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i : nums) sum += i;<br>        <span class="hljs-keyword">if</span>(sum % <span class="hljs-number">2</span> != <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br><br>        sum/=<span class="hljs-number">2</span>;<br>        <span class="hljs-type">int</span> n = nums.<span class="hljs-built_in">size</span>();<br>        vector&lt;<span class="hljs-type">bool</span>&gt;<span class="hljs-built_in">dp</span>(sum+<span class="hljs-number">1</span>);<br><br>        dp[<span class="hljs-number">0</span>] = <span class="hljs-literal">true</span>;<br><br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++){<br>            <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j = sum; j &gt;= <span class="hljs-number">0</span>; j--){<br>                <span class="hljs-keyword">if</span>(j - nums[i] &gt;= <span class="hljs-number">0</span>){<br>                    dp[j] = dp[j] || dp[j-nums[i]];<br>                }<br>            }<br>        }<br>        <span class="hljs-keyword">return</span> dp[sum];<br><br><br>    }<br>};<br><br></code></pre></td></tr></tbody></table></figure>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/" class="category-chain-item">👨🏻‍💻code</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" class="category-chain-item">数据结构与算法</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/labuladong/" class="category-chain-item">labuladong</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/labuladong/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" class="category-chain-item">动态规划</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/labuladong/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/%E8%83%8C%E5%8C%85%E7%B1%BB%E5%9E%8B%E9%97%AE%E9%A2%98/" class="category-chain-item">背包类型问题</a>
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%F0%9F%93%95/">#📕</a>
+      
+    </div>
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/41/" title="背包问题🗃️">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">背包问题🗃️</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/25/" title="经典动态规划：0-1 背包问题">
+                        <span class="hidden-mobile">经典动态规划：0-1 背包问题</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

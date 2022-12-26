@@ -16,15 +16,15 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="📝矩阵的性质:: 2022&#x2F;11&#x2F;3: 第一次创建  12345678910二维数组[行][列] matrix[A][B]一行有多少个: matrix.size()一列有多少个: matrix[0].size() 对于一个二维数组 matrix， matrix.size() 返回的是该二维数组中包含的一维数组的个数，即行数。 而 matrix[0].size() 返回的是该二维数组中第一个一维数">
+    <meta name="description" content="📝矩阵的性质:: 2022&#x2F;11&#x2F;3: 第一次创建   1: 获取值 12345678910二维数组[行][列] matrix[A][B]一行有多少个: matrix.size()一列有多少个: matrix[0].size() 对于一个二维数组 matrix， matrix.size() 返回的是该二维数组中包含的一维数组的个数，即行数。 而 matrix[0].size() 返回的是该二维数">
 <meta property="og:type" content="article">
 <meta property="og:title" content="矩阵的性质">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/62366/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="📝矩阵的性质:: 2022&#x2F;11&#x2F;3: 第一次创建  12345678910二维数组[行][列] matrix[A][B]一行有多少个: matrix.size()一列有多少个: matrix[0].size() 对于一个二维数组 matrix， matrix.size() 返回的是该二维数组中包含的一维数组的个数，即行数。 而 matrix[0].size() 返回的是该二维数组中第一个一维数">
+<meta property="og:description" content="📝矩阵的性质:: 2022&#x2F;11&#x2F;3: 第一次创建   1: 获取值 12345678910二维数组[行][列] matrix[A][B]一行有多少个: matrix.size()一列有多少个: matrix[0].size() 对于一个二维数组 matrix， matrix.size() 返回的是该二维数组中包含的一维数组的个数，即行数。 而 matrix[0].size() 返回的是该二维数">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-03T02:24:00.000Z">
-<meta property="article:modified_time" content="2022-12-12T03:20:54.422Z">
+<meta property="article:modified_time" content="2022-12-19T01:28:35.053Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          215 字
+          407 字
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          2 分钟
+          3 分钟
         
       </span>
     
@@ -284,7 +284,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年12月12日 上午
+                    本文最后更新于：2022年12月19日 上午
                   
                 
               </p>
@@ -294,11 +294,17 @@
               <p>📝矩阵的性质::<br>
 2022/11/3: 第一次创建</p>
 <!-- basicblock-end -->
+<h1 id="1-获取值"><a class="markdownIt-Anchor" href="#1-获取值"></a> 1: 获取值</h1>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs C++"><br>二维数组[行][列] <br>matrix[A][B]<br><br><br>一行有多少个: matrix.<span class="hljs-built_in">size</span>()<br>一列有多少个: matrix[<span class="hljs-number">0</span>].<span class="hljs-built_in">size</span>()<br><br><br><br></code></pre></td></tr></tbody></table></figure>
 <p>对于一个二维数组 <code>matrix</code>，<br>
 <code>matrix.size()</code> 返回的是该二维数组中包含的一维数组的个数，即行数。<br>
 而 <code>matrix[0].size()</code> 返回的是该二维数组中第一个一维数组的长度，即列数。</p>
 <p>![[二维数组.excalidraw]]</p>
+<h1 id="2-初始化"><a class="markdownIt-Anchor" href="#2-初始化"></a> 2: 初始化</h1>
+<p>在定义二维 <code>vector</code> 的时候，可以使用三个参数的 <code>vector</code> 构造函数来初始化所有的元素。例如：</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++">vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">dp</span>(m, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;(n, <span class="hljs-number">0</span>));<br></code></pre></td></tr></tbody></table></figure>
+<p>这样做的目的是为了创建一个大小为 <code>m</code> 行 <code>n</code> 列的二维 <code>vector</code>，并将所有元素都初始化为 <code>0</code>。<br>
+每一行都是一个大小为 <code>n</code> 的一维 <code>vector</code>，用来存储一行的数据。</p>
 
               
             </div>

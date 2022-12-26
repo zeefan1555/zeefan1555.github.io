@@ -16,17 +16,17 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="文章简介：力扣题解--- 474.一和零">
+    <meta name="description" content="📝17.一和零 2::   1: 474.一和零 力扣题目链接  (opens new window) 给你一个二进制字符串数组 strs 和两个整数 m 和 n 。 请你找出并返回 strs 的最大子集的大小，该子集中 最多 有 m 个 0 和 n 个 1 。 如果 x 的所有元素也是 y 的元素，集合 x 是集合 y 的 子集 。 示例 1： 输入：strs &#x3D; [“10”, “0001”,">
 <meta property="og:type" content="article">
-<meta property="og:title" content="17.一和零">
+<meta property="og:title" content="17.一和零 2">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/31990/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="文章简介：力扣题解--- 474.一和零">
+<meta property="og:description" content="📝17.一和零 2::   1: 474.一和零 力扣题目链接  (opens new window) 给你一个二进制字符串数组 strs 和两个整数 m 和 n 。 请你找出并返回 strs 的最大子集的大小，该子集中 最多 有 m 个 0 和 n 个 1 。 如果 x 的所有元素也是 y 的元素，集合 x 是集合 y 的 子集 。 示例 1： 输入：strs &#x3D; [“10”, “0001”,">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20210120111201512.jpg">
 <meta property="og:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/20220721151503.png">
 <meta property="article:published_time" content="2022-07-21T01:45:00.000Z">
-<meta property="article:modified_time" content="2022-07-28T02:53:53.280Z">
+<meta property="article:modified_time" content="2022-12-17T06:41:08.369Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="动态规划">
 <meta name="twitter:card" content="summary_large_image">
@@ -36,7 +36,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>17.一和零 - 一杯空气</title>
+  <title>17.一和零 2 - 一杯空气</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -203,7 +203,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="17.一和零"></span>
+            <span id="subtitle" data-typed-text="17.一和零 2"></span>
           
         </div>
 
@@ -283,19 +283,21 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">17.一和零</h1>
+            <h1 style="display: none">17.一和零 2</h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年7月28日 上午
+                    本文最后更新于：2022年12月17日 下午
                   
                 
               </p>
             
             <div class="markdown-body">
               
-              <h1 id="1-474一和零"><a class="markdownIt-Anchor" href="#1-474一和零"></a> 1 474.一和零</h1>
+              <p>📝17.一和零 2::</p>
+<!-- basicblock-end -->
+<h1 id="1-474一和零"><a class="markdownIt-Anchor" href="#1-474一和零"></a> 1: 474.一和零</h1>
 <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/ones-and-zeroes/">力扣题目链接</a></p>
 <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/ones-and-zeroes/"></a></p>
 <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/ones-and-zeroes/">(opens new window)</a></p>
@@ -313,7 +315,7 @@
 <li>strs[i]&nbsp;仅由&nbsp;‘0’ 和&nbsp;‘1’ 组成</li>
 <li>1 &lt;= m, n &lt;= 100</li>
 </ul>
-<h1 id="2-思路"><a class="markdownIt-Anchor" href="#2-思路"></a> 2 思路</h1>
+<h1 id="2-思路"><a class="markdownIt-Anchor" href="#2-思路"></a> 2: 思路</h1>
 <p><strong>strs 数组里的元素就是物品，每个物品都是一个！</strong><br>
 <strong>而m 和 n相当于是一个背包，两个维度的背包</strong>。<br>
 理解成多重背包的同学主要是把m和n混淆为物品了，感觉这是不同数量的物品，所以以为是多重背包。但本题是01背包</p>
@@ -352,7 +354,7 @@ dp[j] = max(dp[j], dp[j - weight[i]] + value[i]);<br>
 </ol>
 <p>最后dp数组的状态如下所示：</p>
 <p><img src="https://img-blog.csdnimg.cn/20210120111201512.jpg" srcset="/img/loading.gif" lazyload alt="474.一和零"></p>
-<h1 id="3-代码"><a class="markdownIt-Anchor" href="#3-代码"></a> 3 代码</h1>
+<h1 id="3-代码"><a class="markdownIt-Anchor" href="#3-代码"></a> 3: 代码</h1>
 <p>参考：[[for 循环]]<br>
 编译未通过</p>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> {</span><br>public:<br>    <span class="hljs-type">int</span> <span class="hljs-title function_">findMaxForm</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">string</span>&gt;&amp; strs, <span class="hljs-type">int</span> m, <span class="hljs-type">int</span> n)</span> {<br>        <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;&gt; dp(m+<span class="hljs-number">1</span>,<span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;(n + <span class="hljs-number">1</span>, <span class="hljs-number">0</span>)) ;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-built_in">string</span> str : strs){ <span class="hljs-comment">// 遍历改位置的字符串</span><br>            <span class="hljs-type">int</span> oneNum = <span class="hljs-number">0</span>, zeroNum = <span class="hljs-number">0</span>; <span class="hljs-comment">// 保证到下一个位置的字符，这些one zero还会初始化为0</span><br>            <span class="hljs-keyword">for</span>(<span class="hljs-type">char</span> c : str){ <span class="hljs-comment">// 遍历字符串的每个字符 此时应该是str,而不是strs</span><br>            <span class="hljs-keyword">if</span> ( c == <span class="hljs-string">'0'</span>) zeroNum ++;<br>            oneNum++; <span class="hljs-comment">// 得到了该字符串的01数量</span><br>            }<br>            <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = m; i &gt;= zeroNum; i--){ <span class="hljs-comment">// 最多能装多少个1</span><br>                <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = n; j &gt;= oneNum; j--){ <span class="hljs-comment">// 最多能装多少个0</span><br>                    dp[i][j] = max(dp[i][j], dp[i - zeroNum][j - oneNum] + <span class="hljs-number">1</span>);<br>                    <span class="hljs-built_in">cout</span>&lt;&lt;dp[i][j];<br>                }<br>            }<br>           <br>            <br>        }<br>  <br>        <span class="hljs-keyword">return</span> dp[m][n];<br><br>    }<br>};<br><br></code></pre></td></tr></tbody></table></figure>
@@ -436,8 +438,8 @@ dp[j] = max(dp[j], dp[j - weight[i]] + value[i]);<br>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/60439/" title="16.目标和">
-                        <span class="hidden-mobile">16.目标和</span>
+                      <a href="/posts/39/" title="16.目标和(装满背包有多少种方法) 2">
+                        <span class="hidden-mobile">16.目标和(装满背包有多少种方法) 2</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

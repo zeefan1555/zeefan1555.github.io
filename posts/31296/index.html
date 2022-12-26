@@ -16,15 +16,15 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="📝1. 动态规划理论基础:: 代码随想录   [!summary] 动态规划，英文：Dynamic Programming，简称 DP 动态规划中每一个状态一定是由上一个状态推导出来的，贪心是局部最优推导全局最优   1: 解决的问题  背包问题 正则字符串匹配  例如：有N件物品和一个最多能背重量为W 的背包。第i件物品的重量是weight[i]，得到的价值是value[i] 。每件物品只能用">
+    <meta name="description" content="📝1. 动态规划理论基础:: 代码随想录   [!summary] 动态规划，英文：Dynamic Programming，简称 DP 动态规划中每一个状态一定是由上一个状态推导出来的，贪心是局部最优推导全局最优   1: 解决的问题  背包问题 正则字符串匹配  例如：有N件物品和一个最多能背重量为W 的背包。第i件物品的重量是weight[i]，得到的价值是value[i] 。 每件物品只能">
 <meta property="og:type" content="article">
 <meta property="og:title" content="1.动态规划理论基础">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/31296/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="📝1. 动态规划理论基础:: 代码随想录   [!summary] 动态规划，英文：Dynamic Programming，简称 DP 动态规划中每一个状态一定是由上一个状态推导出来的，贪心是局部最优推导全局最优   1: 解决的问题  背包问题 正则字符串匹配  例如：有N件物品和一个最多能背重量为W 的背包。第i件物品的重量是weight[i]，得到的价值是value[i] 。每件物品只能用">
+<meta property="og:description" content="📝1. 动态规划理论基础:: 代码随想录   [!summary] 动态规划，英文：Dynamic Programming，简称 DP 动态规划中每一个状态一定是由上一个状态推导出来的，贪心是局部最优推导全局最优   1: 解决的问题  背包问题 正则字符串匹配  例如：有N件物品和一个最多能背重量为W 的背包。第i件物品的重量是weight[i]，得到的价值是value[i] 。 每件物品只能">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-07-05T08:27:00.000Z">
-<meta property="article:modified_time" content="2022-11-15T03:19:59.545Z">
+<meta property="article:modified_time" content="2022-12-20T01:04:46.704Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          669 字
+          745 字
         
       </span>
     
@@ -284,7 +284,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年11月15日 上午
+                    本文最后更新于：2022年12月20日 上午
                   
                 
               </p>
@@ -302,7 +302,8 @@
 <li>背包问题</li>
 <li>正则<strong>字符串匹配</strong></li>
 </ul>
-<p>例如：有N件物品和一个最多能背重量为W 的背包。第i件物品的重量是weight[i]，得到的价值是value[i] 。<strong>每件物品只能用一次</strong>，求解将哪些物品装入背包里物品价值总和最大。</p>
+<p>例如：有N件物品和一个最多能背重量为W 的背包。第i件物品的重量是weight[i]，得到的价值是value[i] 。<br>
+<strong>每件物品只能用一次</strong>，求解将哪些物品装入背包里物品价值总和最大。</p>
 <p>动态规划中dp[j]是由dp[j-weight[i]]推导出来的，然后取max(dp[j], dp[j - weight[i]] + value[i])。</p>
 <h1 id="2-动态规划解题步骤"><a class="markdownIt-Anchor" href="#2-动态规划解题步骤"></a> 2: 动态规划解题步骤</h1>
 <ol>
@@ -310,6 +311,9 @@
 <li>确定递推公式</li>
 <li>dp数组如何初始化</li>
 <li>确定遍历顺序</li>
+</ol>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">for</span> 状态<span class="hljs-number">1</span> in 状态<span class="hljs-number">1</span>的所有取值：<br>    <span class="hljs-keyword">for</span> 状态<span class="hljs-number">2</span> in 状态<span class="hljs-number">2</span>的所有取值：<br>        <span class="hljs-keyword">for</span> ...<br>            dp[状态<span class="hljs-number">1</span>][状态<span class="hljs-number">2</span>][...] = 择优(选择<span class="hljs-number">1</span>，选择<span class="hljs-number">2.</span>..)<br></code></pre></td></tr></tbody></table></figure>
+<ol start="5">
 <li>举例推导dp数组<br>
 <strong>一些情况是递推公式决定了dp数组要如何初始化！</strong></li>
 </ol>

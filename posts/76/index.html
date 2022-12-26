@@ -1,0 +1,910 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202206251952371.png">
+  <link rel="icon" href="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202206251952371.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="zeefan">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="📝Redis6篇 （三）Redis新数据类型::   1: Bitmaps  1.1: 简介  现代计算机用二进制（位） 作为信息的基础单位， 1个字节等于8位，例如“abc”字符串是由3个字节组成，但实际在计算机存储时将其用二进制表示， “abc”分别对应的 ASCII码分别是97、 98、 99，对应的二进制分别是01100001、 01100010和01100011，如下图  合理地使用操">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis6篇 （三）Redis新数据类型">
+<meta property="og:url" content="https://zeefan1555.github.io/posts/76/index.html">
+<meta property="og:site_name" content="一杯空气">
+<meta property="og:description" content="📝Redis6篇 （三）Redis新数据类型::   1: Bitmaps  1.1: 简介  现代计算机用二进制（位） 作为信息的基础单位， 1个字节等于8位，例如“abc”字符串是由3个字节组成，但实际在计算机存储时将其用二进制表示， “abc”分别对应的 ASCII码分别是97、 98、 99，对应的二进制分别是01100001、 01100010和01100011，如下图  合理地使用操">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/60424e743cb64d28ac26156633efc915.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/32bc72709ae047bd82259e498105eef8.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/9070a0aa234e458a92da950e5b337752.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/d4c2aabecab14fd5a789969c55632f1d.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/bde50fce3cbf4610ae024606c85f49bf.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/af697288314240c1a35add6ea147ad6f.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/8dabb5decb844ce7ae41a4d6378267cd.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/17d5ade95cdd4bd98317f7a875a5187c.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/0c3826e1020144fb86bfc547ddf1c50b.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/c23f0f23825946829d849acc0b150d1b.png#pic_center">
+<meta property="article:published_time" content="2022-12-17T13:10:00.000Z">
+<meta property="article:modified_time" content="2022-12-19T01:45:27.464Z">
+<meta property="article:author" content="zeefan">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/60424e743cb64d28ac26156633efc915.png#pic_center">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Redis6篇 （三）Redis新数据类型 - 一杯空气</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.15.6/katex.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"zeefan1555.github.io","root":"/","version":"1.9.1","typing":{"enable":true,"typeSpeed":150,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"Text"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":10},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>一杯空气</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Redis6篇 （三）Redis新数据类型"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-12-17 21:10" pubdate>
+          2022年12月17日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          25 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Redis6篇 （三）Redis新数据类型</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2022年12月19日 上午
+                  
+                
+              </p>
+            
+            <div class="markdown-body">
+              
+              <p>📝Redis6篇 （三）Redis新数据类型::</p>
+<!-- basicblock-end -->
+<h1 id="1-bitmaps"><a class="markdownIt-Anchor" href="#1-bitmaps"></a> 1: Bitmaps</h1>
+<h2 id="11-简介"><a class="markdownIt-Anchor" href="#11-简介"></a> 1.1: 简介</h2>
+<blockquote>
+<p>现代计算机用二进制（位） 作为信息的基础单位， 1个字节等于8位，例如“abc”字符串是由3个字节组成，但实际在计算机存储时将其用二进制表示， “abc”分别对应的 <a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=ASCII%E7%A0%81&amp;spm=1001.2101.3001.7020">ASCII码</a>分别是97、 98、 99，对应的二进制分别是01100001、 01100010和01100011，如下图</p>
+<p><img src="https://img-blog.csdnimg.cn/60424e743cb64d28ac26156633efc915.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p>合理地使用操作位能够有效地提高内存使用率和开发效率。</p>
+</blockquote>
+<p>Redis提供了Bitmaps这个“数据类型”可以实现对位的操作：</p>
+<ol>
+<li>Bitmaps本身不是一种数据类型， <strong>实际上它就是字符串</strong>（key-value） ，但是它可以对字符串的位进行操作。</li>
+<li>Bitmaps单独提供了一套命令，所以在中使用和使用字符串的方法不太相同。<strong>可以把想象成一个以位为单位的数组，数组的每个单元只能存储0和1，数组的下标在中叫做偏移量</strong></li>
+</ol>
+<p><img src="https://img-blog.csdnimg.cn/32bc72709ae047bd82259e498105eef8.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<h2 id="12-命令"><a class="markdownIt-Anchor" href="#12-命令"></a> 1.2: 命令</h2>
+<ul>
+<li><strong>setbit</strong></li>
+</ul>
+<p>语法</p>
+<figure class="highlight gherkin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gherkin">setbit<span class="hljs-variable">&lt;key&gt;</span><span class="hljs-variable">&lt;offset&gt;</span><span class="hljs-variable">&lt;value&gt;</span>设置Bitmaps中某个偏移量的值（0或1）<span class="hljs-comment"># offset:偏移量从0开始</span><br></code></pre></td></tr></tbody></table></figure>
+<p>实例</p>
+<p>每个独立用户是否访问过网站存放在Bitmaps中，将访问的用户记做1，没有访问的用户记做0，用偏移量作为用户的id。</p>
+<p>设置键的第offset个位的值（从0算起） ，假设现在有20个用户，userid=1， 6， 11， 15， 19的用户对网站进行了访问，那么当前Bitmaps初始化结果如图</p>
+<p><img src="https://img-blog.csdnimg.cn/9070a0aa234e458a92da950e5b337752.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p>users:20000911代表2000-09-11这天的独立访问用户的Bitmaps</p>
+<p><img src="https://img-blog.csdnimg.cn/d4c2aabecab14fd5a789969c55632f1d.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p><strong>注</strong>：</p>
+<blockquote>
+<ul>
+<li>
+<p>很多应用的用户id以一个指定数字（例如10000） 开头，直接将用户id和Bitmaps的偏移量对应势必会造成一定的浪费，通常的做法是每次做setbit操作时将用户id减去这个指定数字。</p>
+</li>
+<li>
+<p>在第一次初始化Bitmaps时，假如偏移量非常大，那么整个初始化过程执行会比较慢，可能会造成Redis的阻塞。</p>
+</li>
+</ul>
+</blockquote>
+<hr>
+<ul>
+<li><strong>getbit</strong></li>
+</ul>
+<figure class="highlight gherkin"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gherkin">getbit<span class="hljs-variable">&lt;key&gt;</span><span class="hljs-variable">&lt;offset&gt;</span> <span class="hljs-comment"># 获取Bitmaps中某个偏移量的值</span><br></code></pre></td></tr></tbody></table></figure>
+<p><strong>实例</strong></p>
+<p>获取id=8的用户是否在2020-11-06这天访问过，返回0说明没有访问过</p>
+<p><img src="https://img-blog.csdnimg.cn/bde50fce3cbf4610ae024606c85f49bf.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p>注：因为12根本不存在，所以也是返回0</p>
+<ul>
+<li><strong>bitcount</strong></li>
+</ul>
+<blockquote>
+<p>统计<strong>字符串</strong>被设置为1的bit数。一般情况下，给定的整个字符串都会被进行计数，通过指定额外的 start 或 end 参数，可以让计数只在特定的位上进行。start 和 end 参数的设置，都可以使用负数值：比如 -1 表示最后一个位，而 -2 表示倒数第二个位，start、end 是指bit组的字节的下标数，二者皆包含。</p>
+</blockquote>
+<p><strong>实例</strong></p>
+<p>计算2000年9月11访问量</p>
+<p><img src="https://img-blog.csdnimg.cn/af697288314240c1a35add6ea147ad6f.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p>start和end代表起始和结束字节数，下面操作计算用户id在第1个字节到第3个字节之间的独立访问用户数，对应的用户id是 15，9</p>
+<p><img src="https://img-blog.csdnimg.cn/8dabb5decb844ce7ae41a4d6378267cd.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p><strong>举例</strong>： K1 【01000001 01000000 00000000 00100001】，对应【0，1，2，3】</p>
+<p>1、bitcount K1 1 2 ： 统计下标1、2字节组中bit=1的个数，即01000000 00000000</p>
+<p>–》bitcount K1 1 2 　　--》1</p>
+<p>2、bitcount K1 1 3 ： 统计下标1、2字节组中bit=1的个数，即01000000 00000000 00100001</p>
+<p>–》bitcount K1 1 3　　--》3</p>
+<p>3、bitcount K1 0 -2 ： 统计下标0到下标倒数第2，字节组中bit=1的个数，即01000001 01000000 00000000</p>
+<p>–》bitcount K1 0 -2　　--》3</p>
+<p>注意：redis的setbit设置或清除的是bit位置，而bitcount计算的是byte位置。</p>
+<ul>
+<li><strong>bitop</strong></li>
+</ul>
+<figure class="highlight awk"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">bitop  and(or<span class="hljs-regexp">/not/</span>xor) &lt;destkey&gt; [key…]<br><span class="hljs-comment">#bitop是一个复合操作， 它可以做多个Bitmaps的and（交集） 、 or（并集） 、 not（非） 、 xor（异或） 操作并将结果保存在destkey中。</span><br></code></pre></td></tr></tbody></table></figure>
+<p><strong>实例</strong></p>
+<p>2020-11-04 日访问网站的userid=1,2,5,9。</p>
+<p>setbit unique:users:20201104 1 1</p>
+<p>setbit unique:users:20201104 2 1</p>
+<p>setbit unique:users:20201104 5 1</p>
+<p>setbit unique:users:20201104 9 1</p>
+<p>2020-11-03 日访问网站的userid=0,1,4,9。</p>
+<p>setbit unique:users:20201103 0 1</p>
+<p>setbit unique:users:20201103 1 1</p>
+<p>setbit unique:users:20201103 4 1</p>
+<p>setbit unique:users:20201103 9 1</p>
+<p><strong>计算出两天都访问过网站的用户数量</strong></p>
+<figure class="highlight apache"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">bitop</span> and unique:users:and:<span class="hljs-number">20201104</span>_03  unique:users:<span class="hljs-number">20201103</span>unique:users:<span class="hljs-number">20201104</span><br></code></pre></td></tr></tbody></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/17d5ade95cdd4bd98317f7a875a5187c.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/0c3826e1020144fb86bfc547ddf1c50b.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<h2 id="13-bitmaps与set对比"><a class="markdownIt-Anchor" href="#13-bitmaps与set对比"></a> 1.3: Bitmaps与set对比</h2>
+<p>假设网站有1亿用户，每天独立访问的用户有5千万，如果每天用集合类型和Bitmaps分别存储活跃用户可以得到表</p>
+<table>
+<thead>
+<tr>
+<th>set和Bitmaps存储一天活跃用户对比</th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据类型</td>
+<td>每个用户id占用空间</td>
+<td>需要存储的用户量</td>
+<td>全部内存量</td>
+</tr>
+<tr>
+<td>集合类型</td>
+<td>64位</td>
+<td>50000000</td>
+<td>64位*50000000 = 400MB</td>
+</tr>
+<tr>
+<td>Bitmaps</td>
+<td>1位</td>
+<td>100000000</td>
+<td>1位*100000000 = 12.5MB</td>
+</tr>
+</tbody>
+</table>
+<p>很明显，这种情况下使用Bitmaps能节省很多的内存空间，尤其是随着时间推移节省的内存还是非常可观的</p>
+<table>
+<thead>
+<tr>
+<th>set和Bitmaps存储独立用户空间对比</th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据类型</td>
+<td>一天</td>
+<td>一个月</td>
+<td>一年</td>
+</tr>
+<tr>
+<td>集合类型</td>
+<td>400MB</td>
+<td>12GB</td>
+<td>144GB</td>
+</tr>
+<tr>
+<td>Bitmaps</td>
+<td>12.5MB</td>
+<td>375MB</td>
+<td>4.5GB</td>
+</tr>
+</tbody>
+</table>
+<p>但Bitmaps并不是万金油，假如该网站每天的独立访问用户很少，例如只有10万（大量的僵尸用户） ，那么两者的对比如下表所示，很显然，这时候使用Bitmaps就不太合适了，因为基本上大部分位都是0。</p>
+<table>
+<thead>
+<tr>
+<th>set和Bitmaps存储一天活跃用户对比（独立用户比较少）</th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据类型</td>
+<td>每个userid占用空间</td>
+<td>需要存储的用户量</td>
+<td>全部内存量</td>
+</tr>
+<tr>
+<td>集合类型</td>
+<td>64位</td>
+<td>100000</td>
+<td>64位*100000 = 800KB</td>
+</tr>
+<tr>
+<td>Bitmaps</td>
+<td>1位</td>
+<td>100000000</td>
+<td>1位*100000000 = 12.5MB</td>
+</tr>
+</tbody>
+</table>
+<h1 id="2-hyperloglog"><a class="markdownIt-Anchor" href="#2-hyperloglog"></a> 2: HyperLogLog</h1>
+<h2 id="21-简介"><a class="markdownIt-Anchor" href="#21-简介"></a> 2.1: 简介</h2>
+<p>在工作当中，我们经常会遇到与统计相关的功能需求，比如统计网站PV（PageView页面访问量）,可以使用Redis的incr、incrby轻松实现。但像UV（UniqueVisitor，独立访客）、独立IP数、搜索记录数等需要去重和计数的问题如何解决？这种求集合中不重复元素个数的问题称为基数问题。</p>
+<p>解决基数问题有很多种方案：</p>
+<p>（1）数据存储在MySQL表中，使用distinct count计算不重复个数</p>
+<p>（2）使用Redis提供的hash、set、bitmaps等数据结构来处理</p>
+<p>以上的方案结果精确，但随着数据不断增加，导致占用空间越来越大，对于非常大的数据集是不切实际的。</p>
+<p>能否能够降低一定的精度来平衡存储空间？Redis推出了<strong>HyperLogLog</strong></p>
+<p>Redis HyperLogLog 是用来做基数统计的算法，HyperLogLog 的优点是，在输入元素的数量或者体积非常非常大时，计算基数所需的空间总是固定的、并且是很小的。</p>
+<p>在 Redis 里面，每个 HyperLogLog 键只需要花费 12 KB 内存，就可以计算接近 2^64 个不同元素的基数。这和计算基数时，元素越多耗费内存就越多的集合形成鲜明对比。</p>
+<p>但是，因为 HyperLogLog 只会根据输入元素来计算基数，而不会储存输入元素本身，所以<strong>HyperLogLog 不能像集合那样，返回输入的各个元素</strong>。</p>
+<p><strong>什么是基数?</strong></p>
+<p>比如数据集 {1, 3, 5, 7, 5, 7, 8}，那么这个数据集的基数集为 {1, 3, 5 ,7, 8}, 基数(<strong>不重复元素个</strong>数)为5。基数估计就是在误差可接受的范围内，快速计算基数。</p>
+<h2 id="22-命令"><a class="markdownIt-Anchor" href="#22-命令"></a> 2.2: 命令</h2>
+<ul>
+<li><strong>pfadd</strong></li>
+<li><strong>pfcount</strong></li>
+</ul>
+<figure class="highlight gauss"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs gauss">pfadd &lt;<span class="hljs-built_in">key</span>&gt;&lt; element&gt; [element ...]   <span class="hljs-meta">#添加指定元素到 HyperLogLog 中</span><br>pfcount&lt;<span class="hljs-built_in">key</span>&gt; [<span class="hljs-built_in">key</span> ...] <span class="hljs-meta"># 计算HLL的近似基数，可以计算多个HLL，比如用HLL存储每天的UV，计算一周的UV可以使用7天的UV合并计算即可</span><br></code></pre></td></tr></tbody></table></figure>
+<p>实例</p>
+<p><img src="https://img-blog.csdnimg.cn/c23f0f23825946829d849acc0b150d1b.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<ul>
+<li><strong>pfmerge</strong></li>
+</ul>
+<figure class="highlight awk"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs awk">pfmerge&lt;destkey&gt;&lt;sourcekey&gt; [sourcekey ...]  <span class="hljs-comment">#将一个或多个HLL合并后的结果存储在另一个HLL中，比如每月活跃用户可以使用每天的活跃用户来合并计算可得</span><br>[[```]]<br><br>**实例**<br><br>![在这里插入图片描述](https:<span class="hljs-regexp">//img</span>-blog.csdnimg.cn/<span class="hljs-number">1</span>b845dfaec8e4303b4d8a36b40325b55.png<span class="hljs-comment">#pic_center)</span><br><br><span class="hljs-comment"># 3: Geospatial</span><br><br><span class="hljs-comment">## 3.1: 简介</span><br><br> Redis <span class="hljs-number">3.2</span> 中增加了对GEO类型的支持。GEO，Geographic，地理信息的缩写。该类型，就是元素的<span class="hljs-number">2</span>维坐标，在地图上就是经纬度。redis基于该类型，提供了经纬度设置，查询，范围查询，距离查询，经纬度Hash等常见操作。<br><br><span class="hljs-comment">## 3.2: 命令</span><br><br>-   **geoadd**<br><br></code></pre></td></tr></tbody></table></figure>
+<p>geoadd<key>&lt; longitude&gt;<latitude><member> [longitude latitude member…]  # 添加地理位置（经度，纬度，名称）</member></latitude></key></p>
+<figure class="highlight asciidoc"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc"><br><span class="hljs-strong">**实例**</span><br><br></code></pre></td></tr></tbody></table></figure>
+<p>geoadd china:city 121.47 31.23 shanghai<br>
+geoadd china:city 106.50 29.53 chongqing 114.05 22.52 shenzhen 116.38 39.90 beijing</p>
+<figure class="highlight markdown"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><br>![<span class="hljs-string">在这里插入图片描述</span>](<span class="hljs-link">https://img-blog.csdnimg.cn/858dfe0f441148fc97da41b37ebc62c7.png#pic_center</span>)<br><br><span class="hljs-quote">&gt; 1.  两极无法直接添加，一般会下载城市数据，直接通过 Java 程序一次性导入。</span><br><span class="hljs-quote">&gt; 2.  有效的经度从 -180 度到 180 度。有效的纬度从 -85.05112878 度到 85.05112878 度。</span><br><span class="hljs-quote">&gt; 3.  当坐标位置超出指定范围时，该命令将会返回一个错误。</span><br><span class="hljs-quote">&gt; 4.  已经添加的数据，是无法再次往里面添加的。</span><br><br><span class="hljs-bullet">-</span>   <span class="hljs-strong">**geopos**</span><br><br></code></pre></td></tr></tbody></table></figure>
+<p>geopos  <key><member> [member…]  #获得指定地区的坐标值</member></key></p>
+<figure class="highlight markdown"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><br>![<span class="hljs-string">在这里插入图片描述</span>](<span class="hljs-link">https://img-blog.csdnimg.cn/9182ade18ffb44cbab39e98abfae98e9.png#pic_center</span>)<br><br><span class="hljs-bullet">-</span>   <span class="hljs-strong">**geodist**</span><br><br></code></pre></td></tr></tbody></table></figure>
+<p>geodist<key><member1><member2>  [m|km|ft|mi ]  #获取两个位置之间的直线距离</member2></member1></key></p>
+<figure class="highlight node-repl"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs node-repl"><br>获取两个位置之间的直线距离<br><br> ![在这里插入图片描述](https://img-blog.csdnimg.cn/e3d1223b4e1245d5b13aef5a0f8d57f5.png#pic_center)<br><br><span class="hljs-meta prompt_">&gt;</span> <span class="language-javascript">单位：</span><br><span class="hljs-meta prompt_">&gt;</span> <br><span class="hljs-meta prompt_">&gt;</span> <span class="language-javascript">m 表示单位为米\[默认值\]。</span><br><span class="hljs-meta prompt_">&gt;</span> <br><span class="hljs-meta prompt_">&gt;</span> <span class="language-javascript">km 表示单位为千米。</span><br><span class="hljs-meta prompt_">&gt;</span> <br><span class="hljs-meta prompt_">&gt;</span> <span class="language-javascript">mi 表示单位为英里。</span><br><span class="hljs-meta prompt_">&gt;</span> <br><span class="hljs-meta prompt_">&gt;</span> <span class="language-javascript">ft 表示单位为英尺。</span><br><span class="hljs-meta prompt_">&gt;</span> <br><span class="hljs-meta prompt_">&gt;</span> <span class="language-javascript">如果用户没有显式地指定单位参数， <span class="hljs-variable constant_">GEODIST</span></span><br><br>-   **georadius**<br><br></code></pre></td></tr></tbody></table></figure>
+<p>georadius<key>&lt; longitude&gt;<latitude>radius  m|km|ft|mi   # 以给定的经纬度为中心，找出某一半径内的元素 四个参数 -》经度 纬度 距离 单位</latitude></key></p>
+<pre class="highlight"><code class="">
+![在这里插入图片描述](https://img-blog.csdnimg.cn/ac2625720536437d9fc4662caa6c7f42.png#pic_center)
+
+
+</code></pre>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/" class="category-chain-item">👨🏻‍💻code</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/redis/" class="category-chain-item">redis</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/redis/%E5%B0%9A%E7%A1%85%E8%B0%B7/" class="category-chain-item">尚硅谷</a>
+  
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/80/" title="一维 dp 数组(🗃️)">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">一维 dp 数组(🗃️)</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/72/" title="Redis6篇 （二）配置文件的介绍 + 发布和订阅">
+                        <span class="hidden-mobile">Redis6篇 （二）配置文件的介绍 + 发布和订阅</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

@@ -1,0 +1,1548 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202206251952371.png">
+  <link rel="icon" href="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202206251952371.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="zeefan">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="📝Redis6篇（一）概述与安装 + 五大常用的数据类型::   1: NoSQL数据库简介 NoSQL(NoSQL &#x3D; Not Only SQL )，意即“不仅仅是SQL”，泛指非关系型的数据库。 NoSQL 不依赖业务逻辑方式存储，而以简单的key-value模式存储。因此大大的增加了数据库的扩展能力。  不遵循SQL标准。 不支持ACID。 远超于SQL的性能。  NoSQL适用场景  对">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis6篇（一）概述与安装 + 五大常用的数据类型">
+<meta property="og:url" content="https://zeefan1555.github.io/posts/19/index.html">
+<meta property="og:site_name" content="一杯空气">
+<meta property="og:description" content="📝Redis6篇（一）概述与安装 + 五大常用的数据类型::   1: NoSQL数据库简介 NoSQL(NoSQL &#x3D; Not Only SQL )，意即“不仅仅是SQL”，泛指非关系型的数据库。 NoSQL 不依赖业务逻辑方式存储，而以简单的key-value模式存储。因此大大的增加了数据库的扩展能力。  不遵循SQL标准。 不支持ACID。 远超于SQL的性能。  NoSQL适用场景  对">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/e08540a6d6a5420cb48ec16a2b29b2e3.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/f610040e4dca4e868d9abed589b5a52a.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/93fd6e936b6e4eb0b5eefe635758f0c6.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/5f94e03c8dc54acfb75c35830abd8a44.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/6cdd7828f88442c491ff31b464c25bd3.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/1cb65d5612ed4f63b8195a4326bbae09.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/5f5a31cba152450f8401ebb23ebc5099.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/ff4ac6f683cf469fad9e9162f4e7070d.png#pic_center">
+<meta property="og:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202212162038378.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/02dd14429c3d4ab4924d46223e1e2a5c.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/635718c04cc04a6ba163448985c189a9.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/5479d53cd1f44c2396f41f869fcee624.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/f9be288daea64e119d1b8660e8307796.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/9902c87d80bf45efb838e9af46e3e8b1.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/8ad0e6d2e7984613bf9a9b1c43d5817a.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/fcadc873329f45d4b7e607d68195d00f.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/71f2f83dd96e43d2bcd87b90a1d3bf8e.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/9b8906b114cc4a778a4d0fdafdacd079.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/d7b073a34e814031a821fea614604f53.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/00208afe11b146a78c0c33be08c80360.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/fc72b761e6ae4cad83173f4cf3469883.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/34d5a23835ba4de7b85d8f6fbffee5f0.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/f1404ec232b441809d0943192354fda4.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/280b73c86a5542a2bf6980790ec710a7.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/a62c19b393724517a95ff4d9934fcef5.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/8deaf5fc3ce54ba6aafecdb641462f33.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/65d2571bb3104d7eb2f1d4e49ee1f6ac.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/98444d82dd654a9791a72e8e0a6c961e.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/06c477edb7c44561b3f26dbd4105cff4.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/193833b4e6f2427690d5ff0d76137b09.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/b2d3053f2baa4449b320d3da86a30df6.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/9ace995900a6491384a33e690cc5c32a.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/94fdecebe8e34ee3a2be71644d4fdf0b.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/03fd35fc4b764174b170fad9cdb728b2.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/1bd9417aa99a43f3aff76498fb82dcfc.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/937c9719bf2441ea9e98f12c371bbf9b.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/879acdcd677b4d91b647cb310fadc8a4.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/84bf9f0033d6425e8953ae6f0608e088.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/40958469cdc94e42a27784c0de38fd56.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/88b974e67c474683a08e4a19fa28bd8b.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/72e6f5f749f24d99ab0d547c0a09c6b4.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/0fb420d8ae1f4ddd9f83c3a5a4c094fc.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/b2561a7437f74288ae865d42bd46e392.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/ad9b4fa8cea343938ee6936b12af6cdd.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/e9189d354e254ab0a9bff54b8cd9bc3d.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/b25472aa0d504b3cb2c7662b0874fc40.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/8e5be58127d44087b215fe5cde3d3e15.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/52a92cd8078d4b32962caa57b6e06deb.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/23fd4baa730c441e82428f730dcb6022.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/ea5eadc6822e4e2e9d0ef1b9398de672.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/095b97fd8c274d7e86dcceee37d7875a.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/193bc5c71f7644629e0ab35ccf056e0b.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/374027f41f0c46acb92ed81ef491c22d.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/8545a6baed784307a801db4b016968d6.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/393a1e53fe774154b12743eb2d49108d.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/245e1fce4a794912b947ca8ca68f25bd.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/759473cfb64b443584f676ba75f0e982.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/a9471aef122c484ba03903984184175c.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/b504876004f04696be916eb36e02cb58.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/41b7b840f4fa4a5f9afd93801cbbf7c7.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/fb53145f2ca24b8f866431539d0989a8.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/095b474bd9dd493082cc6ecbf76be194.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/fc1b3a4c3b0647edbcbd36eae34a17d2.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/7b0c7db8cc404d239fd39215204d5e39.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/27a06fae49d54080a4808cf5d6a11c06.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/ad5021fa573549748ed6809b4b83f316.png#pic_center">
+<meta property="article:published_time" content="2022-12-16T12:34:00.000Z">
+<meta property="article:modified_time" content="2022-12-17T12:56:30.625Z">
+<meta property="article:author" content="zeefan">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/e08540a6d6a5420cb48ec16a2b29b2e3.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70#pic_center">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Redis6篇（一）概述与安装 + 五大常用的数据类型 - 一杯空气</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.15.6/katex.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"zeefan1555.github.io","root":"/","version":"1.9.1","typing":{"enable":true,"typeSpeed":150,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"Text"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":10},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>一杯空气</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Redis6篇（一）概述与安装 + 五大常用的数据类型"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-12-16 20:34" pubdate>
+          2022年12月16日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          11k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          55 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Redis6篇（一）概述与安装 + 五大常用的数据类型</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2022年12月17日 晚上
+                  
+                
+              </p>
+            
+            <div class="markdown-body">
+              
+              <p>📝Redis6篇（一）概述与安装 + 五大常用的数据类型::</p>
+<!-- basicblock-end -->
+<h1 id="1-nosql数据库简介"><a class="markdownIt-Anchor" href="#1-nosql数据库简介"></a> 1: NoSQL数据库简介</h1>
+<p>NoSQL(NoSQL = <strong>Not Only SQL</strong> )，意即“不仅仅是SQL”，泛指<strong>非关系型的数据库</strong>。</p>
+<p>NoSQL 不依赖业务逻辑方式存储，而以简单的key-value模式存储。因此大大的增加了数据库的扩展能力。</p>
+<ul>
+<li>不遵循SQL标准。</li>
+<li>不支持ACID。</li>
+<li>远超于SQL的性能。</li>
+</ul>
+<p><strong>NoSQL适用场景</strong></p>
+<ul>
+<li>对数据高并发的读写</li>
+<li>海量数据的读写</li>
+<li>对数据高可扩展性的</li>
+</ul>
+<p><strong>NoSQL不适用场景</strong></p>
+<ul>
+<li>需要事务支持</li>
+<li>基于sql的结构化查询存储，处理复杂的关系,需要即席查询。</li>
+<li><strong>（用不着sql</strong>的和用了sql也不行的情况，请考虑用NoSql）</li>
+</ul>
+<p><strong>行式数据库</strong></p>
+<p><img src="https://img-blog.csdnimg.cn/e08540a6d6a5420cb48ec16a2b29b2e3.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p><strong>列式数据库</strong></p>
+<p><img src="https://img-blog.csdnimg.cn/f610040e4dca4e868d9abed589b5a52a.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<h1 id="2-redis概述"><a class="markdownIt-Anchor" href="#2-redis概述"></a> 2: Redis概述</h1>
+<ul>
+<li>Redis是一个开源的key-value存储系统。</li>
+<li>和Memcached类似，它支持存储的value类型相对更多，包括string(字符串)、list(链表)、set(集合)、zset(sorted set --有序集合)和hash（哈希类型）。</li>
+<li>这些数据类型都支持push/pop、add/remove及取交集并集和差集及更丰富的操作，而且这些操作都是原子性的。</li>
+<li>在此基础上，Redis支持各种不同方式的排序。</li>
+<li>与memcached一样，为了保证效率，数据都是缓存在内存中。</li>
+<li>区别的是Redis会周期性的把更新的数据写入磁盘或者把修改操作写入追加的记录文件。并且在此基础上实现了主从同步。</li>
+</ul>
+<h1 id="3-redis安装"><a class="markdownIt-Anchor" href="#3-redis安装"></a> 3: Redis安装</h1>
+<h2 id="31-官网下载"><a class="markdownIt-Anchor" href="#31-官网下载"></a> 3.1: 官网下载</h2>
+<blockquote>
+<p>Redis官网 <a target="_blank" rel="noopener" href="https://redis.io/">Redis</a></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/93fd6e936b6e4eb0b5eefe635758f0c6.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<h2 id="32-安装"><a class="markdownIt-Anchor" href="#32-安装"></a> 3.2: 安装</h2>
+<ul>
+<li>
+<p>准备工作</p>
+<ul>
+<li>将下载好的Redis上传到Linux的/opt目录下</li>
+<li>Linux要具备gcc环境</li>
+</ul>
+<figure class="highlight applescript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs applescript"><span class="hljs-comment">#查看是否有gcc环境</span><br>gcc <span class="hljs-comment">--version</span><br><span class="hljs-comment">#安装gcc</span><br>yum -y gcc<br></code></pre></td></tr></tbody></table></figure>
+</li>
+<li>
+<p>解压上传的文件</p>
+</li>
+</ul>
+<figure class="highlight apache"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">tar</span> -zxvf redis-<span class="hljs-number">6</span>.<span class="hljs-number">2</span>.<span class="hljs-number">1</span>.tar.gz<br></code></pre></td></tr></tbody></table></figure>
+<ul>
+<li>解压完成后进入目录</li>
+</ul>
+<figure class="highlight apache"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">cd</span> redis-<span class="hljs-number">6</span>.<span class="hljs-number">2</span>.<span class="hljs-number">1</span><br></code></pre></td></tr></tbody></table></figure>
+<ul>
+<li>在redis-6.2.1目录下再次执行make命令</li>
+</ul>
+<figure class="highlight ebnf"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">make</span><br></code></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>说明：如果没有准备好C语言编译环境，make 会报错—Jemalloc/jemalloc.h：没有那个文件</p>
+<p><img src="https://img-blog.csdnimg.cn/5f94e03c8dc54acfb75c35830abd8a44.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+</blockquote>
+<blockquote>
+<p>解决办法：1、运行make distclean</p>
+<p>2、在redis-6.2.1目录下再次执行make命令</p>
+</blockquote>
+<ul>
+<li>跳过make test 继续执行: make install</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/6cdd7828f88442c491ff31b464c25bd3.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<ul>
+<li>安装目录：/usr/local/bin</li>
+</ul>
+<blockquote>
+<p>查看默认安装目录：</p>
+<p>redis-benchmark:性能测试工具，可以在自己本子运行，看看自己本子性能如何</p>
+<p>redis-check-aof：修复有问题的AOF文件，rdb和aof后面讲</p>
+<p>redis-check-dump：修复有问题的dump.rdb文件</p>
+<p>redis-sentinel：Redis集群使用</p>
+<p>redis-server：Redis服务器启动命令</p>
+<p>redis-cli：客户端，操作入口</p>
+</blockquote>
+<h2 id="33-redis的启动"><a class="markdownIt-Anchor" href="#33-redis的启动"></a> 3.3: Redis的启动</h2>
+<p><strong>前台启动</strong>（不推荐）</p>
+<blockquote>
+<p>前台启动，命令行窗口不能关闭，否则服务器停止</p>
+<p>直接在安装目录下运行redis-server</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/1cb65d5612ed4f63b8195a4326bbae09.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p><strong>后台运行</strong>（推荐）</p>
+<ul>
+<li>先备份redis.conf</li>
+</ul>
+<figure class="highlight vim"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">cp</span> redis.<span class="hljs-keyword">conf</span> /etc/redis-<span class="hljs-keyword">conf</span><br></code></pre></td></tr></tbody></table></figure>
+<ul>
+<li>
+<p>修改/etc/redis.conf(128行)文件将里面的daemonize no 改成 yes，让服务在后台启动</p>
+</li>
+<li>
+<p>启动redis</p>
+</li>
+</ul>
+<figure class="highlight awk"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">redis-server <span class="hljs-regexp">/etc/</span>redis-conf <span class="hljs-comment"># 配置文件一定是要修改了daemonize的</span><br></code></pre></td></tr></tbody></table></figure>
+<ul>
+<li>查看进程</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/5f5a31cba152450f8401ebb23ebc5099.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<ul>
+<li>打开客户端</li>
+</ul>
+<blockquote>
+<p>在安装目录打开</p>
+</blockquote>
+<figure class="highlight avrasm"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs avrasm">redis-<span class="hljs-keyword">cli</span><br></code></pre></td></tr></tbody></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/ff4ac6f683cf469fad9e9162f4e7070d.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<h2 id="34-redis的关闭"><a class="markdownIt-Anchor" href="#34-redis的关闭"></a> 3.4: Redis的关闭</h2>
+<ul>
+<li>
+<p>退出客户端-exit</p>
+</li>
+<li>
+<p>在客户端中输入shundown</p>
+</li>
+<li>
+<p>杀死redis进程</p>
+</li>
+</ul>
+<figure class="highlight perl"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs perl">ps -ef | <span class="hljs-keyword">grep</span> redis <span class="hljs-comment"># 先查看进程号</span><br><span class="hljs-keyword">kill</span> -<span class="hljs-number">9</span> PID<br></code></pre></td></tr></tbody></table></figure>
+<h2 id="35-redis的基本介绍"><a class="markdownIt-Anchor" href="#35-redis的基本介绍"></a> 3.5: Redis的基本介绍</h2>
+<ul>
+<li>默认16个数据库，类似数组下标从0开始，初始默认使用0号库</li>
+<li>使用命令 select <code>&lt;dbid&gt;</code> 来切换数据库。如: select 8</li>
+<li>统一密码管理，所有库同样密码</li>
+<li>dbsize查看当前数据库的key的数量</li>
+<li>flushdb清空当前库</li>
+<li>flushall通杀全部库</li>
+<li><strong>Redis是单线程+多路IO复用技术</strong><br>
+<img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202212162038378.png" srcset="/img/loading.gif" lazyload alt=""></li>
+</ul>
+<blockquote>
+<p>多路复用是指使用一个线程来检查多个文件描述符（Socket）的就绪状态，比如调用select和poll函数，传入多个文件描述符，如果有一个文件描述符就绪，则返回，否则阻塞直到超时。得到就绪状态后进行真正的操作可以在同一个线程里执行，也可以启动线程执行（比如使用线程池。</p>
+</blockquote>
+<p><strong>（与Memcache三点不同: 支持多数据类型，支持持久化，单线程+多路IO复用）</strong></p>
+<h1 id="4-二-redis五大常用的数据类型"><a class="markdownIt-Anchor" href="#4-二-redis五大常用的数据类型"></a> 4: 二、Redis五大常用的数据类型</h1>
+<h1 id="5-redis键key"><a class="markdownIt-Anchor" href="#5-redis键key"></a> 5: Redis键（key）</h1>
+<p><strong>关于key的一些命令</strong></p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>keys *</td>
+<td>查看当前库所有key</td>
+</tr>
+<tr>
+<td>exists key</td>
+<td>判断某个key是否存在</td>
+</tr>
+<tr>
+<td>type key</td>
+<td>查看你的key是什么类型</td>
+</tr>
+<tr>
+<td>del key</td>
+<td>删除指定的key数据</td>
+</tr>
+<tr>
+<td>unlink key</td>
+<td>根据value选择非阻塞删除  仅将keys从keyspace元数据中删除，真正的删除会在后续异步操作</td>
+</tr>
+<tr>
+<td>expire key 10</td>
+<td>10秒钟：为给定的key设置过期时间</td>
+</tr>
+<tr>
+<td>ttl key</td>
+<td>查看还有多少秒过期，-1表示永不过期，-2表示已过期</td>
+</tr>
+<tr>
+<td>selec id</td>
+<td>命令切换数据库</td>
+</tr>
+<tr>
+<td>dbsize</td>
+<td>查看当前数据库的key的数量</td>
+</tr>
+<tr>
+<td>flushdb</td>
+<td>清空当前库</td>
+</tr>
+<tr>
+<td>flushall</td>
+<td>通杀全部库</td>
+</tr>
+</tbody>
+</table>
+<h1 id="6-redis-字符串string"><a class="markdownIt-Anchor" href="#6-redis-字符串string"></a> 6: Redis 字符串(String)</h1>
+<h2 id="61-概述"><a class="markdownIt-Anchor" href="#61-概述"></a> 6.1: 概述</h2>
+<ul>
+<li>
+<p>String是Redis最基本的类型，你可以理解成与Memcached一模一样的类型，一个key对应一个value。</p>
+</li>
+<li>
+<p>String类型是<strong>二进制安全的</strong>。意味着Redis的string可以包含任何数据。比如jpg图片或者序列化的对象。</p>
+</li>
+<li>
+<p>String类型是Redis最基本的数据类型，一个Redis中字符串value最多可以是512M</p>
+</li>
+</ul>
+<h2 id="62-常用命令"><a class="markdownIt-Anchor" href="#62-常用命令"></a> 6.2: 常用命令</h2>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>set <code>&lt;key&gt;&lt;value&gt;</code></td>
+<td>添加键值对</td>
+</tr>
+<tr>
+<td>get <code>&lt;key&gt;</code></td>
+<td>查询对应键值</td>
+</tr>
+<tr>
+<td>append <code>&lt;key&gt;&lt;value</code> &gt;</td>
+<td>将给定的 <code>&lt;value&gt;</code> 追加到原值的末尾</td>
+</tr>
+<tr>
+<td>strlen <code>&lt;key&gt;</code></td>
+<td>获得值的长度</td>
+</tr>
+<tr>
+<td>setnx <code>&lt;key&gt;&lt;value&gt;</code></td>
+<td>只有在 key 不存在时设置 key 的值</td>
+</tr>
+<tr>
+<td>incr <code>&lt;key</code> &gt;</td>
+<td>将 key 中储存的数字值增1  只能对数字值操作，如果为空，新增值为1</td>
+</tr>
+<tr>
+<td>decr <code>&lt;key&gt;</code></td>
+<td>将 key 中储存的数字值减1  只能对数字值操作，如果为空，新增值为-1</td>
+</tr>
+<tr>
+<td>incrby / decrby <code>&lt;key&gt;</code> &lt;步长&gt;</td>
+<td>将 key 中储存的数字值增减。自定义步长。</td>
+</tr>
+<tr>
+<td>mset <code>&lt;key1&gt;&lt;value1&gt;&lt;key2&gt;&lt;value2&gt;</code> …</td>
+<td>同时设置一个或多个 key-value对</td>
+</tr>
+<tr>
+<td>mget <code>&lt;key1&gt;&lt;key2&gt;&lt;key3&gt;</code> …</td>
+<td>同时获取一个或多个 value</td>
+</tr>
+<tr>
+<td>msetnx <code>&lt;key1&gt;&lt;value1&gt;&lt;key2&gt;&lt;value2&gt;</code> …</td>
+<td>同时设置一个或多个 key-value 对，当且仅当所有给定 key 都不存在。</td>
+</tr>
+<tr>
+<td>getrange <code>&lt;key&gt;</code> &lt;起始位置&gt;&lt;结束位置&gt;</td>
+<td>获得值的范围，类似java中的substring，<strong>前包，后包</strong></td>
+</tr>
+<tr>
+<td>setrange <code>&lt;key&gt;</code> &lt;起始位置&gt; <code>&lt;value&gt;</code></td>
+<td>用 <code>&lt;value&gt;</code> 覆写 <code>&lt;key&gt;</code> 所储存的字符串值，从&lt;起始位置&gt;开始(<strong>索引从0开始</strong>)</td>
+</tr>
+<tr>
+<td>setex &lt;过期时间&gt; <code>&lt;value&gt;</code></td>
+<td>设置键值的同时，设置过期时间，单位秒。</td>
+</tr>
+<tr>
+<td>getset <code>&lt;key&gt;&lt;value&gt;</code></td>
+<td>以新换旧，设置了新值同时获得旧值。</td>
+</tr>
+</tbody>
+</table>
+<p><strong>原子性</strong></p>
+<p><strong>所谓原子操作是指不会被线程调度机制打断的操作</strong>；</p>
+<p>这种操作一旦开始，就一直运行到结束，中间不会有任何 context switch （切换到另一个线程）。</p>
+<p>（1）在单线程中，能够在单条指令中完成的操作都可以认为是"原子操作"，因为中断只能发生于指令之间。</p>
+<p>（2）在多线程中，不能被其它进程（线程）打断的操作就叫原子操作。</p>
+<p><strong>Redis单命令的原子性主要得益于的单线程</strong>。</p>
+<p>案例：</p>
+<blockquote>
+<p>java中的i++是否是原子操作？<strong>不是</strong></p>
+<p>i=0;两个线程分别对进行次值是多少？ 2~200</p>
+<p><img src="https://img-blog.csdnimg.cn/02dd14429c3d4ab4924d46223e1e2a5c.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+</blockquote>
+<hr>
+<ul>
+<li>set <code>&lt;key&gt;&lt;value&gt;</code> 添加键值对</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/635718c04cc04a6ba163448985c189a9.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<ul>
+<li>get <code>&lt;key&gt;</code> 查询对应键值</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/5479d53cd1f44c2396f41f869fcee624.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<ul>
+<li>append <code>&lt;key&gt;&lt;value&gt;</code> 将给定的 <code>&lt;value&gt;</code> 追加到原值的末尾</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/f9be288daea64e119d1b8660e8307796.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<ul>
+<li>strlen <code>&lt;key&gt;</code> 获得值的长度</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/9902c87d80bf45efb838e9af46e3e8b1.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<ul>
+<li>setnx <code>&lt;key&gt;&lt;value&gt;</code> 只有在 key 不存在时设置 key 的值</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/8ad0e6d2e7984613bf9a9b1c43d5817a.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<ul>
+<li>
+<p>incr <code>&lt;key&gt;</code></p>
+<p>将 key 中储存的数字值增1</p>
+<p>只能对数字值操作，如果为空，新增值为1</p>
+</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/fcadc873329f45d4b7e607d68195d00f.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<ul>
+<li>
+<p>decr <code>&lt;key&gt;</code></p>
+<p>将 key 中储存的数字值减1</p>
+<p>只能对数字值操作，如果为空，新增值为-1</p>
+</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/71f2f83dd96e43d2bcd87b90a1d3bf8e.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<ul>
+<li>incrby / decrby <code>&lt;key&gt;</code> &lt;步长&gt;将 key 中储存的数字值增减。自定义步长。</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/9b8906b114cc4a778a4d0fdafdacd079.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<ul>
+<li>mset <code>&lt;key1&gt;&lt;value1&gt;&lt;key2&gt;&lt;value2&gt;</code> … 同时设置一个或多个 key-value</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/d7b073a34e814031a821fea614604f53.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<ul>
+<li>mget <code>&lt;key1&gt;&lt;key2&gt;&lt;key3&gt;</code> … 同时获取一个或多个 value</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/00208afe11b146a78c0c33be08c80360.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<ul>
+<li>
+<p>msetnx <code>&lt;key1&gt;&lt;value1&gt;&lt;key2&gt;&lt;value2&gt;</code> …</p>
+<p>同时设置一个或多个 key-value 对，当且仅当所有给定 key 都不存在。</p>
+</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/fc72b761e6ae4cad83173f4cf3469883.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<ul>
+<li>
+<p>getrange <code>&lt;key&gt;</code>&lt;起始位置&gt;&lt;结束位置&gt;</p>
+<p>获得值的范围，类似java中的substring，<strong>前包，后包</strong></p>
+</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/34d5a23835ba4de7b85d8f6fbffee5f0.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<ul>
+<li>
+<p>setrange <code>&lt;key&gt;</code>&lt;起始位置&gt;<code>&lt;value&gt;</code></p>
+<p>用 <code>&lt;value&gt;</code> 覆写<code>&lt;key&gt;</code>所储存的字符串值，从&lt;起始位置&gt;开始(<strong>索引从0****开始</strong>)。</p>
+</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/f1404ec232b441809d0943192354fda4.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<ul>
+<li>setex &lt;过期时间&gt; <code>&lt;value&gt;</code> 设置键值的同时，设置过期时间，单位秒</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/280b73c86a5542a2bf6980790ec710a7.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<ul>
+<li>
+<p>getset <code>&lt;key&gt;&lt;value&gt;</code></p>
+<p>以新换旧，设置了新值同时获得旧值。</p>
+</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/a62c19b393724517a95ff4d9934fcef5.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<h2 id="63-数据结构"><a class="markdownIt-Anchor" href="#63-数据结构"></a> 6.3: 数据结构</h2>
+<blockquote>
+<p>String的数据结构为简单动态字符串(Simple Dynamic String,缩写SDS)。是可以修改的字符串，内部结构实现上类似于Java的ArrayList，采用预分配冗余空间的方式来减少内存的频繁分配.</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/8deaf5fc3ce54ba6aafecdb641462f33.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p>如图中所示，内部为当前字符串实际分配的空间capacity一般要高于实际字符串长度len。<br>
+当字符串长度小于1M时，扩容都是加倍现有的空间，<br>
+如果超过1M，扩容时一次只会多扩1M的空间。<br>
+需要注意的是字符串最大长度为512M。</p>
+<h1 id="7-redis-列表list"><a class="markdownIt-Anchor" href="#7-redis-列表list"></a> 7: Redis 列表(List)</h1>
+<h2 id="71-概述"><a class="markdownIt-Anchor" href="#71-概述"></a> 7.1: 概述</h2>
+<ul>
+<li>
+<p>单键多值</p>
+</li>
+<li>
+<p>Redis 列表是简单的字符串列表，按照插入顺序排序。你可以添加一个元素到列表的头部（左边）或者尾部（右边）。</p>
+</li>
+<li>
+<p>它的底层实际是个双向链表，对两端的操作性能很高，通过索引下标的操作中间的节点性能会较差。</p>
+</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/65d2571bb3104d7eb2f1d4e49ee1f6ac.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<h2 id="72-常用命令"><a class="markdownIt-Anchor" href="#72-常用命令"></a> 7.2: 常用命令</h2>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>lpush/rpush <code>&lt;key&gt;&lt;value1&gt;&lt;value2&gt;&lt;value3&gt;</code> …</td>
+<td>从左边/右边插入一个或多个值</td>
+</tr>
+<tr>
+<td>lpop/rpop <code>&lt;key&gt; &lt;n&gt;</code></td>
+<td>从左边/右边吐出n个值。<strong>值在键在，值光键亡</strong>。</td>
+</tr>
+<tr>
+<td>rpoplpush <code>&lt;key1&gt;&lt;key2&gt;</code></td>
+<td>从<code>&lt;key1&gt;</code>列表右边吐出一个值，插到<code>&lt;key2&gt;</code>列表左边</td>
+</tr>
+<tr>
+<td>lrange <code>&lt;key&gt;&lt;start&gt;&lt;stop&gt;</code></td>
+<td>按照索引下标获得元素(从左到右)</td>
+</tr>
+<tr>
+<td>lrange mylist 0 -1</td>
+<td>0左边第一个，-1右边第一个，（0-1表示获取所有）</td>
+</tr>
+<tr>
+<td>lindex <code>&lt;key&gt;&lt;index&gt;</code></td>
+<td>按照索引下标获得元素(从左到右)</td>
+</tr>
+<tr>
+<td>llen <code>&lt;key&gt;</code></td>
+<td>获得列表长度</td>
+</tr>
+<tr>
+<td>linsert <code>&lt;key&gt;</code> before <code>&lt;value&gt;&lt;newvalue&gt;</code></td>
+<td>在<code>&lt;value&gt;</code>的后面插入<code>&lt;newvalue&gt;</code>插入值</td>
+</tr>
+<tr>
+<td>lrem<code>&lt;key&gt;&lt;n&gt;&lt;value&gt;</code></td>
+<td>从左边删除n个value(从左到右)</td>
+</tr>
+<tr>
+<td>lset<code>&lt;key&gt;&lt;index&gt;&lt;value&gt;</code></td>
+<td>将列表key下标为index的值替换成value</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>
+<p>lpush/rpush <code>&lt;key&gt;&lt;value1&gt;&lt;value2&gt;&lt;value3&gt;</code> …</p>
+<p>从左边/右边插入一个或多个值</p>
+</li>
+<li>
+<p>lrange <code>&lt;key&gt;&lt;start&gt;&lt;stop&gt;</code></p>
+<p>按照索引下标获得元素(从左到右)</p>
+</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/98444d82dd654a9791a72e8e0a6c961e.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/06c477edb7c44561b3f26dbd4105cff4.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<blockquote>
+<p>说明：因为lrange是从左到右的，左边push类似于一个单道管道，先进去的在后面</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/193833b4e6f2427690d5ff0d76137b09.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/b2d3053f2baa4449b320d3da86a30df6.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<blockquote>
+<p>说明：因为lrange是从左到右的，右边push则是正常的</p>
+</blockquote>
+<ul>
+<li>lpop/rpop <code>&lt;key&gt;&lt;n&gt;</code>从左边/右边吐出n个值（n可以省略，默认1）。<strong>值在键在，值光键亡。</strong></li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/9ace995900a6491384a33e690cc5c32a.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<hr>
+<p><img src="https://img-blog.csdnimg.cn/94fdecebe8e34ee3a2be71644d4fdf0b.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<ul>
+<li>
+<p>rpoplpush <code>&lt;key1&gt;&lt;key2&gt;</code> 从<code>&lt;key1&gt;</code>列表右边吐出一个值，插到<code>&lt;key2&gt;</code>列表左边。<img src="https://img-blog.csdnimg.cn/03fd35fc4b764174b170fad9cdb728b2.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+</li>
+<li>
+<p>lindex <code>&lt;key&gt;&lt;index&gt;</code> 按照索引下标获得元素(从左到右)</p>
+</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/1bd9417aa99a43f3aff76498fb82dcfc.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<ul>
+<li>llen <code>&lt;key&gt;</code>获得列表长度</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/937c9719bf2441ea9e98f12c371bbf9b.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<ul>
+<li>linsert <code>&lt;key&gt;</code> before <code>&lt;value&gt;&lt;newvalue&gt;</code> 在<code>&lt;value&gt;</code>的后面插入<code>&lt;newvalue&gt;</code>插入值</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/879acdcd677b4d91b647cb310fadc8a4.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<ul>
+<li>lrem <code>&lt;key&gt;&lt;n&gt;&lt;value&gt;</code> 从左边删除n个value(从左到右)</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/84bf9f0033d6425e8953ae6f0608e088.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<ul>
+<li>lset<code>&lt;key&gt;&lt;index&gt;&lt;value&gt;</code> 将列表key下标为index的值替换成value</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/40958469cdc94e42a27784c0de38fd56.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<h2 id="73-数据结构"><a class="markdownIt-Anchor" href="#73-数据结构"></a> 7.3: 数据结构</h2>
+<p>List的数据结构为快速链表quickList。</p>
+<blockquote>
+<p>首先在列表元素较少的情况下会使用一块连续的内存存储，这个结构是ziplist，也即是压缩列表。</p>
+<p>它将所有的元素紧挨着一起存储，分配的是一块连续的内存。</p>
+<p>当数据量比较多的时候才会改成quicklist。</p>
+<p>因为普通的链表需要的附加指针空间太大，会比较浪费空间。比如这个列表里存的只是int类型的数据，结构上还需要两个额外的指针prev和next。</p>
+<p><img src="https://img-blog.csdnimg.cn/88b974e67c474683a08e4a19fa28bd8b.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p>Redis将链表和ziplist结合起来组成了quicklist。也就是将多个ziplist使用双向指针串起来使用。这样既满足了快速的插入删除性能，又不会出现太大的空间冗余。</p>
+</blockquote>
+<h1 id="8-redis-集合set"><a class="markdownIt-Anchor" href="#8-redis-集合set"></a> 8: Redis 集合(Set)</h1>
+<h2 id="81-概述"><a class="markdownIt-Anchor" href="#81-概述"></a> 8.1: 概述</h2>
+<ul>
+<li>
+<p>Redis set对外提供的功能与list类似是一个列表的功能，特殊之处在于set是可以<strong>自动排重</strong>的，当你需要存储一个列表数据，又不希望出现重复数据时，set是一个很好的选择，并且set提供了判断某个成员是否在一个set集合内的重要接口，这个也是list所不能提供的。</p>
+</li>
+<li>
+<p>Redis的Set是string类型的无序集合。它底层其实是一个value为null的hash表，所以添加，删除，查找的<strong>复杂度都是O(1)。</strong></p>
+</li>
+<li>
+<p>一个算法，随着数据的增加，执行时间的长短，如果是O(1)，数据增加，查找数据的时间不变</p>
+</li>
+</ul>
+<h2 id="82-常用命令"><a class="markdownIt-Anchor" href="#82-常用命令"></a> 8.2: 常用命令</h2>
+<ul>
+<li>sadd <code>&lt;key&gt;&lt;value1&gt;&lt;value2&gt;</code> …
+<ul>
+<li>将一个或多个 member 元素加入到集合 key 中，已经存在的 member 元素将被忽略</li>
+</ul>
+</li>
+<li>smembers <code>&lt;key&gt;</code>
+<ul>
+<li>取出该集合的所有值。</li>
+</ul>
+</li>
+<li>sismember <code>&lt;key&gt;&lt;value&gt;</code>
+<ul>
+<li>判断集合<code>&lt;key&gt;</code>是否为含有该<code>&lt;value&gt;</code>值，有1，没有0</li>
+</ul>
+</li>
+<li>scard<code>&lt;key&gt;</code>
+<ul>
+<li>返回该集合的元素个数。</li>
+</ul>
+</li>
+<li>srem <code>&lt;key&gt;&lt;value1&gt;&lt;value2&gt;</code> …
+<ul>
+<li>删除集合中的某个元素。</li>
+</ul>
+</li>
+<li>spop <code>&lt;key&gt;</code>
+<ul>
+<li><strong>随机从该集合中吐出一个值。</strong></li>
+</ul>
+</li>
+<li>srandmember <code>&lt;key&gt;&lt;n&gt;</code>
+<ul>
+<li>随机从该集合中取出n个值。不会从集合中删除。</li>
+</ul>
+</li>
+<li>smove <code>&lt;source&gt;&lt;destination&gt;</code>value
+<ul>
+<li>把集合中一个值从一个集合移动到另一个集合</li>
+</ul>
+</li>
+<li>sinter <code>&lt;key1&gt;&lt;key2&gt;</code>
+<ul>
+<li>返回两个集合的交集元素。</li>
+</ul>
+</li>
+<li>sunion <code>&lt;key1&gt;&lt;key2&gt;</code>
+<ul>
+<li>返回两个集合的并集元素。</li>
+</ul>
+</li>
+<li>sdiff <code>&lt;key1&gt;&lt;key2&gt;</code>
+<ul>
+<li>返回两个集合的<strong>差集</strong>元素(key1中的，不包含key2中的)</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p><strong>测试</strong></p>
+<ul>
+<li>sadd <code>&lt;key&gt;&lt;value1&gt;&lt;value2&gt;</code> … 将一个或多个 member 元素加入到集合 key 中，已经存在的 member 元素将被忽略</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/72e6f5f749f24d99ab0d547c0a09c6b4.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<ul>
+<li>smembers <code>&lt;key&gt;</code> 取出该集合的所有值。</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/0fb420d8ae1f4ddd9f83c3a5a4c094fc.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<ul>
+<li>sismember <code>&lt;key&gt;&lt;value&gt;</code> 判断集合<code>&lt;key&gt;</code>是否为含有该<code>&lt;value&gt;</code>值，有1，没有0</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/b2561a7437f74288ae865d42bd46e392.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<ul>
+<li>scard<code>&lt;key&gt;</code> 返回元素的个数</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/ad9b4fa8cea343938ee6936b12af6cdd.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<ul>
+<li>srem <code>&lt;key&gt;&lt;value1&gt;&lt;value2&gt;</code> … 删除集合中的某个元素。</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/e9189d354e254ab0a9bff54b8cd9bc3d.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<ul>
+<li>spop <code>&lt;key&gt;</code> 随机从集合中吐一个出来</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/b25472aa0d504b3cb2c7662b0874fc40.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<ul>
+<li>srandmember <code>&lt;key&gt;&lt;n&gt;</code> 随机从该集合中取出n个值。不会从集合中删除。</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/8e5be58127d44087b215fe5cde3d3e15.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<ul>
+<li>smove <code>&lt;source&gt;&lt;destination&gt;</code> value把集合中一个值从一个集合移动到另一个集合</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/52a92cd8078d4b32962caa57b6e06deb.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<ul>
+<li>sinter <code>&lt;key1&gt;&lt;key2&gt;</code>返回两个集合的交集元素。</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/23fd4baa730c441e82428f730dcb6022.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<ul>
+<li>sunion <code>&lt;key1&gt;&lt;key2&gt;</code>返回两个集合的并集元素</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/ea5eadc6822e4e2e9d0ef1b9398de672.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<ul>
+<li>sdiff<code>&lt;key1&gt;&lt;key2&gt;</code>返回两个集合的<strong>差集</strong>元素(key1中的，不包含key2中的)</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/095b97fd8c274d7e86dcceee37d7875a.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<h2 id="83-数据结构"><a class="markdownIt-Anchor" href="#83-数据结构"></a> 8.3: 数据结构</h2>
+<p>Set数据结构是dict字典，字典是用哈希表实现的。</p>
+<p>Java中HashSet的内部实现使用的是HashMap，只不过所有的value都指向同一个对象。Redis的set结构也是一样，它的内部也使用hash结构，所有的value都指向同一个内部值。</p>
+<h1 id="9-redis-哈希hash"><a class="markdownIt-Anchor" href="#9-redis-哈希hash"></a> 9: Redis 哈希(Hash)</h1>
+<h2 id="91-概述"><a class="markdownIt-Anchor" href="#91-概述"></a> 9.1: 概述</h2>
+<p>Redis hash 是一个键值对集合。</p>
+<p>Redis hash是一个string类型的field和value的映射表，hash特别适合用于存储对象。</p>
+<p>类似Java里面的Map&lt;String,Object&gt;</p>
+<p>用户ID为查找的key，存储的value用户对象包含姓名，年龄，生日等信息，如果用普通的key/value结构来存储主要有以下2种存储方式：<br>
+<img src="https://img-blog.csdnimg.cn/193bc5c71f7644629e0ab35ccf056e0b.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<h2 id="92-常用命令"><a class="markdownIt-Anchor" href="#92-常用命令"></a> 9.2: 常用命令</h2>
+<ul>
+<li>hset <code>&lt;key&gt;&lt;field&gt;&lt;value&gt;</code> 给<code>&lt;key&gt;</code>集合中的 <code>&lt;field&gt;</code>键赋值<code>&lt;value&gt;</code></li>
+<li>hget <code>&lt;key1&gt;&lt;field&gt;</code> 从<code>&lt;key1&gt;</code>集合<code>&lt;field&gt;</code>取出 value</li>
+<li>hmset <code>&lt;key1&gt;&lt;field1&gt;&lt;value1&gt;&lt;field2&gt;&lt;value2&gt;</code>… 批量设置hash的值</li>
+<li>hexists<code>&lt;key1&gt;&lt;field&gt;</code> 查看哈希表 key 中，给定域 field 是否存在。</li>
+<li>hkeys <code>&lt;key&gt;</code> 列出该hash集合的所有field</li>
+<li>hvals <code>&lt;key&gt;</code> 列出该hash集合的所有value</li>
+<li>hincrby <code>&lt;key&gt;&lt;field&gt;&lt;increment&gt;</code> 为哈希表 key 中的域 field 的值加上增量 1 -1</li>
+<li>hsetnx <code>&lt;key&gt;&lt;field&gt;&lt;value&gt;</code> 将哈希表 key 中的域的值设置为，当且仅当域不存在</li>
+</ul>
+<hr>
+<p><strong>测试</strong></p>
+<ul>
+<li>hset <code>&lt;key&gt;&lt;field&gt;&lt;value&gt;</code> 给<code>&lt;key&gt;</code>集合中的 <code>&lt;field&gt;</code>键赋值<code>&lt;value&gt;</code></li>
+<li>hget <code>&lt;key1&gt;&lt;field&gt;</code> 从<code>&lt;key1&gt;</code>集合<code>&lt;field&gt;</code>取出 value</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/374027f41f0c46acb92ed81ef491c22d.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<ul>
+<li>hexists<code>&lt;key1&gt;&lt;field&gt;</code> 查看哈希表 key 中，给定域 field 是否存在。存在返回1，不存在返回0</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/8545a6baed784307a801db4b016968d6.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<ul>
+<li>hkeys <code>&lt;key&gt;</code> 列出该hash集合的所有field</li>
+<li>hvals <code>&lt;key&gt;</code> 列出该hash集合的所有value</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/393a1e53fe774154b12743eb2d49108d.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<ul>
+<li>hincrby <code>&lt;key&gt;&lt;field&gt;&lt;increment&gt;</code> 为哈希表 key 中的域 field 的值加上增量 1或自定义的n(只针对整数)</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/245e1fce4a794912b947ca8ca68f25bd.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<ul>
+<li>hsetnx <code>&lt;key&gt;&lt;field&gt;&lt;value&gt;</code> 将哈希表 key 中的域的值设置为，当且仅当域不存在</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/759473cfb64b443584f676ba75f0e982.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<h2 id="93-数据结构"><a class="markdownIt-Anchor" href="#93-数据结构"></a> 9.3: 数据结构</h2>
+<p>Hash类型对应的数据结构是两种：ziplist（压缩列表），hashtable（哈希表）。当field-value长度较短且个数较少时，使用ziplist，否则使用hashtable</p>
+<h1 id="10-redis有序集合zset"><a class="markdownIt-Anchor" href="#10-redis有序集合zset"></a> 10: Redis有序集合(Zset)</h1>
+<h2 id="101-简介"><a class="markdownIt-Anchor" href="#101-简介"></a> 10.1: 简介</h2>
+<ul>
+<li>
+<p>Redis有序集合zset与普通集合set非常相似，是一个没有重复元素的字符串集合。</p>
+</li>
+<li>
+<p>不同之处是有序集合的每个成员都关联了一个<strong>评分</strong>（score）,这个评分（score）被用来按照从最低分到最高分的方式排序集合中的成员。集合的成员是唯一的，但是评分可以是重复了。</p>
+</li>
+<li>
+<p>因为元素是有序的, 所以你也可以很快的根据评分（score）或者次序（position）来获取一个范围的元素。</p>
+</li>
+<li>
+<p>访问有序集合的中间元素也是非常快的,因此你能够使用有序集合作为一个没有重复成员的智能列表。</p>
+</li>
+</ul>
+<h2 id="102-常用命令"><a class="markdownIt-Anchor" href="#102-常用命令"></a> 10.2: 常用命令</h2>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>zadd <code>&lt;key&gt;&lt;score1&gt;&lt;value1&gt;&lt;score2&gt;&lt;value2&gt;</code> …</td>
+<td>将一个或多个 member 元素及其 score 值加入到有序集 key 当中。</td>
+</tr>
+<tr>
+<td><strong>zrange [WITHSCORES]</strong></td>
+<td>返回有序集 key 中，下标在 <code>&lt;start&gt;&lt;stop&gt;</code> 之间的元素  带WITHSCORES，可以让分数一起和值返回到结果集。</td>
+</tr>
+<tr>
+<td>zrangebyscore key minmax [withscores] [limit offset count]</td>
+<td>返回有序集 key 中，所有 score 值介于 min 和 max 之间(包括等于 min 或 max )的成员。有序集成员按 score 值递增(从小到大)次序排列</td>
+</tr>
+<tr>
+<td>zrevrangebyscore key maxmin [withscores] [limit offset count]</td>
+<td>同上，改为从大到小排列。</td>
+</tr>
+<tr>
+<td>zincrby <code>&lt;key&gt;&lt;increment&gt;&lt;value&gt;</code></td>
+<td>为元素的score加上增量</td>
+</tr>
+<tr>
+<td>zrem <code>&lt;key&gt;&lt;value&gt;</code></td>
+<td>删除该集合下，指定值的元素</td>
+</tr>
+<tr>
+<td>zcount <code>&lt;key&gt;&lt;min&gt;&lt;max&gt;</code></td>
+<td>统计该集合，分数区间内的元素个数</td>
+</tr>
+<tr>
+<td>zrank <code>&lt;key&gt;&lt;value&gt;</code></td>
+<td>返回该值在集合中的排名，从0开始。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="1021-测试"><a class="markdownIt-Anchor" href="#1021-测试"></a> 10.2.1: <strong>测试</strong></h3>
+<ul>
+<li>
+<p>zadd <code>&lt;key&gt;&lt;score1&gt;&lt;value1&gt;&lt;score2&gt;&lt;value2&gt;</code> … 将一个或多个 member 元素及其 score 值加入到有序集 key 当中。</p>
+</li>
+<li>
+<p><strong>zrange [WITHSCORES]</strong> 返回有序集 key 中，下标在 <code>&lt;start&gt;&lt;stop&gt;</code> 之间的元素<br>
+带WITHSCORES，可以让分数一起和值返回到结果集。</p>
+</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/a9471aef122c484ba03903984184175c.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<ul>
+<li>zrangebyscore key minmax [withscores] [limit offset count] 返回有序集 key 值介于min 之间包括等于min 的成员。有序集成员按score (从小到大)次序排列</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/b504876004f04696be916eb36e02cb58.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<ul>
+<li>
+<p>zrevrangebyscore key maxmin [withscores] [limit offset count]</p>
+<p>同上，改为从大到小排列。</p>
+</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/41b7b840f4fa4a5f9afd93801cbbf7c7.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<ul>
+<li>zincrby <code>&lt;key&gt;&lt;increment&gt;&lt;value&gt;</code> 为元素的score加上增量</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/fb53145f2ca24b8f866431539d0989a8.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<ul>
+<li>zrem <code>&lt;key&gt;&lt;value&gt;</code> 删除该集合下，指定值的元素</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/095b474bd9dd493082cc6ecbf76be194.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<ul>
+<li>zcount <code>&lt;key&gt;&lt;min&gt;&lt;max&gt;</code>统计该集合，分数区间内的元素个数</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/fc1b3a4c3b0647edbcbd36eae34a17d2.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<ul>
+<li>zrank <code>&lt;key&gt;&lt;value&gt;</code>返回该值在集合中的排名，从0开始</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/7b0c7db8cc404d239fd39215204d5e39.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<h2 id="103-数据结构"><a class="markdownIt-Anchor" href="#103-数据结构"></a> 10.3: 数据结构</h2>
+<p>SortedSet(zset)是Redis提供的一个非常特别的数据结构，一方面它等价于Java的数据结构Map&lt;String,Double&gt;，可以给每一个元素value赋予一个权重score，另一方面它又类似于TreeSet，内部的元素会按照权重score进行排序，可以得到每个元素的名次，还可以通过score的范围来获取元素的列表。</p>
+<p><strong>zset底层使用了两个数据结构</strong></p>
+<p>（1）hash，hash的作用就是关联元素value和权重score，保障元素value的唯一性，可以通过元素value找到相应的score值。</p>
+<p>（2）跳跃表，跳跃表的目的在于给元素value排序，根据score的范围获取元素列表。</p>
+<h3 id="1031-跳跃表"><a class="markdownIt-Anchor" href="#1031-跳跃表"></a> 10.3.1: 跳跃表</h3>
+<p><strong>简介</strong></p>
+<blockquote>
+<p>有序集合在生活中比较常见，例如根据成绩对学生排名，根据得分对玩家排名等。对于有序集合的底层实现，可以用数组、平衡树、链表等。数组不便元素的插入、删除；平衡树或红黑树虽然效率高但结构复杂；链表查询需要遍历所有效率低。Redis采用的是跳跃表。跳跃表效率堪比红黑树，实现远比红黑树简单。</p>
+</blockquote>
+<p><strong>实例</strong></p>
+<p>对比有序链表和跳跃表，从链表中查询出51</p>
+<p>（1） 有序链表</p>
+<p><img src="https://img-blog.csdnimg.cn/27a06fae49d54080a4808cf5d6a11c06.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p>要查找值为51的元素，需要从第一个元素开始依次查找、比较才能找到。共需要6次比较。</p>
+<p>（2） 跳跃表</p>
+<p><img src="https://img-blog.csdnimg.cn/ad5021fa573549748ed6809b4b83f316.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p>从第2层开始，1节点比51节点小，向后比较。</p>
+<p>21节点比51节点小，继续向后比较，后面就是NULL了，所以从21节点向下到第1层</p>
+<p>在第1层，41节点比51节点小，继续向后，61节点比51节点大，所以从41向下</p>
+<p>在第0层，51节点为要查找的节点，节点被找到，共查找4次。</p>
+<p>从此可以看出<strong>跳跃表比有序链表效率要高</strong></p>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/" class="category-chain-item">👨🏻‍💻code</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/redis/" class="category-chain-item">redis</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/redis/%E5%B0%9A%E7%A1%85%E8%B0%B7/" class="category-chain-item">尚硅谷</a>
+  
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/21/" title="动态规划设计：最长递增子序列">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">动态规划设计：最长递增子序列</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/17/" title="目录 2">
+                        <span class="hidden-mobile">目录 2</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

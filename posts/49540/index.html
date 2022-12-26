@@ -16,17 +16,17 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="📝2、结构体内存对齐问题？::   1: 总结  [!summary]  结构体内成员按照声明顺序存储，第一个成员地址和整个结构体地址相同。 未特殊说明时，按结构体中size最大的成员对齐（若有double成员，按8字节对齐。）    2: 两个关键字 c++11以后引入两个关键字 alignas 与 alignof。 alignof 可以计算出类型的对齐方式， alignas可以指定结构体的对">
+    <meta name="description" content="📝2、结构体内存对齐问题？::   1: 总结  [!summary]  结构体内成员按照声明顺序存储，第一个成员地址和整个结构体地址相同。 tip 未特殊说明时，按结构体中size最大的成员对齐（若有double成员，按8字节对齐。）    2: 相关语法(了解一下得了) c++11以后引入两个关键字 alignas 与 alignof。 alignof 可以计算出类型的对齐方式， align">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2、结构体内存对齐问题？">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/49540/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="📝2、结构体内存对齐问题？::   1: 总结  [!summary]  结构体内成员按照声明顺序存储，第一个成员地址和整个结构体地址相同。 未特殊说明时，按结构体中size最大的成员对齐（若有double成员，按8字节对齐。）    2: 两个关键字 c++11以后引入两个关键字 alignas 与 alignof。 alignof 可以计算出类型的对齐方式， alignas可以指定结构体的对">
+<meta property="og:description" content="📝2、结构体内存对齐问题？::   1: 总结  [!summary]  结构体内成员按照声明顺序存储，第一个成员地址和整个结构体地址相同。 tip 未特殊说明时，按结构体中size最大的成员对齐（若有double成员，按8字节对齐。）    2: 相关语法(了解一下得了) c++11以后引入两个关键字 alignas 与 alignof。 alignof 可以计算出类型的对齐方式， align">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-21T12:35:00.000Z">
-<meta property="article:modified_time" content="2022-12-14T13:32:37.083Z">
+<meta property="article:modified_time" content="2022-12-19T07:22:06.706Z">
 <meta property="article:author" content="zeefan">
-<meta property="article:tag" content="疑问">
+<meta property="article:tag" content="📕">
 <meta name="twitter:card" content="summary_large_image">
   
   
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.4k 字
+          2.5k 字
         
       </span>
     
@@ -285,7 +285,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年12月14日 晚上
+                    本文最后更新于：2022年12月19日 下午
                   
                 
               </p>
@@ -299,10 +299,10 @@
 <p>[!summary]</p>
 <ul>
 <li>结构体内成员按照声明顺序存储，第一个成员地址和整个结构体地址相同。</li>
-<li>未特殊说明时，按结构体中size最大的成员对齐（若有double成员，按8字节对齐。）</li>
+<li>tip 未特殊说明时，<strong>按结构体中size最大的成员对齐</strong>（若有double成员，按8字节对齐。）</li>
 </ul>
 </blockquote>
-<h1 id="2-两个关键字"><a class="markdownIt-Anchor" href="#2-两个关键字"></a> 2: 两个关键字</h1>
+<h1 id="2-相关语法了解一下得了"><a class="markdownIt-Anchor" href="#2-相关语法了解一下得了"></a> 2: 相关语法(了解一下得了)</h1>
 <p>c++11以后引入两个关键字 <a target="_blank" rel="noopener" href="https://zh.cppreference.com/w/cpp/language/alignas">alignas</a> 与 <a target="_blank" rel="noopener" href="https://zh.cppreference.com/w/cpp/language/alignof">alignof</a>。<br>
 <code>alignof</code> 可以<strong>计算</strong>出类型的对齐方式，<br>
 <code>alignas</code>可以<strong>指定</strong>结构体的对齐方式。</p>
@@ -316,7 +316,7 @@
 </ul>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">if</span> defined(__GNUC__) || defined(__GNUG__)</span><br>  <span class="hljs-meta">#<span class="hljs-keyword">define</span> ONEBYTE_ALIGN __attribute__((packed))</span><br><span class="hljs-meta">#<span class="hljs-keyword">elif</span> defined(_MSC_VER)</span><br>  <span class="hljs-meta">#<span class="hljs-keyword">define</span> ONEBYTE_ALIGN</span><br>  <span class="hljs-meta">#<span class="hljs-keyword">pragma</span> pack(push,1)</span><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br><br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">Info</span> {<br>  <span class="hljs-type">uint8_t</span> a;<br>  <span class="hljs-type">uint32_t</span> b;<br>  <span class="hljs-type">uint8_t</span> c;<br>} ONEBYTE_ALIGN;<br><br><span class="hljs-meta">#<span class="hljs-keyword">if</span> defined(__GNUC__) || defined(__GNUG__)</span><br>  <span class="hljs-meta">#<span class="hljs-keyword">undef</span> ONEBYTE_ALIGN</span><br><span class="hljs-meta">#<span class="hljs-keyword">elif</span> defined(_MSC_VER)</span><br>  <span class="hljs-meta">#<span class="hljs-keyword">pragma</span> pack(pop)</span><br>  <span class="hljs-meta">#<span class="hljs-keyword">undef</span> ONEBYTE_ALIGN</span><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br><br>std::cout &lt;&lt; <span class="hljs-built_in">sizeof</span>(Info) &lt;&lt; std::endl;   <span class="hljs-comment">// 6 1 + 4 + 1</span><br>std::cout &lt;&lt; <span class="hljs-built_in">alignof</span>(Info) &lt;&lt; std::endl;  <span class="hljs-comment">// 6</span><br></code></pre></td></tr></tbody></table></figure>
 <blockquote>
-<p>[!question] 确定结构体中每个元素大小可以通过下面这种方法 #疑问</p>
+<p>[!question] #📕      确定结构体中每个元素大小可以通过下面这种方法</p>
 </blockquote>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">if</span> defined(__GNUC__) || defined(__GNUG__)</span><br>  <span class="hljs-meta">#<span class="hljs-keyword">define</span> ONEBYTE_ALIGN __attribute__((packed))</span><br><span class="hljs-meta">#<span class="hljs-keyword">elif</span> defined(_MSC_VER)</span><br>  <span class="hljs-meta">#<span class="hljs-keyword">define</span> ONEBYTE_ALIGN</span><br>  <span class="hljs-meta">#<span class="hljs-keyword">pragma</span> pack(push,1)</span><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment">* 0 1   3     6   8 9            15</span><br><span class="hljs-comment">* +-+---+-----+---+-+-------------+</span><br><span class="hljs-comment">* | |   |     |   | |             |</span><br><span class="hljs-comment">* |a| b |  c  | d |e|     pad     |</span><br><span class="hljs-comment">* | |   |     |   | |             |</span><br><span class="hljs-comment">* +-+---+-----+---+-+-------------+</span><br><span class="hljs-comment">*/</span><br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">Info</span> {<br>  <span class="hljs-type">uint16_t</span> a : <span class="hljs-number">1</span>;<br>  <span class="hljs-type">uint16_t</span> b : <span class="hljs-number">2</span>;<br>  <span class="hljs-type">uint16_t</span> c : <span class="hljs-number">3</span>;<br>  <span class="hljs-type">uint16_t</span> d : <span class="hljs-number">2</span>;<br>  <span class="hljs-type">uint16_t</span> e : <span class="hljs-number">1</span>;<br>  <span class="hljs-type">uint16_t</span> pad : <span class="hljs-number">7</span>;<br>} ONEBYTE_ALIGN;<br><br><span class="hljs-meta">#<span class="hljs-keyword">if</span> defined(__GNUC__) || defined(__GNUG__)</span><br>  <span class="hljs-meta">#<span class="hljs-keyword">undef</span> ONEBYTE_ALIGN</span><br><span class="hljs-meta">#<span class="hljs-keyword">elif</span> defined(_MSC_VER)</span><br>  <span class="hljs-meta">#<span class="hljs-keyword">pragma</span> pack(pop)</span><br>  <span class="hljs-meta">#<span class="hljs-keyword">undef</span> ONEBYTE_ALIGN</span><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br><br>std::cout &lt;&lt; <span class="hljs-built_in">sizeof</span>(Info) &lt;&lt; std::endl;   <span class="hljs-comment">// 2</span><br>std::cout &lt;&lt; <span class="hljs-built_in">alignof</span>(Info) &lt;&lt; std::endl;  <span class="hljs-comment">// 1</span><br></code></pre></td></tr></tbody></table></figure>
 <p>这种处理方式是 <code>alignas</code> 处理不了的。</p>
@@ -373,7 +373,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E7%96%91%E9%97%AE/">#疑问</a>
+        <a href="/tags/%F0%9F%93%95/">#📕</a>
       
     </div>
   

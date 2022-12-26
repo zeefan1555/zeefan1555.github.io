@@ -1,0 +1,927 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202206251952371.png">
+  <link rel="icon" href="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202206251952371.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="zeefan">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="📝Redis6篇 （二）配置文件的介绍 + 发布和订阅::   1: 三、Redis配置文件的介绍  Units单位   配置大小单位,开头定义了一些基本的度量单位，只支持bytes，不支持bit 大小写不敏感     INCLUDES包含   类似jsp中的include，多实例的情况可以把公用的配置文件提取出来      网络相关配置  bind     默认情况bind&#x3D;127.0.0.1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis6篇 （二）配置文件的介绍 + 发布和订阅">
+<meta property="og:url" content="https://zeefan1555.github.io/posts/72/index.html">
+<meta property="og:site_name" content="一杯空气">
+<meta property="og:description" content="📝Redis6篇 （二）配置文件的介绍 + 发布和订阅::   1: 三、Redis配置文件的介绍  Units单位   配置大小单位,开头定义了一些基本的度量单位，只支持bytes，不支持bit 大小写不敏感     INCLUDES包含   类似jsp中的include，多实例的情况可以把公用的配置文件提取出来      网络相关配置  bind     默认情况bind&#x3D;127.0.0.1">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/dd87d227e9714764a3a941458b9535e1.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/9840bbbd9ac24820a5743e4db6b4d5bd.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2f8808ec792e45ab9389ac07bb524086.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/6c651db0902c4fc6b5643477e8a34d7d.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/6290579c91aa4082983581c1ef93d2fd.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/6ad9855228634af68792c47760f25af8.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/48c253edf58d470a869b8ae054b0f2f9.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/4e9eba85b7084d74ad75a6b8ed2e27c0.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/23e28b55ed904580af7c49eb54de96c3.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/d858ef6e762e4a489c509d1a7cbc691a.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20b113a19f6c4fe484a77b473c25aed9.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/0c426a486b26428ead2a55be89e62fe1.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/0b9cdfca29de4d84823da9bdb450f7ea.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/374c230b34df424c91ac1933582107b0.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/8a6d670b12074b26b5283dfd8329362d.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/1003dc6551aa4d3a951f655cebb3f71e.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/9363af9570ef4c34ae77417e2ee5b51c.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/4001bc7c7e7c412bb58d8cea4fe3fd03.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/0144d2d629c44da980d284d27d707737.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/d6d85c97cd934b26829090da30d8a928.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/77da7cb9f5744a33bff47d078a54da11.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/a5e4d5496e12497d93d4b5a6c30396bb.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20568f1ac96b4d0491f1745db3d4b4b9.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/c5c868e2eec64f7cbbd879b1c60799df.png#pic_center">
+<meta property="article:published_time" content="2022-12-17T12:58:00.000Z">
+<meta property="article:modified_time" content="2022-12-19T01:45:28.603Z">
+<meta property="article:author" content="zeefan">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/dd87d227e9714764a3a941458b9535e1.png#pic_center">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Redis6篇 （二）配置文件的介绍 + 发布和订阅 - 一杯空气</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.15.6/katex.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"zeefan1555.github.io","root":"/","version":"1.9.1","typing":{"enable":true,"typeSpeed":150,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"Text"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":10},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>一杯空气</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Redis6篇 （二）配置文件的介绍 + 发布和订阅"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-12-17 20:58" pubdate>
+          2022年12月17日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          11 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Redis6篇 （二）配置文件的介绍 + 发布和订阅</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2022年12月19日 上午
+                  
+                
+              </p>
+            
+            <div class="markdown-body">
+              
+              <p>📝Redis6篇 （二）配置文件的介绍 + 发布和订阅::</p>
+<!-- basicblock-end -->
+<h1 id="1-三-redis配置文件的介绍"><a class="markdownIt-Anchor" href="#1-三-redis配置文件的介绍"></a> 1: 三、Redis配置文件的介绍</h1>
+<ul>
+<li><strong>Units单位</strong></li>
+</ul>
+<blockquote>
+<p>配置大小单位,开头定义了一些基本的度量单位，<strong>只支持bytes</strong>，不支持bit</p>
+<p>大小写不敏感</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/dd87d227e9714764a3a941458b9535e1.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<hr>
+<ul>
+<li><strong>INCLUDES包含</strong></li>
+</ul>
+<blockquote>
+<p>类似jsp中的include，多实例的情况可以把公用的配置文件提取出来</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/9840bbbd9ac24820a5743e4db6b4d5bd.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<hr>
+<ul>
+<li>
+<p><strong>网络相关配置</strong></p>
+<ul>
+<li>bind</li>
+</ul>
+<blockquote>
+<ul>
+<li>
+<p>默认情况bind=127.0.0.1只能接受本机的访问请求</p>
+</li>
+<li>
+<p>不写的情况下，无限制接受任何ip</p>
+</li>
+<li>
+<p>生产环境肯定要写你应用服务器的地址；服务器是需要远程访问的，所以需要将其注释掉</p>
+</li>
+<li>
+<p>如果开启了protected-mode，那么在没有设定bind ip且没有设密码的情况下，Redis只允许接受本机的响应</p>
+</li>
+</ul>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/2f8808ec792e45ab9389ac07bb524086.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<ul>
+<li><strong>protected-mode</strong></li>
+</ul>
+<blockquote>
+<p>将本机访问保护模式设置no</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/6c651db0902c4fc6b5643477e8a34d7d.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<ul>
+<li><strong>PORT</strong></li>
+</ul>
+<blockquote>
+<p>端口号</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/6290579c91aa4082983581c1ef93d2fd.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<ul>
+<li><strong>tcp-backlog</strong></li>
+</ul>
+<blockquote>
+<p>设置tcp的backlog，backlog其实是一个连接队列，backlog队列总和=未完成三次握手队列 + 已经完成三次握手队列。</p>
+<p>在高并发环境下你需要一个高backlog值来避免慢客户端连接问题。</p>
+<p>注意Linux内核会将这个值减小到/proc/sys/net/core/somaxconn的值（128），所以需要确认增大/proc/sys/net/core/somaxconn和/proc/sys/net/ipv4/tcp_max_syn_backlog（128）两个值来达到想要的效果</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/6ad9855228634af68792c47760f25af8.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<ul>
+<li>timeout</li>
+</ul>
+<blockquote>
+<p>一个空闲的客户端维持多少秒会关闭，0表示关闭该功能。即永不关闭</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/48c253edf58d470a869b8ae054b0f2f9.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<ul>
+<li><strong>tcp-keepalive</strong></li>
+</ul>
+<blockquote>
+<p>对访问客户端的一种心跳检测，每个n秒检测一次。</p>
+<p>单位为秒，如果设置为0，则不会进行Keepalive检测，建议设置成60</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/4e9eba85b7084d74ad75a6b8ed2e27c0.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+</li>
+<li>
+<p><strong>GENERAL通用</strong></p>
+<ul>
+<li>daemonize</li>
+</ul>
+<blockquote>
+<p>是否为后台进程，设置为yes</p>
+<p>守护进程，后台启动</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/23e28b55ed904580af7c49eb54de96c3.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<ul>
+<li>pidfile</li>
+</ul>
+<blockquote>
+<p>存放pid文件的位置，每个实例会产生一个不同的pid文件</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/d858ef6e762e4a489c509d1a7cbc691a.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<ul>
+<li>loglevel</li>
+</ul>
+<blockquote>
+<p>指定日志记录级别，Redis总共支持四个级别：debug、verbose、notice、warning，默认为<strong>notice</strong></p>
+<p>四个级别根据使用阶段来选择，生产环境选择notice 或者warning</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20b113a19f6c4fe484a77b473c25aed9.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<ul>
+<li>logfile</li>
+</ul>
+<blockquote>
+<p>日志文件名称</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/0c426a486b26428ead2a55be89e62fe1.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<ul>
+<li>databases 16</li>
+</ul>
+<blockquote>
+<p>设定库的数量默认16，默认数据库为0，可以使用SELECT <code>&lt;dbid&gt;</code> 命令在连接上指定数据库id</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/0b9cdfca29de4d84823da9bdb450f7ea.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+</li>
+<li>
+<p>SECURITY安全</p>
+<ul>
+<li>设置密码</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/374c230b34df424c91ac1933582107b0.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<blockquote>
+<p>访问密码的查看、设置和取消</p>
+<p>在命令中设置密码，只是临时的。重启redis服务器，密码就还原了。</p>
+<p>永久设置，需要再配置文件中进行设置。</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/8a6d670b12074b26b5283dfd8329362d.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+</li>
+<li>
+<p>LIMITS限制</p>
+<ul>
+<li><strong>maxclients</strong></li>
+</ul>
+<blockquote>
+<p>设置redis同时可以与多少个客户端进行连接。</p>
+<p>默认情况下为10000个客户端。</p>
+<p>如果达到了此限制，redismax number of clients reached</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/1003dc6551aa4d3a951f655cebb3f71e.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<ul>
+<li><strong>maxmemory</strong></li>
+</ul>
+<blockquote>
+<ol>
+<li>建议<strong>必须设置</strong>，否则，将内存占满，造成服务器宕机</li>
+<li>设置redis可以使用的内存量。一旦到达内存使用上限，redis将会试图移除内部数据，移除规则可以通过maxmemory-policy来指定。</li>
+<li>如果redis无法根据移除规则来移除内存中的数据，或者设置了“不允许移除”，那么redis则会针对那些需要申请内存的指令返回错误信息，比如SET、LPUSH等。</li>
+<li>但是对于无内存申请的指令，仍然会正常响应，比如GET等。如果你的redis是主redis（说明你的redis有从redis），那么在设置内存使用上限时，需要在系统中留出一些内存空间给同步队列缓存，只有在你设置的是“不移除”的情况下，才不用考虑这个因素。</li>
+</ol>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/9363af9570ef4c34ae77417e2ee5b51c.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<ul>
+<li><strong>maxmemory-policy</strong></li>
+</ul>
+<blockquote>
+<ol>
+<li>volatile-lru：使用LRU算法移除key，只对设置了过期时间的键；（最近最少使用）</li>
+<li>allkeys-lru：在所有集合key中，使用LRU算法移除key</li>
+<li>volatile-random：在过期集合中移除随机的key，只对设置了过期时间的键</li>
+<li>allkeys-random：在所有集合key中，移除随机的key</li>
+<li>volatile-ttl：移除那些TTL值最小的key，即那些最近要过期的key</li>
+<li>noeviction：不进行移除。针对写操作，只是返回错误信息</li>
+</ol>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/4001bc7c7e7c412bb58d8cea4fe3fd03.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<ul>
+<li><strong>maxmemory-samples</strong></li>
+</ul>
+<blockquote>
+<ol>
+<li>设置样本数量，LRU算法和最小TTL算法都并非是精确的算法，而是估算值，所以你可以设置样本的大小，redis默认会检查这么多个key并选择其中LRU的那个。</li>
+<li>一般设置3到7的数字，数值越小样本越不准确，但性能消耗越小。</li>
+</ol>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/0144d2d629c44da980d284d27d707737.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+</li>
+</ul>
+<h1 id="2-四-redis的发布和订阅"><a class="markdownIt-Anchor" href="#2-四-redis的发布和订阅"></a> 2: 四、Redis的发布和订阅</h1>
+<blockquote>
+<p>什么是发布和订阅？</p>
+<ul>
+<li>Redis 发布订阅 (pub/sub) 是一种消息通信模式：发送者 (pub) 发送消息，订阅者 (sub) 接收消息。</li>
+<li>Redis 客户端可以订阅任意数量的频道。</li>
+</ul>
+</blockquote>
+<hr>
+<p>1、客户端可以订阅频道如下图</p>
+<p><img src="https://img-blog.csdnimg.cn/d6d85c97cd934b26829090da30d8a928.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p>2、当给这个频道发布消息后，消息就会发送给订阅的客户端</p>
+<p><img src="https://img-blog.csdnimg.cn/77da7cb9f5744a33bff47d078a54da11.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p><strong>演示</strong>：</p>
+<ul>
+<li>
+<p>打开一个客户端订阅channel1</p>
+<p>SUBSCRIBE channel1</p>
+</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/a5e4d5496e12497d93d4b5a6c30396bb.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<ul>
+<li>
+<p>打开另一个客户端，给channel1发布消息hello</p>
+<p>publish channel1 hello</p>
+</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/20568f1ac96b4d0491f1745db3d4b4b9.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<blockquote>
+<p>返回的1是订阅者数量</p>
+</blockquote>
+<ul>
+<li>打开第一个客户端可以看到发送的消息</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/c5c868e2eec64f7cbbd879b1c60799df.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<blockquote>
+<p>注：发布的消息没有持久化，如果在订阅的客户端收不到hello，只能收到订阅后发布的消息</p>
+</blockquote>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/" class="category-chain-item">👨🏻‍💻code</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/redis/" class="category-chain-item">redis</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/redis/%E5%B0%9A%E7%A1%85%E8%B0%B7/" class="category-chain-item">尚硅谷</a>
+  
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/76/" title="Redis6篇 （三）Redis新数据类型">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Redis6篇 （三）Redis新数据类型</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/68/" title="74、指针加减计算要注意什么？">
+                        <span class="hidden-mobile">74、指针加减计算要注意什么？</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
