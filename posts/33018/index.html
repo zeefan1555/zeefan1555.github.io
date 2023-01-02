@@ -16,18 +16,18 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="📝37、public，protected和private:: 直接看总结吧   public的变量和函数在类的内部外部都可以访问。 protected的变量和函数只能在类的内部和其派生类中访问。 private修饰的元素只能在类内访问。   1: 访问权限 C++通过 public、protected、private 三个关键字来控制成员变量和成员函数的访问权限，它们分别表示公有的、受保护的、私">
+    <meta name="description" content="📝37、public，protected和private:: 直接看总结吧   public的变量和函数在类的内部外部都可以访问。 private修饰的元素只能在类内访问。 protected的变量和函数只能在类的内部和其派生类中访问。   1: 访问权限 C++通过 public、protected、private 三个关键字来控制成员变量和成员函数的访问权限，它们分别表示公有的、受保护的、私">
 <meta property="og:type" content="article">
 <meta property="og:title" content="访问权限, 继承权限">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/33018/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="📝37、public，protected和private:: 直接看总结吧   public的变量和函数在类的内部外部都可以访问。 protected的变量和函数只能在类的内部和其派生类中访问。 private修饰的元素只能在类内访问。   1: 访问权限 C++通过 public、protected、private 三个关键字来控制成员变量和成员函数的访问权限，它们分别表示公有的、受保护的、私">
+<meta property="og:description" content="📝37、public，protected和private:: 直接看总结吧   public的变量和函数在类的内部外部都可以访问。 private修饰的元素只能在类内访问。 protected的变量和函数只能在类的内部和其派生类中访问。   1: 访问权限 C++通过 public、protected、private 三个关键字来控制成员变量和成员函数的访问权限，它们分别表示公有的、受保护的、私">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://axiu-image-bed.oss-cn-shanghai.aliyuncs.com/img/202205212341241.png">
 <meta property="og:image" content="https://axiu-image-bed.oss-cn-shanghai.aliyuncs.com/img/202205212341074.png">
 <meta property="og:image" content="https://axiu-image-bed.oss-cn-shanghai.aliyuncs.com/img/202205212341430.png">
 <meta property="article:published_time" content="2022-11-27T07:56:00.000Z">
-<meta property="article:modified_time" content="2022-11-29T03:03:06.373Z">
+<meta property="article:modified_time" content="2023-01-01T17:04:35.317Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="疑问">
 <meta name="twitter:card" content="summary_large_image">
@@ -227,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.5k 字
+          1.8k 字
         
       </span>
     
@@ -238,7 +238,7 @@
         
         
         
-          8 分钟
+          9 分钟
         
       </span>
     
@@ -289,7 +289,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年11月29日 上午
+                    本文最后更新于：2023年1月2日 凌晨
                   
                 
               </p>
@@ -300,8 +300,8 @@
 <!-- basicblock-end -->
 <ul>
 <li>public的变量和函数在类的内部外部都可以访问。</li>
-<li>protected的变量和函数只能在类的内部和其派生类中访问。</li>
 <li>private修饰的元素只能在类内访问。</li>
+<li>protected的变量和函数只能在类的内部和其派生类中访问。</li>
 </ul>
 <h1 id="1-访问权限"><a class="markdownIt-Anchor" href="#1-访问权限"></a> 1: 访问权限</h1>
 <p>C++通过 public、protected、private 三个关键字来控制成员变量和<strong>成员函数的访问权限</strong>，它们分别表示公有的、受保护的、私有的，被称为成员访问限定符。</p>
@@ -336,7 +336,7 @@
 <p>update1：感谢微信好友“李宇杰”指出方式二中代码错误，感谢。</p>
 </blockquote>
 <h1 id="3-总结"><a class="markdownIt-Anchor" href="#3-总结"></a> 3: 总结</h1>
-<h2 id="31-一-访问权限"><a class="markdownIt-Anchor" href="#31-一-访问权限"></a> 3.1: 一、访问权限</h2>
+<h2 id="31-三种访问权限"><a class="markdownIt-Anchor" href="#31-三种访问权限"></a> 3.1: 三种访问权限</h2>
 <table>
 <thead>
 <tr>
@@ -354,22 +354,30 @@
 <td>✔</td>
 </tr>
 <tr>
-<td>protected</td>
-<td>❌</td>
-<td>✔</td>
-<td>✔</td>
-</tr>
-<tr>
 <td>private</td>
 <td>❌</td>
 <td>❌</td>
+<td>✔</td>
+</tr>
+<tr>
+<td>protected</td>
+<td>❌</td>
+<td>✔</td>
 <td>✔</td>
 </tr>
 </tbody>
 </table>
 <p>public、protected、private 的访问权限范围关系：</p>
 <p>public &gt; protected &gt; private</p>
-<h2 id="32-二-继承权限"><a class="markdownIt-Anchor" href="#32-二-继承权限"></a> 3.2: 二、继承权限</h2>
+<p>① public:用该关键字修饰的成员表示公有成员，该成员不仅可以在类内可以被访问，在类外也是可以被访问的，是类对外提供的可访问接口；</p>
+<p>② private:用该关键字修饰的成员表示私有成员，该成员仅在类内可以被访问，在类体外是隐藏状态；</p>
+<p>③ protected:用该关键字修饰的成员表示保护成员，保护成员在类体外同样是隐藏状态，但是对于该类的派生类来说，相当于公有成员，在派生类中可以被访问。</p>
+<h2 id="32-三种继承方式"><a class="markdownIt-Anchor" href="#32-三种继承方式"></a> 3.2: 三种继承方式</h2>
+<p>① 若继承方式是public，基类成员在派生类中的访问权限保持不变，也就是说，基类中的成员访问权限，在派生类中仍然保持原来的访问权限；</p>
+<p>② 若继承方式是private，基类所有成员在派生类中的访问权限都会变为私有(private)权限；</p>
+<p>③ 若继承方式是protected，<br>
+基类的共有成员和保护成员在派生类中的访问权限都会变为保护(protected)权限，<br>
+私有成员在派生类中的访问权限仍然是私有(private)权限。</p>
 <ol>
 <li>派生类继承自基类的成员权限有四种状态：public、protected、private、不可见</li>
 <li>派生类对基类成员的访问权限取决于两点：
@@ -378,16 +386,13 @@
 <li>二、基类成员在基类中的访问权限</li>
 </ol>
 </li>
-<li>派生类对基类成员的访问权限是取以上两点中的更小的访问范围（除了 private 的继承方式遇到 private 成员是不可见外）。例如：</li>
+<li>派生类对基类成员的访问权限是<strong>取以上两点中的更小的访问范围</strong>（除了 private 的继承方式遇到 private 成员是不可见外）。例如：</li>
 </ol>
 <ul>
 <li>public 继承 + private 成员 =&gt; private</li>
 <li>private 继承 + protected 成员 =&gt; private</li>
 <li>private 继承 + private 成员 =&gt; 不可见</li>
 </ul>
-<blockquote>
-<p>感谢网友做出归纳总结https://github.com/forthespada/InterviewGuide/issues/35， - 2022.02.22</p>
-</blockquote>
 
               
             </div>

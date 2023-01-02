@@ -24,9 +24,8 @@
 <meta property="og:description" content="📝16.目标和(装满背包有多少种方法)::   1: 目标和 力扣题目链接 难度：中等 给定一个非负整数数组，a1, a2, …, an, 和一个目标数，S。现在你有两个符号&amp;nbsp;+&amp;nbsp;和&amp;nbsp;-。对于数组中的任意一个整数，你都可以从&amp;nbsp;+&amp;nbsp;或&amp;nbsp;-中选择一个符号添加在前面。 返回可以使最终数组和为目标数 S 的所有添加符号的方法数。 示例： 输入：">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20210125120743274.jpg">
-<meta property="og:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/20220720234829.png">
 <meta property="article:published_time" content="2022-07-20T09:39:00.000Z">
-<meta property="article:modified_time" content="2022-12-17T06:41:08.907Z">
+<meta property="article:modified_time" content="2023-01-01T08:41:54.216Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="疑问">
 <meta property="article:tag" content="card">
@@ -227,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.4k 字
+          1.8k 字
         
       </span>
     
@@ -238,7 +237,7 @@
         
         
         
-          7 分钟
+          10 分钟
         
       </span>
     
@@ -289,7 +288,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年12月17日 下午
+                    本文最后更新于：2023年1月1日 下午
                   
                 
               </p>
@@ -320,56 +319,39 @@
 <li>保证返回的最终结果能被 32 位整数存下。</li>
 </ul>
 <h1 id="2-思路"><a class="markdownIt-Anchor" href="#2-思路"></a> 2: 思路</h1>
-<p>假设加法总和为x， → 减法总和 = sum - x。<br>
-目标和 = 加法总和 - 减法总和 → S = x - (sum - x)<br>
-→ x = (S + sum) / 2</p>
-<p>此时化为 ：就是从数组中挑几个数加起来正好等于x</p>
-<p><strong>特例判断</strong></p>
+<p>假设 <code>加法总和为x</code>， 👉🏻 <code>减法总和</code> <code>= sum - x。</code>目标和<code>=</code>加法总和<code>-</code>减法总和` 👉🏻 target = x - (sum - x)<br>
+👉🏻 x = (target + sum) / 2, 所需要得到 x 的数都是已知</p>
+<p>转化为: 装满 x 背包共有多少种方法</p>
+<p><strong>特例判断👉🏻剪枝</strong></p>
 <ol>
 <li>假设加法和是非整数，即 (S + sum) / 2 除不尽，说明有余数，又因为加法和是整数，有余数不可能符合等号条件。所以：</li>
 </ol>
-<figure class="highlight apache"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">if</span> ((S + sum) % <span class="hljs-number">2</span> == <span class="hljs-number">1</span>) return <span class="hljs-number">0</span>; // 此时没有方案<br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-keyword">if</span> ((S + sum) % <span class="hljs-number">2</span> == <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>; <span class="hljs-comment">// 此时没有方案</span><br></code></pre></td></tr></tbody></table></figure>
 <ol start="2">
 <li>同时如果 S的绝对值已经大于sum，那么也是没有方案的。</li>
 </ol>
-<figure class="highlight arcade"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arcade"><span class="hljs-keyword">if</span> (<span class="hljs-built_in">abs</span>(S) &gt; <span class="hljs-built_in">sum</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>; <span class="hljs-comment">// 此时没有方案</span><br></code></pre></td></tr></tbody></table></figure>
-<p>动归五部曲</p>
-<ol>
-<li>
-<p>确定dp[j]的含义<br>
-恰好装满背包容量为j的背包，一共有dp[j]种方法</p>
-</li>
-<li>
-<p>确定递推公式<br>
-先记住：在<strong>求装满背包有几种方法</strong>的情况下，递推公式一般为： #card #疑问</p>
-</li>
-</ol>
-<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c">dp[j] = dp[j] + dp[j - nums[i]];<br></code></pre></td></tr></tbody></table></figure>
-<ol start="3">
-<li>
-<p>dp数组的初始化<br>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-keyword">if</span> (<span class="hljs-built_in">abs</span>(S) &gt; sum) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>; <span class="hljs-comment">// 此时没有方案</span><br></code></pre></td></tr></tbody></table></figure>
+<p>动归五部曲<br>
+<span style="background:#b1ffff">1. 确定dp[j]的含义</span><br>
+dp[j]: 恰好装满背包容量为j的背包，一共有多少种方法</p>
+<p><span style="background:#b1ffff">2. 确定递推公式</span><br>
+[[如何求装满背包有几种方法 – 递推公式]]<br>
+<span style="background:#b1ffff">3. dp数组的初始化</span><br>
 dp[0] = 1，显然装满容量为0的背包，有1种方法，就是装0件物品。<br>
-dp[j]其他下标对应的数值应该初始化为0，从递归公式也可以看出<code>dp[j] = dp[j] + dp[j - nums[i]];</code>，dp[j]要保证是0的初始值，才能正确的由dp[j - nums[i]]推导出来。</p>
-</li>
-<li>
-<p>确定遍历顺序<br>
+dp[j]其他下标对应的数值应该初始化为0，从递归公式也可以看出 <code>dp[j] += dp[j - nums[i]];</code>，<br>
+dp[j]要保证是0的初始值，才能正确的由dp[j - nums[i]]推导出来。</p>
+<p><span style="background:#b1ffff">4. 确定遍历顺序</span><br>
 先物品在背包，背包for循环倒序</p>
-</li>
-<li>
-<p>举例推导dp数组</p>
-</li>
-</ol>
+<p><span style="background:#b1ffff">5.  举例推导dp数组</span></p>
 <p>输入：nums: [1, 1, 1, 1, 1], S: 3</p>
 <p>bagSize = (S + sum) / 2 = (3 + 5) / 2 = 4</p>
 <p>dp数组状态变化如下：</p>
 <p><img src="https://img-blog.csdnimg.cn/20210125120743274.jpg" srcset="/img/loading.gif" lazyload alt="494.目标和"></p>
 <h1 id="3-代码"><a class="markdownIt-Anchor" href="#3-代码"></a> 3: 代码</h1>
-<p>编译未通过</p>
-<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> {</span><br>public:<br>    <span class="hljs-type">int</span> <span class="hljs-title function_">findTargetSumWays</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;&amp; nums, <span class="hljs-type">int</span> target)</span> {<br>        <span class="hljs-type">int</span> bagsize;<br>        <span class="hljs-type">int</span> sum = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; nums.size(); i++) sum += nums[i];<br>        bagsize = (sum + target)/<span class="hljs-number">2</span>;<br>        <span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title function_">dp</span><span class="hljs-params">(bagsize + <span class="hljs-number">1</span>, <span class="hljs-number">0</span>)</span>;<br>        dp[<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">abs</span>(target) &gt; sum) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>; <span class="hljs-comment">// 此时没有方案</span><br>        <span class="hljs-keyword">if</span> ((target + sum) % <span class="hljs-number">2</span> == <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>; <span class="hljs-comment">// 此时没有方案</span><br>        <br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; nums.size(); i++){<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = bagsize; j &gt;= nums[i]; j--){<br>                dp[j] = dp[j] + dp[j - nums[i]];<br>        <br>            }<br>        }<br>        <span class="hljs-keyword">return</span> dp[target];<br><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
-<p><img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/20220720234829.png" srcset="/img/loading.gif" lazyload alt=""></p>
-<p><strong>参考资料</strong><br>
-自用跳转链接：🈚<br>
-<a target="_blank" rel="noopener" href="https://www.programmercarl.com/0494.%E7%9B%AE%E6%A0%87%E5%92%8C.html#%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92">代码随想录</a></p>
+<p>v2 通过</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">findTargetSumWays</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums, <span class="hljs-type">int</span> target)</span> </span>{<br>        <span class="hljs-type">int</span> sum = <span class="hljs-number">0</span>;<br><br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i : nums){<br>            sum+=i;<br>        }<br><br><br>        <span class="hljs-type">int</span> bagweight = (sum + target) / <span class="hljs-number">2</span>;<br><br>        <span class="hljs-keyword">if</span>(<span class="hljs-built_in">abs</span>(target) &gt; <span class="hljs-built_in">abs</span>(sum)) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>; <span class="hljs-comment">// ❗️不是 bagweight &gt; sum</span><br>        <span class="hljs-keyword">if</span>((sum + target)%<span class="hljs-number">2</span> != <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br><br>        <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">dp</span> <span class="hljs-params">(bagweight+<span class="hljs-number">1</span>, <span class="hljs-number">0</span>)</span></span>;<br>        dp[<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;<br><br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; nums.<span class="hljs-built_in">size</span>(); i++){<br>            <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j = bagweight; j &gt;= nums[i]; j--){<br>                dp[j] += dp[j - nums[i]]; <br>            }<br>        }<br>        <span class="hljs-keyword">return</span> dp[bagweight];<br><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
+<p>通过</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">findTargetSumWays</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums, <span class="hljs-type">int</span> target)</span> </span>{<br>        <span class="hljs-type">int</span> sum = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i : nums){<br>            sum += i;<br>        }<br>        <span class="hljs-type">int</span> bagweight = (target + sum) / <span class="hljs-number">2</span>;<br><br>        <span class="hljs-keyword">if</span>(<span class="hljs-built_in">abs</span>(target) &gt; <span class="hljs-built_in">abs</span>(sum)) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">if</span>((target + sum) % <span class="hljs-number">2</span> == <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br><br>        <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">dp</span> <span class="hljs-params">(bagweight + <span class="hljs-number">1</span>, <span class="hljs-number">0</span>)</span></span>;<br>        dp[<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; nums.<span class="hljs-built_in">size</span>(); i++){<br>            <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j = bagweight; j &gt;= nums[i]; j--){<br>                dp[j] += dp[j - nums[i]];<br>            }<br>        }<br>        <span class="hljs-keyword">return</span> dp[bagweight];<br><br><br><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
 
               
             </div>
@@ -439,9 +421,9 @@ dp[j]其他下标对应的数值应该初始化为0，从递归公式也可以�
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/39/" title="16.目标和(装满背包有多少种方法) 2">
+                      <a href="/posts/31990/" title="17.一和零">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">16.目标和(装满背包有多少种方法) 2</span>
+                        <span class="hidden-mobile">17.一和零</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     

@@ -24,7 +24,7 @@
 <meta property="og:description" content="📝1. 动态规划理论基础:: 代码随想录   [!summary] 动态规划，英文：Dynamic Programming，简称 DP 动态规划中每一个状态一定是由上一个状态推导出来的，贪心是局部最优推导全局最优   1: 解决的问题  背包问题 正则字符串匹配  例如：有N件物品和一个最多能背重量为W 的背包。第i件物品的重量是weight[i]，得到的价值是value[i] 。 每件物品只能">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-07-05T08:27:00.000Z">
-<meta property="article:modified_time" content="2022-12-20T01:04:46.704Z">
+<meta property="article:modified_time" content="2022-12-30T03:15:36.186Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          745 字
+          972 字
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          4 分钟
+          5 分钟
         
       </span>
     
@@ -284,7 +284,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年12月20日 上午
+                    本文最后更新于：2022年12月30日 上午
                   
                 
               </p>
@@ -306,17 +306,21 @@
 <strong>每件物品只能用一次</strong>，求解将哪些物品装入背包里物品价值总和最大。</p>
 <p>动态规划中dp[j]是由dp[j-weight[i]]推导出来的，然后取max(dp[j], dp[j - weight[i]] + value[i])。</p>
 <h1 id="2-动态规划解题步骤"><a class="markdownIt-Anchor" href="#2-动态规划解题步骤"></a> 2: 动态规划解题步骤</h1>
-<ol>
-<li>确定dp数组（dp table）以及下标的含义</li>
-<li>确定递推公式</li>
-<li>dp数组如何初始化</li>
-<li>确定遍历顺序</li>
-</ol>
+<h2 id="21-确定dp数组dp-table以及下标的含义"><a class="markdownIt-Anchor" href="#21-确定dp数组dp-table以及下标的含义"></a> 2.1: 确定dp数组（dp table）以及下标的含义 +</h2>
+<p>dp[j] :  j 背包下能装的最大价值</p>
+ <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c">dp[j] = max(dp[j], dp[j - weight[i]] + value[i])<br></code></pre></td></tr></tbody></table></figure>
+<p>dp[j] : 恰好装满背包容量为j的背包，一共有多少种方法</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c">dp[j] = dp[j] + dp[j - nums[i]];<br></code></pre></td></tr></tbody></table></figure>
+<p>原理: [[16.目标和(装满背包有多少种方法)🗃️]]</p>
+<h2 id="22-dp数组如何初始化"><a class="markdownIt-Anchor" href="#22-dp数组如何初始化"></a> 2.2: dp数组如何初始化</h2>
+<p>一般初始为 0,<br>
+如果需要原始值来推导则另当别论: [[6.不同路径 2]]</p>
+<p>滚动数组初始化: 第一开始默认 i = 0, <code>dp[j] = dp[0][j]</code></p>
+<h2 id="23-递推公式"><a class="markdownIt-Anchor" href="#23-递推公式"></a> 2.3: 递推公式</h2>
+<h2 id="24-确定遍历顺序"><a class="markdownIt-Anchor" href="#24-确定遍历顺序"></a> 2.4: 确定遍历顺序</h2>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">for</span> 状态<span class="hljs-number">1</span> in 状态<span class="hljs-number">1</span>的所有取值：<br>    <span class="hljs-keyword">for</span> 状态<span class="hljs-number">2</span> in 状态<span class="hljs-number">2</span>的所有取值：<br>        <span class="hljs-keyword">for</span> ...<br>            dp[状态<span class="hljs-number">1</span>][状态<span class="hljs-number">2</span>][...] = 择优(选择<span class="hljs-number">1</span>，选择<span class="hljs-number">2.</span>..)<br></code></pre></td></tr></tbody></table></figure>
-<ol start="5">
-<li>举例推导dp数组<br>
-<strong>一些情况是递推公式决定了dp数组要如何初始化！</strong></li>
-</ol>
+<h2 id="25-举例推导dp数组"><a class="markdownIt-Anchor" href="#25-举例推导dp数组"></a> 2.5: 举例推导dp数组</h2>
+<p><strong>一些情况是递推公式决定了dp数组要如何初始化！</strong></p>
 <p><strong>做动规的题目，写代码之前一定要把状态转移在dp数组的上具体情况模拟一遍，心中有数，确定最后推出的是想要的结果</strong>。<br>
 然后再写代码，如果代码没通过就打印dp数组，看看是不是和自己预先推导的哪里不一样。</p>
 <p>如果打印出来和自己预先模拟推导是一样的，那么就是自己的递归公式、初始化或者遍历顺序有问题了。</p>

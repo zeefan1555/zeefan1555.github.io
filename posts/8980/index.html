@@ -18,7 +18,7 @@
   
     <meta name="description" content="📝11.0-1背包理论基础(一)::  [!参考资料]- 带你学透0-1背包问题！| 关于背包问题，你不清楚的地方，这里都讲了！| 动态规划经典问题 | 数据结构与算法_哔哩哔哩_bilibili   ![[背包问题.excalidraw]]  1: 01 背包概念 有n件物品和一个最多能背重量为w 的背包。第i件物品的重量是weight[i]，得到的价值是value[i] 。每件物品只能用一次">
 <meta property="og:type" content="article">
-<meta property="og:title" content="11.0-1背包理论基础(一)">
+<meta property="og:title" content="11. 0-1 背包二维 dp 数组套路">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/8980/index.html">
 <meta property="og:site_name" content="一杯空气">
 <meta property="og:description" content="📝11.0-1背包理论基础(一)::  [!参考资料]- 带你学透0-1背包问题！| 关于背包问题，你不清楚的地方，这里都讲了！| 动态规划经典问题 | 数据结构与算法_哔哩哔哩_bilibili   ![[背包问题.excalidraw]]  1: 01 背包概念 有n件物品和一个最多能背重量为w 的背包。第i件物品的重量是weight[i]，得到的价值是value[i] 。每件物品只能用一次">
@@ -29,7 +29,7 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20210110103109140.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20210118163425129.jpg">
 <meta property="article:published_time" content="2022-07-12T06:55:00.000Z">
-<meta property="article:modified_time" content="2022-12-20T15:18:54.597Z">
+<meta property="article:modified_time" content="2022-12-30T01:38:35.759Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="动态规划">
 <meta property="article:tag" content="📙">
@@ -40,7 +40,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>11.0-1背包理论基础(一) - 一杯空气</title>
+  <title>11. 0-1 背包二维 dp 数组套路 - 一杯空气</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -207,7 +207,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="11.0-1背包理论基础(一)"></span>
+            <span id="subtitle" data-typed-text="11. 0-1 背包二维 dp 数组套路"></span>
           
         </div>
 
@@ -230,7 +230,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.1k 字
+          3k 字
         
       </span>
     
@@ -287,12 +287,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">11.0-1背包理论基础(一)</h1>
+            <h1 style="display: none">11. 0-1 背包二维 dp 数组套路</h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年12月20日 晚上
+                    本文最后更新于：2022年12月30日 上午
                   
                 
               </p>
@@ -369,8 +369,7 @@
 i-1是指：只能选择的<strong>物品范围</strong>是 i-1，而不是真的放了i-1个物品</p>
 </blockquote>
 <ul>
-<li><strong>放物品i</strong>：<code>dp[i - 1][j - weight[i]] + value[i]</code> ，左上方格子中: 不放物品 i 的最大价值+ 放物品 i 的价值 #✏️<br>
-<a href="%E6%B5%8B%E8%AF%95">发动发动发</a></li>
+<li><strong>放物品i</strong>：<code>dp[i - 1][j - weight[i]] + value[i]</code> ，左上方格子中: 不放物品 i 的最大价值+ 放物品 i 的价值 <a href="prodrafts://note/?uuid=EBAAE62A-198E-4959-8593-DC0F311D4C92">✏️</a></li>
 </ul>
 <p>所以递归公式：</p>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs C++">dp[i][j] = <span class="hljs-built_in">max</span>(dp[i - <span class="hljs-number">1</span>][j], dp[i - <span class="hljs-number">1</span>][j - weight[i]] + value[i]);<br></code></pre></td></tr></tbody></table></figure>

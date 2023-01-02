@@ -27,7 +27,7 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20210111204939971.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20210111205857918.png">
 <meta property="article:published_time" content="2022-07-06T09:26:00.000Z">
-<meta property="article:modified_time" content="2022-12-19T01:53:51.367Z">
+<meta property="article:modified_time" content="2022-12-29T03:03:51.891Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="动态规划">
 <meta name="twitter:card" content="summary_large_image">
@@ -227,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.7k 字
+          2.3k 字
         
       </span>
     
@@ -238,7 +238,7 @@
         
         
         
-          9 分钟
+          12 分钟
         
       </span>
     
@@ -289,7 +289,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年12月19日 上午
+                    本文最后更新于：2022年12月29日 上午
                   
                 
               </p>
@@ -329,7 +329,7 @@
 <li>m ==&nbsp;obstacleGrid.length</li>
 <li>n ==&nbsp;obstacleGrid[i].length</li>
 <li>1 &lt;= m, n &lt;= 100</li>
-<li>obstacleGrid[i][j] 为 0 或 1</li>
+<li><code>obstacleGrid[i][j]</code> 为 0 或 1</li>
 </ul>
 <h1 id="2-思路"><a class="markdownIt-Anchor" href="#2-思路"></a> 2: 思路</h1>
 <blockquote>
@@ -353,10 +353,17 @@
 </ul>
 </blockquote>
 <h1 id="3-代码"><a class="markdownIt-Anchor" href="#3-代码"></a> 3: 代码</h1>
-<p>编译已通过</p>
-<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">uniquePathsWithObstacles</span><span class="hljs-params">(vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt;&amp; obstacleGrid)</span> </span>{<br>        <span class="hljs-type">int</span> m = obstacleGrid.<span class="hljs-built_in">size</span>();<br>        <span class="hljs-type">int</span> n = obstacleGrid[<span class="hljs-number">0</span>].<span class="hljs-built_in">size</span>();<br>        vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">dp</span>(m,<span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;(n,<span class="hljs-number">0</span>));<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; m &amp;&amp; obstacleGrid[i][<span class="hljs-number">0</span>] == <span class="hljs-number">0</span>; i++) dp[<span class="hljs-number">0</span>][i] = <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; j &lt; n &amp;&amp; obstacleGrid[<span class="hljs-number">0</span>][j] == <span class="hljs-number">0</span>; j++) dp[j][<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; m; i++){<br>            <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt; n; j++){<br>                <span class="hljs-keyword">if</span>(obstacleGrid[i][j] == <span class="hljs-number">0</span>){ <span class="hljs-comment">// if (obstacleGrid[i][j] == 1) continue;</span><br>                    dp[i][j] = dp[i<span class="hljs-number">-1</span>][j] + dp[i][j<span class="hljs-number">-1</span>];<br>                }<br>            }<br>        }<br>        <span class="hljs-keyword">return</span> dp[m<span class="hljs-number">-1</span>][n<span class="hljs-number">-1</span>];<br><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
 <p>v2</p>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">uniquePathsWithObstacles</span><span class="hljs-params">(vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt;&amp; obstacleGrid)</span> </span>{<br>        <span class="hljs-type">int</span> m = obstacleGrid.<span class="hljs-built_in">size</span>();<br>        <span class="hljs-type">int</span> n = obstacleGrid[<span class="hljs-number">0</span>].<span class="hljs-built_in">size</span>();<br><br>        vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">dp</span>(m, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;(n, <span class="hljs-number">0</span>));<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; j &lt; n &amp;&amp; obstacleGrid[<span class="hljs-number">0</span>][j] == <span class="hljs-number">0</span>; j++){<br>            dp[<span class="hljs-number">0</span>][j] = <span class="hljs-number">1</span>;<br>        }<br><br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; m &amp;&amp; obstacleGrid[i][<span class="hljs-number">0</span>] == <span class="hljs-number">0</span>; i++){<br>            dp[i][<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;<br>        }<br><br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; m; i++){<br>            <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt; n; j++){<br>                <span class="hljs-keyword">if</span>(obstacleGrid[i][j] == <span class="hljs-number">0</span>){ <span class="hljs-comment">// 不要在 for 循环中判断</span><br>                    dp[i][j] = dp[i<span class="hljs-number">-1</span>][j] + dp[i][j<span class="hljs-number">-1</span>]; <br>                }<br>            }<br>        }<br>        <span class="hljs-keyword">return</span> dp[m<span class="hljs-number">-1</span>][n<span class="hljs-number">-1</span>];<br><br>    }<br>};<br><br></code></pre></td></tr></tbody></table></figure>
+<p>v1: 编译已通过</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">uniquePathsWithObstacles</span><span class="hljs-params">(vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt;&amp; obstacleGrid)</span> </span>{<br>        <span class="hljs-type">int</span> m = obstacleGrid.<span class="hljs-built_in">size</span>();<br>        <span class="hljs-type">int</span> n = obstacleGrid[<span class="hljs-number">0</span>].<span class="hljs-built_in">size</span>();<br>        vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">dp</span>(m,<span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;(n,<span class="hljs-number">0</span>));<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; m &amp;&amp; obstacleGrid[i][<span class="hljs-number">0</span>] == <span class="hljs-number">0</span>; i++) dp[<span class="hljs-number">0</span>][i] = <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; j &lt; n &amp;&amp; obstacleGrid[<span class="hljs-number">0</span>][j] == <span class="hljs-number">0</span>; j++) dp[j][<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; m; i++){<br>            <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt; n; j++){<br>                <span class="hljs-keyword">if</span>(obstacleGrid[i][j] == <span class="hljs-number">0</span>){ <span class="hljs-comment">// if (obstacleGrid[i][j] == 1) continue;</span><br>                    dp[i][j] = dp[i<span class="hljs-number">-1</span>][j] + dp[i][j<span class="hljs-number">-1</span>];<br>                }<br>            }<br>        }<br>        <span class="hljs-keyword">return</span> dp[m<span class="hljs-number">-1</span>][n<span class="hljs-number">-1</span>];<br><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
+<h1 id="4-滚动数组解法"><a class="markdownIt-Anchor" href="#4-滚动数组解法"></a> 4: 滚动数组解法</h1>
+<ul>
+<li>dp定义:</li>
+<li>初始化: 如果第一行中间某个位置出现了障碍物, 障碍物后边也过不去</li>
+</ul>
+<p>v1通过</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">uniquePathsWithObstacles</span><span class="hljs-params">(vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt;&amp; obstacleGrid)</span> </span>{<br>        <span class="hljs-type">int</span> m = obstacleGrid.<span class="hljs-built_in">size</span>();<br>        <span class="hljs-type">int</span> n = obstacleGrid[<span class="hljs-number">0</span>].<span class="hljs-built_in">size</span>();<br>        <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">dp</span><span class="hljs-params">(n, <span class="hljs-number">1</span>)</span></span>;<br>        <span class="hljs-comment">// 初始化 dp[0][j]</span><br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; j &lt; n; j++){<br>            <span class="hljs-keyword">if</span>(obstacleGrid[<span class="hljs-number">0</span>][j] == <span class="hljs-number">1</span>) <br>            <span class="hljs-keyword">for</span>(; j &lt; n; j++){<br>                dp[j] = <span class="hljs-number">0</span>;<br>            }<br>        }<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; m; i++) <span class="hljs-comment">// 初始化时已经考虑了 i = 0的情况</span><br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; j &lt; n; j++){ <span class="hljs-comment">// 每一行的第一列都可能有障碍物, 所以从j=0 开始</span><br>                <span class="hljs-keyword">if</span> (obstacleGrid[i][j] == <span class="hljs-number">1</span>)<br>                    dp[j] = <span class="hljs-number">0</span>;<br>                <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (j != <span class="hljs-number">0</span>)<br>                    dp[j] = dp[j] + dp[j<span class="hljs-number">-1</span>];<br>            }<br>        <span class="hljs-keyword">return</span> dp[n<span class="hljs-number">-1</span>];<br>    }<br>};<br><br><br></code></pre></td></tr></tbody></table></figure>
 
               
             </div>
@@ -434,8 +441,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/31702/" title="6.不同路径">
-                        <span class="hidden-mobile">6.不同路径</span>
+                      <a href="/posts/31702/" title="6.不同路径 2">
+                        <span class="hidden-mobile">6.不同路径 2</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

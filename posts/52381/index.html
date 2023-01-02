@@ -16,15 +16,15 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="📝hash table 原理::  STL中的hashtable使用的是开链法解决hash冲突问题，如下图所示。 ![[hash table 原理图.excalidraw]] hash table中的bucket所维护的list既不是list也不是slist，而是其自己定义的由hash table_node数据结构组成的linked-list，而。 在hash table设计bucket的数量上">
+    <meta name="description" content="📝hash table 原理::  STL中的hashtable使用的是开链法解决hash冲突问题，如下图所示。 ![[hash table 原理图.excalidraw]] 开链挂的元素不能太多 hash table中的bucket所维护的list既不是list也不是slist，而是其自己定义的由hash table_node数据结构组成的linked-list，而。 在hash table设">
 <meta property="og:type" content="article">
 <meta property="og:title" content="hash table 原理">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/52381/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="📝hash table 原理::  STL中的hashtable使用的是开链法解决hash冲突问题，如下图所示。 ![[hash table 原理图.excalidraw]] hash table中的bucket所维护的list既不是list也不是slist，而是其自己定义的由hash table_node数据结构组成的linked-list，而。 在hash table设计bucket的数量上">
+<meta property="og:description" content="📝hash table 原理::  STL中的hashtable使用的是开链法解决hash冲突问题，如下图所示。 ![[hash table 原理图.excalidraw]] 开链挂的元素不能太多 hash table中的bucket所维护的list既不是list也不是slist，而是其自己定义的由hash table_node数据结构组成的linked-list，而。 在hash table设">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-29T14:19:00.000Z">
-<meta property="article:modified_time" content="2022-12-14T13:28:58.926Z">
+<meta property="article:modified_time" content="2022-12-29T09:04:01.061Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          421 字
+          431 字
         
       </span>
     
@@ -284,7 +284,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年12月14日 晚上
+                    本文最后更新于：2022年12月29日 下午
                   
                 
               </p>
@@ -295,9 +295,13 @@
 <!-- basicblock-end -->
 <p>STL中的hashtable使用的是<strong>开链法</strong>解决hash冲突问题，如下图所示。<br>
 ![[hash table 原理图.excalidraw]]</p>
-<p>hash table中的bucket所维护的list既不是list也不是slist，而是其自己定义的由hash table_node数据结构组成的linked-list，而。</p>
-<p>在hash table设计bucket的数量上，其内置了28个质数[53, 97, 193,…,429496729]，在创建hash table时，会根据存入的元素个数选择大于等于元素个数的质数作为hash table的容量（vector的长度），其中每个bucket所维护的linked-list长度也等于hashtable的容量。<br>
-如果插入hash table的元素个数超过了bucket的容量，就要进行重建table操作，即找出下一个质数，创建新的buckets vector，重新计算元素在新hash table的位置。</p>
+<p>开链挂的元素不能太多<br>
+hash table中的bucket所维护的list既不是list也不是slist，而是其自己定义的由hash table_node数据结构组成的linked-list，而。</p>
+<p>在hash table设计bucket的数量上，其内置了28个质数[53, 97, 193,…,429496729]，<br>
+在创建hash table时，会根据存入的元素个数选择大于等于元素个数的质数作为hash table的容量（vector的长度），<br>
+其中每个bucket所维护的linked-list长度也等于hashtable的容量。<br>
+如果插入hash table的元素个数超过了bucket的容量，就要进行重建table操作，<br>
+即找出下一个质数，创建新的buckets vector，重新计算元素在新hash table的位置。</p>
 
               
             </div>

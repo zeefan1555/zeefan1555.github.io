@@ -16,20 +16,22 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="📝4.使用最小花费爬楼梯:: 2022&#x2F;12&#x2F;20: 下次可以在优化一下空间复杂度: 746. 使用最小花费爬楼梯 题解 - 力扣（LeetCode）  [!参考资料]- 代码随想录 Leetcode-746.使用最小花费爬楼梯_哔哩哔哩_bilibili    1: 使用最小花费爬楼梯 力扣题目链接 数组的每个下标作为一个阶梯，第 i 个阶梯对应着一个非负数的体力花费值&amp;nbsp;cost[i">
+    <meta name="description" content="📝4.使用最小花费爬楼梯:: 2022&#x2F;12&#x2F;20: 下次可以在优化一下空间复杂度: 746. 使用最小花费爬楼梯 题解 - 力扣（LeetCode） ✅  [!参考资料]- 代码随想录 Leetcode-746.使用最小花费爬楼梯_哔哩哔哩_bilibili    1: 使用最小花费爬楼梯 力扣题目链接 数组的每个下标作为一个阶梯，第 i 个阶梯对应着一个非负数的体力花费值&amp;nbsp;cost">
 <meta property="og:type" content="article">
 <meta property="og:title" content="4.使用最小花费爬楼梯">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/27967/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="📝4.使用最小花费爬楼梯:: 2022&#x2F;12&#x2F;20: 下次可以在优化一下空间复杂度: 746. 使用最小花费爬楼梯 题解 - 力扣（LeetCode）  [!参考资料]- 代码随想录 Leetcode-746.使用最小花费爬楼梯_哔哩哔哩_bilibili    1: 使用最小花费爬楼梯 力扣题目链接 数组的每个下标作为一个阶梯，第 i 个阶梯对应着一个非负数的体力花费值&amp;nbsp;cost[i">
+<meta property="og:description" content="📝4.使用最小花费爬楼梯:: 2022&#x2F;12&#x2F;20: 下次可以在优化一下空间复杂度: 746. 使用最小花费爬楼梯 题解 - 力扣（LeetCode） ✅  [!参考资料]- 代码随想录 Leetcode-746.使用最小花费爬楼梯_哔哩哔哩_bilibili    1: 使用最小花费爬楼梯 力扣题目链接 数组的每个下标作为一个阶梯，第 i 个阶梯对应着一个非负数的体力花费值&amp;nbsp;cost">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/2021010621363669.png">
 <meta property="article:published_time" content="2022-07-05T13:03:00.000Z">
-<meta property="article:modified_time" content="2022-12-20T01:43:55.996Z">
+<meta property="article:modified_time" content="2022-12-29T01:37:29.678Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="动态规划">
+<meta property="article:tag" content="📕">
+<meta property="article:tag" content="📗">
 <meta property="article:tag" content="📙">
-<meta property="article:tag" content="📗✅">
+<meta property="article:tag" content="✅">
 <meta property="article:tag" content="📙✅">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://img-blog.csdnimg.cn/2021010621363669.png">
@@ -228,7 +230,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.7k 字
+          2.5k 字
         
       </span>
     
@@ -239,7 +241,7 @@
         
         
         
-          9 分钟
+          13 分钟
         
       </span>
     
@@ -290,7 +292,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年12月20日 上午
+                    本文最后更新于：2022年12月29日 上午
                   
                 
               </p>
@@ -298,7 +300,7 @@
             <div class="markdown-body">
               
               <p>📝4.使用最小花费爬楼梯::<br>
-2022/12/20: 下次可以在优化一下空间复杂度: <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/min-cost-climbing-stairs/solution/yi-bu-yi-bu-tui-dao-dong-tai-gui-hua-de-duo-chong-/">746. 使用最小花费爬楼梯 题解 - 力扣（LeetCode）</a></p>
+2022/12/20: 下次可以在优化一下空间复杂度: <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/min-cost-climbing-stairs/solution/yi-bu-yi-bu-tui-dao-dong-tai-gui-hua-de-duo-chong-/">746. 使用最小花费爬楼梯 题解 - 力扣（LeetCode）</a> ✅</p>
 <blockquote>
 <p>[!参考资料]-<br>
 <a target="_blank" rel="noopener" href="https://www.programmercarl.com/0746.%E4%BD%BF%E7%94%A8%E6%9C%80%E5%B0%8F%E8%8A%B1%E8%B4%B9%E7%88%AC%E6%A5%BC%E6%A2%AF.html#%E6%80%9D%E8%B7%AF">代码随想录</a><br>
@@ -314,7 +316,7 @@
 <p>输入：cost = [10, 15, 20]<br>
 输出：15 解释：最低花费是从 cost[1] 开始，然后走两步即可到阶梯顶，一共花费 15 。 &nbsp;示例 2：</p>
 <blockquote>
-<p>[!success] #📗✅     第一次不要钱，爬上了15，支付15后可以爬一层到楼顶，那我从10开始支付10爬两层不是更好吗<br>
+<p>[!success] #📗   第一次不要钱，爬上了15，支付15后可以爬一层到楼顶，那我从10开始支付10爬两层不是更好吗<br>
 从 15 爬两层是到了 20 的上面一层. 顶层是最后一个数的下一层<br>
 如果在 10 的地方爬两层到了 20</p>
 </blockquote>
@@ -327,22 +329,31 @@
 <h1 id="2-思路"><a class="markdownIt-Anchor" href="#2-思路"></a> 2: 思路</h1>
 <p><strong>注意题目描述：每当你爬上一个阶梯你都要花费对应的体力值，一旦支付了相应的体力值，你就可以选择向上爬一个阶梯或者爬两个阶梯</strong></p>
 <p>动归五部曲</p>
-<p><font color="#F36208">1.  确定dp数组以及下标的含义</font></p>
+<ul>
+<li>summary <span style="background:#b1ffff"><font color="#F36208">1.  确定dp数组以及下标的含义</font></span></li>
+</ul>
 <blockquote>
-<p>[!note] <strong>dp[i]的定义：到达第i个台阶所花费的最少体力为dp[i]</strong>。</p>
+<p>[!note] dp[i]的定义：<strong>离开</strong>第i个台阶所花费的最少体力为dp[i]。</p>
 </blockquote>
-<p>注意这里认为是第一步一定是要花费：<br>
+<blockquote>
+<p>[!question] #📕    注意这里认为是第一步一定是要花费：<br>
 dp[0] = cost[0];<br>
 dp[1] = cost[1];<br>
-<strong>dp[2] = min(dp[0], dp[1]) + cost[2];</strong><br>
-<font color="#F36208">2.  确定递推公式</font><br>
-<strong>可以有两个途径得到dp[i]，一个是dp[i-1] 一个是dp[i-2]</strong>。</p>
+<strong>dp[2] = min(dp[0], dp[1]) + cost[2];</strong></p>
+</blockquote>
+<ul>
+<li>summary <span style="background:#b1ffff"><font color="#F36208">2.  确定递推公式</font></span><br>
+<strong>可以有两个途径得到dp[i]，一个是dp[i-1] 一个是dp[i-2]</strong>。</li>
+</ul>
 <blockquote>
 <p>一旦支付当前下边相应的体力值，就可向上爬一个或者两个楼梯</p>
 </blockquote>
 <p><strong>dp[i] = min(dp[i - 1], dp[i - 2]) + cost[i];</strong><br>
-爬上台阶i，可能是从 i - 1 层，i-2层爬上来的，然后在离开台阶i 又在需要花费cost[i]<br>
-<font color="#F36208">3. dp数组初始化</font></p>
+爬上台阶i，可能是从 i - 1 层，i-2层爬上来的，然后在离开台阶i 又在需要花费cost[i]</p>
+<p>返回值:</p>
+<ul>
+<li>summary <span style="background:#b1ffff"><font color="#F36208">3. dp数组初始化</font></span></li>
+</ul>
 <blockquote>
 <p>[!success] #📙✅<br>
 题目说：可以选择从下标为 0 或 1 的元素作为初始阶梯。<br>
@@ -350,35 +361,20 @@ dp[1] = cost[1];<br>
 <strong>dp[0] = cost[0]; // 相当于上第一层楼梯顶部</strong>, 需要支付 cost[0]</p>
 </blockquote>
 <figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">dp</span><span class="hljs-params">(cost.size())</span></span>;<br>dp[<span class="hljs-number">0</span>] = cost[<span class="hljs-number">0</span>];<br>dp[<span class="hljs-number">1</span>] = cost[<span class="hljs-number">1</span>];<br></code></pre></td></tr></tbody></table></figure>
-<p><font color="#F36208">4. 遍历顺序</font><br>
-因为是模拟台阶，而且dp[i]又dp[i-1]dp[i-2]推出，所以是从前到后遍历cost数组就可以了。<br>
-<strong>但是稍稍有点难度的动态规划，其遍历顺序并不容易确定下来</strong>。<br>
-<font color="#F36208">5. 举例推导dp数组</font></p>
-<table>
-<thead>
-<tr>
-<th>cost</th>
-<th>10</th>
-<th>15</th>
-<th>20</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>dp[i]</td>
-<td>10</td>
-<td>15</td>
-<td>30</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p><img src="https://img-blog.csdnimg.cn/2021010621363669.png" srcset="/img/loading.gif" lazyload alt="746.使用最小花费爬楼梯"></p>
+<ul>
+<li>summary <span style="background:#b1ffff"><font color="#F36208">4. 遍历顺序</font></span></li>
+</ul>
+<p>因为是模拟台阶，而且dp[i]又dp[i-1]dp[i-2]推出，所以是从前到后遍历cost数组就可以了。<br>
+<strong>但是稍稍有点难度的动态规划，其遍历顺序并不容易确定下来</strong>。</p>
+<ul>
+<li>summary <span style="background:#b1ffff"><font color="#F36208">5. 举例推导dp数组</font></span><br>
+| cost  | 10  | 15  | 20  |<br>
+| ----- | — | — | — |<br>
+| dp[i] | 10  | 15  | 30  |<br>
+|       |     |     |     |<br>
+<img src="https://img-blog.csdnimg.cn/2021010621363669.png" srcset="/img/loading.gif" lazyload alt="746.使用最小花费爬楼梯"><br>
+最后两个数取小者, 因为支付后边两个花费, 都可以到达顶层</li>
+</ul>
 <blockquote>
 <p>[!question] #📙    我觉得是数组 dp 数组的值已经涵盖了到达下一层的花销<br>
 最后两位支付该值都可以到下一层，<br>
@@ -386,6 +382,11 @@ dp[1] = cost[1];<br>
 所以<strong>相当于最后一步不用花费，就停止到那了，不用+cost[i]</strong></p>
 </blockquote>
 <h1 id="3-代码"><a class="markdownIt-Anchor" href="#3-代码"></a> 3: 代码</h1>
+<p>v2, 通过</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">minCostClimbingStairs</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; cost)</span> </span>{<br>        <span class="hljs-type">int</span> dp[<span class="hljs-number">1001</span>] = {<span class="hljs-number">0</span>};<br><br>        dp[<span class="hljs-number">0</span>] = cost[<span class="hljs-number">0</span>];<br>        dp[<span class="hljs-number">1</span>] = cost[<span class="hljs-number">1</span>];<br>        <br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">2</span>; i &lt; cost.<span class="hljs-built_in">size</span>(); i++){<br>            dp[i] = <span class="hljs-built_in">min</span>(dp[i<span class="hljs-number">-1</span>], dp[i<span class="hljs-number">-2</span>]) + cost[i];<br>        }<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">min</span>(dp[cost.<span class="hljs-built_in">size</span>()<span class="hljs-number">-1</span>], dp[cost.<span class="hljs-built_in">size</span>()<span class="hljs-number">-2</span>]);<br>        <br><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
+<p>上面的代码在空间利用上可以再优化一下。</p>
+<p>注意到状态转移方程中只用到了前面的两个记录，可以不用一维数组，只用两个变量保存前面的两个记录，并不断更新，就可以递推下去，这样空间复杂度就是O(1)了。</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">minCostClimbingStairs</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; cost)</span> </span>{<br>        <span class="hljs-type">int</span> dp[<span class="hljs-number">2</span>] = {<span class="hljs-number">0</span>};<br><br>        dp[<span class="hljs-number">0</span>] = cost[<span class="hljs-number">0</span>];<br>        dp[<span class="hljs-number">1</span>] = cost[<span class="hljs-number">1</span>];<br>        <br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">2</span>; i &lt; cost.<span class="hljs-built_in">size</span>(); i++){<br>            <span class="hljs-type">int</span> temp = <span class="hljs-built_in">min</span>(dp[<span class="hljs-number">0</span>], dp[<span class="hljs-number">1</span>]) + cost[i];<br>            dp[<span class="hljs-number">0</span>] = dp[<span class="hljs-number">1</span>];<br>            dp[<span class="hljs-number">1</span>] = temp;<br><br>        }<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">min</span>(dp[<span class="hljs-number">0</span>], dp[<span class="hljs-number">1</span>]);<br>        <br><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
 <p>编译已通过</p>
 <figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">minCostClimbingStairs</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; cost)</span> </span>{<br>        <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">dp</span><span class="hljs-params">(cost.size())</span></span>;<br>        dp[<span class="hljs-number">0</span>] = cost[<span class="hljs-number">0</span>];<br>        dp[<span class="hljs-number">1</span>] = cost[<span class="hljs-number">1</span>];<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">2</span>; i &lt; cost.<span class="hljs-built_in">size</span>(); i++){<span class="hljs-comment">// 这里不用&lt;=，因为下标从0开始，取不到cost.size()||从第三个元素开始，下标是2</span><br>            dp[i] = <span class="hljs-built_in">min</span>(dp[i - <span class="hljs-number">1</span>], dp[i - <span class="hljs-number">2</span>]) + cost[i];<br>        }<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">min</span>(dp[cost.<span class="hljs-built_in">size</span>()<span class="hljs-number">-1</span>], dp[cost.<span class="hljs-built_in">size</span>() - <span class="hljs-number">2</span>]);<br><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
 
@@ -443,9 +444,13 @@ dp[1] = cost[1];<br>
       
         <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">#动态规划</a>
       
+        <a href="/tags/%F0%9F%93%95/">#📕</a>
+      
+        <a href="/tags/%F0%9F%93%97/">#📗</a>
+      
         <a href="/tags/%F0%9F%93%99/">#📙</a>
       
-        <a href="/tags/%F0%9F%93%97%E2%9C%85/">#📗✅</a>
+        <a href="/tags/%E2%9C%85/">#✅</a>
       
         <a href="/tags/%F0%9F%93%99%E2%9C%85/">#📙✅</a>
       
@@ -461,9 +466,9 @@ dp[1] = cost[1];<br>
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/31702/" title="6.不同路径 2">
+                      <a href="/posts/31702/" title="6.不同路径">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">6.不同路径 2</span>
+                        <span class="hidden-mobile">6.不同路径</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     

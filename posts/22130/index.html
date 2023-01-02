@@ -16,15 +16,15 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="📝map 类容器(🗃)::  ![[map 类容器(🗃)表格. excalidraw]] [[STL中unordered_map和map的区别和应用场景]]  1: [[map(🗃)]] map中的元素是按照二叉搜索树存储，进行中序遍历会得到有序遍历。  2: [[unordered_map(🗃)]] 存储时是根据key的hash值判断元素是否相同，即unordered_map内部元素是">
+    <meta name="description" content="📝map 类容器(🗃)::  放入的是 key, value 键值对 ![[map 类容器(🗃)表格. excalidraw]] [[STL中unordered_map和map的区别和应用场景]]  1: [[map(🗃)]] map中的元素是按照二叉搜索树存储，进行中序遍历会得到有序遍历。  2: [[unordered_map(🗃)]] 存储时是根据key的hash值判断元素是否相同">
 <meta property="og:type" content="article">
 <meta property="og:title" content="map 类容器(🗃)">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/22130/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="📝map 类容器(🗃)::  ![[map 类容器(🗃)表格. excalidraw]] [[STL中unordered_map和map的区别和应用场景]]  1: [[map(🗃)]] map中的元素是按照二叉搜索树存储，进行中序遍历会得到有序遍历。  2: [[unordered_map(🗃)]] 存储时是根据key的hash值判断元素是否相同，即unordered_map内部元素是">
+<meta property="og:description" content="📝map 类容器(🗃)::  放入的是 key, value 键值对 ![[map 类容器(🗃)表格. excalidraw]] [[STL中unordered_map和map的区别和应用场景]]  1: [[map(🗃)]] map中的元素是按照二叉搜索树存储，进行中序遍历会得到有序遍历。  2: [[unordered_map(🗃)]] 存储时是根据key的hash值判断元素是否相同">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-12-13T08:25:00.000Z">
-<meta property="article:modified_time" content="2022-12-16T02:31:34.091Z">
+<meta property="article:modified_time" content="2022-12-29T09:11:29.705Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          300 字
+          344 字
         
       </span>
     
@@ -284,7 +284,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年12月16日 上午
+                    本文最后更新于：2022年12月29日 下午
                   
                 
               </p>
@@ -293,6 +293,7 @@
               
               <p>📝map 类容器(🗃)::</p>
 <!-- basicblock-end -->
+<p>放入的是 key, value 键值对</p>
 <p>![[map 类容器(🗃)表格. excalidraw]]</p>
 <p>[[STL中unordered_map和map的区别和应用场景]]</p>
 <h1 id="1-map"><a class="markdownIt-Anchor" href="#1-map"></a> 1: [[map(🗃)]]</h1>
@@ -301,8 +302,10 @@
 <p>存储时是根据key的hash值判断元素是否相同，即unordered_map内部元素是无序的<br>
 unordered_map和map类似，都是存储的key-value的值，可以通过key快速索引到value。<br>
 不同的是unordered_map不会根据key的大小进行排序，</p>
-<h1 id="3-hash_map"><a class="markdownIt-Anchor" href="#3-hash_map"></a> 3: [[hash_map]]</h1>
-<h1 id="4-容器去重"><a class="markdownIt-Anchor" href="#4-容器去重"></a> 4: [[容器去重]]</h1>
+<h1 id="3-multimap"><a class="markdownIt-Anchor" href="#3-multimap"></a> 3: multimap</h1>
+<p>key 不可以重复, value 可以重复</p>
+<h1 id="4-hash_map"><a class="markdownIt-Anchor" href="#4-hash_map"></a> 4: [[hash_map]]</h1>
+<h1 id="5-容器去重"><a class="markdownIt-Anchor" href="#5-容器去重"></a> 5: [[容器去重]]</h1>
 
               
             </div>

@@ -16,17 +16,17 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="📝14.最后一块石头的重量 II::   1: 11049.最后一块石头的重量 II 力扣题目链接 题目难度：中等 有一堆石头，每块石头的重量都是正整数。 每一回合，从中选出任意两块石头，然后将它们一起粉碎。假设石头的重量分别为&amp;nbsp;x 和&amp;nbsp;y，且&amp;nbsp;x &lt;&#x3D; y。那么粉碎的可能结果如下： 如果&amp;nbsp;x &#x3D;&#x3D; y，那么两块石头都会被完全粉碎； 如果&amp;nbsp;">
+    <meta name="description" content="📝14.最后一块石头的重量 II:: 本题与 [[13.分割等和子集]]一个类型，不同之处是前者要求能装多少装多，后者要求正好装满  [!参考资料]- leetcode1049 最后一块石头的重量II 题解_哔哩哔哩_bilibili    1: 11049.最后一块石头的重量 II 力扣题目链接 题目难度：中等 有一堆石头，每块石头的重量都是正整数。 每一回合，从中选出任意两块石头，然后将它们">
 <meta property="og:type" content="article">
 <meta property="og:title" content="14.最后一块石头的重量 II">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/29/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="📝14.最后一块石头的重量 II::   1: 11049.最后一块石头的重量 II 力扣题目链接 题目难度：中等 有一堆石头，每块石头的重量都是正整数。 每一回合，从中选出任意两块石头，然后将它们一起粉碎。假设石头的重量分别为&amp;nbsp;x 和&amp;nbsp;y，且&amp;nbsp;x &lt;&#x3D; y。那么粉碎的可能结果如下： 如果&amp;nbsp;x &#x3D;&#x3D; y，那么两块石头都会被完全粉碎； 如果&amp;nbsp;">
+<meta property="og:description" content="📝14.最后一块石头的重量 II:: 本题与 [[13.分割等和子集]]一个类型，不同之处是前者要求能装多少装多，后者要求正好装满  [!参考资料]- leetcode1049 最后一块石头的重量II 题解_哔哩哔哩_bilibili    1: 11049.最后一块石头的重量 II 力扣题目链接 题目难度：中等 有一堆石头，每块石头的重量都是正整数。 每一回合，从中选出任意两块石头，然后将它们">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/20220720164608.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20210121115805904.jpg">
 <meta property="article:published_time" content="2022-07-19T06:47:00.000Z">
-<meta property="article:modified_time" content="2022-12-17T06:41:10.334Z">
+<meta property="article:modified_time" content="2022-12-30T02:34:19.804Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="疑问">
 <meta property="article:tag" content="card">
@@ -228,7 +228,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.7k 字
+          2.4k 字
         
       </span>
     
@@ -239,7 +239,7 @@
         
         
         
-          9 分钟
+          13 分钟
         
       </span>
     
@@ -290,14 +290,18 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年12月17日 下午
+                    本文最后更新于：2022年12月30日 上午
                   
                 
               </p>
             
             <div class="markdown-body">
               
-              <p>📝14.最后一块石头的重量 II::</p>
+              <p>📝14.最后一块石头的重量 II:: 本题与 [[13.分割等和子集]]一个类型，不同之处是前者要求能装多少装多，后者要求正好装满</p>
+<blockquote>
+<p>[!参考资料]-<br>
+<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1G3411E7oX?spm_id_from=333.337.search-card.all.click&amp;vd_source=f2340d96e99780a96b50d8096ffaaf1a">leetcode1049 最后一块石头的重量II 题解_哔哩哔哩_bilibili</a></p>
+</blockquote>
 <!-- basicblock-end -->
 <h1 id="1-11049最后一块石头的重量-ii"><a class="markdownIt-Anchor" href="#1-11049最后一块石头的重量-ii"></a> 1: 11049.最后一块石头的重量 II</h1>
 <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/last-stone-weight-ii/">力扣题目链接</a></p>
@@ -312,58 +316,45 @@
 <li>1 &lt;= stones[i] &lt;= 1000</li>
 </ul>
 <h1 id="2-思路"><a class="markdownIt-Anchor" href="#2-思路"></a> 2: 思路</h1>
-<p>1049.最后一块石头的重量 II 为什么能转化为 01背包问题 #card  #已解决<br>
-自顶向下的考虑，算出所有石头的重量和，如果能分成一半一半，那说明正好可以撞完<br>
+<p>自顶向下的考虑，算出所有石头的重量和，如果能分成一半一半，那说明正好可以撞完<br>
 如果不能恰好分成一半一半，让分成的两大块尽量靠近一半。一边大一边小，相减也得到碰撞后的最小重量<br>
 问题就变成了：创造一个sum/2的背包。在这个背包里尽量装满。<br>
 如果背包装的满即表示能分成一半一半，也就是最后能撞完。<br>
 如果没装完，(sum- 装的重量) - 装的重量= half<sup>+</sup>  - half<sup>-</sup> = 相撞后的重量<br>
-<img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/20220720164608.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/20220720164608.png" srcset="/img/loading.gif" lazyload alt="|700"></p>
 <p>本题物品的重量为store[i]，物品的价值也为store[i]。重量和价值是一样的<br>
 对应着01背包里的物品重量weight[i]和 物品价值value[i]。</p>
-<ol>
-<li>
-<p>确定dp[j]的含义<br>
-j背包下最多可以装dp[j]的重量</p>
-</li>
-<li>
-<p>递推公式<br>
+<p><span style="background:#b1ffff">1. 确定dp[j]的含义</span><br>
+<strong>j背包下最多可以装dp[j]的重量</strong></p>
+<p><span style="background:#b1ffff">2. 递推公式</span><br>
 dp[j] = max(dp[j], dp[j - weight[i]] + value[i]);<br>
 <strong>dp[j] = max(dp[j], dp[j - stones[i]] + stones[i]);</strong></p>
-</li>
-<li>
-<p>dp数组的初始化 #card #疑问<br>
+<p><span style="background:#b1ffff">3. dp数组的初始化</span><br>
 为什么要要一半<br>
 题目如下要求，最多重量是30000</p>
-</li>
-</ol>
 <ul>
 <li>1 &lt;= stones.length &lt;= 30</li>
-<li>1 &lt;= stones[i] &lt;= 1000<br>
+<li>1 &lt;= stones[i] &lt;= 100<br>
 我们只需要计划总重量的一半<br>
-dp数组的大小为15000，都初始化为0：<code>vector&lt;int&gt; dp(15001, 0);</code> 从0开始，要多一位</li>
+dp数组的大小为1500，都初始化为0：<br>
+<code>vector&lt;int&gt; dp(15001, 0);</code> 从0开始，要多一位<br>
+用 int dp[1501] 也可以</li>
 </ul>
-<ol start="4">
-<li>
-<p>遍历顺序<br>
+<p><span style="background:#b1ffff">4. 遍历顺序</span><br>
 先物品在背包，背包循环倒序</p>
-</li>
-<li>
-<p>打印dp数组<br>
-举例，输入：[2,4,1,1]，此时target = (2 + 4 + 1 + 1)/2 = 4 ，dp数组状态图如下：<br>
+<p><span style="background:#b1ffff">5. 打印dp数组</span><br>
+<a href="prodrafts://note/?uuid=4A0445C3-1573-4F9F-B9F2-BE9F0BAC7BBB">✏️遍历过程</a></p>
+<p>举例，输入：[2,4,1,1]，此时target = (2 + 4 + 1 + 1)/2 = 4 ，dp数组状态图如下：<br>
 用store[1]遍历时<br>
 dp[4] = max(dp[4], dp[4 - store[1]]+ store[1]) =max(2, 2+2)<br>
 <img src="https://img-blog.csdnimg.cn/20210121115805904.jpg" srcset="/img/loading.gif" lazyload alt="1049.最后一块石头的重量II"></p>
-</li>
-</ol>
 <h1 id="3-代码"><a class="markdownIt-Anchor" href="#3-代码"></a> 3: 代码</h1>
-<p>编译已通过</p>
+<p>v3通过</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">lastStoneWeightII</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; stones)</span> </span>{<br>        <span class="hljs-type">int</span> sum = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i : stones){<br>            sum += i;<br>        }<br>        <span class="hljs-type">int</span> target = sum / <span class="hljs-number">2</span>;<br><br>        <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">dp</span><span class="hljs-params">(target+<span class="hljs-number">1</span>, <span class="hljs-number">0</span>)</span></span>;<br><br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; stones.<span class="hljs-built_in">size</span>(); i++){<br>            <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j = target; j &gt;= stones[i]; j--){<br>                dp[j] = <span class="hljs-built_in">max</span>(dp[j], dp[j - stones[i]] + stones[i]);<br>            }<br>        }<br><br>        <span class="hljs-type">int</span> half = dp[target];<br><br>        <span class="hljs-type">int</span> result = sum - half - half;<br><br>        <span class="hljs-keyword">return</span> result;<br><br>        <br><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
+<p>v2</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">lastStoneWeightII</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; stones)</span> </span>{<br>        <span class="hljs-type">int</span> dp[<span class="hljs-number">1501</span>] = {<span class="hljs-number">0</span>};<br>        <span class="hljs-type">int</span> sum = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i : stones){<br>            sum += i;<br>        }<br>        <span class="hljs-type">int</span> bagweight = sum / <span class="hljs-number">2</span>;<br><br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; stones.<span class="hljs-built_in">size</span>(); i++){<br>            <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j = bagweight; j &gt;= stones[i]; j--){<br>                dp[j] = <span class="hljs-built_in">max</span>(dp[j], dp[j - stones[i]] + stones[i]);<br>            }<br>        }<br>        <span class="hljs-keyword">return</span> sum-dp[bagweight] - dp[bagweight];<br><br><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
+<p>v1</p>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> {</span><br>public:<br>    <span class="hljs-type">int</span> <span class="hljs-title function_">lastStoneWeightII</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;&amp; stones)</span> {<br>        <span class="hljs-type">int</span> sum = <span class="hljs-number">0</span>;<br>        <span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title function_">dp</span><span class="hljs-params">(<span class="hljs-number">15001</span>,<span class="hljs-number">0</span>)</span>; <br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; stones.size(); i++){<br>            sum += stones[i];<br>        }<br><br>        <span class="hljs-type">int</span> target = sum / <span class="hljs-number">2</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; stones.size(); i++){<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = target; j &gt;= stones[i]; j--){<br>                dp[j] = max(dp[j], dp[j - stones[i]] + stones[i]);<br>            }<br>        }<br>        <span class="hljs-keyword">return</span> (sum - dp[target]) - dp[target];<br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
-<h1 id="4-总结"><a class="markdownIt-Anchor" href="#4-总结"></a> 4: 总结</h1>
-<p>本题与[[13.分割等和子集]]一个类型，不同之处是前者要求能装多少装多，后者要求正好装满</p>
-<p><strong>参考资料</strong><br>
-自用跳转链接：🈚<br>
-<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1G3411E7oX?spm_id_from=333.337.search-card.all.click&amp;vd_source=f2340d96e99780a96b50d8096ffaaf1a">leetcode1049 最后一块石头的重量II 题解_哔哩哔哩_bilibili</a></p>
 
               
             </div>
@@ -445,8 +436,8 @@ dp[4] = max(dp[4], dp[4 - store[1]]+ store[1]) =max(2, 2+2)<br>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/31/" title="14.最后一块石头的重量 II 2">
-                        <span class="hidden-mobile">14.最后一块石头的重量 II 2</span>
+                      <a href="/posts/25586/" title="图床的设置">
+                        <span class="hidden-mobile">图床的设置</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

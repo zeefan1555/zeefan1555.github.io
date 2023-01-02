@@ -1,0 +1,821 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202206251952371.png">
+  <link rel="icon" href="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202206251952371.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="zeefan">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="📝26. 单词拆分::   1: 139.单词拆分 力扣题目链接 (opens new window) 给定一个非空字符串 s 和一个包含非空单词的列表 wordDict， 判定&amp;nbsp;s 是否可以被空格拆分为一个或多个在字典中出现的单词。 说明： 拆分时可以重复使用字典中的单词。 你可以假设字典中没有重复的单词。 示例 1：  输入: s &#x3D; “leetcode”, wordDict &#x3D;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="26. 单词拆分">
+<meta property="og:url" content="https://zeefan1555.github.io/posts/103/index.html">
+<meta property="og:site_name" content="一杯空气">
+<meta property="og:description" content="📝26. 单词拆分::   1: 139.单词拆分 力扣题目链接 (opens new window) 给定一个非空字符串 s 和一个包含非空单词的列表 wordDict， 判定&amp;nbsp;s 是否可以被空格拆分为一个或多个在字典中出现的单词。 说明： 拆分时可以重复使用字典中的单词。 你可以假设字典中没有重复的单词。 示例 1：  输入: s &#x3D; “leetcode”, wordDict &#x3D;">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210202162652727.jpg">
+<meta property="article:published_time" content="2023-01-01T16:28:00.000Z">
+<meta property="article:modified_time" content="2023-01-02T03:01:43.212Z">
+<meta property="article:author" content="zeefan">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20210202162652727.jpg">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>26. 单词拆分 - 一杯空气</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.15.6/katex.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"zeefan1555.github.io","root":"/","version":"1.9.1","typing":{"enable":true,"typeSpeed":150,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"Text"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":10},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>一杯空气</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="26. 单词拆分"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-01-02 00:28" pubdate>
+          2023年1月2日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          6.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          32 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">26. 单词拆分</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2023年1月2日 上午
+                  
+                
+              </p>
+            
+            <div class="markdown-body">
+              
+              <p>📝26. 单词拆分::</p>
+<!-- basicblock-end -->
+<h1 id="1-139单词拆分"><a class="markdownIt-Anchor" href="#1-139单词拆分"></a> 1: 139.单词拆分</h1>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/word-break/">力扣题目链接 (opens new window)</a></p>
+<p>给定一个非空字符串 s 和一个包含非空单词的列表 wordDict，<br>
+判定&nbsp;s 是否可以被空格拆分为一个或多个在字典中出现的单词。</p>
+<p>说明：</p>
+<p>拆分时可以重复使用字典中的单词。</p>
+<p>你可以假设字典中没有重复的单词。</p>
+<p>示例 1：</p>
+<ul>
+<li>输入: s = “leetcode”, wordDict = [“leet”, “code”]</li>
+<li>输出: true</li>
+<li>解释: 返回 true 因为 “leetcode” 可以被拆分成 “leet code”。</li>
+</ul>
+<p>示例 2：</p>
+<ul>
+<li>输入: s = “applepenapple”, wordDict = [“apple”, “pen”]</li>
+<li>输出: true</li>
+<li>解释: 返回 true 因为 “applepenapple” 可以被拆分成 “apple pen apple”。</li>
+<li>注意你可以<strong>重复</strong>使用字典中的单词。</li>
+</ul>
+<p>示例 3：</p>
+<ul>
+<li>输入: s = “catsandog”, wordDict = [“cats”, “dog”, “sand”, “and”, “cat”]</li>
+<li>输出: false</li>
+</ul>
+<h1 id="2-回溯思路"><a class="markdownIt-Anchor" href="#2-回溯思路"></a> 2: 回溯思路</h1>
+<p>看到这道题目的时候，大家应该回想起我们之前讲解回溯法专题的时候，讲过的一道题目<a target="_blank" rel="noopener" href="https://programmercarl.com/0131.%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2.html">回溯算法：分割回文串 (opens new window)</a>，就是枚举字符串的所有分割情况。</p>
+<p><a target="_blank" rel="noopener" href="https://programmercarl.com/0131.%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2.html">回溯算法：分割回文串 (opens new window)</a> ：是枚举分割后的所有子串，判断是否回文。</p>
+<p>本道是枚举分割所有字符串，判断是否在字典里出现过。</p>
+<p>那么这里我也给出回溯法C++代码：</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">private</span>:<br>    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">backtracking</span> <span class="hljs-params">(<span class="hljs-type">const</span> string&amp; s, <span class="hljs-type">const</span> unordered_set&lt;string&gt;&amp; wordSet, <span class="hljs-type">int</span> startIndex)</span> </span>{<br>        <span class="hljs-keyword">if</span> (startIndex &gt;= s.<span class="hljs-built_in">size</span>()) {<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        }<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = startIndex; i &lt; s.<span class="hljs-built_in">size</span>(); i++) {<br>            string word = s.<span class="hljs-built_in">substr</span>(startIndex, i - startIndex + <span class="hljs-number">1</span>);<br>            <span class="hljs-keyword">if</span> (wordSet.<span class="hljs-built_in">find</span>(word) != wordSet.<span class="hljs-built_in">end</span>() &amp;&amp; <span class="hljs-built_in">backtracking</span>(s, wordSet, i + <span class="hljs-number">1</span>)) {<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>            }<br>        }<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    }<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">wordBreak</span><span class="hljs-params">(string s, vector&lt;string&gt;&amp; wordDict)</span> </span>{<br>        <span class="hljs-function">unordered_set&lt;string&gt; <span class="hljs-title">wordSet</span><span class="hljs-params">(wordDict.begin(), wordDict.end())</span></span>;<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">backtracking</span>(s, wordSet, <span class="hljs-number">0</span>);<br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
+<ul>
+<li>时间复杂度：O(2^n)，因为每一个单词都有两个状态，切割和不切割</li>
+<li>空间复杂度：O(n)，算法递归系统调用栈的空间</li>
+</ul>
+<p>那么以上代码很明显要超时了，超时的数据如下：</p>
+<figure class="highlight prolog"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs prolog"><span class="hljs-string">"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab"</span><br>[<span class="hljs-string">"a"</span>,<span class="hljs-string">"aa"</span>,<span class="hljs-string">"aaa"</span>,<span class="hljs-string">"aaaa"</span>,<span class="hljs-string">"aaaaa"</span>,<span class="hljs-string">"aaaaaa"</span>,<span class="hljs-string">"aaaaaaa"</span>,<span class="hljs-string">"aaaaaaaa"</span>,<span class="hljs-string">"aaaaaaaaa"</span>,<span class="hljs-string">"aaaaaaaaaa"</span>]<br></code></pre></td></tr></tbody></table></figure>
+<p>递归的过程中有很多重复计算，可以使用数组保存一下递归过程中计算的结果。</p>
+<p>这个叫做记忆化递归，这种方法我们之前已经提过很多次了。</p>
+<p>使用memory数组保存每次计算的以startIndex起始的计算结果，如果memory[startIndex]里已经被赋值了，直接用memory[startIndex]的结果。</p>
+<p>C++代码如下：</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">private</span>:<br>    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">backtracking</span> <span class="hljs-params">(<span class="hljs-type">const</span> string&amp; s,</span></span><br><span class="hljs-params"><span class="hljs-function">            <span class="hljs-type">const</span> unordered_set&lt;string&gt;&amp; wordSet,</span></span><br><span class="hljs-params"><span class="hljs-function">            vector&lt;<span class="hljs-type">bool</span>&gt;&amp; memory,</span></span><br><span class="hljs-params"><span class="hljs-function">            <span class="hljs-type">int</span> startIndex)</span> </span>{<br>        <span class="hljs-keyword">if</span> (startIndex &gt;= s.<span class="hljs-built_in">size</span>()) {<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        }<br>        <span class="hljs-comment">// 如果memory[startIndex]不是初始值了，直接使用memory[startIndex]的结果</span><br>        <span class="hljs-keyword">if</span> (!memory[startIndex]) <span class="hljs-keyword">return</span> memory[startIndex];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = startIndex; i &lt; s.<span class="hljs-built_in">size</span>(); i++) {<br>            string word = s.<span class="hljs-built_in">substr</span>(startIndex, i - startIndex + <span class="hljs-number">1</span>);<br>            <span class="hljs-keyword">if</span> (wordSet.<span class="hljs-built_in">find</span>(word) != wordSet.<span class="hljs-built_in">end</span>() &amp;&amp; <span class="hljs-built_in">backtracking</span>(s, wordSet, memory, i + <span class="hljs-number">1</span>)) {<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>            }<br>        }<br>        memory[startIndex] = <span class="hljs-literal">false</span>; <span class="hljs-comment">// 记录以startIndex开始的子串是不可以被拆分的</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    }<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">wordBreak</span><span class="hljs-params">(string s, vector&lt;string&gt;&amp; wordDict)</span> </span>{<br>        <span class="hljs-function">unordered_set&lt;string&gt; <span class="hljs-title">wordSet</span><span class="hljs-params">(wordDict.begin(), wordDict.end())</span></span>;<br>        <span class="hljs-function">vector&lt;<span class="hljs-type">bool</span>&gt; <span class="hljs-title">memory</span><span class="hljs-params">(s.size(), <span class="hljs-number">1</span>)</span></span>; <span class="hljs-comment">// -1 表示初始化状态</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">backtracking</span>(s, wordSet, memory, <span class="hljs-number">0</span>);<br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
+<p>这个时间复杂度其实也是：O(2^n)。只不过对于上面那个超时测试用例优化效果特别明显。</p>
+<p><strong>这个代码就可以AC了，当然回溯算法不是本题的主菜，背包才是！</strong></p>
+<h1 id="3-背包问题"><a class="markdownIt-Anchor" href="#3-背包问题"></a> 3: 背包问题</h1>
+<blockquote>
+<p>[!note] 转化为完全背包<br>
+字符串s就是背包<br>
+部分单词就是物品，💡遍历的是每一个可能的分割点<br>
+单词能否组成字符串s，就是问物品能不能把背包装满。<br>
+拆分时可以重复使用字典中的单词，说明就是一个完全背包！</p>
+</blockquote>
+<p>动规五部曲分析如下：</p>
+<ol>
+<li>确定dp数组以及下标的含义</li>
+</ol>
+<p>dp[i] : 表示字符串 s 从头到第 i 个字符能否被字典中的单词拼成。<br>
+最后判断的是 dp[s.size()]</p>
+<ol start="2">
+<li>确定递推公式<br>
+![[26. 单词拆分 2023-01-02 10.12.31.excalidraw]]</li>
+</ol>
+<ul>
+<li>对于每个分割点，
+<ul>
+<li>我们要判断 s[0:j] 这个子串是否能被拼成，dp[j] == true</li>
+<li>以及 s[j:i] 这个子串是否在字典中出现过。wordSet.find</li>
+</ul>
+</li>
+<li>如果都满足，那么 dp[i] 就设为 true。</li>
+</ul>
+<p>所以递推公式是 if([j, i] 这个区间的子串出现在字典里 &amp;&amp; dp[j]是true) 那么 dp[i] = true。</p>
+<ol start="3">
+<li>dp数组如何初始化</li>
+</ol>
+<p>从递归公式中可以看出，dp[i] 的状态依靠 dp[j]是否为true，那么dp[0]就是递归的根基，dp[0]一定要为true，否则递归下去后面都都是false了。</p>
+<blockquote>
+<p>[!note] 那么dp[0]有没有意义呢？<br>
+dp[0]表示如果字符串为空的话，说明出现在字典里。<br>
+但题目中说了“给定一个非空字符串 s” 所以测试数据中不会出现i为0的情况，那么dp[0]初始为true完全就是为了推导公式。<br>
+下标非0的dp[i]初始化为false，只要没有被覆盖说明都是不可拆分为一个或多个在字典中出现的单词。</p>
+</blockquote>
+<ol start="4">
+<li>确定遍历顺序</li>
+</ol>
+<p>题目中说是拆分为一个或多个在字典中出现的单词，所以这是完全背包。</p>
+<p>还要讨论两层for循环的前后循序。</p>
+<p><strong>如果求组合数就是外层for循环遍历物品，内层for遍历背包</strong>。</p>
+<p><strong>如果求排列数就是外层for遍历背包，内层for循环遍历物品</strong>。</p>
+<p>而本题其实我们求的是排列数，为什么呢。拿 s = “applepenapple”, wordDict = [“apple”, “pen”] 举例。</p>
+<p>“apple”, “pen” 是物品，那么我们要求物品的组合一定是 “apple” + “pen” + “apple” 才能组成 “applepenapple”。</p>
+<p>“apple” + “apple” + “pen” 或者 “pen” + “apple” + “apple” 是不可以的，那<strong>么我们就是强调物品之间顺序, 即排列数</strong></p>
+<p>所以说，本题一定是先遍历背包，在遍历物品。</p>
+<ol start="5">
+<li>举例推导dp[i]</li>
+</ol>
+<p>以输入: s = “leetcode”, wordDict = [“leet”, “code”]为例，dp状态如图：<br>
+<a href="prodrafts://note/?uuid=AAA10CB1-F793-4F2D-AA81-C821E03B1C62">✏️遍历顺序</a><br>
+<img src="https://img-blog.csdnimg.cn/20210202162652727.jpg" srcset="/img/loading.gif" lazyload alt="139.单词拆分"></p>
+<p>dp[s.size()]就是最终结果。</p>
+<p>动规五部曲分析完毕，C++代码如下：</p>
+<blockquote>
+<p>[!note] 解释一下为什么第二个 for 循环中 j &lt; i<br>
+在第二层循环中，j &lt; i。这是因为，如果 j &gt;= i，那么 s[j:i] 这个子串就是空串，显然不在字典中。所以我们要保证 j &lt; i。</p>
+<blockquote>
+<p>[!note] 第二个for 循环是遍历物品, 为什么不用 j &lt; wordDict.size()<br>
+在这个问题中，j 不是遍历 wordDict 中的每一个单词，而是遍历所有可能的分割点。所以 j 不能取到 wordDict.size()，因为 wordDict.size() 这个值对应的分割点超出了 s 的范围。<br>
+在这里，我们的目的是要判断 s[0:j] 和 s[j:i] 这两个子串是否能被字典中的单词拼成。所以 j 要小于 i。</p>
+</blockquote>
+</blockquote>
+<p>v1 通过</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">wordBreak</span><span class="hljs-params">(string s, vector&lt;string&gt;&amp; wordDict)</span> </span>{<br>        <span class="hljs-type">int</span> n = s.<span class="hljs-built_in">size</span>();<br>        <span class="hljs-function">vector&lt;<span class="hljs-type">bool</span>&gt; <span class="hljs-title">dp</span><span class="hljs-params">(n+<span class="hljs-number">1</span>, <span class="hljs-literal">false</span>)</span></span>;<br>        dp[<span class="hljs-number">0</span>] = <span class="hljs-literal">true</span>;<br><br>        <span class="hljs-function">unordered_set&lt;string&gt; <span class="hljs-title">wordset</span><span class="hljs-params">(wordDict.begin(), wordDict.end())</span></span>;<br><br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++){<span class="hljs-comment">// 遍历背包</span><br>            <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; j &lt; i; j++){<span class="hljs-comment">// 遍历物品, ❗️遍历的是每一个分割点</span><br>                string  word = s.<span class="hljs-built_in">substr</span>(j, i-j);<span class="hljs-comment">//substr(起始位置，截取的个数)</span><br>                <span class="hljs-keyword">if</span>(dp[j] == <span class="hljs-literal">true</span> &amp;&amp; wordset.<span class="hljs-built_in">find</span>(word) != wordset.<span class="hljs-built_in">end</span>()){<br>                    dp[i] = <span class="hljs-literal">true</span>;<br>                }<br>            }<br>        }<br>        <span class="hljs-keyword">return</span> dp[n];<br><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
+<p>v0 carl</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">wordBreak</span><span class="hljs-params">(string s, vector&lt;string&gt;&amp; wordDict)</span> </span>{<br>        <span class="hljs-function">unordered_set&lt;string&gt; <span class="hljs-title">wordSet</span><span class="hljs-params">(wordDict.begin(), wordDict.end())</span></span>;<br>        <span class="hljs-function">vector&lt;<span class="hljs-type">bool</span>&gt; <span class="hljs-title">dp</span><span class="hljs-params">(s.size() + <span class="hljs-number">1</span>, <span class="hljs-literal">false</span>)</span></span>;<br>        dp[<span class="hljs-number">0</span>] = <span class="hljs-literal">true</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= s.<span class="hljs-built_in">size</span>(); i++) {   <span class="hljs-comment">// 遍历背包</span><br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; j &lt; i; j++) {       <span class="hljs-comment">// 遍历物品, 每一个可能的分割点</span><br>                string word = s.<span class="hljs-built_in">substr</span>(j, i - j); <span class="hljs-comment">//substr(起始位置，截取的个数)</span><br>                <span class="hljs-keyword">if</span> (wordSet.<span class="hljs-built_in">find</span>(word) != wordSet.<span class="hljs-built_in">end</span>() &amp;&amp; dp[j]) {<br>                    dp[i] = <span class="hljs-literal">true</span>;<br>                }<br>            }<br>        }<br>        <span class="hljs-keyword">return</span> dp[s.<span class="hljs-built_in">size</span>()];<br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
+<ul>
+<li>时间复杂度：O(n^3)，因为substr返回子串的副本是O(n)的复杂度（这里的n是substring的长度）</li>
+<li>空间复杂度：O(n)</li>
+</ul>
+<h1 id="4-拓展"><a class="markdownIt-Anchor" href="#4-拓展"></a> 4: 拓展</h1>
+<p>关于遍历顺序，再给大家讲一下为什么先遍历物品再遍历背包不行。</p>
+<p>这里可以给出先遍历物品在遍历背包的代码：</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">wordBreak</span><span class="hljs-params">(string s, vector&lt;string&gt;&amp; wordDict)</span> </span>{<br>        <span class="hljs-function">unordered_set&lt;string&gt; <span class="hljs-title">wordSet</span><span class="hljs-params">(wordDict.begin(), wordDict.end())</span></span>;<br>        <span class="hljs-function">vector&lt;<span class="hljs-type">bool</span>&gt; <span class="hljs-title">dp</span><span class="hljs-params">(s.size() + <span class="hljs-number">1</span>, <span class="hljs-literal">false</span>)</span></span>;<br>        dp[<span class="hljs-number">0</span>] = <span class="hljs-literal">true</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; j &lt; wordDict.<span class="hljs-built_in">size</span>(); j++) { <span class="hljs-comment">// 物品</span><br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = wordDict[j].<span class="hljs-built_in">size</span>(); i &lt;= s.<span class="hljs-built_in">size</span>(); i++) { <span class="hljs-comment">// 背包</span><br>                string word = s.<span class="hljs-built_in">substr</span>(i - wordDict[j].<span class="hljs-built_in">size</span>(), wordDict[j].<span class="hljs-built_in">size</span>());<br>                <span class="hljs-comment">// cout &lt;&lt; word &lt;&lt; endl;</span><br>                <span class="hljs-keyword">if</span> ( word == wordDict[j] &amp;&amp; dp[i - wordDict[j].<span class="hljs-built_in">size</span>()]) {<br>                    dp[i] = <span class="hljs-literal">true</span>;<br>                }<br>                <span class="hljs-comment">// for (int k = 0; k &lt;= s.size(); k++) cout &lt;&lt; dp[k] &lt;&lt; " "; //这里打印 dp数组的情况 </span><br>                <span class="hljs-comment">// cout &lt;&lt; endl;</span><br>            }<br>        }<br>        <span class="hljs-keyword">return</span> dp[s.<span class="hljs-built_in">size</span>()];<br><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
+<p>使用用例：s = “applepenapple”, wordDict = [“apple”, “pen”]，对应的dp数组状态如下：</p>
+<p>!</p>
+<p>最后dp[s.size()] = 0 即 dp[13] = 0 ，而不是1，因为先用 “apple” 去遍历的时候，dp[8]并没有被赋值为1 （还没用"pen"），所以 dp[13]也不能变成1。</p>
+<p>除非是先用 “apple” 遍历一遍，在用 “pen” 遍历，此时 dp[8]已经是1，最后再用 “apple” 去遍历，dp[13]才能是1。</p>
+<p>如果大家对这里不理解，建议可以把我上面给的代码，拿去力扣上跑一跑，把dp数组打印出来，对着递推公式一步一步去看，思路就清晰了。</p>
+<h1 id="5-总结"><a class="markdownIt-Anchor" href="#5-总结"></a> 5: 总结</h1>
+<p>本题和我们之前讲解回溯专题的<a target="_blank" rel="noopener" href="https://programmercarl.com/0131.%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2.html">回溯算法：分割回文串 (opens new window)</a> 非常像，所以我也给出了对应的回溯解法。</p>
+<p>稍加分析，便可知道本题是完全背包，是求能否组成背包，而且这里要求物品是要有顺序的。</p>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/" class="category-chain-item">👨🏻‍💻code</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" class="category-chain-item">数据结构与算法</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95/" class="category-chain-item">代码随想录</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" class="category-chain-item">动态规划</a>
+  
+  
+
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/107/" title="88、为什么模板类一般都是放在一个h文件中">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">88、为什么模板类一般都是放在一个h文件中</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/99/" title="为什么dpj - coinsi ==  INT_MAX则跳过">
+                        <span class="hidden-mobile">为什么dpj - coinsi ==  INT_MAX则跳过</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

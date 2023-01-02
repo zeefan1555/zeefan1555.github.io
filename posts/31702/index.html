@@ -16,19 +16,20 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="📝6.不同路径 2::   1: 62.不同路径 力扣题目链接 一个机器人位于一个 m x n&amp;nbsp;网格的左上角 （起始点在下图中标记为 “Start” ）。 机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下角（在下图中标记为 “Finish” ）。 问总共有多少条不同的路径？ 示例 1：   输入：m &#x3D; 3, n &#x3D; 7 输出：28  示例 2：  输入：m &#x3D; 2, n">
+    <meta name="description" content="📝6.不同路径::   1: 62.不同路径 力扣题目链接 一个机器人位于一个 m x n&amp;nbsp;网格的左上角 （起始点在下图中标记为 “Start” ）。 机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下角（在下图中标记为 “Finish” ）。 问总共有多少条不同的路径？ 示例 1：   输入：m &#x3D; 3, n &#x3D; 7 输出：28  示例 2：  输入：m &#x3D; 2, n &#x3D;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="6.不同路径 2">
+<meta property="og:title" content="6.不同路径">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/31702/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="📝6.不同路径 2::   1: 62.不同路径 力扣题目链接 一个机器人位于一个 m x n&amp;nbsp;网格的左上角 （起始点在下图中标记为 “Start” ）。 机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下角（在下图中标记为 “Finish” ）。 问总共有多少条不同的路径？ 示例 1：   输入：m &#x3D; 3, n &#x3D; 7 输出：28  示例 2：  输入：m &#x3D; 2, n">
+<meta property="og:description" content="📝6.不同路径::   1: 62.不同路径 力扣题目链接 一个机器人位于一个 m x n&amp;nbsp;网格的左上角 （起始点在下图中标记为 “Start” ）。 机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下角（在下图中标记为 “Finish” ）。 问总共有多少条不同的路径？ 示例 1：   输入：m &#x3D; 3, n &#x3D; 7 输出：28  示例 2：  输入：m &#x3D; 2, n &#x3D;">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20210110174033215.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20201209113631392.png">
 <meta property="article:published_time" content="2022-07-06T08:34:00.000Z">
-<meta property="article:modified_time" content="2022-12-17T06:41:03.999Z">
+<meta property="article:modified_time" content="2022-12-19T01:40:47.753Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="动态规划">
+<meta property="article:tag" content="📙">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://img-blog.csdnimg.cn/20210110174033215.png">
   
@@ -36,7 +37,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>6.不同路径 2 - 一杯空气</title>
+  <title>6.不同路径 - 一杯空气</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -203,7 +204,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="6.不同路径 2"></span>
+            <span id="subtitle" data-typed-text="6.不同路径"></span>
           
         </div>
 
@@ -226,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.2k 字
+          2.6k 字
         
       </span>
     
@@ -237,7 +238,7 @@
         
         
         
-          12 分钟
+          14 分钟
         
       </span>
     
@@ -283,19 +284,19 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">6.不同路径 2</h1>
+            <h1 style="display: none">6.不同路径</h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年12月17日 下午
+                    本文最后更新于：2022年12月19日 上午
                   
                 
               </p>
             
             <div class="markdown-body">
               
-              <p>📝6.不同路径 2::</p>
+              <p>📝6.不同路径::</p>
 <!-- basicblock-end -->
 <h1 id="1-62不同路径"><a class="markdownIt-Anchor" href="#1-62不同路径"></a> 1: 62.不同路径</h1>
 <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/unique-paths/">力扣题目链接</a></p>
@@ -352,6 +353,10 @@
 如何初始化呢，首先<code>dp[i][0]</code>一定都是1，因为从(0, 0)的位置到(i, 0)的路径只有一条，那么<code>dp[0][j]</code>也同理。<br>
 所以初始化代码为：</p>
 <figure class="highlight apache"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">for</span> (int i = <span class="hljs-number">0</span>; i &lt; m; i++) dp[i][<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;<br><span class="hljs-attribute">for</span> (int j = <span class="hljs-number">0</span>; j &lt; n; j++) dp[<span class="hljs-number">0</span>][j] = <span class="hljs-number">1</span>;<br></code></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>[!question] #📙     <code>dp[0][0]</code> : = 1, 表示从(0, 0) 出发的?<br>
+出发的不需要路径吧</p>
+</blockquote>
 <p><strong>4.  确定遍历顺序</strong><br>
 这里要看一下递归公式<code>dp[i][j] = dp[i - 1][j] + dp[i][j - 1]</code>，<code>dp[i][j]</code>都是从其上方和左方推导而来，那么从左到右一层一层遍历就可以了。两个for循环嵌套</p>
 <p>这样就可以保证推导<code>dp[i][j]</code>的时候，<code>dp[i - 1][j]</code> 和 <code>dp[i][j - 1]</code>一定是有数值的。</p>
@@ -362,7 +367,9 @@
 <h1 id="3-代码"><a class="markdownIt-Anchor" href="#3-代码"></a> 3: 代码</h1>
 <h2 id="31-二维数组解法编译已通过"><a class="markdownIt-Anchor" href="#31-二维数组解法编译已通过"></a> 3.1: 二维数组解法，编译已通过</h2>
 <figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">uniquePaths</span><span class="hljs-params">(<span class="hljs-type">int</span> m, <span class="hljs-type">int</span> n)</span> </span>{<br>      vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">dp</span>(m, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;(n,<span class="hljs-number">0</span>));<br>      <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; m; i++) dp[i][<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;<br>      <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; j &lt; n; j++) dp[<span class="hljs-number">0</span>][j] = <span class="hljs-number">1</span>;<br>      <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; m; i++){ <span class="hljs-comment">// 从(1,1)开始的</span><br>          <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt; n; j++){<br>              dp[i][j] = dp[i<span class="hljs-number">-1</span>][j] + dp[i][j<span class="hljs-number">-1</span>];<br>          }<br>      }<br>      <span class="hljs-keyword">return</span> dp[m<span class="hljs-number">-1</span>][n<span class="hljs-number">-1</span>];<span class="hljs-comment">// 因为下标从0开始，所以-1</span><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
-<h2 id="32-一维数组"><a class="markdownIt-Anchor" href="#32-一维数组"></a> 3.2: 一维数组</h2>
+<p>v2</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">uniquePaths</span><span class="hljs-params">(<span class="hljs-type">int</span> m, <span class="hljs-type">int</span> n)</span> </span>{<br>        vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">dp</span> (m+<span class="hljs-number">1</span>, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;(n+<span class="hljs-number">1</span>, <span class="hljs-number">0</span>));<br><br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; m; i++){<br>            dp[i][<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;<br>        }<br><br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; j &lt; n; j++){<br>            dp[<span class="hljs-number">0</span>][j] = <span class="hljs-number">1</span>;<br>        }<br><br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; m; i++){<br>            <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt; n; j++){<br>                dp[i][j] = dp[i<span class="hljs-number">-1</span>][j] + dp[i][j<span class="hljs-number">-1</span>];<br>            }<br>        }<br><br>        <span class="hljs-keyword">return</span> dp[m<span class="hljs-number">-1</span>][n<span class="hljs-number">-1</span>];<br><br><br>    }<br>};<br><br></code></pre></td></tr></tbody></table></figure>
+<h2 id="32-一维数组暂时不学"><a class="markdownIt-Anchor" href="#32-一维数组暂时不学"></a> 3.2: 一维数组(暂时不学)</h2>
 <p>编译已通过<br>
 用一维数组的前提是：二维数组的第一行和第一列是相同的值，这样才能保证滚动数组的初始值是一样的</p>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> {</span><br>public:<br>    <span class="hljs-type">int</span> <span class="hljs-title function_">uniquePaths</span><span class="hljs-params">(<span class="hljs-type">int</span> m, <span class="hljs-type">int</span> n)</span> {<br>        <span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title function_">dp</span> <span class="hljs-params">(n,<span class="hljs-number">1</span>)</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;m; i++){<span class="hljs-comment">// 为什么要从1开始呢，因为0行全是1(已经赋值了)，所以从第1行开始</span><br>            <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt;n; j++){<span class="hljs-comment">// 因为第一列是1，从第二列开始赋值的</span><br>                dp[j] = dp[j] + dp[j<span class="hljs-number">-1</span>];<br>            }<br>        }<br>        <span class="hljs-keyword">return</span> dp[n<span class="hljs-number">-1</span>];<span class="hljs-comment">// 从第0行开始的，差了一个1</span><br><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
@@ -429,6 +436,8 @@
       
         <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">#动态规划</a>
       
+        <a href="/tags/%F0%9F%93%99/">#📙</a>
+      
     </div>
   
 </div>
@@ -441,9 +450,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/31702/" title="6.不同路径">
+                      <a href="/posts/31702/" title="6.不同路径 2">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">6.不同路径</span>
+                        <span class="hidden-mobile">6.不同路径 2</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     

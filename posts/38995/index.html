@@ -16,16 +16,16 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="📝12.0-1背包理论基础（二）::  [!参考资料]- 不错:  滚动数组详解_哔哩哔哩_bilibili    1: 滚动数组思路 滚动数组，就是把二维dp降为一维dp 把二维数组中上一层拷贝到当前层, 不断重复, 以实现一维数组 ✏️ 滚动数组：在同一层中，不断的进行覆盖然后刷新 动规五部曲分析如下：  1.1: 确定dp数组的定义  [!note] dp[j]：容量为j的背包，所背的物品">
+    <meta name="description" content="📝12.0-1背包理论基础（二）::  [!参考资料]- 不错:  滚动数组详解_哔哩哔哩_bilibili    1: 滚动数组思路 滚动数组，就是把二维dp降为一维dp 把二维数组中上一层拷贝到当前层, 不断重复, 以实现一维数组 滚动数组：在同一层中，不断的进行覆盖然后刷新 动规五部曲分析如下：  1.1: 确定dp数组的定义  [!note] dp[j]：容量为j的背包，所背的物品价值的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="滚动数组">
+<meta property="og:title" content="12. 0-1 背包滚动数组">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/38995/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="📝12.0-1背包理论基础（二）::  [!参考资料]- 不错:  滚动数组详解_哔哩哔哩_bilibili    1: 滚动数组思路 滚动数组，就是把二维dp降为一维dp 把二维数组中上一层拷贝到当前层, 不断重复, 以实现一维数组 ✏️ 滚动数组：在同一层中，不断的进行覆盖然后刷新 动规五部曲分析如下：  1.1: 确定dp数组的定义  [!note] dp[j]：容量为j的背包，所背的物品">
+<meta property="og:description" content="📝12.0-1背包理论基础（二）::  [!参考资料]- 不错:  滚动数组详解_哔哩哔哩_bilibili    1: 滚动数组思路 滚动数组，就是把二维dp降为一维dp 把二维数组中上一层拷贝到当前层, 不断重复, 以实现一维数组 滚动数组：在同一层中，不断的进行覆盖然后刷新 动规五部曲分析如下：  1.1: 确定dp数组的定义  [!note] dp[j]：容量为j的背包，所背的物品价值的">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20210110103614769.png">
 <meta property="article:published_time" content="2022-07-13T06:57:00.000Z">
-<meta property="article:modified_time" content="2022-12-20T08:32:48.177Z">
+<meta property="article:modified_time" content="2022-12-30T01:38:28.556Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="动态规划">
 <meta property="article:tag" content="📙">
@@ -36,7 +36,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>滚动数组 - 一杯空气</title>
+  <title>12. 0-1 背包滚动数组 - 一杯空气</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -203,7 +203,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="滚动数组"></span>
+            <span id="subtitle" data-typed-text="12. 0-1 背包滚动数组"></span>
           
         </div>
 
@@ -283,12 +283,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">滚动数组</h1>
+            <h1 style="display: none">12. 0-1 背包滚动数组</h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年12月20日 下午
+                    本文最后更新于：2022年12月30日 上午
                   
                 
               </p>
@@ -303,7 +303,7 @@
 <!-- basicblock-end -->
 <h1 id="1-滚动数组思路"><a class="markdownIt-Anchor" href="#1-滚动数组思路"></a> 1: 滚动数组思路</h1>
 <p>滚动数组，<strong>就是把二维dp降为一维dp</strong><br>
-把二维数组中上一层拷贝到当前层, 不断重复, 以实现一维数组 ✏️<br>
+把二维数组中上一层拷贝到当前层, 不断重复, 以实现一维数组<br>
 滚动数组：在同一层中，不断的进行覆盖然后刷新</p>
 <p>动规五部曲分析如下：</p>
 <h2 id="11-确定dp数组的定义"><a class="markdownIt-Anchor" href="#11-确定dp数组的定义"></a> 1.1: 确定dp数组的定义</h2>
@@ -312,7 +312,8 @@
 </blockquote>
 <h2 id="12-一维dp数组的递推公式"><a class="markdownIt-Anchor" href="#12-一维dp数组的递推公式"></a> 1.2: 一维dp数组的递推公式</h2>
 <p>整体思路： 想想如何从前面的数推过来</p>
-<p>dp[j]有两个选择，</p>
+<p>dp[j]有两个选择，<br>
+<a href="prodrafts://note/?uuid=EBAAE62A-198E-4959-8593-DC0F311D4C92prodrafts://note/?uuid=FAD75045-6D79-4B61-87F2-7FAF98848888">✏️</a></p>
 <ul>
 <li>不放物品i：dp[j],
 <ul>
@@ -328,8 +329,8 @@
 </ul>
 <blockquote>
 <p>[!success]  万一放不了呢，之前二维数组是有一个判断语句，一维中没有啊？<br>
-<code>for(int j = bagWeight; j &gt;= weight[i]; j--)</code>。<br>
-一维中也有判断语句，进入for循环的条件是背包容量大于所放物品i的重量</p>
+一维:  <code>for(int j = bagWeight; j &gt;= weight[i]; j--)</code><br>
+二维:  <code>if (j &lt; weight[i]) dp[i][j] = dp[i - 1][j];</code></p>
 </blockquote>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++">dp[j] = <span class="hljs-built_in">max</span>(dp[j], dp[j - weight[i]] + value[i]);<br></code></pre></td></tr></tbody></table></figure>
 <h2 id="13-一维dp数组如何初始化"><a class="markdownIt-Anchor" href="#13-一维dp数组如何初始化"></a> 1.3: 一维dp数组如何初始化</h2>
@@ -341,7 +342,7 @@
 </blockquote>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; weight.<span class="hljs-built_in">size</span>(); i++) { <span class="hljs-comment">// 遍历物品</span><br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j = bagWeight; j &gt;= weight[i]; j--) { <span class="hljs-comment">// 遍历背包容量</span><br>        dp[j] = <span class="hljs-built_in">max</span>(dp[j], dp[j - weight[i]] + value[i]);<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
 <blockquote>
-<p>[!note] 为什么是j &gt;= weight[i]<br>
+<p>[!note]- 为什么是j &gt;= weight[i]<br>
 在 for(int j = bagWeight; j &gt;= weight[i]; j–) 这个循环语句中，j 的值是从 bagWeight 开始，递减到 weight[i] 的。<br>
 这样做的原因是，在动态规划的状态转移方程中，dp[j] 是由 dp[j - weight[i]] 转移过来的。<br>
 因此，在更新 dp[j] 的值之前，dp[j - weight[i]] 的值必须已经被更新过了。</p>
@@ -361,7 +362,6 @@
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">test_1_wei_bag_problem</span><span class="hljs-params">()</span> </span>{<br>    vector&lt;<span class="hljs-type">int</span>&gt; weight = {<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>};<br>    vector&lt;<span class="hljs-type">int</span>&gt; value = {<span class="hljs-number">15</span>, <span class="hljs-number">20</span>, <span class="hljs-number">30</span>};<br>    <span class="hljs-type">int</span> bagWeight = <span class="hljs-number">4</span>;<br><br>    <span class="hljs-comment">// 初始化</span><br>    <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">dp</span><span class="hljs-params">(bagWeight + <span class="hljs-number">1</span>, <span class="hljs-number">0</span>)</span></span>;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; weight.<span class="hljs-built_in">size</span>(); i++) { <span class="hljs-comment">// 遍历物品</span><br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j = bagWeight; j &gt;= weight[i]; j--) { <span class="hljs-comment">// 遍历背包容量</span><br>            dp[j] = <span class="hljs-built_in">max</span>(dp[j], dp[j - weight[i]] + value[i]);<br>        }<br>    }<br>    cout &lt;&lt; dp[bagWeight] &lt;&lt; endl;<br>}<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{<br>    <span class="hljs-built_in">test_1_wei_bag_problem</span>();<br>}<br></code></pre></td></tr></tbody></table></figure>
 <p>一维dp 的01背包，要比二维简洁的多！ 初始化 和 遍历顺序相对简单了，<strong>空间复杂度还降了一个数量级</strong><br>
 推荐用一维数组</p>
-<h1 id="3-总结"><a class="markdownIt-Anchor" href="#3-总结"></a> 3: 总结</h1>
 
               
             </div>

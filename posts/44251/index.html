@@ -16,16 +16,16 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="📝set:: 2022&#x2F;10&#x2F;27 : 第一次创建   [[set的实现]]   当我们要使用集合来解决哈希问题的时候， 优先使用 unordered_set，因为它的查询和增删效率是最优的， 如果需要集合是有序的，那么就用 set， 如果要求不仅有序还要有重复数据的话，那么就用multiset。  数据范围大(上亿)的时候用 set 要查询的有: 0 , 5, 100000 . 此时如果用数组">
+    <meta name="description" content="set &amp; multiset(🗃)::  容器是红黑树 2022&#x2F;10&#x2F;27 : 第一次创建   key 就 value, value 就是 key  1: 如何选择 当我们要使用集合来解决哈希问题的时候， 优先使用 unordered_set，因为它的查询和增删效率是最优的， 如果需要集合是有序的，那么就用 set， 如果要求不仅有序还要有重复数据的话，那么就用multiset。  数">
 <meta property="og:type" content="article">
-<meta property="og:title" content="set(🗃)">
+<meta property="og:title" content="set &amp; multiset(🗃)">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/44251/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="📝set:: 2022&#x2F;10&#x2F;27 : 第一次创建   [[set的实现]]   当我们要使用集合来解决哈希问题的时候， 优先使用 unordered_set，因为它的查询和增删效率是最优的， 如果需要集合是有序的，那么就用 set， 如果要求不仅有序还要有重复数据的话，那么就用multiset。  数据范围大(上亿)的时候用 set 要查询的有: 0 , 5, 100000 . 此时如果用数组">
+<meta property="og:description" content="set &amp; multiset(🗃)::  容器是红黑树 2022&#x2F;10&#x2F;27 : 第一次创建   key 就 value, value 就是 key  1: 如何选择 当我们要使用集合来解决哈希问题的时候， 优先使用 unordered_set，因为它的查询和增删效率是最优的， 如果需要集合是有序的，那么就用 set， 如果要求不仅有序还要有重复数据的话，那么就用multiset。  数">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202208121701377.png">
 <meta property="article:published_time" content="2022-08-13T13:58:00.000Z">
-<meta property="article:modified_time" content="2022-12-15T10:22:10.584Z">
+<meta property="article:modified_time" content="2022-12-29T08:58:19.419Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="🗃️">
 <meta name="twitter:card" content="summary_large_image">
@@ -35,7 +35,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>set(🗃) - 一杯空气</title>
+  <title>set &amp; multiset(🗃) - 一杯空气</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -202,7 +202,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="set(🗃)"></span>
+            <span id="subtitle" data-typed-text="set &amp; multiset(🗃)"></span>
           
         </div>
 
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.3k 字
+          582 字
         
       </span>
     
@@ -236,7 +236,7 @@
         
         
         
-          7 分钟
+          3 分钟
         
       </span>
     
@@ -282,23 +282,24 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">set(🗃)</h1>
+            <h1 style="display: none">set &amp; multiset(🗃)</h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年12月15日 晚上
+                    本文最后更新于：2022年12月29日 下午
                   
                 
               </p>
             
             <div class="markdown-body">
               
-              <p>📝set::<br>
+              <p>set &amp; multiset(🗃)::  容器是红黑树<br>
 2022/10/27 : 第一次创建</p>
 <!-- basicblock-end -->
-<h1 id="set的实现"><a class="markdownIt-Anchor" href="#set的实现"></a> [[set的实现]]</h1>
-<h1 id=""><a class="markdownIt-Anchor" href="#"></a> </h1>
+<p><img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202208121701377.png" srcset="/img/loading.gif" lazyload alt="|600"></p>
+<p>key 就 value, value 就是 key</p>
+<h1 id="1-如何选择"><a class="markdownIt-Anchor" href="#1-如何选择"></a> 1: 如何选择</h1>
 <p>当我们要使用集合来解决哈希问题的时候，<br>
 <strong>优先使用 unordered_set</strong>，因为它的查询和增删效率是最优的，<br>
 如果需要集合是有序的，那么就用 set，<br>
@@ -308,82 +309,17 @@
 <li>要查询的有: 0 , 5, 100000 . 此时如果用数组的就要开一个 100000 大小的,其实就查询 3 个数,这也是不合适的会造成空间浪费,这种情况也用 set</li>
 </ul>
 <p>局限: set是一个集合，里面放的元素只能是一个key，而两数之和这道题目，不仅要判断y是否存在而且还要记录y的下标位置，因为要返回x 和 y的下标。所以set 也不能用。:</p>
-<p><img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202208121701377.png" srcset="/img/loading.gif" lazyload alt="|600"></p>
-<h1 id="1-unordered_set"><a class="markdownIt-Anchor" href="#1-unordered_set"></a> 1: unordered_set</h1>
-<p>unoredered_set<br>
-在 set 的三种类型中查找效率最高, 映射效率最高, 取值操作效率也是最高的,<br>
-不需要对数据排序, 并且不会让数组重复(<strong>自带去重</strong>)</p>
-<h2 id="11-性质"><a class="markdownIt-Anchor" href="#11-性质"></a> 1.1: 性质</h2>
+<h1 id="2-set的实现"><a class="markdownIt-Anchor" href="#2-set的实现"></a> 2: [[set的实现]]</h1>
+<h1 id="3-unordered_set-multiset️"><a class="markdownIt-Anchor" href="#3-unordered_set-multiset️"></a> 3: [[unordered_set &amp; multiset(🗃️)]]</h1>
+<h1 id="4-multiset"><a class="markdownIt-Anchor" href="#4-multiset"></a> 4: multiset</h1>
+<p>multiset 里边的元素可以重复<br>
+set 和 multiset 因为底层实现是红黑树, 查找元素的之前还要进行向下寻找的操作, 所以效率低</p>
 <ul>
-<li>插入元素后自带去重. <code>eg:插入 100 个 2 , 最后也是一个 2.</code></li>
-<li>无自动排序</li>
+<li>自动排序(红黑树具有自动排序的功能)</li>
 </ul>
-<h2 id="12-操作"><a class="markdownIt-Anchor" href="#12-操作"></a> 1.2: 操作</h2>
-<p>结构: <code>nums_set: {[0] = 2, [1] = 1}</code>, [[3. 两个数组的交集]]</p>
-<ul>
-<li>
-<p>插入操作: <code>unordered_set result; result.insert();</code></p>
-<ul>
-<li>每往里 insert 一个值, 对该值进行一个哈希运算,转变成另一个它内部存储的一个值, 然后还要开辟一个新的空间</li>
-</ul>
-</li>
-<li>
-<p>寻找操作:</p>
-<ul>
-<li><code>set1. find(2);</code>, 查找2，找到返回迭代器，失败返回set1.end()</li>
-<li>时间复杂度为 O(m * n) [[KMP 算法理论篇#^zyqb9e]]</li>
-</ul>
-</li>
-<li>
-<p>初始化</p>
-<ol>
-<li>创建空的 set :<code>unordered_set&lt;int&gt; set1;</code></li>
-<li>拷贝创建: <code>unordered_set&lt;int&gt; set2(set1);</code></li>
-<li><strong>使用其他结构创建</strong>: <code>unordered_set&lt;int&gt; set3(set1.begin(), set1.end());</code></li>
-</ol>
-</li>
-<li>
-<p><code>unorder_set&lt;string&gt; first</code>容器定义</p>
-</li>
-<li>
-<p><code>first.empty()</code>判断容器是否是空，是空返回<code>true</code>，反之为<code>false</code></p>
-</li>
-<li>
-<p><code>first.size()</code>返回容器大小</p>
-</li>
-<li>
-<p><code>first.maxsize()</code>返回容器最大尺寸</p>
-</li>
-<li>
-<p><code>first.begin()</code>返回迭代器开始</p>
-</li>
-<li>
-<p><code>first.end()</code>返回迭代器结束</p>
-</li>
-<li>
-<p><code>first.find(value)</code>返回value在迭代器的位置</p>
-</li>
-<li>
-<p><code>first.count(key)</code>返回key在容器的个数</p>
-</li>
-<li>
-<p><code>first.insert(value)</code>将value插入到容器中</p>
-</li>
-<li>
-<p><code>first.erase(key)</code>通过key删除</p>
-</li>
-<li>
-<p><code>first.clear()</code>清空容器</p>
-</li>
-</ul>
-<h1 id="2-set-multiset"><a class="markdownIt-Anchor" href="#2-set-multiset"></a> 2: set multiset</h1>
-<p>set 和 multiset 因为底层实现是红黑树, 查找元素的之前还要进行向下寻找的操作, 所以效率低</p>
-<ul>
-<li>自动排序(红黑树具有自动排序的功能)<br>
-multiset 里边的元素可以重复</li>
-</ul>
+<p>multiset 自己有一个 find 函数</p>
 <p>红黑树是一种平衡二叉搜索树，所以key值是有序的，但key不可以修改，改动key值会导致整棵树的错乱，所以只能删除和增加。</p>
-<h1 id="3-案例"><a class="markdownIt-Anchor" href="#3-案例"></a> 3: 案例</h1>
+<h1 id="5-案例"><a class="markdownIt-Anchor" href="#5-案例"></a> 5: 案例</h1>
 <p>[[14. 递增子序列]]</p>
 
               

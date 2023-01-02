@@ -25,11 +25,11 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20210110104240545.png">
 <meta property="article:published_time" content="2022-07-13T07:58:00.000Z">
-<meta property="article:modified_time" content="2022-12-20T09:22:39.897Z">
+<meta property="article:modified_time" content="2022-12-30T02:12:36.071Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="动态规划">
 <meta property="article:tag" content="📕">
-<meta property="article:tag" content="📕✅">
+<meta property="article:tag" content="✅">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://img-blog.csdnimg.cn/20210110104240545.png">
   
@@ -227,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.6k 字
+          2.2k 字
         
       </span>
     
@@ -238,7 +238,7 @@
         
         
         
-          9 分钟
+          11 分钟
         
       </span>
     
@@ -289,7 +289,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年12月20日 下午
+                    本文最后更新于：2022年12月30日 上午
                   
                 
               </p>
@@ -315,36 +315,34 @@
 背包的总容量为 sum/2，每个物品的价值就是他们数组值(应该是这样咯)</p>
 <p><strong>只有确定了如下四点，才能把01背包问题套到本题上来。</strong></p>
 <ul>
-<li>
-<p>物品</p>
-<ul>
-<li>集合的个数</li>
+<li>物品: 数组集合</li>
 </ul>
-</li>
+<blockquote>
+<p>[!success] #✅    集合的个数:不应该是集合的子集吗<br>
+背包容量总和/ 2, 如果有达到了, 肯定不是全部的数组, 即一定是子集</p>
+</blockquote>
+<ul>
 <li>
 <p>背包</p>
 <ul>
-<li>总和的一半</li>
+<li>总和的一半: sum / 2</li>
 </ul>
-</li>
-<li>
-<p>背包的体积为sum / 2</p>
 </li>
 <li>
 <p>背包要放入的物品重量为 元素的数值，价值也为元素的数值</p>
 </li>
 <li>
-<p>背包如果正好装满，说明找到了总和为 sum / 2 的子集。</p>
+<p>背包如果正好装满，说明找到了总和为 sum / 2 的<strong>子集。</strong></p>
 </li>
 <li>
-<p>背包中每一个元素是<strong>不可重复放入</strong>。(01背包：每个物品只放一次)</p>
+<p>cite 背包中每一个元素是<strong>不可重复放入</strong>。(01背包：每个物品只放一次)</p>
 </li>
 </ul>
 <h2 id="21-确定dp数组以及下的含义"><a class="markdownIt-Anchor" href="#21-确定dp数组以及下的含义"></a> 2.1: 确定dp数组以及下的含义</h2>
 <p>01背包中，dp[j] 表示： 容量为j的背包，所背的物品最大价值为dp[j]。<br>
 <strong>套到本题，dp[j]表示 背包总容量是j，最大可以凑成j的子集总和为dp[j]</strong></p>
 <h2 id="22-确定递推公式"><a class="markdownIt-Anchor" href="#22-确定递推公式"></a> 2.2: 确定递推公式</h2>
-<p>[[滚动数组]]</p>
+<p>[[12. 0-1 背包滚动数组]]</p>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs C++">dp[j] = <span class="hljs-built_in">max</span>(dp[j], dp[j - weight[i]] + value[i]);<br>👇🏻<br>dp[j] = <span class="hljs-built_in">max</span>(dp[j], dp[j - nums[i]] + nums[i]);<br></code></pre></td></tr></tbody></table></figure>
 <h2 id="23-dp数组如何初始化"><a class="markdownIt-Anchor" href="#23-dp数组如何初始化"></a> 2.3: dp数组如何初始化</h2>
 <p>全部初始化为0</p>
@@ -363,10 +361,13 @@
 <p>一层一层的，从后往前赋值的</p>
 <p>最后dp[11] == 11，说明可以将这个数组分割成两个子集，使得两个子集的元素和相等。</p>
 <h1 id="3-代码"><a class="markdownIt-Anchor" href="#3-代码"></a> 3: 代码</h1>
+<p>v2 通过</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">canPartition</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums)</span> </span>{<br>        <span class="hljs-type">int</span> sum = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i : nums){<br>            sum += i;<br>        }<br>        <span class="hljs-type">int</span> target = sum/<span class="hljs-number">2</span>;<br><br>        <span class="hljs-keyword">if</span>(sum % <span class="hljs-number">2</span> != <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br><br>        <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">dp</span> <span class="hljs-params">(target+<span class="hljs-number">1</span>, <span class="hljs-number">0</span>)</span></span>; <span class="hljs-comment">// 背包容量即 sum/2</span><br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; nums.<span class="hljs-built_in">size</span>(); i++){<br>            <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j = target; j &gt;= nums[i]; j--){<br>                dp[j] = <span class="hljs-built_in">max</span>(dp[j], dp[j-nums[i]] + nums[i]);<br>            }<br>        }<br>        <span class="hljs-keyword">return</span> dp[target] == target ? <span class="hljs-literal">true</span> : <span class="hljs-literal">false</span>; <span class="hljs-comment">// 看 target 背包能不能装满</span><br><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
 <blockquote>
-<p>[!success] #📕✅   下面这段代码不知道哪里错了</p>
+<p>[!success] #📕   下面这段代码不知道哪里错了<br>
+如果没有if(sum % 2 == 1) return false;, 下边的 for 循环都不成立</p>
 </blockquote>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">canPartition</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums)</span> </span>{<br>        <span class="hljs-type">int</span> sum = <span class="hljs-built_in">accumulate</span>(nums.<span class="hljs-built_in">begin</span>(), nums.<span class="hljs-built_in">end</span>(), <span class="hljs-number">0</span>);     <br>        <span class="hljs-keyword">if</span>(sum % <span class="hljs-number">2</span> == <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>; <span class="hljs-comment">// ❗️这是必须的</span><br>        <span class="hljs-type">int</span> target = sum / <span class="hljs-number">2</span>;<br>        <br>        <span class="hljs-type">int</span> n = nums.<span class="hljs-built_in">size</span>();<br>        <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">dp</span> <span class="hljs-params">(target+<span class="hljs-number">1</span>, <span class="hljs-number">0</span>)</span></span>;<br><br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++){<br>            <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j = target; j &gt;= nums[i]; j--){<br>                dp[j] = <span class="hljs-built_in">max</span>(dp[j], dp[j-nums[i]] + nums[i]);<br><br>            }<br><br>        }<br>        <span class="hljs-keyword">if</span>(dp[target] == target) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        <br>        <br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">canPartition</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums)</span> </span>{<br>        <span class="hljs-type">int</span> sum = <span class="hljs-built_in">accumulate</span>(nums.<span class="hljs-built_in">begin</span>(), nums.<span class="hljs-built_in">end</span>(), <span class="hljs-number">0</span>);     <br>        <span class="hljs-keyword">if</span>(sum % <span class="hljs-number">2</span> == <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>; <span class="hljs-comment">// ✅这是必须的</span><br>        <span class="hljs-type">int</span> target = sum / <span class="hljs-number">2</span>;<br>        <br>        <span class="hljs-type">int</span> n = nums.<span class="hljs-built_in">size</span>();<br>        <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">dp</span> <span class="hljs-params">(target+<span class="hljs-number">1</span>, <span class="hljs-number">0</span>)</span></span>;<br><br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++){<br>            <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j = target; j &gt;= nums[i]; j--){<br>                dp[j] = <span class="hljs-built_in">max</span>(dp[j], dp[j-nums[i]] + nums[i]);<br><br>            }<br><br>        }<br>        <span class="hljs-keyword">if</span>(dp[target] == target) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        <br>        <br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
 
               
             </div>
@@ -424,7 +425,7 @@
       
         <a href="/tags/%F0%9F%93%95/">#📕</a>
       
-        <a href="/tags/%F0%9F%93%95%E2%9C%85/">#📕✅</a>
+        <a href="/tags/%E2%9C%85/">#✅</a>
       
     </div>
   
@@ -448,8 +449,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/38995/" title="滚动数组">
-                        <span class="hidden-mobile">滚动数组</span>
+                      <a href="/posts/38995/" title="12. 0-1 背包滚动数组">
+                        <span class="hidden-mobile">12. 0-1 背包滚动数组</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

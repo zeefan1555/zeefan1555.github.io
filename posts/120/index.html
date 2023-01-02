@@ -16,15 +16,15 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="📝基础语法-81-100目录::   1: 81、知道C++中的组合吗？它与继承相比有什么优缺点吗？ 一：继承 继承是Is a 的关系，比如说Student继承Person,则说明Student is a Person。继承的优点是子类可以重写父类的方法来方便地实现对父类的扩展。 继承的缺点有以下几点： ①：父类的内部细节对子类是可见的。 ②：子类从父类继承的方法在编译时就确定下来了，所以无法在">
+    <meta name="description" content="📝基础语法-81-100目录::   1: [[81、知道C++中的组合吗？它与继承相比有什么优缺点吗？]]  2: [[82、函数指针？]]  3: [[83、说一说你理解的内存对齐以及原因]]  4: [[84、结构体变量比较是否相等]]  5: [[85、函数调用过程栈的变化，返回值和参数变量哪个先入栈？]]  6: [[86、define、const、typedef、inline的使用方">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基础语法-81-100目录">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/120/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="📝基础语法-81-100目录::   1: 81、知道C++中的组合吗？它与继承相比有什么优缺点吗？ 一：继承 继承是Is a 的关系，比如说Student继承Person,则说明Student is a Person。继承的优点是子类可以重写父类的方法来方便地实现对父类的扩展。 继承的缺点有以下几点： ①：父类的内部细节对子类是可见的。 ②：子类从父类继承的方法在编译时就确定下来了，所以无法在">
+<meta property="og:description" content="📝基础语法-81-100目录::   1: [[81、知道C++中的组合吗？它与继承相比有什么优缺点吗？]]  2: [[82、函数指针？]]  3: [[83、说一说你理解的内存对齐以及原因]]  4: [[84、结构体变量比较是否相等]]  5: [[85、函数调用过程栈的变化，返回值和参数变量哪个先入栈？]]  6: [[86、define、const、typedef、inline的使用方">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-12-19T10:15:00.000Z">
-<meta property="article:modified_time" content="2022-12-19T10:24:53.751Z">
+<meta property="article:modified_time" content="2023-01-01T17:31:52.659Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          7.2k 字
+          1.9k 字
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          36 分钟
+          10 分钟
         
       </span>
     
@@ -284,7 +284,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年12月19日 晚上
+                    本文最后更新于：2023年1月2日 凌晨
                   
                 
               </p>
@@ -293,173 +293,22 @@
               
               <p>📝基础语法-81-100目录::</p>
 <!-- basicblock-end -->
-<h1 id="1-81-知道c中的组合吗它与继承相比有什么优缺点吗"><a class="markdownIt-Anchor" href="#1-81-知道c中的组合吗它与继承相比有什么优缺点吗"></a> 1: 81、知道C++中的组合吗？它与继承相比有什么优缺点吗？</h1>
-<p><strong>一：继承</strong></p>
-<p>继承是Is a 的关系，比如说Student继承Person,则说明Student is a Person。继承的优点是子类可以重写父类的方法来方便地实现对父类的扩展。</p>
-<p>继承的缺点有以下几点：</p>
-<p>①：父类的内部细节对子类是可见的。</p>
-<p>②：子类从父类继承的方法在编译时就确定下来了，所以无法在运行期间改变从父类继承的方法的行为。</p>
-<p>③：如果对父类的方法做了修改的话（比如增加了一个参数），则子类的方法必须做出相应的修改。所以说子类与父类是一种高耦合，违背了面向对象思想。</p>
-<p><strong>二：组合</strong></p>
-<p>组合也就是设计类的时候把要组合的类的对象加入到该类中作为自己的成员变量。</p>
-<p>组合的优点：</p>
-<p>①：当前对象只能通过所包含的那个对象去调用其方法，所以所包含的对象的内部细节对当前对象时不可见的。</p>
-<p>②：当前对象与包含的对象是一个低耦合关系，如果修改包含对象的类中代码不需要修改当前对象类的代码。</p>
-<p>③：当前对象可以在运行时动态的绑定所包含的对象。可以通过set方法给所包含对象赋值。</p>
-<p>组合的缺点：①：容易产生过多的对象。②：为了能组合多个对象，必须仔细对接口进行定义。</p>
-<h1 id="2-82-函数指针"><a class="markdownIt-Anchor" href="#2-82-函数指针"></a> 2: 82、函数指针？</h1>
-<p><strong>1) 什么是函数指针?</strong></p>
-<p>函数指针指向的是特殊的数据类型，函数的类型是由其返回的数据类型和其参数列表共同决定的，而函数的名称则不是其类型的一部分。</p>
-<p>一个具体函数的名字，如果后面不跟调用符号(即括号)，则该名字就是该函数的指针(注意：大部分情况下，可以这么认为，但这种说法并不很严格)。</p>
-<p><strong>2) 函数指针的声明方法</strong></p>
-<p>int (*pf)(const int&amp;, const int&amp;); (1)</p>
-<p>上面的pf就是一个函数指针，指向所有返回类型为int，并带有两个const int&amp;参数的函数。注意*pf两边的括号是必须的，否则上面的定义就变成了：</p>
-<p>int *pf(const int&amp;, const int&amp;); (2)</p>
-<p>而这声明了一个函数pf，其返回类型为int *，带有两个const int&amp;参数。</p>
-<p><strong>3) 为什么有函数指针</strong></p>
-<p>函数与数据项相似，函数也有地址。我们希望在同一个函数中通过使用相同的形参在不同的时间使用产生不同的效果。</p>
-<p><strong>4) 一个函数名就是一个指针，它指向函数的代码。</strong></p>
-<p>一个函数地址是该函数的进入点，也就是调用函数的地址。函数的调用可以通过函数名，也可以通过指向函数的指针来调用。函数指针还允许将函数作为变元传递给其他函数；</p>
-<p><strong>5) 两种方法赋值：</strong></p>
-<p>指针名 = 函数名；指针名 = &amp;函数名</p>
-<h1 id="3-83-说一说你理解的内存对齐以及原因"><a class="markdownIt-Anchor" href="#3-83-说一说你理解的内存对齐以及原因"></a> 3: 83、说一说你理解的内存对齐以及原因</h1>
-<p>1、分配内存的顺序是按照声明的顺序。</p>
-<p>2、每个变量相对于起始位置的偏移量必须是该变量类型大小的整数倍，不是整数倍空出内存，直到偏移量是整数倍为止。</p>
-<p>3、最后整个结构体的大小必须是里面变量类型最大值的整数倍。</p>
-<p>添加了#pragma pack(n)后规则就变成了下面这样：</p>
-<p>1、偏移量要是n和当前变量大小中较小值的整数倍</p>
-<p>2、整体大小要是n和最大变量大小中较小值的整数倍</p>
-<p>3、 n值必须为1,2,4,8…，为其他值时就按照默认的分配规则</p>
-<h1 id="4-84-结构体变量比较是否相等"><a class="markdownIt-Anchor" href="#4-84-结构体变量比较是否相等"></a> 4: 84、结构体变量比较是否相等</h1>
-<ul>
-<li>重载了 “==” 操作符</li>
-</ul>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">foo</span> {<br><br>  <span class="hljs-type">int</span> a;<br>  <span class="hljs-type">int</span> b;<br><br>  <span class="hljs-type">bool</span> <span class="hljs-keyword">operator</span>==(<span class="hljs-type">const</span> foo&amp; rhs) *<span class="hljs-comment">//* *操作运算符重载*</span><br><br>  {<br>    <span class="hljs-built_in">return</span>( a == rhs.a) &amp;&amp; (b == rhs.b);<br>  }<br>};<br></code></pre></td></tr></tbody></table></figure>
-<ul>
-<li>元素的话，一个个比；</li>
-<li>指针直接比较，如果保存的是同一个实例地址，则(p1==p2)为真；</li>
-</ul>
-<h1 id="5-85-函数调用过程栈的变化返回值和参数变量哪个先入栈"><a class="markdownIt-Anchor" href="#5-85-函数调用过程栈的变化返回值和参数变量哪个先入栈"></a> 5: 85、函数调用过程栈的变化，返回值和参数变量哪个先入栈？</h1>
-<p>1、调用者函数把被调函数所需要的参数按照与被调函数的形参顺序相反的顺序压入栈中,即:从右向左依次把被调</p>
-<p>函数所需要的参数压入栈;</p>
-<p>2、调用者函数使用call指令调用被调函数,并把call指令的下一条指令的地址当成返回地址压入栈中(这个压栈操作</p>
-<p>隐含在call指令中);</p>
-<p>3、在被调函数中,被调函数会先保存调用者函数的栈底地址(push ebp),然后再保存调用者函数的栈顶地址,即:当前</p>
-<p>被调函数的栈底地址(mov ebp,esp);</p>
-<p>4、在被调函数中,从ebp的位置处开始存放被调函数中的局部变量和临时变量,并且这些变量的地址按照定义时的</p>
-<p>顺序依次减小,即:这些变量的地址是按照栈的延伸方向排列的,先定义的变量先入栈,后定义的变量后入栈;</p>
-<h1 id="6-86-define-const-typedef-inline的使用方法他们之间有什么区别"><a class="markdownIt-Anchor" href="#6-86-define-const-typedef-inline的使用方法他们之间有什么区别"></a> 6: 86、define、const、typedef、inline的使用方法？他们之间有什么区别？</h1>
-<p>一、const与#define的区别：</p>
-<ul>
-<li>const定义的常量是变量带类型，而#define定义的只是个常数不带类型；</li>
-<li>define只在预处理阶段起作用，简单的文本替换，而const在编译、链接过程中起作用；</li>
-<li>define只是简单的字符串替换没有类型检查。而const是有数据类型的，是要进行判断的，可以避免一些低级错误；</li>
-<li>define预处理后，占用代码段空间，const占用数据段空间；</li>
-<li>const不能重定义，而define可以通过#undef取消某个符号的定义，进行重定义；</li>
-<li>define独特功能，比如可以用来防止文件重复引用。<br>
-二、#define和别名typedef的区别</li>
-<li>执行时间不同，typedef在编译阶段有效，typedef有类型检查的功能；#define是宏定义，发生在预处理阶段，不进行类型检查；</li>
-<li>功能差异，typedef用来定义类型的别名，定义与平台无关的数据类型，与struct的结合使用等。#define不只是可以为类型取别名，还可以定义常量、变量、编译开关等。</li>
-<li>作用域不同，#define没有作用域的限制，只要是之前预定义过的宏，在以后的程序中都可以使用。而typedef有自己的作用域。</li>
-</ul>
-<p>三、 define与inline的区别</p>
-<ul>
-<li>#define是关键字，inline是函数；</li>
-<li>宏定义在预处理阶段进行文本替换，inline函数在编译阶段进行替换；</li>
-<li>inline函数有类型检查，相比宏定义比较安全；</li>
-</ul>
-<h1 id="7-87-你知道printf函数的实现原理是什么吗"><a class="markdownIt-Anchor" href="#7-87-你知道printf函数的实现原理是什么吗"></a> 7: 87、你知道printf函数的实现原理是什么吗？</h1>
-<p>在C/C++中，对函数参数的扫描是从后向前的。</p>
-<p>C/C++的函数参数是通过压入堆栈的方式来给函数传参数的（堆栈是一种先进后出的数据结构），最先压入的参数最后出来，在计算机的内存中，数据有2块，一块是堆，一块是栈（函数参数及局部变量在这里），而栈是从内存的高地址向低地址生长的，控制生长的就是堆栈指针了，最先压入的参数是在最上面，就是说在所有参数的最后面，最后压入的参数在最下面，结构上看起来是第一个，所以最后压入的参数总是能够被函数找到，因为它就在堆栈指针的上方。</p>
-<p>printf的第一个被找到的参数就是那个字符指针，就是被双引号括起来的那一部分，函数通过判断字符串里控制参数的个数来判断参数个数及数据类型，通过这些就可算出数据需要的堆栈指针的偏移量了，下面给出printf("%d,%d",a,b);（其中a、b都是int型的）的汇编代码.</p>
-<h1 id="8-88-为什么模板类一般都是放在一个h文件中"><a class="markdownIt-Anchor" href="#8-88-为什么模板类一般都是放在一个h文件中"></a> 8: 88、为什么模板类一般都是放在一个h文件中</h1>
-<ul>
-<li>模板定义很特殊。由template&lt;…&gt;处理的任何东西都意味着编译器在当时不为它分配存储空间，它一直处于等待状态直到被一个模板实例告知。在编译器和连接器的某一处，有一机制能去掉指定模板的多重定义。</li>
-</ul>
-<p>所以为了容易使用，几乎总是在头文件中放置全部的模板声明和定义。</p>
-<ul>
-<li>在分离式编译的环境下，编译器编译某一个.cpp文件时并不知道另一个.cpp文件的存在，也不会去查找（当遇到未决符号时它会寄希望于连接器）。这种模式在没有模板的情况下运行良好，但遇到模板时就傻眼了，因为模板仅在需要的时候才会实例化出来。</li>
-</ul>
-<p>所以，当编译器只看到模板的声明时，它不能实例化该模板，只能创建一个具有外部连接的符号并期待连接器能够将符号的地址决议出来。</p>
-<p>然而当实现该模板的.cpp文件中没有用到模板的实例时，编译器懒得去实例化，所以，整个工程的.obj中就找不到一行模板实例的二进制代码，于是连接器也黔驴技穷了。</p>
-<h1 id="9-89-c中类成员的访问权限和继承权限问题"><a class="markdownIt-Anchor" href="#9-89-c中类成员的访问权限和继承权限问题"></a> 9: 89、C++中类成员的访问权限和继承权限问题</h1>
-<ul>
-<li>三种访问权限</li>
-</ul>
-<p>① public:用该关键字修饰的成员表示公有成员，该成员不仅可以在类内可以被访问，在类外也是可以被访问的，是类对外提供的可访问接口；</p>
-<p>② private:用该关键字修饰的成员表示私有成员，该成员仅在类内可以被访问，在类体外是隐藏状态；</p>
-<p>③ protected:用该关键字修饰的成员表示保护成员，保护成员在类体外同样是隐藏状态，但是对于该类的派生类来说，相当于公有成员，在派生类中可以被访问。</p>
-<ul>
-<li>三种继承方式</li>
-</ul>
-<p>① 若继承方式是public，基类成员在派生类中的访问权限保持不变，也就是说，基类中的成员访问权限，在派生类中仍然保持原来的访问权限；</p>
-<p>② 若继承方式是private，基类所有成员在派生类中的访问权限都会变为私有(private)权限；</p>
-<p>③ 若继承方式是protected，基类的共有成员和保护成员在派生类中的访问权限都会变为保护(protected)权限，私有成员在派生类中的访问权限仍然是私有(private)权限。</p>
-<h1 id="10-90-cout和printf有什么区别"><a class="markdownIt-Anchor" href="#10-90-cout和printf有什么区别"></a> 10: 90、cout和printf有什么区别？</h1>
-<p>cout&lt;&lt;是一个函数，cout&lt;&lt;后可以跟不同的类型是因为cout&lt;&lt;已存在针对各种类型数据的重载，所以会自动识别数据的类型。</p>
-<p>输出过程会首先将输出字符放入缓冲区，然后输出到屏幕。</p>
-<p>cout是有缓冲输出:</p>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs C++">cout &lt; &lt; <span class="hljs-string">"abc "</span> &lt; &lt;endl; <br>或cout &lt; &lt; <span class="hljs-string">"abc\n "</span>; cout &lt; &lt;flush; 这两个才是一样的.<br></code></pre></td></tr></tbody></table></figure>
-<p>flush立即强迫缓冲输出。</p>
-<p>printf是行缓冲输出，不是无缓冲输出。</p>
-<h1 id="11-91-你知道重载运算符吗"><a class="markdownIt-Anchor" href="#11-91-你知道重载运算符吗"></a> 11: 91、你知道重载运算符吗？</h1>
-<p>1、我们只能重载已有的运算符，而无权发明新的运算符；对于一个重载的运算符，其优先级和结合律与内置类型一致才可以；不能改变运算符操作数个数；</p>
-<p>2、两种重载方式：成员运算符和非成员运算符，成员运算符比非成员运算符少一个参数；下标运算符、箭头运算符必须是成员运算符；</p>
-<p>3、引入运算符重载，是为了实现类的多态性；</p>
-<p>4、当重载的运算符是成员函数时，this绑定到左侧运算符对象。成员运算符函数的参数数量比运算符对象的数量少一个；至少含有一个类类型的参数；</p>
-<p>5、从参数的个数推断到底定义的是哪种运算符，当运算符既是一元运算符又是二元运算符（+，-，*，&amp;）；</p>
-<p>6、下标运算符必须是成员函数，下标运算符通常以所访问元素的引用作为返回值，同时最好定义下标运算符的常量版本和非常量版本；</p>
-<p>7、箭头运算符必须是类的成员，解引用通常也是类的成员；重载的箭头运算符必须返回类的指针；</p>
-<h1 id="12-92-当程序中有函数重载时函数的匹配原则和顺序是什么"><a class="markdownIt-Anchor" href="#12-92-当程序中有函数重载时函数的匹配原则和顺序是什么"></a> 12: 92、当程序中有函数重载时，函数的匹配原则和顺序是什么？</h1>
-<ul>
-<li>名字查找</li>
-<li>确定候选函数</li>
-<li>寻找最佳匹配</li>
-</ul>
-<h1 id="13-93-定义和声明的区别"><a class="markdownIt-Anchor" href="#13-93-定义和声明的区别"></a> 13: 93、定义和声明的区别</h1>
-<p><strong>如果是指变量的声明和定义：</strong> 从编译原理上来说，声明是仅仅告诉编译器，有个某类型的变量会被使用，但是编译器并不会为它分配任何内存。而定义就是分配了内存。</p>
-<p><strong>如果是指函数的声明和定义：</strong> 声明：一般在头文件里，对编译器说：这里我有一个函数叫function() 让编译器知道这个函数的存在。定义：一般在源文件里，具体就是函数的实现过程写明函数体。</p>
-<h1 id="14-94-全局变量和static变量的区别"><a class="markdownIt-Anchor" href="#14-94-全局变量和static变量的区别"></a> 14: 94、全局变量和static变量的区别</h1>
-<p>1、全局变量（外部变量）的说明之前再冠以static就构成了静态的全局变量。</p>
-<p>全局变量本身就是静态存储方式，静态全局变量当然也是静态存储方式。</p>
-<p>这两者在存储方式上并无不同。这两者的区别在于非静态全局变量的作用域是整个源程序，当一个源程序由多个原文件组成时，非静态的全局变量在各个源文件中都是有效的。</p>
-<p>而静态全局变量则限制了其作用域，即只在定义该变量的源文件内有效，在同一源程序的其它源文件中不能使用它。由于静态全局变量的作用域限于一个源文件内，只能为该源文件内的函数公用，因此可以避免在其他源文件中引起错误。</p>
-<p>static全局变量与普通的全局变量的区别是static全局变量只初始化一次，防止在其他文件单元被引用。</p>
-<p>2.static函数与普通函数有什么区别？ static函数与普通的函数作用域不同。尽在本文件中。只在当前源文件中使用的函数应该说明为内部函数（static），内部函数应该在当前源文件中说明和定义。</p>
-<p>对于可在当前源文件以外使用的函数应该在一个头文件中说明，要使用这些函数的源文件要包含这个头文件。 static函数与普通函数最主要区别是static函数在内存中只有一份，普通静态函数在每个被调用中维持一份拷贝程序的局部变量存在于（堆栈）中，全局变量存在于（静态区）中，动态申请数据存在于（堆）</p>
-<h1 id="15-95-静态成员与普通成员的区别是什么"><a class="markdownIt-Anchor" href="#15-95-静态成员与普通成员的区别是什么"></a> 15: 95、静态成员与普通成员的区别是什么？</h1>
-<ul>
-<li>生命周期</li>
-</ul>
-<p>静态成员变量从类被加载开始到类被卸载，一直存在；</p>
-<p>普通成员变量只有在类创建对象后才开始存在，对象结束，它的生命期结束；</p>
-<ul>
-<li>共享方式</li>
-</ul>
-<p>静态成员变量是全类共享；普通成员变量是每个对象单独享用的；</p>
-<ul>
-<li>定义位置</li>
-</ul>
-<p>普通成员变量存储在栈或堆中，而静态成员变量存储在静态全局区；</p>
-<ul>
-<li>初始化位置</li>
-</ul>
-<p>普通成员变量在类中初始化；静态成员变量在类外初始化；</p>
-<ul>
-<li>默认实参</li>
-</ul>
-<p>可以使用静态成员变量作为默认实参，</p>
-<h1 id="16-96-说一下你理解的-ifdef-endif代表着什么"><a class="markdownIt-Anchor" href="#16-96-说一下你理解的-ifdef-endif代表着什么"></a> 16: 96、说一下你理解的 ifdef endif代表着什么？</h1>
-<ul>
-<li>一般情况下，源程序中所有的行都参加编译。但是有时希望对其中一部分内容只在满足一定条件才进行编译，也就是对一部分内容指定编译的条件，这就是“条件编译”。有时，希望当满足某条件时对一组语句进行编译，而当条件不满足时则编译另一组语句。</li>
-<li>条件编译命令最常见的形式为：</li>
-</ul>
-<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">ifdef</span> 标识符程序段#<span class="hljs-keyword">else</span>程序段#<span class="hljs-keyword">endif</span></span><br></code></pre></td></tr></tbody></table></figure>
-<p>它的作用是：当标识符已经被定义过(一般是用#define命令定义)，则对程序段1进行编译，否则编译程序段2。其中#else部分也可以没有，即：</p>
-<ul>
-<li>在一个大的软件工程里面，可能会有多个文件同时包含一个头文件，当这些文件编译链接成一个可执行文件上时，就会出现大量“重定义”错误。</li>
-</ul>
-<p>在头文件中使用#define、#ifndef、#ifdef、#endif能避免头文件重定义。</p>
+<h1 id="1-81-知道c中的组合吗它与继承相比有什么优缺点吗"><a class="markdownIt-Anchor" href="#1-81-知道c中的组合吗它与继承相比有什么优缺点吗"></a> 1: [[81、知道C++中的组合吗？它与继承相比有什么优缺点吗？]]</h1>
+<h1 id="2-82-函数指针"><a class="markdownIt-Anchor" href="#2-82-函数指针"></a> 2: [[82、函数指针？]]</h1>
+<h1 id="3-83-说一说你理解的内存对齐以及原因"><a class="markdownIt-Anchor" href="#3-83-说一说你理解的内存对齐以及原因"></a> 3: [[83、说一说你理解的内存对齐以及原因]]</h1>
+<h1 id="4-84-结构体变量比较是否相等"><a class="markdownIt-Anchor" href="#4-84-结构体变量比较是否相等"></a> 4: [[84、结构体变量比较是否相等]]</h1>
+<h1 id="5-85-函数调用过程栈的变化返回值和参数变量哪个先入栈"><a class="markdownIt-Anchor" href="#5-85-函数调用过程栈的变化返回值和参数变量哪个先入栈"></a> 5: [[85、函数调用过程栈的变化，返回值和参数变量哪个先入栈？]]</h1>
+<h1 id="6-86-define-const-typedef-inline的使用方法他们之间有什么区别"><a class="markdownIt-Anchor" href="#6-86-define-const-typedef-inline的使用方法他们之间有什么区别"></a> 6: [[86、define、const、typedef、inline的使用方法？他们之间有什么区别？]]</h1>
+<h1 id="7-87-你知道printf函数的实现原理是什么吗"><a class="markdownIt-Anchor" href="#7-87-你知道printf函数的实现原理是什么吗"></a> 7: [[87、你知道printf函数的实现原理是什么吗？]]</h1>
+<h1 id="8-88-为什么模板类一般都是放在一个h文件中"><a class="markdownIt-Anchor" href="#8-88-为什么模板类一般都是放在一个h文件中"></a> 8: [[88、为什么模板类一般都是放在一个h文件中]]</h1>
+<h1 id="9-public-private-protected访问权限-继承权限"><a class="markdownIt-Anchor" href="#9-public-private-protected访问权限-继承权限"></a> 9: [[public private protected(访问权限, 继承权限)]]</h1>
+<h1 id="10-90-cout和printf有什么区别"><a class="markdownIt-Anchor" href="#10-90-cout和printf有什么区别"></a> 10: [[90、cout和printf有什么区别？]]</h1>
+<h1 id="11-1191-你知道重载运算符吗"><a class="markdownIt-Anchor" href="#11-1191-你知道重载运算符吗"></a> 11: 11:[[91、你知道重载运算符吗？]]</h1>
+<h1 id="12-1292-当程序中有函数重载时函数的匹配原则和顺序是什么"><a class="markdownIt-Anchor" href="#12-1292-当程序中有函数重载时函数的匹配原则和顺序是什么"></a> 12: 12:[[92、当程序中有函数重载时，函数的匹配原则和顺序是什么？]]</h1>
+<h1 id="13-声明与定义"><a class="markdownIt-Anchor" href="#13-声明与定义"></a> 13: [[声明与定义]]</h1>
+<h1 id="14-94-全局变量和static变量的区别"><a class="markdownIt-Anchor" href="#14-94-全局变量和static变量的区别"></a> 14: [[94、全局变量和static变量的区别]]</h1>
+<h1 id="15-95-静态成员与普通成员的区别是什么"><a class="markdownIt-Anchor" href="#15-95-静态成员与普通成员的区别是什么"></a> 15: [[95、静态成员与普通成员的区别是什么？]]</h1>
+<h1 id="16-96-说一下你理解的-ifdef-endif代表着什么"><a class="markdownIt-Anchor" href="#16-96-说一下你理解的-ifdef-endif代表着什么"></a> 16: [[96、说一下你理解的 ifdef endif代表着什么？]]</h1>
 <h1 id="17-97-隐式转换如何消除隐式转换"><a class="markdownIt-Anchor" href="#17-97-隐式转换如何消除隐式转换"></a> 17: 97、隐式转换，如何消除隐式转换？</h1>
 <p>1、C++的基本类型中并非完全的对立，部分数据类型之间是可以进行隐式转换的。所谓隐式转换，是指不需要用户干预，编译器私下进行的类型转换行为。很多时候用户可能都不知道进行了哪些转换</p>
 <p>2、C<ins>面向对象的多态特性，就是通过父类的类型实现对子类的封装。通过隐式转换，你可以直接将一个子类的对象使用父类的类型进行返回。在比如，数值和布尔类型的转换，整数和浮点数的转换等。某些方面来说，隐式转换给C</ins>程序开发者带来了不小的便捷。C++是一门强类型语言，类型的检查是非常严格的。</p>

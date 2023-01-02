@@ -16,12 +16,12 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1 基础篇  1.1 函数  1.2 约束  1.2.1 外键约束  1.2.1.1 删除&#x2F;更新行为  1.3 多表查询  1.3.1 多表关系  一对多（多对一） 多对多 一对一   1.3.1.1 一对多 案例：部门与员工 关系：一个部门对应多个员工，一个员工对应一个部门 实现：在多的一方建立外键，指向一的一方的主键  1.3.1.2 多对多 案例：学生与课程 关系：一个学生可以选多门课程，">
+    <meta name="description" content="1: 基础篇  1.1: 函数  1.2: 约束  1.2.1: 外键约束  1.2.1.1: 删除&#x2F;更新行为  1.3: 多表查询  1.3.1: 多表关系  一对多（多对一） 多对多 一对一   1.3.1.1: 一对多 案例：部门与员工 关系：一个部门对应多个员工，一个员工对应一个部门 实现：在多的一方建立外键，指向一的一方的主键  1.3.1.2: 多对多 案例：学生与课程 关系：一个学">
 <meta property="og:type" content="article">
 <meta property="og:title" content="一杯空气">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/11/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="1 基础篇  1.1 函数  1.2 约束  1.2.1 外键约束  1.2.1.1 删除&#x2F;更新行为  1.3 多表查询  1.3.1 多表关系  一对多（多对一） 多对多 一对一   1.3.1.1 一对多 案例：部门与员工 关系：一个部门对应多个员工，一个员工对应一个部门 实现：在多的一方建立外键，指向一的一方的主键  1.3.1.2 多对多 案例：学生与课程 关系：一个学生可以选多门课程，">
+<meta property="og:description" content="1: 基础篇  1.1: 函数  1.2: 约束  1.2.1: 外键约束  1.2.1.1: 删除&#x2F;更新行为  1.3: 多表查询  1.3.1: 多表关系  一对多（多对一） 多对多 一对一   1.3.1.1: 一对多 案例：部门与员工 关系：一个部门对应多个员工，一个员工对应一个部门 实现：在多的一方建立外键，指向一的一方的主键  1.3.1.2: 多对多 案例：学生与课程 关系：一个学">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://dhc.pythonanywhere.com/media/editor/%E4%BA%8C%E5%8F%89%E6%A0%91_20220316153214227108.png">
 <meta property="og:image" content="https://dhc.pythonanywhere.com/media/editor/%E7%BA%A2%E9%BB%91%E6%A0%91_20220316163142686602.png">
@@ -32,7 +32,7 @@
 <meta property="og:image" content="https://dhc.pythonanywhere.com/media/editor/%E5%8E%9F%E7%90%86%E5%9B%BE_20220318194454880073.png">
 <meta property="og:image" content="https://dhc.pythonanywhere.com/media/editor/%E6%BC%94%E7%A4%BA%E5%9B%BE_20220319215403721066.png">
 <meta property="article:published_time" content="2022-10-05T03:16:19.772Z">
-<meta property="article:modified_time" content="2022-11-04T10:12:27.165Z">
+<meta property="article:modified_time" content="2022-12-27T10:44:40.192Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://dhc.pythonanywhere.com/media/editor/%E4%BA%8C%E5%8F%89%E6%A0%91_20220316153214227108.png">
@@ -242,7 +242,7 @@
         
         
         
-          91 分钟
+          92 分钟
         
       </span>
     
@@ -293,38 +293,38 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年11月4日 晚上
+                    本文最后更新于：2022年12月27日 晚上
                   
                 
               </p>
             
             <div class="markdown-body">
               
-              <h1 id="1-基础篇"><a class="markdownIt-Anchor" href="#1-基础篇"></a> 1 基础篇</h1>
-<h2 id="11-函数"><a class="markdownIt-Anchor" href="#11-函数"></a> 1.1 函数</h2>
-<h2 id="12-约束"><a class="markdownIt-Anchor" href="#12-约束"></a> 1.2 约束</h2>
-<h3 id="121-外键约束"><a class="markdownIt-Anchor" href="#121-外键约束"></a> 1.2.1 外键约束</h3>
-<h4 id="1211-删除更新行为"><a class="markdownIt-Anchor" href="#1211-删除更新行为"></a> 1.2.1.1 删除/更新行为</h4>
-<h2 id="13-多表查询"><a class="markdownIt-Anchor" href="#13-多表查询"></a> 1.3 多表查询</h2>
-<h3 id="131-多表关系"><a class="markdownIt-Anchor" href="#131-多表关系"></a> 1.3.1 多表关系</h3>
+              <h1 id="1-基础篇"><a class="markdownIt-Anchor" href="#1-基础篇"></a> 1: 基础篇</h1>
+<h2 id="11-函数"><a class="markdownIt-Anchor" href="#11-函数"></a> 1.1: 函数</h2>
+<h2 id="12-约束"><a class="markdownIt-Anchor" href="#12-约束"></a> 1.2: 约束</h2>
+<h3 id="121-外键约束"><a class="markdownIt-Anchor" href="#121-外键约束"></a> 1.2.1: 外键约束</h3>
+<h4 id="1211-删除更新行为"><a class="markdownIt-Anchor" href="#1211-删除更新行为"></a> 1.2.1.1: 删除/更新行为</h4>
+<h2 id="13-多表查询"><a class="markdownIt-Anchor" href="#13-多表查询"></a> 1.3: 多表查询</h2>
+<h3 id="131-多表关系"><a class="markdownIt-Anchor" href="#131-多表关系"></a> 1.3.1: 多表关系</h3>
 <ul>
 <li>一对多（多对一）</li>
 <li>多对多</li>
 <li>一对一</li>
 </ul>
-<h4 id="1311-一对多"><a class="markdownIt-Anchor" href="#1311-一对多"></a> 1.3.1.1 一对多</h4>
+<h4 id="1311-一对多"><a class="markdownIt-Anchor" href="#1311-一对多"></a> 1.3.1.1: 一对多</h4>
 <p>案例：部门与员工<br>
 关系：一个部门对应多个员工，一个员工对应一个部门<br>
 实现：在多的一方建立外键，指向一的一方的主键</p>
-<h4 id="1312-多对多"><a class="markdownIt-Anchor" href="#1312-多对多"></a> 1.3.1.2 多对多</h4>
+<h4 id="1312-多对多"><a class="markdownIt-Anchor" href="#1312-多对多"></a> 1.3.1.2: 多对多</h4>
 <p>案例：学生与课程<br>
 关系：一个学生可以选多门课程，一门课程也可以供多个学生选修<br>
 实现：建立第三张中间表，中间表至少包含两个外键，分别关联两方主键</p>
-<h4 id="1313-一对一"><a class="markdownIt-Anchor" href="#1313-一对一"></a> 1.3.1.3 一对一</h4>
+<h4 id="1313-一对一"><a class="markdownIt-Anchor" href="#1313-一对一"></a> 1.3.1.3: 一对一</h4>
 <p>案例：用户与用户详情<br>
 关系：一对一关系，多用于单表拆分，将一张表的基础字段放在一张表中，其他详情字段放在另一张表中，以提升操作效率<br>
 实现：在任意一方加入外键，关联另外一方的主键，并且设置外键为唯一的（UNIQUE）</p>
-<h3 id="132-查询"><a class="markdownIt-Anchor" href="#132-查询"></a> 1.3.2 查询</h3>
+<h3 id="132-查询"><a class="markdownIt-Anchor" href="#132-查询"></a> 1.3.2: 查询</h3>
 <p>合并查询（笛卡尔积，会展示所有组合结果）：<br>
 <code>select * from employee, dept;</code></p>
 <blockquote>
@@ -332,7 +332,7 @@
 </blockquote>
 <p>消除无效笛卡尔积：<br>
 <code>select * from employee, dept where employee.dept = dept.id;</code></p>
-<h3 id="133-内连接查询"><a class="markdownIt-Anchor" href="#133-内连接查询"></a> 1.3.3 内连接查询</h3>
+<h3 id="133-内连接查询"><a class="markdownIt-Anchor" href="#133-内连接查询"></a> 1.3.3: 内连接查询</h3>
 <p>内连接查询的是两张表交集的部分</p>
 <p>隐式内连接：<br>
 <code>SELECT 字段列表 FROM 表1, 表2 WHERE 条件 ...;</code></p>
@@ -341,7 +341,7 @@
 <p>显式性能比隐式高</p>
 <p>例子：</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs mysql">-- 查询员工姓名，及关联的部门的名称<br>-- 隐式<br>select e.name, d.name from employee as e, dept as d where e.dept = d.id;<br>-- 显式<br>select e.name, d.name from employee as e inner join dept as d on e.dept = d.id;<br></code></pre></td></tr></tbody></table></figure>
-<h3 id="134-外连接查询"><a class="markdownIt-Anchor" href="#134-外连接查询"></a> 1.3.4 外连接查询</h3>
+<h3 id="134-外连接查询"><a class="markdownIt-Anchor" href="#134-外连接查询"></a> 1.3.4: 外连接查询</h3>
 <p>左外连接：<br>
 查询左表所有数据，以及两张表交集部分数据<br>
 <code>SELECT 字段列表 FROM 表1 LEFT [ OUTER ] JOIN 表2 ON 条件 ...;</code><br>
@@ -352,23 +352,23 @@
 <p>例子：</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs mysql">-- 左<br>select e.*, d.name from employee as e left outer join dept as d on e.dept = d.id;<br>select d.name, e.* from dept d left outer join emp e on e.dept = d.id;  -- 这条语句与下面的语句效果一样<br>-- 右<br>select d.name, e.* from employee as e right outer join dept as d on e.dept = d.id;<br></code></pre></td></tr></tbody></table></figure>
 <p>左连接可以查询到没有dept的employee，右连接可以查询到没有employee的dept</p>
-<h3 id="135-自连接查询"><a class="markdownIt-Anchor" href="#135-自连接查询"></a> 1.3.5 自连接查询</h3>
+<h3 id="135-自连接查询"><a class="markdownIt-Anchor" href="#135-自连接查询"></a> 1.3.5: 自连接查询</h3>
 <p>当前表与自身的连接查询，自连接必须使用表别名</p>
 <p>语法：<br>
 <code>SELECT 字段列表 FROM 表A 别名A JOIN 表A 别名B ON 条件 ...;</code></p>
 <p>自连接查询，可以是内连接查询，也可以是外连接查询</p>
 <p>例子：</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs mysql">-- 查询员工及其所属领导的名字<br>select a.name, b.name from employee a, employee b where a.manager = b.id;<br>-- 没有领导的也查询出来<br>select a.name, b.name from employee a left join employee b on a.manager = b.id;<br></code></pre></td></tr></tbody></table></figure>
-<h3 id="136-联合查询-union-union-all"><a class="markdownIt-Anchor" href="#136-联合查询-union-union-all"></a> 1.3.6 联合查询 union, union all</h3>
+<h3 id="136-联合查询-union-union-all"><a class="markdownIt-Anchor" href="#136-联合查询-union-union-all"></a> 1.3.6: 联合查询 union, union all</h3>
 <p>把多次查询的结果合并，形成一个新的查询集</p>
 <p>语法：</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs mysql">SELECT 字段列表 FROM 表A ...<br>UNION [ALL]<br>SELECT 字段列表 FROM 表B ...<br></code></pre></td></tr></tbody></table></figure>
-<h4 id="1361-注意事项"><a class="markdownIt-Anchor" href="#1361-注意事项"></a> 1.3.6.1 注意事项</h4>
+<h4 id="1361-注意事项"><a class="markdownIt-Anchor" href="#1361-注意事项"></a> 1.3.6.1: 注意事项</h4>
 <ul>
 <li>UNION ALL 会有重复结果，UNION 不会</li>
 <li>联合查询比使用or效率高，不会使索引失效</li>
 </ul>
-<h3 id="137-子查询"><a class="markdownIt-Anchor" href="#137-子查询"></a> 1.3.7 子查询</h3>
+<h3 id="137-子查询"><a class="markdownIt-Anchor" href="#137-子查询"></a> 1.3.7: 子查询</h3>
 <p>SQL语句中嵌套SELECT语句，称谓嵌套查询，又称子查询。<br>
 <code>SELECT * FROM t1 WHERE column1 = ( SELECT column1 FROM t2);</code><br>
 <strong>子查询外部的语句可以是 INSERT / UPDATE / DELETE / SELECT 的任何一个</strong></p>
@@ -385,17 +385,17 @@
 <li>FROM 之后</li>
 <li>SELECT 之后</li>
 </ul>
-<h4 id="1371-标量子查询"><a class="markdownIt-Anchor" href="#1371-标量子查询"></a> 1.3.7.1 标量子查询</h4>
+<h4 id="1371-标量子查询"><a class="markdownIt-Anchor" href="#1371-标量子查询"></a> 1.3.7.1: 标量子查询</h4>
 <p>子查询返回的结果是单个值（数字、字符串、日期等）。<br>
 常用操作符：- &lt; &gt; &gt; &gt;= &lt; &lt;=</p>
 <p>例子：</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs mysql">-- 查询销售部所有员工<br>select id from dept where name = '销售部';<br>-- 根据销售部部门ID，查询员工信息<br>select * from employee where dept = 4;<br>-- 合并（子查询）<br>select * from employee where dept = (select id from dept where name = '销售部');<br><br>-- 查询xxx入职之后的员工信息<br>select * from employee where entrydate &gt; (select entrydate from employee where name = 'xxx');<br></code></pre></td></tr></tbody></table></figure>
-<h4 id="1372-列子查询"><a class="markdownIt-Anchor" href="#1372-列子查询"></a> 1.3.7.2 列子查询</h4>
+<h4 id="1372-列子查询"><a class="markdownIt-Anchor" href="#1372-列子查询"></a> 1.3.7.2: 列子查询</h4>
 <p>返回的结果是一列（可以是多行）。</p>
 <p>常用操作符：</p>
 <p>例子：</p>
-<h4 id="1373"><a class="markdownIt-Anchor" href="#1373"></a> 1.3.7.3</h4>
-<h2 id="14-事务"><a class="markdownIt-Anchor" href="#14-事务"></a> 1.4 事务</h2>
+<h4 id="1373"><a class="markdownIt-Anchor" href="#1373"></a> 1.3.7.3:</h4>
+<h2 id="14-事务"><a class="markdownIt-Anchor" href="#14-事务"></a> 1.4: 事务</h2>
 <p>事务是一组操作的集合，事务会把所有操作作为一个整体一起向系统提交或撤销操作请求，即这些操作要么同时成功，要么同时失败。</p>
 <p>基本操作：</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs mysql">-- 1. 查询张三账户余额<br>select * from account where name = '张三';<br>-- 2. 将张三账户余额-1000<br>update account set money = money - 1000 where name = '张三';<br>-- 此语句出错后张三钱减少但是李四钱没有增加<br>模拟sql语句错误<br>-- 3. 将李四账户余额+1000<br>update account set money = money + 1000 where name = '李四';<br><br>-- 查看事务提交方式<br>SELECT @@AUTOCOMMIT;<br>-- 设置事务提交方式，1为自动提交，0为手动提交，该设置只对当前会话有效<br>SET @@AUTOCOMMIT = 0;<br>-- 提交事务<br>COMMIT;<br>-- 回滚事务<br>ROLLBACK;<br><br>-- 设置手动提交后上面代码改为：<br>select * from account where name = '张三';<br>update account set money = money - 1000 where name = '张三';<br>update account set money = money + 1000 where name = '李四';<br>commit;<br></code></pre></td></tr></tbody></table></figure>
@@ -408,7 +408,7 @@
 <code>ROLLBACK;</code></p>
 <p>操作实例：</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs mysql">start transaction;<br>select * from account where name = '张三';<br>update account set money = money - 1000 where name = '张三';<br>update account set money = money + 1000 where name = '李四';<br>commit;<br></code></pre></td></tr></tbody></table></figure>
-<h3 id="141-四大特性acid"><a class="markdownIt-Anchor" href="#141-四大特性acid"></a> 1.4.1 四大特性ACID</h3>
+<h3 id="141-四大特性acid"><a class="markdownIt-Anchor" href="#141-四大特性acid"></a> 1.4.1: 四大特性ACID</h3>
 <p>^ac7aff</p>
 <ul>
 <li>原子性(Atomicity)：事务是不可分割的最小操作但愿，要么全部成功，要么全部失败</li>
@@ -416,7 +416,7 @@
 <li>隔离性(Isolation)：数据库系统提供的隔离机制，保证事务在不受外部并发操作影响的独立环境下运行</li>
 <li>持久性(Durability)：事务一旦提交或回滚，它对数据库中的数据的改变就是永久的</li>
 </ul>
-<h3 id="142-并发事务"><a class="markdownIt-Anchor" href="#142-并发事务"></a> 1.4.2 并发事务</h3>
+<h3 id="142-并发事务"><a class="markdownIt-Anchor" href="#142-并发事务"></a> 1.4.2: 并发事务</h3>
 <table>
 <thead>
 <tr>
@@ -488,15 +488,15 @@
 设置事务隔离级别：<br>
 <code>SET [ SESSION | GLOBAL ] TRANSACTION ISOLATION LEVEL {READ UNCOMMITTED | READ COMMITTED | REPEATABLE READ | SERIALIZABLE };</code><br>
 SESSION 是会话级别，表示只针对当前会话有效，GLOBAL 表示对所有会话有效</p>
-<h1 id="2-进阶篇"><a class="markdownIt-Anchor" href="#2-进阶篇"></a> 2 进阶篇</h1>
-<h2 id="21-存储引擎"><a class="markdownIt-Anchor" href="#21-存储引擎"></a> 2.1 存储引擎</h2>
+<h1 id="2-进阶篇"><a class="markdownIt-Anchor" href="#2-进阶篇"></a> 2: 进阶篇</h1>
+<h2 id="21-存储引擎"><a class="markdownIt-Anchor" href="#21-存储引擎"></a> 2.1: 存储引擎</h2>
 <p>MySQL体系结构：</p>
-<h2 id="22-性能分析"><a class="markdownIt-Anchor" href="#22-性能分析"></a> 2.2 性能分析</h2>
-<h3 id="221-查看执行频次"><a class="markdownIt-Anchor" href="#221-查看执行频次"></a> 2.2.1 查看执行频次</h3>
+<h2 id="22-性能分析"><a class="markdownIt-Anchor" href="#22-性能分析"></a> 2.2: 性能分析</h2>
+<h3 id="221-查看执行频次"><a class="markdownIt-Anchor" href="#221-查看执行频次"></a> 2.2.1: 查看执行频次</h3>
 <p>查看当前数据库的 INSERT, UPDATE, DELETE, SELECT 访问频次：<br>
 <code>SHOW GLOBAL STATUS LIKE 'Com_______';</code> 或者 <code>SHOW SESSION STATUS LIKE 'Com_______';</code><br>
 例：<code>show global status like 'Com_______'</code></p>
-<h3 id="222-慢查询日志"><a class="markdownIt-Anchor" href="#222-慢查询日志"></a> 2.2.2 慢查询日志</h3>
+<h3 id="222-慢查询日志"><a class="markdownIt-Anchor" href="#222-慢查询日志"></a> 2.2.2: 慢查询日志</h3>
 <p>慢查询日志记录了所有执行时间超过指定参数（long_query_time，单位：秒，默认10秒）的所有SQL语句的日志。<br>
 MySQL的慢查询日志默认没有开启，需要在MySQL的配置文件（/etc/my.cnf）中配置如下信息：<br>
 # 开启慢查询日志开关<br>
@@ -506,7 +506,7 @@ long_query_time=2<br>
 更改后记得重启MySQL服务，日志文件位置：/var/lib/mysql/localhost-slow.log</p>
 <p>查看慢查询日志开关状态：<br>
 <code>show variables like 'slow_query_log';</code></p>
-<h3 id="223-profile"><a class="markdownIt-Anchor" href="#223-profile"></a> 2.2.3 profile</h3>
+<h3 id="223-profile"><a class="markdownIt-Anchor" href="#223-profile"></a> 2.2.3: profile</h3>
 <p>show profile 能在做SQL优化时帮我们了解时间都耗费在哪里。通过 have_profiling 参数，能看到当前 MySQL 是否支持 profile 操作：<br>
 <code>SELECT @@have_profiling;</code><br>
 profiling 默认关闭，可以通过set语句在session/global级别开启 profiling：<br>
@@ -517,13 +517,13 @@ profiling 默认关闭，可以通过set语句在session/global级别开启 prof
 <code>show profile for query query_id;</code><br>
 查看指定query_id的SQL语句CPU的使用情况<br>
 <code>show profile cpu for query query_id;</code></p>
-<h3 id="224-explain"><a class="markdownIt-Anchor" href="#224-explain"></a> 2.2.4 explain</h3>
+<h3 id="224-explain"><a class="markdownIt-Anchor" href="#224-explain"></a> 2.2.4: explain</h3>
 <p>EXPLAIN 或者 DESC 命令获取 MySQL 如何执行 SELECT 语句的信息，包括在 SELECT 语句执行过程中表如何连接和连接的顺序。<br>
 语法：<br>
 # 直接在select语句之前加上关键字 explain / desc<br>
 EXPLAIN SELECT 字段列表 FROM 表名 HWERE 条件;</p>
 <p>EXPLAIN 各字段含义：</p>
-<h2 id="23-索引"><a class="markdownIt-Anchor" href="#23-索引"></a> 2.3 索引</h2>
+<h2 id="23-索引"><a class="markdownIt-Anchor" href="#23-索引"></a> 2.3: 索引</h2>
 <p>索引是帮助 MySQL <strong>高效获取数据</strong>的<strong>数据结构（有序）</strong>。在数据之外，数据库系统还维护着满足特定查找算法的数据结构，这些数据结构以某种方式引用（指向）数据，这样就可以在这些数据结构上实现高级查询算法，这种数据结构就是索引。</p>
 <p>优缺点：</p>
 <p>优点：</p>
@@ -536,7 +536,7 @@ EXPLAIN SELECT 字段列表 FROM 表名 HWERE 条件;</p>
 <li>索引列也是要占用空间的</li>
 <li>索引大大提高了查询效率，但降低了更新的速度，比如 INSERT、UPDATE、DELETE</li>
 </ul>
-<h3 id="231-索引结构"><a class="markdownIt-Anchor" href="#231-索引结构"></a> 2.3.1 索引结构</h3>
+<h3 id="231-索引结构"><a class="markdownIt-Anchor" href="#231-索引结构"></a> 2.3.1: 索引结构</h3>
 <table>
 <thead>
 <tr>
@@ -599,7 +599,7 @@ EXPLAIN SELECT 字段列表 FROM 表名 HWERE 条件;</p>
 </tr>
 </tbody>
 </table>
-<h4 id="2311-b-tree"><a class="markdownIt-Anchor" href="#2311-b-tree"></a> 2.3.1.1 B-Tree</h4>
+<h4 id="2311-b-tree"><a class="markdownIt-Anchor" href="#2311-b-tree"></a> 2.3.1.1: B-Tree</h4>
 <p><img src="https://dhc.pythonanywhere.com/media/editor/%E4%BA%8C%E5%8F%89%E6%A0%91_20220316153214227108.png" srcset="/img/loading.gif" lazyload alt="二叉树" title="二叉树"></p>
 <p>二叉树的缺点可以用红黑树来解决：<br>
 <img src="https://dhc.pythonanywhere.com/media/editor/%E7%BA%A2%E9%BB%91%E6%A0%91_20220316163142686602.png" srcset="/img/loading.gif" lazyload alt="红黑树" title="红黑树"><br>
@@ -611,7 +611,7 @@ B-Tree (多路平衡查找树) 以一棵最大度数（max-degree，指一个节
 <p>B-Tree 的数据插入过程动画参照：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Kr4y1i7ru?p=68">https://www.bilibili.com/video/BV1Kr4y1i7ru?p=68</a><br>
 演示地址：<a target="_blank" rel="noopener" href="https://www.cs.usfca.edu/~galles/visualization/BTree.html">https://www.cs.usfca.edu/~galles/visualization/BTree.html</a></p>
 </blockquote>
-<h4 id="2312-btree"><a class="markdownIt-Anchor" href="#2312-btree"></a> 2.3.1.2 B+Tree</h4>
+<h4 id="2312-btree"><a class="markdownIt-Anchor" href="#2312-btree"></a> 2.3.1.2: B+Tree</h4>
 <p>结构图：</p>
 <p><img src="https://dhc.pythonanywhere.com/media/editor/B+Tree%E7%BB%93%E6%9E%84%E5%9B%BE_20220316170700591277.png" srcset="/img/loading.gif" lazyload alt="B+Tree结构图" title="B+Tree结构图"></p>
 <blockquote>
@@ -624,7 +624,7 @@ B-Tree (多路平衡查找树) 以一棵最大度数（max-degree，指一个节
 </ul>
 <p>MySQL 索引数据结构对经典的 B+Tree 进行了优化。在原 B+Tree 的基础上，增加一个指向相邻叶子节点的链表指针，就形成了带有顺序指针的 B+Tree，提高区间访问的性能。</p>
 <p><img src="https://dhc.pythonanywhere.com/media/editor/%E7%BB%93%E6%9E%84%E5%9B%BE_20220316171730865611.png" srcset="/img/loading.gif" lazyload alt="MySQL B+Tree 结构图" title="MySQL B+Tree 结构图"></p>
-<h4 id="2313-hash"><a class="markdownIt-Anchor" href="#2313-hash"></a> 2.3.1.3 Hash</h4>
+<h4 id="2313-hash"><a class="markdownIt-Anchor" href="#2313-hash"></a> 2.3.1.3: Hash</h4>
 <p>哈希索引就是采用一定的hash算法，将键值换算成新的hash值，映射到对应的槽位上，然后存储在hash表中。<br>
 如果两个（或多个）键值，映射到一个相同的槽位上，他们就产生了hash冲突（也称为hash碰撞），可以通过链表来解决。</p>
 <p><img src="https://dhc.pythonanywhere.com/media/editor/Hash%E7%B4%A2%E5%BC%95%E5%8E%9F%E7%90%86%E5%9B%BE_20220317143226150679.png" srcset="/img/loading.gif" lazyload alt="Hash索引原理图" title="Hash索引原理图"></p>
@@ -639,7 +639,7 @@ B-Tree (多路平衡查找树) 以一棵最大度数（max-degree，指一个节
 <li>Memory</li>
 <li>InnoDB: 具有自适应hash功能，hash索引是存储引擎根据 B+Tree 索引在指定条件下自动构建的</li>
 </ul>
-<h4 id="2314-面试题"><a class="markdownIt-Anchor" href="#2314-面试题"></a> 2.3.1.4 面试题</h4>
+<h4 id="2314-面试题"><a class="markdownIt-Anchor" href="#2314-面试题"></a> 2.3.1.4: 面试题</h4>
 <ol>
 <li>为什么 InnoDB 存储引擎选择使用 B+Tree 索引结构？</li>
 </ol>
@@ -648,7 +648,7 @@ B-Tree (多路平衡查找树) 以一棵最大度数（max-degree，指一个节
 <li>对于 B-Tree，无论是叶子节点还是非叶子节点，都会保存数据，这样导致一页中存储的键值减少，指针也跟着减少，要同样保存大量数据，只能增加树的高度，导致性能降低</li>
 <li>相对于 Hash 索引，B+Tree 支持范围匹配及排序操作</li>
 </ul>
-<h3 id="232-索引分类"><a class="markdownIt-Anchor" href="#232-索引分类"></a> 2.3.2 索引分类</h3>
+<h3 id="232-索引分类"><a class="markdownIt-Anchor" href="#232-索引分类"></a> 2.3.2: 索引分类</h3>
 <table>
 <thead>
 <tr>
@@ -716,7 +716,7 @@ B-Tree (多路平衡查找树) 以一棵最大度数（max-degree，指一个节
 <li>如果不存在主键，将使用第一个唯一(UNIQUE)索引作为聚集索引</li>
 <li>如果表没有主键或没有合适的唯一索引，则 InnoDB 会自动生成一个 rowid 作为隐藏的聚集索引</li>
 </ul>
-<h4 id="2321-思考题"><a class="markdownIt-Anchor" href="#2321-思考题"></a> 2.3.2.1 思考题</h4>
+<h4 id="2321-思考题"><a class="markdownIt-Anchor" href="#2321-思考题"></a> 2.3.2.1: 思考题</h4>
 <p>1. 以下 SQL 语句，哪个执行效率高？为什么？</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select * from user where id = 10;<br>select * from user where name = 'Arm';<br>-- 备注：id为主键，name字段创建的有索引<br></code></pre></td></tr></tbody></table></figure>
 <p>答：第一条语句，因为第二条需要回表查询，相当于两个步骤。</p>
@@ -726,7 +726,7 @@ B-Tree (多路平衡查找树) 以一棵最大度数（max-degree，指一个节
 <p>如果树的高度为2，那么他能存储的数据量大概为：<code>1171 * 16 = 18736</code>；<br>
 如果树的高度为3，那么他能存储的数据量大概为：<code>1171 * 1171 * 16 = 21939856</code>。</p>
 <p>另外，如果有成千上万的数据，那么就要考虑分表，涉及运维篇知识。</p>
-<h3 id="233-语法"><a class="markdownIt-Anchor" href="#233-语法"></a> 2.3.3 语法</h3>
+<h3 id="233-语法"><a class="markdownIt-Anchor" href="#233-语法"></a> 2.3.3: 语法</h3>
 <p>创建索引：<br>
 <code>CREATE [ UNIQUE | FULLTEXT ] INDEX index_name ON table_name (index_col_name, ...);</code><br>
 如果不加 CREATE 后面不加索引类型参数，则创建的是常规索引</p>
@@ -736,12 +736,12 @@ B-Tree (多路平衡查找树) 以一棵最大度数（max-degree，指一个节
 <code>DROP INDEX index_name ON table_name;</code></p>
 <p>案例：</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs mysql">-- name字段为姓名字段，该字段的值可能会重复，为该字段创建索引<br>create index idx_user_name on tb_user(name);<br>-- phone手机号字段的值非空，且唯一，为该字段创建唯一索引<br>create unique index idx_user_phone on tb_user (phone);<br>-- 为profession, age, status创建联合索引<br>create index idx_user_pro_age_stat on tb_user(profession, age, status);<br>-- 为email建立合适的索引来提升查询效率<br>create index idx_user_email on tb_user(email);<br><br>-- 删除索引<br>drop index idx_user_email on tb_user;<br></code></pre></td></tr></tbody></table></figure>
-<h3 id="234-使用规则"><a class="markdownIt-Anchor" href="#234-使用规则"></a> 2.3.4 使用规则</h3>
-<h4 id="2341-最左前缀法则"><a class="markdownIt-Anchor" href="#2341-最左前缀法则"></a> 2.3.4.1 最左前缀法则</h4>
+<h3 id="234-使用规则"><a class="markdownIt-Anchor" href="#234-使用规则"></a> 2.3.4: 使用规则</h3>
+<h4 id="2341-最左前缀法则"><a class="markdownIt-Anchor" href="#2341-最左前缀法则"></a> 2.3.4.1: 最左前缀法则</h4>
 <p>如果索引关联了多列（联合索引），要遵守最左前缀法则，最左前缀法则指的是查询从索引的最左列开始，并且不跳过索引中的列。<br>
 如果跳跃某一列，索引将部分失效（后面的字段索引失效）。</p>
 <p>联合索引中，出现范围查询（&lt;, &gt;），范围查询右侧的列索引失效。可以用&gt;=或者&lt;=来规避索引失效问题。</p>
-<h4 id="2342-索引失效情况"><a class="markdownIt-Anchor" href="#2342-索引失效情况"></a> 2.3.4.2 索引失效情况</h4>
+<h4 id="2342-索引失效情况"><a class="markdownIt-Anchor" href="#2342-索引失效情况"></a> 2.3.4.2: 索引失效情况</h4>
 <ol>
 <li>在索引列上进行运算操作，索引将失效。如：<code>explain select * from tb_user where substring(phone, 10, 2) = '15';</code></li>
 <li>字符串类型字段使用时，不加引号，索引将失效。如：<code>explain select * from tb_user where phone = 17799990015;</code>，此处phone的值没有加引号</li>
@@ -749,7 +749,7 @@ B-Tree (多路平衡查找树) 以一棵最大度数（max-degree，指一个节
 <li>用 or 分割开的条件，如果 or 其中一个条件的列没有索引，那么涉及的索引都不会被用到。</li>
 <li>如果 MySQL 评估使用索引比全表更慢，则不使用索引。</li>
 </ol>
-<h4 id="2343-sql-提示"><a class="markdownIt-Anchor" href="#2343-sql-提示"></a> 2.3.4.3 SQL 提示</h4>
+<h4 id="2343-sql-提示"><a class="markdownIt-Anchor" href="#2343-sql-提示"></a> 2.3.4.3: SQL 提示</h4>
 <p>是优化数据库的一个重要手段，简单来说，就是在SQL语句中加入一些人为的提示来达到优化操作的目的。</p>
 <p>例如，使用索引：<br>
 <code>explain select * from tb_user use index(idx_user_pro) where profession="软件工程";</code><br>
@@ -758,7 +758,7 @@ B-Tree (多路平衡查找树) 以一棵最大度数（max-degree，指一个节
 必须使用哪个索引：<br>
 <code>explain select * from tb_user force index(idx_user_pro) where profession="软件工程";</code></p>
 <p>use 是建议，实际使用哪个索引 MySQL 还会自己权衡运行速度去更改，force就是无论如何都强制使用该索引。</p>
-<h4 id="2344-覆盖索引回表查询"><a class="markdownIt-Anchor" href="#2344-覆盖索引回表查询"></a> 2.3.4.4 覆盖索引&amp;回表查询</h4>
+<h4 id="2344-覆盖索引回表查询"><a class="markdownIt-Anchor" href="#2344-覆盖索引回表查询"></a> 2.3.4.4: 覆盖索引&amp;回表查询</h4>
 <p>尽量使用覆盖索引（查询使用了索引，并且需要返回的列，在该索引中已经全部能找到），减少 select *。</p>
 <p>explain 中 extra 字段含义：<br>
 <code>using index condition</code>：查找使用了索引，但是需要回表查询数据<br>
@@ -768,25 +768,25 @@ B-Tree (多路平衡查找树) 以一棵最大度数（max-degree，指一个节
 <p>面试题：一张表，有四个字段（id, username, password, status），由于数据量大，需要对以下SQL语句进行优化，该如何进行才是最优方案：<br>
 <code>select id, username, password from tb_user where username='itcast';</code></p>
 <p>解：给username和password字段建立联合索引，则不需要回表查询，直接覆盖索引</p>
-<h4 id="2345-前缀索引"><a class="markdownIt-Anchor" href="#2345-前缀索引"></a> 2.3.4.5 前缀索引</h4>
+<h4 id="2345-前缀索引"><a class="markdownIt-Anchor" href="#2345-前缀索引"></a> 2.3.4.5: 前缀索引</h4>
 <p>当字段类型为字符串（varchar, text等）时，有时候需要索引很长的字符串，这会让索引变得很大，查询时，浪费大量的磁盘IO，影响查询效率，此时可以只降字符串的一部分前缀，建立索引，这样可以大大节约索引空间，从而提高索引效率。</p>
 <p>语法：<code>create index idx_xxxx on table_name(columnn(n));</code><br>
 前缀长度：可以根据索引的选择性来决定，而选择性是指不重复的索引值（基数）和数据表的记录总数的比值，索引选择性越高则查询效率越高，唯一索引的选择性是1，这是最好的索引选择性，性能也是最好的。<br>
 求选择性公式：</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select count(distinct email) / count(*) from tb_user;<br>select count(distinct substring(email, 1, 5)) / count(*) from tb_user;<br></code></pre></td></tr></tbody></table></figure>
 <p>show index 里面的sub_part可以看到接取的长度</p>
-<h4 id="2346-单列索引联合索引"><a class="markdownIt-Anchor" href="#2346-单列索引联合索引"></a> 2.3.4.6 单列索引&amp;联合索引</h4>
+<h4 id="2346-单列索引联合索引"><a class="markdownIt-Anchor" href="#2346-单列索引联合索引"></a> 2.3.4.6: 单列索引&amp;联合索引</h4>
 <p>单列索引：即一个索引只包含单个列<br>
 联合索引：即一个索引包含了多个列<br>
 在业务场景中，如果存在多个查询条件，考虑针对于查询字段建立索引时，建议建立联合索引，而非单列索引。</p>
 <p>单列索引情况：<br>
 <code>explain select id, phone, name from tb_user where phone = '17799990010' and name = '韩信';</code><br>
 这句只会用到phone索引字段</p>
-<h5 id="23461-注意事项"><a class="markdownIt-Anchor" href="#23461-注意事项"></a> 2.3.4.6.1 注意事项</h5>
+<h5 id="23461-注意事项"><a class="markdownIt-Anchor" href="#23461-注意事项"></a> 2.3.4.6.1: 注意事项</h5>
 <ul>
 <li>多条件联合查询时，MySQL优化器会评估哪个字段的索引效率更高，会选择该索引完成本次查询</li>
 </ul>
-<h3 id="235-设计原则"><a class="markdownIt-Anchor" href="#235-设计原则"></a> 2.3.5 设计原则</h3>
+<h3 id="235-设计原则"><a class="markdownIt-Anchor" href="#235-设计原则"></a> 2.3.5: 设计原则</h3>
 <ol>
 <li>针对于数据量较大，且查询比较频繁的表建立索引</li>
 <li>针对于常作为查询条件（where）、排序（order by）、分组（group by）操作的字段建立索引</li>
@@ -796,8 +796,8 @@ B-Tree (多路平衡查找树) 以一棵最大度数（max-degree，指一个节
 <li>要控制索引的数量，索引并不是多多益善，索引越多，维护索引结构的代价就越大，会影响增删改的效率</li>
 <li>如果索引列不能存储NULL值，请在创建表时使用NOT NULL约束它。当优化器知道每列是否包含NULL值时，它可以更好地确定哪个索引最有效地用于查询</li>
 </ol>
-<h2 id="24-sql-优化"><a class="markdownIt-Anchor" href="#24-sql-优化"></a> 2.4 SQL 优化</h2>
-<h3 id="241-插入数据"><a class="markdownIt-Anchor" href="#241-插入数据"></a> 2.4.1 插入数据</h3>
+<h2 id="24-sql-优化"><a class="markdownIt-Anchor" href="#24-sql-优化"></a> 2.4: SQL 优化</h2>
+<h3 id="241-插入数据"><a class="markdownIt-Anchor" href="#241-插入数据"></a> 2.4.1: 插入数据</h3>
 <p>普通插入：</p>
 <ol>
 <li>采用批量插入（一次插入的数据不建议超过1000条）</li>
@@ -807,7 +807,7 @@ B-Tree (多路平衡查找树) 以一棵最大度数（max-degree，指一个节
 <p>大批量插入：<br>
 如果一次性需要插入大批量数据，使用insert语句插入性能较低，此时可以使用MySQL数据库提供的load指令插入。</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs mysql"># 客户端连接服务端时，加上参数 --local-infile（这一行在bash/cmd界面输入）<br>mysql --local-infile -u root -p<br># 设置全局参数local_infile为1，开启从本地加载文件导入数据的开关<br>set global local_infile = 1;<br>select @@local_infile;<br># 执行load指令将准备好的数据，加载到表结构中<br>load data local infile '/root/sql1.log' into table 'tb_user' fields terminated by ',' lines terminated by '\n';<br></code></pre></td></tr></tbody></table></figure>
-<h3 id="242-主键优化"><a class="markdownIt-Anchor" href="#242-主键优化"></a> 2.4.2 主键优化</h3>
+<h3 id="242-主键优化"><a class="markdownIt-Anchor" href="#242-主键优化"></a> 2.4.2: 主键优化</h3>
 <p>数据组织方式：在InnoDB存储引擎中，表数据都是根据主键顺序组织存放的，这种存储方式的表称为索引组织表（Index organized table, IOT）</p>
 <p>页分裂：页可以为空，也可以填充一般，也可以填充100%，每个页包含了2-N行数据（如果一行数据过大，会行溢出），根据主键排列。<br>
 页合并：当删除一行记录时，实际上记录并没有被物理删除，只是记录被标记（flaged）为删除并且它的空间变得允许被其他记录声明使用。当页中删除的记录到达 MERGE_THRESHOLD（默认为页的50%），InnoDB会开始寻找最靠近的页（前后）看看是否可以将这两个页合并以优化空间使用。</p>
@@ -822,7 +822,7 @@ B-Tree (多路平衡查找树) 以一棵最大度数（max-degree，指一个节
 <li>尽量不要使用 UUID 做主键或者是其他的自然主键，如身份证号</li>
 <li>业务操作时，避免对主键的修改</li>
 </ul>
-<h3 id="243-order-by优化"><a class="markdownIt-Anchor" href="#243-order-by优化"></a> 2.4.3 order by优化</h3>
+<h3 id="243-order-by优化"><a class="markdownIt-Anchor" href="#243-order-by优化"></a> 2.4.3: order by优化</h3>
 <ol>
 <li>Using filesort：通过表的索引或全表扫描，读取满足条件的数据行，然后在排序缓冲区 sort buffer 中完成排序操作，所有不是通过索引直接返回排序结果的排序都叫 FileSort 排序</li>
 <li>Using index：通过有序索引顺序扫描直接返回有序数据，这种情况即为 using index，不需要额外排序，操作效率高</li>
@@ -835,18 +835,18 @@ B-Tree (多路平衡查找树) 以一棵最大度数（max-degree，指一个节
 <li>多字段排序，一个升序一个降序，此时需要注意联合索引在创建时的规则（ASC/DESC）</li>
 <li>如果不可避免出现filesort，大数据量排序时，可以适当增大排序缓冲区大小 sort_buffer_size（默认256k）</li>
 </ul>
-<h3 id="244-group-by优化"><a class="markdownIt-Anchor" href="#244-group-by优化"></a> 2.4.4 group by优化</h3>
+<h3 id="244-group-by优化"><a class="markdownIt-Anchor" href="#244-group-by优化"></a> 2.4.4: group by优化</h3>
 <ul>
 <li>在分组操作时，可以通过索引来提高效率</li>
 <li>分组操作时，索引的使用也是满足最左前缀法则的</li>
 </ul>
 <p>如索引为<code>idx_user_pro_age_stat</code>，则句式可以是<code>select ... where profession order by age</code>，这样也符合最左前缀法则</p>
-<h3 id="245-limit优化"><a class="markdownIt-Anchor" href="#245-limit优化"></a> 2.4.5 limit优化</h3>
+<h3 id="245-limit优化"><a class="markdownIt-Anchor" href="#245-limit优化"></a> 2.4.5: limit优化</h3>
 <p>常见的问题如<code>limit 2000000, 10</code>，此时需要 MySQL 排序前2000000条记录，但仅仅返回2000000 - 2000010的记录，其他记录丢弃，查询排序的代价非常大。<br>
 优化方案：一般分页查询时，通过创建覆盖索引能够比较好地提高性能，可以通过覆盖索引加子查询形式进行优化</p>
 <p>例如：</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs mysql">-- 此语句耗时很长<br>select * from tb_sku limit 9000000, 10;<br>-- 通过覆盖索引加快速度，直接通过主键索引进行排序及查询<br>select id from tb_sku order by id limit 9000000, 10;<br>-- 下面的语句是错误的，因为 MySQL 不支持 in 里面使用 limit<br>-- select * from tb_sku where id in (select id from tb_sku order by id limit 9000000, 10);<br>-- 通过连表查询即可实现第一句的效果，并且能达到第二句的速度<br>select * from tb_sku as s, (select id from tb_sku order by id limit 9000000, 10) as a where s.id = a.id;<br></code></pre></td></tr></tbody></table></figure>
-<h3 id="246-count优化"><a class="markdownIt-Anchor" href="#246-count优化"></a> 2.4.6 count优化</h3>
+<h3 id="246-count优化"><a class="markdownIt-Anchor" href="#246-count优化"></a> 2.4.6: count优化</h3>
 <p>MyISAM 引擎把一个表的总行数存在了磁盘上，因此执行 count(*) 的时候会直接返回这个数，效率很高（前提是不适用where）；<br>
 InnoDB 在执行 count(*) 时，需要把数据一行一行地从引擎里面读出来，然后累计计数。<br>
 优化方案：自己计数，如创建key-value表存储在内存或硬盘，或者是用redis</p>
@@ -864,13 +864,13 @@ InnoDB 在执行 count(*) 时，需要把数据一行一行地从引擎里面读
 <li>count(*)：InnoDB 引擎并不会把全部字段取出来，而是专门做了优化，不取值，服务层直接按行进行累加</li>
 </ul>
 <p>按效率排序：count(字段) &lt; count(主键) &lt; count(1) &lt; count(*)，所以尽量使用 count(*)</p>
-<h3 id="247-update优化避免行锁升级为表锁"><a class="markdownIt-Anchor" href="#247-update优化避免行锁升级为表锁"></a> 2.4.7 update优化（避免行锁升级为表锁）</h3>
+<h3 id="247-update优化避免行锁升级为表锁"><a class="markdownIt-Anchor" href="#247-update优化避免行锁升级为表锁"></a> 2.4.7: update优化（避免行锁升级为表锁）</h3>
 <p>InnoDB 的行锁是针对索引加的锁，不是针对记录加的锁，并且该索引不能失效，否则会从行锁升级为表锁。</p>
 <p>如以下两条语句：<br>
 <code>update student set no = '123' where id = 1;</code>，这句由于id有主键索引，所以只会锁这一行；<br>
 <code>update student set no = '123' where name = 'test';</code>，这句由于name没有索引，所以会把整张表都锁住进行数据更新，解决方法是给name字段添加索引</p>
-<h1 id="3-数据类型"><a class="markdownIt-Anchor" href="#3-数据类型"></a> 3 数据类型</h1>
-<h2 id="31-整型"><a class="markdownIt-Anchor" href="#31-整型"></a> 3.1 整型</h2>
+<h1 id="3-数据类型"><a class="markdownIt-Anchor" href="#3-数据类型"></a> 3: 数据类型</h1>
+<h2 id="31-整型"><a class="markdownIt-Anchor" href="#31-整型"></a> 3.1: 整型</h2>
 <table>
 <thead>
 <tr>
@@ -908,7 +908,7 @@ InnoDB 在执行 count(*) 时，需要把数据一行一行地从引擎里面读
 </tbody>
 </table>
 <p>无符号在数据类型后加 unsigned 关键字。</p>
-<h2 id="32-浮点型"><a class="markdownIt-Anchor" href="#32-浮点型"></a> 3.2 浮点型</h2>
+<h2 id="32-浮点型"><a class="markdownIt-Anchor" href="#32-浮点型"></a> 3.2: 浮点型</h2>
 <table>
 <thead>
 <tr>
@@ -935,7 +935,7 @@ InnoDB 在执行 count(*) 时，需要把数据一行一行地从引擎里面读
 </tr>
 </tbody>
 </table>
-<h2 id="33-日期和时间"><a class="markdownIt-Anchor" href="#33-日期和时间"></a> 3.3 日期和时间</h2>
+<h2 id="33-日期和时间"><a class="markdownIt-Anchor" href="#33-日期和时间"></a> 3.3: 日期和时间</h2>
 <table>
 <thead>
 <tr>
@@ -978,7 +978,7 @@ InnoDB 在执行 count(*) 时，需要把数据一行一行地从引擎里面读
 </tr>
 </tbody>
 </table>
-<h2 id="34-字符串"><a class="markdownIt-Anchor" href="#34-字符串"></a> 3.4 字符串</h2>
+<h2 id="34-字符串"><a class="markdownIt-Anchor" href="#34-字符串"></a> 3.4: 字符串</h2>
 <table>
 <thead>
 <tr>
@@ -1030,7 +1030,7 @@ InnoDB 在执行 count(*) 时，需要把数据一行一行地从引擎里面读
 </tr>
 </tbody>
 </table>
-<h2 id="35-二进制类型"><a class="markdownIt-Anchor" href="#35-二进制类型"></a> 3.5 二进制类型</h2>
+<h2 id="35-二进制类型"><a class="markdownIt-Anchor" href="#35-二进制类型"></a> 3.5: 二进制类型</h2>
 <table>
 <thead>
 <tr>
@@ -1077,7 +1077,7 @@ InnoDB 在执行 count(*) 时，需要把数据一行一行地从引擎里面读
 </tr>
 </tbody>
 </table>
-<h1 id="4-权限一览表"><a class="markdownIt-Anchor" href="#4-权限一览表"></a> 4 权限一览表</h1>
+<h1 id="4-权限一览表"><a class="markdownIt-Anchor" href="#4-权限一览表"></a> 4: 权限一览表</h1>
 <blockquote>
 <p>具体权限的作用详见<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html" title="官方文档">官方文档</a></p>
 </blockquote>
@@ -1418,7 +1418,7 @@ InnoDB 在执行 count(*) 时，需要把数据一行一行地从引擎里面读
 </tr>
 </tbody>
 </table>
-<h1 id="5-图形化界面工具"><a class="markdownIt-Anchor" href="#5-图形化界面工具"></a> 5 图形化界面工具</h1>
+<h1 id="5-图形化界面工具"><a class="markdownIt-Anchor" href="#5-图形化界面工具"></a> 5: 图形化界面工具</h1>
 <ul>
 <li>Workbench(免费): <a target="_blank" rel="noopener" href="http://dev.mysql.com/downloads/workbench/">http://dev.mysql.com/downloads/workbench/</a></li>
 <li>navicat(收费，试用版30天): <a target="_blank" rel="noopener" href="https://www.navicat.com/en/download/navicat-for-mysql">https://www.navicat.com/en/download/navicat-for-mysql</a></li>
@@ -1427,14 +1427,14 @@ InnoDB 在执行 count(*) 时，需要把数据一行一行地从引擎里面读
 <li>phpMyAdmin(免费): <a target="_blank" rel="noopener" href="https://www.phpmyadmin.net/">https://www.phpmyadmin.net/</a></li>
 <li>SQLyog: <a target="_blank" rel="noopener" href="https://sqlyog.en.softonic.com/">https://sqlyog.en.softonic.com/</a></li>
 </ul>
-<h1 id="6-安装"><a class="markdownIt-Anchor" href="#6-安装"></a> 6 安装</h1>
-<h1 id="7-小技巧"><a class="markdownIt-Anchor" href="#7-小技巧"></a> 7 小技巧</h1>
+<h1 id="6-安装"><a class="markdownIt-Anchor" href="#6-安装"></a> 6: 安装</h1>
+<h1 id="7-小技巧"><a class="markdownIt-Anchor" href="#7-小技巧"></a> 7: 小技巧</h1>
 <ol>
 <li>在SQL语句之后加上<code>\G</code>会将结果的表格形式转换成行文本形式</li>
 <li>查看Mysql数据库占用空间：</li>
 </ol>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs mysql">SELECT table_schema "Database Name"<br>     , SUM(data_length + index_length) / (1024 * 1024) "Database Size in MB"<br>FROM information_schema.TABLES<br>GROUP BY table_schema;<br></code></pre></td></tr></tbody></table></figure>
-<h1 id="8-后续内容"><a class="markdownIt-Anchor" href="#8-后续内容"></a> 8 后续内容</h1>
+<h1 id="8-后续内容"><a class="markdownIt-Anchor" href="#8-后续内容"></a> 8: 后续内容</h1>
 <p>后续内容因为跟当前学习、工作计划有冲突，所以后续课程的学习计划会无限期推后。<br>
 目前的工作重点放在重做一个学习笔记网站，当然这是边做边学的，开发过程中遇到的难点和知识点我也会记录下来供大家学习。<br>
 <strong>在此感谢B站同样爱学习的同学 @守心-人 提供的后续课程笔记，大家有条件一定要去给个star，你的每一个star和点赞都是我们前进的动力</strong><br>

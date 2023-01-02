@@ -16,17 +16,17 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="📝deque(🗃)::   1: 简介 vector是单向开口（尾部）的连续线性空间，deque则是一种双向开口的连续线性空间， 虽然vector也可以在头尾进行元素操作，但是其头部操作的效率十分低下（主要是涉及到整体的移动） ![[deque 原理图.excalidraw]] deque和vector的区别 一个是deque运行在常数时间内对头端进行元素操作(最重要) 二是deque没有容量">
+    <meta name="description" content="📝deque(🗃)::   1: 简介 [[深度探索deque容器🗃️]]  2: 简介 vector是单向开口（尾部）的连续线性空间，deque则是一种双向开口的连续线性空间， 虽然vector也可以在头尾进行元素操作，但是其头部操作的效率十分低下（主要是涉及到整体的移动） ![[deque 原理图.excalidraw]] deque和vector的区别 一个是deque运行在常数时间内">
 <meta property="og:type" content="article">
 <meta property="og:title" content="deque(🗃)">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/25249/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="📝deque(🗃)::   1: 简介 vector是单向开口（尾部）的连续线性空间，deque则是一种双向开口的连续线性空间， 虽然vector也可以在头尾进行元素操作，但是其头部操作的效率十分低下（主要是涉及到整体的移动） ![[deque 原理图.excalidraw]] deque和vector的区别 一个是deque运行在常数时间内对头端进行元素操作(最重要) 二是deque没有容量">
+<meta property="og:description" content="📝deque(🗃)::   1: 简介 [[深度探索deque容器🗃️]]  2: 简介 vector是单向开口（尾部）的连续线性空间，deque则是一种双向开口的连续线性空间， 虽然vector也可以在头尾进行元素操作，但是其头部操作的效率十分低下（主要是涉及到整体的移动） ![[deque 原理图.excalidraw]] deque和vector的区别 一个是deque运行在常数时间内">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://axiu-image-bed.oss-cn-shanghai.aliyuncs.com/img/202205220021322.png">
 <meta property="og:image" content="https://axiu-image-bed.oss-cn-shanghai.aliyuncs.com/img/202205220021453.png">
 <meta property="article:published_time" content="2022-12-13T08:59:00.000Z">
-<meta property="article:modified_time" content="2022-12-14T13:29:00.578Z">
+<meta property="article:modified_time" content="2022-12-31T09:32:00.888Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="📕">
 <meta name="twitter:card" content="summary_large_image">
@@ -288,7 +288,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年12月14日 晚上
+                    本文最后更新于：2022年12月31日 下午
                   
                 
               </p>
@@ -298,6 +298,8 @@
               <p>📝deque(🗃)::</p>
 <!-- basicblock-end -->
 <h1 id="1-简介"><a class="markdownIt-Anchor" href="#1-简介"></a> 1: 简介</h1>
+<p>[[深度探索deque容器🗃️]]</p>
+<h1 id="2-简介"><a class="markdownIt-Anchor" href="#2-简介"></a> 2: 简介</h1>
 <p>vector是单向开口（尾部）的连续线性空间，deque则是一种双向开口的连续线性空间，<br>
 虽然vector也可以在头尾进行元素操作，但是其头部操作的效率十分低下（主要是涉及到整体的移动）</p>
 <p>![[deque 原理图.excalidraw]]</p>
@@ -305,7 +307,7 @@
 一个是deque运行<strong>在常数时间内</strong>对头端进行元素操作(最重要)<br>
 二是deque没有容量的概念，它是动态地以分段连续空间组合而成，可以随时增加一段新的空间并链接起来</p>
 <p>如果需要对deque排序，可以先将deque中的元素复制到vector中，利用sort对vector排序，再将结果复制回deque</p>
-<h1 id="2-底层结构"><a class="markdownIt-Anchor" href="#2-底层结构"></a> 2: 底层结构</h1>
+<h1 id="3-底层结构"><a class="markdownIt-Anchor" href="#3-底层结构"></a> 3: 底层结构</h1>
 <p>deque由一段一段的定量连续空间组成，一旦需要增加新的空间，只要配置一段定量连续空间拼接在头部或尾部即可，因此deque的最大任务是如何维护这个整体的连续性<br>
 deque的数据结构如下：</p>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">deque</span><br>{<br>    ...<br><span class="hljs-keyword">protected</span>:<br>    <span class="hljs-keyword">typedef</span> pointer* map_pointer;<span class="hljs-comment">//指向map指针的指针</span><br>    map_pointer map;<span class="hljs-comment">//指向map</span><br>    size_type map_size;<span class="hljs-comment">//map的大小</span><br><span class="hljs-keyword">public</span>:<br>    ...<br>    <span class="hljs-function">iterator <span class="hljs-title">begin</span><span class="hljs-params">()</span></span>;<br>    <span class="hljs-function">itertator <span class="hljs-title">end</span><span class="hljs-params">()</span></span>;<br>    ...<br>}<br></code></pre></td></tr></tbody></table></figure>
@@ -313,7 +315,7 @@ deque的数据结构如下：</p>
 <p>[!question] #📕<br>
 <img src="https://axiu-image-bed.oss-cn-shanghai.aliyuncs.com/img/202205220021322.png" srcset="/img/loading.gif" lazyload alt=""></p>
 </blockquote>
-<h1 id="3-迭代器还没看"><a class="markdownIt-Anchor" href="#3-迭代器还没看"></a> 3: 迭代器(还没看)</h1>
+<h1 id="4-迭代器还没看"><a class="markdownIt-Anchor" href="#4-迭代器还没看"></a> 4: 迭代器(还没看)</h1>
 <p>deque虽然也提供随机访问的迭代器，但是其迭代器并不是普通的指针，其复杂程度比vector高很多，因此除非必要，否则一般使用vector而非deque。<br>
 deque的迭代器数据结构如下：</p>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">__deque_iterator</span><br>{<br>    ...<br>    T* cur;<span class="hljs-comment">//迭代器所指缓冲区当前的元素</span><br>    T* first;<span class="hljs-comment">//迭代器所指缓冲区第一个元素</span><br>    T* last;<span class="hljs-comment">//迭代器所指缓冲区最后一个元素</span><br>    map_pointer node;<span class="hljs-comment">//指向map中的node</span><br>    ...<br>}<br></code></pre></td></tr></tbody></table></figure>

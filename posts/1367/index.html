@@ -24,7 +24,7 @@
 <meta property="og:description" content="📝内存对齐概念::  ![[内存对齐.excalidraw]]  内存对齐:  一次寻址 一字节的char占用了四个字节，空了三个字节的内存地址，int数据从地址4开始。 此时，直接将地址4，5，6，7处的四个字节数据读取到即可 ^9987ae 非内存对齐 : 两次寻址，一次合并 char型的数据和int型的数据挨在一起，该int数据从地址1开始，那么CPU想要读这个数据的话来看看需要几步操作：">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-21T14:30:00.000Z">
-<meta property="article:modified_time" content="2022-11-22T09:19:05.349Z">
+<meta property="article:modified_time" content="2022-12-28T14:18:31.016Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -284,7 +284,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年11月22日 下午
+                    本文最后更新于：2022年12月28日 晚上
                   
                 
               </p>
@@ -312,6 +312,7 @@ char型的数据和int型的数据挨在一起，该int数据从地址1开始，
 <strong>编译器一般都会做内存对齐的优化操作，也就是说当考虑程序真正占用的内存大小的时候，也需要认识到内存对齐的影响</strong>。</p>
 <p>例子</p>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// char 一字节, int 四字节</span><br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">node</span>{</span><br>   <span class="hljs-type">int</span> num;<br>   <span class="hljs-type">char</span> cha;<br>}st;<br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> {<br>    <span class="hljs-type">int</span> a[<span class="hljs-number">100</span>];<br>    <span class="hljs-type">char</span> b[<span class="hljs-number">100</span>];<br>    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-keyword">sizeof</span>(<span class="hljs-type">int</span>) &lt;&lt; <span class="hljs-built_in">endl</span>;  <span class="hljs-comment">// 4</span><br>    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-keyword">sizeof</span>(<span class="hljs-type">char</span>) &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-comment">// 1</span><br>    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-keyword">sizeof</span>(a) &lt;&lt; <span class="hljs-built_in">endl</span>;    <span class="hljs-comment">// 400</span><br>    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-keyword">sizeof</span>(b) &lt;&lt; <span class="hljs-built_in">endl</span>;    <span class="hljs-comment">// 100</span><br>    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-keyword">sizeof</span>(st) &lt;&lt; <span class="hljs-built_in">endl</span>;   <span class="hljs-comment">// 因为内存对齐,整个类的内存占用为 8 字节</span><br>}<br></code></pre></td></tr></tbody></table></figure>
+
               
             </div>
             <hr/>
