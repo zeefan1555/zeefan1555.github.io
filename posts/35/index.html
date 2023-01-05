@@ -23,14 +23,13 @@
 <meta property="og:site_name" content="一杯空气">
 <meta property="og:description" content="📝16.目标和(装满背包有多少种方法)::   1: 目标和 力扣题目链接 难度：中等 给定一个非负整数数组，a1, a2, …, an, 和一个目标数，S。现在你有两个符号&amp;nbsp;+&amp;nbsp;和&amp;nbsp;-。对于数组中的任意一个整数，你都可以从&amp;nbsp;+&amp;nbsp;或&amp;nbsp;-中选择一个符号添加在前面。 返回可以使最终数组和为目标数 S 的所有添加符号的方法数。 示例： 输入：">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202301041440226.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20210125120743274.jpg">
 <meta property="article:published_time" content="2022-07-20T09:39:00.000Z">
-<meta property="article:modified_time" content="2023-01-01T08:41:54.216Z">
+<meta property="article:modified_time" content="2023-01-04T06:42:31.887Z">
 <meta property="article:author" content="zeefan">
-<meta property="article:tag" content="疑问">
-<meta property="article:tag" content="card">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20210125120743274.jpg">
+<meta name="twitter:image" content="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202301041440226.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -226,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.8k 字
+          1.7k 字
         
       </span>
     
@@ -237,7 +236,7 @@
         
         
         
-          10 分钟
+          9 分钟
         
       </span>
     
@@ -288,7 +287,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年1月1日 下午
+                    本文最后更新于：2023年1月4日 下午
                   
                 
               </p>
@@ -319,9 +318,10 @@
 <li>保证返回的最终结果能被 32 位整数存下。</li>
 </ul>
 <h1 id="2-思路"><a class="markdownIt-Anchor" href="#2-思路"></a> 2: 思路</h1>
-<p>假设 <code>加法总和为x</code>， 👉🏻 <code>减法总和</code> <code>= sum - x。</code>目标和<code>=</code>加法总和<code>-</code>减法总和` 👉🏻 target = x - (sum - x)<br>
-👉🏻 x = (target + sum) / 2, 所需要得到 x 的数都是已知</p>
-<p>转化为: 装满 x 背包共有多少种方法</p>
+<blockquote>
+<p>[!note]  <a href="prodrafts://note/marker/?uuid=D9C4E534-4CE2-4E58-8565-1613BDDACD8E&amp;markerId=76EC8195-FB18-4335-9CC8-1B035E6A598C">✏️如何转化为背包</a><br>
+<img src="https://hexoblogzeefan.oss-cn-guangzhou.aliyuncs.com/img/202301041440226.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+</blockquote>
 <p><strong>特例判断👉🏻剪枝</strong></p>
 <ol>
 <li>假设加法和是非整数，即 (S + sum) / 2 除不尽，说明有余数，又因为加法和是整数，有余数不可能符合等号条件。所以：</li>
@@ -401,15 +401,6 @@ dp[j]要保证是0的初始值，才能正确的由dp[j - nums[i]]推导出来�
 
     </div>
   
-  
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/%E7%96%91%E9%97%AE/">#疑问</a>
-      
-        <a href="/tags/card/">#card</a>
-      
-    </div>
   
 </div>
 

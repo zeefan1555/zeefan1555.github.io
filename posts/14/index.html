@@ -16,49 +16,13 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="📝笔记 3::   1: 1、算法algorithm  （1）算法看不到容器，只能看到迭代器，通过迭代器去处理容器；根据迭代器的类型，判断怎么提供哪种最优的方式。 （2）Algorithm看不见容器，对其一无所知，所以，需要的信息都必须从迭代器中获得，因此迭代器必须可以回到算法的提问，才能搭配算法的所有操作； 1 迭代器的分类（category）  （1）array，vector，deque，都">
+    <meta name="description" content="📝笔记 3::   1: [[算法algorithm]]  2: [[仿函数functors]]  3: [[适配器adapter]]  4: &amp;nbsp;4、C++STL周边的知识点 4.1 一个万用的hash function  产生出的hash_code越乱越好，不要重复；  以类customer为例，以它为元素放在容器里，然后计算它的hash_code; 上图中形式2设计为一般函数，形式">
 <meta property="og:type" content="article">
 <meta property="og:title" content="笔记 3">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/14/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="📝笔记 3::   1: 1、算法algorithm  （1）算法看不到容器，只能看到迭代器，通过迭代器去处理容器；根据迭代器的类型，判断怎么提供哪种最优的方式。 （2）Algorithm看不见容器，对其一无所知，所以，需要的信息都必须从迭代器中获得，因此迭代器必须可以回到算法的提问，才能搭配算法的所有操作； 1 迭代器的分类（category）  （1）array，vector，deque，都">
+<meta property="og:description" content="📝笔记 3::   1: [[算法algorithm]]  2: [[仿函数functors]]  3: [[适配器adapter]]  4: &amp;nbsp;4、C++STL周边的知识点 4.1 一个万用的hash function  产生出的hash_code越乱越好，不要重复；  以类customer为例，以它为元素放在容器里，然后计算它的hash_code; 上图中形式2设计为一般函数，形式">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/e3bf8f0dd53e4c118737a0c86f03ebac.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/52d985ff49b9472dbb3c18699aa6d5fe.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/ba17ff64a6d448b8a20388dc1a559e9d.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/153b7369b85c42209318101b5410b4f9.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/6bba97662c9147598b1e73f8aa79c1d5.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/9eb367d36e0b442b960cf23035ef91e6.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/2e2556defbfa42e7aeebb5407dfbd6e3.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/33d7b37a11714d1883f9c117eda30f43.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/340df1d469014e3e9b903db16e414477.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/f21d9c07dc9b43268807562ab3340b20.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/62bf2ea4cd4f4935b7ecc85167391f0b.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/cebb4274780f4092b6d3aee8790b047d.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/9ae2fae945b148488e74bc8b776fa1a8.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/83f9f6d1e8f64fefbdbbad0d3ceb4f87.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/cd4c0d62132847b0afff6c70c1277c3e.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/8e1085a974f245b2934e04a7e56dda11.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/b6f21fd690e0483e9e6376c4789d0822.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/5562c0e32230409883d02d878f27097c.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/0547af28731446cc8d1b7c6ad025b523.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/c61a873359d74115802897c2ca1d2d74.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/183ee63e61414a2d87935bf28afb0abe.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/e801cf24c3bf446b9be42e2b7e5edda1.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/15bee50711554510a793cbe3ca37a097.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/86777fc9ec9541a8993c15f425766d03.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/c5baf1a1e16f43baaa6aadec831fa112.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/97be79bbcbed480383d46d7eea215be9.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_19,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/51abc08d982649deafa38797af0e8b89.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/2621541a99624448ac704d196c4b6e4b.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/e06015092c7e42e09540549ec93c67f0.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/f1104b85044b458dacb8e9ee912c1da4.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/7c1c1c070167442abde4e26b97d5ede7.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/d6fd84120b2946ab8da39b5d96b15dec.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/4ab3da3209374e04af15dcf67a969cba.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/35b93e61665c4b56895ac78293aecfdc.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/77c797d9d90a42cc9a91fbc94da7b3d6.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/05f0c80d89494e07ab0edb28e6d89906.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/50416fbcd5e742ff803a605bd91759d4.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/a0341383dcff47ee8ec1c044457d13b2.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/6dd5149b83aa42eda4538e027dd83ff8.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16">
@@ -72,10 +36,11 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/112dece6aaa448c5842c682afc04ddda.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/b80506539ac5434cacee9f547121780d.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16">
 <meta property="article:published_time" content="2022-12-31T09:18:00.000Z">
-<meta property="article:modified_time" content="2022-12-31T09:41:48.614Z">
+<meta property="article:modified_time" content="2023-01-04T01:02:17.203Z">
 <meta property="article:author" content="zeefan">
+<meta property="article:tag" content="📕">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/e3bf8f0dd53e4c118737a0c86f03ebac.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/50416fbcd5e742ff803a605bd91759d4.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -271,7 +236,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5.4k 字
+          1.2k 字
         
       </span>
     
@@ -282,7 +247,7 @@
         
         
         
-          27 分钟
+          7 分钟
         
       </span>
     
@@ -333,7 +298,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年12月31日 下午
+                    本文最后更新于：2023年1月4日 上午
                   
                 
               </p>
@@ -342,180 +307,46 @@
               
               <p>📝笔记 3::</p>
 <!-- basicblock-end -->
-<h1 id="1-1-算法algorithm"><a class="markdownIt-Anchor" href="#1-1-算法algorithm"></a> 1: 1、算法algorithm</h1>
-<p><img src="https://img-blog.csdnimg.cn/e3bf8f0dd53e4c118737a0c86f03ebac.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload alt=""><br>
-（1）算法看不到容器，只能看到迭代器，通过迭代器去处理容器；根据迭代器的类型，判断怎么提供哪种最优的方式。<br>
-（2）Algorithm看不见容器，对其一无所知，所以，需要的信息都必须从迭代器中获得，因此迭代器必须可以回到算法的提问，才能搭配算法的所有操作；<br>
-<strong>1 迭代器的分类（category）</strong><br>
-<img src="https://img-blog.csdnimg.cn/52d985ff49b9472dbb3c18699aa6d5fe.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload alt=""><br>
-（1）array，vector，deque，都是随机访问迭代器；（连续的）<br>
-（2）list，set,multiset,map,multimap，都是双向访问迭代器；（不连续），forward list是单向访问迭代器；<br>
-（3）unordered （非不定序的）容器判断是双向还是单向就根据篮子的链表的性质；<br>
-（4）为什么不用12345来表示5种迭代器类型，而用5种结构？<br>
-A、利用函数重载一条语句就可以对应到上方函数，简洁明了；<br>
-<img src="https://img-blog.csdnimg.cn/ba17ff64a6d448b8a20388dc1a559e9d.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload alt=""><br>
-（5）只有ostream_iterator的是output_iterator;<br>
-（6）利用标准库的typeid操作符，打印出系统定义的迭代器名称类型；<br>
-<img src="https://img-blog.csdnimg.cn/153b7369b85c42209318101b5410b4f9.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload alt=""><br>
-（7）编译器之后，会增加名称前缀；<br>
-<strong>1.2 istream_iterator的iterator_category</strong><br>
-<img src="https://img-blog.csdnimg.cn/6bba97662c9147598b1e73f8aa79c1d5.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload alt=""><br>
-（1）不同的实现但要有相同的接口；<br>
-（2）继承父类，但是父类只有typedef没有别的数据；为了少打几行typedef;<br>
-<strong>1.3 ostream_iterator</strong></p>
-<p><img src="https://img-blog.csdnimg.cn/9eb367d36e0b442b960cf23035ef91e6.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload alt=""></p>
-<p><strong>2 迭代器分类（category）对算法的影响<br>
-2.1 distance（）</strong><br>
-<img src="https://img-blog.csdnimg.cn/2e2556defbfa42e7aeebb5407dfbd6e3.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload alt=""><br>
-（1）算法需要知道迭代器的分类；<br>
-（2）distance函数是计算两个指针之间的距离，调用重载函数__distance，输入迭代器和随机访问器都不同处理；同时返回值是两迭代器距离类型的值，问萃取机iterator_traits中的5个之一difference_type是什么；<br>
-（3）cataegory()创建临时对象，作为第三参数进行函数重载调用；<br>
-（4）很多都采用，一个主函数调用分函数重载的形式；<br>
-<strong>2.2 advance（）</strong><br>
-<img src="https://img-blog.csdnimg.cn/33d7b37a11714d1883f9c117eda30f43.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload alt=""><br>
-（1）注意，__advance返回值是void，采用的引用方式，<br>
-（2）为什么不用12345来表示5种迭代器类型，而用5种结构？<br>
-B、可以充分利用类继承的方便；<br>
-<strong>2.3 copy（），原地址的头尾区间+目的地指针</strong><br>
-<img src="https://img-blog.csdnimg.cn/340df1d469014e3e9b903db16e414477.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload alt=""><br>
-（1）过程，首先如果是字符串，采用C字符串的拷贝memmove()简单快捷，否则进入第一个泛化，再次检查是否为指针类型，否则进入第二个泛化，检查是否为随机访问迭代器，执行循环搬运时会调用拷贝赋值，for的检查条件是n&lt;直接相减得到，如果是输入访问迭代器，搬运时for条件就是每次都要判断是否到last()效率较低，回过头看指针，判断是否重要，不重要执行memmove()，重要的话同随机访问一样；<br>
-（2）copy()设计精细以最大限度提高算法效率；<br>
-<strong>2.4 destory（），摧毁一个对象，调用析构函数</strong><br>
-<img src="https://img-blog.csdnimg.cn/f21d9c07dc9b43268807562ab3340b20.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload alt=""><br>
-<img src="https://img-blog.csdnimg.cn/62bf2ea4cd4f4935b7ecc85167391f0b.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload alt=""><br>
-<strong>算法的效率与迭代器的分类判断有很重要的关系！！！</strong><br>
-<strong>2.5 __unique_copy()，只copy独一无二的值</strong><br>
-<img src="https://img-blog.csdnimg.cn/cebb4274780f4092b6d3aee8790b047d.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload alt=""><br>
-（1）__下划线一般不是主函数，内部调用的子函数<br>
-（2）如果不对Outputiterator进行编写，就会到forwarditerator，中有读操作，因此有一个专门针对output_iterator,避免有read操作;<br>
-（3）算法对迭代器没有强制要求，语法没有这种限制功能，只有暗示；像sort需要randomiterator,distance()input就可以；<br>
-<img src="https://img-blog.csdnimg.cn/9ae2fae945b148488e74bc8b776fa1a8.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload alt=""><br>
-<strong>3 算法的源代码剖析（11个例子）<br>
-3.1 accumulate—累计</strong><br>
-<img src="https://img-blog.csdnimg.cn/83f9f6d1e8f64fefbdbbad0d3ceb4f87.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload alt=""><br>
-（1）accumulate有两个版本，增加第四个参数，对应不同的操作；<br>
-<strong>3.2 for_each()—指定范围内对元素做同一操作</strong><br>
-<img src="https://img-blog.csdnimg.cn/cd4c0d62132847b0afff6c70c1277c3e.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload alt=""><br>
-（1）右下角应用了for（）范围运算，在C++11新增的；<br>
-<strong>3.3 replace，replace_if，replace_copy</strong><br>
-<img src="https://img-blog.csdnimg.cn/8e1085a974f245b2934e04a7e56dda11.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload alt=""><br>
-（1）prodicate是模板参数，叫什么都可以，但是有暗示，predicate就是判断式返回真假</p>
-<p><strong>3.4 count，count_if</strong><br>
-<img src="https://img-blog.csdnimg.cn/b6f21fd690e0483e9e6376c4789d0822.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload alt=""><br>
-（1）左边是全局算法，右边是容器中有同名的成员函数；<br>
-<strong>3.5 find，find_if</strong><br>
-<img src="https://img-blog.csdnimg.cn/5562c0e32230409883d02d878f27097c.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload alt=""><br>
-（1）右边自带find的容器都有自己更高效的查找find方法；</p>
-<p><strong>3.6 sort()</strong><br>
-<img src="https://img-blog.csdnimg.cn/0547af28731446cc8d1b7c6ad025b523.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload alt=""><br>
-（1）rbegin(),rend()逆向排序；<br>
-（2）sort()要求随机访问迭代器，而List，forward_list不符合，有自己的成员函数，框起来的容器本身就是排序好的，不需要sort();</p>
-<p><img src="https://img-blog.csdnimg.cn/c61a873359d74115802897c2ca1d2d74.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload alt=""></p>
-<p><strong>3.7 binary_search—必须是排序好的容器</strong><br>
-<img src="https://img-blog.csdnimg.cn/183ee63e61414a2d87935bf28afb0abe.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload alt=""><br>
-（1）lower_bound帮我找到不破坏排序安插下去的最低位置；upper_bound为最高位置；</p>
-<p><strong>此处之后开始学的比较吃力，作为标记，以后可以再次温习</strong></p>
-<h1 id="2-2-仿函数functors"><a class="markdownIt-Anchor" href="#2-2-仿函数functors"></a> 2: 2、仿函数functors</h1>
-<p><strong>4.1 仿函数—只服务于算法，使用仿函数作为特有的参数指定特定操作<br>
-STL六大部件：容器；分配器；算法；迭代器；适配器；仿函数；</strong><br>
-（1）仿函数必须重载（）操作符;<br>
-<img src="https://img-blog.csdnimg.cn/e801cf24c3bf446b9be42e2b7e5edda1.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload alt=""><br>
-（2）仿函数只服务于算法；<br>
-（3）GC独有的一些仿函数；<br>
-<img src="https://img-blog.csdnimg.cn/15bee50711554510a793cbe3ca37a097.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload alt=""><br>
-（4）sort()函数，第三个参数就是仿函数，实现不同的功能；<br>
-<img src="https://img-blog.csdnimg.cn/86777fc9ec9541a8993c15f425766d03.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload alt=""><br>
-（5）标准库中仿函数继承的基类，binary_function和unary_function;如果自己写的仿函数没有继承基类，就没有融合到库中；<br>
-基类就是接收模板参数，并给模板参数赋一个简单名字，基类大小为0，实际是1，但是如果真的被继承时，大小就是0；<br>
-（6）仿函数可以被修改的条件就是继承合适的基类，用于回答问题；仿函数适配器要问问题，仿函数回答问题；<br>
-&nbsp;<img src="https://img-blog.csdnimg.cn/c5baf1a1e16f43baaa6aadec831fa112.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload alt=""><br>
-<strong>（7）仿函数就是一个class重载了()运算法，称为函数对象；是一个对象，但像一个函数；</strong></p>
-<h1 id="3-3-适配器adapter"><a class="markdownIt-Anchor" href="#3-3-适配器adapter"></a> 3: 3、适配器adapter</h1>
-<p><strong>5.1 多种适配器adapter(改造器)—换皮肤，小工程</strong><br>
-（1）修改既有的一个东西，可能是容器，函数，迭代器；浅蓝色的框框；<br>
-<img src="https://img-blog.csdnimg.cn/97be79bbcbed480383d46d7eea215be9.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_19,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload alt=""><br>
-（2）adapter是一个包装后的一个桥梁；使用原有的好东西，继承或者包含，这里都是包含；<br>
-（3）适配器与内含的东西也是通过提问题和回达问题；<br>
-（4）stack和queue都被称为容器适配器，它们都内含一个sequence,默认是一个deque;下图中是对已有函数的改名，也是一种改造；换成stack先进后出，queue先进先出的特性；</p>
-<p><img src="https://img-blog.csdnimg.cn/51abc08d982649deafa38797af0e8b89.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload alt=""></p>
-<p><strong>5.2 函数适配器:binder2nd</strong><br>
-<img src="https://img-blog.csdnimg.cn/2621541a99624448ac704d196c4b6e4b.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload alt=""><br>
-（1）适配器去修改一个仿函数，自己也要变成仿函数的形式；重载()操作符；<br>
-（2）适配器通过建立一个大类实现，但类的调用比较复杂，因此用一个辅助函数来包装大类；<br>
-（3）这个类的构造函数，会将仿函数的参数代入构造函数，形成自己的数据，然后开始()重载实现，这个过程需要知道仿函数的参数类型以及返回类型，也就是typename的三个提问，因此必须仿函数必须继承基类（包含3个typename）才能回答适配器的问题，被适配器改造；同样，适配器也是一个仿函数，也需要继承基类；<br>
-（4）仿函数可适配的条件就是继承基类（3个typename）;<br>
-（5）在提问中，不仅仅需要作用域解析，而且要加上typename以通过编译；<br>
-（6）其中在辅助函数中，利用形参自动推导在<code>binder2nd&lt;Operation&gt;</code>中的Operation判断类型，注意这里是建立大类的一个对象；开始调用真正的大类;<br>
-（7）真正调用大类重载()的地方在count_if()中，第三参数其实是大类的一个对象（仿函数），在pred(*first)此处进行()重载，是一个对象，行为像一个函数；<br>
-<strong>5.3 函数适配器：not1</strong><br>
-<img src="https://img-blog.csdnimg.cn/e06015092c7e42e09540549ec93c67f0.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload alt=""><br>
-<strong>5.4 新型适配器bind合并了bind1st,bind2st</strong><br>
-&nbsp;<img src="https://img-blog.csdnimg.cn/f1104b85044b458dacb8e9ee912c1da4.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload alt=""><br>
-（1）binder2nd是辅助函数，bind2nd是一个大类；</p>
-<p><strong>5.5 仿函数适配器bind</strong><br>
-<img src="https://img-blog.csdnimg.cn/7c1c1c070167442abde4e26b97d5ede7.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload alt=""><br>
-（1）函数对象function objects，就是一个重载了()的类，因为是一个对象，但行为像一个函数；<br>
-（2）bind可以绑定函数，函数对象，成员函数，数据成员；<br>
-（3）_1,_2就是占位符，当bind(my_divide,_2,_1)时，改造了顺序，（10,2）=0.2；<br>
-（4）<code>bind&lt;int&gt;(my\_divide,\_1,\_2)</code>这里绑定了一个模板参数，会改变return type,会返回int;<br>
-（5）MyPair ten_two {10,2}；创建对象并赋初值；<br>
-（6）自己推导返回类型复杂，就用auto代替；<br>
-（7）在绑定成员函数时，有一个参数，this,因此有一个_1;之后调用就传入对象，bound_memfn(ten_two);<br>
-（8）之后直接绑定ten_two，就不用在传参数；没有绑定，调用的时候就要传参数；<br>
-<strong>5.6 迭代器适配器reverse_iterator</strong><br>
-<img src="https://img-blog.csdnimg.cn/d6fd84120b2946ab8da39b5d96b15dec.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload alt=""><br>
-（1）reverse_iterator是一个迭代器适配器，所以它一定会包含一个迭代器就是正向迭代器；<br>
-（2）重点在于取值，<strong>对逆向取值就是对正向迭代器退一位取值；<br>
-5.7 迭代器适配器inserter</strong><br>
-<img src="https://img-blog.csdnimg.cn/4ab3da3209374e04af15dcf67a969cba.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload alt=""><br>
-（1）copy是不管目的端够不够的问题，所以这里提前预留了7个位置；<br>
-（2）inserter就不需要担心这个问题，就负责内存的问题；inserter(foo,it)就是利用了inserter插入迭代器适配器，前面advance(it,3)是将it前进三个位置，指向4；<br>
-（3）inserter是辅助函数，方便使用，实现大类中有准备data来放置传入的两个参数，<br>
-<strong>（4）重点在于=的重载，copy不动，通过=重载来改变行为；调用容器的insert操作；<br>
-5.8 X适配器：ostream_iterator</strong><br>
-<img src="https://img-blog.csdnimg.cn/35b93e61665c4b56895ac78293aecfdc.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload alt=""><br>
-（1）ostream_iterator和istream_iterator不属于容器函数迭代器，称X迭代器；<br>
-<strong>（2）copy的代码不变，通过不同的迭代器中不同的操作符重载来实现不同的功能；</strong><br>
-（3）delimiter就是分隔符的意思;（4）通过重载=将元素和分隔符丢到cout中；<br>
-<strong>5.9 X适配器：istream_iterator</strong><br>
-<img src="https://img-blog.csdnimg.cn/77c797d9d90a42cc9a91fbc94da7b3d6.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload alt=""><br>
-（1）重载前置<ins>操作符；<br>
-（2）创建一个对象eos，只要没有参数，就代表一个end-of-stream iterator;作为一个标记进行比对；当等于eos时，就表示结束了；<br>
-<img src="https://img-blog.csdnimg.cn/05f0c80d89494e07ab0edb28e6d89906.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload alt=""><br>
-**（1）注意，在创建对象的时候，构造函数就已经调用</ins>重载开始读取第一个数据了！；**</p>
+<h1 id="1-算法algorithm"><a class="markdownIt-Anchor" href="#1-算法algorithm"></a> 1: [[算法algorithm]]</h1>
+<h1 id="2-仿函数functors"><a class="markdownIt-Anchor" href="#2-仿函数functors"></a> 2: [[仿函数functors]]</h1>
+<h1 id="3-适配器adapter"><a class="markdownIt-Anchor" href="#3-适配器adapter"></a> 3: [[适配器adapter]]</h1>
 <h1 id="4-4-cstl周边的知识点"><a class="markdownIt-Anchor" href="#4-4-cstl周边的知识点"></a> 4: &nbsp;4、C++STL周边的知识点</h1>
-<p><strong>4.1 一个万用的hash function</strong><br>
-（1）产生出的hash_code越乱越好，不要重复；<br>
-<img src="https://img-blog.csdnimg.cn/50416fbcd5e742ff803a605bd91759d4.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload alt=""><br>
-（2）以类customer为例，以它为元素放在容器里，然后计算它的hash_code;<br>
-（3）上图中形式2设计为一般函数，形式1设计为成员函数；<br>
-（4）右侧调用函数时，形参为函数类型size_t(*)(const Customer&amp;),左侧会自动产生一个函数对象；<br>
-（5）原子拆分，再相加形成hash function太过天真；分的有fname,lname都是string基本类型有自己的hash function,以及num是Long类型；就是在用hash_function的特化版本；把各自的hash_code简单相加，这样会碰撞多，一个篮子的链表过长；<br>
-（6）调用库中的函数hash_val;</p>
+<p><strong>4.1 一个万用的hash function</strong></p>
+<ul>
+<li>产生出的hash_code越乱越好，不要重复；<br>
+<img src="https://img-blog.csdnimg.cn/50416fbcd5e742ff803a605bd91759d4.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload alt=""></li>
+<li>以类customer为例，以它为元素放在容器里，然后计算它的hash_code;</li>
+<li>上图中形式2设计为一般函数，形式1设计为成员函数；</li>
+<li>右侧调用函数时，形参为函数类型size_t(*)(const Customer&amp;),左侧会自动产生一个函数对象；</li>
+<li>原子拆分，再相加形成hash function太过天真；分的有fname,lname都是string基本类型有自己的hash function,以及num是Long类型；就是在用hash_function的特化版本；把各自的hash_code简单相加，这样会碰撞多，一个篮子的链表过长；</li>
+<li>调用库中的函数hash_val;</li>
+</ul>
 <p><strong>4.1.2 typename… Type代表任意数量任意类型参数</strong><br>
 <img src="https://img-blog.csdnimg.cn/a0341383dcff47ee8ec1c044457d13b2.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload alt=""><br>
-<strong>（1）template&lt;typename…Types&gt;新增，可以添加任意多个模板参数；variadic template;</strong><br>
-（2）1和2的区别在于第一个参数分别是size_t&amp;和const Type&amp;…;<br>
-（3）1,2,3是函数重载；用最泛化的版本分离参数个数，1分为seed和所有传入（例如3个）的参数，然后调用2，在2中调用自己hash_val（seed，args…）,分为seed，val,和另外2个参数，然后重复分解；过程中依次每次取出一个参数做seed的变化用；当只剩下seed和位移参数时，到3执行；<br>
-<strong>（4）将不定量的参数不断拆解；</strong><br>
-（5）0x9e3779b9的来由；黄金比例<br>
+<strong>（1）template&lt;typename…Types&gt;新增，可以添加任意多个模板参数；variadic template;</strong></p>
+<ul>
+<li>1和2的区别在于第一个参数分别是size_t&amp;和const Type&amp;…;</li>
+<li>1,2,3是函数重载；用最泛化的版本分离参数个数，1分为seed和所有传入（例如3个）的参数，然后调用2，在2中调用自己hash_val（seed，args…）,分为seed，val,和另外2个参数，然后重复分解；过程中依次每次取出一个参数做seed的变化用；当只剩下seed和位移参数时，到3执行；<br>
+<strong>（4）将不定量的参数不断拆解；</strong></li>
+<li>0x9e3779b9的来由；黄金比例<br>
 <img src="https://img-blog.csdnimg.cn/6dd5149b83aa42eda4538e027dd83ff8.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload alt=""><br>
 <strong>4.1.3 hash_function测试</strong><br>
 <img src="https://img-blog.csdnimg.cn/f26bd0d0d59d43a493a158b7185492a7.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload alt=""><br>
 &nbsp;<img src="https://img-blog.csdnimg.cn/a9ed20968a4049868318f09df8dd1b05.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload alt=""><br>
 <strong>4.1.4 新版本对基本类型都有hash_function</strong><br>
-&nbsp;<img src="https://img-blog.csdnimg.cn/c440a5b2a96f44aa93e1b2b7855499a3.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_16,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload alt=""><br>
-（1）模仿右侧标准库中对string的hash_function对自己的类也写一个<code>hash&lt;T&gt;</code><br>
+&nbsp;<img src="https://img-blog.csdnimg.cn/c440a5b2a96f44aa93e1b2b7855499a3.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_16,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload alt=""></li>
+<li>模仿右侧标准库中对string的hash_function对自己的类也写一个<code>hash&lt;T&gt;</code><br>
 <img src="https://img-blog.csdnimg.cn/f1576c37b24d40f28a2d03878c48f149.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload alt=""><br>
 <strong>4.2 Tuple用例----一堆东西的组合，标准库中的</strong><br>
-<img src="https://img-blog.csdnimg.cn/08ccb5bffbec4d569ef99c3bc045f86e.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload alt=""><br>
-（1）string是一个指针，为4字节在32位电脑上，<code>complex&lt;double&gt;</code>就是复数，大小16；<br>
-（2）<code>get&lt;0&gt;(t1)</code>表示取出t1的第一个元素；make_tuple是创建一个tuple对象并初始化；<br>
-（3）可以比大小，赋值；说明进行了重载；<br>
-（4）装任意数量，任意类型的数据；填入模板参数；<br>
-（5）tie(il,f1,s1)=t3;是将t3中的三个变量赋值到或者链接到il,f1,s1,;<br>
-<strong>（6）<code>tuple\_size&lt;TupleType&gt;</code>：：value（提问的方式），知道value的值；</strong><br>
-（7）tuple_element&lt;a,TupleType&gt;::type 也是提问的方式，typedef给T；</p>
+<img src="https://img-blog.csdnimg.cn/08ccb5bffbec4d569ef99c3bc045f86e.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload alt=""></li>
+<li>string是一个指针，为4字节在32位电脑上，<code>complex&lt;double&gt;</code>就是复数，大小16；</li>
+<li><code>get&lt;0&gt;(t1)</code>表示取出t1的第一个元素；make_tuple是创建一个tuple对象并初始化；</li>
+<li>可以比大小，赋值；说明进行了重载；</li>
+<li>装任意数量，任意类型的数据；填入模板参数；</li>
+<li>tie(il,f1,s1)=t3;是将t3中的三个变量赋值到或者链接到il,f1,s1,;<br>
+<strong>（6）<code>tuple\_size&lt;TupleType&gt;</code>：：value（提问的方式），知道value的值；</strong></li>
+<li>tuple_element&lt;a,TupleType&gt;::type 也是提问的方式，typedef给T；</li>
+</ul>
 <p><strong>4.8 测试函数</strong><br>
 <img src="https://img-blog.csdnimg.cn/eaa0c871ed8f4e08b286bc9e2487b6c3.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAcGxhaW5fcm9va2ll,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload alt=""><br>
 <strong>4.8.1 vector的copy ctor（深拷贝）</strong><br>
@@ -573,6 +404,13 @@ STL六大部件：容器；分配器；算法；迭代器；适配器；仿函�
 
     </div>
   
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%F0%9F%93%95/">#📕</a>
+      
+    </div>
   
 </div>
 

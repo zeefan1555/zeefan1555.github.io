@@ -16,15 +16,15 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="📝pragma::  1234#ifdef _MSC_VER#pragma warning(push)#pragma warning(disable : 4100) &#x2F;&#x2F; unused parameter#endif &#x2F;&#x2F; _MSC_VER 这是 C&#x2F;C++ 中的宏定义，它用于忽略编译器的警告。 在这个例子中，首先使用了 #ifdef 和 [[_MSC_VER]] 判断当前的编译器是否是 Mic">
+    <meta name="description" content="📝pragma::  1234#ifdef _MSC_VER#pragma warning(push)#pragma warning(disable : 4100) &#x2F;&#x2F; unused parameter#endif &#x2F;&#x2F; _MSC_VER 这是 C&#x2F;C++ 中的宏定义，它用于忽略编译器的警告。 在这个例子中，首先使用了 #ifdef 和 [[MSC_VER]] 判断当前的编译器是否是 Micr">
 <meta property="og:type" content="article">
 <meta property="og:title" content="pragma">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/156/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="📝pragma::  1234#ifdef _MSC_VER#pragma warning(push)#pragma warning(disable : 4100) &#x2F;&#x2F; unused parameter#endif &#x2F;&#x2F; _MSC_VER 这是 C&#x2F;C++ 中的宏定义，它用于忽略编译器的警告。 在这个例子中，首先使用了 #ifdef 和 [[_MSC_VER]] 判断当前的编译器是否是 Mic">
+<meta property="og:description" content="📝pragma::  1234#ifdef _MSC_VER#pragma warning(push)#pragma warning(disable : 4100) &#x2F;&#x2F; unused parameter#endif &#x2F;&#x2F; _MSC_VER 这是 C&#x2F;C++ 中的宏定义，它用于忽略编译器的警告。 在这个例子中，首先使用了 #ifdef 和 [[MSC_VER]] 判断当前的编译器是否是 Micr">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-01-02T08:34:00.000Z">
-<meta property="article:modified_time" content="2023-01-02T08:38:08.442Z">
+<meta property="article:modified_time" content="2023-01-04T01:02:22.329Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          539 字
+          538 字
         
       </span>
     
@@ -284,7 +284,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年1月2日 下午
+                    本文最后更新于：2023年1月4日 上午
                   
                 
               </p>
@@ -295,7 +295,7 @@
 <!-- basicblock-end -->
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">ifdef</span> _MSC_VER</span><br><span class="hljs-meta">#<span class="hljs-keyword">pragma</span> <span class="hljs-keyword">warning</span>(push)</span><br><span class="hljs-meta">#<span class="hljs-keyword">pragma</span> <span class="hljs-keyword">warning</span>(disable : 4100) <span class="hljs-comment">// unused parameter</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span> <span class="hljs-comment">// _MSC_VER</span></span><br></code></pre></td></tr></tbody></table></figure>
 <p>这是 C/C++ 中的宏定义，它用于忽略编译器的警告。</p>
-<p>在这个例子中，首先使用了 <code>#ifdef</code> 和 [[_MSC_VER]] 判断当前的编译器是否是 Microsoft Visual C++。<br>
+<p>在这个例子中，首先使用了 <code>#ifdef</code> 和 [[MSC_VER]] 判断当前的编译器是否是 Microsoft Visual C++。<br>
 如果是，则继续执行下面的代码。</p>
 <p>然后，使用了 <code>#pragma</code> warning 指令来控制编译器的警告。具体来说，使用了 <code>#pragma</code> warning(push) 来保存当前的警告状态，然后使用 <code>#pragma</code> warning(disable : 4100) 来禁止“未使用的参数”警告。最后使用了 <code>#pragma</code> warning(pop) 来恢复保存的警告状态。</p>
 <blockquote>
@@ -369,6 +369,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/posts/48593/" title="MSC_VER">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">MSC_VER</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">

@@ -16,15 +16,15 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="#🗺️  背包问题总览🗃️::   [!summary] 常见的背包问题有1、组合问题。2、True、False问题。3、最大最小问题。 以下题目整理来自大神CyC，github地址： github  我在大神整理的基础上，又做了细分的整理。分为三类。 1、组合问题： 377. 组合总和 Ⅳ 494. 目标和 518. 零钱兑换 II 2、True、False问题： 139. 单词拆分 416">
+    <meta name="description" content="#🗺️  背包问题总览🗃️::  ![[背包问题.excalidraw]]  1: 思考顺序  [!summary] 常见的背包问题有1、组合问题。2、True、False问题。3、最大最小问题。 以下题目整理来自大神CyC，github地址： github  我在大神整理的基础上，又做了细分的整理。分为三类。 1、组合问题： 377. 组合总和 Ⅳ 494. 目标和 518. 零钱兑换 II">
 <meta property="og:type" content="article">
 <meta property="og:title" content="背包问题总览🗺️">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/78/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="#🗺️  背包问题总览🗃️::   [!summary] 常见的背包问题有1、组合问题。2、True、False问题。3、最大最小问题。 以下题目整理来自大神CyC，github地址： github  我在大神整理的基础上，又做了细分的整理。分为三类。 1、组合问题： 377. 组合总和 Ⅳ 494. 目标和 518. 零钱兑换 II 2、True、False问题： 139. 单词拆分 416">
+<meta property="og:description" content="#🗺️  背包问题总览🗃️::  ![[背包问题.excalidraw]]  1: 思考顺序  [!summary] 常见的背包问题有1、组合问题。2、True、False问题。3、最大最小问题。 以下题目整理来自大神CyC，github地址： github  我在大神整理的基础上，又做了细分的整理。分为三类。 1、组合问题： 377. 组合总和 Ⅳ 494. 目标和 518. 零钱兑换 II">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-01-01T09:26:00.000Z">
-<meta property="article:modified_time" content="2023-01-01T16:03:28.293Z">
+<meta property="article:modified_time" content="2023-01-04T03:36:37.122Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="🗃️">
 <meta property="article:tag" content="🗺️">
@@ -224,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.6k 字
+          1.7k 字
         
       </span>
     
@@ -235,7 +235,7 @@
         
         
         
-          8 分钟
+          9 分钟
         
       </span>
     
@@ -286,7 +286,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年1月2日 凌晨
+                    本文最后更新于：2023年1月4日 中午
                   
                 
               </p>
@@ -295,6 +295,8 @@
               
               <p>#🗺️  背包问题总览🗃️::</p>
 <!-- basicblock-end -->
+<p>![[背包问题.excalidraw]]</p>
+<h1 id="1-思考顺序"><a class="markdownIt-Anchor" href="#1-思考顺序"></a> 1: 思考顺序</h1>
 <blockquote>
 <p>[!summary] <strong>常见的背包问题有1、组合问题。2、True、False问题。3、最大最小问题。</strong><br>
 以下题目整理来自大神CyC，github地址：<br>
@@ -311,7 +313,6 @@
 <strong>3、最大最小问题：</strong><br>
 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/ones-and-zeroes/description/">474. 一和零</a><br>
 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/coin-change/description/">322. 零钱兑换</a></p>
-<h1 id="1-思考顺序"><a class="markdownIt-Anchor" href="#1-思考顺序"></a> 1: 思考顺序</h1>
 <h2 id="11-当然拿到问题后需要做到以下几个步骤"><a class="markdownIt-Anchor" href="#11-当然拿到问题后需要做到以下几个步骤"></a> 1.1: 当然拿到问题后，需要做到以下几个步骤：</h2>
 <p>1.分析是否为背包问题。<br>
 2.是以上三种背包问题中的哪一种。<br>
@@ -332,8 +333,8 @@ nums放在外循环，target在内循环。且内循环正序。</p>
 <p>3.如果组合问题需考虑元素之间的顺序，<br>
 需将target放在外循环，将nums放在内循环。</p>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-function"><span class="hljs-keyword">for</span> i in <span class="hljs-title">range</span><span class="hljs-params">(<span class="hljs-number">1</span>, target+<span class="hljs-number">1</span>)</span>:</span><br><span class="hljs-function">    for num in nums:</span><br></code></pre></td></tr></tbody></table></figure>
-<h1 id="2-最大最小问题公式-装满背包-j-的最大最小价值-个数"><a class="markdownIt-Anchor" href="#2-最大最小问题公式-装满背包-j-的最大最小价值-个数"></a> 2: <strong>最大最小问题公式</strong>: 装满背包 j 的最大最小价值 || 个数</h1>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs C++">dp[j] = <span class="hljs-built_in">dmax</span>(dp[j], dp[j-num[i]]+value[i] || <span class="hljs-number">1</span>)<br>或者 <br>dp[j] = <span class="hljs-built_in">min</span>(dp[j], dp[j-num[i]]+ value[i] || <span class="hljs-number">1</span>)<br></code></pre></td></tr></tbody></table></figure>
+<h1 id="2-能否能装满背包或者最多装多少价值装满背包-j-的最大最小价值-个数"><a class="markdownIt-Anchor" href="#2-能否能装满背包或者最多装多少价值装满背包-j-的最大最小价值-个数"></a> 2: 能否能装满背包（或者最多装多少价值）装满背包 j 的最大最小价值 || 个数</h1>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs C++">dp[j] = <span class="hljs-built_in">max</span>(dp[j], dp[j-num[i]] + value[i] || <span class="hljs-number">1</span>)<br>或者 <br>dp[j] = <span class="hljs-built_in">min</span>(dp[j], dp[j-num[i]] + value[i] || <span class="hljs-number">1</span>)<br></code></pre></td></tr></tbody></table></figure>
 <h2 id="21-0-1-背包j能装最大多少的价值"><a class="markdownIt-Anchor" href="#21-0-1-背包j能装最大多少的价值"></a> 2.1: 0-1 背包j能装最大多少的价值</h2>
 <ul>
 <li>需要转换问题的
@@ -371,26 +372,44 @@ nums放在外循环，target在内循环。且内循环正序。</p>
 <li>[[23. 零钱兑换]]</li>
 <li>[[24. 完全平方数]]</li>
 </ul>
-<h1 id="3-装满背包有多-少种方法"><a class="markdownIt-Anchor" href="#3-装满背包有多-少种方法"></a> 3: : 装满背包有多 少种方法</h1>
+<h1 id="3-装满背包有多-少种方法"><a class="markdownIt-Anchor" href="#3-装满背包有多-少种方法"></a> 3: 装满背包有多 少种方法</h1>
 <p>[[装满背包有几种方法(🗃️)]]</p>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs C++">dp[j] += dp[j-num[i]]<br></code></pre></td></tr></tbody></table></figure>
 <h2 id="31-01背背包"><a class="markdownIt-Anchor" href="#31-01背背包"></a> 3.1: 01背背包</h2>
 <ul>
 <li>原理:  [[如何求装满背包有几种方法 – 递推公式]]</li>
-<li>[[16.目标和(装满背包有多少种方法)🗃️]] :</li>
+<li>[[16.目标和(装满背包有多少种方法)]] :</li>
 </ul>
 <h2 id="32-完全背包"><a class="markdownIt-Anchor" href="#32-完全背包"></a> 3.2: 完全背包</h2>
+<p>[[18.完全背包理论基础🗃️]]</p>
 <ul>
-<li>原理:  [[18.完全背包理论基础🗃️]]</li>
-<li>组合数
+<li>
+<p>如果求组合数就是外层for循环遍历物品，内层for遍历背包。</p>
+</li>
+<li>
+<p>如果求排列数就是外层for遍历背包，内层for循环遍历物品**。</p>
+</li>
+<li>
+<p>如果是求最小数, 两层 for 循环的先后顺序就无所谓了</p>
+</li>
+<li>
+<p>组合数</p>
 <ul>
 <li>[[19.零钱兑换II]]</li>
 </ul>
 </li>
-<li>排列数
+<li>
+<p>排列数</p>
 <ul>
 <li>[[21. 组合总和 Ⅳ]]</li>
 <li>[[22. 爬楼梯（进阶版）]]</li>
+</ul>
+</li>
+<li>
+<p>最小数</p>
+<ul>
+<li>[[23. 零钱兑换]]</li>
+<li>[[24. 完全平方数]]</li>
 </ul>
 </li>
 </ul>

@@ -16,24 +16,23 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="📝如何防止整数溢出::  [[21. 组合总和 Ⅳ]] 123456789101112131415161718class Solution {public:    int combinationSum4(vector&lt;int&gt;&amp; nums, int target) {        vector&lt;int&gt; dp (target+1, 0);        dp[0">
+    <meta name="description" content="1: 学习方法  只关注零散的技术点，没有建立起一套完整的知识框架，缺乏系统观，但是，系统观其实是至关重要的  Redis 长尾延迟例子：对 Redis 的线程模型做了分析，我发现，对于单线程的 Redis 而言，任何阻塞性操作都会导致长尾延迟的产生。接着，我又开始寻找可能导致阻塞的关键因素，一开始想到的是网络阻塞，但随着对 Redis 网络框架的理解，我知道 Redis 网络 IO 使用了 I">
 <meta property="og:type" content="article">
-<meta property="og:title" content="如何防止整数溢出">
+<meta property="og:title" content="一杯空气">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/90/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="📝如何防止整数溢出::  [[21. 组合总和 Ⅳ]] 123456789101112131415161718class Solution {public:    int combinationSum4(vector&lt;int&gt;&amp; nums, int target) {        vector&lt;int&gt; dp (target+1, 0);        dp[0">
+<meta property="og:description" content="1: 学习方法  只关注零散的技术点，没有建立起一套完整的知识框架，缺乏系统观，但是，系统观其实是至关重要的  Redis 长尾延迟例子：对 Redis 的线程模型做了分析，我发现，对于单线程的 Redis 而言，任何阻塞性操作都会导致长尾延迟的产生。接着，我又开始寻找可能导致阻塞的关键因素，一开始想到的是网络阻塞，但随着对 Redis 网络框架的理解，我知道 Redis 网络 IO 使用了 I">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-01-01T09:55:00.000Z">
-<meta property="article:modified_time" content="2023-01-01T09:57:25.869Z">
+<meta property="article:published_time" content="2022-11-21T04:26:14.720Z">
+<meta property="article:modified_time" content="2023-01-02T15:55:35.423Z">
 <meta property="article:author" content="zeefan">
-<meta property="article:tag" content="📙">
 <meta name="twitter:card" content="summary_large_image">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>如何防止整数溢出 - 一杯空气</title>
+  <title>一杯空气</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -200,7 +199,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="如何防止整数溢出"></span>
+            <span id="subtitle" data-typed-text=""></span>
           
         </div>
 
@@ -211,8 +210,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-01-01 17:55" pubdate>
-          2023年1月1日 下午
+        <time datetime="2022-11-21 12:26" pubdate>
+          2022年11月21日 中午
         </time>
       </span>
     
@@ -223,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.4k 字
+          2.9k 字
         
       </span>
     
@@ -234,7 +233,7 @@
         
         
         
-          8 分钟
+          15 分钟
         
       </span>
     
@@ -280,33 +279,96 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">如何防止整数溢出</h1>
+            <h1 style="display: none"></h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年1月1日 下午
+                    本文最后更新于：2023年1月2日 晚上
                   
                 
               </p>
             
             <div class="markdown-body">
               
-              <p>📝如何防止整数溢出::</p>
-<!-- basicblock-end -->
-<p>[[21. 组合总和 Ⅳ]]</p>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">combinationSum4</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums, <span class="hljs-type">int</span> target)</span> </span>{<br>        <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">dp</span> <span class="hljs-params">(target+<span class="hljs-number">1</span>, <span class="hljs-number">0</span>)</span></span>;<br>        dp[<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;<br><br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; j &lt;= target; j++){ <span class="hljs-comment">// 先背包</span><br>            <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; nums.<span class="hljs-built_in">size</span>(); i++){ <span class="hljs-comment">// 再物品</span><br>                <span class="hljs-keyword">if</span>(j &gt;= nums[i] &amp;&amp;  dp[j] &lt; INT_MAX - dp[j - nums[i]]){ <span class="hljs-comment">//❗️防止整数溢出</span><br>                    dp[j] += dp[j - nums[i]];<br>                }<br>            }<br>        }<br>        <span class="hljs-keyword">return</span> dp[target];<br><br>    }<br>};<br><br></code></pre></td></tr></tbody></table></figure>
-<p>如果没有 if 语句中的第二个限制条件, 就会造成整数溢出, 会有下边的报错信息</p>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs C++">Line <span class="hljs-number">10</span>: Char <span class="hljs-number">27</span>: runtime error: <span class="hljs-type">signed</span> integer overflow: <span class="hljs-number">2147483647</span> + <span class="hljs-number">1</span> cannot be represented in type <span class="hljs-string">'int'</span> (solution.cpp)<br>SUMMARY: UndefinedBehaviorSanitizer: undefined-behavior prog_joined.cpp:<span class="hljs-number">19</span>:<span class="hljs-number">27</span><br><br><br>最后执行的输入：<br>[<span class="hljs-number">10</span>,<span class="hljs-number">20</span>,<span class="hljs-number">30</span>,<span class="hljs-number">40</span>,<span class="hljs-number">50</span>,<span class="hljs-number">60</span>,<span class="hljs-number">70</span>,<span class="hljs-number">80</span>,<span class="hljs-number">90</span>,<span class="hljs-number">100</span>,<span class="hljs-number">110</span>,<span class="hljs-number">120</span>,<span class="hljs-number">130</span>,<span class="hljs-number">140</span>,<span class="hljs-number">150</span>,<span class="hljs-number">160</span>,<span class="hljs-number">170</span>,<span class="hljs-number">180</span>,<span class="hljs-number">190</span>,<span class="hljs-number">200</span>,<span class="hljs-number">210</span>,<span class="hljs-number">220</span>,<span class="hljs-number">230</span>,<span class="hljs-number">240</span>,<span class="hljs-number">250</span>,<span class="hljs-number">260</span>,<span class="hljs-number">270</span>,<span class="hljs-number">280</span>,<span class="hljs-number">290</span>,<span class="hljs-number">300</span>,<span class="hljs-number">310</span>,<span class="hljs-number">320</span>,<span class="hljs-number">330</span>,<span class="hljs-number">340</span>,<span class="hljs-number">350</span>,<span class="hljs-number">360</span>,<span class="hljs-number">370</span>,<span class="hljs-number">380</span>,<span class="hljs-number">390</span>,<span class="hljs-number">400</span>,<span class="hljs-number">410</span>,<span class="hljs-number">420</span>,<span class="hljs-number">430</span>,<span class="hljs-number">440</span>,<span class="hljs-number">450</span>,<span class="hljs-number">460</span>,<span class="hljs-number">470</span>,<span class="hljs-number">480</span>,<span class="hljs-number">490</span>,<span class="hljs-number">500</span>,<span class="hljs-number">510</span>,<span class="hljs-number">520</span>,<span class="hljs-number">530</span>,<span class="hljs-number">540</span>,<span class="hljs-number">550</span>,<span class="hljs-number">560</span>,<span class="hljs-number">570</span>,<span class="hljs-number">580</span>,<span class="hljs-number">590</span>,<span class="hljs-number">600</span>,<span class="hljs-number">610</span>,<span class="hljs-number">620</span>,<span class="hljs-number">630</span>,<span class="hljs-number">640</span>,<span class="hljs-number">650</span>,<span class="hljs-number">660</span>,<span class="hljs-number">670</span>,<span class="hljs-number">680</span>,<span class="hljs-number">690</span>,<span class="hljs-number">700</span>,<span class="hljs-number">710</span>,<span class="hljs-number">720</span>,<span class="hljs-number">730</span>,<span class="hljs-number">740</span>,<span class="hljs-number">750</span>,<span class="hljs-number">760</span>,<span class="hljs-number">770</span>,<span class="hljs-number">780</span>,<span class="hljs-number">790</span>,<span class="hljs-number">800</span>,<span class="hljs-number">810</span>,<span class="hljs-number">820</span>,<span class="hljs-number">830</span>,<span class="hljs-number">840</span>,<span class="hljs-number">850</span>,<span class="hljs-number">860</span>,<span class="hljs-number">870</span>,<span class="hljs-number">880</span>,<span class="hljs-number">890</span>,<span class="hljs-number">900</span>,<span class="hljs-number">910</span>,<span class="hljs-number">920</span>,<span class="hljs-number">930</span>,<span class="hljs-number">940</span>,<span class="hljs-number">950</span>,<span class="hljs-number">960</span>,<span class="hljs-number">970</span>,<span class="hljs-number">980</span>,<span class="hljs-number">990</span>,<span class="hljs-number">111</span>] <span class="hljs-number">999</span><br><br></code></pre></td></tr></tbody></table></figure>
-<p>在 C++ 中，整数类型有两种：有符号整数和无符号整数。有符号整数有正数、负数和 0，而无符号整数只有正数和 0。在进行数值运算时，如果有符号整数的值超出了它所能表示的范围，就会发生整数溢出。<br>
-例如，在 C++ 中，int 类型的最大值是 2147483647，如果再加上 1，就会发生溢出，导致程序出现错误。</p>
-<blockquote>
-<p>[!question] #📙<br>
-在上面的代码中，加入了一个限制条件：<code>dp[j] &lt; INT_MAX - dp[j - nums[i]]</code>。这个条件的作用是防止数组 dp 中的值溢出。</p>
-</blockquote>
-<p>在 C++ 中，int 类型的数据范围是 -2147483648 到 2147483647。如果一个 int 类型的数超过了这个范围，就会发生溢出，导致结果不正确。</p>
-<p>因此，在这里加入了一个限制条件，当 dp[j] 大于等于 INT_MAX 时，就不再执行 dp[j] += dp[j - nums[i]] 这一步，从而避免发生溢出的情况。</p>
-<p>INT_MAX 是一个常量，表示 int 类型的最大值。</p>
+              <h1 id="1-学习方法"><a class="markdownIt-Anchor" href="#1-学习方法"></a> 1: 学习方法</h1>
+<ul>
+<li><strong>只关注零散的技术点，没有建立起一套完整的知识框架，缺乏系统观，但是，系统观其实是至关重要的</strong>
+<ul>
+<li>Redis 长尾延迟例子：对 Redis 的线程模型做了分析，我发现，对于单线程的 Redis 而言，任何阻塞性操作都会导致长尾延迟的产生。接着，我又开始寻找可能导致阻塞的关键因素，一开始想到的是网络阻塞，但随着对 Redis 网络框架的理解，我知道 Redis 网络 IO 使用了 IO 复用机制，并不会阻塞在单个客户端上；再后来，我又把目光转向了键值对数据结构、持久化机制下的 fork 调用、主从库同步时的AOF 重写，以及缓冲区溢出等多个方面</li>
+</ul>
+</li>
+<li><strong>在应用维度上，按照两种方式学习: “应用场景驱动”和“典型案例驱动”</strong>，一个是“面”的梳理，一个是“点”的掌握。
+<ul>
+<li>重点解读一些对 Redis的“三高”特性影响较大的使用案例，例如，多家大厂在万亿级访问量和万亿级数据量的情况下对 Redis 的深度优化</li>
+</ul>
+</li>
+<li>在学习和使用的过程中，可以根据自己的方式，完善问题画像图，把自己实践或掌握到的新知识点，按照“问题 --&gt; 主线 --&gt; 技术点”的方式梳理出来，放到这张图上。这样一来，积累越来越多，画像也会越来越丰富</li>
+</ul>
+<h1 id="2-专业是机械工程为什么想要从事软件开发没有考虑机械相关的岗位吗"><a class="markdownIt-Anchor" href="#2-专业是机械工程为什么想要从事软件开发没有考虑机械相关的岗位吗"></a> 2: 专业是机械工程，为什么想要从事软件开发，没有考虑机械相关的岗位吗？</h1>
+<p>对算法的落地更感兴趣，并且本身在项目当中也是负责实现的，对软件开发部分会更加熟悉</p>
+<h1 id="3-c使用了多久从什么时候开始学习的"><a class="markdownIt-Anchor" href="#3-c使用了多久从什么时候开始学习的"></a> 3: C++使用了多久，从什么时候开始学习的？</h1>
+<p>本科上过编程语言和数据结构的课，但是在项目中使用是从研一开始的</p>
+<h1 id="4-个人优点-最能概括你的三个词"><a class="markdownIt-Anchor" href="#4-个人优点-最能概括你的三个词"></a> 4: 个人优点、最能概括你的三个词？</h1>
+<ul>
+<li>抗压能力较好，做事坚持——考研</li>
+<li>自驱能力强——学习</li>
+<li>沟通能力也不错</li>
+<li>适应能力强</li>
+</ul>
+<h1 id="5-缺点"><a class="markdownIt-Anchor" href="#5-缺点"></a> 5: 缺点</h1>
+<ul>
+<li>不善拒绝，耗费精力较多</li>
+</ul>
+<h1 id="6-他人对你的评价"><a class="markdownIt-Anchor" href="#6-他人对你的评价"></a> 6: 他人对你的评价</h1>
+<ul>
+<li>自驱能力强，朋友们都很佩服我肯下苦功</li>
+<li>沟通能力好</li>
+<li>负责任</li>
+<li>一个动手能力强，做事有始有终的人。
+<ul>
+<li>其实很多事情我喜欢自己去验证答案，所以我很愿意亲自去动手做自己想做的事情，一旦做了，我也会把它做到最好。我认为在做每一件事情的过程中我可以收获很多</li>
+</ul>
+</li>
+<li>我是一个比较随和的人，很容易相处，也很值得大家信赖。实际上我确实是一个这样的人，我不希望与人发生矛盾，也不会斤斤计较。对于周围的人我都会跟他们有好相处，因为我觉得相识就是一种缘分，没有必要互相猜忌和防范。</li>
+</ul>
+<h1 id="7-失败的经历"><a class="markdownIt-Anchor" href="#7-失败的经历"></a> 7: 失败的经历</h1>
+<p>保研失败，个别科目没发挥好，失之交臂，没有停滞，大三早早就开始准备考研</p>
+<h1 id="8-最有成就的经历"><a class="markdownIt-Anchor" href="#8-最有成就的经历"></a> 8: 最有成就的经历</h1>
+<p>考研</p>
+<h1 id="9-薪资问题"><a class="markdownIt-Anchor" href="#9-薪资问题"></a> 9: 薪资问题</h1>
+<p>“你好，HR小姐姐，我还真没考虑过薪资的问题，因为按照我的认识和理解，我认为自己的第一份工作是想学到东西的，因此我更看重公司的工作氛围，特别是技术氛围这一块，我很希望自己能在贵公司学到一些新技术或者一些能够让自己有所成长的东西，我是一个很喜欢技术的人，能够学到让我在学校里学不到的东西是我最看重的，所以薪资这块我确实不怎么在意，差不多就行。 如果您需要一个比较具体的数值的话，我也确实报不出来，我只是觉得自己的水平应该还不至于很差，所以只要自己的薪资能够达到贵公司这次招收的应届生的薪资范围的中等水平就好，如果是垫底的水平我可能不会接受，因为我对自己的技术水平有信心，也相信自己会比绝大多数同批次进入公司的同学表现要好，不管是工作产出上还是与同事相处上，我都对自己很有信心，所以薪资这块，您给个中等水平的offer就好。”</p>
+<p>我觉得职位和薪酬都是你的到达那个水平，公司自然会提供给你的。鹅厂有完善的职位薪酬体系，并且对员工的考核也是全方位的，我相信在职的各位前辈必然有他的过人之处，我觉得我企业是能提供我公平完善的考核及晋升机制的。并且我觉得，在第一份工作的选择中，我们更应该考虑的是如何扎根在这里，成长起来，承担自己的责任，并且为企业获取效益，从而让自己更加有影响力。</p>
+<h1 id="10-你最看重一个公司哪三个点"><a class="markdownIt-Anchor" href="#10-你最看重一个公司哪三个点"></a> 10: 你最看重一个公司哪三个点</h1>
+<p>第一看公司的规模、技术积累以及未来发展趋势。</p>
+<p>第二看公司的文化和氛围，给员工的工资水平待遇，再好的公司没有这一点也是枉然。</p>
+<p>第三看个人在这个公司的晋升和发展 这三点我认为是比较重要的</p>
+<h1 id="11-3~5年内你有什么职业规划嘛"><a class="markdownIt-Anchor" href="#11-3~5年内你有什么职业规划嘛"></a> 11: 3~5年内，你有什么职业规划嘛？</h1>
+<p>作为应届生加入公司，我相信一定有许多东西需要去进一步的学习，希望能在这个大平台，能够相周围优秀的同事们学习，学习公司的文化，通过追赶他们，让自己成为一个更加职业化，专业化的人，我觉得这是一个难得的机会；3~5年内，我的目标是在工作方面超额完成，让自己在工作领域有所建树；在行业方面，希望自己以后能成为领域行家，根据公司脉络发展进步，能够让自己与公司共同进步，实现双赢。</p>
+<p>一定要围绕技术这块来规划，根据你的岗位，一年 技术达到什么程度，三年在某个技术领域有深入研究，五年成为技术专家之类的</p>
+<h1 id="12-你对我们公司了解多少"><a class="markdownIt-Anchor" href="#12-你对我们公司了解多少"></a> 12: 你对我们公司了解多少？</h1>
+<p>通过简单了解。知道咱们公司的主要产品有XXXX，咱们现有媒介平台是通过XXX，渠道合作方面包括XXXX</p>
+<h1 id="13-对你面试的岗位的理解"><a class="markdownIt-Anchor" href="#13-对你面试的岗位的理解"></a> 13: 对你面试的岗位的理解</h1>
+<p>自己对着jd和自己的理解，来形成的一套说辞，我一般会分点来进行递增的理解介绍，比如测试开发，就会从测试、再到测试开发来介绍</p>
+<p>首先我选择投递岗位是软件工程师（C/C<ins>方向），这主要是因为我个人认为自己具有较好的一个C</ins>开发编程基础，结合我简历上的三个项目对软件开发的整体流程都相对比较熟悉，理解操作系统，QT界面设计这块都具有一定的理解，而且本身对算法的落地更感兴趣，并且本身在项目当中也是负责实现的，对软件开发部分会更加熟悉</p>
+<h1 id="14-你觉得在团队中最重要的几个点是什么呢"><a class="markdownIt-Anchor" href="#14-你觉得在团队中最重要的几个点是什么呢"></a> 14: 你觉得在团队中最重要的几个点是什么呢？</h1>
+<p>执行规划+确认计划+定期跟进沟通进度</p>
+<h1 id="15-可以来实习吗"><a class="markdownIt-Anchor" href="#15-可以来实习吗"></a> 15: 可以来实习吗？</h1>
+<p>如果是签了三方再去实习，现在的导师是不允许去实习的，但是今年年末之后，如果论文和三方都已经签订了，我也拿到了公司的意向书和完成的三方协议，我可以拿着这个和导师说明情况。我也很希望可以提前进入公司提前适应节奏和学习新知识。</p>
+<h1 id="16-你对加班的看法"><a class="markdownIt-Anchor" href="#16-你对加班的看法"></a> 16: 你对加班的看法</h1>
+<p>首先我前些年因为是应届生进入公司，我需要更多的时间来进行学习和完成社会上角色的转换，我觉得公司里也有很多技术需要我去学习。在之后我觉得工作时间是和我的职责和项目进度来保证的，我会尽最大的努力在规定时间内完成工作任务，如果是未完成，或者是紧急工作，我也会适应公司的节奏和加班的强度。</p>
+<h1 id="17-你在团队中担任什么样的角色"><a class="markdownIt-Anchor" href="#17-你在团队中担任什么样的角色"></a> 17: 你在团队中担任什么样的角色？</h1>
+<p>我一般会回答执行者、沟通者、领导者，这三个选一个结合具体的例子来进行解释</p>
+<h1 id="18-如果团队中有消极怠工的成员你会怎么办"><a class="markdownIt-Anchor" href="#18-如果团队中有消极怠工的成员你会怎么办"></a> 18: 如果团队中有消极怠工的成员你会怎么办？</h1>
+<p>个人是分程度和沟通程度来讲。</p>
+<p>首先进行谈心和强调重要性，提高积极度。。。。一步一步延伸，如果还是拒绝合作和消极怠工，那就上级反应情况</p>
+<h1 id="19-实际过程遇到的困难比想象的大怎么解决"><a class="markdownIt-Anchor" href="#19-实际过程遇到的困难比想象的大怎么解决"></a> 19: 实际过程遇到的困难比想象的大，怎么解决</h1>
+<p>这个…及时向领导反映,说明其真实情况,如果领导说可以延长那你把大概完成时间向领导汇报,但领导说不能延长时间,那你就请求领导增加人手,确保在要求时间内完成</p>
+<h1 id="20-如果公司录用你你将怎样开展工作"><a class="markdownIt-Anchor" href="#20-如果公司录用你你将怎样开展工作"></a> 20: 如果公司录用你，你将怎样开展工作？</h1>
+<p>“首先听取领导的指示和要求，然后就有关情况进行了解和熟悉，接下来制定一份近期的工作计划并报领导批准，最后根据计划开展工作。</p>
+<h1 id="21-你还有什么问题要问吗"><a class="markdownIt-Anchor" href="#21-你还有什么问题要问吗"></a> 21: 你还有什么问题要问吗？</h1>
+<p>关于岗位的问题，关于公司的产品问题，关于公司的项目问题</p>
+<p>具体的业务方向之前和面试官以及HR都已经联系过了，那现在还蛮想了解一下我们部门对新人的一个培养制度以及您认为应届生进入实际工作场景中最需要培养什么能力呢，有什么建议吗？</p>
 
               
             </div>
@@ -329,20 +391,13 @@
   
     <span>></span>
     
-  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" class="category-chain-item">数据结构与算法</a>
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/%E9%9D%A2%E7%BB%8F/" class="category-chain-item">面经</a>
   
   
     <span>></span>
     
-  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95/" class="category-chain-item">代码随想录</a>
+  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/%E9%9D%A2%E7%BB%8F/Lin/" class="category-chain-item">Lin</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBcode/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" class="category-chain-item">动态规划</a>
-  
-  
-
   
 
   
@@ -357,13 +412,6 @@
     </div>
   
   
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/%F0%9F%93%99/">#📙</a>
-      
-    </div>
-  
 </div>
 
 
@@ -374,9 +422,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/93/" title="22. 爬楼梯（进阶版）">
+                      <a href="/posts/94/" title="">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">22. 爬楼梯（进阶版）</span>
+                        <span class="hidden-mobile"></span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -384,8 +432,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/78/" title="背包问题总览🗺️">
-                        <span class="hidden-mobile">背包问题总览🗺️</span>
+                      <a href="/posts/87/" title="面经整理的副本">
+                        <span class="hidden-mobile">面经整理的副本</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

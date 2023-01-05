@@ -24,7 +24,7 @@
 <meta property="og:description" content="📝基础语法-81-100目录::   1: [[81、知道C++中的组合吗？它与继承相比有什么优缺点吗？]]  2: [[82、函数指针？]]  3: [[83、说一说你理解的内存对齐以及原因]]  4: [[84、结构体变量比较是否相等]]  5: [[85、函数调用过程栈的变化，返回值和参数变量哪个先入栈？]]  6: [[86、define、const、typedef、inline的使用方">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-12-19T10:15:00.000Z">
-<meta property="article:modified_time" content="2023-01-01T17:31:52.659Z">
+<meta property="article:modified_time" content="2023-01-02T13:48:48.028Z">
 <meta property="article:author" content="zeefan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.9k 字
+          595 字
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          10 分钟
+          3 分钟
         
       </span>
     
@@ -284,7 +284,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年1月2日 凌晨
+                    本文最后更新于：2023年1月2日 晚上
                   
                 
               </p>
@@ -309,22 +309,10 @@
 <h1 id="14-94-全局变量和static变量的区别"><a class="markdownIt-Anchor" href="#14-94-全局变量和static变量的区别"></a> 14: [[94、全局变量和static变量的区别]]</h1>
 <h1 id="15-95-静态成员与普通成员的区别是什么"><a class="markdownIt-Anchor" href="#15-95-静态成员与普通成员的区别是什么"></a> 15: [[95、静态成员与普通成员的区别是什么？]]</h1>
 <h1 id="16-96-说一下你理解的-ifdef-endif代表着什么"><a class="markdownIt-Anchor" href="#16-96-说一下你理解的-ifdef-endif代表着什么"></a> 16: [[96、说一下你理解的 ifdef endif代表着什么？]]</h1>
-<h1 id="17-97-隐式转换如何消除隐式转换"><a class="markdownIt-Anchor" href="#17-97-隐式转换如何消除隐式转换"></a> 17: 97、隐式转换，如何消除隐式转换？</h1>
-<p>1、C++的基本类型中并非完全的对立，部分数据类型之间是可以进行隐式转换的。所谓隐式转换，是指不需要用户干预，编译器私下进行的类型转换行为。很多时候用户可能都不知道进行了哪些转换</p>
-<p>2、C<ins>面向对象的多态特性，就是通过父类的类型实现对子类的封装。通过隐式转换，你可以直接将一个子类的对象使用父类的类型进行返回。在比如，数值和布尔类型的转换，整数和浮点数的转换等。某些方面来说，隐式转换给C</ins>程序开发者带来了不小的便捷。C++是一门强类型语言，类型的检查是非常严格的。</p>
-<p>3、基本数据类型基本数据类型的转换以取值范围的作为转换基础（保证精度不丢失）。隐式转换发生在从小-&gt;大的转换中。比如从char转换为int。从int-&gt;long。自定义对象子类对象可以隐式的转换为父类对象。</p>
-<p>4、 C++中提供了explicit关键字，在构造函数声明的时候加上explicit关键字，能够禁止隐式转换。</p>
-<p>5、如果构造函数只接受一个参数，则它实际上定义了转换为此类类型的隐式转换机制。可以通过将构造函数声明为explicit加以制止隐式类型转换，关键字explicit只对一个实参的构造函数有效，需要多个实参的构造函数不能用于执行隐式转换，所以无需将这些构造函数指定为explicit。</p>
-<h1 id="18-98-c如何处理多个异常的"><a class="markdownIt-Anchor" href="#18-98-c如何处理多个异常的"></a> 18: 98、C++如何处理多个异常的？</h1>
-<ul>
-<li>C<ins>中的异常情况： 语法错误（编译错误）：比如变量未定义、括号不匹配、关键字拼写错误等等编译器在编译时能发现的错误，这类错误可以及时被编译器发现，而且可以及时知道出错的位置及原因，方便改正。运行时错误：比如数组下标越界、系统内存不足等等。这类错误不易被程序员发现，它能通过编译且能进入运行，但运行时会出错，导致程序崩溃。为了有效处理程序运行时错误，C</ins>中引入异常处理机制来解决此问题。</li>
-<li>C<ins>异常处理机制： 异常处理基本思想：执行一个函数的过程中发现异常，可以不用在本函数内立即进行处理，而是抛出该异常，让函数的调用者直接或间接处理这个问题。 C</ins>异常处理机制由3个模块组成：try(检查)、throw(抛出)、catch(捕获) 抛出异常的语句格式为：throw 表达式；如果try块中程序段发现了异常则抛出异常。</li>
-</ul>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">try</span>  {  可能抛出异常的语句；（检查） <span class="hljs-keyword">try</span> <br>{ <br>可能抛出异常的语句；（检查） <br>} <br><span class="hljs-keyword">catch</span>（类型名[形参名]）<span class="hljs-comment">//捕获特定类型的异常 </span><br>{ <br><span class="hljs-comment">//处理1； </span><br>} <br><span class="hljs-keyword">catch</span>（类型名[形参名]）<span class="hljs-comment">//捕获特定类型的异常 </span><br>{ <br><span class="hljs-comment">//处理2； </span><br>} <br><span class="hljs-keyword">catch</span>（…）<span class="hljs-comment">//捕获所有类型的异常 </span><br>{ <br>}<br></code></pre></td></tr></tbody></table></figure>
-<h1 id="19-99-如何在不使用额外空间的情况下交换两个数你有几种方法"><a class="markdownIt-Anchor" href="#19-99-如何在不使用额外空间的情况下交换两个数你有几种方法"></a> 19: 99、如何在不使用额外空间的情况下，交换两个数？你有几种方法</h1>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-number">1</span>)  算术<br><br>x = x + y;<br> y = x - y;<br><br>x = x - y;<span class="hljs-number">2</span>)  异或<br><br>x = x^y;<span class="hljs-comment">// 只能对int,char..</span><br> y = x^y;<br> x = x^y;<br> x ^= y ^= x;<br></code></pre></td></tr></tbody></table></figure>
-<h1 id="20-100-你知道strcpy和memcpy的区别是什么吗"><a class="markdownIt-Anchor" href="#20-100-你知道strcpy和memcpy的区别是什么吗"></a> 20: 100、你知道strcpy和memcpy的区别是什么吗？</h1>
-<p>1、复制的内容不同。strcpy只能复制字符串，而memcpy可以复制任意内容，例如字符数组、整型、结构体、类等。 2、复制的方法不同。strcpy不需要指定长度，它遇到被复制字符的串结束符"\0"才结束，所以容易溢出。memcpy则是根据其第3个参数决定复制的长度。 3、用途不同。通常在复制字符串时用strcpy，而需要复制其他类型数据时则一般用memcpy</p>
+<h1 id="17-97-隐式转换如何消除隐式转换"><a class="markdownIt-Anchor" href="#17-97-隐式转换如何消除隐式转换"></a> 17: [[97、隐式转换，如何消除隐式转换？]]</h1>
+<h1 id="18-98-c如何处理多个异常的"><a class="markdownIt-Anchor" href="#18-98-c如何处理多个异常的"></a> 18: [[98、C++如何处理多个异常的？]]</h1>
+<h1 id="19-99-如何在不使用额外空间的情况下交换两个数你有几种方法"><a class="markdownIt-Anchor" href="#19-99-如何在不使用额外空间的情况下交换两个数你有几种方法"></a> 19: [[99、如何在不使用额外空间的情况下，交换两个数？你有几种方法]]</h1>
+<h1 id="20-100-你知道strcpy和memcpy的区别是什么吗"><a class="markdownIt-Anchor" href="#20-100-你知道strcpy和memcpy的区别是什么吗"></a> 20: [[100、你知道strcpy和memcpy的区别是什么吗？]]</h1>
 
               
             </div>
