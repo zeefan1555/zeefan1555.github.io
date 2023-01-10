@@ -16,17 +16,17 @@
   <meta name="author" content="zeefan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="📝deque(🗃)::   1: 简介 [[深度探索deque容器🗃️]]  2: 简介 vector是单向开口（尾部）的连续线性空间，deque则是一种双向开口的连续线性空间， 虽然vector也可以在头尾进行元素操作，但是其头部操作的效率十分低下（主要是涉及到整体的移动） ![[deque 原理图.excalidraw]] deque和vector的区别 一个是deque运行在常数时间内">
+    <meta name="description" content="📝deque(🗃)::   1: 底层实现 [[深度探索deque容器]]  2: 简介 vector是单向开口（尾部）的连续线性空间，deque则是一种双向开口的连续线性空间， 虽然vector也可以在头尾进行元素操作，但是其头部操作的效率十分低下（主要是涉及到整体的移动） ![[deque 原理图.excalidraw]] deque和vector的区别 一个是deque运行在常数时间内对">
 <meta property="og:type" content="article">
 <meta property="og:title" content="deque(🗃)">
 <meta property="og:url" content="https://zeefan1555.github.io/posts/25249/index.html">
 <meta property="og:site_name" content="一杯空气">
-<meta property="og:description" content="📝deque(🗃)::   1: 简介 [[深度探索deque容器🗃️]]  2: 简介 vector是单向开口（尾部）的连续线性空间，deque则是一种双向开口的连续线性空间， 虽然vector也可以在头尾进行元素操作，但是其头部操作的效率十分低下（主要是涉及到整体的移动） ![[deque 原理图.excalidraw]] deque和vector的区别 一个是deque运行在常数时间内">
+<meta property="og:description" content="📝deque(🗃)::   1: 底层实现 [[深度探索deque容器]]  2: 简介 vector是单向开口（尾部）的连续线性空间，deque则是一种双向开口的连续线性空间， 虽然vector也可以在头尾进行元素操作，但是其头部操作的效率十分低下（主要是涉及到整体的移动） ![[deque 原理图.excalidraw]] deque和vector的区别 一个是deque运行在常数时间内对">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://axiu-image-bed.oss-cn-shanghai.aliyuncs.com/img/202205220021322.png">
 <meta property="og:image" content="https://axiu-image-bed.oss-cn-shanghai.aliyuncs.com/img/202205220021453.png">
 <meta property="article:published_time" content="2022-12-13T08:59:00.000Z">
-<meta property="article:modified_time" content="2022-12-31T09:32:00.888Z">
+<meta property="article:modified_time" content="2023-01-10T00:29:38.867Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="📕">
 <meta name="twitter:card" content="summary_large_image">
@@ -288,7 +288,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年12月31日 下午
+                    本文最后更新于：2023年1月10日 早上
                   
                 
               </p>
@@ -297,8 +297,8 @@
               
               <p>📝deque(🗃)::</p>
 <!-- basicblock-end -->
-<h1 id="1-简介"><a class="markdownIt-Anchor" href="#1-简介"></a> 1: 简介</h1>
-<p>[[深度探索deque容器🗃️]]</p>
+<h1 id="1-底层实现"><a class="markdownIt-Anchor" href="#1-底层实现"></a> 1: 底层实现</h1>
+<p>[[深度探索deque容器]]</p>
 <h1 id="2-简介"><a class="markdownIt-Anchor" href="#2-简介"></a> 2: 简介</h1>
 <p>vector是单向开口（尾部）的连续线性空间，deque则是一种双向开口的连续线性空间，<br>
 虽然vector也可以在头尾进行元素操作，但是其头部操作的效率十分低下（主要是涉及到整体的移动）</p>

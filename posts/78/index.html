@@ -24,7 +24,7 @@
 <meta property="og:description" content="#🗺️  背包问题总览🗃️::  ![[背包问题.excalidraw]]  1: 思考顺序  [!summary] 常见的背包问题有1、组合问题。2、True、False问题。3、最大最小问题。 以下题目整理来自大神CyC，github地址： github  我在大神整理的基础上，又做了细分的整理。分为三类。 1、组合问题： 377. 组合总和 Ⅳ 494. 目标和 518. 零钱兑换 II">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-01-01T09:26:00.000Z">
-<meta property="article:modified_time" content="2023-01-04T03:36:37.122Z">
+<meta property="article:modified_time" content="2023-01-05T13:44:20.330Z">
 <meta property="article:author" content="zeefan">
 <meta property="article:tag" content="🗃️">
 <meta property="article:tag" content="🗺️">
@@ -286,7 +286,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年1月4日 中午
+                    本文最后更新于：2023年1月5日 晚上
                   
                 
               </p>
@@ -337,15 +337,20 @@ nums放在外循环，target在内循环。且内循环正序。</p>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs C++">dp[j] = <span class="hljs-built_in">max</span>(dp[j], dp[j-num[i]] + value[i] || <span class="hljs-number">1</span>)<br>或者 <br>dp[j] = <span class="hljs-built_in">min</span>(dp[j], dp[j-num[i]] + value[i] || <span class="hljs-number">1</span>)<br></code></pre></td></tr></tbody></table></figure>
 <h2 id="21-0-1-背包j能装最大多少的价值"><a class="markdownIt-Anchor" href="#21-0-1-背包j能装最大多少的价值"></a> 2.1: 0-1 背包j能装最大多少的价值</h2>
 <ul>
-<li>需要转换问题的
+<li>
+<p>需要转换问题的</p>
 <ul>
 <li>[[13.分割等和子集]] : 能不能恰好装满 sum / 2的背包</li>
 <li>[[14.最后一块石头的重量 II]] : sum / 2 背包下,  能装多少装多少</li>
 </ul>
 </li>
+<li></li>
+</ul>
+<h2 id="22-0-1-背包的最小个数"><a class="markdownIt-Anchor" href="#22-0-1-背包的最小个数"></a> 2.2: 0-1 背包的最小个数</h2>
+<ul>
 <li>[[17.一和零]], 重量的维度有两个</li>
 </ul>
-<h2 id="22-完全背包最小的个数"><a class="markdownIt-Anchor" href="#22-完全背包最小的个数"></a> 2.2: 完全背包最小的个数</h2>
+<h2 id="23-完全背包最小的个数"><a class="markdownIt-Anchor" href="#23-完全背包最小的个数"></a> 2.3: 完全背包最小的个数</h2>
 <ul>
 <li>定义dp[j] : 装满背包少 的最小物品数量</li>
 <li>初始化: <code>vector&lt;int&gt; dp(amount + 1, INT_MAX);dp[0] = 0;</code>
@@ -367,7 +372,7 @@ nums放在外循环，target在内循环。且内循环正序。</p>
 </ul>
 </li>
 </ul>
-<h3 id="221-题目"><a class="markdownIt-Anchor" href="#221-题目"></a> 2.2.1: 题目</h3>
+<h3 id="231-题目"><a class="markdownIt-Anchor" href="#231-题目"></a> 2.3.1: 题目</h3>
 <ul>
 <li>[[23. 零钱兑换]]</li>
 <li>[[24. 完全平方数]]</li>
